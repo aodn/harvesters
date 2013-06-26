@@ -1,6 +1,4 @@
-GEONETWORK
-==========
-
-Contains GeoNetwork Talend Jobs
+IMOS GeoNetwork Talend Jobs
+---------------------------
 
 
