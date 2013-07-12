@@ -1,0 +1,1814 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+  <context confirmationNeeded="false" name="Default">
+    <contextParameter comment="" name="register_name" prompt="register_name?" promptNeeded="false" type="id_String" value="Australian Ocean Data Network register"/>
+    <contextParameter comment="" name="vocab_type" prompt="vocab_type?" promptNeeded="false" type="id_String" value="Parameter"/>
+    <contextParameter comment="" name="vocab_database_Server" prompt="vocab_database_Server?" promptNeeded="false" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="vocab_database_Password" prompt="vocab_database_Password?" promptNeeded="false" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_Password" value="pUu/zBGQt+H096uhdGeE6g=="/>
+    <contextParameter comment="" name="vocab_database_Schema" prompt="vocab_database_Schema?" promptNeeded="false" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_String" value="contr_vocab_db"/>
+    <contextParameter comment="" name="vocab_database_Database" prompt="vocab_database_Database?" promptNeeded="false" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_String" value="maplayers"/>
+    <contextParameter comment="" name="vocab_database_Port" prompt="vocab_database_Port?" promptNeeded="false" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_String" value="5432"/>
+    <contextParameter comment="" name="vocab_database_Login" prompt="vocab_database_Login?" promptNeeded="false" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_String" value="contr_vocab_db"/>
+  </context>
+  <parameters>
+    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
+    <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="0"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
+    <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
+    <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
+    <elementParameter field="TEXT" name="JOBID_FOR_OOZIE" value=""/>
+    <elementParameter field="CHECK" name="IMPLICITCONTEXT_USE_PROJECT_SETTINGS" value="true"/>
+    <elementParameter field="CHECK" name="STATANDLOG_USE_PROJECT_SETTINGS" value="true"/>
+    <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
+    <elementParameter field="CHECK" name="DISABLE_WARNINGS" value="false"/>
+    <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
+    <elementParameter field="DIRECTORY" name="FILE_PATH" value="&quot;/par2/talend-work/.metadata&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="ojdbc14-10g.jar"/>
+    <routinesParameter id="_HQTeIJFHEeKwSqGpaxdt6w" name="DataOperation"/>
+    <routinesParameter id="_HQBKQJFHEeKwSqGpaxdt6w" name="Mathematical"/>
+    <routinesParameter id="_HQQa0JFHEeKwSqGpaxdt6w" name="Numeric"/>
+    <routinesParameter id="_HQSQAJFHEeKwSqGpaxdt6w" name="Relational"/>
+    <routinesParameter id="_HQMJYJFHEeKwSqGpaxdt6w" name="StringHandling"/>
+    <routinesParameter id="_HQIfAJFHEeKwSqGpaxdt6w" name="TalendDataGenerator"/>
+    <routinesParameter id="_HQE0oJFHEeKwSqGpaxdt6w" name="TalendDate"/>
+    <routinesParameter id="_HNs2EJFHEeKwSqGpaxdt6w" name="TalendString"/>
+    <routinesParameter id="_Ho4wYOqjEeKnR_S2LksuVw" name="GeoOperation"/>
+    <routinesParameter id="_Ho2UIOqjEeKnR_S2LksuVw" name="GeometryOperation"/>
+    <routinesParameter id="_HovmcOqjEeKnR_S2LksuVw" name="GeometryUtility"/>
+    <routinesParameter id="_Ho3iQOqjEeKnR_S2LksuVw" name="OpenStreetMap"/>
+    <routinesParameter id="_hUD08K7VEeK83I5ENNNsNA" name="SQLike"/>
+  </parameters>
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="256" posY="416">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_3"/>
+    <elementParameter field="CHECK" name="START" value="true"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_N4U_8KyvEeK0PpzDv6Uf0w"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
+    <elementParameter field="TEXT" name="HOST" value="context.vocab_database_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.vocab_database_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.vocab_database_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.vocab_database_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.vocab_database_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.vocab_database_Password"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;register&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot; SELECT register.register_name||' - '||'&quot;+context.vocab_type.trim()+&quot;'||' sub-register' as register_name, register.register_content_summary, &quot; +&#xA;&quot;  (('http://vocab.aodn.org.au/' || register.register_name) || '/') || register.register_version AS uniform_resource_identifier, &quot; +&#xA;&quot;   register.register_language, register.register_version, register.date_of_last_change, register.register_date &quot; +&#xA;&quot;   FROM contr_vocab_db.vocabulary_register_table register &quot; +&#xA;&quot;  WHERE register.register_name = '&quot; + context.register_name + &quot;' &quot;&#xA;&#xA;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
+    <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="register_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="register_content_summary"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="uniform_resource_identifier"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="register_language"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="register_version"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="date_of_last_change"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="register_date"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="LABEL" value="__TABLE__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" label="row3" name="tPostgresqlInput_3">
+      <column comment="" key="false" length="110" name="register_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="310" name="register_content_summary" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="0" name="uniform_resource_identifier" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="50" name="register_language" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="20" name="register_version" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="29" name="date_of_last_change" nullable="true" pattern="" precision="6" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="29" name="register_date" nullable="true" pattern="" precision="6" sourceType="VARCHAR" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="256" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_N4U_8KyvEeK0PpzDv6Uf0w"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
+    <elementParameter field="TEXT" name="HOST" value="context.vocab_database_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.vocab_database_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.vocab_database_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.vocab_database_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.vocab_database_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.vocab_database_Password"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;term&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot; SELECT vocabulary_term_table.date_added, vocabulary_term_table.term_status, vocabulary_term_table.term_notes, &quot; +&#xA;&quot;    row_number() OVER (ORDER BY vocabulary_term_table.vocabulary_term_name) AS item_number, &quot; +&#xA;&quot;    (((('http://vocab.aodn.org.au/' || register.register_name) || '/') || register.register_version) || '/') || vocabulary_term_table.vocabulary_term_name AS item_uri, &quot; +&#xA;&quot;     vocabulary_term_table.vocabulary_term_name, vocabulary_term_table.vocabulary_term_definition, reference_source_table.online_term_resource &quot; +&#xA;&quot;   FROM contr_vocab_db.vocabulary_term_table &quot; +&#xA;&quot;   LEFT JOIN contr_vocab_db.vocabulary_register_table register ON register.register_name = vocabulary_term_table.register_name &quot; +&#xA;&quot;   LEFT JOIN contr_vocab_db.organisation_name_table submitted_by ON vocabulary_term_table.organisation_name_id = submitted_by.organisation_name_id &quot; +&#xA;&quot;   LEFT JOIN contr_vocab_db.person_table submitted_by_contact ON vocabulary_term_table.person_id = submitted_by_contact.person_id &quot; +&#xA;&quot;   LEFT JOIN contr_vocab_db.reference_source_table ON reference_source_table.reference_id = vocabulary_term_table.reference_source_id &quot; +&#xA;&quot;   WHERE vocabulary_term_table.register_name = '&quot; + context.register_name + &quot;' &quot; +&#xA;&quot;     AND vocabulary_term_table.vocabulary_type_name = trim(both from '&quot; + context.vocab_type + &quot;')&quot;&#xA;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
+    <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="date_added"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="term_status"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="term_notes"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="item_number"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="item_uri"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="vocabulary_term_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="vocabulary_term_definition"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="online_term_resource"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="LABEL" value="__TABLE__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" label="row1" name="tPostgresqlInput_1">
+      <column comment="" key="false" length="13" name="date_added" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="20" name="term_status" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="310" name="term_notes" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="19" name="item_number" nullable="true" pattern="" precision="0" sourceType="" type="id_Long"/>
+      <column comment="" key="false" length="0" name="item_uri" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="110" name="vocabulary_term_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="2000" name="vocabulary_term_definition" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="200" name="online_term_resource" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tFileOutputMSXML" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="544" posY="224">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileOutputMSXML_2"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;/tmp/&quot;+context.vocab_type.trim()+&quot;.xml&quot;"/>
+    <elementParameter field="TABLE" name="ROOT">
+      <elementValue elementRef="PATH" value="/grg:RE_Register"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="main"/>
+      <elementValue elementRef="ORDER" value="1"/>
+      <elementValue elementRef="PATH" value="uuid"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="2"/>
+      <elementValue elementRef="PATH" value="xsi:schemaLocation"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="3"/>
+      <elementValue elementRef="PATH" value="grg"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/grg"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="4"/>
+      <elementValue elementRef="PATH" value="gmd"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/gmd"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="5"/>
+      <elementValue elementRef="PATH" value="gco"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/gco"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="6"/>
+      <elementValue elementRef="PATH" value="gnreg"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value="http://geonetwork-opensource.org/register"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="7"/>
+      <elementValue elementRef="PATH" value="xlink"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value="http://www.w3.org/1999/xlink"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="8"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:contentSummary"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="11"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:contentSummary/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row3:register_content_summary"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="12"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:uniformResourceIdentifier"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="13"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:uniformResourceIdentifier/gmd:CI_OnlineResource"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="14"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:uniformResourceIdentifier/gmd:CI_OnlineResource/gmd:linkage"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="15"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:uniformResourceIdentifier/gmd:CI_OnlineResource/gmd:linkage/gmd:URL"/>
+      <elementValue elementRef="COLUMN" value="row3:uniform_resource_identifier"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="16"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:operatingLanguage"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="17"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:operatingLanguage/grg:RE_Locale"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="18"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:operatingLanguage/grg:RE_Locale/grg:name"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="19"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:operatingLanguage/grg:RE_Locale/grg:name/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row3:register_language"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="20"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:operatingLanguage/grg:RE_Locale/grg:language"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="21"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:operatingLanguage/grg:RE_Locale/grg:language/gmd:LanguageCode"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="22"/>
+      <elementValue elementRef="PATH" value="codeList"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_LanguageCode"/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="23"/>
+      <elementValue elementRef="PATH" value="codeListValue"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value="eng"/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="24"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:operatingLanguage/grg:RE_Locale/grg:country"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="25"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:operatingLanguage/grg:RE_Locale/grg:country/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value="Australia"/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="26"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:operatingLanguage/grg:RE_Locale/grg:characterEncoding"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="27"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:operatingLanguage/grg:RE_Locale/grg:characterEncoding/gmd:MD_CharacterSetCode"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="28"/>
+      <elementValue elementRef="PATH" value="codeListValue"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value="utf8"/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="29"/>
+      <elementValue elementRef="PATH" value="codeList"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode"/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="30"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:version"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="31"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:version/grg:RE_Version"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="32"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:version/grg:RE_Version/grg:versionNumber"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="33"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:version/grg:RE_Version/grg:versionNumber/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row3:register_version"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="34"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:version/grg:RE_Version/grg:versionDate"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="35"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:version/grg:RE_Version/grg:versionDate/gco:Date"/>
+      <elementValue elementRef="COLUMN" value="row3:register_date"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="36"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:dateOfLastChange"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="37"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:dateOfLastChange/gco:Date"/>
+      <elementValue elementRef="COLUMN" value="row3:date_of_last_change"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="38"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="main"/>
+      <elementValue elementRef="ORDER" value="1"/>
+      <elementValue elementRef="PATH" value="grg"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/grg"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="2"/>
+      <elementValue elementRef="PATH" value="gmd"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/gmd"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="3"/>
+      <elementValue elementRef="PATH" value="gco"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/gco"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="4"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="main"/>
+      <elementValue elementRef="ORDER" value="1"/>
+      <elementValue elementRef="PATH" value="grg"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/grg"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="2"/>
+      <elementValue elementRef="PATH" value="gmd"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/gmd"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="3"/>
+      <elementValue elementRef="PATH" value="gco"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/gco"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="4"/>
+      <elementValue elementRef="PATH" value="gnreg"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value="http://geonetwork-opensource.org/register"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="5"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="main"/>
+      <elementValue elementRef="ORDER" value="1"/>
+      <elementValue elementRef="PATH" value="grg"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/grg"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="2"/>
+      <elementValue elementRef="PATH" value="gmd"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/gmd"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="3"/>
+      <elementValue elementRef="PATH" value="gco"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/gco"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="4"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="main"/>
+      <elementValue elementRef="ORDER" value="1"/>
+      <elementValue elementRef="PATH" value="grg"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/grg"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="2"/>
+      <elementValue elementRef="PATH" value="gmd"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/gmd"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="3"/>
+      <elementValue elementRef="PATH" value="gco"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/gco"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="4"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="main"/>
+      <elementValue elementRef="ORDER" value="1"/>
+      <elementValue elementRef="PATH" value="grg"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/grg"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="2"/>
+      <elementValue elementRef="PATH" value="gmd"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/gmd"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="3"/>
+      <elementValue elementRef="PATH" value="gco"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/gco"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="4"/>
+      <elementValue elementRef="PATH" value="xlink"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value="http://www.w3.org/1999/xlink"/>
+      <elementValue elementRef="ATTRIBUTE" value="ns"/>
+      <elementValue elementRef="ORDER" value="5"/>
+    </elementParameter>
+    <elementParameter field="TABLE" name="GROUP"/>
+    <elementParameter field="TABLE" name="LOOP">
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:name"/>
+      <elementValue elementRef="COLUMN" value="row3"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="main"/>
+      <elementValue elementRef="ORDER" value="9"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:name/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row3:register_name"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="10"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="main"/>
+      <elementValue elementRef="ORDER" value="5"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="6"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:name"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="7"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:name/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="8"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="9"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="10"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:individualName"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="11"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row4:owner_contact_name"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="12"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:organisationName"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="13"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="14"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="15"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="16"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="17"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="18"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="19"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row4:owner_contact_phone_number"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="20"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="21"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="22"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:deliveryPoint"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="23"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:deliveryPoint/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="24"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:city"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="25"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:city/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="26"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:administrativeArea"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="27"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:administrativeArea/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="28"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:postalCode"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="29"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:postalCode/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="30"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:country"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="31"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:country/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="32"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="33"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row4:owner_contact_email"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="34"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:role"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="35"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:owner/grg:RE_RegisterOwner/grg:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="36"/>
+      <elementValue elementRef="PATH" value="codeList"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="37"/>
+      <elementValue elementRef="PATH" value="codeListValue"/>
+      <elementValue elementRef="COLUMN" value="row4"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="38"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="main"/>
+      <elementValue elementRef="ORDER" value="6"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="7"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:name"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="8"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:name/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row2:organisation_name"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="9"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="10"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="11"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:individualName"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="12"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row2:person_name"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="13"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:organisationName"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="14"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row2:organisation_name"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="15"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="16"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="17"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="18"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="19"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="20"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row2:contact_phone_number"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="21"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="22"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="23"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:deliveryPoint"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="24"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:deliveryPoint/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="25"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:city"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="26"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:city/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="27"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:administrativeArea"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="28"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:administrativeArea/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="29"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:postalCode"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="30"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:postalCode/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="31"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:country"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="32"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:country/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="33"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="34"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row2:contact_email"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="35"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:role"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="36"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:submitter/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="37"/>
+      <elementValue elementRef="PATH" value="codeList"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="38"/>
+      <elementValue elementRef="PATH" value="codeListValue"/>
+      <elementValue elementRef="COLUMN" value="row2"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="39"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItemClass"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="main"/>
+      <elementValue elementRef="ORDER" value="5"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItemClass/grg:RE_ItemClass"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="6"/>
+      <elementValue elementRef="PATH" value="id"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value="Item_Class"/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="7"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItemClass/grg:RE_ItemClass/grg:name"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="8"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItemClass/grg:RE_ItemClass/grg:name/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value="gnreg:RE_RegisterItem"/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="9"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItemClass/grg:RE_ItemClass/grg:technicalStandard"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="10"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItemClass/grg:RE_ItemClass/grg:technicalStandard/gmd:CI_Citation"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="11"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItemClass/grg:RE_ItemClass/grg:technicalStandard/gmd:CI_Citation/gmd:title"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="12"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItemClass/grg:RE_ItemClass/grg:technicalStandard/gmd:CI_Citation/gmd:title/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value="GeoNetwork Extension to RE_RegisterItem in ISO19135"/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="13"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItemClass/grg:RE_ItemClass/grg:technicalStandard/gmd:CI_Citation/gmd:date"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="14"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItemClass/grg:RE_ItemClass/grg:technicalStandard/gmd:CI_Citation/gmd:date/gmd:CI_Date"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="15"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItemClass/grg:RE_ItemClass/grg:technicalStandard/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="16"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItemClass/grg:RE_ItemClass/grg:technicalStandard/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date/gco:Date"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value="2012-04-29"/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="17"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItemClass/grg:RE_ItemClass/grg:technicalStandard/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="18"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItemClass/grg:RE_ItemClass/grg:technicalStandard/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="19"/>
+      <elementValue elementRef="PATH" value="codeList"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="20"/>
+      <elementValue elementRef="PATH" value="codeListValue"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value="creation"/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="21"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItemClass/grg:RE_ItemClass/grg:technicalStandard/gmd:CI_Citation/gmd:edition"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="22"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItemClass/grg:RE_ItemClass/grg:technicalStandard/gmd:CI_Citation/gmd:edition/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row6"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="23"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="main"/>
+      <elementValue elementRef="ORDER" value="5"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="6"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:name"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="7"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:name/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="8"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="9"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="10"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:individualName"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="11"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row5:manager_contact_name"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="12"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:organisationName"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="13"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="14"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="15"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="16"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="17"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="18"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="19"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row5:manager_contact_phone_number"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="20"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="21"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="22"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:deliveryPoint"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="23"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:deliveryPoint/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="24"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:city"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="25"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:city/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="26"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:administrativeArea"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="27"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:administrativeArea/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="28"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:postalCode"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="29"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:postalCode/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="30"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:country"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="31"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:country/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="32"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="33"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row5:manager_contact_email"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="34"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:role"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="35"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:manager/grg:RE_RegisterManager/grg:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="36"/>
+      <elementValue elementRef="PATH" value="codeList"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="37"/>
+      <elementValue elementRef="PATH" value="codeListValue"/>
+      <elementValue elementRef="COLUMN" value="row5"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="38"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="main"/>
+      <elementValue elementRef="ORDER" value="6"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="7"/>
+      <elementValue elementRef="PATH" value="gco:isoType"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value="grg:RE_RegisterItem"/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="8"/>
+      <elementValue elementRef="PATH" value="uuid"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="9"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:itemIdentifier"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="10"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:itemIdentifier/gco:Integer"/>
+      <elementValue elementRef="COLUMN" value="row1:item_number"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="11"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:name"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="12"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:name/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row1:vocabulary_term_name"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="13"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:status"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="14"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:status/grg:RE_ItemStatus"/>
+      <elementValue elementRef="COLUMN" value="row1:term_status"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="15"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:dateAccepted"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="16"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:dateAccepted/gco:Date"/>
+      <elementValue elementRef="COLUMN" value="row1:date_added"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="17"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:definition"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="18"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:definition/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row1:vocabulary_term_definition"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="19"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:fieldOfApplication"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="20"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:fieldOfApplication/grg:RE_FieldOfApplication"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="21"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:fieldOfApplication/grg:RE_FieldOfApplication/grg:name"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="22"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:fieldOfApplication/grg:RE_FieldOfApplication/grg:name/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="23"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:fieldOfApplication/grg:RE_FieldOfApplication/grg:description"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="24"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:fieldOfApplication/grg:RE_FieldOfApplication/grg:description/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="25"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="26"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="27"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:dateProposed"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="28"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:dateProposed/gco:Date"/>
+      <elementValue elementRef="COLUMN" value="row1:date_added"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="29"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:justification"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="30"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:justification/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="31"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:status"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="32"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:status/grg:RE_DecisionStatus"/>
+      <elementValue elementRef="COLUMN" value="row1:term_status"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="33"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:registerManagerNotes"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="34"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:registerManagerNotes/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row1:term_notes"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="35"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="36"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="37"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:name"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="38"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:name/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="39"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="40"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="41"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:organisationName"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="42"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="43"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="44"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="45"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="46"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="47"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:deliveryPoint"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="48"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:deliveryPoint/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="49"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:city"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="50"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:city/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="51"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:administrativeArea"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="52"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:administrativeArea/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="53"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:postalCode"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="54"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:postalCode/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="55"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:country"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="56"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:country/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="57"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="58"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="59"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:role"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="60"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:additionInformation/grg:RE_AdditionInformation/grg:sponsor/grg:RE_SubmittingOrganization/grg:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="61"/>
+      <elementValue elementRef="PATH" value="codeList"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="62"/>
+      <elementValue elementRef="PATH" value="codeListValue"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="63"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:itemClass"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="64"/>
+      <elementValue elementRef="PATH" value="xlink:href"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value="#Item_Class"/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="65"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:specificationLineage"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="66"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:specificationLineage/grg:RE_Reference"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="67"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:specificationLineage/grg:RE_Reference/grg:itemIdentifierAtSource"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="68"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:specificationLineage/grg:RE_Reference/grg:itemIdentifierAtSource/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row1:online_term_resource"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="69"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:specificationLineage/grg:RE_Reference/grg:similarity"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="70"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/grg:specificationLineage/grg:RE_Reference/grg:similarity/grg:RE_SimilarityToSource"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="71"/>
+      <elementValue elementRef="PATH" value="codeListValue"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="72"/>
+      <elementValue elementRef="PATH" value="codeList"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="attri"/>
+      <elementValue elementRef="ORDER" value="73"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/gnreg:itemIdentifier"/>
+      <elementValue elementRef="COLUMN" value="row1"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="74"/>
+      <elementValue elementRef="PATH" value="/grg:RE_Register/grg:containedItem/gnreg:RE_RegisterItem/gnreg:itemIdentifier/gco:CharacterString"/>
+      <elementValue elementRef="COLUMN" value="row1:item_uri"/>
+      <elementValue elementRef="VALUE" value=""/>
+      <elementValue elementRef="ATTRIBUTE" value="branch"/>
+      <elementValue elementRef="ORDER" value="75"/>
+    </elementParameter>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CHECK" name="CREATE" value="true"/>
+    <elementParameter field="CHECK" name="CREATE_EMPTY_ELEMENT" value="false"/>
+    <elementParameter field="CHECK" name="ADVANCED_SEPARATOR" value="false"/>
+    <elementParameter field="TEXT" name="THOUSANDS_SEPARATOR" value="&quot;,&quot;"/>
+    <elementParameter field="TEXT" name="DECIMAL_SEPARATOR" value="&quot;.&quot;"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="DELETE_EMPTYFILE" value="false"/>
+    <elementParameter field="CHECK" name="TRIM_TEXT" value="true"/>
+    <elementParameter field="CHECK" name="ESCAPE_TEXT" value="true"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" value="100"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tFileOutputMSXML_2">
+      <column comment="" key="false" length="110" name="register_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="310" name="register_content_summary" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="0" name="uniform_resource_identifier" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="50" name="register_language" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="20" name="register_version" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="29" name="date_of_last_change" nullable="true" pattern="" precision="6" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="29" name="register_date" nullable="true" pattern="" precision="6" sourceType="VARCHAR" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="128">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_2"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_N4U_8KyvEeK0PpzDv6Uf0w"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
+    <elementParameter field="TEXT" name="HOST" value="context.vocab_database_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.vocab_database_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.vocab_database_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.vocab_database_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.vocab_database_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.vocab_database_Password"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;register_submitter&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT distinct term.register_name, term.organisation_name_id, term.person_id, submitted_by.organisation_name, submitted_by_contact.person_name, &quot; +&#xA;&quot; submitted_by_contact.contact_email, submitted_by_contact.contact_phone_number &quot; +&#xA;&quot;  FROM contr_vocab_db.vocabulary_term_table term &quot; +&#xA;&quot;  LEFT JOIN contr_vocab_db.organisation_name_table submitted_by ON term.organisation_name_id = submitted_by.organisation_name_id &quot; +&#xA;&quot;  LEFT JOIN contr_vocab_db.person_table submitted_by_contact ON term.person_id = submitted_by_contact.person_id &quot; +&#xA;&quot; WHERE term.register_name = '&quot; + context.register_name + &quot;' &quot; &#xA;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
+    <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="register_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="organisation_name_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="person_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="organisation_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="person_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="contact_email"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="contact_phone_number"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="LABEL" value="__TABLE__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" label="row2" name="tPostgresqlInput_2">
+      <column comment="" key="false" length="110" name="register_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="10" name="organisation_name_id" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="10" name="person_id" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" length="110" name="organisation_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="110" name="person_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="110" name="contact_email" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="20" name="contact_phone_number" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="224">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_5"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_N4U_8KyvEeK0PpzDv6Uf0w"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
+    <elementParameter field="TEXT" name="HOST" value="context.vocab_database_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.vocab_database_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.vocab_database_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.vocab_database_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.vocab_database_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.vocab_database_Password"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;register_owner&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot; SELECT register.register_name, owner_contact.person_name AS owner_contact_name, &quot; +&#xA;&quot;    owner_contact.contact_email AS owner_contact_email, owner_contact.contact_phone_number AS owner_contact_phone_number &quot; +&#xA;&quot;   FROM contr_vocab_db.vocabulary_register_table register &quot; +&#xA;&quot;   LEFT JOIN contr_vocab_db.vocabulary_owner_table owner ON owner.register_name = register.register_name &quot; +&#xA;&quot;   LEFT JOIN contr_vocab_db.person_table owner_contact ON owner.person_id = owner_contact.person_id &quot; +&#xA;&quot;  WHERE register.register_name = '&quot; + context.register_name + &quot;' &quot;&#xA;&#xA;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
+    <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="register_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="owner_contact_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="owner_contact_email"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="owner_contact_phone_number"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="LABEL" value="__TABLE__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" label="row4" name="tPostgresqlInput_5">
+      <column comment="" key="false" length="110" name="register_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="110" name="owner_contact_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="110" name="owner_contact_email" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="20" name="owner_contact_phone_number" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="160" posY="320">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_6"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_N4U_8KyvEeK0PpzDv6Uf0w"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
+    <elementParameter field="TEXT" name="HOST" value="context.vocab_database_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.vocab_database_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.vocab_database_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.vocab_database_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.vocab_database_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.vocab_database_Password"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;register_manager&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot; SELECT register.register_name, manager_contact.person_name AS manager_contact_name, manager_contact.contact_email AS manager_contact_email, &quot; +&#xA;&quot;    manager_contact.contact_phone_number AS manager_contact_phone_number &quot; +&#xA;&quot;   FROM contr_vocab_db.vocabulary_register_table register &quot; +&#xA;&quot;   LEFT JOIN contr_vocab_db.vocabulary_manager_table ON vocabulary_manager_table.register_name = register.register_name &quot; +&#xA;&quot;   LEFT JOIN contr_vocab_db.person_table manager_contact ON vocabulary_manager_table.person_id = manager_contact.person_id &quot; +&#xA;&quot;  WHERE register.register_name = '&quot; + context.register_name + &quot;' &quot;&#xA;&#xA;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
+    <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="register_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="manager_contact_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="manager_contact_email"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="manager_contact_phone_number"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="LABEL" value="__TABLE__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" label="row5" name="tPostgresqlInput_6">
+      <column comment="" key="false" length="110" name="register_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="110" name="manager_contact_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="110" name="manager_contact_email" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="20" name="manager_contact_phone_number" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tFixedFlowInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="416">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFixedFlowInput_1"/>
+    <elementParameter field="TEXT" name="NB_ROWS" value="1"/>
+    <elementParameter field="RADIO" name="USE_SINGLEMODE" value="true"/>
+    <elementParameter field="TABLE" name="VALUES">
+      <elementValue elementRef="SCHEMA_COLUMN" value="dummy"/>
+      <elementValue elementRef="VALUE" value="&quot;test&quot;"/>
+    </elementParameter>
+    <elementParameter field="RADIO" name="USE_INTABLE" value="false"/>
+    <elementParameter field="TABLE" name="INTABLE"/>
+    <elementParameter field="RADIO" name="USE_INLINECONTENT" value="false"/>
+    <elementParameter field="TEXT" name="ROWSEPARATOR" value="&quot;\n&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;;&quot;"/>
+    <elementParameter field="MEMO" name="INLINECONTENT" value=""/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" label="row6" name="tFixedFlowInput_1">
+      <column comment="" key="false" name="dummy" nullable="true" pattern="" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <connection connectorName="FLOW" label="row3" lineStyle="10" mergeOrder="1" metaname="tPostgresqlInput_3" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_3" target="tFileOutputMSXML_2">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="register_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="register_content_summary"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="register_language"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="register_version"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="register_date"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="date_of_last_change"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row3"/>
+  </connection>
+  <connection connectorName="FLOW" label="row1" lineStyle="10" mergeOrder="6" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tFileOutputMSXML_2">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="vocabulary_term_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="vocabulary_type_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="vocabulary_instance_of"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="vocabulary_term_short_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="vocabulary_term_ancillary_information"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="vocabulary_term_definition"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="alternative_term_expression"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="date_added"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="added_by"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="person_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="organisation_name_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="term_status"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="date_status_amended"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="reference_source_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="term_notes"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="register_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="internal_relationship"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="external_relationship"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
+  </connection>
+  <connection connectorName="FLOW" label="row2" lineStyle="10" mergeOrder="3" metaname="tPostgresqlInput_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_2" target="tFileOutputMSXML_2">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="register_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="organisation_name_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="person_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row2"/>
+  </connection>
+  <connection connectorName="FLOW" label="row4" lineStyle="10" mergeOrder="2" metaname="tPostgresqlInput_5" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_5" target="tFileOutputMSXML_2">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="register_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="owner_contact_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="owner_contact_email"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="owner_contact_phone_number"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row4"/>
+  </connection>
+  <connection connectorName="FLOW" label="row5" lineStyle="10" mergeOrder="5" metaname="tPostgresqlInput_6" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_6" target="tFileOutputMSXML_2">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="register_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="manager_contact_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="manager_contact_email"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="manager_contact_phone_number"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row5"/>
+  </connection>
+  <connection connectorName="FLOW" label="row6" lineStyle="10" mergeOrder="4" metaname="tFixedFlowInput_1" offsetLabelX="0" offsetLabelY="0" source="tFixedFlowInput_1" target="tFileOutputMSXML_2">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row6"/>
+  </connection>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_3"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+</talendfile:ProcessType>
