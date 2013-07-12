@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+  <context confirmationNeeded="false" name="Default">
+    <contextParameter comment="" name="DestinationDatabase_Password" prompt="DestinationDatabase_Password?" promptNeeded="false" repositoryContextId="_smNe8KYfEeKj5-W1OfzANQ" type="id_Password" value="xISFWhbrLLw="/>
+    <contextParameter comment="" name="DestinationDatabase_Schema" prompt="DestinationDatabase_Schema?" promptNeeded="false" repositoryContextId="_smNe8KYfEeKj5-W1OfzANQ" type="id_String" value="dart"/>
+    <contextParameter comment="" name="DestinationDatabase_Login" prompt="DestinationDatabase_Login?" promptNeeded="false" repositoryContextId="_smNe8KYfEeKj5-W1OfzANQ" type="id_String" value="dart"/>
+    <contextParameter comment="" name="DestinationDatabase_Port" prompt="DestinationDatabase_Port?" promptNeeded="false" repositoryContextId="_smNe8KYfEeKj5-W1OfzANQ" type="id_String" value="5432"/>
+    <contextParameter comment="" name="DestinationDatabase_Database" prompt="DestinationDatabase_Database?" promptNeeded="false" repositoryContextId="_smNe8KYfEeKj5-W1OfzANQ" type="id_String" value="dart"/>
+    <contextParameter comment="" name="DestinationDatabase_Server" prompt="DestinationDatabase_Server?" promptNeeded="false" repositoryContextId="_smNe8KYfEeKj5-W1OfzANQ" type="id_String" value="localhost"/>
+  </context>
+  <parameters>
+    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
+    <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="0"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
+    <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
+    <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
+    <elementParameter field="TEXT" name="JOBID_FOR_OOZIE" value=""/>
+    <elementParameter field="CHECK" name="IMPLICITCONTEXT_USE_PROJECT_SETTINGS" value="true"/>
+    <elementParameter field="CHECK" name="STATANDLOG_USE_PROJECT_SETTINGS" value="true"/>
+    <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
+    <elementParameter field="CHECK" name="DISABLE_WARNINGS" value="false"/>
+    <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="ojdbc14-10g.jar"/>
+    <routinesParameter id="_OY1W0KYeEeKj5-W1OfzANQ" name="DataOperation"/>
+    <routinesParameter id="_ObJrAKYeEeKj5-W1OfzANQ" name="Mathematical"/>
+    <routinesParameter id="_OauNMKYeEeKj5-W1OfzANQ" name="Numeric"/>
+    <routinesParameter id="_OaOd8KYeEeKj5-W1OfzANQ" name="Relational"/>
+    <routinesParameter id="_OcGtQKYeEeKj5-W1OfzANQ" name="SQLike"/>
+    <routinesParameter id="_Oa7BgKYeEeKj5-W1OfzANQ" name="StringHandling"/>
+    <routinesParameter id="_ObkhwKYeEeKj5-W1OfzANQ" name="TalendDataGenerator"/>
+    <routinesParameter id="_OahY4KYeEeKj5-W1OfzANQ" name="TalendDate"/>
+    <routinesParameter id="_ObzyUKYeEeKj5-W1OfzANQ" name="TalendString"/>
+    <routinesParameter id="__qfH4OhcEeKleqFUj2EIkw" name="GeoOperation"/>
+    <routinesParameter id="__qdSsOhcEeKleqFUj2EIkw" name="GeometryOperation"/>
+    <routinesParameter id="__qV98OhcEeKleqFUj2EIkw" name="GeometryUtility"/>
+    <routinesParameter id="__qd5wOhcEeKleqFUj2EIkw" name="OpenStreetMap"/>
+  </parameters>
+  <node componentName="iPostgresqlGenerateChangelog" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlGenerateChangelog_1"/>
+    <elementParameter field="CHECK" name="START" value="true"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_szRqkKYfEeKj5-W1OfzANQ"/>
+    <elementParameter field="TEXT" name="HOST" value="context.DestinationDatabase_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.DestinationDatabase_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDatabase_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDatabase_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.DestinationDatabase_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.DestinationDatabase_Password"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;/tmp/changelog.xml&quot;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlGenerateChangelog_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+</talendfile:ProcessType>
