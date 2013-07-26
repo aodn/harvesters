@@ -4,11 +4,21 @@
     <contextParameter comment="" name="register_name" prompt="register_name?" promptNeeded="false" type="id_String" value="Australian Ocean Data Network register"/>
     <contextParameter comment="" name="vocab_type" prompt="vocab_type?" promptNeeded="false" type="id_String" value="Parameter"/>
     <contextParameter comment="" name="vocab_database_Server" prompt="vocab_database_Server?" promptNeeded="false" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_String" value="localhost"/>
-    <contextParameter comment="" name="vocab_database_Password" prompt="vocab_database_Password?" promptNeeded="false" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_Password" value="pUu/zBGQt+H096uhdGeE6g=="/>
+    <contextParameter comment="" name="vocab_database_Password" prompt="vocab_database_Password?" promptNeeded="false" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_Password" value="kZhhArLSTtQepXqI6lhYyA=="/>
     <contextParameter comment="" name="vocab_database_Schema" prompt="vocab_database_Schema?" promptNeeded="false" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_String" value="contr_vocab_db"/>
     <contextParameter comment="" name="vocab_database_Database" prompt="vocab_database_Database?" promptNeeded="false" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_String" value="maplayers"/>
     <contextParameter comment="" name="vocab_database_Port" prompt="vocab_database_Port?" promptNeeded="false" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_String" value="5432"/>
     <contextParameter comment="" name="vocab_database_Login" prompt="vocab_database_Login?" promptNeeded="false" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_String" value="contr_vocab_db"/>
+  </context>
+  <context confirmationNeeded="false" name="Prompt">
+    <contextParameter comment="" name="register_name" prompt="register_name?" promptNeeded="false" type="id_String" value="Australian Ocean Data Network register"/>
+    <contextParameter comment="" name="vocab_type" prompt="vocab_type?" promptNeeded="false" type="id_String" value="Parameter"/>
+    <contextParameter comment="" name="vocab_database_Server" prompt="vocab_database_Server?" promptNeeded="true" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="vocab_database_Database" prompt="vocab_database_Database?" promptNeeded="true" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_String" value="maplayers"/>
+    <contextParameter comment="" name="vocab_database_Port" prompt="vocab_database_Port?" promptNeeded="true" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_String" value="5432"/>
+    <contextParameter comment="" name="vocab_database_Password" prompt="vocab_database_Password?" promptNeeded="true" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_Password" value="kZhhArLSTtQepXqI6lhYyA=="/>
+    <contextParameter comment="" name="vocab_database_Schema" prompt="vocab_database_Schema?" promptNeeded="true" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_String" value="contr_vocab_db"/>
+    <contextParameter comment="" name="vocab_database_Login" prompt="vocab_database_Login?" promptNeeded="true" repositoryContextId="_uU7TMK4lEeKkq6XP_VyBww" type="id_String" value="contr_vocab_db"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -37,10 +47,10 @@
     <routinesParameter id="_HQIfAJFHEeKwSqGpaxdt6w" name="TalendDataGenerator"/>
     <routinesParameter id="_HQE0oJFHEeKwSqGpaxdt6w" name="TalendDate"/>
     <routinesParameter id="_HNs2EJFHEeKwSqGpaxdt6w" name="TalendString"/>
-    <routinesParameter id="_Ho4wYOqjEeKnR_S2LksuVw" name="GeoOperation"/>
-    <routinesParameter id="_Ho2UIOqjEeKnR_S2LksuVw" name="GeometryOperation"/>
-    <routinesParameter id="_HovmcOqjEeKnR_S2LksuVw" name="GeometryUtility"/>
-    <routinesParameter id="_Ho3iQOqjEeKnR_S2LksuVw" name="OpenStreetMap"/>
+    <routinesParameter id="_N8EXQORkEeKFpZnmEOBqEg" name="GeoOperation"/>
+    <routinesParameter id="_N8B7AORkEeKFpZnmEOBqEg" name="GeometryOperation"/>
+    <routinesParameter id="_N8DJIORkEeKFpZnmEOBqEg" name="GeometryUtility"/>
+    <routinesParameter id="_N7koAORkEeKFpZnmEOBqEg" name="OpenStreetMap"/>
     <routinesParameter id="_hUD08K7VEeK83I5ENNNsNA" name="SQLike"/>
   </parameters>
   <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="256" posY="416">
@@ -62,7 +72,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot; SELECT register.register_name||' - '||'&quot;+context.vocab_type.trim()+&quot;'||' sub-register' as register_name, register.register_content_summary, &quot; +&#xA;&quot;  (('http://vocab.aodn.org.au/' || register.register_name) || '/') || register.register_version AS uniform_resource_identifier, &quot; +&#xA;&quot;   register.register_language, register.register_version, register.date_of_last_change, register.register_date &quot; +&#xA;&quot;   FROM contr_vocab_db.vocabulary_register_table register &quot; +&#xA;&quot;  WHERE register.register_name = '&quot; + context.register_name + &quot;' &quot;&#xA;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot; SELECT register.register_name||' - '||'&quot;+context.vocab_type.trim()+&quot;'||' sub-register' as register_name, register.register_content_summary, &quot; +&#xA;&quot;  (('http://vocab.aodn.org.au/' || register.register_name) || '/') || register.register_version AS uniform_resource_identifier, &quot; +&#xA;&quot;   register.register_language_name, register.register_version, register.date_of_last_change, register.register_date &quot; +&#xA;&quot;   FROM contr_vocab_db.vocabulary_register_table register &quot; +&#xA;&quot;  WHERE register.register_name = '&quot; + context.register_name + &quot;' &quot;&#xA;&#xA;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -76,7 +86,7 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="uniform_resource_identifier"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="register_language"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="register_language_name"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="register_version"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -94,7 +104,7 @@
       <column comment="" key="false" length="110" name="register_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="310" name="register_content_summary" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="0" name="uniform_resource_identifier" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="50" name="register_language" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="50" name="register_language_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="20" name="register_version" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="29" name="date_of_last_change" nullable="true" pattern="" precision="6" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="29" name="register_date" nullable="true" pattern="" precision="6" sourceType="VARCHAR" type="id_String"/>
@@ -118,7 +128,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot; SELECT vocabulary_term_table.date_added, vocabulary_term_table.term_status, vocabulary_term_table.term_notes, &quot; +&#xA;&quot;    row_number() OVER (ORDER BY vocabulary_term_table.vocabulary_term_name) AS item_number, &quot; +&#xA;&quot;    (((('http://vocab.aodn.org.au/' || register.register_name) || '/') || register.register_version) || '/') || vocabulary_term_table.vocabulary_term_name AS item_uri, &quot; +&#xA;&quot;     vocabulary_term_table.vocabulary_term_name, vocabulary_term_table.vocabulary_term_definition, reference_source_table.online_term_resource &quot; +&#xA;&quot;   FROM contr_vocab_db.vocabulary_term_table &quot; +&#xA;&quot;   LEFT JOIN contr_vocab_db.vocabulary_register_table register ON register.register_name = vocabulary_term_table.register_name &quot; +&#xA;&quot;   LEFT JOIN contr_vocab_db.organisation_name_table submitted_by ON vocabulary_term_table.organisation_name_id = submitted_by.organisation_name_id &quot; +&#xA;&quot;   LEFT JOIN contr_vocab_db.person_table submitted_by_contact ON vocabulary_term_table.person_id = submitted_by_contact.person_id &quot; +&#xA;&quot;   LEFT JOIN contr_vocab_db.reference_source_table ON reference_source_table.reference_id = vocabulary_term_table.reference_source_id &quot; +&#xA;&quot;   WHERE vocabulary_term_table.register_name = '&quot; + context.register_name + &quot;' &quot; +&#xA;&quot;     AND vocabulary_term_table.vocabulary_type_name = trim(both from '&quot; + context.vocab_type + &quot;')&quot;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot; SELECT vocabulary_term_table.date_added, vocabulary_term_table.term_status, vocabulary_term_table.term_notes, &quot; +&#xA;&quot;    row_number() OVER (ORDER BY vocabulary_term_table.vocabulary_term_name) AS item_number, &quot; +&#xA;&quot;    (((('http://vocab.aodn.org.au/' || register.register_name) || '/') || register.register_version) || '/') || vocabulary_term_table.vocabulary_term_name AS item_uri, &quot; +&#xA;&quot;     vocabulary_term_table.vocabulary_term_name, vocabulary_term_table.vocabulary_term_definition, reference_source_table.online_term_resource &quot; +&#xA;&quot;   FROM contr_vocab_db.vocabulary_term_table &quot; +&#xA;&quot;   LEFT JOIN contr_vocab_db.vocabulary_register_table register ON register.register_name = vocabulary_term_table.register_name &quot; +&#xA;&quot;   LEFT JOIN contr_vocab_db.term_proposer_table proposers ON vocabulary_term_table.term_proposer_id = proposers.term_proposer_id &quot; +&#xA;&quot;   LEFT JOIN contr_vocab_db.organisation_name_table submitted_by ON proposers.organisation_name_id = submitted_by.organisation_name_id &quot; +&#xA;&quot;   LEFT JOIN contr_vocab_db.person_table submitted_by_contact ON proposers.person_id = submitted_by_contact.person_id &quot; +&#xA;&quot;   LEFT JOIN contr_vocab_db.reference_source_table ON reference_source_table.reference_id = vocabulary_term_table.reference_source_id &quot; +&#xA;&quot;   WHERE vocabulary_term_table.register_name = '&quot; + context.register_name + &quot;' &quot; +&#xA;&quot;     AND vocabulary_term_table.vocabulary_type_name = trim(both from '&quot; + context.vocab_type + &quot;')&quot;&#xA;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -249,7 +259,7 @@
       <elementValue elementRef="ATTRIBUTE" value="branch"/>
       <elementValue elementRef="ORDER" value="19"/>
       <elementValue elementRef="PATH" value="/grg:RE_Register/grg:operatingLanguage/grg:RE_Locale/grg:name/gco:CharacterString"/>
-      <elementValue elementRef="COLUMN" value="row3:register_language"/>
+      <elementValue elementRef="COLUMN" value="row3:register_language_name"/>
       <elementValue elementRef="VALUE" value=""/>
       <elementValue elementRef="ATTRIBUTE" value="branch"/>
       <elementValue elementRef="ORDER" value="20"/>
@@ -1438,11 +1448,11 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tFileOutputMSXML_2">
+    <metadata connector="FLOW" label="row3" name="tFileOutputMSXML_2">
       <column comment="" key="false" length="110" name="register_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="310" name="register_content_summary" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="0" name="uniform_resource_identifier" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="50" name="register_language" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="50" name="register_language_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="20" name="register_version" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="29" name="date_of_last_change" nullable="true" pattern="" precision="6" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="29" name="register_date" nullable="true" pattern="" precision="6" sourceType="VARCHAR" type="id_String"/>
@@ -1466,7 +1476,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT distinct term.register_name, term.organisation_name_id, term.person_id, submitted_by.organisation_name, submitted_by_contact.person_name, &quot; +&#xA;&quot; submitted_by_contact.contact_email, submitted_by_contact.contact_phone_number &quot; +&#xA;&quot;  FROM contr_vocab_db.vocabulary_term_table term &quot; +&#xA;&quot;  LEFT JOIN contr_vocab_db.organisation_name_table submitted_by ON term.organisation_name_id = submitted_by.organisation_name_id &quot; +&#xA;&quot;  LEFT JOIN contr_vocab_db.person_table submitted_by_contact ON term.person_id = submitted_by_contact.person_id &quot; +&#xA;&quot; WHERE term.register_name = '&quot; + context.register_name + &quot;' &quot; &#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT distinct term.register_name, proposers.organisation_name_id, proposers.person_id, submitted_by.organisation_name, submitted_by_contact.person_name, &quot; +&#xA;&quot; submitted_by_contact.contact_email, submitted_by_contact.contact_phone_number &quot; +&#xA;&quot;  FROM contr_vocab_db.vocabulary_term_table term  &quot; +&#xA;&quot;  LEFT JOIN contr_vocab_db.term_proposer_table proposers ON term.term_proposer_id = proposers.term_proposer_id &quot; +&#xA;&quot;  LEFT JOIN contr_vocab_db.organisation_name_table submitted_by ON proposers.organisation_name_id = submitted_by.organisation_name_id  &quot; +&#xA;&quot;  LEFT JOIN contr_vocab_db.person_table submitted_by_contact ON proposers.person_id = submitted_by_contact.person_id  &quot; +&#xA;&quot; WHERE term.register_name = '&quot; + context.register_name + &quot;' &quot; &#xA;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -1629,7 +1639,7 @@
       <elementValue elementRef="TRACE_COLUMN" value="register_content_summary"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="register_language"/>
+      <elementValue elementRef="TRACE_COLUMN" value="register_language_name"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="register_version"/>
