@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+  <context confirmationNeeded="false" name="Default">
+    <contextParameter comment="" name="register_name" prompt="register_name?" promptNeeded="false" type="id_String" value="Australian Ocean Data Network register"/>
+    <contextParameter comment="" name="destination_dir" prompt="destination_dir?" promptNeeded="false" repositoryContextId="_Ive14LDYEeKoVIcq6JuWnA" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="temp_dir" prompt="temp_dir?" promptNeeded="false" type="id_String" value="/tmp"/>
+  </context>
+  <parameters>
+    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
+    <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="0"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
+    <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
+    <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
+    <elementParameter field="TEXT" name="JOBID_FOR_OOZIE" value=""/>
+    <elementParameter field="CHECK" name="IMPLICITCONTEXT_USE_PROJECT_SETTINGS" value="true"/>
+    <elementParameter field="CHECK" name="STATANDLOG_USE_PROJECT_SETTINGS" value="true"/>
+    <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
+    <elementParameter field="CHECK" name="DISABLE_WARNINGS" value="false"/>
+    <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
+    <elementParameter field="DIRECTORY" name="FILE_PATH" value="&quot;/par2/talend-work/.metadata&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="ojdbc14-10g.jar"/>
+    <routinesParameter id="_hTTnAK7VEeK83I5ENNNsNA" name="DataOperation"/>
+    <routinesParameter id="_hQEs0K7VEeK83I5ENNNsNA" name="Mathematical"/>
+    <routinesParameter id="_hSDp0K7VEeK83I5ENNNsNA" name="Numeric"/>
+    <routinesParameter id="_hSqGwK7VEeK83I5ENNNsNA" name="Relational"/>
+    <routinesParameter id="_hUD08K7VEeK83I5ENNNsNA" name="SQLike"/>
+    <routinesParameter id="_hRiFYK7VEeK83I5ENNNsNA" name="StringHandling"/>
+    <routinesParameter id="_hRHOoK7VEeK83I5ENNNsNA" name="TalendDataGenerator"/>
+    <routinesParameter id="_hQsX4K7VEeK83I5ENNNsNA" name="TalendDate"/>
+    <routinesParameter id="_hNer0K7VEeK83I5ENNNsNA" name="TalendString"/>
+    <routinesParameter id="_yYnpYLBaEeKTQrctq10m-A" name="VocabDate"/>
+    <routinesParameter id="_BPQc0LIkEeKeJdWWZ_dLpQ" name="GeoOperation"/>
+    <routinesParameter id="_BHLe4LIkEeKeJdWWZ_dLpQ" name="GeometryOperation"/>
+    <routinesParameter id="_BPdRILIkEeKeJdWWZ_dLpQ" name="GeometryUtility"/>
+    <routinesParameter id="_BPbb8LIkEeKeJdWWZ_dLpQ" name="OpenStreetMap"/>
+    <routinesParameter id="_oYYtELInEeKeJdWWZ_dLpQ" name="FileUtils"/>
+  </parameters>
+  <node componentName="tFileInputDelimited" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="160">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileInputDelimited_1"/>
+    <elementParameter field="CHECK" name="START" value="true"/>
+    <elementParameter field="LABEL" name="FILENAMETEXT" value="&quot;When the input source is a stream or a zip file,footer and random shouldn't be bigger than 0.&quot;"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.temp_dir + &quot;/&quot; + context.register_name + &quot;_raw.xml&quot;"/>
+    <elementParameter field="TEXT" name="ROWSEPARATOR" value="&quot;lkjhkjlkjhlkjljk&quot;"/>
+    <elementParameter field="OPENED_LIST" name="CSVROWSEPARATOR" value="&quot;\n&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;khjgjkhgkjhfhgkfkhg&quot;"/>
+    <elementParameter field="CHECK" name="CSV_OPTION" value="false"/>
+    <elementParameter field="TEXT" name="ESCAPE_CHAR" value="&quot;&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TEXT_ENCLOSURE" value="&quot;&quot;&quot;"/>
+    <elementParameter field="TEXT" name="HEADER" value="0"/>
+    <elementParameter field="TEXT" name="FOOTER" value="0"/>
+    <elementParameter field="TEXT" name="LIMIT" value=""/>
+    <elementParameter field="CHECK" name="REMOVE_EMPTY_ROW" value="false"/>
+    <elementParameter field="CHECK" name="UNCOMPRESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="DIRECTORY" name="TEMP_DIR" value="&quot;/par2/TOS_DI-r84309-V5.1.1/workspace&quot;"/>
+    <elementParameter field="CHECK" name="ADVANCED_SEPARATOR" value="false"/>
+    <elementParameter field="TEXT" name="THOUSANDS_SEPARATOR" value="&quot;,&quot;"/>
+    <elementParameter field="TEXT" name="DECIMAL_SEPARATOR" value="&quot;.&quot;"/>
+    <elementParameter field="CHECK" name="RANDOM" value="false"/>
+    <elementParameter field="TEXT" name="NB_RANDOM" value="10"/>
+    <elementParameter field="CHECK" name="TRIMALL" value="false"/>
+    <elementParameter field="TABLE" name="TRIMSELECT">
+      <elementValue elementRef="SCHEMA_COLUMN" value="xmlresult"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="CHECK_FIELDS_NUM" value="false"/>
+    <elementParameter field="CHECK" name="CHECK_DATE" value="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="SPLITRECORD" value="false"/>
+    <elementParameter field="TEXT" name="DESTINATION" value=""/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tFileInputDelimited_1">
+      <column comment="" key="false" name="xmlresult" nullable="true" pattern="" sourceType="" type="id_String"/>
+    </metadata>
+    <metadata connector="REJECT" name="REJECT">
+      <column comment="" key="false" name="xmlresult" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tXSLTField" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="416" posY="160">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tXSLTField_1"/>
+    <elementParameter field="PREV_COLUMN_LIST" name="XML_FIELD" value="xmlresult"/>
+    <elementParameter field="FILE" name="XSLT_FILE" value="&quot;/par2/TOS_DI-r84309-V5.1.1/workspace/in.xsl&quot;"/>
+    <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;&#xA;    xmlns:grg=&quot;http://www.isotc211.org/2005/grg&quot; &#xA;    xmlns:gmd=&quot;http://www.isotc211.org/2005/gmd&quot; &#xA;    xmlns:gco=&quot;http://www.isotc211.org/2005/gco&quot; &#xA;    xmlns:gnreg=&quot;http://geonetwork-opensource.org/register&quot;&#xA;    xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;   &#xA;    version=&quot;1.0&quot;>&#xA;    &#xA;    &lt;xsl:output indent=&quot;yes&quot; method=&quot;xml&quot;/>&#xA;&#xA;&lt;xsl:template match=&quot;/&quot;>&#xA;    &lt;xsl:apply-templates select=&quot;root/register&quot;/>&#xA;&lt;/xsl:template>&#xA;    &#xA;    &lt;xsl:template match=&quot;register&quot;>&#xA;        &lt;grg:RE_Register xmlns:grg=&quot;http://www.isotc211.org/2005/grg&quot; xmlns:gmd=&quot;http://www.isotc211.org/2005/gmd&quot; xmlns:gco=&quot;http://www.isotc211.org/2005/gco&quot; xmlns:gnreg=&quot;http://geonetwork-opensource.org/register&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;>&#xA;            &lt;grg:name>&#xA;                &lt;gco:CharacterString>&lt;xsl:value-of select=&quot;register_name&quot;/>&lt;/gco:CharacterString>&#xA;            &lt;/grg:name>&#xA;            &lt;grg:contentSummary>&#xA;                &lt;gco:CharacterString>&lt;xsl:value-of select=&quot;register_content_summary&quot;/>&lt;/gco:CharacterString>&#xA;            &lt;/grg:contentSummary>&#xA;            &lt;grg:uniformResourceIdentifier>&#xA;                &lt;gmd:CI_OnlineResource>&#xA;                    &lt;gmd:linkage>&#xA;                        &lt;gmd:URL>http://vocab.aodn.org.au/&lt;xsl:value-of select=&quot;register_name&quot;/>/&lt;xsl:value-of select=&quot;register_version&quot;/>&lt;/gmd:URL>&#xA;                    &lt;/gmd:linkage>&#xA;                &lt;/gmd:CI_OnlineResource>&#xA;            &lt;/grg:uniformResourceIdentifier>&#xA;            &lt;grg:operatingLanguage>&#xA;                &lt;grg:RE_Locale>&#xA;                    &lt;grg:name>&#xA;                        &lt;gco:CharacterString>&lt;xsl:value-of select=&quot;register_language_name&quot;/>&lt;/gco:CharacterString>&#xA;                    &lt;/grg:name>&#xA;                    &lt;grg:language>&#xA;                        &lt;gmd:LanguageCode codeList=&quot;http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_LanguageCode&quot; codeListValue=&quot;{register_language_code}&quot;/>&#xA;                    &lt;/grg:language>&#xA;                    &lt;grg:country>&#xA;                        &lt;gco:CharacterString>&lt;xsl:value-of select=&quot;register_language_country&quot;/>&lt;/gco:CharacterString>&#xA;                    &lt;/grg:country>&#xA;                    &lt;grg:characterEncoding>&#xA;                        &lt;gmd:MD_CharacterSetCode codeListValue=&quot;{register_language_encoding}&quot; codeList=&quot;http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode&quot;/>&#xA;                    &lt;/grg:characterEncoding>&#xA;                &lt;/grg:RE_Locale>&#xA;            &lt;/grg:operatingLanguage>&#xA;            &lt;grg:version>&#xA;                &lt;grg:RE_Version>&#xA;                    &lt;grg:versionNumber>&#xA;                        &lt;gco:CharacterString>&lt;xsl:value-of select=&quot;register_version&quot;/>&lt;/gco:CharacterString>&#xA;                    &lt;/grg:versionNumber>&#xA;                    &lt;grg:versionDate>&#xA;                        &lt;gco:Date>&lt;xsl:value-of select=&quot;register_date&quot;/>&lt;/gco:Date>&#xA;                    &lt;/grg:versionDate>&#xA;                &lt;/grg:RE_Version>&#xA;            &lt;/grg:version>&#xA;            &lt;grg:dateOfLastChange>&#xA;                &lt;gco:Date>&lt;xsl:value-of select=&quot;date_of_last_change&quot;/>&lt;/gco:Date>&#xA;            &lt;/grg:dateOfLastChange>&#xA;        &lt;xsl:apply-templates select=&quot;owner&quot;/>&#xA;            &lt;xsl:apply-templates select=&quot;submitter&quot;/>&#xA;            &lt;grg:containedItemClass>&#xA;            &lt;grg:RE_ItemClass id=&quot;Item_Class&quot;>&#xA;                &lt;grg:name>&#xA;                    &lt;gco:CharacterString>gnreg:RE_RegisterItem&lt;/gco:CharacterString>&#xA;                &lt;/grg:name>&#xA;                &lt;grg:technicalStandard>&#xA;                    &lt;gmd:CI_Citation>&#xA;                        &lt;gmd:title>&#xA;                            &lt;gco:CharacterString>GeoNetwork Extension to RE_RegisterItem in ISO19135&lt;/gco:CharacterString>&#xA;                        &lt;/gmd:title>&#xA;                        &lt;gmd:date>&#xA;                            &lt;gmd:CI_Date>&#xA;                                &lt;gmd:date>&#xA;                                    &lt;gco:Date>2012-04-29&lt;/gco:Date>&#xA;                                &lt;/gmd:date>&#xA;                                &lt;gmd:dateType>&#xA;                                    &lt;gmd:CI_DateTypeCode codeList=&quot;http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode&quot; codeListValue=&quot;creation&quot;/>&#xA;                                &lt;/gmd:dateType>&#xA;                            &lt;/gmd:CI_Date>&#xA;                        &lt;/gmd:date>&#xA;                    &lt;/gmd:CI_Citation>&#xA;                &lt;/grg:technicalStandard>&#xA;            &lt;/grg:RE_ItemClass>&#xA;        &lt;/grg:containedItemClass>&#xA;            &lt;xsl:apply-templates select=&quot;manager&quot;/>&#xA;            &lt;xsl:apply-templates select=&quot;term&quot;/>&#xA;        &lt;/grg:RE_Register>&#xA;    &lt;/xsl:template>&#xA;&#xA;&lt;xsl:template match=&quot;owner&quot;>&#xA;        &lt;grg:owner>&#xA;            &lt;grg:RE_RegisterOwner>&#xA;                &lt;xsl:call-template name=&quot;contact&quot;>&#xA;                    &lt;xsl:with-param name=&quot;organisation_name&quot;  select=&quot;organisation_name&quot;/>&#xA;                    &lt;xsl:with-param name=&quot;contact_name&quot;  select=&quot;contact_name&quot;/>&#xA;                    &lt;xsl:with-param name=&quot;contact_email&quot;  select=&quot;contact_email&quot;/>&#xA;                    &lt;xsl:with-param name=&quot;contact_phone_number&quot;  select=&quot;contact_phone_number&quot;/>&#xA;                &lt;/xsl:call-template>&#xA;            &lt;/grg:RE_RegisterOwner>&#xA;        &lt;/grg:owner>&#xA;&lt;/xsl:template>&#xA;    &#xA;    &lt;xsl:template match=&quot;submitter&quot;>&#xA;        &lt;grg:submitter>&#xA;            &lt;grg:RE_SubmittingOrganization>&#xA;                &lt;xsl:call-template name=&quot;contact&quot;>&#xA;                    &lt;xsl:with-param name=&quot;organisation_name&quot;  select=&quot;organisation_name&quot;/>&#xA;                    &lt;xsl:with-param name=&quot;contact_name&quot;  select=&quot;contact_name&quot;/>&#xA;                    &lt;xsl:with-param name=&quot;contact_email&quot;  select=&quot;contact_email&quot;/>&#xA;                    &lt;xsl:with-param name=&quot;contact_phone_number&quot;  select=&quot;contact_phone_number&quot;/>&#xA;                &lt;/xsl:call-template>&#xA;            &lt;/grg:RE_SubmittingOrganization>&#xA;        &lt;/grg:submitter>&#xA;    &lt;/xsl:template>&#xA;    &#xA;    &lt;xsl:template match=&quot;manager&quot;>&#xA;        &lt;grg:manager>&#xA;            &lt;grg:RE_RegisterManager>&#xA;                &lt;xsl:call-template name=&quot;contact&quot;>&#xA;                    &lt;xsl:with-param name=&quot;organisation_name&quot;  select=&quot;organisation_name&quot;/>&#xA;                    &lt;xsl:with-param name=&quot;contact_name&quot;  select=&quot;contact_name&quot;/>&#xA;                    &lt;xsl:with-param name=&quot;contact_email&quot;  select=&quot;contact_email&quot;/>&#xA;                    &lt;xsl:with-param name=&quot;contact_phone_number&quot;  select=&quot;contact_phone_number&quot;/>&#xA;                &lt;/xsl:call-template>&#xA;            &lt;/grg:RE_RegisterManager>&#xA;        &lt;/grg:manager>&#xA;    &lt;/xsl:template>&#xA;    &#xA;    &lt;xsl:template match=&quot;term&quot;>&#xA;        &lt;grg:containedItem>&#xA;            &lt;gnreg:RE_RegisterItem gco:isoType=&quot;grg:RE_RegisterItem&quot;>&#xA;                &lt;grg:itemIdentifier>&#xA;                    &lt;gco:Integer>&lt;xsl:value-of select=&quot;vocabulary_term_code&quot;/>&lt;/gco:Integer>&#xA;                &lt;/grg:itemIdentifier>&#xA;                &lt;grg:name>&#xA;                    &lt;gco:CharacterString>&lt;xsl:value-of select=&quot;vocabulary_term_name&quot;/>&lt;/gco:CharacterString>&#xA;                &lt;/grg:name>&#xA;                &lt;grg:status>&#xA;                    &lt;grg:RE_ItemStatus>&lt;xsl:value-of select=&quot;term_status&quot;/>&lt;/grg:RE_ItemStatus>&#xA;                &lt;/grg:status>&#xA;                &lt;grg:dateAccepted>&#xA;                    &lt;gco:Date>&lt;xsl:value-of select=&quot;date_added&quot;/>&lt;/gco:Date>&#xA;                &lt;/grg:dateAccepted>&#xA;                &lt;grg:definition>&#xA;                    &lt;gco:CharacterString>&lt;xsl:value-of select=&quot;vocabulary_term_definition&quot;/>&lt;/gco:CharacterString>&#xA;                &lt;/grg:definition>&#xA;                &lt;grg:additionInformation>&#xA;                    &lt;grg:RE_AdditionInformation>&#xA;                        &lt;grg:dateProposed>&#xA;                            &lt;gco:Date>&lt;xsl:value-of select=&quot;date_added&quot;/>&lt;/gco:Date>&#xA;                        &lt;/grg:dateProposed>&#xA;                        &lt;grg:justification  gco:nilReason=&quot;missing&quot;>&#xA;                            &lt;gco:CharacterString/>&#xA;                        &lt;/grg:justification>&#xA;                        &lt;grg:status>&#xA;                            &lt;grg:RE_DecisionStatus>&lt;xsl:value-of select=&quot;proposal_term_status&quot;/>&lt;/grg:RE_DecisionStatus>&#xA;                        &lt;/grg:status>&#xA;                        &lt;xsl:if test=&quot;term_notes&quot;>&#xA;                        &lt;grg:registerManagerNotes>&#xA;                            &lt;gco:CharacterString>&lt;xsl:value-of select=&quot;term_notes&quot;/>&lt;/gco:CharacterString>&#xA;                        &lt;/grg:registerManagerNotes>&#xA;                        &lt;/xsl:if>&#xA;                        &lt;grg:sponsor gco:nilReason=&quot;missing&quot;/>&#xA;                    &lt;/grg:RE_AdditionInformation>&#xA;                &lt;/grg:additionInformation>&#xA;                &lt;grg:itemClass xlink:href=&quot;#Item_Class&quot;/>&#xA;                &lt;xsl:apply-templates select=&quot;relatedTerm&quot;/>&#xA;                &lt;gnreg:itemIdentifier>&#xA;                    &lt;gco:CharacterString>&lt;xsl:value-of select=&quot;vocabulary_term_uid&quot;/>&lt;/gco:CharacterString>&#xA;                &lt;/gnreg:itemIdentifier>&#xA;            &lt;/gnreg:RE_RegisterItem>&#xA;        &lt;/grg:containedItem>&#xA;    &lt;/xsl:template>&#xA;    &#xA;    &lt;xsl:template match=&quot;relatedTerm&quot;>&#xA;        &lt;grg:specificationLineage>&#xA;            &lt;grg:RE_Reference>&#xA;                &lt;grg:itemIdentifierAtSource>&#xA;                    &lt;gco:CharacterString>&lt;xsl:value-of select=&quot;.&quot;/>&lt;/gco:CharacterString>&#xA;                &lt;/grg:itemIdentifierAtSource>&#xA;                &lt;grg:similarity>&#xA;                    &lt;grg:RE_SimilarityToSource codeListValue=&quot;{@type}&quot; codeList=&quot;http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#RE_SimilarityToSource&quot;/>&#xA;                &lt;/grg:similarity>&#xA;                &lt;grg:sourceCitation gco:nilReason=&quot;missing&quot;/>&#xA;            &lt;/grg:RE_Reference>&#xA;        &lt;/grg:specificationLineage>&#xA;    &lt;/xsl:template>&#xA;    &#xA;    &lt;xsl:template name=&quot;contact&quot;>&#xA;        &lt;xsl:param name=&quot;organisation_name&quot;/>&#xA;        &lt;xsl:param name=&quot;contact_name&quot;/>&#xA;        &lt;xsl:param name=&quot;contact_email&quot;/>&#xA;        &lt;xsl:param name=&quot;contact_phone_number&quot;/>&#xA;        &lt;grg:name>&#xA;            &lt;gco:CharacterString>&lt;xsl:value-of select=&quot;$organisation_name&quot;/>&lt;/gco:CharacterString>&#xA;        &lt;/grg:name>&#xA;        &lt;grg:contact>&#xA;            &lt;gmd:CI_ResponsibleParty>&#xA;                &lt;gmd:individualName>&#xA;                    &lt;gco:CharacterString>&lt;xsl:value-of select=&quot;$contact_name&quot;/>&lt;/gco:CharacterString>&#xA;                &lt;/gmd:individualName>&#xA;                &lt;gmd:organisationName>&#xA;                    &lt;gco:CharacterString>&lt;xsl:value-of select=&quot;$organisation_name&quot;/>&lt;/gco:CharacterString>&#xA;                &lt;/gmd:organisationName>&#xA;                &lt;gmd:contactInfo>&#xA;                    &lt;gmd:CI_Contact>&#xA;                        &lt;gmd:phone>&#xA;                            &lt;gmd:CI_Telephone>&#xA;                                &lt;gmd:voice>&#xA;                                    &lt;gco:CharacterString>&lt;xsl:value-of select=&quot;$contact_phone_number&quot;/>&lt;/gco:CharacterString>&#xA;                                &lt;/gmd:voice>&#xA;                            &lt;/gmd:CI_Telephone>&#xA;                        &lt;/gmd:phone>&#xA;                        &lt;gmd:address>&#xA;                            &lt;gmd:CI_Address>&#xA;                                &lt;gmd:electronicMailAddress>&#xA;                                    &lt;gco:CharacterString>&lt;xsl:value-of select=&quot;$contact_email&quot;/>&lt;/gco:CharacterString>&#xA;                                &lt;/gmd:electronicMailAddress>&#xA;                            &lt;/gmd:CI_Address>&#xA;                        &lt;/gmd:address>&#xA;                    &lt;/gmd:CI_Contact>&#xA;                &lt;/gmd:contactInfo>&#xA;                &lt;gmd:role>&#xA;                    &lt;gmd:CI_RoleCode codeList=&quot;http://www.isotc211.org/2005/resources/Codelist/gmxCodelist.xml#CI_RoleCode&quot; codeListValue=&quot;pointOfContact&quot;/>&#xA;                &lt;/gmd:role>&#xA;            &lt;/gmd:CI_ResponsibleParty>&#xA;        &lt;/grg:contact>&#xA;    &lt;/xsl:template>&#xA;&lt;/xsl:stylesheet>"/>
+    <elementParameter field="TABLE" name="PARAMS"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tXSLTField_1">
+      <column comment="" key="false" name="xmlresult" nullable="true" pattern="" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tFileOutputDelimited" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="640" posY="160">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileOutputDelimited_1"/>
+    <elementParameter field="CHECK" name="USESTREAM" value="false"/>
+    <elementParameter field="TEXT" name="STREAMNAME" value="outputStream"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.destination_dir + &quot;/&quot; + FileUtils.sanitise(context.register_name) + &quot;.xml&quot;"/>
+    <elementParameter field="TEXT" name="ROWSEPARATOR" value="&quot;&quot;"/>
+    <elementParameter field="CHECK" name="OS_LINE_SEPARATOR_AS_ROW_SEPARATOR" value="true"/>
+    <elementParameter field="OPENED_LIST" name="CSVROWSEPARATOR" value="&quot;\n&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;&quot;"/>
+    <elementParameter field="CHECK" name="APPEND" value="false"/>
+    <elementParameter field="CHECK" name="INCLUDEHEADER" value="false"/>
+    <elementParameter field="CHECK" name="COMPRESS" value="false"/>
+    <elementParameter field="CHECK" name="ADVANCED_SEPARATOR" value="false"/>
+    <elementParameter field="TEXT" name="THOUSANDS_SEPARATOR" value="&quot;,&quot;"/>
+    <elementParameter field="TEXT" name="DECIMAL_SEPARATOR" value="&quot;.&quot;"/>
+    <elementParameter field="CHECK" name="CSV_OPTION" value="false"/>
+    <elementParameter field="TEXT" name="ESCAPE_CHAR" value="&quot;&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TEXT_ENCLOSURE" value="&quot;&quot;&quot;"/>
+    <elementParameter field="CHECK" name="CREATE" value="true"/>
+    <elementParameter field="CHECK" name="SPLIT" value="false"/>
+    <elementParameter field="TEXT" name="SPLIT_EVERY" value="1000"/>
+    <elementParameter field="CHECK" name="FLUSHONROW" value="false"/>
+    <elementParameter field="TEXT" name="FLUSHONROW_NUM" value="1"/>
+    <elementParameter field="CHECK" name="ROW_MODE" value="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="DELETE_EMPTYFILE" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tFileOutputDelimited_1">
+      <column comment="" key="false" name="xmlresult" nullable="true" pattern="" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <connection connectorName="FLOW" label="row7" lineStyle="0" metaname="tFileInputDelimited_1" offsetLabelX="0" offsetLabelY="0" source="tFileInputDelimited_1" target="tXSLTField_1">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="xmlresult"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row7"/>
+  </connection>
+  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tXSLTField_1" offsetLabelX="0" offsetLabelY="0" source="tXSLTField_1" target="tFileOutputDelimited_1">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="xmlresult"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
+  </connection>
+  <note opaque="false" posX="128" posY="32" sizeHeight="64" sizeWidth="417" text="Write iso19135 xml document using collected register info">
+    <elementParameter field="COLOR" name="NOTE_COLOR" value="255;255;203"/>
+    <elementParameter field="COLOR" name="NOTETXT_COLOR" value="0;0;0"/>
+    <elementParameter field="RADIO" name="NOTETXT_LEFT" value="true"/>
+    <elementParameter field="RADIO" name="NOTETXT_RIGHT" value="false"/>
+    <elementParameter field="RADIO" name="NOTETXT_CENTER" value="false"/>
+    <elementParameter field="RADIO" name="NOTELABEL_CENTER" value="true"/>
+    <elementParameter field="RADIO" name="NOTETXT_TOP" value="false"/>
+    <elementParameter field="RADIO" name="NOTETXT_BOTTOM" value="false"/>
+    <elementParameter field="TEXT" name="NOTE_FONT" value="Time New Roman"/>
+    <elementParameter field="TEXT" name="FONT_SIZE" value="10"/>
+    <elementParameter field="CHECK" name="FONT_BOLD" value="false"/>
+    <elementParameter field="CHECK" name="FONT_ITALIC" value="false"/>
+    <elementParameter field="COLOR" name="NOTE_LINECOLOR" value="237;201;122"/>
+  </note>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileInputDelimited_1"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Read register details (xml), transform to iso19135 using xsl and write it to destination"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+</talendfile:ProcessType>
