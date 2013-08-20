@@ -3,9 +3,10 @@ talend-aatams-sattag-nrt
 
 AATAMS Harvester (Talend)
 
-# cd into TOS workspace and clone into dest directory
-cd workspace
-git clone git@github.com:aodn/talend-aatams-sattag-nrt AATAMS_SATTAG_RT
+cd into TOS workspace and clone into dest directory eg.
 
-# then import and open normally using TOS
+$ cd workspace
+$ git clone git@github.com:aodn/talend-aatams-sattag-nrt AATAMS_SATTAG_RT
+
+then import and open normally using TOS
 
