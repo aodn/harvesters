@@ -1,4 +1,4 @@
-talend-aatams-sattag-nrt
+AATAMS_SATTAG_RT
 ========================
 
 AATAMS Harvester (Talend)
