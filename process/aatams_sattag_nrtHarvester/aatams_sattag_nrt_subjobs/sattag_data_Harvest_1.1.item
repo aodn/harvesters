@@ -931,6 +931,7 @@
       <column comment="" defaultValue="" key="false" length="17" name="salinity" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="19" name="count" nullable="true" pattern="" precision="0" sourceType="" type="id_Long"/>
       <column comment="" key="false" name="myfile" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="now" nullable="true" pattern="" sourceType="" type="id_String"/>
     </metadata>
     <nodeData xsi:type="MapperData">
       <uiProperties shellMaximized="true"/>
@@ -949,6 +950,7 @@
         <mapperTableEntries name="salinity" expression="row7.salinity" type="id_Double" nullable="true"/>
         <mapperTableEntries name="count" expression="row7.count" type="id_Long" nullable="true"/>
         <mapperTableEntries name="myfile" expression="(String)globalMap.get(&quot;tFileUnarchive_1_CURRENT_FILEPATH&quot;)" type="id_String" nullable="true"/>
+        <mapperTableEntries name="now" expression="TalendDate.getDate(&quot;yyyy-MM-dd HH:mm:ss&quot;)" type="id_String" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row7" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="device_wmo_ref" type="id_String" nullable="true"/>
@@ -994,6 +996,8 @@
       <elementValue elementRef="LENGTH" value="10"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="myfile"/>
       <elementValue elementRef="LENGTH" value="10"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="now"/>
+      <elementValue elementRef="LENGTH" value="10"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -1009,6 +1013,7 @@
       <column comment="" defaultValue="" key="false" length="17" name="salinity" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="19" name="count" nullable="true" pattern="" precision="0" sourceType="" type="id_Long"/>
       <column comment="" key="false" name="myfile" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="now" nullable="true" pattern="" sourceType="" type="id_String"/>
     </metadata>
   </node>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIncludeSdiLibraries_1" offsetLabelX="0" offsetLabelY="0" source="iIncludeSdiLibraries_1" target="iNewResources_1">
@@ -1280,6 +1285,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="myfile"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="now"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
