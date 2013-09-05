@@ -26,7 +26,7 @@
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="100"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="96"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="480"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
     <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
@@ -206,7 +206,7 @@
       <column comment="" defaultValue="" key="false" length="8" name="lon" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="252" posY="-96">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="256" posY="-96">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
@@ -302,10 +302,10 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="myout">
       <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Long"/>
-      <column comment="" key="false" length="8" name="device_wmo_ref" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="19" name="timestamp" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="true" length="19" name="timestamp" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
-      <column comment="" defaultValue="" key="false" length="3" name="pressure" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="true" length="3" name="pressure" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" length="7" name="temperature" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
     </metadata>
@@ -321,7 +321,7 @@
         <mapperTableEntries name="temperature" expression="row2.temperature" type="id_Double" nullable="true"/>
         <mapperTableEntries name="salinity" expression="row2.salinity" type="id_Double" nullable="true"/>
       </outputTables>
-      <inputTables sizeState="INTERMEDIATE" name="row2" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
+      <inputTables sizeState="INTERMEDIATE" name="row4" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="device_wmo_ref" type="id_String" nullable="true"/>
         <mapperTableEntries name="timestamp" type="id_Date" nullable="true"/>
         <mapperTableEntries name="pressure" type="id_Integer" nullable="true"/>
@@ -355,16 +355,26 @@
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="TEXT" name="COMMIT_EVERY" value="1"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="1000000"/>
     <elementParameter field="TABLE" name="ADD_COLS"/>
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS">
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="device_wmo_ref"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="timestamp"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -384,42 +394,32 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
-    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
+    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="false"/>
     <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlOutput_5">
-      <column comment="" key="false" length="8" name="device_wmo_ref" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="19" name="timestamp" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="3" name="pressure" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="true" length="19" name="timestamp" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
+      <column comment="" defaultValue="" key="true" length="3" name="pressure" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" length="7" name="temperature" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="false" length="8" name="device_wmo_ref" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="19" name="timestamp" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="3" name="pressure" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="true" length="19" name="timestamp" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
+      <column comment="" defaultValue="" key="true" length="3" name="pressure" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" length="7" name="temperature" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -445,7 +445,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-32" posY="224">
+  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-32" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_3"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -467,15 +467,14 @@
     <elementParameter field="TEXT" name="PASS" value="context.DestinationDatabase_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/home/meteo/imos/aatams/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;     &#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1378188905035-3&quot;>&#xA;        &lt;createTable schemaName=&quot;aatams_sattag_nrt&quot; tableName=&quot;scratch&quot;>&#xA;&#x9;    &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;VARCHAR(8)&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/>&#xA;&#x9;    &lt;column name=&quot;geom&quot; type=&quot;GEOMETRY&quot;/>&#xA;            &lt;column name=&quot;pressure&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;temperature&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;salinity&quot; type=&quot;FLOAT8(17)&quot;/>                  &#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1378188905035-1&quot;>&#xA;        &lt;createTable schemaName=&quot;aatams_sattag_nrt&quot; tableName=&quot;measurements&quot;>&#xA;&#x9;    &lt;column autoIncrement=&quot;true&quot; name=&quot;id&quot; type=&quot;bigserial&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;measurements_pkey&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;profile_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;pressure&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;temperature&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;salinity&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1378188905035-2&quot;>&#xA;        &lt;createTable schemaName=&quot;aatams_sattag_nrt&quot; tableName=&quot;profiles&quot;>&#xA;&#x9;    &lt;column autoIncrement=&quot;true&quot; name=&quot;id&quot; type=&quot;bigserial&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;profiles_pkey&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;VARCHAR(8)&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/>&#xA;            &lt;column name=&quot;lat&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;lon&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;           &#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;   &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1378188905035-4&quot;>&#xA;        &lt;addForeignKeyConstraint baseColumnNames=&quot;profile_id&quot; baseTableName=&quot;measurements&quot; baseTableSchemaName=&quot;aatams_sattag_nrt&quot; constraintName=&quot;measurements_profile_id_fkey&quot; deferrable=&quot;false&quot; initiallyDeferred=&quot;false&quot; onDelete=&quot;NO ACTION&quot; onUpdate=&quot;NO ACTION&quot; referencedColumnNames=&quot;id&quot; referencedTableName=&quot;profiles&quot; referencedTableSchemaName=&quot;aatams_sattag_nrt&quot; referencesUniqueColumn=&quot;false&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;   &lt;changeSet author=&quot;talend&quot; id=&quot;1378252876655-2&quot;>&#xA;        &lt;addUniqueConstraint columnNames=&quot;device_wmo_ref, timestamp&quot; constraintName=&quot;profiles_unique_constraint&quot; deferrable=&quot;false&quot; disabled=&quot;false&quot; initiallyDeferred=&quot;false&quot; schemaName=&quot;aatams_sattag_nrt&quot; tableName=&quot;profiles&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1378252876655-3&quot;>&#xA;        &lt;addUniqueConstraint columnNames=&quot;profile_id,pressure,temperature,salinity&quot; constraintName=&quot;measurements_unique_constraint&quot; deferrable=&quot;false&quot; disabled=&quot;false&quot; initiallyDeferred=&quot;false&quot; schemaName=&quot;aatams_sattag_nrt&quot; tableName=&quot;measurements&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;     &#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1378188905035-3&quot;>&#xA;        &lt;createTable schemaName=&quot;aatams_sattag_nrt&quot; tableName=&quot;scratch&quot;>&#xA;&#x9;    &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;VARCHAR(8)&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/>&#xA;&#x9;    &lt;column name=&quot;geom&quot; type=&quot;GEOMETRY&quot;/>&#xA;            &lt;column name=&quot;pressure&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;temperature&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;salinity&quot; type=&quot;FLOAT8(17)&quot;/>                  &#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1378188905035-2&quot;>&#xA;        &lt;createTable schemaName=&quot;aatams_sattag_nrt&quot; tableName=&quot;profiles&quot;>&#xA;&#x9;    &lt;column autoIncrement=&quot;true&quot; name=&quot;id&quot; type=&quot;bigserial&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;profiles_pkey&quot;/>&#xA;            &lt;/column>&#x9;    &#xA;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;VARCHAR(8)&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/>&#xA;&#x9;    &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;           &lt;column name=&quot;geom&quot; type=&quot;GEOMETRY&quot;/>           &#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1378188905035-1&quot;>&#xA;        &lt;createTable schemaName=&quot;aatams_sattag_nrt&quot; tableName=&quot;measurements&quot;>&#xA;&#x9;    &lt;column autoIncrement=&quot;true&quot; name=&quot;id&quot; type=&quot;bigserial&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;measurements_pkey&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;profile_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;pressure&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;temperature&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;salinity&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;   &#xA;   &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1378188905035-4&quot;>&#xA;        &lt;addForeignKeyConstraint baseColumnNames=&quot;profile_id&quot; baseTableName=&quot;measurements&quot; baseTableSchemaName=&quot;aatams_sattag_nrt&quot; constraintName=&quot;measurements_profile_id_fkey&quot; deferrable=&quot;false&quot; initiallyDeferred=&quot;false&quot; onDelete=&quot;NO ACTION&quot; onUpdate=&quot;NO ACTION&quot; referencedColumnNames=&quot;id&quot; referencedTableName=&quot;profiles&quot; referencedTableSchemaName=&quot;aatams_sattag_nrt&quot; referencesUniqueColumn=&quot;false&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;   &lt;changeSet author=&quot;talend&quot; id=&quot;1378252876655-2&quot;>&#xA;        &lt;addUniqueConstraint columnNames=&quot;device_wmo_ref, timestamp&quot; constraintName=&quot;profiles_unique_constraint&quot; deferrable=&quot;false&quot; disabled=&quot;false&quot; initiallyDeferred=&quot;false&quot; schemaName=&quot;aatams_sattag_nrt&quot; tableName=&quot;profiles&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1378252876655-3&quot;>&#xA;        &lt;addUniqueConstraint columnNames=&quot;profile_id,pressure,temperature,salinity&quot; constraintName=&quot;measurements_unique_constraint&quot; deferrable=&quot;false&quot; disabled=&quot;false&quot; initiallyDeferred=&quot;false&quot; schemaName=&quot;aatams_sattag_nrt&quot; tableName=&quot;measurements&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="864" posY="-160">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="832" posY="-160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_2"/>
-    <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
@@ -487,12 +486,12 @@
     <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDatabase_Schema"/>
     <elementParameter field="TEXT" name="USER" value="context.DestinationDatabase_Login"/>
     <elementParameter field="TEXT" name="PASS" value="context.DestinationDatabase_Password"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;tester123&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select distinct device_wmo_ref,timestamp,lat,lon from scratch&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select distinct device_wmo_ref,timestamp,file_id, geom from scratch&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -504,9 +503,9 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="timestamp"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="lat"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="lon"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
       <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -516,11 +515,11 @@
     <metadata connector="FLOW" name="tPostgresqlInput_2">
       <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="true" length="35" name="timestamp" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="17" name="lat" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="17" name="lon" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
+      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="GEOMETRY" type="id_Geometry"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1120" posY="-160">
+  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1056" posY="-160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlOutput_6"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
@@ -557,12 +556,12 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="lat"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="lon"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -579,19 +578,19 @@
     <metadata connector="FLOW" name="tPostgresqlOutput_6">
       <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="true" length="35" name="timestamp" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="17" name="lat" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="17" name="lon" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="" type="id_Geometry"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="true" length="35" name="timestamp" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="17" name="lat" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="17" name="lon" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="" type="id_Geometry"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="864" posY="0">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="832" posY="0">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_3"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
@@ -609,7 +608,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select c.id as profile_id, c.pressure, c.temperature, c.salinity &#xA;from &#xA;(select &#xA;&#x9;profiles.id, profiles.device_wmo_ref, profiles.timestamp, profiles.lat, profiles.lon, &#xA;&#x9;scratch.device_wmo_ref, scratch.timestamp, scratch.lat, scratch.lon, scratch.temperature, scratch.pressure, scratch.salinity&#xA;  from &#xA;&#x9;aatams_sattag_nrt.profiles, aatams_sattag_nrt.scratch   &#xA;  where &#xA;&#x9;profiles.device_wmo_ref = scratch.device_wmo_ref &#xA;  &#x9;and profiles.timestamp = scratch.timestamp&#xA;) &#xA;c order by c.id, c.pressure&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select c.id as profile_id, c.pressure, c.temperature, c.salinity &#xA;from &#xA;(select &#xA;&#x9;profiles.id, profiles.device_wmo_ref, profiles.timestamp, profiles.geom, &#xA;&#x9;scratch.device_wmo_ref, scratch.timestamp, scratch.geom, scratch.temperature, scratch.pressure, scratch.salinity&#xA;  from &#xA;&#x9;aatams_sattag_nrt.profiles, aatams_sattag_nrt.scratch   &#xA;  where &#xA;&#x9;profiles.device_wmo_ref = scratch.device_wmo_ref &#xA;  &#x9;and profiles.timestamp = scratch.timestamp&#xA;&#x9;and profiles.geom = scratch.geom&#xA;) &#xA;c order by c.id, c.pressure&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -637,7 +636,7 @@
       <column comment="" key="false" name="salinity" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1120" posY="0">
+  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1056" posY="0">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlOutput_7"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
@@ -708,8 +707,9 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="864" posY="160">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="832" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_4"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
@@ -766,8 +766,9 @@
       <column comment="" defaultValue="" key="false" length="19" name="count" nullable="true" pattern="" precision="0" sourceType="" type="id_Long"/>
     </metadata>
   </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="160">
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="960" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_1"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
     <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
@@ -822,8 +823,9 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1152" posY="160">
+  <node componentName="tLogRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1088" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tLogRow_1"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="RADIO" name="BASIC_MODE" value="true"/>
     <elementParameter field="RADIO" name="TABLE_PRINT" value="false"/>
     <elementParameter field="RADIO" name="VERTICAL" value="false"/>
@@ -928,53 +930,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
   </connection>
-  <connection connectorName="FLOW" label="row4" lineStyle="0" metaname="tJoin_1" offsetLabelX="0" offsetLabelY="0" source="tJoin_1" target="tFilterRow_1">
-    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="device_wmo_ref"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="timestamp"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="pressure"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="temperature"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="salinity"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="lat"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="lon"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
-    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
-    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
-    <elementParameter field="TABLE" name="THRESHLODS"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row4"/>
-  </connection>
-  <connection connectorName="FLOW" label="row3" lineStyle="8" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tJoin_1">
-    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER"/>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
-    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
-    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
-    <elementParameter field="TABLE" name="THRESHLODS"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row3"/>
-  </connection>
-  <connection connectorName="FILTER" label="row2" lineStyle="0" metaname="FILTER" offsetLabelX="0" offsetLabelY="0" source="tFilterRow_1" target="tMap_2">
+  <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tJoin_1" offsetLabelX="0" offsetLabelY="0" source="tJoin_1" target="tFilterRow_1">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="device_wmo_ref"/>
@@ -1007,6 +963,52 @@
     <elementParameter field="TABLE" name="THRESHLODS"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row2"/>
+  </connection>
+  <connection connectorName="FLOW" label="row3" lineStyle="8" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tJoin_1">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER"/>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row3"/>
+  </connection>
+  <connection connectorName="FILTER" label="row4" lineStyle="0" metaname="FILTER" offsetLabelX="29" offsetLabelY="1" source="tFilterRow_1" target="tMap_2">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="device_wmo_ref"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="timestamp"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="pressure"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="temperature"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="salinity"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="lat"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="lon"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row4"/>
   </connection>
   <connection connectorName="FLOW" label="myout" lineStyle="0" metaname="myout" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="tPostgresqlOutput_5">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
@@ -1041,6 +1043,10 @@
     <elementParameter field="TABLE" name="THRESHLODS"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="myout"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlOutput_5" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlOutput_5" target="tPostgresqlInput_2">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnection_3" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_3" target="iIncludeSdiLibraries_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
@@ -1104,10 +1110,6 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row6"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_3" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_3" target="tPostgresqlInput_4">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk8"/>
-  </connection>
   <connection connectorName="FLOW" label="row7" lineStyle="0" metaname="tPostgresqlInput_4" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_4" target="tMap_1">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
@@ -1142,7 +1144,7 @@
     <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
     <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
     <elementParameter field="TABLE" name="THRESHLODS"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row7"/>
   </connection>
   <connection connectorName="FLOW" label="xxx" lineStyle="0" metaname="xxx" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tLogRow_1">
@@ -1185,7 +1187,7 @@
     <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
     <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
     <elementParameter field="TABLE" name="THRESHLODS"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="xxx"/>
   </connection>
   <subjob>
