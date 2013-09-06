@@ -311,7 +311,7 @@
       <column comment="" defaultValue="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="myout">
         <mapperTableEntries name="file_id" expression="((Long)globalMap.get(&quot;iNewResources_1_FILE_ID&quot;))" type="id_Long" nullable="true"/>
@@ -491,7 +491,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select distinct device_wmo_ref,timestamp,file_id, geom from scratch order by file_id,device_wmo_ref,timestamp&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select distinct file_id, device_wmo_ref,timestamp,geom from scratch order by file_id,device_wmo_ref,timestamp&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -513,9 +513,9 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlInput_2">
+      <column comment="" defaultValue="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
       <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="true" length="35" name="timestamp" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="GEOMETRY" type="id_Geometry"/>
     </metadata>
   </node>
@@ -546,17 +546,17 @@
     <elementParameter field="TABLE" name="ADD_COLS"/>
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS">
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="device_wmo_ref"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="timestamp"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -576,16 +576,16 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlOutput_6">
+      <column comment="" defaultValue="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
       <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="true" length="35" name="timestamp" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="" type="id_Geometry"/>
+      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="GEOMETRY" type="id_Geometry"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
+      <column comment="" defaultValue="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
       <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="true" length="35" name="timestamp" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="" type="id_Geometry"/>
+      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="GEOMETRY" type="id_Geometry"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
