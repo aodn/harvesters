@@ -608,7 +608,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select c.id as profile_id, c.pressure, c.temperature, c.salinity &#xA;from &#xA;(select &#xA;&#x9;profiles.id, profiles.device_wmo_ref, profiles.timestamp, profiles.geom, &#xA;&#x9;scratch.device_wmo_ref, scratch.timestamp, scratch.geom, scratch.temperature, scratch.pressure, scratch.salinity&#xA;  from &#xA;&#x9;aatams_sattag_nrt.profiles, aatams_sattag_nrt.scratch   &#xA;  where &#xA;&#x9;profiles.device_wmo_ref = scratch.device_wmo_ref &#xA;  &#x9;and profiles.timestamp = scratch.timestamp&#xA;&#x9;and profiles.geom = scratch.geom&#xA;) &#xA;c order by c.id, c.pressure&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select &#xA;    profiles.id as profile_id, scratch.pressure, scratch.temperature, scratch.salinity&#xA;  from &#xA;    aatams_sattag_nrt.profiles &#xA;  join aatams_sattag_nrt.scratch on  &#xA;    ( profiles.device_wmo_ref = scratch.device_wmo_ref &#xA;    and profiles.timestamp = scratch.timestamp&#xA;    and profiles.geom = scratch.geom )&#xA;    order by profile_id, pressure&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
