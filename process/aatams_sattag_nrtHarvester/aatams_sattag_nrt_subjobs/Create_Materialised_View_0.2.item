@@ -66,7 +66,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT id AS profile_id,&#xA;device_wmo_ref,&#xA;timestamp,&#xA;make_shortest_line(geom,CASE WHEN lead(geom,1) OVER (PARTITION BY device_wmo_ref ORDER BY device_wmo_ref, timestamp) IS NULL THEN geom ELSE lead(geom,1) OVER (PARTITION BY device_wmo_ref ORDER BY device_wmo_ref, timestamp) END) AS geom,&#xA;'#'::text || upper(colour::text) AS colour&#xA;FROM profiles&#xA;ORDER by device_wmo_ref, timestamp&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT id AS profile_id,&#xA;device_wmo_ref,&#xA;timestamp,&#xA;make_point_or_shortest_line(geom,CASE WHEN lead(geom,1) OVER (PARTITION BY device_wmo_ref ORDER BY device_wmo_ref, timestamp) IS NULL THEN geom ELSE lead(geom,1) OVER (PARTITION BY device_wmo_ref ORDER BY device_wmo_ref, timestamp) END) AS geom,&#xA;'#'::text || upper(colour::text) AS colour&#xA;FROM profiles&#xA;ORDER by device_wmo_ref, timestamp&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
