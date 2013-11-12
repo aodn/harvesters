@@ -29,6 +29,8 @@
 	  toolbox_version text,
 	  depth_b boolean,
 	  sea_water_temperature_b boolean,
+	  sea_water_electrical_conductivity_b boolean,
+	  sea_water_salinity_b boolean,
 	  sea_water_pressure_b boolean,
 	  sea_water_pressure_due_to_sea_water_b boolean,
 	  CONSTRAINT timeseries_pk PRIMARY KEY (id ),
@@ -59,6 +61,10 @@
 	  "DEPTH_quality_control" character(1),
 	  "TEMP" real,
 	  "TEMP_quality_control" character(1),
+	  "CNDC" real,
+	  "CNDC_quality_control" character(1),
+	  "PSAL" real,
+	  "PSAL_quality_control" character(1),
 	  "PRES" real,
 	  "PRES_quality_control" character(1),
 	  "PRES_REL" real,
@@ -108,6 +114,8 @@
 	    t.instrument_serial_number,
 	    t.depth_b,
 	    t.sea_water_temperature_b,
+	    t.sea_water_electrical_conductivity_b,
+	    t.sea_water_salinity_b,
 	    t.sea_water_pressure_b,
 	    t.sea_water_pressure_due_to_sea_water_b
 	    FROM anmn_ts.timeseries t JOIN anmn_ts.indexed_file f ON t.file_id = f.id;
@@ -139,6 +147,10 @@
 	    m."DEPTH_quality_control",
 	    m."TEMP",
 	    m."TEMP_quality_control",
+	    m."CNDC",
+	    m."CNDC_quality_control",
+	    m."PSAL",
+	    m."PSAL_quality_control",
 	    m."PRES",
 	    m."PRES_quality_control",
 	    m."PRES_REL",
@@ -146,6 +158,8 @@
 	    t.geom,
 	    t.depth_b,
 	    t.sea_water_temperature_b,
+	    t.sea_water_electrical_conductivity_b,
+	    t.sea_water_salinity_b,
 	    t.sea_water_pressure_b,
 	    t.sea_water_pressure_due_to_sea_water_b
 	    FROM  anmn_ts.timeseries t  JOIN  anmn_ts.measurement m  ON  t.id = m.ts_id;
@@ -158,3 +172,4 @@
 
 
 </databaseChangeLog>
+
