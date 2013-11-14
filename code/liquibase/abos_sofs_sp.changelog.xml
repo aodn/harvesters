@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet author="talend" id="create_file_metadata_table-1">
+      <sql>
+	CREATE TABLE abos_sofs_sf.file_metadata
+	(
+	  file_id bigint NOT NULL,
+	  deployment_number varchar(3) NOT NULL,
+	  delivery_mode varchar(3) NOT NULL,
+	  time_coverage_start timestamp with time zone,
+	  time_coverage_end timestamp with time zone,
+	  date_created  timestamp with time zone,
+	  CONSTRAINT file_metadata_indexed_file_fk FOREIGN KEY (file_id)
+	      REFERENCES abos_sofs_sf.indexed_file (id) MATCH SIMPLE
+	      ON UPDATE CASCADE ON DELETE CASCADE
+	)
+	WITH (
+	  OIDS=FALSE
+	);
+	ALTER TABLE abos_sofs_sf.file_metadata
+	  OWNER TO abos_sofs_sf;
+      </sql>
+    </changeSet>
+	  
+
+    <changeSet author="talend" id="create_timeseries_table-1">
+      <sql>
+	CREATE TABLE abos_sofs_sf.timeseries
+	  id bigserial NOT NULL,
+	  deployment_number varchar(3) NOT NULL,
+	  delivery_mode varchar(3) NOT NULL,
+	  nominal_latitude double precision NOT NULL,
+	  nominal_longitude double precision NOT NULL,
+	  geom geometry(Geometry,4326) NOT NULL,
+	  time_deployment_start timestamp with time zone,
+	  time_deployment_end timestamp with time zone,
+	  CONSTRAINT timeseries_pk PRIMARY KEY (id ),
+          CONSTRAINT timeseries_deployment_mode_uc UNIQUE (deployment_number, delivery_mode)
+	)
+	WITH (
+	  OIDS=FALSE
+	);
+	ALTER TABLE abos_sofs_sf.timeseries
+	  OWNER TO abos_sofs_sf;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="update_geometry_column-1">
+      <sql>
+	ALTER TABLE timeseries
+	  ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)
+	  USING ST_SetSRID(geom,4326);
+	CREATE INDEX timeseries_gist_idx ON timeseries USING GIST (geom); 
+      </sql>
+    </changeSet>
+
+
+</databaseChangeLog>
