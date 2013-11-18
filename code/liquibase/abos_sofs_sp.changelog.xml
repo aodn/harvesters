@@ -3,7 +3,7 @@
 
     <changeSet author="talend" id="create_file_metadata_table-1">
       <sql>
-	CREATE TABLE abos_sofs_sf.file_metadata
+	CREATE TABLE abos_sofs_sp.file_metadata
 	(
 	  file_id bigint NOT NULL,
 	  deployment_number varchar(3) NOT NULL,
@@ -12,27 +12,28 @@
 	  time_coverage_end timestamp with time zone,
 	  date_created  timestamp with time zone,
 	  CONSTRAINT file_metadata_indexed_file_fk FOREIGN KEY (file_id)
-	      REFERENCES abos_sofs_sf.indexed_file (id) MATCH SIMPLE
+	      REFERENCES abos_sofs_sp.indexed_file (id) MATCH SIMPLE
 	      ON UPDATE CASCADE ON DELETE CASCADE
 	)
 	WITH (
 	  OIDS=FALSE
 	);
-	ALTER TABLE abos_sofs_sf.file_metadata
-	  OWNER TO abos_sofs_sf;
+	ALTER TABLE abos_sofs_sp.file_metadata
+	  OWNER TO abos_sofs_sp;
       </sql>
     </changeSet>
 	  
 
     <changeSet author="talend" id="create_timeseries_table-1">
       <sql>
-	CREATE TABLE abos_sofs_sf.timeseries
+	CREATE TABLE abos_sofs_sp.timeseries
+	(
 	  id bigserial NOT NULL,
 	  deployment_number varchar(3) NOT NULL,
 	  delivery_mode varchar(3) NOT NULL,
-	  nominal_latitude double precision NOT NULL,
-	  nominal_longitude double precision NOT NULL,
-	  geom geometry(Geometry,4326) NOT NULL,
+	  nominal_latitude double precision,
+	  nominal_longitude double precision,
+	  geom geometry(Geometry,4326),
 	  time_deployment_start timestamp with time zone,
 	  time_deployment_end timestamp with time zone,
 	  CONSTRAINT timeseries_pk PRIMARY KEY (id ),
@@ -41,8 +42,8 @@
 	WITH (
 	  OIDS=FALSE
 	);
-	ALTER TABLE abos_sofs_sf.timeseries
-	  OWNER TO abos_sofs_sf;
+	ALTER TABLE abos_sofs_sp.timeseries
+	  OWNER TO abos_sofs_sp;
       </sql>
     </changeSet>
 

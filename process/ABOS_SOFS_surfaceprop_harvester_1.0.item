@@ -63,6 +63,7 @@
   </parameters>
   <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="448">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="TEXT" name="HOST" value="context.harvestDb_Server"/>
     <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
     <elementParameter field="TEXT" name="PORT" value="context.harvestDb_Port"/>
@@ -84,10 +85,11 @@
   </node>
   <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="448" posY="448">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_3"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
-    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="HarvestTimeseriesFile"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_YZ0AcDEvEeOm3NYRQTSI_w"/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="HarvestSOFSFile"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_4_weIFALEeOWjojytgXKfw"/>
     <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
     <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
     <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
@@ -108,31 +110,6 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_3"/>
-  </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="448" posY="544">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_7"/>
-    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
-    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
-    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="AddTimeseriesBoolean"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_74PFQDYvEeOBXOTTBaxmyA"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
-    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
-    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
-    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
-    <elementParameter field="TABLE" name="CONTEXTPARAMS">
-      <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iHarvestResources_1_FILE_ID&quot;))"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
-    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tRunJob_7"/>
   </node>
   <node componentName="iDeletedResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
@@ -159,8 +136,8 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_5"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
-    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="DeleteTimeseriesFileData"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_8Ljq0DboEeOhUNOF0l0jkg"/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="DeleteSOFSFileData"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_Fru28FALEeOWjojytgXKfw"/>
     <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
     <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
     <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
@@ -191,7 +168,7 @@
     <elementParameter field="TEXT" name="PASS" value="context.harvestDb_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/home/mhidas/work/sql/data_harvest/anmn_ts.changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_file_metadata_table-1&quot;>&#xA;      &lt;sql>&#xA;&#x9;CREATE TABLE abos_sofs_sf.file_metadata&#xA;&#x9;(&#xA;&#x9;  file_id bigint NOT NULL,&#xA;&#x9;  deployment_number varchar(3) NOT NULL,&#xA;&#x9;  delivery_mode varchar(3) NOT NULL,&#xA;&#x9;  time_coverage_start timestamp with time zone,&#xA;&#x9;  time_coverage_end timestamp with time zone,&#xA;&#x9;  date_created  timestamp with time zone,&#xA;&#x9;  CONSTRAINT file_metadata_indexed_file_fk FOREIGN KEY (file_id)&#xA;&#x9;      REFERENCES abos_sofs_sf.indexed_file (id) MATCH SIMPLE&#xA;&#x9;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;&#x9;)&#xA;&#x9;WITH (&#xA;&#x9;  OIDS=FALSE&#xA;&#x9;);&#xA;&#x9;ALTER TABLE abos_sofs_sf.file_metadata&#xA;&#x9;  OWNER TO abos_sofs_sf;&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#x9;  &#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_timeseries_table-1&quot;>&#xA;      &lt;sql>&#xA;&#x9;CREATE TABLE abos_sofs_sf.timeseries&#xA;&#x9;  id bigserial NOT NULL,&#xA;&#x9;  deployment_number varchar(3) NOT NULL,&#xA;&#x9;  delivery_mode varchar(3) NOT NULL,&#xA;&#x9;  nominal_latitude double precision NOT NULL,&#xA;&#x9;  nominal_longitude double precision NOT NULL,&#xA;&#x9;  geom geometry(Geometry,4326) NOT NULL,&#xA;&#x9;  time_deployment_start timestamp with time zone,&#xA;&#x9;  time_deployment_end timestamp with time zone,&#xA;&#x9;  CONSTRAINT timeseries_pk PRIMARY KEY (id ),&#xA;          CONSTRAINT timeseries_deployment_mode_uc UNIQUE (deployment_number, delivery_mode)&#xA;&#x9;)&#xA;&#x9;WITH (&#xA;&#x9;  OIDS=FALSE&#xA;&#x9;);&#xA;&#x9;ALTER TABLE abos_sofs_sf.timeseries&#xA;&#x9;  OWNER TO abos_sofs_sf;&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;update_geometry_column-1&quot;>&#xA;      &lt;sql>&#xA;&#x9;ALTER TABLE timeseries&#xA;&#x9;  ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;&#x9;  USING ST_SetSRID(geom,4326);&#xA;&#x9;CREATE INDEX timeseries_gist_idx ON timeseries USING GIST (geom); &#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_file_metadata_table-1&quot;>&#xA;      &lt;sql>&#xA;&#x9;CREATE TABLE abos_sofs_sp.file_metadata&#xA;&#x9;(&#xA;&#x9;  file_id bigint NOT NULL,&#xA;&#x9;  deployment_number varchar(3) NOT NULL,&#xA;&#x9;  delivery_mode varchar(3) NOT NULL,&#xA;&#x9;  time_coverage_start timestamp with time zone,&#xA;&#x9;  time_coverage_end timestamp with time zone,&#xA;&#x9;  date_created  timestamp with time zone,&#xA;&#x9;  CONSTRAINT file_metadata_indexed_file_fk FOREIGN KEY (file_id)&#xA;&#x9;      REFERENCES abos_sofs_sp.indexed_file (id) MATCH SIMPLE&#xA;&#x9;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;&#x9;)&#xA;&#x9;WITH (&#xA;&#x9;  OIDS=FALSE&#xA;&#x9;);&#xA;&#x9;ALTER TABLE abos_sofs_sp.file_metadata&#xA;&#x9;  OWNER TO abos_sofs_sp;&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#x9;  &#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_timeseries_table-1&quot;>&#xA;      &lt;sql>&#xA;&#x9;CREATE TABLE abos_sofs_sp.timeseries&#xA;&#x9;(&#xA;&#x9;  id bigserial NOT NULL,&#xA;&#x9;  deployment_number varchar(3) NOT NULL,&#xA;&#x9;  delivery_mode varchar(3) NOT NULL,&#xA;&#x9;  nominal_latitude double precision,&#xA;&#x9;  nominal_longitude double precision,&#xA;&#x9;  geom geometry(Geometry,4326),&#xA;&#x9;  time_deployment_start timestamp with time zone,&#xA;&#x9;  time_deployment_end timestamp with time zone,&#xA;&#x9;  CONSTRAINT timeseries_pk PRIMARY KEY (id ),&#xA;          CONSTRAINT timeseries_deployment_mode_uc UNIQUE (deployment_number, delivery_mode)&#xA;&#x9;)&#xA;&#x9;WITH (&#xA;&#x9;  OIDS=FALSE&#xA;&#x9;);&#xA;&#x9;ALTER TABLE abos_sofs_sp.timeseries&#xA;&#x9;  OWNER TO abos_sofs_sp;&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;update_geometry_column-1&quot;>&#xA;      &lt;sql>&#xA;&#x9;ALTER TABLE timeseries&#xA;&#x9;  ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;&#x9;  USING ST_SetSRID(geom,4326);&#xA;&#x9;CREATE INDEX timeseries_gist_idx ON timeseries USING GIST (geom); &#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -235,17 +212,11 @@
       <column defaultValue="" key="false" length="0" name="fileSize" nullable="true" precision="0" sourceType="" type="id_Double"/>
     </metadata>
   </node>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="iHarvestResources_1" target="tRunJob_3">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tRunJob_3">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate1"/>
-  </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="iHarvestResources_1" target="tRunJob_7">
-    <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
-    <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate3"/>
   </connection>
   <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="tRunJob_5">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
@@ -254,7 +225,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="iHarvestResources_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iDeletedResources_1">
