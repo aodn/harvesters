@@ -13,7 +13,8 @@
 	  date_created  timestamp with time zone,
 	  CONSTRAINT file_metadata_indexed_file_fk FOREIGN KEY (file_id)
 	      REFERENCES abos_sofs_sp.indexed_file (id) MATCH SIMPLE
-	      ON UPDATE CASCADE ON DELETE CASCADE
+	      ON UPDATE CASCADE ON DELETE CASCADE,
+	  CONSTRAINT file_metadata_file_id_uc UNIQUE (file_id)
 	)
 	WITH (
 	  OIDS=FALSE
