@@ -33,7 +33,6 @@
     <elementParameter field="CHECK" name="STATANDLOG_USE_PROJECT_SETTINGS" value="true"/>
     <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;&quot;"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY_TYPE_IMPLICIT_CONTEXT:REPOSITORY_PROPERTY_TYPE" value=""/>
     <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
     <elementParameter field="CLOSED_LIST" name="LOAD_NEW_VARIABLE" value=""/>
     <elementParameter field="CLOSED_LIST" name="NOT_LOAD_OLD_VARIABLE" value=""/>
@@ -474,8 +473,6 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFInput_2"/>
     <elementParameter field="FILE" name="FILENAME" value="context.url"/>
     <elementParameter field="TABLE" name="SCHEMAS">
-      <elementValue elementRef="SCHEMA" value="LATITUDE"/>
-      <elementValue elementRef="SCHEMA" value="LONGITUDE"/>
       <elementValue elementRef="SCHEMA" value="variables"/>
       <elementValue elementRef="SCHEMA" value="location"/>
     </elementParameter>
@@ -497,12 +494,6 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="LATITUDE" name="LATITUDE">
-      <column comment="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
-    </metadata>
-    <metadata connector="FLOW" label="LONGITUDE" name="LONGITUDE">
-      <column comment="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
-    </metadata>
     <metadata connector="FLOW" label="variables" name="variables">
       <column comment="" defaultValue="" key="false" name="TIME" nullable="false" originalDbColumnName="time" pattern="" sourceType="" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="index" nullable="true" pattern="" sourceType="" type="id_Long"/>
@@ -1492,7 +1483,7 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="timeseries" name="timeseries_latitude">
+    <metadata connector="FLOW" label="timeseries" name="timeseries_location">
       <column comment="" key="true" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long">
         <additionalField key="Comment" value=""/>
       </column>
@@ -1502,9 +1493,9 @@
       <column comment="actual longitude of deployment" defaultValue="" key="false" length="8" name="LONGITUDE" nullable="false" pattern="" precision="8" sourceType="" type="id_Double" originalLength="8"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
-      <outputTables sizeState="INTERMEDIATE" name="timeseries_latitude">
+      <outputTables sizeState="INTERMEDIATE" name="timeseries_location">
         <mapperTableEntries name="file_id" expression="context.fileId" type="id_Long"/>
         <mapperTableEntries name="LATITUDE" expression="location.LATITUDE " type="id_Double"/>
         <mapperTableEntries name="LONGITUDE" expression="location.LONGITUDE" type="id_Double"/>
@@ -2969,7 +2960,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row3"/>
   </connection>
-  <connection connectorName="FLOW" label="timeseries_latitude" lineStyle="0" metaname="timeseries_latitude" offsetLabelX="0" offsetLabelY="0" source="tMap_5" target="tPostgresqlOutput_5">
+  <connection connectorName="FLOW" label="timeseries_location" lineStyle="0" metaname="timeseries_location" offsetLabelX="0" offsetLabelY="0" source="tMap_5" target="tPostgresqlOutput_5">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="deployment_code"/>
@@ -3001,7 +2992,7 @@
     <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
     <elementParameter field="TABLE" name="THRESHLODS"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="timeseries_latitude"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="timeseries_location"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlRow_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_2" target="tPostgresqlRow_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
