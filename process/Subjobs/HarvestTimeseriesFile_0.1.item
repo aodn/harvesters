@@ -350,9 +350,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFInput_1"/>
     <elementParameter field="FILE" name="FILENAME" value="context.url"/>
     <elementParameter field="TABLE" name="SCHEMAS">
-      <elementValue elementRef="SCHEMA" value="latitude"/>
       <elementValue elementRef="SCHEMA" value="location"/>
-      <elementValue elementRef="SCHEMA" value="longitude"/>
       <elementValue elementRef="SCHEMA" value="data"/>
     </elementParameter>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
@@ -373,14 +371,6 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="latitude" name="latitude">
-      <column comment="" key="false" name="LATITUDE" nullable="false" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" key="false" length="1" name="LATITUDE_quality_control" nullable="true" pattern="" sourceType="" type="id_String" originalLength="1"/>
-    </metadata>
-    <metadata connector="FLOW" label="longitude" name="longitude">
-      <column comment="" key="false" name="LONGITUDE" nullable="false" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" key="false" length="1" name="LONGITUDE_quality_control" nullable="true" pattern="" sourceType="" type="id_String" originalLength="1"/>
-    </metadata>
     <metadata connector="FLOW" label="data" name="data">
       <column comment="" defaultValue="" key="false" name="TIME" nullable="false" pattern="" sourceType="" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="TIME_index" nullable="false" pattern="" sourceType="" type="id_Long"/>
@@ -445,7 +435,7 @@
         <mapperTableEntries name="ts_id" expression="row3.ts_id" type="id_Long"/>
         <mapperTableEntries name="index" expression="data.TIME_index " type="id_Long"/>
         <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1950-01-01 00:00:00&quot;, &quot;yyyy-MM-dd HH:mm:ss&quot;, data.TIME, true)" type="id_Date"/>
-        <mapperTableEntries name="TIME_quality_control" expression="&quot;0&quot;" type="id_String" nullable="true"/>
+        <mapperTableEntries name="TIME_quality_control" expression="data.TIME_quality_control==null?&quot;0&quot;:data.TIME_quality_control" type="id_String" nullable="true"/>
         <mapperTableEntries name="TEMP" expression="data.TEMP" type="id_Float" nullable="true"/>
         <mapperTableEntries name="TEMP_quality_control" expression="data.TEMP==null?null:(data.TEMP_quality_control==null?&quot;0&quot;:data.TEMP_quality_control)" type="id_String" nullable="true"/>
         <mapperTableEntries name="PSAL" expression="data.PSAL" type="id_Float" nullable="true"/>
@@ -703,7 +693,7 @@
       <column comment="" key="false" length="1" name="LONGITUDE_quality_control" nullable="true" pattern="" sourceType="" type="id_String" originalLength="1"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="timeseries_location">
         <mapperTableEntries name="file_id" expression="context.fileId" type="id_Long"/>
