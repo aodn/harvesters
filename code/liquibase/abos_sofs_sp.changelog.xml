@@ -29,16 +29,13 @@
       <sql>
 	CREATE TABLE abos_sofs_sp.timeseries
 	(
-	  id bigserial NOT NULL,
 	  deployment_number varchar(3) NOT NULL,
-	  delivery_mode varchar(3) NOT NULL,
-	  nominal_latitude double precision,
-	  nominal_longitude double precision,
+	  mean_latitude double precision,
+	  mean_longitude double precision,
 	  geom geometry(Geometry,4326),
 	  time_deployment_start timestamp with time zone,
 	  time_deployment_end timestamp with time zone,
-	  CONSTRAINT timeseries_pk PRIMARY KEY (id ),
-          CONSTRAINT timeseries_deployment_mode_uc UNIQUE (deployment_number, delivery_mode)
+	  CONSTRAINT timeseries_pk PRIMARY KEY (deployment_number)
 	)
 	WITH (
 	  OIDS=FALSE
@@ -63,7 +60,7 @@
       <sql>
 	CREATE TABLE abos_sofs_sp.measurement_rt
 	(
-	  ts_id bigint,
+	  deployment_number varchar(3) NOT NULL,
 	  file_id bigint NOT NULL,
 	  index bigint NOT NULL,
 	  "TIME" timestamp with time zone NOT NULL,
@@ -133,9 +130,6 @@
 	  "WSPD_4" real,
 	  "WSPD_4_quality_control" character(1),
 	  CONSTRAINT measurement_rt_pk PRIMARY KEY (file_id , index ),
-	  CONSTRAINT measurement_rt_ts_fk FOREIGN KEY (ts_id)
-	      REFERENCES abos_sofs_sp.timeseries (id) MATCH SIMPLE
-	      ON UPDATE CASCADE ON DELETE CASCADE,
 	  CONSTRAINT measurement_rt_file_metadata_fk FOREIGN KEY (FILE_id)
 	      REFERENCES abos_sofs_sp.file_metadata (file_id) MATCH SIMPLE
 	      ON UPDATE CASCADE ON DELETE CASCADE
