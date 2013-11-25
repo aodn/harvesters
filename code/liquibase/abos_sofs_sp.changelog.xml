@@ -144,4 +144,26 @@
     </changeSet>
 
 
+    <changeSet author="talend" id="create_rt_map_view-1">
+      <sql>
+	CREATE VIEW abos_sofs_surfaceprop_rt_map AS
+	  SELECT DISTINCT
+	    timeseries.*
+	  FROM timeseries JOIN file_metadata USING (deployment_number)
+	  WHERE delivery_mode = 'RT';
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_rt_data_view-1">
+      <sql>
+	CREATE VIEW abos_sofs_surfaceprop_rt_data AS
+	  SELECT 
+	    measurement_rt.*, timeseries.geom
+	  FROM measurement_rt JOIN timeseries USING (deployment_number)
+	  ORDER BY file_id, index;
+      </sql>
+    </changeSet>
+
+
 </databaseChangeLog>
