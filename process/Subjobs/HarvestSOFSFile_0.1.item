@@ -152,17 +152,17 @@
     <metadata connector="FLOW" name="file_metadata">
       <column comment="" key="true" name="file_id" nullable="false" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="3" name="deployment_number" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="3" name="delivery_mode" nullable="false" pattern="" sourceType="VARCHAR" type="id_String" originalLength="3"/>
+      <column comment="" key="false" length="3" name="delivery_mode" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMPTZ" type="id_Date"/>
       <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMPTZ" type="id_Date"/>
-      <column comment="" key="false" length="35" name="date_created" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" originalLength="35"/>
+      <column comment="" key="false" length="35" name="date_created" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
     </metadata>
     <metadata connector="FLOW" name="deployment_number">
       <column key="false" length="255" name="key" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column key="false" length="255" name="value" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="file_metadata">
         <mapperTableEntries name="file_id" expression="context.fileId" type="id_Long"/>
@@ -198,6 +198,8 @@
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;file_metadata&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA_FLOW:SCHEMA_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA_FLOW:REPOSITORY_SCHEMA_TYPE" value="_hpMg8FDHEeOef6js2c26iQ - file_metadata"/>
     <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
     <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
     <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
@@ -248,21 +250,45 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlOutput_1">
-      <column comment="" key="true" name="file_id" nullable="false" pattern="" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="false" length="3" name="deployment_number" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="3" name="delivery_mode" nullable="false" pattern="" sourceType="VARCHAR" type="id_String" originalLength="3"/>
-      <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMPTZ" type="id_Date"/>
-      <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMPTZ" type="id_Date"/>
-      <column comment="" key="false" length="35" name="date_created" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" originalLength="35"/>
+    <metadata connector="FLOW" label="file_metadata" name="tPostgresqlOutput_1">
+      <column comment="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="3" name="deployment_number" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="3" name="delivery_mode" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="35" name="date_created" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
+        <additionalField key="Comment" value=""/>
+      </column>
     </metadata>
-    <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="true" name="file_id" nullable="false" pattern="" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="false" length="3" name="deployment_number" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="3" name="delivery_mode" nullable="false" pattern="" sourceType="VARCHAR" type="id_String" originalLength="3"/>
-      <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMPTZ" type="id_Date"/>
-      <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMPTZ" type="id_Date"/>
-      <column comment="" key="false" length="35" name="date_created" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" originalLength="35"/>
+    <metadata connector="REJECT" label="file_metadata" name="REJECT">
+      <column comment="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="3" name="deployment_number" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="3" name="delivery_mode" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="35" name="date_created" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
+        <additionalField key="Comment" value=""/>
+      </column>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -516,6 +542,30 @@
       <column comment="" key="false" length="1" name="WSPD_4_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
         <additionalField key="Comment" value=""/>
       </column>
+      <column comment="" key="false" length="8" name="WSPD_MIN" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="1" name="WSPD_MIN_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="8" name="WSPD_MIN_2" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="1" name="WSPD_MIN_2_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="8" name="WSPD_MAX" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="1" name="WSPD_MAX_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="8" name="WSPD_MAX_2" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="1" name="WSPD_MAX_2_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="416" posY="352">
@@ -531,8 +581,11 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="measurement_rt" name="measurement_rt">
+    <metadata connector="FLOW" label="measurement" name="measurement_rt">
       <column comment="" key="false" length="3" name="deployment_number" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="3" name="delivery_mode" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String">
         <additionalField key="Comment" value=""/>
       </column>
       <column comment="" key="true" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long">
@@ -739,12 +792,39 @@
       <column comment="" key="false" length="1" name="WSPD_4_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
         <additionalField key="Comment" value=""/>
       </column>
+      <column comment="" key="false" length="8" name="WSPD_MIN" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="1" name="WSPD_MIN_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="8" name="WSPD_MIN_2" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="1" name="WSPD_MIN_2_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="8" name="WSPD_MAX" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="1" name="WSPD_MAX_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="8" name="WSPD_MAX_2" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="1" name="WSPD_MAX_2_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
-      <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
+      <uiProperties shellMaximized="true"/>
+      <varTables sizeState="INTERMEDIATE" name="Var">
+        <mapperTableEntries name="delivery_mode" expression="StringHandling.INDEX(context.url,&quot;Real-time&quot;) >= 0  ?  &quot;RT&quot;  :  &quot;DM&quot; " type="id_String"/>
+      </varTables>
       <outputTables sizeState="INTERMEDIATE" name="measurement_rt">
         <mapperTableEntries name="deployment_number" expression="context.deploymentNo" type="id_String"/>
+        <mapperTableEntries name="delivery_mode" expression="Var.delivery_mode " type="id_String"/>
         <mapperTableEntries name="file_id" expression="context.fileId" type="id_Long"/>
         <mapperTableEntries name="index" expression="data.TIME_index " type="id_Long"/>
         <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1950-01-01 00:00:00&quot;, &quot;yyyy-MM-dd HH:mm:ss&quot;, data.TIME, true)" type="id_Date"/>
@@ -813,6 +893,14 @@
         <mapperTableEntries name="WSPD_3_quality_control" expression="data.WSPD_3_quality_control" type="id_String" nullable="true"/>
         <mapperTableEntries name="WSPD_4" expression="data.WSPD_4" type="id_Float" nullable="true"/>
         <mapperTableEntries name="WSPD_4_quality_control" expression="data.WSPD_4_quality_control" type="id_String" nullable="true"/>
+        <mapperTableEntries name="WSPD_MIN" expression="data.WSPD_MIN" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="WSPD_MIN_quality_control" expression="data.WSPD_MIN_quality_control" type="id_String" nullable="true"/>
+        <mapperTableEntries name="WSPD_MIN_2" expression="data.WSPD_MIN_2" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="WSPD_MIN_2_quality_control" expression="data.WSPD_MIN_2_quality_control" type="id_String" nullable="true"/>
+        <mapperTableEntries name="WSPD_MAX" expression="data.WSPD_MAX" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="WSPD_MAX_quality_control" expression="data.WSPD_MAX_quality_control" type="id_String" nullable="true"/>
+        <mapperTableEntries name="WSPD_MAX_2" expression="data.WSPD_MAX_2" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="WSPD_MAX_2_quality_control" expression="data.WSPD_MAX_2_quality_control" type="id_String" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="data" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="TIME" type="id_Double"/>
@@ -882,6 +970,14 @@
         <mapperTableEntries name="WSPD_3_quality_control" type="id_String" nullable="true"/>
         <mapperTableEntries name="WSPD_4" type="id_Float" nullable="true"/>
         <mapperTableEntries name="WSPD_4_quality_control" type="id_String" nullable="true"/>
+        <mapperTableEntries name="WSPD_MIN" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="WSPD_MIN_quality_control" type="id_String" nullable="true"/>
+        <mapperTableEntries name="WSPD_MIN_2" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="WSPD_MIN_2_quality_control" type="id_String" nullable="true"/>
+        <mapperTableEntries name="WSPD_MAX" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="WSPD_MAX_quality_control" type="id_String" nullable="true"/>
+        <mapperTableEntries name="WSPD_MAX_2" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="WSPD_MAX_2_quality_control" type="id_String" nullable="true"/>
       </inputTables>
     </nodeData>
   </node>
@@ -896,11 +992,11 @@
     <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;measurement_rt&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;measurement&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
     <elementParameter field="TECHNICAL" name="SCHEMA_FLOW:SCHEMA_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="SCHEMA_FLOW:REPOSITORY_SCHEMA_TYPE" value="_hpMg8FDHEeOef6js2c26iQ - measurement_rt"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA_FLOW:REPOSITORY_SCHEMA_TYPE" value="_hpMg8FDHEeOef6js2c26iQ - measurement"/>
     <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
     <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
     <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
@@ -913,6 +1009,11 @@
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS">
       <elementValue elementRef="SCHEMA_COLUMN" value="deployment_number"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="delivery_mode"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -1257,6 +1358,46 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="WSPD_MIN"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="WSPD_MIN_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="WSPD_MIN_2"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="WSPD_MIN_2_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="WSPD_MAX"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="WSPD_MAX_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="WSPD_MAX_2"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="WSPD_MAX_2_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -1266,8 +1407,11 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="measurement_rt" name="tPostgresqlOutput_5">
+    <metadata connector="FLOW" label="measurement" name="tPostgresqlOutput_5">
       <column comment="" key="false" length="3" name="deployment_number" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="3" name="delivery_mode" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String">
         <additionalField key="Comment" value=""/>
       </column>
       <column comment="" key="true" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long">
@@ -1472,11 +1616,38 @@
         <additionalField key="Comment" value=""/>
       </column>
       <column comment="" key="false" length="1" name="WSPD_4_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="8" name="WSPD_MIN" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="1" name="WSPD_MIN_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="8" name="WSPD_MIN_2" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="1" name="WSPD_MIN_2_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="8" name="WSPD_MAX" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="1" name="WSPD_MAX_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="8" name="WSPD_MAX_2" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="1" name="WSPD_MAX_2_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
         <additionalField key="Comment" value=""/>
       </column>
     </metadata>
-    <metadata connector="REJECT" label="measurement_rt" name="REJECT">
+    <metadata connector="REJECT" label="measurement" name="REJECT">
       <column comment="" key="false" length="3" name="deployment_number" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="3" name="delivery_mode" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String">
         <additionalField key="Comment" value=""/>
       </column>
       <column comment="" key="true" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long">
@@ -1681,6 +1852,30 @@
         <additionalField key="Comment" value=""/>
       </column>
       <column comment="" key="false" length="1" name="WSPD_4_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="8" name="WSPD_MIN" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="1" name="WSPD_MIN_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="8" name="WSPD_MIN_2" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="1" name="WSPD_MIN_2_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="8" name="WSPD_MAX" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="1" name="WSPD_MAX_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="8" name="WSPD_MAX_2" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="1" name="WSPD_MAX_2_quality_control" nullable="true" pattern="" precision="0" sourceType="BPCHAR" type="id_String">
         <additionalField key="Comment" value=""/>
       </column>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
@@ -2036,6 +2231,30 @@
       <elementValue elementRef="TRACE_COLUMN" value="RAIN_AMOUNT_2"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="WSPD_MAX_2"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="WSPD_MIN_2"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="WSPD_MIN"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="WSPD_MAX_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="WSPD_MAX"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="WSPD_MAX_2_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="WSPD_MIN_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="WSPD_MIN_2_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -2261,6 +2480,33 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="deployment_number"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="WSPD_MAX_2"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="WSPD_MIN_2"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="WSPD_MIN"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="WSPD_MAX_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="WSPD_MAX"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="WSPD_MAX_2_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="WSPD_MIN_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="delivery_mode"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="WSPD_MIN_2_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
