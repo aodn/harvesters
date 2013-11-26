@@ -56,11 +56,12 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="create_measurement_rt_table-1">
+    <changeSet author="talend" id="create_measurement_table-1">
       <sql>
-	CREATE TABLE abos_sofs_sp.measurement_rt
+	CREATE TABLE abos_sofs_sp.measurement
 	(
 	  deployment_number varchar(3) NOT NULL,
+	  delivery_mode varchar(3) NOT NULL,
 	  file_id bigint NOT NULL,
 	  index bigint NOT NULL,
 	  "TIME" timestamp with time zone NOT NULL,
@@ -129,17 +130,25 @@
 	  "WSPD_3_quality_control" character(1),
 	  "WSPD_4" real,
 	  "WSPD_4_quality_control" character(1),
-	  CONSTRAINT measurement_rt_pk PRIMARY KEY (file_id , index ),
-	  CONSTRAINT measurement_rt_file_metadata_fk FOREIGN KEY (file_id)
+	  "WSPD_MIN" real,
+	  "WSPD_MIN_quality_control" character(1),
+	  "WSPD_MIN_2" real,
+	  "WSPD_MIN_2_quality_control" character(1),
+	  "WSPD_MAX" real,
+	  "WSPD_MAX_quality_control" character(1),
+	  "WSPD_MAX_2" real,
+	  "WSPD_MAX_2_quality_control" character(1),
+	  CONSTRAINT measurement_pk PRIMARY KEY (file_id , index ),
+	  CONSTRAINT measurement_file_metadata_fk FOREIGN KEY (file_id)
 	      REFERENCES abos_sofs_sp.file_metadata (file_id) MATCH SIMPLE
 	      ON UPDATE CASCADE ON DELETE CASCADE
 	)
 	WITH (
 	  OIDS=FALSE
 	);
-	ALTER TABLE abos_sofs_sp.measurement_rt
+	ALTER TABLE abos_sofs_sp.measurement
 	  OWNER TO abos_sofs_sp;
-	COMMENT ON COLUMN abos_sofs_sp.measurement_rt.index IS 'index of measurement in netCDF file';
+	COMMENT ON COLUMN abos_sofs_sp.measurement.index IS 'index of measurement in netCDF file';
       </sql>
     </changeSet>
 
@@ -155,12 +164,36 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="create_rt_data_view-1">
+    <changeSet author="talend" id="create_rt_data_view-2">
       <sql>
 	CREATE VIEW abos_sofs_surfaceprop_rt_data AS
 	  SELECT 
-	    measurement_rt.*, timeseries.geom
-	  FROM measurement_rt JOIN timeseries USING (deployment_number)
+	    measurement.*, timeseries.geom
+	  FROM measurement JOIN timeseries USING (deployment_number)
+	  WHERE delivery_mode = 'RT'
+	  ORDER BY file_id, index;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_dm_map_view-1">
+      <sql>
+	CREATE VIEW abos_sofs_surfaceprop_dm_map AS
+	  SELECT DISTINCT
+	    timeseries.*
+	  FROM timeseries JOIN file_metadata USING (deployment_number)
+	  WHERE delivery_mode = 'DM';
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_dm_data_view-2">
+      <sql>
+	CREATE VIEW abos_sofs_surfaceprop_dm_data AS
+	  SELECT 
+	    measurement.*, timeseries.geom
+	  FROM measurement JOIN timeseries USING (deployment_number)
+	  WHERE delivery_mode = 'DM'
 	  ORDER BY file_id, index;
       </sql>
     </changeSet>
