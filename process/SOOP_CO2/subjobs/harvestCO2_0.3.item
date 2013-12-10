@@ -25,17 +25,8 @@
     <contextParameter comment="" name="metadataDb_Server" prompt="metadataDb_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="localhost"/>
   </context>
   <parameters>
-    <elementParameter field="DIRECTORY" name="COMP_DEFAULT_FILE_DIR" value="/media/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi"/>
-    <elementParameter field="DIRECTORY" name="PRODUCT_ROOT_DIR" value="/media/Laurent_emII/TOS_DI-r96646-V5.1.3"/>
-    <elementParameter field="DIRECTORY" name="COMP_DEFAULT_PROJECT_DIR" value="/media/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/SOOP_CO2"/>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
-    <elementParameter field="TEXT" name="AUTHOR" value="test@talend.com"/>
-    <elementParameter field="TEXT" name="STATUS" value="DEV"/>
-    <elementParameter field="TEXT" name="NAME" value="harvestCO2"/>
-    <elementParameter field="TEXT" name="VERSION" value="0.3"/>
-    <elementParameter field="TEXT" name="PURPOSE" value=""/>
-    <elementParameter field="TEXT" name="DESCRIPTION" value=""/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="288"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="96"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
@@ -97,7 +88,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="384">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="512" posY="384">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_3"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -133,22 +124,22 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlInput_3">
-      <column comment="" key="false" length="0" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="0" name="platform_code" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="0" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="50"/>
+      <column comment="" key="false" length="0" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="0" name="platform_code" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="0" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1056" posY="384">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlOutput_3"/>
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="800" posY="384">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_3"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="context.DestinationDatabase_Server"/>
-    <elementParameter field="TEXT" name="PORT" value="context.DestinationDatabase_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDatabase_Database"/>
-    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDatabase_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.DestinationDatabase_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.DestinationDatabase_Password"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;vessel_names&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT_OR_UPDATE"/>
@@ -188,20 +179,20 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlOutput_3">
-      <column comment="" key="true" length="50" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="50" name="platform_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
+    <metadata connector="FLOW" name="iPostgresqlOutput_3">
+      <column comment="" key="true" length="50" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="platform_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="true" length="50" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="50" name="platform_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
+      <column comment="" key="true" length="50" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="platform_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="544">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="512" posY="512">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_4"/>
     <elementParameter field="CHECK" name="TSTATCATCHER_STATS" value="true"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
@@ -258,17 +249,17 @@
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1056" posY="544">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlOutput_4"/>
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="832" posY="512">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_4"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="context.DestinationDatabase_Server"/>
-    <elementParameter field="TEXT" name="PORT" value="context.DestinationDatabase_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDatabase_Database"/>
-    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDatabase_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.DestinationDatabase_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.DestinationDatabase_Password"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;visualisation_wms&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="TRUNCATE"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
@@ -326,32 +317,32 @@
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
-    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="false"/>
+    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
     <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
     <elementParameter field="TEXT" name="LABEL" value="createWMS"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlOutput_4">
+    <metadata connector="FLOW" name="iPostgresqlOutput_4">
       <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="29" name="time_start" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="29" name="time_end" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="30" name="voyage_number" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="30"/>
+      <column comment="" key="false" length="30" name="voyage_number" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="vessel_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
+      <column comment="" defaultValue="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="29" name="time_start" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="29" name="time_end" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="30" name="voyage_number" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="30"/>
+      <column comment="" key="false" length="30" name="voyage_number" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="vessel_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
+      <column comment="" defaultValue="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -559,209 +550,6 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="-32">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlOutput_2"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="context.DestinationDatabase_Server"/>
-    <elementParameter field="TEXT" name="PORT" value="context.DestinationDatabase_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDatabase_Database"/>
-    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDatabase_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.DestinationDatabase_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.DestinationDatabase_Password"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;deployments&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
-    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
-    <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
-    <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
-    <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
-    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
-    <elementParameter field="TABLE" name="ADD_COLS"/>
-    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
-    <elementParameter field="TABLE" name="FIELD_OPTIONS">
-      <elementValue elementRef="SCHEMA_COLUMN" value="deploy_id"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="project"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="institution"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="title"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="date_created"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="source"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="platform_code"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="vessel_name"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="cruise_id"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="naming_authority"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="cdm_data_type"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="geospatial_lat_min"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="geospatial_lat_max"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="geospatial_lon_min"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="geospatial_lon_max"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="principal_investigator"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="institution_references"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="citation"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="aknowledgment"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="distribution_statement"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
-    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
-    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="false"/>
-    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
-    <elementParameter field="TEXT" name="LABEL" value="deployment_table"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlOutput_2">
-      <column comment="" key="true" name="deploy_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" name="project" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="institution" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="date_created" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="source" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="vessel_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="cruise_id" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="naming_authority" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="cdm_data_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="geospatial_lat_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="geospatial_lat_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="geospatial_lon_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="geospatial_lon_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="time_coverage_start" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="time_coverage_end" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="principal_investigator" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="institution_references" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="citation" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="aknowledgment" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="distribution_statement" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-    </metadata>
-    <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="true" name="deploy_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" name="project" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="institution" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="date_created" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="source" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="vessel_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="cruise_id" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="naming_authority" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="cdm_data_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="geospatial_lat_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="geospatial_lat_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="geospatial_lon_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="geospatial_lon_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="time_coverage_start" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="time_coverage_end" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="principal_investigator" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="institution_references" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="citation" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="aknowledgment" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="distribution_statement" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
-    </metadata>
-  </node>
   <node componentName="iNetCDFInput" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="512" posY="256">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFInput_2"/>
     <elementParameter field="FILE" name="FILENAME" value="((String)globalMap.get(&quot;fileToprocess.url&quot;))"/>
@@ -822,7 +610,7 @@
       <column comment="" key="false" length="1" name="xCO2EQ_PPM_quality_control" nullable="true" originalDbColumnName="xco2eq_ppm_quality_control" pattern="" sourceType="" type="id_String" originalLength="1"/>
     </metadata>
   </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="864" posY="256">
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="672" posY="256">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_1"/>
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
@@ -966,24 +754,227 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1088" posY="256">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlOutput_1"/>
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="960" posY="-32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_1"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="context.DestinationDatabase_Server"/>
-    <elementParameter field="TEXT" name="PORT" value="context.DestinationDatabase_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDatabase_Database"/>
-    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDatabase_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.DestinationDatabase_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.DestinationDatabase_Password"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;deployments&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
+    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
+    <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
+    <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
+    <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TABLE" name="ADD_COLS"/>
+    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
+    <elementParameter field="TABLE" name="FIELD_OPTIONS">
+      <elementValue elementRef="SCHEMA_COLUMN" value="deploy_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="project"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="institution"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="title"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="date_created"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="source"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="platform_code"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="vessel_name"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="cruise_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="naming_authority"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="cdm_data_type"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geospatial_lat_min"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geospatial_lat_max"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geospatial_lon_min"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geospatial_lon_max"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="principal_investigator"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="institution_references"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="citation"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="aknowledgment"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="distribution_statement"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
+    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
+    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
+    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
+    <elementParameter field="TEXT" name="LABEL" value="deployment_table"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="iPostgresqlOutput_1">
+      <column comment="" defaultValue="" key="true" length="-1" name="deploy_id" nullable="false" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="file_id" nullable="false" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="-1" name="project" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="institution" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="title" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="date_created" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="source" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="platform_code" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="vessel_name" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="cruise_id" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="naming_authority" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="cdm_data_type" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="geospatial_lat_min" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="geospatial_lat_max" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="geospatial_lon_min" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="geospatial_lon_max" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="time_coverage_start" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="-1" name="time_coverage_end" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="-1" name="principal_investigator" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="institution_references" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="citation" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="aknowledgment" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="distribution_statement" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+    </metadata>
+    <metadata connector="REJECT" name="REJECT">
+      <column comment="" defaultValue="" key="true" length="-1" name="deploy_id" nullable="false" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="file_id" nullable="false" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="-1" name="project" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="institution" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="title" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="date_created" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="source" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="platform_code" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="vessel_name" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="cruise_id" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="naming_authority" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="cdm_data_type" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="geospatial_lat_min" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="geospatial_lat_max" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="geospatial_lon_min" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="geospatial_lon_max" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="time_coverage_start" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="-1" name="time_coverage_end" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="-1" name="principal_investigator" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="institution_references" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="citation" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="aknowledgment" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="-1" name="distribution_statement" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="896" posY="256">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_2"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;measurements&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT_OR_UPDATE"/>
     <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
     <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
     <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -1201,89 +1192,89 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlOutput_1">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="1" name="TIME_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="LATITUDE_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="LONGITUDE_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
-      <column comment="" defaultValue="" key="false" name="DfCO2" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="DfCO2_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="fCO2ATM_UATM_INTERPOLATED" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="fCO2ATM_UATM_INTERPOLATED_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="fCO2SW_UATM" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="fCO2SW_UATM_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="H2OFLOW" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="H2OFLOW_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="LICORflow" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="LICORflow_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="Press_ATM" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="Press_ATM_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="Press_Equil" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="Press_Equil_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="PSAL_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="SUBFLAG" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="TEMP_1" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="TEMP_1_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="TEMP_2" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="TEMP_2_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="WDIR" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="WDIR_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="WSPD" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="WSPD_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="xCO2ATM_PPM" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="xCO2ATM_PPM_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="xCO2ATM_PPM_INTERPOLATED" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="xCO2ATM_PPM_INTERPOLATED_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="xCO2EQ_PPM" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="xCO2EQ_PPM_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+    <metadata connector="FLOW" name="iPostgresqlOutput_2">
+      <column comment="" defaultValue="" key="false" length="-1" name="file_id" nullable="true" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="true" length="-1" name="measurement" nullable="true" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="-1" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="1" name="TIME_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="LATITUDE" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="LATITUDE_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="LONGITUDE" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="LONGITUDE_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="geom" nullable="true" pattern="" precision="-1" sourceType="GEOMETRY" type="id_Geometry"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="DfCO2" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="DfCO2_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="fCO2ATM_UATM_INTERPOLATED" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="fCO2ATM_UATM_INTERPOLATED_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="fCO2SW_UATM" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="fCO2SW_UATM_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="H2OFLOW" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="H2OFLOW_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="LICORflow" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="LICORflow_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="Press_ATM" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="Press_ATM_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="Press_Equil" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="Press_Equil_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="PSAL" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="PSAL_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="SUBFLAG" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="TEMP_1" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="TEMP_1_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="TEMP_2" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="TEMP_2_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="WDIR" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="WDIR_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="WSPD" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="WSPD_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="xCO2ATM_PPM" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="xCO2ATM_PPM_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="xCO2ATM_PPM_INTERPOLATED" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="xCO2ATM_PPM_INTERPOLATED_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="xCO2EQ_PPM" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="xCO2EQ_PPM_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="1" name="TIME_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="LATITUDE_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="LONGITUDE_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
-      <column comment="" defaultValue="" key="false" name="DfCO2" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="DfCO2_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="fCO2ATM_UATM_INTERPOLATED" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="fCO2ATM_UATM_INTERPOLATED_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="fCO2SW_UATM" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="fCO2SW_UATM_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="H2OFLOW" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="H2OFLOW_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="LICORflow" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="LICORflow_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="Press_ATM" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="Press_ATM_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="Press_Equil" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="Press_Equil_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="PSAL_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="SUBFLAG" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="TEMP_1" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="TEMP_1_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="TEMP_2" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="TEMP_2_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="WDIR" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="WDIR_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="WSPD" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="WSPD_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="xCO2ATM_PPM" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="xCO2ATM_PPM_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="xCO2ATM_PPM_INTERPOLATED" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="xCO2ATM_PPM_INTERPOLATED_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="xCO2EQ_PPM" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="xCO2EQ_PPM_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="file_id" nullable="true" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="true" length="-1" name="measurement" nullable="true" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="-1" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="1" name="TIME_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="LATITUDE" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="LATITUDE_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="LONGITUDE" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="LONGITUDE_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="geom" nullable="true" pattern="" precision="-1" sourceType="GEOMETRY" type="id_Geometry"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="DfCO2" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="DfCO2_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="fCO2ATM_UATM_INTERPOLATED" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="fCO2ATM_UATM_INTERPOLATED_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="fCO2SW_UATM" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="fCO2SW_UATM_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="H2OFLOW" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="H2OFLOW_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="LICORflow" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="LICORflow_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="Press_ATM" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="Press_ATM_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="Press_Equil" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="Press_Equil_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="PSAL" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="PSAL_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="SUBFLAG" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="TEMP_1" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="TEMP_1_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="TEMP_2" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="TEMP_2_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="WDIR" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="WDIR_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="WSPD" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="WSPD_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="xCO2ATM_PPM" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="xCO2ATM_PPM_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="xCO2ATM_PPM_INTERPOLATED" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="xCO2ATM_PPM_INTERPOLATED_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="xCO2EQ_PPM" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="xCO2EQ_PPM_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1304,7 +1295,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk3"/>
   </connection>
-  <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tPostgresqlInput_3" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_3" target="tPostgresqlOutput_3">
+  <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tPostgresqlInput_3" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_3" target="iPostgresqlOutput_3">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="vessel_name"/>
@@ -1326,7 +1317,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row2"/>
   </connection>
-  <connection connectorName="FLOW" label="row3" lineStyle="0" metaname="tPostgresqlInput_4" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_4" target="tPostgresqlOutput_4">
+  <connection connectorName="FLOW" label="row3" lineStyle="0" metaname="tPostgresqlInput_4" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_4" target="iPostgresqlOutput_4">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="file_id"/>
@@ -1534,121 +1525,76 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfout1" lineStyle="0" metaname="copyOfout1" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="tPostgresqlOutput_2">
+  <connection connectorName="FLOW" label="copyOfout1" lineStyle="0" metaname="copyOfout1" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="iPostgresqlOutput_1">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="deploy_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="_abstract"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="author"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="author_email"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="cdm_data_type"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="citation"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="data_centre"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="data_centre_email"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="date_created"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="distribution_statement"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="featureType"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geospatial_lat_max"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geospatial_lat_min"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geospatial_lon_max"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geospatial_lon_min"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_max"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_min"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_positive"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="institution"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="institution_references"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="naming_authority"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="platform_code"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="principal_investigator"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="principal_investigator_email"/>
+      <elementValue elementRef="TRACE_COLUMN" value="file_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="project"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="project_acknowledgement"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="source"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_start"/>
+      <elementValue elementRef="TRACE_COLUMN" value="institution"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="title"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="date_created"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="source"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="platform_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="vessel_name"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="file_id"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geospation_lon_min"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="aknowledgment"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geospation_lat_max"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geospation_lat_min"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="cruise_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="naming_authority"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="cdm_data_type"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_lat_min"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_lat_max"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_lon_min"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="geospatial_lon_max"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_start"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="principal_investigator"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="institution_references"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="citation"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="aknowledgment"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="distribution_statement"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -1785,40 +1731,22 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="variables"/>
   </connection>
-  <connection connectorName="FLOW" label="out1" lineStyle="0" metaname="out1" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tPostgresqlOutput_1">
+  <connection connectorName="FLOW" label="out1" lineStyle="0" metaname="out1" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="iPostgresqlOutput_2">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="file_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="measurement"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="TIME"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TIME_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="LATITUDE"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="LONGITUDE"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="CNDC"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="CNDC_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="COND"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="COND_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="CPHL"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="CPHL_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="LATITUDE_1"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="LATITUDE_quality_control"/>
@@ -1830,58 +1758,13 @@
       <elementValue elementRef="TRACE_COLUMN" value="LONGITUDE_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="PSAL"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="PSAL_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="TEMP"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="TEMP_2"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="TEMP_2_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="TEMP_1_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="TIME_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="TURB"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="TURB_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="geom"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="file_id"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="TEMP_1"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="H2OFLOW_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="SUBFLAG"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="DfCO2"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="Press_Equil_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="TEMP_1_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="xCO2EQ_PPM"/>
+      <elementValue elementRef="TRACE_COLUMN" value="DfCO2_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="fCO2ATM_UATM_INTERPOLATED"/>
@@ -1890,16 +1773,19 @@
       <elementValue elementRef="TRACE_COLUMN" value="fCO2ATM_UATM_INTERPOLATED_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="fCO2SW_UATM"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="fCO2SW_UATM_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="H2OFLOW"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="xCO2EQ_PPM_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN" value="H2OFLOW_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="Press_Equil"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="Press_ATM_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN" value="LICORflow"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="LICORflow_quality_control"/>
@@ -1908,40 +1794,64 @@
       <elementValue elementRef="TRACE_COLUMN" value="Press_ATM"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="DfCO2_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN" value="Press_ATM_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="xCO2ATM_PPM_INTERPOLATED_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN" value="Press_Equil"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="fCO2SW_UATM"/>
+      <elementValue elementRef="TRACE_COLUMN" value="Press_Equil_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PSAL"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PSAL_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="SUBFLAG"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TEMP_1"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TEMP_1_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TEMP_2"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TEMP_2_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="WDIR"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="WSPD_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="fCO2SW_UATM_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN" value="WDIR_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="WSPD"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="WSPD_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="xCO2ATM_PPM"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="xCO2ATM_PPM_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="xCO2ATM_PPM_INTERPOLATED"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="LICORflow"/>
+      <elementValue elementRef="TRACE_COLUMN" value="xCO2ATM_PPM_INTERPOLATED_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="WDIR_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN" value="xCO2EQ_PPM"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="xCO2ATM_PPM_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN" value="xCO2EQ_PPM_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
