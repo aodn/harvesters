@@ -11,7 +11,7 @@
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_u4KjIEzWEeOn1OuyGjn67Q" type="id_String" value="null"/>
     <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_IndnQAlJEeObitNNn0mU_g" type="id_String" value="&quot;.*aggregated_datasets.*&quot;"/>
     <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_IndnQAlJEeObitNNn0mU_g" type="id_String" value="&quot;.*\\.nc$&quot;"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_IndnQAlJEeObitNNn0mU_g" type="id_String" value="&quot;/home/meteo/imos/chef/SOOP-XBT&quot;"/>
+    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_IndnQAlJEeObitNNn0mU_g" type="id_String" value="&quot;/home/meteo/imos/projects/chef/SOOP-XBT/&quot;"/>
   </context>
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="DestinationDatabase_Database" prompt="DestinationDatabase_Database?" promptNeeded="false" repositoryContextId="_PaceUAlGEeObitNNn0mU_g" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
@@ -24,7 +24,7 @@
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_u4KjIEzWEeOn1OuyGjn67Q" type="id_String" value="null"/>
     <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_IndnQAlJEeObitNNn0mU_g" type="id_String" value="&quot;.*aggregated_datasets.*&quot;"/>
     <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_IndnQAlJEeObitNNn0mU_g" type="id_String" value="&quot;.*\\.nc$&quot;"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_IndnQAlJEeObitNNn0mU_g" type="id_String" value="&quot;/home/meteo/imos/chef/SOOP-XBT&quot;"/>
+    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_IndnQAlJEeObitNNn0mU_g" type="id_String" value="&quot;/home/meteo/imos/projects/chef/SOOP-XBT/&quot;"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -38,11 +38,11 @@
     <elementParameter field="CHECK" name="IMPLICIT_TCONTEXTLOAD" value="true"/>
     <elementParameter field="RADIO" name="FROM_FILE_FLAG_IMPLICIT_CONTEXT" value="true"/>
     <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="context.paramFile"/>
-    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;=>&quot;"/>
     <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
-    <elementParameter field="CHECK" name="DISABLE_WARNINGS" value="false"/>
     <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
     <elementParameter field="CHECK" name="ON_STATCATCHER_FLAG" value="true"/>
+    <elementParameter field="CHECK" name="ON_LOGCATCHER_FLAG" value="true"/>
     <elementParameter field="CHECK" name="ON_FILES_FLAG" value="true"/>
     <elementParameter field="DIRECTORY" name="FILE_PATH" value="context.logDir"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -196,10 +196,10 @@
     <elementParameter field="CHECK" name="ERROR" value="false"/>
     <elementParameter field="CHECK" name="GLOBEXPRESSIONS" value="false"/>
     <elementParameter field="TABLE" name="FILES">
-      <elementValue elementRef="FILEMASK" value="&quot;.*\\.nc$&quot;"/>
+      <elementValue elementRef="FILEMASK" value="context.include"/>
     </elementParameter>
     <elementParameter field="CHECK" name="IFEXCLUDE" value="true"/>
-    <elementParameter field="TEXT" name="EXCLUDEFILEMASK" value="&quot;.*aggregated_datasets.*&quot;"/>
+    <elementParameter field="TEXT" name="EXCLUDEFILEMASK" value="context.exclude"/>
     <elementParameter field="CHECK" name="FORMAT_FILEPATH_TO_SLASH" value="false"/>
     <elementParameter field="RADIO" name="ORDER_BY_NOTHING" value="true"/>
     <elementParameter field="RADIO" name="ORDER_BY_FILENAME" value="false"/>
