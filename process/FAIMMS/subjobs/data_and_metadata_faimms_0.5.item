@@ -109,7 +109,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT DISTINCT id,url FROM indexed_file where url  ~ '/NO_QAQC/' AND id NOT IN (SELECT DISTINCT  file_id from global_attributes_file) ;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT DISTINCT id,url FROM indexed_file where  id NOT IN (SELECT DISTINCT  file_id from global_attributes_file) order by id;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -505,7 +505,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT name AS \&quot;VARNAME\&quot; from faimms.variable where  ( variable.name !~ 'LATITUDE' AND  variable.name !~ 'LONGITUDE' AND variable.name !~ 'TIME' AND variable.name !~ '_quality_control' AND file_id = &quot;+ ((Integer)globalMap.get(&quot;fileToprocess.id&quot;)) +&quot; )  &quot;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT name AS \&quot;VARNAME\&quot; from variable where  ( variable.name !~ 'LATITUDE' AND  variable.name !~ 'LONGITUDE' AND variable.name !~ 'TIME' AND variable.name !~ '_quality_control' AND file_id = &quot;+ ((Integer)globalMap.get(&quot;fileToprocess.id&quot;)) +&quot; )  &quot;&#xA;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -685,11 +685,6 @@
     <elementParameter field="TABLE" name="ADD_COLS"/>
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS">
-      <elementValue elementRef="SCHEMA_COLUMN" value="deploy_id"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -881,82 +876,80 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_3">
-      <column comment="" defaultValue="" key="true" length="-1" name="deploy_id" nullable="false" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="file_id" nullable="false" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="-1" name="author_email" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="aims_channel_id" nullable="true" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="-1" name="quality_control_set" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="keywords" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="source" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="citation" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="author" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="references" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="platform_code" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="geospatial_vertical_reference_datum" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="file_version" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="geospatial_vertical_positive" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="institution" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="distribution_statement" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="principal_investigator_email" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="institution_references" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="geospatial_vertical_min" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Double"/>
-      <column comment="" key="false" length="-1" name="local_time_zone" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="geospatial_vertical_max" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="geospatial_vertical_units" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="data_centre_email" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="file_version_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="netcdf_version" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="data_centre" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="instrument" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="date_created" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="title" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="acknowledgement" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="principal_investigator" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="metadata_uuid" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="conventions" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="site_code" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="instrument_serial_number" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="project" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="naming_authority" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="true" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="author_email" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="aims_channel_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="quality_control_set" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="keywords" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="source" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="citation" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="author" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="references" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_reference_datum" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="file_version" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_positive" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="institution" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="distribution_statement" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="principal_investigator_email" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="institution_references" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="geospatial_vertical_min" nullable="true" pattern="" sourceType="FLOAT4" type="id_Double"/>
+      <column comment="" key="false" name="local_time_zone" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_units" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="data_centre_email" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="file_version_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="netcdf_version" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="data_centre" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="instrument" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="date_created" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="acknowledgement" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="principal_investigator" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="metadata_uuid" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="conventions" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="site_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="instrument_serial_number" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="project" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="naming_authority" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" defaultValue="" key="true" length="-1" name="deploy_id" nullable="false" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="file_id" nullable="false" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="-1" name="author_email" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="aims_channel_id" nullable="true" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="-1" name="quality_control_set" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="keywords" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="source" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="citation" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="author" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="references" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="platform_code" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="geospatial_vertical_reference_datum" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="file_version" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="geospatial_vertical_positive" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="institution" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="distribution_statement" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="principal_investigator_email" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="institution_references" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="geospatial_vertical_min" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Double"/>
-      <column comment="" key="false" length="-1" name="local_time_zone" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="geospatial_vertical_max" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="geospatial_vertical_units" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="data_centre_email" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="file_version_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="netcdf_version" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="data_centre" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="instrument" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="date_created" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="title" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="acknowledgement" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="principal_investigator" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="metadata_uuid" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="conventions" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="site_code" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="instrument_serial_number" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="project" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="-1" name="naming_authority" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="true" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="author_email" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="aims_channel_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="quality_control_set" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="keywords" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="source" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="citation" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="author" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="references" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_reference_datum" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="file_version" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_positive" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="institution" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="distribution_statement" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="principal_investigator_email" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="institution_references" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="geospatial_vertical_min" nullable="true" pattern="" sourceType="FLOAT4" type="id_Double"/>
+      <column comment="" key="false" name="local_time_zone" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_units" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="data_centre_email" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="file_version_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="netcdf_version" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="data_centre" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="instrument" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="date_created" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="acknowledgement" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="principal_investigator" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="metadata_uuid" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="conventions" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="site_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="instrument_serial_number" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="project" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="naming_authority" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1027,20 +1020,20 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_2">
-      <column comment="" defaultValue="" key="true" length="-1" name="channel_id" nullable="true" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="LATITUDE" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="LONGITUDE" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="DEPTH" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="geom" nullable="false" pattern="" precision="-1" sourceType="GEOMETRY" type="id_Geometry"/>
-      <column comment="" key="false" length="40" name="site_code" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="true" name="channel_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
+      <column comment="" key="false" length="40" name="site_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" defaultValue="" key="true" length="-1" name="channel_id" nullable="true" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="LATITUDE" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="LONGITUDE" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="DEPTH" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="geom" nullable="false" pattern="" precision="-1" sourceType="GEOMETRY" type="id_Geometry"/>
-      <column comment="" key="false" length="40" name="site_code" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="true" name="channel_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
+      <column comment="" key="false" length="40" name="site_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1058,7 +1051,7 @@
     <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;measurements&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
-    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT_OR_UPDATE"/>
+    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
     <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
     <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
     <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
@@ -1071,11 +1064,6 @@
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS">
       <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="measurement"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -1111,20 +1099,18 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_1">
-      <column comment="" defaultValue="" key="false" length="-1" name="file_id" nullable="false" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
-      <column comment="" defaultValue="" key="true" length="-1" name="measurement" nullable="false" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="channel_id" nullable="false" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="-1" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="VALUES" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="VALUES_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" name="channel_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" name="VALUES" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="VALUES_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" defaultValue="" key="false" length="-1" name="file_id" nullable="false" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
-      <column comment="" defaultValue="" key="true" length="-1" name="measurement" nullable="false" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="channel_id" nullable="false" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="-1" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="-1" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="VALUES" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="1" name="VALUES_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" name="channel_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" name="VALUES" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="1" name="VALUES_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1142,7 +1128,7 @@
     <elementParameter field="TEXT" name="PASS" value="context.metadataDb_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/media/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-1&quot;>&#xA;       &lt;sql>&#xA;      CREATE TABLE global_attributes_file&#xA;(&#xA;  deploy_id integer NOT NULL,&#xA;  file_id integer NOT NULL,&#xA;  author_email character varying,&#xA;  aims_channel_id integer,&#xA;  quality_control_set character varying,&#xA;  keywords character varying,&#xA;  source character varying,&#xA;  citation character varying,&#xA;  author character varying,&#xA;  &quot;references&quot; character varying,&#xA;  platform_code character varying,&#xA;  geospatial_vertical_reference_datum character varying,&#xA;  file_version character varying,&#xA;  geospatial_vertical_positive character varying,&#xA;  institution character varying,&#xA;  distribution_statement character varying,&#xA;  principal_investigator_email character varying,&#xA;  institution_references character varying,&#xA;  geospatial_vertical_min real,&#xA;  local_time_zone character varying,&#xA;  geospatial_vertical_max character varying,&#xA;  geospatial_vertical_units character varying,&#xA;  data_centre_email character varying,&#xA;  file_version_quality_control character varying,&#xA;  netcdf_version character varying,&#xA;  data_centre character varying,&#xA;  instrument character varying,&#xA;  date_created character varying,&#xA;  title character varying,&#xA;  acknowledgement character varying,&#xA;  principal_investigator character varying,&#xA;  metadata_uuid character varying,&#xA;  conventions character varying,&#xA;  site_code character varying,&#xA;  instrument_serial_number character varying,&#xA;  project character varying,&#xA;  naming_authority character varying,&#xA;  CONSTRAINT deployments_pkey PRIMARY KEY (deploy_id ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;   &#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-2&quot;>&#xA;       &lt;sql>&#xA;     CREATE TABLE measurements&#xA;(&#xA;  file_id integer NOT NULL,&#xA;  measurement integer NOT NULL,&#xA;  channel_id integer NOT NULL,&#xA;  &quot;TIME&quot; timestamp without time zone,&#xA;  &quot;VALUES&quot; real,&#xA;  &quot;VALUES_quality_control&quot; character varying(1),&#xA;  CONSTRAINT measurements_pkey PRIMARY KEY (measurement ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;&#xA;)&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-3&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE timeseries_feature_deployments&#xA;(&#xA;  channel_id integer NOT NULL,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; double precision,&#xA;  geom geometry NOT NULL,&#xA;  site_code character varying(40),&#xA;  CONSTRAINT timeseries_feature_pkey PRIMARY KEY (channel_id )&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-4&quot;>&#xA;       &lt;sql>&#xA;      CREATE TABLE timeseries_feature_deployments_final&#xA;(&#xA;  channel_id integer,&#xA;  &quot;VARNAME&quot; text,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; double precision,&#xA;  geom geometry,&#xA;  site_code character varying(40)&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;   &#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-1&quot;>&#xA;       &lt;sql>&#xA;      CREATE TABLE global_attributes_file&#xA;(&#xA;  id bigserial,&#x9;&#xA;  file_id integer NOT NULL,&#xA;  author_email character varying,&#xA;  aims_channel_id integer,&#xA;  quality_control_set character varying,&#xA;  keywords character varying,&#xA;  source character varying,&#xA;  citation character varying,&#xA;  author character varying,&#xA;  &quot;references&quot; character varying,&#xA;  platform_code character varying,&#xA;  geospatial_vertical_reference_datum character varying,&#xA;  file_version character varying,&#xA;  geospatial_vertical_positive character varying,&#xA;  institution character varying,&#xA;  distribution_statement character varying,&#xA;  principal_investigator_email character varying,&#xA;  institution_references character varying,&#xA;  geospatial_vertical_min real,&#xA;  local_time_zone character varying,&#xA;  geospatial_vertical_max character varying,&#xA;  geospatial_vertical_units character varying,&#xA;  data_centre_email character varying,&#xA;  file_version_quality_control character varying,&#xA;  netcdf_version character varying,&#xA;  data_centre character varying,&#xA;  instrument character varying,&#xA;  date_created character varying,&#xA;  title character varying,&#xA;  acknowledgement character varying,&#xA;  principal_investigator character varying,&#xA;  metadata_uuid character varying,&#xA;  conventions character varying,&#xA;  site_code character varying,&#xA;  instrument_serial_number character varying,&#xA;  project character varying,&#xA;  naming_authority character varying,&#xA;  CONSTRAINT deployments_pkey PRIMARY KEY (file_id ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;   &#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-2&quot;>&#xA;       &lt;sql>&#xA;     CREATE TABLE measurements&#xA;(&#xA;&#x9;&#xA;  file_id integer NOT NULL,&#xA;  measurement bigserial,&#xA;  channel_id integer NOT NULL,&#xA;  &quot;TIME&quot; timestamp without time zone,&#xA;  &quot;VALUES&quot; real,&#xA;  &quot;VALUES_quality_control&quot; character varying(1),&#xA;  CONSTRAINT measurements_pkey PRIMARY KEY (measurement ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;&#xA;)&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-3&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE timeseries_feature_deployments&#xA;(&#xA;  channel_id integer NOT NULL,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; real,&#xA;  geom geometry NOT NULL,&#xA;  site_code character varying(40),&#xA;  CONSTRAINT timeseries_feature_pkey PRIMARY KEY (channel_id )&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-4&quot;>&#xA;       &lt;sql>&#xA;      CREATE TABLE timeseries_feature_deployments_final&#xA;(&#xA;  channel_id integer,&#xA;  &quot;VARNAME&quot; text,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; real,&#xA;  geom geometry,&#xA;  site_code character varying(40)&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-5&quot;>&#xA;      &#xA;      &lt;sql>&#xA;        ALTER TABLE timeseries_feature_deployments_final&#xA;        ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;        USING ST_SetSRID(geom,4326);&#xA;        CREATE INDEX timeseries_feature_deployments_final_gist_idx ON timeseries_feature_deployments_final USING GIST (geom); &#xA;      &lt;/sql>      &#xA;&#xA;&lt;sql>&#xA;        ALTER TABLE timeseries_feature_deployments&#xA;        ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;        USING ST_SetSRID(geom,4326);&#xA;        CREATE INDEX timeseries_feature_deployments_gist_idx ON timeseries_feature_deployments USING GIST (geom); &#xA;      &lt;/sql>      &#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;      &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-6&quot;>&#xA;       &lt;sql>&#xA;CREATE OR REPLACE VIEW faimms_timeseries_map AS &#xA;&#xA;with table_a as (SELECT channel_id,min( &quot;TIME&quot;) AS time_start , max(&quot;TIME&quot;) AS time_end&#xA;from measurements&#xA;group by channel_id),&#xA;table_b as (SELECT channel_id, &#xA;&#x9;CASE &#xA;&#x9;&#x9;WHEN site_code ~ 'DAV' THEN 'Davies Reef' &#xA;&#x9;&#x9;WHEN site_code ~ 'HI' THEN 'Heron Island' &#xA;&#x9;&#x9;WHEN site_code ~ 'LIZ' THEN 'Lizard Island' &#xA;&#x9;&#x9;WHEN site_code ~ 'MYR' THEN 'Myrmidon Reef' &#xA;&#x9;&#x9;WHEN site_code ~ 'OTI' THEN 'One Tree Island' &#xA;&#x9;&#x9;WHEN site_code ~ 'RIB' THEN 'Rib Reef' &#xA;&#x9;&#x9;WHEN site_code ~ 'OI' THEN 'Orpheus Island' &#xA;&#xA;&#x9;&#x9;ELSE site_code END AS platform_code  from timeseries_feature_deployments_final)&#xA;&#xA;SELECT &#xA;timeseries_feature_deployments_final.channel_id,&#xA;table_a.time_start,&#xA;table_a.time_end,&#xA;platform_code,&#xA;site_code,&#xA;&quot;VARNAME&quot;,&#xA;&quot;DEPTH&quot;,&#xA;geom&#xA;from timeseries_feature_deployments_final&#xA;JOIN table_a on table_a.channel_id = timeseries_feature_deployments_final.channel_id&#xA;JOIN table_b on table_b.channel_id = timeseries_feature_deployments_final.channel_id&#xA;;&#xA;&#x9; &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-7&quot;>&#xA;       &lt;sql>&#xA;CREATE OR REPLACE VIEW faimms_timeseries_data AS&#xA;with&#xA;table_a as (SELECT id, url from indexed_file),&#xA;table_b as (SELECT channel_id, &#xA;&#x9;CASE &#xA;&#x9;&#x9;WHEN site_code ~ 'DAV' THEN 'Davies Reef' &#xA;&#x9;&#x9;WHEN site_code ~ 'HI' THEN 'Heron Island' &#xA;&#x9;&#x9;WHEN site_code ~ 'LIZ' THEN 'Lizard Island' &#xA;&#x9;&#x9;WHEN site_code ~ 'MYR' THEN 'Myrmidon Reef' &#xA;&#x9;&#x9;WHEN site_code ~ 'OTI' THEN 'One Tree Island' &#xA;&#x9;&#x9;WHEN site_code ~ 'RIB' THEN 'Rib Reef' &#xA;&#x9;&#x9;WHEN site_code ~ 'OI' THEN 'Orpheus Island' &#xA;&#xA;&#x9;&#x9;ELSE site_code END AS platform_code  from timeseries_feature_deployments_final),&#xA;data as (SELECT file_id , measurement  ,  channel_id ,  &quot;TIME&quot; ,  &quot;VALUES&quot; ,  &quot;VALUES_quality_control&quot; from measurements)&#xA;&#xA;SELECT file_id,table_a.url,measurement,data.channel_id,platform_code,timeseries_feature_deployments_final.site_code , &quot;TIME&quot; ,timeseries_feature_deployments_final.&quot;LATITUDE&quot;,timeseries_feature_deployments_final.&quot;LONGITUDE&quot;,timeseries_feature_deployments_final.&quot;DEPTH&quot;, timeseries_feature_deployments_final.&quot;VARNAME&quot;,  &quot;VALUES&quot; , &quot;VALUES_quality_control&quot; ,timeseries_feature_deployments_final.geom&#xA;from data&#xA;JOIN table_a on table_a.id = data.file_id&#xA;JOIN table_b on table_b.channel_id = data.channel_id&#xA;&#xA;JOIN timeseries_feature_deployments_final on timeseries_feature_deployments_final.channel_id = data.channel_id;&#xA;&#xA;&#x9; &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
     <elementParameter field="TEXT" name="LABEL" value="liquidBade_createTables"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
