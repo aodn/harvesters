@@ -118,7 +118,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT DISTINCT &#xA;&#x9;id,&#xA;&#x9;url ,&#xA;&#x9;substring(url, '[^(?:/AUV/)]\\w+\\d+' ) AS campaign_name ,&#xA;&#x9;substring(url, '(r\\d+_.*)/hydro' ) AS dive_name &#xA;from indexed_file where id NOT IN (SELECT DISTINCT  file_id from deployments) order by campaign_name,dive_name ;&#xA;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT DISTINCT&#xA;        id,&#xA;        url ,&#xA;        substring(url, '/AUV/(\\w+\\d?)/r' ) AS campaign_name ,&#xA;        substring(url, '(r\\d+_.*)/hydro' ) AS dive_name&#xA;from indexed_file where id NOT IN (SELECT DISTINCT  file_id from deployments) order by campaign_name,dive_name ;&#xA;&quot;&#xA;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
