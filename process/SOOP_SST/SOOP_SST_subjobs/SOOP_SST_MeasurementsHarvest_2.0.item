@@ -4,9 +4,9 @@
     <contextParameter comment="" name="DestinationDatabase_Password" prompt="DestinationDatabase_Password?" promptNeeded="false" repositoryContextId="_PaceUAlGEeObitNNn0mU_g" type="id_Password" value="00d6A6SZnl3096uhdGeE6g=="/>
     <contextParameter comment="" name="DestinationDatabase_Schema" prompt="DestinationDatabase_Schema?" promptNeeded="false" repositoryContextId="_PaceUAlGEeObitNNn0mU_g" type="id_String" value="soop_sst"/>
     <contextParameter comment="" name="DestinationDatabase_Login" prompt="DestinationDatabase_Login?" promptNeeded="false" repositoryContextId="_PaceUAlGEeObitNNn0mU_g" type="id_String" value="soop_sst"/>
-    <contextParameter comment="" name="DestinationDatabase_Port" prompt="DestinationDatabase_Port?" promptNeeded="false" repositoryContextId="_PaceUAlGEeObitNNn0mU_g" type="id_String" value="15432"/>
+    <contextParameter comment="" name="DestinationDatabase_Port" prompt="DestinationDatabase_Port?" promptNeeded="false" repositoryContextId="_PaceUAlGEeObitNNn0mU_g" type="id_String" value="5432"/>
     <contextParameter comment="" name="DestinationDatabase_Database" prompt="DestinationDatabase_Database?" promptNeeded="false" repositoryContextId="_PaceUAlGEeObitNNn0mU_g" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
-    <contextParameter comment="" name="DestinationDatabase_Server" prompt="DestinationDatabase_Server?" promptNeeded="false" repositoryContextId="_PaceUAlGEeObitNNn0mU_g" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="DestinationDatabase_Server" prompt="DestinationDatabase_Server?" promptNeeded="false" repositoryContextId="_PaceUAlGEeObitNNn0mU_g" type="id_String" value="10.11.12.13"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms512M -Xmx2048M"/>
@@ -362,19 +362,17 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="960" posY="96">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlOutput_1"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_QKA6EAlGEeObitNNn0mU_g"/>
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="960" posY="96">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_1"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="context.DestinationDatabase_Server"/>
-    <elementParameter field="TEXT" name="PORT" value="context.DestinationDatabase_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDatabase_Database"/>
-    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDatabase_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.DestinationDatabase_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.DestinationDatabase_Password"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;measurements&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
@@ -662,124 +660,123 @@
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
-    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="false"/>
+    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
     <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
-    <elementParameter field="TEXT" name="LABEL" value="measurements_PostgreSQL_Output"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="out_global_attributes" name="tPostgresqlOutput_1">
-      <column comment="" key="true" name="trajectory_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="true" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="TIME_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" name="LATITUDE_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" name="LONGITUDE_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="AIRT" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="AIRT_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="ATMP" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="ATMP_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="CNDC" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="CNDC_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="CNDC_2" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="CNDC_2_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="CNDC_3" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="CNDC_3_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="DEWT" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="DEWT_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="GPS_HEIGHT" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="GPS_HEIGHT_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PL_CRS" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="PL_CRS_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PL_SPD" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="PL_SPD_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PL_WDIR" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="PL_WDIR_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PL_WSPD" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="PL_WSPD_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="PSAL_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PSAL_2" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="PSAL_2_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PSAL_3" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="PSAL_3_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="RAD_PAR" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="RAD_PAR_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="RELH" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="RELH_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="TEMP_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="TEMP_2" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="TEMP_2_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="TEMP_3" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="TEMP_3_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="TEMP_4" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="TEMP_4_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="WDIR" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="WDIR_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="WETT" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="WETT_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="WSPD" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="WSPD_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
+    <metadata connector="FLOW" label="out_global_attributes" name="iPostgresqlOutput_1">
+      <column comment="" key="true" name="trajectory_id" nullable="true" pattern="" sourceType="" type="id_Long"/>
+      <column comment="" key="true" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" sourceType="" type="id_Date"/>
+      <column comment="" key="false" name="TIME_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" key="false" name="LATITUDE_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" key="false" name="LONGITUDE_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="AIRT" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="AIRT_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="ATMP" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="ATMP_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="CNDC" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="CNDC_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="CNDC_2" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="CNDC_2_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="CNDC_3" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="CNDC_3_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="DEWT" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="DEWT_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="GPS_HEIGHT" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="GPS_HEIGHT_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="PL_CRS" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="PL_CRS_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="PL_SPD" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="PL_SPD_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="PL_WDIR" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="PL_WDIR_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="PL_WSPD" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="PL_WSPD_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="PSAL_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="PSAL_2" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="PSAL_2_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="PSAL_3" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="PSAL_3_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="RAD_PAR" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="RAD_PAR_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="RELH" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="RELH_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="TEMP_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="TEMP_2" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="TEMP_2_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="TEMP_3" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="TEMP_3_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="TEMP_4" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="TEMP_4_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="WDIR" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="WDIR_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="WETT" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="WETT_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="WSPD" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="WSPD_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
     </metadata>
     <metadata connector="REJECT" label="out_global_attributes" name="REJECT">
-      <column comment="" key="true" name="trajectory_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="true" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="TIME_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" name="LATITUDE_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" name="LONGITUDE_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="AIRT" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="AIRT_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="ATMP" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="ATMP_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="CNDC" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="CNDC_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="CNDC_2" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="CNDC_2_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="CNDC_3" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="CNDC_3_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="DEWT" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="DEWT_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="GPS_HEIGHT" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="GPS_HEIGHT_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PL_CRS" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="PL_CRS_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PL_SPD" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="PL_SPD_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PL_WDIR" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="PL_WDIR_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PL_WSPD" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="PL_WSPD_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="PSAL_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PSAL_2" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="PSAL_2_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PSAL_3" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="PSAL_3_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="RAD_PAR" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="RAD_PAR_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="RELH" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="RELH_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="TEMP_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="TEMP_2" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="TEMP_2_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="TEMP_3" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="TEMP_3_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="TEMP_4" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="TEMP_4_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="WDIR" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="WDIR_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="WETT" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="WETT_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="WSPD" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="WSPD_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
+      <column comment="" key="true" name="trajectory_id" nullable="true" pattern="" sourceType="" type="id_Long"/>
+      <column comment="" key="true" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" sourceType="" type="id_Date"/>
+      <column comment="" key="false" name="TIME_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" key="false" name="LATITUDE_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" key="false" name="LONGITUDE_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="AIRT" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="AIRT_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="ATMP" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="ATMP_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="CNDC" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="CNDC_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="CNDC_2" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="CNDC_2_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="CNDC_3" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="CNDC_3_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="DEWT" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="DEWT_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="GPS_HEIGHT" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="GPS_HEIGHT_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="PL_CRS" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="PL_CRS_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="PL_SPD" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="PL_SPD_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="PL_WDIR" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="PL_WDIR_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="PL_WSPD" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="PL_WSPD_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="PSAL_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="PSAL_2" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="PSAL_2_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="PSAL_3" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="PSAL_3_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="RAD_PAR" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="RAD_PAR_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="RELH" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="RELH_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="TEMP_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="TEMP_2" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="TEMP_2_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="TEMP_3" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="TEMP_3_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="TEMP_4" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="TEMP_4_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="WDIR" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="WDIR_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="WETT" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="WETT_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="WSPD" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="WSPD_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -981,13 +978,10 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="variables"/>
   </connection>
-  <connection connectorName="FLOW" label="out_temperature" lineStyle="0" metaname="out_temperature" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tPostgresqlOutput_1">
+  <connection connectorName="FLOW" label="out_temperature" lineStyle="0" metaname="out_temperature" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="iPostgresqlOutput_1">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="trajectory_id"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="measurement_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="TIME"/>
@@ -1159,7 +1153,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="out_temperature"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlOutput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlOutput_1" target="tPostgresqlCommit_1">
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlOutput_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlOutput_1" target="tPostgresqlCommit_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
   </connection>
