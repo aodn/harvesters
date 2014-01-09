@@ -4,9 +4,9 @@
     <contextParameter comment="" name="metadataDb_Password" prompt="metadataDb_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="XQPxICrOzqb096uhdGeE6g=="/>
     <contextParameter comment="" name="metadataDb_Server" prompt="metadataDb_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="localhost"/>
     <contextParameter comment="" name="metadataDb_Schema" prompt="metadataDb_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="soop_trv"/>
-    <contextParameter comment="" name="metadataDb_Database" prompt="metadataDb_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+    <contextParameter comment="" name="metadataDb_Database" prompt="metadataDb_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest"/>
     <contextParameter comment="" name="metadataDb_Login" prompt="metadataDb_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="soop_trv"/>
-    <contextParameter comment="" name="metadataDb_Port" prompt="metadataDb_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="15432"/>
+    <contextParameter comment="" name="metadataDb_Port" prompt="metadataDb_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -42,7 +42,7 @@
     <routinesParameter id="_cRn34BQsEeKRFb0vPU_LNg" name="DAPUtils"/>
     <routinesParameter id="_IMfY4Dp8EeKYTu4DLH4cKg" name="NetCDFUtils"/>
   </parameters>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="544" posY="640">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="544" posY="608">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -83,7 +83,7 @@
       <column comment="" key="false" length="0" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="50"/>
     </metadata>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="992" posY="544">
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="960" posY="608">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_1"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -100,7 +100,7 @@
     <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
     <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
     <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -238,7 +238,7 @@
     <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
     <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
     <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -353,7 +353,7 @@
     <elementParameter field="TEXT" name="PASS" value="context.metadataDb_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/media/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;       &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-1&quot;>&#xA;       &lt;sql>&#xA; CREATE TABLE vessel_names&#xA;(&#xA;  vessel_name character varying(50) NOT NULL,&#xA;  platform_code character varying(50),&#xA;  colour character varying(50),&#xA;  CONSTRAINT vessel_names_pkey PRIMARY KEY (vessel_name )&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;   &#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-2&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE visualisation_wms&#xA;(&#xA;  trip_id integer,&#xA;   metadata_uuid character varying(100),&#xA;  time_start timestamp without time zone,&#xA;  time_end timestamp without time zone,&#xA;  vessel_name character varying(50),&#xA;  colour character varying(50),&#xA;  &quot;TURB_b&quot; boolean,&#xA;  &quot;Seawater_Intake_Temperature_b&quot; boolean,&#xA;  fluorescence_b boolean,&#xA;  &quot;PSAL_b&quot; boolean,&#xA;  geom geometry)&#xA;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-3&quot;>&#xA;        &lt;sql>&#xA;ALTER TABLE visualisation_wms&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX visualisation_wms_gist_idx ON visualisation_wms USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-4&quot;>&#xA;        &lt;sql>&#xA;CREATE OR REPLACE VIEW sooptrv_trajectory_data AS &#xA; SELECT measurements_merged_data.trip_id, &#xA;&#x9;measurements_merged_data.&quot;TIME&quot;, &#xA;&#x9;measurements_merged_data.&quot;LATITUDE&quot;, &#xA;&#x9;measurements_merged_data.&quot;LONGITUDE&quot;, &#xA;&#x9;measurements_merged_data.&quot;TURB&quot;, &#xA;&#x9;measurements_merged_data.&quot;Seawater_Intake_Temperature&quot;, &#xA;&#x9;measurements_merged_data.&quot;PSAL&quot;, &#xA;&#x9;measurements_merged_data.fluorescence, &#xA;&#x9;measurements_merged_data.geom&#xA;&#x9;FROM measurements_merged_data&#xA;   JOIN visualisation_wms ON visualisation_wms.trip_id = measurements_merged_data.trip_id&#xA;  ORDER BY measurements_merged_data.&quot;TIME&quot;;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-5&quot;>&#xA;        &lt;sql>&#xA;CREATE OR REPLACE VIEW sooptrv_trajectory_map AS &#xA; SELECT a.trip_id,  a.metadata_uuid, a.time_start, a.time_end,a.colour, a.&quot;TURB_b&quot;, a.fluorescence_b, a.&quot;Seawater_Intake_Temperature_b&quot;, a.&quot;PSAL_b&quot;, a.geom, b.platform_code, b.vessel_name&#xA;   FROM visualisation_wms a&#xA;   JOIN deployments b ON a.trip_id = b.trip_id;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;       &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-1&quot;>&#xA;       &lt;sql>&#xA; CREATE TABLE vessel_names&#xA;(&#xA;  vessel_name character varying(50) NOT NULL,&#xA;  platform_code character varying(50),&#xA;  colour character varying(50),&#xA;  CONSTRAINT vessel_names_pkey PRIMARY KEY (vessel_name )&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;   &#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-2&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE visualisation_wms&#xA;(&#xA;  trip_id integer,&#xA;   metadata_uuid character varying(100),&#xA;  time_start timestamp without time zone,&#xA;  time_end timestamp without time zone,&#xA;  vessel_name character varying(50),&#xA;  colour character varying(50),&#xA;  &quot;TURB_b&quot; boolean,&#xA;  &quot;Seawater_Intake_Temperature_b&quot; boolean,&#xA;  fluorescence_b boolean,&#xA;  &quot;PSAL_b&quot; boolean,&#xA;  geom geometry)&#xA;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-3&quot;>&#xA;        &lt;sql>&#xA;ALTER TABLE visualisation_wms&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX visualisation_wms_gist_idx ON visualisation_wms USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-4&quot;>&#xA;        &lt;sql>&#xA;CREATE OR REPLACE VIEW soop_trv_trajectory_data AS &#xA; SELECT measurements_merged_data.trip_id, &#xA;&#x9;measurements_merged_data.&quot;TIME&quot;, &#xA;&#x9;measurements_merged_data.&quot;LATITUDE&quot;, &#xA;&#x9;measurements_merged_data.&quot;LONGITUDE&quot;, &#xA;&#x9;measurements_merged_data.&quot;TURB&quot;, &#xA;&#x9;measurements_merged_data.&quot;Seawater_Intake_Temperature&quot;, &#xA;&#x9;measurements_merged_data.&quot;PSAL&quot;, &#xA;&#x9;measurements_merged_data.fluorescence, &#xA;&#x9;measurements_merged_data.geom&#xA;&#x9;FROM measurements_merged_data&#xA;   JOIN visualisation_wms ON visualisation_wms.trip_id = measurements_merged_data.trip_id&#xA;  ORDER BY measurements_merged_data.&quot;TIME&quot;;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-5&quot;>&#xA;        &lt;sql>&#xA;CREATE OR REPLACE VIEW soop_trv_trajectory_map AS &#xA; SELECT a.trip_id,  a.metadata_uuid, a.time_start, a.time_end,a.colour, a.&quot;TURB_b&quot;, a.fluorescence_b, a.&quot;Seawater_Intake_Temperature_b&quot;, a.&quot;PSAL_b&quot;, a.geom, b.platform_code, b.vessel_name&#xA;   FROM visualisation_wms a&#xA;   JOIN deployments b ON a.trip_id = b.trip_id;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog>"/>
     <elementParameter field="TEXT" name="LABEL" value="liquidBade_createTables"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -375,19 +375,21 @@
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="CHECK" name="USE_SHARED_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="SHARED_CONNECTION_NAME" value=""/>
-    <elementParameter field="CHECK" name="AUTO_COMMIT" value="true"/>
+    <elementParameter field="CHECK" name="AUTO_COMMIT" value="false"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="352" posY="832">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
+  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="512" posY="864">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="CHECK" name="CLOSE" value="true"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlCommit_1"/>
   </node>
   <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="iPostgresqlOutput_1">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
@@ -475,7 +477,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" outputId="3" source="tPostgresqlConnection_1" target="tPostgresqlClose_1">
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" outputId="3" source="tPostgresqlConnection_1" target="tPostgresqlCommit_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk4"/>
   </connection>
@@ -500,7 +502,7 @@
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
