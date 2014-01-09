@@ -3,12 +3,12 @@
   <context confirmationNeeded="false" name="soop_xbt_dm">
     <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Long" value=""/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="&quot;http://thredds.aodn.org.au/thredds/dodsC/IMOS/SOOP/SOOP-SST/VHW6005_RV-Linnaeus/2013/IMOS_SOOP-SST_ST_20130818T000000Z_VHW6005_FV01_C-20130913T051720Z.nc&quot;"/>
-    <contextParameter comment="" name="DestinationDatabase_Database" prompt="DestinationDatabase_Database?" promptNeeded="false" repositoryContextId="_PaceUAlGEeObitNNn0mU_g" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
-    <contextParameter comment="" name="DestinationDatabase_Login" prompt="DestinationDatabase_Login?" promptNeeded="false" repositoryContextId="_PaceUAlGEeObitNNn0mU_g" type="id_String" value="soop_xbt_dm"/>
-    <contextParameter comment="" name="DestinationDatabase_Password" prompt="DestinationDatabase_Password?" promptNeeded="false" repositoryContextId="_PaceUAlGEeObitNNn0mU_g" type="id_Password" value="X4z4a4k/UYycsHVkF8ev9A=="/>
-    <contextParameter comment="" name="DestinationDatabase_Port" prompt="DestinationDatabase_Port?" promptNeeded="false" repositoryContextId="_PaceUAlGEeObitNNn0mU_g" type="id_String" value="15432"/>
-    <contextParameter comment="" name="DestinationDatabase_Schema" prompt="DestinationDatabase_Schema?" promptNeeded="false" repositoryContextId="_PaceUAlGEeObitNNn0mU_g" type="id_String" value="soop_xbt_dm"/>
-    <contextParameter comment="" name="DestinationDatabase_Server" prompt="DestinationDatabase_Server?" promptNeeded="false" repositoryContextId="_PaceUAlGEeObitNNn0mU_g" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="DestinationDatabase_Database" prompt="DestinationDatabase_Database?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+    <contextParameter comment="" name="DestinationDatabase_Login" prompt="DestinationDatabase_Login?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_String" value="soop_xbt_dm"/>
+    <contextParameter comment="" name="DestinationDatabase_Password" prompt="DestinationDatabase_Password?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_Password" value="X4z4a4k/UYycsHVkF8ev9A=="/>
+    <contextParameter comment="" name="DestinationDatabase_Port" prompt="DestinationDatabase_Port?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_String" value="5432"/>
+    <contextParameter comment="" name="DestinationDatabase_Schema" prompt="DestinationDatabase_Schema?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_String" value="soop_xbt_dm"/>
+    <contextParameter comment="" name="DestinationDatabase_Server" prompt="DestinationDatabase_Server?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_String" value="10.11.12.13"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms512M -Xmx2048M"/>
@@ -20,14 +20,15 @@
     <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
     <elementParameter field="TEXT" name="JOBID_FOR_OOZIE" value=""/>
     <elementParameter field="CHECK" name="IMPLICITCONTEXT_USE_PROJECT_SETTINGS" value="true"/>
-    <elementParameter field="CHECK" name="STATANDLOG_USE_PROJECT_SETTINGS" value="true"/>
     <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY_TYPE_IMPLICIT_CONTEXT:REPOSITORY_PROPERTY_TYPE" value=""/>
     <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
-    <elementParameter field="CLOSED_LIST" name="LOAD_NEW_VARIABLE" value=""/>
-    <elementParameter field="CLOSED_LIST" name="NOT_LOAD_OLD_VARIABLE" value=""/>
     <elementParameter field="CHECK" name="DISABLE_WARNINGS" value="false"/>
     <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
+    <elementParameter field="CHECK" name="ON_LOGCATCHER_FLAG" value="true"/>
+    <elementParameter field="CHECK" name="ON_FILES_FLAG" value="true"/>
+    <elementParameter field="DIRECTORY" name="FILE_PATH" value="&quot;/tmp&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="ojdbc14-10g.jar"/>
     <routinesParameter id="_2kScYAMLEeO_h_HVNU44lw" name="DataOperation"/>
@@ -180,19 +181,17 @@
       <column comment="" key="false" name="LATITUDE_quality_control" nullable="true" pattern="" type="id_Byte"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="992" posY="96">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlOutput_2"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_QKA6EAlGEeObitNNn0mU_g"/>
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="992" posY="96">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_1"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="context.DestinationDatabase_Server"/>
-    <elementParameter field="TEXT" name="PORT" value="context.DestinationDatabase_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDatabase_Database"/>
-    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDatabase_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.DestinationDatabase_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.DestinationDatabase_Password"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;measurements&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="CREATE_IF_NOT_EXISTS"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
@@ -237,41 +236,38 @@
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
     <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
     <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
-    <elementParameter field="TEXT" name="LABEL" value="measurements_PostgreSQL_Output"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="out_global_attributes" name="tPostgresqlOutput_2">
-      <column comment="" key="true" name="profile_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="true" name="DEPTH" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+    <metadata connector="FLOW" label="out_global_attributes" name="iPostgresqlOutput_1">
+      <column comment="" key="false" name="profile_id" nullable="true" pattern="" sourceType="" type="id_Long"/>
+      <column comment="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="" type="id_Float"/>
       <column comment="" key="false" name="DEPTH_quality_control" nullable="true" pattern="" sourceType="INT2" type="id_Byte"/>
-      <column comment="" key="false" name="TEMP" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="TEMP" nullable="true" pattern="" sourceType="" type="id_Float"/>
       <column comment="" key="false" name="TEMP_quality_control" nullable="true" pattern="" sourceType="INT2" type="id_Byte"/>
     </metadata>
     <metadata connector="REJECT" label="out_global_attributes" name="REJECT">
-      <column comment="" key="true" name="profile_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="true" name="DEPTH" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="profile_id" nullable="true" pattern="" sourceType="" type="id_Long"/>
+      <column comment="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="" type="id_Float"/>
       <column comment="" key="false" name="DEPTH_quality_control" nullable="true" pattern="" sourceType="INT2" type="id_Byte"/>
-      <column comment="" key="false" name="TEMP" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="TEMP" nullable="true" pattern="" sourceType="" type="id_Float"/>
       <column comment="" key="false" name="TEMP_quality_control" nullable="true" pattern="" sourceType="INT2" type="id_Byte"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="992" posY="224">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlOutput_3"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_QKA6EAlGEeObitNNn0mU_g"/>
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="992" posY="224">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_2"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="context.DestinationDatabase_Server"/>
-    <elementParameter field="TEXT" name="PORT" value="context.DestinationDatabase_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDatabase_Database"/>
-    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDatabase_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.DestinationDatabase_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.DestinationDatabase_Password"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;qc_flags&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="CREATE_IF_NOT_EXISTS"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
@@ -309,13 +305,13 @@
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
-    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="false"/>
+    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
     <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlOutput_3">
+    <metadata connector="FLOW" name="iPostgresqlOutput_2">
       <column comment="" key="true" name="profile_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" name="TIME_quality_control" nullable="true" pattern="" sourceType="INT2" type="id_Byte"/>
       <column comment="" key="false" name="LONGITUDE_quality_control" nullable="true" pattern="" sourceType="INT2" type="id_Byte"/>
@@ -414,7 +410,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="variables"/>
   </connection>
-  <connection connectorName="FLOW" label="copyOfout_temperature" lineStyle="0" metaname="copyOfout_temperature" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_2" target="tPostgresqlOutput_2">
+  <connection connectorName="FLOW" label="copyOfout_temperature" lineStyle="0" metaname="copyOfout_temperature" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMap_2" target="iPostgresqlOutput_1">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="profile_id"/>
@@ -470,7 +466,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="out_qcflags"/>
   </connection>
-  <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tAggregateRow_1" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_1" target="tPostgresqlOutput_3">
+  <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tAggregateRow_1" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_1" target="iPostgresqlOutput_2">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="profile_id"/>
@@ -495,7 +491,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row2"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlOutput_3" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlOutput_3" target="tPostgresqlCommit_1">
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlOutput_2" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlOutput_2" target="tPostgresqlCommit_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk2"/>
   </connection>
