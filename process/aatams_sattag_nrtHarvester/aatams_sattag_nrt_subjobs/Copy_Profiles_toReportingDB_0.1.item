@@ -5,13 +5,13 @@
     <contextParameter comment="" name="DestinationDatabase_Schema" prompt="DestinationDatabase_Schema?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="aatams_sattag_nrt"/>
     <contextParameter comment="" name="DestinationDatabase_Login" prompt="DestinationDatabase_Login?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="aatams_sattag_nrt"/>
     <contextParameter comment="" name="DestinationDatabase_Port" prompt="DestinationDatabase_Port?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="5432"/>
-    <contextParameter comment="" name="DestinationDatabase_Database" prompt="DestinationDatabase_Database?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="maplayers"/>
-    <contextParameter comment="" name="DestinationDatabase_Server" prompt="DestinationDatabase_Server?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="DestinationDatabase_Database" prompt="DestinationDatabase_Database?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="harvest?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+    <contextParameter comment="" name="DestinationDatabase_Server" prompt="DestinationDatabase_Server?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="ReportingDatabase_Port" prompt="ReportingDatabase_Port?" promptNeeded="false" repositoryContextId="_EGdVkAhqEeOJn8rDLYzdcg" type="id_String" value="5432"/>
     <contextParameter comment="" name="ReportingDatabase_Password" prompt="ReportingDatabase_Password?" promptNeeded="false" repositoryContextId="_EGdVkAhqEeOJn8rDLYzdcg" type="id_Password" value="y/rKQmSqKmcy5ZysFF96DC8Bm1mg9U1j"/>
     <contextParameter comment="" name="ReportingDatabase_Schema" prompt="ReportingDatabase_Schema?" promptNeeded="false" repositoryContextId="_EGdVkAhqEeOJn8rDLYzdcg" type="id_String" value="aatams_sattag_nrt"/>
-    <contextParameter comment="" name="ReportingDatabase_Server" prompt="ReportingDatabase_Server?" promptNeeded="false" repositoryContextId="_EGdVkAhqEeOJn8rDLYzdcg" type="id_String" value="localhost"/>
-    <contextParameter comment="" name="ReportingDatabase_Database" prompt="ReportingDatabase_Database?" promptNeeded="false" repositoryContextId="_EGdVkAhqEeOJn8rDLYzdcg" type="id_String" value="data_warehouse"/>
+    <contextParameter comment="" name="ReportingDatabase_Server" prompt="ReportingDatabase_Server?" promptNeeded="false" repositoryContextId="_EGdVkAhqEeOJn8rDLYzdcg" type="id_String" value="10.11.12.13"/>
+    <contextParameter comment="" name="ReportingDatabase_Database" prompt="ReportingDatabase_Database?" promptNeeded="false" repositoryContextId="_EGdVkAhqEeOJn8rDLYzdcg" type="id_String" value="data_warehouse?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="ReportingDatabase_Login" prompt="ReportingDatabase_Login?" promptNeeded="false" repositoryContextId="_EGdVkAhqEeOJn8rDLYzdcg" type="id_String" value="aatams_sattag_nrt"/>
   </context>
   <parameters>
@@ -66,7 +66,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT file_id,&#xA;profiles.id AS profile_id,&#xA;profiles.device_wmo_ref,&#xA;profiles.timestamp,&#xA;st_x(profiles.geom) AS lon,&#xA;st_y(profiles.geom) AS lat,&#xA;min(depth) AS min_depth,&#xA;max(depth) AS max_depth,&#xA;COUNT(temperature) AS nb_measurements&#xA;FROM profiles&#xA;LEFT JOIN measurements ON measurements.profile_id = profiles.id&#xA;GROUP BY file_id, profiles.id, profiles.device_wmo_ref, profiles.timestamp, st_x(profiles.geom),st_y(profiles.geom)&#xA;ORDER BY device_wmo_ref,timestamp,profile_id&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT file_id,&#xA;profiles.id AS profile_id,&#xA;profiles.device_wmo_ref,&#xA;profiles.timestamp,&#xA;st_x(profiles.geom) AS lon,&#xA;st_y(profiles.geom) AS lat,&#xA;min(pressure) AS min_pressure,&#xA;max(pressure) AS max_pressure,&#xA;COUNT(temperature) AS nb_measurements&#xA;FROM profiles&#xA;LEFT JOIN measurements ON measurements.profile_id = profiles.id&#xA;GROUP BY file_id, profiles.id, profiles.device_wmo_ref, profiles.timestamp, st_x(profiles.geom),st_y(profiles.geom)&#xA;ORDER BY device_wmo_ref,timestamp,profile_id&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -86,9 +86,9 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="lat"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="min_depth"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="min_pressure"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="max_depth"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="max_pressure"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="nb_measurements"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -105,13 +105,13 @@
       <column comment="" key="true" length="35" name="timestamp" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="17" name="lon" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="17" name="lat" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="10" name="min_depth" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="10" name="max_depth" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="10" name="min_pressure" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="10" name="max_pressure" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" length="19" name="nb_measurements" nullable="true" pattern="" precision="0" sourceType="" type="id_Long"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="256">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlOutput_2"/>
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="256">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_Ee0yQAhqEeOJn8rDLYzdcg"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
@@ -167,12 +167,12 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="min_depth"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="min_pressure"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="max_depth"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="max_pressure"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -187,32 +187,31 @@
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
     <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
     <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
-    <elementParameter field="TEXT" name="LABEL" value="tPostgresqlOutput_Reporting_profiles"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlOutput_2">
-      <column comment="" defaultValue="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
-      <column comment="" defaultValue="" key="false" length="19" name="profile_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="true" length="35" name="timestamp" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="17" name="lon" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="17" name="lat" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="10" name="min_depth" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="10" name="max_depth" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="19" name="nb_measurements" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
+    <metadata connector="FLOW" name="iPostgresqlOutput_1">
+      <column comment="" defaultValue="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
+      <column comment="" defaultValue="" key="false" length="19" name="profile_id" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
+      <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="true" length="35" name="timestamp" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" length="17" name="lon" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" length="17" name="lat" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" length="10" name="min_pressure" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="10" name="max_pressure" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="19" name="nb_measurements" nullable="true" pattern="" precision="0" sourceType="" type="id_Long"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" defaultValue="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
-      <column comment="" defaultValue="" key="false" length="19" name="profile_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="true" length="35" name="timestamp" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="17" name="lon" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="17" name="lat" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="10" name="min_depth" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="10" name="max_depth" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="19" name="nb_measurements" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
+      <column comment="" defaultValue="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
+      <column comment="" defaultValue="" key="false" length="19" name="profile_id" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
+      <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="true" length="35" name="timestamp" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" length="17" name="lon" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" length="17" name="lat" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" length="10" name="min_pressure" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="10" name="max_pressure" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="19" name="nb_measurements" nullable="true" pattern="" precision="0" sourceType="" type="id_Long"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -230,7 +229,7 @@
     <elementParameter field="TEXT" name="PASS" value="context.ReportingDatabase_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/home/meteo/imos/software/TOS_DI-r96646-V5.1.3/workspace/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;   &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1231205035-1&quot;>&#xA;        &lt;createTable schemaName=&quot;aatams_sattag_nrt&quot; tableName=&quot;profiles&quot;>&#xA;&#x9;    &#xA;&#x9;    &lt;column autoIncrement=&quot;true&quot; name=&quot;id&quot; type=&quot;bigserial&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;profiles_pkey&quot;/>&#xA;            &lt;/column>&#x9;    &#xA;            &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;profile_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;VARCHAR(8)&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/>&#xA;            &lt;column name=&quot;lon&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;lat&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;min_depth&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;max_depth&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;nb_measurements&quot; type=&quot;int8&quot;/>&#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1380072253465-3&quot;>&#xA;        &lt;addUniqueConstraint columnNames=&quot;device_wmo_ref, timestamp&quot; constraintName=&quot;profiles_unique_constraint&quot; deferrable=&quot;false&quot; disabled=&quot;false&quot; initiallyDeferred=&quot;false&quot; schemaName=&quot;aatams_sattag_nrt&quot; tableName=&quot;profiles&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;   &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1231205035-1&quot;>&#xA;        &lt;createTable schemaName=&quot;aatams_sattag_nrt&quot; tableName=&quot;profiles&quot;>&#xA;&#x9;    &#xA;&#x9;    &lt;column autoIncrement=&quot;true&quot; name=&quot;id&quot; type=&quot;bigserial&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;profiles_pkey&quot;/>&#xA;            &lt;/column>&#x9;    &#xA;            &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;profile_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;VARCHAR(8)&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/>&#xA;            &lt;column name=&quot;lon&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;lat&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;min_pressure&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;max_pressure&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;nb_measurements&quot; type=&quot;int8&quot;/>&#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1380072253465-3&quot;>&#xA;        &lt;addUniqueConstraint columnNames=&quot;device_wmo_ref, timestamp&quot; constraintName=&quot;profiles_unique_constraint&quot; deferrable=&quot;false&quot; disabled=&quot;false&quot; initiallyDeferred=&quot;false&quot; schemaName=&quot;aatams_sattag_nrt&quot; tableName=&quot;profiles&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -245,7 +244,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tPostgresqlOutput_2">
+  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="iPostgresqlOutput_1">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="file_id"/>
@@ -257,13 +256,22 @@
       <elementValue elementRef="TRACE_COLUMN" value="device_wmo_ref"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="utc_date"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geom"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="timestamp"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="lon"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="lat"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="min_pressure"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="max_pressure"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="nb_measurements"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
