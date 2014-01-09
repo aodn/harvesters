@@ -1,0 +1,1131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+  <context confirmationNeeded="false" name="Default">
+    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_b2CKgHgOEeOMHsnb02Unfg" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_b2CKgHgOEeOMHsnb02Unfg" type="id_String" value="null"/>
+    <contextParameter comment="" name="metadataDb_Database" prompt="metadataDb_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="maplayers"/>
+    <contextParameter comment="" name="metadataDb_Login" prompt="metadataDb_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="anfog"/>
+    <contextParameter comment="" name="metadataDb_Password" prompt="metadataDb_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="YDPLjYmrylE="/>
+    <contextParameter comment="" name="metadataDb_Port" prompt="metadataDb_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
+    <contextParameter comment="" name="metadataDb_Schema" prompt="metadataDb_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="anfog"/>
+    <contextParameter comment="" name="metadataDb_Server" prompt="metadataDb_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value=".*/REALTIME/.*"/>
+    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_Long" value="1"/>
+    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value=".*.nc"/>
+    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value="/Users/bpasquer/Documents/TALEND_projects/ANFOG_data"/>
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value="http://thredds.aodn.org.au/thredds/catalog/IMOS/ANFOG/catalog.html"/>
+  </context>
+  <parameters>
+    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
+    <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="32"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="0"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
+    <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
+    <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
+    <elementParameter field="TEXT" name="JOBID_FOR_OOZIE" value=""/>
+    <elementParameter field="CHECK" name="IMPLICITCONTEXT_USE_PROJECT_SETTINGS" value="true"/>
+    <elementParameter field="CHECK" name="STATANDLOG_USE_PROJECT_SETTINGS" value="true"/>
+    <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LOAD_NEW_VARIABLE" value=""/>
+    <elementParameter field="CLOSED_LIST" name="NOT_LOAD_OLD_VARIABLE" value=""/>
+    <elementParameter field="CHECK" name="DISABLE_WARNINGS" value="false"/>
+    <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="ojdbc14-10g.jar"/>
+    <routinesParameter id="_IutegFC1EeOiO-906CQIRQ" name="DataOperation"/>
+    <routinesParameter id="_Ixhh8FC1EeOiO-906CQIRQ" name="GeoOperation"/>
+    <routinesParameter id="_IxXJ4FC1EeOiO-906CQIRQ" name="GeometryOperation"/>
+    <routinesParameter id="_Ixd3kFC1EeOiO-906CQIRQ" name="GeometryUtility"/>
+    <routinesParameter id="_Iwp_QFC1EeOiO-906CQIRQ" name="Mathematical"/>
+    <routinesParameter id="_IwtCkFC1EeOiO-906CQIRQ" name="Numeric"/>
+    <routinesParameter id="_IxklQFC1EeOiO-906CQIRQ" name="OpenStreetMap"/>
+    <routinesParameter id="_Iw524FC1EeOiO-906CQIRQ" name="Relational"/>
+    <routinesParameter id="_Iw86MFC1EeOiO-906CQIRQ" name="StringHandling"/>
+    <routinesParameter id="_IxAkkFC1EeOiO-906CQIRQ" name="TalendDataGenerator"/>
+    <routinesParameter id="_IxEO8FC1EeOiO-906CQIRQ" name="TalendDate"/>
+    <routinesParameter id="_IxIgYFC1EeOiO-906CQIRQ" name="TalendString"/>
+    <routinesParameter id="_BzxlsElWEeK5TPMSOHM6dA" name="ArgoUtils"/>
+    <routinesParameter id="_cRn34BQsEeKRFb0vPU_LNg" name="DAPUtils"/>
+    <routinesParameter id="_IMfY4Dp8EeKYTu4DLH4cKg" name="NetCDFUtils"/>
+  </parameters>
+  <node componentName="iIncludeSdiLibraries" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="32" posY="192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIncludeSdiLibraries_1"/>
+    <elementParameter field="CHECK" name="START" value="true"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import org.talend.sdi.geometry.Geometry;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="800" posY="96">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
+    <elementParameter field="CHECK" name="TSTATCATCHER_STATS" value="true"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;deployment_id&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_a AS (SELECT file_id, substring(value from '[^ ]*$') AS deployment_name FROM attribute WHERE name='title' ),&#xA;table_b as (SELECT file_id,platform_code,platform_id,&#xA;       CASE WHEN platform_id='SG' THEN  'seaglider'&#xA;            ELSE  'slocum glider'       &#xA;       END AS platform_type&#xA;    FROM (select file_id, value as platform_code,&#xA;&#x9;substring(value from '^[A-Z]{2}') as platform_id &#xA;&#x9; FROM attribute WHERE name='platform_code'  &#xA;&#x9;ORDER BY file_id) as platfrom_id)&#xA;&#xA;SELECT&#xA;table_a.file_id,&#xA;deployment_name,&#xA;platform_type,&#xA;platform_code,&#xA;'#'::text || upper(lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour&#xA;from table_b&#xA;&#xA;LEFT JOIN table_a ON table_a.file_id = table_b.file_id&quot;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
+    <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="deployment_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="platform_type"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="platform_code"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="colour"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlInput_1">
+      <column comment="" defaultValue="" key="true" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="50" name="deployment_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="30"/>
+      <column comment="" key="false" length="20" name="platform_type" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="10" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="10"/>
+      <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="992" posY="96">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_1"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;deployment_id&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="TRUNCATE"/>
+    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT_OR_UPDATE"/>
+    <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
+    <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
+    <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TABLE" name="ADD_COLS"/>
+    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
+    <elementParameter field="TABLE" name="FIELD_OPTIONS">
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="deployment_name"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="platform_type"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="platform_code"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="colour"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
+    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
+    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
+    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
+    <elementParameter field="TEXT" name="LABEL" value="deployment_id"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="iPostgresqlOutput_1">
+      <column comment="" defaultValue="" key="true" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="50" name="deployment_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="30"/>
+      <column comment="" key="false" length="20" name="platform_type" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="10" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="10"/>
+      <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+    </metadata>
+    <metadata connector="REJECT" name="REJECT">
+      <column comment="" defaultValue="" key="true" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="50" name="deployment_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="30"/>
+      <column comment="" key="false" length="20" name="platform_type" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="10" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="10"/>
+      <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
+    <elementParameter field="TEXT" name="HOST" value="context.metadataDb_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.metadataDb_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.metadataDb_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.metadataDb_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.metadataDb_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.metadataDb_Password"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;/media/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/changelog.xml&quot;"/>
+    <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;  &#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-12&quot;>&#xA;       &lt;sql>&#xA; CREATE TABLE deployment_id&#xA;(&#xA;file_id integer NOT NULL, &#xA;deployment_name character varying(50) NOT NULL,&#xA;platform_type character varying(20) NOT NULL,&#xA;platform_code character varying(10) NOT NULL,&#xA;colour character varying(50),&#xA;CONSTRAINT deployment_id_pkey PRIMARY KEY (file_id),&#xA;CONSTRAINT deployment_id_fkey FOREIGN KEY(file_id)&#xA;REFERENCES indexed_file (id) MATCH SIMPLE&#xA; )&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-11&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE anfog_dm_trajectory_wms&#xA;(&#xA;file_id integer NOT NULL,&#xA;deployment_name character varying(50) NOT NULL,&#xA;platform_code character varying(10) NOT NULL,&#xA;platform_type character varying(20) NOT NULL,&#xA;geospatial_vertical_max character varying(50),&#xA;geospatial_vertical_min character varying(50),&#xA;time_coverage_start character varying(50),&#xA;time_coverage_end character varying(50),&#xA;&quot;TEMP_b&quot; boolean, &#xA;&quot;PSAL_b&quot; boolean,&#xA;&quot;DOXY_b&quot; boolean,&#xA;&quot;DEPTH_b&quot; boolean,&#xA;&quot;FLU2_b&quot; boolean,&#xA;&quot;CDOM_b&quot; boolean,&#xA;&quot;UCUR_b&quot; boolean,&#xA;&quot;VCUR_b&quot; boolean,&#xA;&quot;PRES_b&quot; boolean,&#xA;&quot;CNDC_b&quot; boolean,&#xA;&quot;DOXY_raw_b&quot; boolean, &#xA;&quot;HEAD_b&quot; boolean,&#xA;&quot;UCUR_GPS_b&quot; boolean,&#xA;&quot;VCUR_GPS_b&quot; boolean,&#xA;&quot;VBSC_b&quot; boolean,&#xA;&quot;OCR443_b&quot; boolean,&#xA;&quot;OCR443_1_b&quot; boolean,&#xA;&quot;OCR443_42_b&quot; boolean,&#xA;&quot;OCR443_52_b&quot; boolean,&#xA;&quot;OCR443_8_b&quot; boolean,&#xA;&quot;OCR443_9_b&quot; boolean,&#xA;&quot;OCR455_9_b&quot; boolean,&#xA;&quot;OCR456_6_b&quot; boolean,&#xA;&quot;OCR470_3_b&quot; boolean,&#xA;&quot;OCR470_5_b&quot; boolean,&#xA;&quot;OCR489_1_b&quot; boolean,&#xA;&quot;OCR489_2_b&quot; boolean,&#xA;&quot;OCR489_4_b&quot; boolean,&#xA;&quot;OCR489_59_b&quot; boolean,&#xA;&quot;OCR489_64_b&quot; boolean,&#xA;&quot;OCR489_7_b&quot; boolean,&#xA;&quot;OCR520_b&quot; boolean,&#xA;&quot;OCR520_3_b&quot; boolean,&#xA;&quot;OCR554_2_b&quot; boolean,&#xA;&quot;OCR554_24_b&quot; boolean,&#xA;&quot;OCR554_4_b&quot; boolean,&#xA;&quot;OCR554_77_b&quot; boolean,&#xA;&quot;OCR554_9_b&quot; boolean,&#xA;&quot;OCR555_3_b&quot; boolean,&#xA;&quot;OCR555_4_b&quot; boolean,&#xA;&quot;OCR664_67_b&quot; boolean,&#xA;&quot;OCR664_89_b&quot; boolean,&#xA;&quot;OCR669_3_b&quot; boolean,&#xA;&quot;OCR670_2_b&quot; boolean,&#xA;&quot;OCR670_8_b&quot; boolean,&#xA;&quot;OCR670_9_b&quot; boolean,&#xA;colour character varying(50),&#xA;geom geometry,&#xA;CONSTRAINT anfog_dm_trajectory_wms_pkey PRIMARY KEY (file_id),&#xA;CONSTRAINT anfog_dm_trajectory_wms_fkey FOREIGN KEY(file_id)&#xA;REFERENCES indexed_file (id) MATCH SIMPLE)&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-3&quot;>&#xA;        &lt;sql>&#xA;ALTER TABLE anfog_dm_trajectory_wms&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX anfog_dm_trajectory_wms_gist_idx ON anfog_dm_trajectory_wms USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-4&quot;>&#xA;        &lt;sql>&#xA;CREATE OR REPLACE VIEW anfog_dm_trajectory_data AS &#xA; SELECT file_id, &#xA;&#x9;&quot;TIME&quot;, &#xA;&#x9;&quot;LATITUDE&quot;, &#xA;&#x9;&quot;LONGITUDE&quot;,&#xA;&#x9;&quot;DEPTH&quot;, &#xA;&#x9;&quot;TEMP&quot;,&#xA;&#x9;&quot;PSAL&quot;,   &#xA;&#x9;&quot;DOXY&quot;,&#xA;&#x9;&quot;CDOM&quot;, &#xA;&#x9;&quot;FLU2&quot;, &#xA;&#x9;&quot;UCUR&quot;, &#xA;&#x9;&quot;VCUR&quot;,&#xA; &#x9;&quot;PRES&quot; ,&#xA;&#x9;&quot;CNDC&quot; ,&#xA;&#x9;&quot;DOXY_raw&quot; , &#xA;&#x9;&quot;HEAD&quot; ,&#xA;&#x9;&quot;UCUR_GPS&quot; ,&#xA;&#x9;&quot;VCUR_GPS&quot; ,&#xA;&#x9;&quot;VBSC&quot; ,&#xA;&#x9;&quot;OCR443&quot; ,&#xA;&#x9;&quot;OCR443_1&quot; ,&#xA;&#x9;&quot;OCR443_42&quot; ,&#xA;&#x9;&quot;OCR443_52&quot; ,&#xA;&#x9;&quot;OCR443_8&quot; ,&#xA;&#x9;&quot;OCR443_9&quot; ,&#xA;&#x9;&quot;OCR455_9&quot; ,&#xA;&#x9;&quot;OCR456_6&quot; ,&#xA;&#x9;&quot;OCR470_3&quot; ,&#xA;&#x9;&quot;OCR470_5&quot; ,&#xA;&#x9;&quot;OCR489_1&quot; ,&#xA;&#x9;&quot;OCR489_2&quot; ,&#xA;&#x9;&quot;OCR489_4&quot; ,&#xA;&#x9;&quot;OCR489_59&quot; ,&#xA;&#x9;&quot;OCR489_64&quot; ,&#xA;&#x9;&quot;OCR489_7&quot; ,&#xA;&#x9;&quot;OCR520&quot; ,&#xA;&#x9;&quot;OCR520_3&quot; ,&#xA;&#x9;&quot;OCR554_2&quot; ,&#xA;&#x9;&quot;OCR554_24&quot; ,&#xA;&#x9;&quot;OCR554_4&quot; ,&#xA;&#x9;&quot;OCR554_77&quot; ,&#xA;&#x9;&quot;OCR554_9&quot; ,&#xA;&#x9;&quot;OCR555_3&quot; ,&#xA;&#x9;&quot;OCR555_4&quot; ,&#xA;&#x9;&quot;OCR664_67&quot; ,&#xA;&#x9;&quot;OCR664_89&quot; ,&#xA;&#x9;&quot;OCR669_3&quot; ,&#xA;&#x9;&quot;OCR670_2&quot; ,&#xA;&#x9;&quot;OCR670_8&quot; ,&#xA;&#x9;&quot;OCR670_9&quot; ,&#xA;&#x9;geom&#xA;&#x9;FROM measurements&#xA;  ORDER BY measurements.&quot;TIME&quot;;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-5&quot;>&#xA;        &lt;sql>&#xA;CREATE OR REPLACE VIEW anfog_dm_trajectory_map AS &#xA; SELECT file_id,&#xA;&#x9;deployment_name,&#xA;&#x9;platform_type,&#xA;&#x9;platform_code,&#xA;&#x9;time_coverage_start,&#xA;&#x9;time_coverage_end,&#xA;&#x9;colour,&#xA;&#x9;&quot;TEMP_b&quot; , &#xA;&#x9;&quot;PSAL_b&quot; ,&#xA;&#x9;&quot;DOXY_b&quot; ,&#xA;&#x9;&quot;DEPTH_b&quot;,&#xA;&#x9;&quot;FLU2_b&quot; ,&#xA;&#x9;&quot;CDOM_b&quot; ,&#xA;&#x9;&quot;UCUR_b&quot; ,&#xA;&#x9;&quot;VCUR_b&quot; ,&#xA;&#x9;&quot;PRES_b&quot; ,&#xA;&#x9;&quot;CNDC_b&quot; ,&#xA;&#x9;&quot;DOXY_raw_b&quot; , &#xA;&#x9;&quot;HEAD_b&quot; ,&#xA;&#x9;&quot;UCUR_GPS_b&quot; ,&#xA;&#x9;&quot;VCUR_GPS_b&quot; ,&#xA;&#x9;&quot;VBSC_b&quot; ,&#xA;&#x9;&quot;OCR443_b&quot; ,&#xA;&#x9;&quot;OCR443_1_b&quot; ,&#xA;&#x9;&quot;OCR443_42_b&quot; ,&#xA;&#x9;&quot;OCR443_52_b&quot; ,&#x9;&#xA;&#x9;&quot;OCR443_8_b&quot; ,&#xA;&#x9;&quot;OCR443_9_b&quot; ,&#xA;&#x9;&quot;OCR455_9_b&quot; ,&#xA;&#x9;&quot;OCR456_6_b&quot; ,&#xA;&#x9;&quot;OCR470_3_b&quot; ,&#xA;&#x9;&quot;OCR470_5_b&quot; ,&#xA;&#x9;&quot;OCR489_1_b&quot; ,&#xA;&#x9;&quot;OCR489_2_b&quot; ,&#xA;&#x9;&quot;OCR489_4_b&quot; ,&#xA;&#x9;&quot;OCR489_59_b&quot; ,&#xA;&#x9;&quot;OCR489_64_b&quot; ,&#xA;&#x9;&quot;OCR489_7_b&quot; ,&#xA;&#x9;&quot;OCR520_b&quot; ,&#xA;&#x9;&quot;OCR520_3_b&quot; ,&#xA;&#x9;&quot;OCR554_2_b&quot; ,&#xA;&#x9;&quot;OCR554_24_b&quot; ,&#xA;&#x9;&quot;OCR554_4_b&quot; ,&#xA;&#x9;&quot;OCR554_77_b&quot; ,&#xA;&#x9;&quot;OCR554_9_b&quot; ,&#xA;&#x9;&quot;OCR555_3_b&quot; ,&#xA;&#x9;&quot;OCR555_4_b&quot; ,&#xA;&#x9;&quot;OCR664_67_b&quot; ,&#xA;&#x9;&quot;OCR664_89_b&quot; ,&#xA;&#x9;&quot;OCR669_3_b&quot; ,&#xA;&#x9;&quot;OCR670_2_b&quot; ,&#xA;&#x9;&quot;OCR670_8_b&quot; ,&#xA;&#x9;&quot;OCR670_9_b&quot; ,&#xA;&#x9; geom&#xA;   FROM anfog_dm_trajectory_wms&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
+    <elementParameter field="TEXT" name="LABEL" value="liquidBade_createTables"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tPostgresqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
+    <elementParameter field="TEXT" name="HOST" value="context.metadataDb_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.metadataDb_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.metadataDb_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.metadataDb_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.metadataDb_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.metadataDb_Password"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_SHARED_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="SHARED_CONNECTION_NAME" value=""/>
+    <elementParameter field="CHECK" name="AUTO_COMMIT" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="960" posY="384">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="CHECK" name="CLOSE" value="true"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlCommit_1"/>
+  </node>
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="704" posY="256">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_2"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
+    <elementParameter field="TEXT" name="HOST" value="context.metadataDb_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.metadataDb_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.metadataDb_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.metadataDb_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.metadataDb_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.metadataDb_Password"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_a AS(SELECT file_id, deployment_name,platform_type,platform_code,colour FROM deployment_id),&#xA;table_b AS(SELECT file_id,time_coverage_start,time_coverage_end,geospatial_vertical_min,geospatial_vertical_max FROM deployments),&#xA;data AS (SELECT file_id, &#xA;COUNT (\&quot;TEMP\&quot;) AS \&quot;TEMP\&quot;,&#xA;COUNT(\&quot;PSAL\&quot;) AS \&quot;PSAL\&quot;,&#xA;COUNT(\&quot;FLU2\&quot;) AS \&quot;FLU2\&quot;,&#xA;COUNT(\&quot;DOXY\&quot;) AS \&quot;DOXY\&quot;,&#xA;COUNT(\&quot;CDOM\&quot;) AS \&quot;CDOM\&quot;,&#xA;COUNT(\&quot;UCUR\&quot;) AS \&quot;UCUR\&quot;,&#xA;COUNT(\&quot;VCUR\&quot;) AS \&quot;VCUR\&quot;,&#xA;COUNT(\&quot;DEPTH\&quot;) AS \&quot;DEPTH\&quot;, &#xA;COUNT(\&quot;PRES\&quot;) AS \&quot;PRES\&quot;,&#xA;COUNT(\&quot;CNDC\&quot;) AS \&quot;CNDC\&quot;,&#xA;COUNT(\&quot;DOXY_raw\&quot;) AS \&quot;DOXY_raw\&quot;, &#xA;COUNT(\&quot;HEAD\&quot;) AS \&quot;HEAD\&quot;,&#xA;COUNT(\&quot;UCUR_GPS\&quot;) AS \&quot;UCUR_GPS\&quot;,&#xA;COUNT(\&quot;VCUR_GPS\&quot;) AS \&quot;VCUR_GPS\&quot;,&#xA;COUNT(\&quot;VBSC\&quot;) AS \&quot;VBSC\&quot;,&#xA;COUNT(\&quot;OCR443\&quot;) AS \&quot;OCR443\&quot;,&#xA;COUNT(\&quot;OCR443_1\&quot;) AS \&quot;OCR443_1\&quot;,&#xA;COUNT(\&quot;OCR443_42\&quot;) AS \&quot;OCR443_42\&quot;,&#xA;COUNT(\&quot;OCR443_52\&quot;) AS \&quot;OCR443_52\&quot;,&#xA;COUNT(\&quot;OCR443_8\&quot;) AS \&quot;OCR443_8\&quot;,&#xA;COUNT(\&quot;OCR443_9\&quot;) AS \&quot;OCR443_9\&quot;,&#xA;COUNT(\&quot;OCR455_9\&quot;) AS \&quot;OCR455_9\&quot;,&#xA;COUNT(\&quot;OCR456_6\&quot;) AS \&quot;OCR456_6\&quot;,&#xA;COUNT(\&quot;OCR470_3\&quot;) AS \&quot;OCR470_3\&quot;,&#xA;COUNT(\&quot;OCR470_5\&quot;) AS \&quot;OCR470_5\&quot;,&#xA;COUNT(\&quot;OCR489_1\&quot;) AS \&quot;OCR489_1\&quot;,&#xA;COUNT(\&quot;OCR489_2\&quot;) AS \&quot;OCR489_2\&quot;,&#xA;COUNT(\&quot;OCR489_4\&quot;) AS \&quot;OCR489_4\&quot;,&#xA;COUNT(\&quot;OCR489_59\&quot;) AS \&quot;OCR489_59\&quot;,&#xA;COUNT(\&quot;OCR489_64\&quot;) AS \&quot;OCR489_64\&quot;,&#xA;COUNT(\&quot;OCR489_7\&quot;) AS \&quot;OCR489_7\&quot;,&#xA;COUNT(\&quot;OCR520\&quot;) AS \&quot;OCR520\&quot;,&#xA;COUNT(\&quot;OCR520_3\&quot;) AS \&quot;OCR520_3\&quot;,&#xA;COUNT(\&quot;OCR554_2\&quot;) AS \&quot;OCR554_2\&quot;,&#xA;COUNT(\&quot;OCR554_24\&quot;) AS \&quot;OCR554_24\&quot;,&#xA;COUNT(\&quot;OCR554_4\&quot;) AS \&quot;OCR554_4\&quot;,&#xA;COUNT(\&quot;OCR554_77\&quot;) AS \&quot;OCR554_77\&quot;,&#xA;COUNT(\&quot;OCR554_9\&quot;) AS \&quot;OCR554_9\&quot;,&#xA;COUNT(\&quot;OCR555_3\&quot;) AS \&quot;OCR555_3\&quot;,&#xA;COUNT(\&quot;OCR555_4\&quot;) AS \&quot;OCR555_4\&quot;,&#xA;COUNT(\&quot;OCR664_67\&quot;) AS \&quot;OCR664_67\&quot;,&#xA;COUNT(\&quot;OCR664_89\&quot;) AS \&quot;OCR664_89\&quot;,&#xA;COUNT(\&quot;OCR669_3\&quot;) AS \&quot;OCR669_3\&quot;,&#xA;COUNT(\&quot;OCR670_2\&quot;) AS \&quot;OCR670_2\&quot;,&#xA;COUNT(\&quot;OCR670_8\&quot;) AS \&quot;OCR670_8\&quot;,&#xA;COUNT(\&quot;OCR670_9\&quot;) AS \&quot;OCR670_9\&quot;,&#xA;ST_SimplifyPreserveTopology(make_trajectory(geom),0.005) AS geom&#xA;FROM  measurements&#xA;LEFT JOIN indexed_file ON measurements.file_id = indexed_file.id&#xA;GROUP BY file_id)&#xA;&#xA;SELECT data.file_id,&#xA;table_a.deployment_name,&#xA;table_a.platform_type,&#xA;table_a.platform_code,&#xA;table_a.colour,&#xA;table_b.time_coverage_start,&#xA;table_b.time_coverage_end,&#xA;table_b.geospatial_vertical_min,&#xA;table_b.geospatial_vertical_max,&#xA;\&quot;TEMP\&quot; > 0  AS \&quot;TEMP_b\&quot;,&#xA;\&quot;PSAL\&quot; > 0  AS \&quot;PSAL_b\&quot;,&#xA;\&quot;FLU2\&quot; > 0  AS \&quot;FLU2_b\&quot;,&#xA;\&quot;DOXY\&quot; > 0  AS \&quot;DOXY_b\&quot;,&#xA;\&quot;CDOM\&quot; > 0  AS \&quot;CDOM_b\&quot;,&#xA;\&quot;UCUR\&quot; > 0  AS \&quot;UCUR_b\&quot;,&#xA;\&quot;VCUR\&quot; > 0  AS \&quot;VCUR_b\&quot;,&#xA;\&quot;DEPTH\&quot; > 0  AS \&quot;DEPTH_b\&quot;,&#xA;\&quot;PRES\&quot; > 0  AS \&quot;PRES_b\&quot;,&#xA;\&quot;CNDC\&quot; > 0  AS \&quot;CNDC_b\&quot;,&#xA;\&quot;DOXY_raw\&quot; > 0  AS \&quot;DOXY_raw_b\&quot;,&#xA;\&quot;HEAD\&quot; > 0  AS \&quot;HEAD_b\&quot;, &#xA;\&quot;UCUR_GPS\&quot; > 0  AS \&quot;UCUR_GPS_b\&quot;,&#xA;\&quot;VCUR_GPS\&quot; > 0  AS \&quot;VCUR_GPS_b\&quot;,&#xA;\&quot;VBSC\&quot; > 0  AS \&quot;VBSC_b\&quot;,&#xA;\&quot;OCR443\&quot; > 0  AS \&quot;OCR443_b\&quot;,&#xA;\&quot;OCR443_1\&quot; > 0  AS \&quot;OCR443_1_b\&quot;,&#xA;\&quot;OCR443_42\&quot; > 0  AS \&quot;OCR443_42_b\&quot;,&#xA;\&quot;OCR443_52\&quot; > 0  AS \&quot;OCR443_52_b\&quot;,&#xA;\&quot;OCR443_8\&quot; > 0  AS \&quot;OCR443_8_b\&quot;,&#xA;\&quot;OCR443_9\&quot; > 0  AS \&quot;OCR443_9_b\&quot;,&#xA;\&quot;OCR455_9\&quot; > 0  AS \&quot;OCR455_9_b\&quot;,&#xA;\&quot;OCR456_6\&quot; > 0  AS \&quot;OCR456_6_b\&quot;,&#xA;\&quot;OCR470_3\&quot; > 0  AS \&quot;OCR470_3_b\&quot;, &#xA;\&quot;OCR470_5\&quot; > 0  AS \&quot;OCR470_5_b\&quot;,&#xA;\&quot;OCR489_1\&quot; > 0  AS \&quot;OCR489_1_b\&quot;,&#xA;\&quot;OCR489_2\&quot; > 0  AS \&quot;OCR489_2_b\&quot;,&#xA;\&quot;OCR489_4\&quot; > 0  AS \&quot;OCR489_4_b\&quot;,&#xA;\&quot;OCR489_59\&quot; > 0  AS \&quot;OCR489_59_b\&quot;,&#xA;\&quot;OCR489_64\&quot; > 0  AS \&quot;OCR489_64_b\&quot;,&#xA;\&quot;OCR489_7\&quot; > 0  AS \&quot;OCR489_7_b\&quot;,&#xA;\&quot;OCR520\&quot; > 0  AS \&quot;OCR520_b\&quot;,&#xA;\&quot;OCR520_3\&quot; > 0  AS \&quot;OCR520_3_b\&quot;,&#xA;\&quot;OCR554_2\&quot; > 0  AS \&quot;OCR554_2_b\&quot;,&#xA;\&quot;OCR554_24\&quot; > 0  AS \&quot;OCR554_24_b\&quot;,&#xA;\&quot;OCR554_4\&quot; > 0  AS \&quot;OCR554_4_b\&quot;,&#xA;\&quot;OCR554_77\&quot; > 0  AS \&quot;OCR554_77_b\&quot;,&#xA;\&quot;OCR554_9\&quot; > 0  AS \&quot;OCR554_9_b\&quot;,&#xA;\&quot;OCR555_3\&quot; > 0  AS \&quot;OCR555_3_b\&quot;,&#xA;\&quot;OCR555_4\&quot; > 0  AS \&quot;OCR555_4_b\&quot;, &#xA;\&quot;OCR664_67\&quot; > 0  AS \&quot;OCR664_67_b\&quot;,&#xA;\&quot;OCR664_89\&quot; > 0  AS \&quot;OCR664_89_b\&quot;,&#xA;\&quot;OCR669_3\&quot; > 0  AS \&quot;OCR669_3_b\&quot;,&#xA;\&quot;OCR670_2\&quot; > 0  AS \&quot;OCR670_2_b\&quot;,&#xA;\&quot;OCR670_8\&quot; > 0  AS \&quot;OCR670_8_b\&quot;, &#xA;\&quot;OCR670_9\&quot; > 0  AS \&quot;OCR670_9_b\&quot;,&#xA;geom&#xA;FROM data&#xA;&#xA;LEFT JOIN table_a ON data.file_id = table_a.file_id&#xA;LEFT JOIN table_b ON data.file_id = table_b.file_id&#xA;&quot;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
+    <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="deployment_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="platform_type"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="platform_code"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="colour"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geospatial_vertical_min"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geospatial_vertical_max"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="TEMP_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="PSAL_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="FLU2_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="DOXY_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="CDOM_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="UCUR_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="VCUR_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="DEPTH_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="PRES_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="CNDC_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="DOXY_raw_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="HEAD_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="UCUR_GPS_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="VCUR_GPS_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="VBSC_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR443_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR443_1_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR443_42_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR443_52_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR443_8_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR443_9_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR455_9_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR456_6_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR470_3_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR470_5_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR489_1_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR489_2_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR489_4_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR489_59_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR489_64_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR489_7_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR520_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR520_3_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR554_2_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR554_24_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR554_4_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR554_77_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR554_9_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR555_3_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR555_4_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR664_67_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR664_89_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR669_3_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR670_2_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR670_8_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR670_9_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlInput_2">
+      <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="50" name="deployment_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="20" name="platform_type" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="10" name="platform_code" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_vertical_min" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_vertical_max" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="1" name="TEMP_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="PSAL_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="FLU2_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="DOXY_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="CDOM_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="UCUR_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="VCUR_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="DEPTH_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="PRES_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="CNDC_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="DOXY_raw_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="HEAD_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="UCUR_GPS_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="VCUR_GPS_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="VBSC_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_1_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_42_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_52_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_8_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_9_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR455_9_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR456_6_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR470_3_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR470_5_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_1_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_2_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_4_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_59_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_64_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_7_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR520_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR520_3_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR554_2_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR554_24_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR554_4_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR554_77_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR554_9_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR555_3_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR555_4_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR664_67_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR664_89_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR669_3_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR670_2_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR670_8_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR670_9_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="LINE" type="id_Object"/>
+    </metadata>
+  </node>
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="960" posY="256">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_2"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;anfog_dm_trajectory_wms&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="TRUNCATE"/>
+    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
+    <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
+    <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
+    <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TABLE" name="ADD_COLS"/>
+    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
+    <elementParameter field="TABLE" name="FIELD_OPTIONS">
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="deployment_name"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="platform_type"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="platform_code"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="colour"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geospatial_vertical_min"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geospatial_vertical_max"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="TEMP_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="PSAL_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="FLU2_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="DOXY_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="CDOM_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="UCUR_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="VCUR_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="DEPTH_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="PRES_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="CNDC_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="DOXY_raw_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="HEAD_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="UCUR_GPS_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="VCUR_GPS_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="VBSC_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR443_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR443_1_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR443_42_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR443_52_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR443_8_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR443_9_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR455_9_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR456_6_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR470_3_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR470_5_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR489_1_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR489_2_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR489_4_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR489_59_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR489_64_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR489_7_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR520_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR520_3_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR554_2_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR554_24_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR554_4_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR554_77_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR554_9_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR555_3_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR555_4_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR664_67_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR664_89_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR669_3_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR670_2_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR670_8_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OCR670_9_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
+    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
+    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
+    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
+    <elementParameter field="TEXT" name="LABEL" value="anfog_dm_trajectory_wms"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="iPostgresqlOutput_2">
+      <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="50" name="deployment_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="20" name="platform_type" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="10" name="platform_code" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_vertical_min" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_vertical_max" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="1" name="TEMP_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="PSAL_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="FLU2_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="DOXY_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="CDOM_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="UCUR_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="VCUR_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="DEPTH_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="PRES_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="CNDC_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="DOXY_raw_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="HEAD_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="UCUR_GPS_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="VCUR_GPS_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="VBSC_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_1_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_42_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_52_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_8_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_9_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR455_9_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR456_6_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR470_3_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR470_5_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_1_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_2_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_4_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_59_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_64_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_7_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR520_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR520_3_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR554_2_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR554_24_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR554_4_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR554_77_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR554_9_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR555_3_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR555_4_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR664_67_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR664_89_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR669_3_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR670_2_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR670_8_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR670_9_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="LINE" type="id_Object"/>
+    </metadata>
+    <metadata connector="REJECT" name="REJECT">
+      <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="50" name="deployment_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="20" name="platform_type" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="10" name="platform_code" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_vertical_min" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_vertical_max" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="1" name="TEMP_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="PSAL_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="FLU2_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="DOXY_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="CDOM_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="UCUR_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="VCUR_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="DEPTH_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="PRES_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="CNDC_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="DOXY_raw_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="HEAD_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="UCUR_GPS_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="VCUR_GPS_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="VBSC_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_1_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_42_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_52_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_8_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR443_9_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR455_9_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR456_6_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR470_3_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR470_5_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_1_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_2_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_4_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_59_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_64_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR489_7_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR520_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR520_3_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR554_2_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR554_24_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR554_4_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR554_77_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR554_9_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR555_3_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR555_4_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR664_67_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR664_89_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR669_3_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR670_2_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR670_8_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" defaultValue="" key="false" length="1" name="OCR670_9_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="LINE" type="id_Object"/>
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iIncludeSdiLibraries_1" offsetLabelX="0" offsetLabelY="0" source="iIncludeSdiLibraries_1" target="iPostgresqlDbUpdate_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
+  </connection>
+  <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="iPostgresqlOutput_1">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="file_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="deployment_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="platform_type"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="platform_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="colour"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row2"/>
+  </connection>
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="tPostgresqlConnection_1">
+    <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
+    <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate1"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tPostgresqlConnection_1" target="tPostgresqlInput_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk2"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tPostgresqlConnection_1" target="tPostgresqlInput_2">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk3"/>
+  </connection>
+  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tPostgresqlInput_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_2" target="iPostgresqlOutput_2">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="file_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="deployment_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="platform_type"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="platform_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="colour"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_start"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_min"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_max"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TEMP_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PSAL_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="FLU2_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DOXY_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="CDOM_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="UCUR_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="VCUR_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DEPTH_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PRES_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="CNDC_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DOXY_raw_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="HEAD_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="UCUR_GPS_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="VCUR_GPS_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="VBSC_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443_1_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443_42_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443_52_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443_8_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443_9_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR455_9_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR456_6_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR470_3_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR470_5_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_1_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_2_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_4_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_59_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_64_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_7_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR520_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR520_3_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR554_2_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR554_24_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR554_4_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR554_77_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR554_9_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR555_3_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR555_4_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR664_67_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR664_89_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR669_3_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR670_2_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR670_8_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR670_9_b"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geom"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlOutput_2" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlOutput_2" target="tPostgresqlCommit_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk4"/>
+  </connection>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIncludeSdiLibraries_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_2"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+</talendfile:ProcessType>
