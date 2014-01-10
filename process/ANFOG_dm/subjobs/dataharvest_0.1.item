@@ -306,7 +306,6 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="measurement">
-      <column comment="" key="true" name="measurement" nullable="false" pattern="" sourceType="INT4" type="id_Long"/>
       <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" name="TIME" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
@@ -464,7 +463,6 @@
         <mapperTableEntries name="VBSC_quality_control" expression="variables.VBSC_quality_control==null?null:variables.VBSC_quality_control.toString()   " type="id_String" nullable="true"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="measurement">
-        <mapperTableEntries name="measurement" expression="  " type="id_Long"/>
         <mapperTableEntries name="file_id" expression="((Integer)globalMap.get(&quot;fileToprocess.id&quot;))   " type="id_Integer"/>
         <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1950-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,variables.TIME,true)    " type="id_Date" nullable="true"/>
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(variables.LONGITUDE,variables.LATITUDE,&quot;EPSG:4326&quot;) " type="id_Geometry" nullable="true"/>
@@ -699,11 +697,6 @@
     <elementParameter field="TABLE" name="ADD_COLS"/>
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS">
-      <elementValue elementRef="SCHEMA_COLUMN" value="measurement"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -1229,7 +1222,6 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_2">
-      <column comment="" key="true" name="measurement" nullable="false" pattern="" sourceType="INT4" type="id_Long"/>
       <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" name="TIME" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
@@ -1335,7 +1327,6 @@
       <column comment="" key="false" name="VBSC_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="true" name="measurement" nullable="false" pattern="" sourceType="INT4" type="id_Long"/>
       <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" name="TIME" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
@@ -1457,7 +1448,6 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="deployment">
-      <column comment="" key="true" name="deploy_id" nullable="false" pattern="" sourceType="INT4" type="id_Long"/>
       <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String" originalLength="500"/>
@@ -1476,7 +1466,6 @@
       <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="deployment">
-        <mapperTableEntries name="deploy_id" expression="  " type="id_Long"/>
         <mapperTableEntries name="file_id" expression="((Integer)globalMap.get(&quot;fileToprocess.id&quot;))" type="id_Integer"/>
         <mapperTableEntries name="title" expression="row1.title " type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_start" expression="row1.time_coverage_start " type="id_String" nullable="true"/>
@@ -1532,11 +1521,6 @@
     <elementParameter field="TABLE" name="ADD_COLS"/>
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS">
-      <elementValue elementRef="SCHEMA_COLUMN" value="deploy_id"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -1612,7 +1596,6 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_1">
-      <column comment="" key="true" name="deploy_id" nullable="false" pattern="" sourceType="INT4" type="id_Long"/>
       <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String" originalLength="500"/>
@@ -1628,7 +1611,6 @@
       <column comment="" key="false" length="50" name="quality_control_set" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="true" name="deploy_id" nullable="false" pattern="" sourceType="INT4" type="id_Long"/>
       <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String" originalLength="500"/>
