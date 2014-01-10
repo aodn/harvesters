@@ -50,7 +50,49 @@
     <routinesParameter id="_cRn34BQsEeKRFb0vPU_LNg" name="DAPUtils"/>
     <routinesParameter id="_IMfY4Dp8EeKYTu4DLH4cKg" name="NetCDFUtils"/>
   </parameters>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="192" posY="320">
+  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="512" posY="320">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
+    <elementParameter field="TEXT" name="HOST" value="context.metadataDb_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.metadataDb_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.metadataDb_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.metadataDb_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.metadataDb_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.metadataDb_Password"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;/media/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/changelog.xml&quot;"/>
+    <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;       &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-1&quot;>&#xA;       &lt;sql>&#xA;        CREATE TABLE deployments&#xA;(&#xA;deploy_id bigserial,&#xA;  file_id integer NOT NULL,&#xA;  author_email character varying,&#xA;  author character varying,&#xA;  principal_investigator character varying,&#xA;  project character varying,&#xA;  platform_code character varying,&#xA;  voyage_number character varying,&#xA;  vessel_name character varying,&#xA;  title character varying,&#xA;  time_coverage_start character varying,&#xA;  time_coverage_end character varying,&#xA;  geospatial_lat_min character varying,&#xA;  geospatial_lat_max character varying,&#xA;  geospatial_lon_min character varying,&#xA;  geospatial_lon_max character varying,&#xA;  source character varying,&#xA;  CONSTRAINT deployments_pkey PRIMARY KEY (deploy_id ),&#xA;CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;);&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;   &#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-2&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE measurements&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp without time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;AIRT_1&quot; real,&#xA;  &quot;AIRT_2&quot; real,&#xA;  &quot;ATMP&quot; real,&#xA;  &quot;LW_1&quot; real,&#xA;  &quot;LW_2&quot; real,&#xA;  &quot;PL_CMP&quot; real,&#xA;  &quot;PL_CRS&quot; real,&#xA;  &quot;PL_HD&quot; real,&#xA;  &quot;PL_SPD&quot; real,&#xA;  &quot;PL_WDIR_1&quot; real,&#xA;  &quot;PL_WDIR_2&quot; real,&#xA;  &quot;PL_WSPD_1&quot; real,&#xA;  &quot;PL_WSPD_2&quot; real,&#xA;  &quot;RAD_PAR_1&quot; real,&#xA;  &quot;RAD_PAR_2&quot; real,&#xA;  &quot;RAD_PAR_3&quot; real,&#xA;  &quot;RAD_PAR_4&quot; real,&#xA;  &quot;RAD_UV&quot; real,&#xA;  &quot;RAIN_AMOUNT_1&quot; real,&#xA;  &quot;RAIN_AMOUNT_2&quot; real,&#xA;  &quot;RELH_1&quot; real,&#xA;  &quot;RELH_2&quot; real,&#xA;  &quot;RRATE&quot; real,&#xA;  &quot;SW_1&quot; real,&#xA;  &quot;SW_2&quot; real,&#xA;  &quot;TEMP&quot; real,&#xA;  &quot;VIS&quot; real,&#xA;  &quot;WDIR_1&quot; real,&#xA;  &quot;WDIR_2&quot; real,&#xA;  &quot;WSPD_1&quot; real,&#xA;  &quot;WSPD_2&quot; real,&#xA;  &quot;WX&quot; real,&#xA;  geom geometry,&#xA;  CONSTRAINT measurements_pkey PRIMARY KEY (measurement ),&#xA;CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;);&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-3&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE visualisation_wms&#xA;(&#xA; file_id integer,&#xA;  url character varying(512) NOT NULL,&#xA;  time_start timestamp(6) without time zone,&#xA;  time_end timestamp(6) without time zone,&#xA;  voyage_number character varying(35),&#xA;  platform_code character varying(255),&#xA;  vessel_name character varying(255),&#xA;  colour character varying(50),&#xA;  geom geometry,&#xA;        CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;);&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-4&quot;>&#xA;        &lt;sql>&#xA;CREATE INDEX measurements_idx&#xA;  ON measurements&#xA;  USING btree&#xA;  (file_id , &quot;TIME&quot; );&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-5&quot;>&#xA;        &lt;sql>&#xA;ALTER TABLE visualisation_wms&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX visualisation_wms_gist_idx ON visualisation_wms USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA;&#xA;        &lt;sql>&#xA;ALTER TABLE measurements&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX measurements_gist_idx ON measurements USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-6&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE vessel_names&#xA;(&#xA;  vessel_name character varying(50) NOT NULL,&#xA;  platform_code character varying(50),&#xA;  colour character varying(50),&#xA;  CONSTRAINT vessel_names_pkey PRIMARY KEY (vessel_name),&#xA;  CONSTRAINT unique_vessel_name UNIQUE (vessel_name)&#xA;);&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-7&quot;>&#xA;        &lt;sql>&#xA;CREATE VIEW soop_asf_mt_trajectory_data AS&#xA;SELECT measurements.file_id, &#xA;measurements.measurement, &#xA;measurements.&quot;TIME&quot; ,&#xA;measurements.&quot;LATITUDE&quot;,&#xA;measurements.&quot;LONGITUDE&quot;,&#xA;measurements.&quot;AIRT_1&quot;,&#xA;measurements.&quot;AIRT_2&quot;,&#xA;measurements.&quot;ATMP&quot;,&#xA;measurements.&quot;LW_1&quot;,&#xA;measurements.&quot;LW_2&quot;,&#xA;measurements.&quot;PL_CMP&quot;,&#xA;measurements.&quot;PL_CRS&quot;,&#xA;measurements.&quot;PL_HD&quot;,&#xA;measurements.&quot;PL_SPD&quot;,&#xA;measurements.&quot;PL_WDIR_1&quot;,&#xA;measurements.&quot;PL_WDIR_2&quot;,&#xA;measurements.&quot;PL_WSPD_1&quot;,&#xA;measurements.&quot;PL_WSPD_2&quot;,&#xA;measurements.&quot;RAD_PAR_1&quot;,&#xA;measurements.&quot;RAD_PAR_2&quot;,&#xA;measurements.&quot;RAD_PAR_3&quot;,&#xA;measurements.&quot;RAD_PAR_4&quot;,&#xA;measurements.&quot;RAD_UV&quot;,&#xA;measurements.&quot;RAIN_AMOUNT_1&quot;,&#xA;measurements.&quot;RAIN_AMOUNT_2&quot;,&#xA;measurements.&quot;RELH_1&quot;,&#xA;measurements.&quot;RELH_2&quot;,&#xA;measurements.&quot;RRATE&quot;,&#xA;measurements.&quot;SW_1&quot;,&#xA;measurements.&quot;SW_2&quot;,&#xA;measurements.&quot;TEMP&quot;,&#xA;measurements.&quot;VIS&quot;,&#xA;measurements.&quot;WDIR_1&quot;,&#xA;measurements.&quot;WDIR_2&quot;,&#xA;measurements.&quot;WSPD_1&quot;,&#xA;measurements.&quot;WSPD_2&quot;,&#xA;measurements.&quot;WX&quot;,&#xA;measurements.geom FROM (measurements JOIN visualisation_wms ON ((visualisation_wms.file_id = measurements.file_id))) ORDER BY measurements.&quot;TIME&quot;;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-8&quot;>&#xA;        &lt;sql>&#xA;CREATE VIEW soop_asf_mt_trajectory_map AS&#xA;&#xA;SELECT a.file_id, &#xA;a.url, &#xA;a.time_start, &#xA;a.time_end, &#xA;a.colour,&#xA;a.geom, &#xA;b.platform_code, &#xA;b.voyage_number as cruise_id,&#xA;b.vessel_name FROM (visualisation_wms a JOIN deployments b ON ((a.file_id = b.file_id)))&#xA;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
+    <elementParameter field="TEXT" name="LABEL" value="liquidBade_createTables"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="736" posY="320">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_3"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="harvestSOOP_ASF_MT"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_JUh2QD0KEeO87owOoGi4rg"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="soop_tmv"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tRunJob_3"/>
+  </node>
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="224" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_4"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
@@ -73,61 +115,14 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_4"/>
   </node>
-  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="512" posY="320">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
-    <elementParameter field="TEXT" name="HOST" value="context.metadataDb_Server"/>
-    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="PORT" value="context.metadataDb_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.metadataDb_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.metadataDb_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.metadataDb_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.metadataDb_Password"/>
-    <elementParameter field="FILE" name="FILENAME" value="&quot;/media/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/changelog.xml&quot;"/>
-    <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;       &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-1&quot;>&#xA;       &lt;sql>&#xA;        CREATE TABLE deployments&#xA;(&#xA;deploy_id bigserial,&#xA;  file_id integer NOT NULL,&#xA;  author_email character varying,&#xA;  author character varying,&#xA;  principal_investigator character varying,&#xA;  project character varying,&#xA;  platform_code character varying,&#xA;  voyage_number character varying,&#xA;  vessel_name character varying,&#xA;  title character varying,&#xA;  time_coverage_start character varying,&#xA;  time_coverage_end character varying,&#xA;  geospatial_lat_min character varying,&#xA;  geospatial_lat_max character varying,&#xA;  geospatial_lon_min character varying,&#xA;  geospatial_lon_max character varying,&#xA;  source character varying,&#xA;  CONSTRAINT deployments_pkey PRIMARY KEY (deploy_id ),&#xA;CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;);&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;   &#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-2&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE measurements&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp without time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;AIRT_1&quot; real,&#xA;  &quot;AIRT_2&quot; real,&#xA;  &quot;ATMP&quot; real,&#xA;  &quot;LW_1&quot; real,&#xA;  &quot;LW_2&quot; real,&#xA;  &quot;PL_CMP&quot; real,&#xA;  &quot;PL_CRS&quot; real,&#xA;  &quot;PL_HD&quot; real,&#xA;  &quot;PL_SPD&quot; real,&#xA;  &quot;PL_WDIR_1&quot; real,&#xA;  &quot;PL_WDIR_2&quot; real,&#xA;  &quot;PL_WSPD_1&quot; real,&#xA;  &quot;PL_WSPD_2&quot; real,&#xA;  &quot;RAD_PAR_1&quot; real,&#xA;  &quot;RAD_PAR_2&quot; real,&#xA;  &quot;RAD_PAR_3&quot; real,&#xA;  &quot;RAD_PAR_4&quot; real,&#xA;  &quot;RAD_UV&quot; real,&#xA;  &quot;RAIN_AMOUNT_1&quot; real,&#xA;  &quot;RAIN_AMOUNT_2&quot; real,&#xA;  &quot;RELH_1&quot; real,&#xA;  &quot;RELH_2&quot; real,&#xA;  &quot;RRATE&quot; real,&#xA;  &quot;SW_1&quot; real,&#xA;  &quot;SW_2&quot; real,&#xA;  &quot;TEMP&quot; real,&#xA;  &quot;VIS&quot; real,&#xA;  &quot;WDIR_1&quot; real,&#xA;  &quot;WDIR_2&quot; real,&#xA;  &quot;WSPD_1&quot; real,&#xA;  &quot;WSPD_2&quot; real,&#xA;  &quot;WX&quot; real,&#xA;  geom geometry,&#xA;  CONSTRAINT measurements_pkey PRIMARY KEY (measurement ),&#xA;CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;);&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-3&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE visualisation_wms&#xA;(&#xA; file_id integer,&#xA;  url character varying(512) NOT NULL,&#xA;  time_start timestamp(6) without time zone,&#xA;  time_end timestamp(6) without time zone,&#xA;  voyage_number character varying(35),&#xA;  platform_code character varying(255),&#xA;  vessel_name character varying(255),&#xA;  colour character varying(50),&#xA;  geom geometry,&#xA;        CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;);&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-4&quot;>&#xA;        &lt;sql>&#xA;CREATE INDEX measurements_idx&#xA;  ON measurements&#xA;  USING btree&#xA;  (file_id , &quot;TIME&quot; );&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-5&quot;>&#xA;        &lt;sql>&#xA;ALTER TABLE visualisation_wms&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX visualisation_wms_gist_idx ON visualisation_wms USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA;&#xA;        &lt;sql>&#xA;ALTER TABLE measurements&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX measurements_gist_idx ON measurements USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-6&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE vessel_names&#xA;(&#xA;  vessel_name character varying(50) NOT NULL,&#xA;  platform_code character varying(50),&#xA;  colour character varying(50),&#xA;  CONSTRAINT vessel_names_pkey PRIMARY KEY (vessel_name),&#xA;  CONSTRAINT unique_vessel_name UNIQUE (vessel_name)&#xA;);&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-7&quot;>&#xA;        &lt;sql>&#xA;CREATE VIEW soopasf_mt_trajectory_data AS&#xA;SELECT measurements.file_id, &#xA;measurements.measurement, &#xA;measurements.&quot;TIME&quot; ,&#xA;measurements.&quot;LATITUDE&quot;,&#xA;measurements.&quot;LONGITUDE&quot;,&#xA;measurements.&quot;AIRT_1&quot;,&#xA;measurements.&quot;AIRT_2&quot;,&#xA;measurements.&quot;ATMP&quot;,&#xA;measurements.&quot;LW_1&quot;,&#xA;measurements.&quot;LW_2&quot;,&#xA;measurements.&quot;PL_CMP&quot;,&#xA;measurements.&quot;PL_CRS&quot;,&#xA;measurements.&quot;PL_HD&quot;,&#xA;measurements.&quot;PL_SPD&quot;,&#xA;measurements.&quot;PL_WDIR_1&quot;,&#xA;measurements.&quot;PL_WDIR_2&quot;,&#xA;measurements.&quot;PL_WSPD_1&quot;,&#xA;measurements.&quot;PL_WSPD_2&quot;,&#xA;measurements.&quot;RAD_PAR_1&quot;,&#xA;measurements.&quot;RAD_PAR_2&quot;,&#xA;measurements.&quot;RAD_PAR_3&quot;,&#xA;measurements.&quot;RAD_PAR_4&quot;,&#xA;measurements.&quot;RAD_UV&quot;,&#xA;measurements.&quot;RAIN_AMOUNT_1&quot;,&#xA;measurements.&quot;RAIN_AMOUNT_2&quot;,&#xA;measurements.&quot;RELH_1&quot;,&#xA;measurements.&quot;RELH_2&quot;,&#xA;measurements.&quot;RRATE&quot;,&#xA;measurements.&quot;SW_1&quot;,&#xA;measurements.&quot;SW_2&quot;,&#xA;measurements.&quot;TEMP&quot;,&#xA;measurements.&quot;VIS&quot;,&#xA;measurements.&quot;WDIR_1&quot;,&#xA;measurements.&quot;WDIR_2&quot;,&#xA;measurements.&quot;WSPD_1&quot;,&#xA;measurements.&quot;WSPD_2&quot;,&#xA;measurements.&quot;WX&quot;,&#xA;measurements.geom FROM (measurements JOIN visualisation_wms ON ((visualisation_wms.file_id = measurements.file_id))) ORDER BY measurements.&quot;TIME&quot;;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-8&quot;>&#xA;        &lt;sql>&#xA;CREATE VIEW soopasf_mt_trajectory_map AS&#xA;&#xA;SELECT a.file_id, &#xA;a.url, &#xA;a.time_start, &#xA;a.time_end, &#xA;a.colour,&#xA;a.geom, &#xA;b.platform_code, &#xA;b.voyage_number as cruise_id,&#xA;b.vessel_name FROM (visualisation_wms a JOIN deployments b ON ((a.file_id = b.file_id)))&#xA;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
-    <elementParameter field="TEXT" name="LABEL" value="liquidBade_createTables"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-  </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="736" posY="320">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_3"/>
-    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
-    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
-    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="harvestSOOP_ASF_MT"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_JUh2QD0KEeO87owOoGi4rg"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
-    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
-    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
-    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
-    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
-    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
-    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tRunJob_3"/>
-  </node>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tRunJob_4" offsetLabelX="0" offsetLabelY="0" source="tRunJob_4" target="iPostgresqlDbUpdate_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
-  </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="tRunJob_3">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk2"/>
   </connection>
-  <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_4"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tRunJob_4" offsetLabelX="0" offsetLabelY="0" source="tRunJob_4" target="iPostgresqlDbUpdate_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
+  </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
@@ -135,6 +130,11 @@
   </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_3"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_4"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
