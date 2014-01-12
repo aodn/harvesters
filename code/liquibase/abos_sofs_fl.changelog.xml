@@ -3,7 +3,7 @@
 
     <changeSet author="talend" id="create_file_metadata_table-1">
       <sql>
-	CREATE TABLE abos_sofs_fl.file_metadata
+	CREATE TABLE file_metadata
 	(
 	  file_id bigint NOT NULL,
 	  deployment_number varchar(3) NOT NULL,
@@ -12,22 +12,17 @@
 	  time_coverage_end timestamp with time zone,
 	  date_created  timestamp with time zone,
 	  CONSTRAINT file_metadata_indexed_file_fk FOREIGN KEY (file_id)
-	      REFERENCES abos_sofs_fl.indexed_file (id) MATCH SIMPLE
+	      REFERENCES indexed_file (id) MATCH SIMPLE
 	      ON UPDATE CASCADE ON DELETE CASCADE,
 	  CONSTRAINT file_metadata_file_id_uc UNIQUE (file_id)
-	)
-	WITH (
-	  OIDS=FALSE
 	);
-	ALTER TABLE abos_sofs_fl.file_metadata
-	  OWNER TO abos_sofs_fl;
       </sql>
     </changeSet>
 	  
 
     <changeSet author="talend" id="create_timeseries_table-1">
       <sql>
-	CREATE TABLE abos_sofs_fl.timeseries
+	CREATE TABLE timeseries
 	(
 	  deployment_number varchar(3) NOT NULL,
 	  mean_latitude double precision,
@@ -36,12 +31,7 @@
 	  time_deployment_start timestamp with time zone,
 	  time_deployment_end timestamp with time zone,
 	  CONSTRAINT timeseries_pk PRIMARY KEY (deployment_number)
-	)
-	WITH (
-	  OIDS=FALSE
 	);
-	ALTER TABLE abos_sofs_fl.timeseries
-	  OWNER TO abos_sofs_fl;
       </sql>
     </changeSet>
 
@@ -58,7 +48,7 @@
 
     <changeSet author="talend" id="create_measurement_table-1">
       <sql>
-	CREATE TABLE abos_sofs_fl.measurement
+	CREATE TABLE measurement
 	(
 	  deployment_number varchar(3) NOT NULL,
 	  delivery_mode varchar(3) NOT NULL,
@@ -109,15 +99,10 @@
 	  "RELH2_0M" real,
 	  CONSTRAINT measurement_pk PRIMARY KEY (file_id , index ),
 	  CONSTRAINT measurement_file_metadata_fk FOREIGN KEY (file_id)
-	      REFERENCES abos_sofs_fl.file_metadata (file_id) MATCH SIMPLE
+	      REFERENCES file_metadata (file_id) MATCH SIMPLE
 	      ON UPDATE CASCADE ON DELETE CASCADE
-	)
-	WITH (
-	  OIDS=FALSE
 	);
-	ALTER TABLE abos_sofs_fl.measurement
-	  OWNER TO abos_sofs_fl;
-	COMMENT ON COLUMN abos_sofs_fl.measurement.index IS 'index of measurement in netCDF file';
+	COMMENT ON COLUMN measurement.index IS 'index of measurement in netCDF file';
       </sql>
     </changeSet>
 
