@@ -30,17 +30,15 @@
 	  geom geometry(Geometry,4326),
 	  time_deployment_start timestamp with time zone,
 	  time_deployment_end timestamp with time zone,
-	  CONSTRAINT timeseries_pk PRIMARY KEY (deployment_number)
+	  CONSTRAINT timeseries_pk PRIMARY KEY (deployment_number),
+	  CONSTRAINT timeseries_geom_check CHECK (st_isvalid(geom))
 	);
       </sql>
     </changeSet>
 
 
-    <changeSet author="talend" id="update_geometry_column-1">
+    <changeSet author="talend" id="create_geometry_index-1">
       <sql>
-	ALTER TABLE timeseries
-	  ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)
-	  USING ST_SetSRID(geom,4326);
 	CREATE INDEX timeseries_gist_idx ON timeseries USING GIST (geom); 
       </sql>
     </changeSet>
