@@ -9,7 +9,9 @@
     <contextParameter comment="" name="DestinationDb_Server" prompt="DestinationDb_Server?" promptNeeded="false" repositoryContextId="_2QHFYHmqEeOnMNAUOu1ENQ" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_uuyScHyeEeOBc4eP00PLRQ" type="id_String" value="/tmp/aatams_biologging_penguin"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_uuyScHyeEeOBc4eP00PLRQ" type="id_String" value="null"/>
+    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_2gcaoHzPEeO8pJt-3ARPWA" type="id_String" value="null"/>
     <contextParameter comment="" name="fileDir" prompt="fileDir?" promptNeeded="false" repositoryContextId="_2gcaoHzPEeO8pJt-3ARPWA" type="id_String" value="/Users/xavierhoenner/Work/AATAMS_Biologging/penguin_data"/>
+    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_2gcaoHzPEeO8pJt-3ARPWA" type="id_String" value=".*csv"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -62,12 +64,12 @@
     <elementParameter field="CHECK" name="INCLUDSUBDIR" value="false"/>
     <elementParameter field="CLOSED_LIST" name="CASE_SENSITIVE" value="YES"/>
     <elementParameter field="CHECK" name="ERROR" value="false"/>
-    <elementParameter field="CHECK" name="GLOBEXPRESSIONS" value="true"/>
+    <elementParameter field="CHECK" name="GLOBEXPRESSIONS" value="false"/>
     <elementParameter field="TABLE" name="FILES">
-      <elementValue elementRef="FILEMASK" value="&quot;*.csv&quot;"/>
+      <elementValue elementRef="FILEMASK" value="context.include"/>
     </elementParameter>
-    <elementParameter field="CHECK" name="IFEXCLUDE" value="false"/>
-    <elementParameter field="TEXT" name="EXCLUDEFILEMASK" value="&quot;*.txt&quot;"/>
+    <elementParameter field="CHECK" name="IFEXCLUDE" value="true"/>
+    <elementParameter field="TEXT" name="EXCLUDEFILEMASK" value="context.exclude"/>
     <elementParameter field="CHECK" name="FORMAT_FILEPATH_TO_SLASH" value="false"/>
     <elementParameter field="RADIO" name="ORDER_BY_NOTHING" value="true"/>
     <elementParameter field="RADIO" name="ORDER_BY_FILENAME" value="false"/>
