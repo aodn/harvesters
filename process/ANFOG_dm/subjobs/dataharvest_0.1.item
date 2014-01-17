@@ -192,7 +192,7 @@
       <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="deployment">
-        <mapperTableEntries name="file_id" expression="((Long)globalMap.get(&quot;iNewResources_5_FILE_ID&quot;))      " type="id_Integer"/>
+        <mapperTableEntries name="file_id" expression="((Long)globalMap.get(&quot;iNewResources_5_FILE_ID&quot;)).intValue()       " type="id_Integer"/>
         <mapperTableEntries name="title" expression="row1.title " type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_start" expression="row1.time_coverage_start " type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_end" expression="row1.time_coverage_end " type="id_String" nullable="true"/>
@@ -649,7 +649,7 @@
         <mapperTableEntries name="VBSC_quality_control" expression="variables.VBSC_quality_control==null?null:variables.VBSC_quality_control.toString()   " type="id_String" nullable="true"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="measurement">
-        <mapperTableEntries name="file_id" expression="((Long)globalMap.get(&quot;iNewResources_5_FILE_ID&quot;))" type="id_Integer"/>
+        <mapperTableEntries name="file_id" expression="((Long)globalMap.get(&quot;iNewResources_5_FILE_ID&quot;)).intValue() " type="id_Integer"/>
         <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1950-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,variables.TIME,true)    " type="id_Date" nullable="true"/>
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(variables.LONGITUDE,variables.LATITUDE,&quot;EPSG:4326&quot;) " type="id_Geometry" nullable="true"/>
         <mapperTableEntries name="LATITUDE" expression="variables.LATITUDE " type="id_Double" nullable="true"/>
@@ -1691,21 +1691,21 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
   </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iNewResources_5" offsetLabelX="0" offsetLabelY="0" outputId="1" source="iNewResources_5" target="iNetCDFInput_1">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iNewResources_5" offsetLabelX="0" offsetLabelY="0" outputId="1" source="iNewResources_5" target="iNetCDFGlobalAttributes_1">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate3"/>
   </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iNewResources_5" offsetLabelX="0" offsetLabelY="0" outputId="2" source="iNewResources_5" target="iNetCDFGlobalAttributes_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iNewResources_5" offsetLabelX="0" offsetLabelY="0" source="iNewResources_5" target="iDeletedResources_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
+  </connection>
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iNewResources_5" offsetLabelX="0" offsetLabelY="0" outputId="2" source="iNewResources_5" target="iNetCDFInput_1">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2"/>
-  </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iNewResources_5" offsetLabelX="0" offsetLabelY="0" source="iNewResources_5" target="iDeletedResources_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="iNetCDFGlobalAttributes_1" offsetLabelX="0" offsetLabelY="0" source="iNetCDFGlobalAttributes_1" target="tMap_2">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
