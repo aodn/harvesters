@@ -200,7 +200,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_a AS(SELECT file_id,  value AS platform_code FROM attribute WHERE name = 'platform_code'),&#xA;table_c AS(SELECT file_id, value AS voyage_number FROM attribute WHERE name = 'voyage_number'),&#xA;table_d AS(SELECT vessel_name, platform_code,  colour FROM vessel_names),&#xA;&#xA;data AS (SELECT file_id, &#xA;min(\&quot;TIME\&quot;)  AT TIME ZONE 'UTC' AS time_start, &#xA;max(\&quot;TIME\&quot;) AT TIME ZONE 'UTC' AS time_end,&#xA;ST_SimplifyPreserveTopology(make_trajectory(geom),0.005) AS geom&#xA;FROM  measurements&#xA;WHERE \&quot;LATITUDE\&quot; != 0 AND \&quot;LONGITUDE\&quot; != 0 AND ((\&quot;LONGITUDE\&quot; > -180 AND \&quot;LONGITUDE\&quot; &lt; 180)  or (\&quot;LATITUDE\&quot; &lt;90  or \&quot;LATITUDE\&quot; > -90))&#xA;GROUP BY file_id)&#xA;&#xA;SELECT DISTINCT data.file_id,&#xA;url,&#xA;time_start,&#xA;time_end,&#xA;voyage_number,&#xA;table_d.platform_code,&#xA;table_d.vessel_name,&#xA;table_d.colour,&#xA;geom&#xA;FROM data&#xA;&#xA;LEFT JOIN table_a ON data.file_id = table_a.file_id&#xA;LEFT JOIN table_c ON data.file_id = table_c.file_id&#xA;LEFT JOIN table_d ON  table_a.platform_code = table_d.platform_code&#xA;&#xA;LEFT JOIN indexed_file ON data.file_id = indexed_file.id&#xA;&#xA;ORDER BY file_id;&#xA;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_a AS(SELECT file_id,  value AS platform_code FROM attribute WHERE name = 'platform_code'),&#xA;table_c AS(SELECT file_id, value AS voyage_number FROM attribute WHERE name = 'voyage_number'),&#xA;table_d AS(SELECT vessel_name, platform_code,  colour FROM vessel_names),&#xA;&#xA;data AS (SELECT file_id, &#xA;min(\&quot;TIME\&quot;)  AT TIME ZONE 'UTC' AS time_start, &#xA;max(\&quot;TIME\&quot;) AT TIME ZONE 'UTC' AS time_end,&#xA;st_makevalid(ST_SimplifyPreserveTopology(make_trajectory(geom),0.005)) AS geom&#xA;FROM  measurements&#xA;WHERE \&quot;LATITUDE\&quot; != 0 AND \&quot;LONGITUDE\&quot; != 0 AND ((\&quot;LONGITUDE\&quot; > -180 AND \&quot;LONGITUDE\&quot; &lt; 180)  or (\&quot;LATITUDE\&quot; &lt;90  or \&quot;LATITUDE\&quot; > -90))&#xA;GROUP BY file_id)&#xA;&#xA;SELECT DISTINCT data.file_id,&#xA;url,&#xA;time_start,&#xA;time_end,&#xA;voyage_number,&#xA;table_d.platform_code,&#xA;table_d.vessel_name,&#xA;table_d.colour,&#xA;geom&#xA;FROM data&#xA;&#xA;LEFT JOIN table_a ON data.file_id = table_a.file_id&#xA;LEFT JOIN table_c ON data.file_id = table_c.file_id&#xA;LEFT JOIN table_d ON  table_a.platform_code = table_d.platform_code&#xA;&#xA;LEFT JOIN indexed_file ON data.file_id = indexed_file.id&#xA;&#xA;ORDER BY file_id;&#xA;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -480,7 +480,7 @@
       <column comment="" key="false" name="data_comment" nullable="true" pattern="" sourceType="" type="id_String"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="copyOfout1">
         <mapperTableEntries name="deploy_id" expression="Numeric.sequence(&quot;s1&quot;,1,1) " type="id_Integer"/>
@@ -881,7 +881,7 @@
       <column comment="" defaultValue="" key="false" name="WSPD10M" nullable="true" originalDbColumnName="wspd10m" pattern="" sourceType="" type="id_Double"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(variables.LONGITUDE,variables.LATITUDE,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
         <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1950-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,variables.TIME,true) " type="id_Date"/>
