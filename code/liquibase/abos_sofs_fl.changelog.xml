@@ -105,12 +105,15 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="create_rt_map_view-2">
+    <changeSet author="talend" id="create_rt_map_view-3">
       <sql>
+	DROP VIEW IF EXISTS abos_sofs_surfaceflux_rt_map;
 	CREATE VIEW abos_sofs_surfaceflux_rt_map AS
-	  SELECT DISTINCT timeseries.*
-	  FROM timeseries JOIN file_metadata USING (deployment_number)
-	  WHERE delivery_mode = 'RT';
+	  SELECT m.*, i.url, i.size, t.geom
+	    FROM timeseries t JOIN file_metadata m USING (deployment_number)
+	                      JOIN indexed_file i ON m.file_id = i.id
+	    WHERE delivery_mode = 'RT'
+	    ORDER BY time_coverage_start;
       </sql>
     </changeSet>
 
@@ -128,12 +131,15 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="create_dm_map_view-2">
+    <changeSet author="talend" id="create_dm_map_view-3">
       <sql>
+	DROP VIEW IF EXISTS abos_sofs_surfaceflux_dm_map;
 	CREATE VIEW abos_sofs_surfaceflux_dm_map AS
-	  SELECT DISTINCT timeseries.*
-	  FROM timeseries JOIN file_metadata USING (deployment_number)
-	  WHERE delivery_mode = 'DM';
+	  SELECT m.*, i.url, i.size, t.geom
+	    FROM timeseries t JOIN file_metadata m USING (deployment_number)
+	                      JOIN indexed_file i ON m.file_id = i.id
+	    WHERE delivery_mode = 'DM'
+	    ORDER BY time_coverage_start;
       </sql>
     </changeSet>
 
