@@ -39,12 +39,7 @@
 	      ON UPDATE CASCADE ON DELETE CASCADE,
 	  CONSTRAINT timeseries_deployment_instrument_depth_uc UNIQUE (deployment_code, instrument, instrument_nominal_depth),
 	  CONSTRAINT timeseries_deployment_serial_number_uc UNIQUE (deployment_code, instrument_serial_number)
-	)
-	WITH (
-	  OIDS=FALSE
 	);
-	ALTER TABLE timeseries
-	  OWNER TO anmn_ts;
       </sql>
     </changeSet>
 
@@ -80,12 +75,7 @@
 	  CONSTRAINT measurement_ts_fk FOREIGN KEY (ts_id)
 	      REFERENCES timeseries (id) MATCH SIMPLE
 	      ON UPDATE CASCADE ON DELETE CASCADE
-	)
-	WITH (
-	  OIDS=FALSE
 	);
-	ALTER TABLE measurement
-	  OWNER TO anmn_ts;
 	COMMENT ON COLUMN measurement.index IS 'index of measurement in netCDF file';
       </sql>
     </changeSet>
@@ -93,9 +83,6 @@
 
     <changeSet author="talend" id="update_geometry_column-1">
       <sql>
-	ALTER TABLE timeseries
-	  ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)
-	  USING ST_SetSRID(geom,4326);
 	CREATE INDEX timeseries_gist_idx ON timeseries USING GIST (geom); 
       </sql>
     </changeSet>
@@ -126,10 +113,6 @@
 	    t.sea_water_pressure_b,
 	    t.sea_water_pressure_due_to_sea_water_b
 	    FROM timeseries t JOIN indexed_file f ON t.file_id = f.id;
-
-	ALTER TABLE anmn_ts_timeseries_map
-	  OWNER TO anmn_ts;
-	GRANT ALL ON TABLE anmn_ts_timeseries_map TO anmn_ts;
       </sql>
     </changeSet>
 
@@ -170,10 +153,6 @@
 	    t.sea_water_pressure_b,
 	    t.sea_water_pressure_due_to_sea_water_b
 	    FROM  timeseries t  JOIN  measurement m  ON  t.id = m.ts_id;
-
-	ALTER TABLE anmn_ts_timeseries_data
-	  OWNER TO anmn_ts;
-	GRANT ALL ON TABLE anmn_ts_timeseries_data TO anmn_ts;
       </sql>
     </changeSet>
 
