@@ -3,7 +3,7 @@
 
     <changeSet author="talend" id="create_timeseries_table-1">
       <sql>
-	CREATE TABLE anmn_ts.timeseries
+	CREATE TABLE timeseries
 	(
 	  id bigserial NOT NULL,
 	  file_id bigint NOT NULL,
@@ -35,7 +35,7 @@
 	  sea_water_pressure_due_to_sea_water_b boolean,
 	  CONSTRAINT timeseries_pk PRIMARY KEY (id ),
 	  CONSTRAINT timeseries_file_fk FOREIGN KEY (file_id)
-	      REFERENCES anmn_ts.indexed_file (id) MATCH SIMPLE
+	      REFERENCES indexed_file (id) MATCH SIMPLE
 	      ON UPDATE CASCADE ON DELETE CASCADE,
 	  CONSTRAINT timeseries_deployment_instrument_depth_uc UNIQUE (deployment_code, instrument, instrument_nominal_depth),
 	  CONSTRAINT timeseries_deployment_serial_number_uc UNIQUE (deployment_code, instrument_serial_number)
@@ -43,7 +43,7 @@
 	WITH (
 	  OIDS=FALSE
 	);
-	ALTER TABLE anmn_ts.timeseries
+	ALTER TABLE timeseries
 	  OWNER TO anmn_ts;
       </sql>
     </changeSet>
@@ -58,7 +58,7 @@
 
     <changeSet author="talend" id="create_measurement_table-1">
       <sql>
-	CREATE TABLE anmn_ts.measurement
+	CREATE TABLE measurement
 	(
 	  ts_id bigint NOT NULL,
 	  index bigint NOT NULL,
@@ -78,15 +78,15 @@
 	  "PRES_REL_quality_control" character(1),
 	  CONSTRAINT measurement_fk PRIMARY KEY (ts_id , index ),
 	  CONSTRAINT measurement_ts_fk FOREIGN KEY (ts_id)
-	      REFERENCES anmn_ts.timeseries (id) MATCH SIMPLE
+	      REFERENCES timeseries (id) MATCH SIMPLE
 	      ON UPDATE CASCADE ON DELETE CASCADE
 	)
 	WITH (
 	  OIDS=FALSE
 	);
-	ALTER TABLE anmn_ts.measurement
+	ALTER TABLE measurement
 	  OWNER TO anmn_ts;
-	COMMENT ON COLUMN anmn_ts.measurement.index IS 'index of measurement in netCDF file';
+	COMMENT ON COLUMN measurement.index IS 'index of measurement in netCDF file';
       </sql>
     </changeSet>
 
@@ -103,7 +103,7 @@
 
     <changeSet author="talend" id="create_map_view-1">
       <sql>
-	CREATE OR REPLACE VIEW anmn_ts.anmn_ts_timeseries_map AS 
+	CREATE OR REPLACE VIEW anmn_ts_timeseries_map AS 
 	  SELECT 
 	    t.id AS timeseries_id,
 	    f.url AS file_url,
@@ -125,18 +125,18 @@
 	    t.sea_water_salinity_b,
 	    t.sea_water_pressure_b,
 	    t.sea_water_pressure_due_to_sea_water_b
-	    FROM anmn_ts.timeseries t JOIN anmn_ts.indexed_file f ON t.file_id = f.id;
+	    FROM timeseries t JOIN indexed_file f ON t.file_id = f.id;
 
-	ALTER TABLE anmn_ts.anmn_ts_timeseries_map
+	ALTER TABLE anmn_ts_timeseries_map
 	  OWNER TO anmn_ts;
-	GRANT ALL ON TABLE anmn_ts.anmn_ts_timeseries_map TO anmn_ts;
+	GRANT ALL ON TABLE anmn_ts_timeseries_map TO anmn_ts;
       </sql>
     </changeSet>
 
 
     <changeSet author="talend" id="create_data_view-1">
       <sql>
-	CREATE OR REPLACE VIEW anmn_ts.anmn_ts_timeseries_data AS 
+	CREATE OR REPLACE VIEW anmn_ts_timeseries_data AS 
 	  SELECT 
 	    m.ts_id AS timeseries_id,
 	    m.index,
@@ -169,11 +169,11 @@
 	    t.sea_water_salinity_b,
 	    t.sea_water_pressure_b,
 	    t.sea_water_pressure_due_to_sea_water_b
-	    FROM  anmn_ts.timeseries t  JOIN  anmn_ts.measurement m  ON  t.id = m.ts_id;
+	    FROM  timeseries t  JOIN  measurement m  ON  t.id = m.ts_id;
 
-	ALTER TABLE anmn_ts.anmn_ts_timeseries_data
+	ALTER TABLE anmn_ts_timeseries_data
 	  OWNER TO anmn_ts;
-	GRANT ALL ON TABLE anmn_ts.anmn_ts_timeseries_data TO anmn_ts;
+	GRANT ALL ON TABLE anmn_ts_timeseries_data TO anmn_ts;
       </sql>
     </changeSet>
 
