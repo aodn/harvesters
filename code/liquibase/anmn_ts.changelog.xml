@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
-    <changeSet author="talend" id="create_timeseries_table-1">
+    <changeSet author="talend" id="create_timeseries_table-2">
       <sql>
 	CREATE TABLE timeseries
 	(
@@ -51,7 +51,7 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="create_measurement_table-1">
+    <changeSet author="talend" id="create_measurement_table-2">
       <sql>
 	CREATE TABLE measurement
 	(
@@ -81,16 +81,17 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="update_geometry_column-1">
+    <changeSet author="talend" id="create_geometry_index-1">
       <sql>
 	CREATE INDEX timeseries_gist_idx ON timeseries USING GIST (geom); 
       </sql>
     </changeSet>
 
 
-    <changeSet author="talend" id="create_map_view-1">
+    <changeSet author="talend" id="create_map_view-2">
       <sql>
-	CREATE OR REPLACE VIEW anmn_ts_timeseries_map AS 
+	DROP VIEW IF EXISTS anmn_ts_timeseries_map;
+	CREATE VIEW anmn_ts_timeseries_map AS 
 	  SELECT 
 	    t.id AS timeseries_id,
 	    f.url AS file_url,
@@ -117,9 +118,10 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="create_data_view-1">
+    <changeSet author="talend" id="create_data_view-2">
       <sql>
-	CREATE OR REPLACE VIEW anmn_ts_timeseries_data AS 
+	DROP VIEW IF EXISTS anmn_ts_timeseries_data;
+	CREATE VIEW anmn_ts_timeseries_data AS 
 	  SELECT 
 	    m.ts_id AS timeseries_id,
 	    m.index,
