@@ -49,6 +49,13 @@
     </changeSet>
 
 
+    <changeSet author="talend" id="add_geometry_check-1">
+      <sql>
+	ALTER TABLE timeseries ADD CHECK (st_isvalid(geom));
+      </sql>
+    </changeSet>
+
+
     <changeSet author="talend" id="create_measurement_table-1">
       <sql>
 	CREATE TABLE anmn_ts.measurement
