@@ -17,10 +17,10 @@
 	  date_created timestamp with time zone,
 	  sea_surface_temperature_b boolean,
 	  sea_surface_salinity_b boolean,
+	  CONSTRAINT timeseries_pk PRIMARY KEY (file_id),
 	  CONSTRAINT timeseries_file_fk FOREIGN KEY (file_id)
 	      REFERENCES indexed_file (id) MATCH SIMPLE
 	      ON UPDATE CASCADE ON DELETE CASCADE,
-	  CONSTRAINT timeseries_file_id_uc UNIQUE (file_id),
 	  CONSTRAINT timeseries_geom_check CHECK (st_isvalid(geom))
 	);
       </sql>
@@ -49,8 +49,8 @@
 	  "XCO2_AIR_standard_deviation" real,
 	  "SSTI" real,
 	  "SSS" real,
-	  CONSTRAINT measurement_fk PRIMARY KEY (file_id , index),
-	  CONSTRAINT measurement_ts_fk FOREIGN KEY (file_id)
+	  CONSTRAINT measurement_pk PRIMARY KEY (file_id , index),
+	  CONSTRAINT measurement_timeseries_fk FOREIGN KEY (file_id)
 	      REFERENCES timeseries (file_id) MATCH SIMPLE
 	      ON UPDATE CASCADE ON DELETE CASCADE
 	);
