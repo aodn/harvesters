@@ -19,6 +19,28 @@
     <contextParameter comment="" name="LegacyDb_Port" prompt="LegacyDb_Port?" promptNeeded="false" repositoryContextId="_62D4sEgZEeOqlfgDIJ-afg" type="id_String" value="5432"/>
     <contextParameter comment="" name="LegacyDb_Schema" prompt="LegacyDb_Schema?" promptNeeded="false" repositoryContextId="_62D4sEgZEeOqlfgDIJ-afg" type="id_String" value="soop"/>
     <contextParameter comment="" name="LegacyDb_Server" prompt="LegacyDb_Server?" promptNeeded="false" repositoryContextId="_62D4sEgZEeOqlfgDIJ-afg" type="id_String" value="dbprod.emii.org.au"/>
+    <contextParameter comment="" name="DMSchema" prompt="DMSchema?" promptNeeded="false" repositoryContextId="_Gd2CQIfjEeOzcoN5e85w5w" type="id_String" value="soop_xbt_dm"/>
+  </context>
+  <context confirmationNeeded="false" name="Default">
+    <contextParameter comment="" name="DestinationDb_Database" prompt="DestinationDb_Database?" promptNeeded="false" repositoryContextId="_nr2toEgZEeOqlfgDIJ-afg" type="id_String" value="harvest?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+    <contextParameter comment="" name="DestinationDb_Login" prompt="DestinationDb_Login?" promptNeeded="false" repositoryContextId="_nr2toEgZEeOqlfgDIJ-afg" type="id_String" value="soop_xbt_nrt"/>
+    <contextParameter comment="" name="DestinationDb_Password" prompt="DestinationDb_Password?" promptNeeded="false" repositoryContextId="_nr2toEgZEeOqlfgDIJ-afg" type="id_Password" value="X4z4a4k/UYxUUFDHDX5x6Q=="/>
+    <contextParameter comment="" name="DestinationDb_Port" prompt="DestinationDb_Port?" promptNeeded="false" repositoryContextId="_nr2toEgZEeOqlfgDIJ-afg" type="id_String" value="5432"/>
+    <contextParameter comment="" name="DestinationDb_Schema" prompt="DestinationDb_Schema?" promptNeeded="false" repositoryContextId="_nr2toEgZEeOqlfgDIJ-afg" type="id_String" value="soop_xbt_nrt"/>
+    <contextParameter comment="" name="DestinationDb_Server" prompt="DestinationDb_Server?" promptNeeded="false" repositoryContextId="_nr2toEgZEeOqlfgDIJ-afg" type="id_String" value="10.11.12.13"/>
+    <contextParameter comment="" name="InventoryDb_Database" prompt="InventoryDb_Database?" promptNeeded="false" repositoryContextId="_fUX98EgcEeOqlfgDIJ-afg" type="id_String" value="inventory?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+    <contextParameter comment="" name="InventoryDb_Login" prompt="InventoryDb_Login?" promptNeeded="false" repositoryContextId="_fUX98EgcEeOqlfgDIJ-afg" type="id_String" value="faimms"/>
+    <contextParameter comment="" name="InventoryDb_Password" prompt="InventoryDb_Password?" promptNeeded="false" repositoryContextId="_fUX98EgcEeOqlfgDIJ-afg" type="id_Password" value="F1XB2ItM4BX096uhdGeE6g=="/>
+    <contextParameter comment="" name="InventoryDb_Port" prompt="InventoryDb_Port?" promptNeeded="false" repositoryContextId="_fUX98EgcEeOqlfgDIJ-afg" type="id_String" value="5432"/>
+    <contextParameter comment="" name="InventoryDb_Schema" prompt="InventoryDb_Schema?" promptNeeded="false" repositoryContextId="_fUX98EgcEeOqlfgDIJ-afg" type="id_String" value="report"/>
+    <contextParameter comment="" name="InventoryDb_Server" prompt="InventoryDb_Server?" promptNeeded="false" repositoryContextId="_fUX98EgcEeOqlfgDIJ-afg" type="id_String" value="db.emii.org.au"/>
+    <contextParameter comment="" name="LegacyDb_Database" prompt="LegacyDb_Database?" promptNeeded="false" repositoryContextId="_62D4sEgZEeOqlfgDIJ-afg" type="id_String" value="legacy?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+    <contextParameter comment="" name="LegacyDb_Login" prompt="LegacyDb_Login?" promptNeeded="false" repositoryContextId="_62D4sEgZEeOqlfgDIJ-afg" type="id_String" value="soop"/>
+    <contextParameter comment="" name="LegacyDb_Password" prompt="LegacyDb_Password?" promptNeeded="false" repositoryContextId="_62D4sEgZEeOqlfgDIJ-afg" type="id_Password" value="SYifQVm6P1YJ6STrAhk8sIv5LGcjs2ZY9PeroXRnhOo="/>
+    <contextParameter comment="" name="LegacyDb_Port" prompt="LegacyDb_Port?" promptNeeded="false" repositoryContextId="_62D4sEgZEeOqlfgDIJ-afg" type="id_String" value="5432"/>
+    <contextParameter comment="" name="LegacyDb_Schema" prompt="LegacyDb_Schema?" promptNeeded="false" repositoryContextId="_62D4sEgZEeOqlfgDIJ-afg" type="id_String" value="soop"/>
+    <contextParameter comment="" name="LegacyDb_Server" prompt="LegacyDb_Server?" promptNeeded="false" repositoryContextId="_62D4sEgZEeOqlfgDIJ-afg" type="id_String" value="dbprod.emii.org.au"/>
+    <contextParameter comment="" name="DMSchema" prompt="DMSchema?" promptNeeded="false" repositoryContextId="_Gd2CQIfjEeOzcoN5e85w5w" type="id_String" value="soop_xbt_dm"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms512M -Xmx2048M"/>
@@ -70,7 +92,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH table_a AS (SELECT uuid AS profile_id FROM xbt_realtime WHERE ST_X(geom) &lt; 140 AND ST_Y(geom) > (-30))&#xA;SELECT uuid AS profile_id,&#xA;line_name AS xbt_line,&#xA;xbt_realtime.callsign AS callsign,&#xA;vessel_name,&#xA;create_date::timestamp without time zone AS time,&#xA;measurements AS nb_measurements,&#xA;max_depth,&#xA;st_x(geom) AS lon,&#xA;st_y(geom) AS lat,&#xA;colour&#xA;FROM xbt_realtime&#xA;LEFT JOIN soop_xbt_realtime_manual ON soop_xbt_realtime_manual.callsign = xbt_realtime.callsign AND create_date > start_date AND create_date &lt; end_date&#xA;LEFT JOIN soop_xbt_dm.xbt_lines ON xbt_lines.\&quot;XBT_line\&quot; = soop_xbt_realtime_manual.line_name&#xA;INNER JOIN table_a ON table_a.profile_id != xbt_realtime.uuid&#xA;ORDER BY uuid;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH table_a AS (SELECT uuid AS profile_id FROM xbt_realtime WHERE ST_X(geom) &lt; 140 AND ST_Y(geom) > (-30))&#xA;SELECT uuid AS profile_id,&#xA;line_name AS xbt_line,&#xA;xbt_realtime.callsign AS callsign,&#xA;vessel_name,&#xA;create_date::timestamp without time zone AS time,&#xA;measurements AS nb_measurements,&#xA;max_depth,&#xA;st_x(geom) AS lon,&#xA;st_y(geom) AS lat,&#xA;colour&#xA;FROM xbt_realtime&#xA;LEFT JOIN soop_xbt_realtime_manual ON soop_xbt_realtime_manual.callsign = xbt_realtime.callsign AND create_date > start_date AND create_date &lt; end_date&#xA;LEFT JOIN &quot; + context.DMSchema + &quot;.xbt_lines ON xbt_lines.\&quot;XBT_line\&quot; = soop_xbt_realtime_manual.line_name&#xA;INNER JOIN table_a ON table_a.profile_id != xbt_realtime.uuid&#xA;ORDER BY uuid;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
