@@ -65,7 +65,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT animal_id.ref,&#xA;COUNT(DISTINCT(birdtrip)) AS no_trips,&#xA;COUNT(id) AS no_observations,&#xA;min(timestamp) AT TIME ZONE 'UTC' AS start_date, &#xA;max(timestamp) AT TIME ZONE 'UTC' AS end_date, &#xA;colour,&#xA;ST_SimplifyPreserveTopology(make_trajectory(geom),0.005) AS geom&#xA;FROM aatams_biologging_shearwater_data&#xA;LEFT JOIN animal_id ON animal_id.ref = aatams_biologging_shearwater_data.ref&#xA;GROUP BY animal_id.ref, colour&#xA;ORDER BY ref;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT animal_id.ref,&#xA;aatams_biologging_shearwater_data.file_id,&#xA;COUNT(DISTINCT(birdtrip)) AS no_trips,&#xA;COUNT(id) AS no_observations,&#xA;min(timestamp) AT TIME ZONE 'UTC' AS start_date, &#xA;max(timestamp) AT TIME ZONE 'UTC' AS end_date, &#xA;colour,&#xA;ST_SimplifyPreserveTopology(make_trajectory(geom),0.005) AS geom&#xA;FROM aatams_biologging_shearwater_data&#xA;LEFT JOIN animal_id ON animal_id.ref = aatams_biologging_shearwater_data.ref&#xA;GROUP BY animal_id.ref, colour, aatams_biologging_shearwater_data.file_id&#xA;ORDER BY ref;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -74,6 +74,8 @@
     <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
     <elementParameter field="TABLE" name="TRIM_COLUMN">
       <elementValue elementRef="SCHEMA_COLUMN" value="ref"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="no_trips"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -94,6 +96,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlInput_1">
       <column comment="" key="true" length="14" name="ref" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" defaultValue="" key="false" length="19" name="no_trips" nullable="true" pattern="" precision="0" sourceType="" type="id_Long"/>
       <column comment="" defaultValue="" key="false" length="19" name="no_observations" nullable="true" pattern="" precision="0" sourceType="" type="id_Long"/>
       <column comment="" key="false" length="35" name="start_date" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
@@ -130,6 +133,11 @@
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS">
       <elementValue elementRef="SCHEMA_COLUMN" value="ref"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -175,6 +183,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_1">
       <column comment="" key="true" length="14" name="ref" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" defaultValue="" key="false" length="19" name="no_trips" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" defaultValue="" key="false" length="19" name="no_observations" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="35" name="start_date" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
@@ -184,6 +193,7 @@
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="true" length="14" name="ref" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" defaultValue="" key="false" length="19" name="no_trips" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" defaultValue="" key="false" length="19" name="no_observations" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="35" name="start_date" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
@@ -222,6 +232,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="colour"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="file_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>

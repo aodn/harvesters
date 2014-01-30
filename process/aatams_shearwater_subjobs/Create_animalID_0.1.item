@@ -66,7 +66,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH table_a AS (SELECT DISTINCT ref FROM aatams_biologging_shearwater_data ORDER BY ref)&#xA;SELECT table_a.ref, &#xA;'#'::text || upper(lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour&#xA;FROM table_a&#xA;LEFT JOIN animal_id ON table_a.ref = animal_id.ref&#xA;WHERE table_a.ref NOT IN (SELECT ref FROM animal_id);&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH table_a AS (SELECT DISTINCT ref,file_id FROM aatams_biologging_shearwater_data ORDER BY ref)&#xA;SELECT table_a.ref,&#xA;table_a.file_id,&#xA;'#'::text || upper(lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour&#xA;FROM table_a&#xA;LEFT JOIN animal_id ON table_a.ref = animal_id.ref&#xA;WHERE table_a.ref NOT IN (SELECT ref FROM animal_id);&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -75,6 +75,8 @@
     <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
     <elementParameter field="TABLE" name="TRIM_COLUMN">
       <elementValue elementRef="SCHEMA_COLUMN" value="ref"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="colour"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -85,6 +87,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlInput_1">
       <column comment="" key="true" length="14" name="ref" nullable="true" pattern="" sourceType="" type="id_String" originalLength="14"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" sourceType="" type="id_String" originalLength="7"/>
     </metadata>
   </node>
@@ -120,6 +123,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="colour"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -136,10 +144,12 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_1">
       <column comment="" key="true" length="14" name="ref" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="14"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="7"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="true" length="14" name="ref" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="14"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="7"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
@@ -152,6 +162,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="colour"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="file_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
