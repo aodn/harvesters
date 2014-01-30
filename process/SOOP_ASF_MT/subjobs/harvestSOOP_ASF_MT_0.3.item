@@ -194,7 +194,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_a AS(SELECT file_id,  value AS platform_code FROM attribute WHERE name = 'platform_code'),&#xA;table_c AS(SELECT file_id, value AS voyage_number FROM attribute WHERE name = 'voyage_number'),&#xA;table_d AS(SELECT vessel_name, platform_code,  colour FROM vessel_names),&#xA;&#xA;data AS (SELECT file_id, &#xA;min(\&quot;TIME\&quot;)  AT TIME ZONE 'UTC' AS time_start, &#xA;max(\&quot;TIME\&quot;) AT TIME ZONE 'UTC' AS time_end,&#xA;st_makevalid(ST_SimplifyPreserveTopology(make_trajectory(geom),0.005)) AS geom&#xA;FROM  measurements&#xA;WHERE \&quot;LATITUDE\&quot; != 0 AND \&quot;LONGITUDE\&quot; != 0 AND ((\&quot;LONGITUDE\&quot; > -180 AND \&quot;LONGITUDE\&quot; &lt; 180)  or (\&quot;LATITUDE\&quot; &lt;90  or \&quot;LATITUDE\&quot; >-90))&#xA;GROUP BY file_id)&#xA;&#xA;SELECT DISTINCT data.file_id,&#xA;url,&#xA;time_start,&#xA;time_end,&#xA;voyage_number,&#xA;table_d.platform_code,&#xA;table_d.vessel_name,&#xA;table_d.colour,&#xA;geom&#xA;FROM data&#xA;&#xA;LEFT JOIN table_a ON data.file_id = table_a.file_id&#xA;LEFT JOIN table_c ON data.file_id = table_c.file_id&#xA;LEFT JOIN table_d ON  table_a.platform_code = table_d.platform_code&#xA;&#xA;LEFT JOIN indexed_file ON data.file_id = indexed_file.id&#xA;&#xA;ORDER BY file_id;&#xA;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_a AS(SELECT file_id,  value AS platform_code FROM attribute WHERE name = 'platform_code'),&#xA;table_c AS(SELECT file_id, value AS voyage_number FROM attribute WHERE name = 'voyage_number'),&#xA;table_d AS(SELECT vessel_name, platform_code,  colour FROM vessel_names),&#xA;&#xA;data AS (SELECT file_id, &#xA;min(\&quot;TIME\&quot;)  AT TIME ZONE 'UTC' AS time_start, &#xA;max(\&quot;TIME\&quot;) AT TIME ZONE 'UTC' AS time_end,&#xA;st_makevalid(ST_SimplifyPreserveTopology(make_trajectory(geom ORDER BY \&quot;TIME\&quot;),0.005)) AS geom&#xA;FROM  measurements&#xA;WHERE \&quot;LATITUDE\&quot; != 0 AND \&quot;LONGITUDE\&quot; != 0 AND ((\&quot;LONGITUDE\&quot; > -180 AND \&quot;LONGITUDE\&quot; &lt; 180)  or (\&quot;LATITUDE\&quot; &lt;90  or \&quot;LATITUDE\&quot; >-90))&#xA;GROUP BY file_id)&#xA;&#xA;SELECT DISTINCT data.file_id,&#xA;url,&#xA;size,&#xA;time_start,&#xA;time_end,&#xA;voyage_number,&#xA;table_d.platform_code,&#xA;table_d.vessel_name,&#xA;table_d.colour,&#xA;geom&#xA;FROM data&#xA;&#xA;LEFT JOIN table_a ON data.file_id = table_a.file_id&#xA;LEFT JOIN table_c ON data.file_id = table_c.file_id&#xA;LEFT JOIN table_d ON  table_a.platform_code = table_d.platform_code&#xA;&#xA;LEFT JOIN indexed_file ON data.file_id = indexed_file.id&#xA;&#xA;ORDER BY file_id;&#xA;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -205,6 +205,8 @@
       <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="url"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="size"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="time_start"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -228,9 +230,10 @@
     <metadata connector="FLOW" name="tPostgresqlInput_4">
       <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
       <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="17" name="size" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double" originalLength="17"/>
       <column comment="" key="false" length="35" name="time_start" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
       <column comment="" key="false" length="35" name="time_end" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
-      <column comment="" key="false" length="30" name="voyage_number" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="30"/>
+      <column comment="" key="false" length="30" name="voyage_number" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="255" name="platform_code" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="50" name="vessel_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
@@ -268,6 +271,11 @@
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="url"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="size"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -320,6 +328,7 @@
     <metadata connector="FLOW" name="iPostgresqlOutput_4">
       <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="17" name="size" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double" originalLength="17"/>
       <column comment="" key="false" length="35" name="time_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="35" name="time_end" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="30" name="voyage_number" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -331,6 +340,7 @@
     <metadata connector="REJECT" name="REJECT">
       <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="17" name="size" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double" originalLength="17"/>
       <column comment="" key="false" length="35" name="time_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="35" name="time_end" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="30" name="voyage_number" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -1486,6 +1496,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="geom"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="size"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
