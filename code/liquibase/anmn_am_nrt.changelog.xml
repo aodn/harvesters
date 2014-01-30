@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet author="talend" id="create_timeseries_table-1">
+      <sql>
+	CREATE TABLE timeseries
+	(
+	  file_id bigint NOT NULL,
+	  site_code text NOT NULL,
+	  platform_code text NOT NULL,
+	  deployment_code text NOT NULL,
+          mean_latitude double precision,
+          mean_longitude double precision,
+	  geom geometry(Geometry,4326),
+	  time_coverage_start timestamp with time zone,
+	  time_coverage_end timestamp with time zone,
+	  date_created timestamp with time zone,
+	  sea_surface_temperature_b boolean,
+	  sea_surface_salinity_b boolean,
+	  CONSTRAINT timeseries_pk PRIMARY KEY (file_id),
+	  CONSTRAINT timeseries_file_fk FOREIGN KEY (file_id)
+	      REFERENCES indexed_file (id) MATCH SIMPLE
+	      ON UPDATE CASCADE ON DELETE CASCADE,
+	  CONSTRAINT timeseries_geom_check CHECK (st_isvalid(geom))
+	);
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_geometry_index-1">
+      <sql>
+	CREATE INDEX timeseries_gist_idx ON timeseries USING GIST (geom); 
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_measurement_table-1">
+      <sql>
+	CREATE TABLE measurement
+	(
+	  file_id bigint NOT NULL,
+	  index bigint NOT NULL,
+	  "TIME" timestamp with time zone NOT NULL,
+	  "LATITUDE" double precision,
+	  "LONGITUDE" double precision,
+	  "XCO2_WATER" real,
+	  "XCO2_WATER_standard_deviation" real,
+	  "XCO2_AIR" real,
+	  "XCO2_AIR_standard_deviation" real,
+	  "SSTI" real,
+	  "SSS" real,
+	  CONSTRAINT measurement_pk PRIMARY KEY (file_id , index),
+	  CONSTRAINT measurement_timeseries_fk FOREIGN KEY (file_id)
+	      REFERENCES timeseries (file_id) MATCH SIMPLE
+	      ON UPDATE CASCADE ON DELETE CASCADE
+	);
+	COMMENT ON COLUMN measurement.index IS 'index of measurement in netCDF file';
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_map_view-1">
+      <sql>
+	DROP VIEW IF EXISTS anmn_am_nrt_map;
+	CREATE VIEW anmn_am_nrt_map AS 
+	  SELECT 
+	    t.*, f.url, f.size
+	    FROM timeseries t JOIN indexed_file f ON t.file_id = f.id
+	    ORDER BY deployment_code;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_data_view-1">
+      <sql>
+	DROP VIEW IF EXISTS anmn_am_nrt_data;
+	CREATE VIEW anmn_am_nrt_data AS 
+	  SELECT 
+	    t.site_code,
+	    t.deployment_code,
+	    m.*,
+	    t.sea_surface_temperature_b,
+	    t.sea_surface_salinity_b,
+	    t.geom
+	    FROM  timeseries t  JOIN  measurement m  USING (file_id)
+	    ORDER BY file_id, m.index;
+      </sql>
+    </changeSet>
+
+
+</databaseChangeLog>
