@@ -18,11 +18,11 @@
     <contextParameter comment="" name="ReportingDatabase_Port" prompt="ReportingDatabase_Port?" promptNeeded="false" repositoryContextId="_EGdVkAhqEeOJn8rDLYzdcg" type="id_String" value="5432"/>
     <contextParameter comment="" name="ReportingDatabase_Schema" prompt="ReportingDatabase_Schema?" promptNeeded="false" repositoryContextId="_EGdVkAhqEeOJn8rDLYzdcg" type="id_String" value="aatams_sattag_nrt"/>
     <contextParameter comment="" name="ReportingDatabase_Server" prompt="ReportingDatabase_Server?" promptNeeded="false" repositoryContextId="_EGdVkAhqEeOJn8rDLYzdcg" type="id_String" value="10.11.12.13"/>
-    <contextParameter comment="" name="archived_folder" prompt="archived_folder?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/Users/xavierhoenner/Work/AATAMS_Biologging/sattags/NRT/zipped"/>
+    <contextParameter comment="" name="archived_folder" prompt="archived_folder?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/usr/local/talend/aatams_sattag_nrt/zipped"/>
     <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="null"/>
     <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=".*.dat.gz"/>
-    <contextParameter comment="" name="metadata_file" prompt="metadata_file?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/Users/xavierhoenner/Work/AATAMS_Biologging/sattags/Metadata/sattag_metadata.csv"/>
-    <contextParameter comment="" name="unarchived_folder" prompt="unarchived_folder?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/Users/xavierhoenner/Work/AATAMS_Biologging/sattags/NRT/unzipped"/>
+    <contextParameter comment="" name="metadata_file" prompt="metadata_file?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/usr/local/talend/aatams_sattag_nrt/aatams_sattag_metadata.csv"/>
+    <contextParameter comment="" name="unarchived_folder" prompt="unarchived_folder?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/usr/local/talend/aatams_sattag_nrt/unzipped"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -69,7 +69,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM profiles CASCADE&#xA;WHERE id IN (SELECT id&#xA;FROM (SELECT id, row_number() OVER (PARTITION BY device_wmo_ref,timestamp ORDER BY id) AS rnum FROM profiles) t&#xA;WHERE t.rnum > 1);&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM profiles CASCADE&#xA;WHERE profile_id IN (SELECT profile_id&#xA;FROM (SELECT profile_id, row_number() OVER (PARTITION BY device_wmo_ref,timestamp ORDER BY profile_id) AS rnum FROM profiles) t&#xA;WHERE t.rnum > 1);&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -106,7 +106,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM measurements&#xA;WHERE id IN (SELECT id&#xA;FROM (SELECT id, row_number() OVER (PARTITION BY device_wmo_ref,timestamp, pressure ORDER BY id) AS rnum FROM measurements) t&#xA;WHERE t.rnum > 1);&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM measurements&#xA;WHERE measurement_id IN (SELECT measurement_id&#xA;FROM (SELECT measurement_id, row_number() OVER (PARTITION BY device_wmo_ref,timestamp, pressure ORDER BY measurement_id) AS rnum FROM measurements) t&#xA;WHERE t.rnum > 1);&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
