@@ -13,9 +13,9 @@
     <contextParameter comment="" name="ReportingDatabase_Port" prompt="ReportingDatabase_Port?" promptNeeded="false" repositoryContextId="_EGdVkAhqEeOJn8rDLYzdcg" type="id_String" value="5432"/>
     <contextParameter comment="" name="ReportingDatabase_Schema" prompt="ReportingDatabase_Schema?" promptNeeded="false" repositoryContextId="_EGdVkAhqEeOJn8rDLYzdcg" type="id_String" value="aatams_sattag_nrt"/>
     <contextParameter comment="" name="ReportingDatabase_Server" prompt="ReportingDatabase_Server?" promptNeeded="false" repositoryContextId="_EGdVkAhqEeOJn8rDLYzdcg" type="id_String" value="10.11.12.13"/>
-    <contextParameter comment="" name="archived_folder" prompt="archived_folder?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/Users/xavierhoenner/Work/AATAMS_Biologging/sattags/NRT/zipped"/>
-    <contextParameter comment="" name="metadata_file" prompt="metadata_file?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/Users/xavierhoenner/Work/AATAMS_Biologging/sattags/Metadata/sattag_metadata.csv"/>
-    <contextParameter comment="" name="unarchived_folder" prompt="unarchived_folder?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/Users/xavierhoenner/Work/AATAMS_Biologging/sattags/NRT/unzipped"/>
+    <contextParameter comment="" name="archived_folder" prompt="archived_folder?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/usr/local/talend/aatams_sattag_nrt/zipped"/>
+    <contextParameter comment="" name="metadata_file" prompt="metadata_file?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/usr/local/talend/aatams_sattag_nrt/aatams_sattag_metadata.csv"/>
+    <contextParameter comment="" name="unarchived_folder" prompt="unarchived_folder?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/usr/local/talend/aatams_sattag_nrt/unzipped"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -178,6 +178,20 @@
       <elementValue elementRef="LOOKUP_COLUMN" value="colour"/>
       <elementValue elementRef="OUTPUT_COLUMN" value="device_id"/>
       <elementValue elementRef="LOOKUP_COLUMN" value="device_id"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="sattag_program"/>
+      <elementValue elementRef="LOOKUP_COLUMN" value="sattag_program"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="tag_type"/>
+      <elementValue elementRef="LOOKUP_COLUMN" value="tag_type"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="common_name"/>
+      <elementValue elementRef="LOOKUP_COLUMN" value="common_name"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="release_site"/>
+      <elementValue elementRef="LOOKUP_COLUMN" value="release_site"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="state_country"/>
+      <elementValue elementRef="LOOKUP_COLUMN" value="state_country"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="age_class"/>
+      <elementValue elementRef="LOOKUP_COLUMN" value="age_class"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="sex"/>
+      <elementValue elementRef="LOOKUP_COLUMN" value="sex"/>
     </elementParameter>
     <elementParameter field="TABLE" name="JOIN_KEY">
       <elementValue elementRef="INPUT_COLUMN" value="device_wmo_ref"/>
@@ -196,8 +210,15 @@
       <column comment="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
       <column comment="" key="false" length="8" name="lat" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="8" name="lon" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
-      <column comment="" key="false" length="16" name="device_id" nullable="true" pattern="" sourceType="" type="id_String" originalLength="16"/>
-      <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="6"/>
+      <column comment="" key="false" length="6" name="sattag_program" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="16" name="device_id" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="40" name="tag_type" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="40" name="common_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="30" name="release_site" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="29" name="state_country" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="8" name="age_class" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="6" name="sex" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" label="metadata" name="REJECT">
       <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
@@ -207,8 +228,15 @@
       <column comment="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
       <column comment="" key="false" length="8" name="lat" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="8" name="lon" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
-      <column comment="" key="false" length="16" name="device_id" nullable="true" pattern="" sourceType="" type="id_String" originalLength="16"/>
-      <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="6"/>
+      <column comment="" key="false" length="6" name="sattag_program" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="16" name="device_id" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="40" name="tag_type" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="40" name="common_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="30" name="release_site" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="29" name="state_country" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="8" name="age_class" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="6" name="sex" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
   <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="256" posY="0">
@@ -229,7 +257,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT * FROM animal_id&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT sattag_program,&#xA;sattag_metadata.device_id,&#xA;sattag_metadata.device_wmo_ref,&#xA;tag_type,&#xA;common_name,&#xA;release_site,&#xA;state_country,&#xA;age_class,&#xA;sex,&#xA;colour&#xA;FROM sattag_metadata&#xA;LEFT JOIN animal_id ON animal_id.device_id = sattag_metadata.device_id&#xA;WHERE sattag_metadata.device_wmo_ref != ''&#xA;ORDER BY device_id;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -237,9 +265,23 @@
     <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
     <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
     <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="sattag_program"/>
+      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="device_id"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="device_wmo_ref"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="tag_type"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="common_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="release_site"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="state_country"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="age_class"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="sex"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="colour"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -249,8 +291,15 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlInput_1">
+      <column comment="" key="false" length="6" name="sattag_program" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="16" name="device_id" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="40" name="tag_type" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="40" name="common_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="30" name="release_site" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="29" name="state_country" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="8" name="age_class" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="6" name="sex" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
@@ -277,8 +326,15 @@
       <column comment="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
       <column comment="" key="false" length="8" name="lat" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="8" name="lon" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
-      <column comment="" key="false" length="16" name="device_id" nullable="true" pattern="" sourceType="" type="id_String" originalLength="16"/>
-      <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="6"/>
+      <column comment="" key="false" length="6" name="sattag_program" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="16" name="device_id" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="40" name="tag_type" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="40" name="common_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="30" name="release_site" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="29" name="state_country" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="8" name="age_class" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="6" name="sex" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
     </metadata>
     <metadata connector="FILTER" label="metadata" name="FILTER">
       <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
@@ -288,8 +344,15 @@
       <column comment="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
       <column comment="" key="false" length="8" name="lat" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="8" name="lon" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
-      <column comment="" key="false" length="16" name="device_id" nullable="true" pattern="" sourceType="" type="id_String" originalLength="16"/>
-      <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="6"/>
+      <column comment="" key="false" length="6" name="sattag_program" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="16" name="device_id" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="40" name="tag_type" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="40" name="common_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="30" name="release_site" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="29" name="state_country" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="8" name="age_class" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="6" name="sex" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" label="metadata" name="REJECT">
       <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
@@ -299,8 +362,15 @@
       <column comment="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
       <column comment="" key="false" length="8" name="lat" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="8" name="lon" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
-      <column comment="" key="false" length="16" name="device_id" nullable="true" pattern="" sourceType="" type="id_String" originalLength="16"/>
-      <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="6"/>
+      <column comment="" key="false" length="6" name="sattag_program" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="16" name="device_id" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="40" name="tag_type" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="40" name="common_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="30" name="release_site" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="29" name="state_country" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="8" name="age_class" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="6" name="sex" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
@@ -319,8 +389,15 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="myout">
       <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Long"/>
+      <column comment="" key="false" length="6" name="sattag_program" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="16" name="device_id" nullable="true" pattern="" sourceType="" type="id_String" originalLength="16"/>
       <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="40" name="tag_type" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="40" name="common_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="30" name="release_site" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="29" name="state_country" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="8" name="age_class" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="6" name="sex" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="true" length="19" name="timestamp" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
       <column comment="" defaultValue="" key="true" length="3" name="pressure" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
@@ -333,8 +410,15 @@
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="myout">
         <mapperTableEntries name="file_id" expression="((Long)globalMap.get(&quot;iNewResources_1_FILE_ID&quot;))" type="id_Long" nullable="true"/>
+        <mapperTableEntries name="sattag_program" expression="row4.sattag_program " type="id_String" nullable="true"/>
         <mapperTableEntries name="device_id" expression="row4.device_id " type="id_String" nullable="true"/>
         <mapperTableEntries name="device_wmo_ref" expression="row4.device_wmo_ref" type="id_String" nullable="true"/>
+        <mapperTableEntries name="tag_type" expression="row4.tag_type " type="id_String" nullable="true"/>
+        <mapperTableEntries name="common_name" expression="row4.common_name " type="id_String" nullable="true"/>
+        <mapperTableEntries name="release_site" expression="row4.release_site " type="id_String" nullable="true"/>
+        <mapperTableEntries name="state_country" expression="row4.state_country " type="id_String" nullable="true"/>
+        <mapperTableEntries name="age_class" expression="row4.age_class " type="id_String" nullable="true"/>
+        <mapperTableEntries name="sex" expression="row4.sex " type="id_String" nullable="true"/>
         <mapperTableEntries name="timestamp" expression="row4.timestamp" type="id_Date" nullable="true"/>
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row4.lon, row4.lat,&quot;EPSG:4326&quot;) " type="id_Geometry" nullable="true"/>
         <mapperTableEntries name="pressure" expression="row4.pressure" type="id_Integer" nullable="true"/>
@@ -350,7 +434,14 @@
         <mapperTableEntries name="salinity" type="id_Double" nullable="true"/>
         <mapperTableEntries name="lat" type="id_Double" nullable="true"/>
         <mapperTableEntries name="lon" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="device_id" type="id_String" nullable="true"/>
+        <mapperTableEntries name="sattag_program" type="id_String" nullable="true"/>
+        <mapperTableEntries name="device_id" type="id_String"/>
+        <mapperTableEntries name="tag_type" type="id_String" nullable="true"/>
+        <mapperTableEntries name="common_name" type="id_String" nullable="true"/>
+        <mapperTableEntries name="release_site" type="id_String" nullable="true"/>
+        <mapperTableEntries name="state_country" type="id_String" nullable="true"/>
+        <mapperTableEntries name="age_class" type="id_String" nullable="true"/>
+        <mapperTableEntries name="sex" type="id_String" nullable="true"/>
         <mapperTableEntries name="colour" type="id_String" nullable="true"/>
       </inputTables>
     </nodeData>
@@ -385,12 +476,47 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="sattag_program"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="device_id"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="device_wmo_ref"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="tag_type"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="common_name"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="release_site"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="state_country"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="age_class"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="sex"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -435,26 +561,40 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_1">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Long"/>
-      <column comment="" key="false" length="16" name="device_id" nullable="true" pattern="" sourceType="" type="id_String" originalLength="16"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" length="6" name="sattag_program" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="16" name="device_id" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="16"/>
       <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="40" name="tag_type" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="40" name="common_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="30" name="release_site" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="29" name="state_country" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="8" name="age_class" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="6" name="sex" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="true" length="19" name="timestamp" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
+      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column comment="" defaultValue="" key="true" length="3" name="pressure" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" length="7" name="temperature" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="6"/>
+      <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="6"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Long"/>
-      <column comment="" key="false" length="16" name="device_id" nullable="true" pattern="" sourceType="" type="id_String" originalLength="16"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" length="6" name="sattag_program" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="16" name="device_id" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="16"/>
       <column comment="" key="true" length="8" name="device_wmo_ref" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="40" name="tag_type" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="40" name="common_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="30" name="release_site" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="29" name="state_country" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="8" name="age_class" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="6" name="sex" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="true" length="19" name="timestamp" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
+      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column comment="" defaultValue="" key="true" length="3" name="pressure" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" length="7" name="temperature" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="6"/>
+      <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="6"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -480,7 +620,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="-3" offsetLabelY="6" posX="192" posY="416">
+  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="-3" offsetLabelY="6" posX="-32" posY="288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_3"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -501,7 +641,7 @@
     <elementParameter field="TEXT" name="PASS" value="context.DestinationDatabase_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/home/meteo/imos/aatams/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;     &#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1378188905035-3&quot;>&#xA;        &lt;createTable tableName=&quot;scratch&quot;>&#xA;&#x9;    &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;device_id&quot; type=&quot;VARCHAR(16)&quot;/>&#xA;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;VARCHAR(8)&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/>&#xA;&#x9;    &lt;column name=&quot;geom&quot; type=&quot;GEOMETRY&quot;/>&#xA;            &lt;column name=&quot;pressure&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;temperature&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;salinity&quot; type=&quot;FLOAT8(17)&quot;/>             &#xA;            &lt;column name=&quot;colour&quot; type=&quot;VARCHAR(7)&quot;/>     &#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1378188905035-2&quot;>&#xA;        &lt;createTable tableName=&quot;profiles&quot;>&#xA;&#x9;    &lt;column autoIncrement=&quot;true&quot; name=&quot;id&quot; type=&quot;bigserial&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;profiles_pkey&quot;/>&#xA;            &lt;/column>&#x9;    &#xA;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;VARCHAR(8)&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/>&#xA;&#x9;    &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;           &lt;column name=&quot;geom&quot; type=&quot;GEOMETRY&quot;/>             &#xA;            &lt;column name=&quot;colour&quot; type=&quot;VARCHAR(7)&quot;/>           &#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1378188905035-1&quot;>&#xA;        &lt;createTable tableName=&quot;measurements&quot;>&#xA;&#x9;    &lt;column autoIncrement=&quot;true&quot; name=&quot;id&quot; type=&quot;bigserial&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;measurements_pkey&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;profile_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;device_id&quot; type=&quot;VARCHAR(16)&quot;/>&#xA;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;VARCHAR(8)&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/>&#xA;            &lt;column name=&quot;lon&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;lat&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;pressure&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;temperature&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;salinity&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;geom&quot; type=&quot;GEOMETRY&quot;/>&#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;   &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1378188905035-4&quot;>&#xA;        &lt;addForeignKeyConstraint baseColumnNames=&quot;profile_id&quot; baseTableName=&quot;measurements&quot; constraintName=&quot;measurements_profile_id_fkey&quot; deferrable=&quot;false&quot; initiallyDeferred=&quot;false&quot; onDelete=&quot;CASCADE&quot; onUpdate=&quot;NO ACTION&quot; referencedColumnNames=&quot;id&quot; referencedTableName=&quot;profiles&quot; referencesUniqueColumn=&quot;false&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;   &lt;changeSet author=&quot;talend&quot; id=&quot;1378252876655-2&quot;>&#xA;        &lt;addUniqueConstraint columnNames=&quot;file_id,device_wmo_ref, timestamp&quot; constraintName=&quot;profiles_unique_constraint&quot; deferrable=&quot;false&quot; disabled=&quot;false&quot; initiallyDeferred=&quot;false&quot; tableName=&quot;profiles&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1378252876655-3&quot;>&#xA;        &lt;addUniqueConstraint columnNames=&quot;profile_id,pressure,temperature,salinity&quot; constraintName=&quot;measurements_unique_constraint&quot; deferrable=&quot;false&quot; disabled=&quot;false&quot; initiallyDeferred=&quot;false&quot; tableName=&quot;measurements&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1378188905035-5&quot;>&#xA;        &lt;addForeignKeyConstraint baseColumnNames=&quot;file_id&quot; baseTableName=&quot;profiles&quot; constraintName=&quot;profiles_file_id_fkey&quot; deferrable=&quot;false&quot; initiallyDeferred=&quot;false&quot; onDelete=&quot;NO ACTION&quot; onUpdate=&quot;NO ACTION&quot; referencedColumnNames=&quot;id&quot; referencedTableName=&quot;indexed_file&quot; referencesUniqueColumn=&quot;false&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1379999793245-15&quot;>&#xA;        &lt;createIndex indexName=&quot;measurements_idx&quot; tableName=&quot;measurements&quot; unique=&quot;false&quot;>&#xA;            &lt;column name=&quot;profile_id&quot;/>&#xA;            &lt;column name=&quot;device_id&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot;/>&#xA;            &lt;column name=&quot;lon&quot;/>&#xA;            &lt;column name=&quot;lat&quot;/>&#xA;            &lt;column name=&quot;pressure&quot;/>&#xA;            &lt;column name=&quot;temperature&quot;/>&#xA;            &lt;column name=&quot;salinity&quot;/>&#xA;        &lt;/createIndex>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1379999793245-16&quot;>&#xA;        &lt;createIndex indexName=&quot;device_timestamp_idx&quot; tableName=&quot;profiles&quot; unique=&quot;false&quot;>&#xA;            &lt;column name=&quot;device_wmo_ref&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot;/>&#xA;        &lt;/createIndex>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id= &quot;1379999793245-17&quot;>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('scratch','geom',4326);&#xA;&#x9;&lt;/sql>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('profiles','geom',4326);&#xA;&#x9;&lt;/sql>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('measurements','geom',4326);&#xA;&#x9;&lt;/sql>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;ALTER TABLE scratch ADD CHECK (ST_IsValid(geom))&#xA;&#x9;&lt;/sql>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;ALTER TABLE profiles ADD CHECK (ST_IsValid(geom))&#xA;&#x9;&lt;/sql>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;ALTER TABLE measurements ADD CHECK (ST_IsValid(geom))&#xA;&#x9;&lt;/sql>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;CREATE INDEX measurements_gist_idx ON aatams_sattag_nrt.measurements USING GIST (geom);&#xA;&#x9;&lt;/sql>&#xA;&lt;/changeSet>&#xA;&lt;/databaseChangeLog>&#xA;"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;     &#xA; &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_scratch_table&quot;>&#xA;        &lt;createTable tableName=&quot;scratch&quot;>&#xA;&#x9;    &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;sattag_program&quot; type=&quot;VARCHAR(6)&quot;/>&#xA;            &lt;column name=&quot;device_id&quot; type=&quot;VARCHAR(16)&quot;/>&#xA;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;VARCHAR(8)&quot;/>&#xA;            &lt;column name=&quot;tag_type&quot; type=&quot;VARCHAR(40)&quot;/>&#xA;            &lt;column name=&quot;common_name&quot; type=&quot;VARCHAR(40)&quot;/>&#xA;            &lt;column name=&quot;release_site&quot; type=&quot;VARCHAR(30)&quot;/>&#xA;            &lt;column name=&quot;state_country&quot; type=&quot;VARCHAR(29)&quot;/>&#xA;            &lt;column name=&quot;age_class&quot; type=&quot;VARCHAR(8)&quot;/>&#xA;            &lt;column name=&quot;sex&quot; type=&quot;VARCHAR(6)&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/>&#xA;&#x9;    &lt;column name=&quot;geom&quot; type=&quot;GEOMETRY&quot;/>&#xA;            &lt;column name=&quot;pressure&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;temperature&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;salinity&quot; type=&quot;FLOAT8(17)&quot;/>             &#xA;            &lt;column name=&quot;colour&quot; type=&quot;VARCHAR(7)&quot;/>     &#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_profiles_table&quot;>&#xA;        &lt;createTable tableName=&quot;profiles&quot;>&#xA;&#x9;    &lt;column autoIncrement=&quot;true&quot; name=&quot;profile_id&quot; type=&quot;bigserial&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;profiles_pkey&quot;/>&#xA;            &lt;/column>&#x9;    &#xA;&#x9;    &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;sattag_program&quot; type=&quot;VARCHAR(6)&quot;/>&#xA;            &lt;column name=&quot;device_id&quot; type=&quot;VARCHAR(16)&quot;/>&#xA;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;VARCHAR(8)&quot;/>&#xA;            &lt;column name=&quot;tag_type&quot; type=&quot;VARCHAR(40)&quot;/>&#xA;            &lt;column name=&quot;common_name&quot; type=&quot;VARCHAR(40)&quot;/>&#xA;            &lt;column name=&quot;release_site&quot; type=&quot;VARCHAR(30)&quot;/>&#xA;            &lt;column name=&quot;state_country&quot; type=&quot;VARCHAR(29)&quot;/>&#xA;            &lt;column name=&quot;age_class&quot; type=&quot;VARCHAR(8)&quot;/>&#xA;            &lt;column name=&quot;sex&quot; type=&quot;VARCHAR(6)&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/>&#xA;            &lt;column name=&quot;min_pressure&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;max_pressure&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;nb_measurements&quot; type=&quot;int8&quot;/>&#xA;           &lt;column name=&quot;geom&quot; type=&quot;GEOMETRY&quot;/>             &#xA;            &lt;column name=&quot;colour&quot; type=&quot;VARCHAR(7)&quot;/>           &#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_measurements_table&quot;>&#xA;        &lt;createTable tableName=&quot;measurements&quot;>&#xA;&#x9;    &lt;column autoIncrement=&quot;true&quot; name=&quot;measurement_id&quot; type=&quot;bigserial&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;measurements_pkey&quot;/>&#xA;            &lt;/column>&#xA;&#x9;    &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;profile_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;sattag_program&quot; type=&quot;VARCHAR(6)&quot;/>&#xA;            &lt;column name=&quot;device_id&quot; type=&quot;VARCHAR(16)&quot;/>&#xA;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;VARCHAR(8)&quot;/>&#xA;            &lt;column name=&quot;tag_type&quot; type=&quot;VARCHAR(40)&quot;/>&#xA;            &lt;column name=&quot;common_name&quot; type=&quot;VARCHAR(40)&quot;/>&#xA;            &lt;column name=&quot;release_site&quot; type=&quot;VARCHAR(30)&quot;/>&#xA;            &lt;column name=&quot;state_country&quot; type=&quot;VARCHAR(29)&quot;/>&#xA;            &lt;column name=&quot;age_class&quot; type=&quot;VARCHAR(8)&quot;/>&#xA;            &lt;column name=&quot;sex&quot; type=&quot;VARCHAR(6)&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/>&#xA;            &lt;column name=&quot;lon&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;lat&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;pressure&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;temperature&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;salinity&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;geom&quot; type=&quot;GEOMETRY&quot;/>&#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;   &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_fkey_to_measurements_table&quot;>&#xA;        &lt;addForeignKeyConstraint baseColumnNames=&quot;profile_id&quot; baseTableName=&quot;measurements&quot; constraintName=&quot;measurements_profile_id_fkey&quot; deferrable=&quot;false&quot; initiallyDeferred=&quot;false&quot; onDelete=&quot;CASCADE&quot; onUpdate=&quot;NO ACTION&quot; referencedColumnNames=&quot;profile_id&quot; referencedTableName=&quot;profiles&quot; referencesUniqueColumn=&quot;false&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;   &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_unique_constraint_to_profiles_table&quot;>&#xA;        &lt;addUniqueConstraint columnNames=&quot;file_id,device_wmo_ref, timestamp&quot; constraintName=&quot;profiles_unique_constraint&quot; deferrable=&quot;false&quot; disabled=&quot;false&quot; initiallyDeferred=&quot;false&quot; tableName=&quot;profiles&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_unique_constraint_to_measurements_table&quot;>&#xA;        &lt;addUniqueConstraint columnNames=&quot;profile_id,pressure,temperature,salinity&quot; constraintName=&quot;measurements_unique_constraint&quot; deferrable=&quot;false&quot; disabled=&quot;false&quot; initiallyDeferred=&quot;false&quot; tableName=&quot;measurements&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_fkey_to_indexed_file_table&quot;>&#xA;        &lt;addForeignKeyConstraint baseColumnNames=&quot;file_id&quot; baseTableName=&quot;profiles&quot; constraintName=&quot;profiles_file_id_fkey&quot; deferrable=&quot;false&quot; initiallyDeferred=&quot;false&quot; onDelete=&quot;NO ACTION&quot; onUpdate=&quot;NO ACTION&quot; referencedColumnNames=&quot;id&quot; referencedTableName=&quot;indexed_file&quot; referencesUniqueColumn=&quot;false&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_indexes_to_measurements_table&quot;>&#xA;        &lt;createIndex indexName=&quot;measurements_idx&quot; tableName=&quot;measurements&quot; unique=&quot;false&quot;>&#xA;            &lt;column name=&quot;profile_id&quot;/>&#xA;            &lt;column name=&quot;device_id&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot;/>&#xA;            &lt;column name=&quot;pressure&quot;/>&#xA;        &lt;/createIndex>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_indexes_to_profiles_table&quot;>&#xA;        &lt;createIndex indexName=&quot;device_timestamp_idx&quot; tableName=&quot;profiles&quot; unique=&quot;false&quot;>&#xA;            &lt;column name=&quot;device_wmo_ref&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot;/>&#xA;        &lt;/createIndex>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;xhoenner&quot; id= &quot;specify_srid_to_tables&quot;>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('scratch','geom',4326);&#xA;&#x9;&lt;/sql>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('profiles','geom',4326);&#xA;&#x9;&lt;/sql>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('measurements','geom',4326);&#xA;&#x9;&lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;xhoenner&quot; id= &quot;add_st_isvalid_check_on_geom&quot;>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;ALTER TABLE scratch ADD CHECK (ST_IsValid(geom))&#xA;&#x9;&lt;/sql>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;ALTER TABLE profiles ADD CHECK (ST_IsValid(geom))&#xA;&#x9;&lt;/sql>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;ALTER TABLE measurements ADD CHECK (ST_IsValid(geom))&#xA;&#x9;&lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;xhoenner&quot; id= &quot;add_gist_index_to_geom&quot;>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;CREATE INDEX measurements_gist_idx ON measurements USING GIST (geom);&#xA;&#x9;&lt;/sql>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;CREATE INDEX profiles_gist_idx ON profiles USING GIST (geom);&#xA;&#x9;&lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog>"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -525,7 +665,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select distinct file_id, device_wmo_ref,timestamp,geom,colour from scratch order by file_id,device_wmo_ref,timestamp&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select DISTINCT file_id, &#xA;device_id, &#xA;device_wmo_ref,&#xA;timestamp,&#xA;min(pressure) AS min_pressure,&#xA;max(pressure) AS max_presure,&#xA;COUNT(temperature) AS nb_measurements,&#xA;geom,&#xA;colour,&#xA;sattag_program,&#xA;tag_type,&#xA;common_name,&#xA;release_site,&#xA;state_country,&#xA;age_class,&#xA;sex&#xA;FROM scratch&#xA;GROUP BY file_id,device_id,device_wmo_ref,timestamp,geom,colour,colour,sattag_program,tag_type,common_name,release_site,state_country,age_class,sex&#xA;ORDER BY file_id,device_id,timestamp;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -535,13 +675,35 @@
     <elementParameter field="TABLE" name="TRIM_COLUMN">
       <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="device_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="device_wmo_ref"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="timestamp"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="min_pressure"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="max_pressure"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="nb_measurements"/>
+      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="colour"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="sattag_program"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="tag_type"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="common_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="release_site"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="state_country"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="age_class"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="sex"/>
       <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -550,10 +712,21 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlInput_2">
       <column comment="" defaultValue="" key="true" name="file_id" nullable="false" pattern="" sourceType="" type="id_Long"/>
+      <column comment="" key="false" name="device_id" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="true" name="device_wmo_ref" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="true" name="timestamp" nullable="true" pattern="" sourceType="" type="id_Date"/>
+      <column comment="" key="false" name="min_pressure" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="max_pressure" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="nb_measurements" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
-      <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="" type="id_String" originalLength="7"/>
+      <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="sattag_program" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="tag_type" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="common_name" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="release_site" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="state_country" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="age_class" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="sex" nullable="true" pattern="" sourceType="" type="id_String"/>
     </metadata>
   </node>
   <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="-160">
@@ -586,12 +759,32 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="device_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="device_wmo_ref"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="timestamp"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="min_pressure"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="max_pressure"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="nb_measurements"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -606,6 +799,41 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="sattag_program"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="tag_type"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="common_name"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="release_site"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="state_country"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="age_class"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="sex"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -616,18 +844,40 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_2">
-      <column comment="" defaultValue="" key="true" name="file_id" nullable="false" pattern="" sourceType="" type="id_Long"/>
-      <column comment="" key="true" name="device_wmo_ref" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="true" name="timestamp" nullable="true" pattern="" sourceType="" type="id_Date"/>
+      <column comment="" defaultValue="" key="true" name="file_id" nullable="false" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="device_id" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="true" name="device_wmo_ref" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="true" name="timestamp" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="min_pressure" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="max_pressure" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="nb_measurements" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
-      <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="" type="id_String" originalLength="7"/>
+      <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="sattag_program" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="tag_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="common_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="release_site" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="state_country" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="age_class" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="sex" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" defaultValue="" key="true" name="file_id" nullable="false" pattern="" sourceType="" type="id_Long"/>
-      <column comment="" key="true" name="device_wmo_ref" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="true" name="timestamp" nullable="true" pattern="" sourceType="" type="id_Date"/>
+      <column comment="" defaultValue="" key="true" name="file_id" nullable="false" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="device_id" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="true" name="device_wmo_ref" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="true" name="timestamp" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="min_pressure" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="max_pressure" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="nb_measurements" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
-      <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="" type="id_String" originalLength="7"/>
+      <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="sattag_program" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="tag_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="common_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="release_site" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="state_country" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="age_class" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="sex" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -650,7 +900,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select profiles.id as profile_id, &#xA;scratch.device_id, &#xA;profiles.device_wmo_ref, &#xA;profiles.timestamp, &#xA;st_x(profiles.geom) AS lon,&#xA;st_y(profiles.geom) AS lat,&#xA;scratch.pressure AS pressure, &#xA;scratch.temperature, &#xA;scratch.salinity,&#xA;profiles.geom AS geom&#xA;  from &#xA;    aatams_sattag_nrt.profiles &#xA;  join aatams_sattag_nrt.scratch on  &#xA;    ( profiles.device_wmo_ref = scratch.device_wmo_ref &#xA;    and profiles.timestamp = scratch.timestamp&#xA;    and profiles.geom = scratch.geom )&#xA;    order by profile_id, pressure&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select profile_id, &#xA;profiles.file_id AS file_id,&#xA;scratch.device_id, &#xA;profiles.device_wmo_ref, &#xA;profiles.timestamp, &#xA;st_x(profiles.geom) AS lon,&#xA;st_y(profiles.geom) AS lat,&#xA;scratch.pressure AS pressure, &#xA;scratch.temperature, &#xA;scratch.salinity,&#xA;profiles.geom AS geom,&#xA;profiles.sattag_program,&#xA;profiles.tag_type,&#xA;profiles.common_name,&#xA;profiles.release_site,&#xA;profiles.state_country,&#xA;profiles.age_class,&#xA;profiles.sex&#xA;  from &#xA;   profiles &#xA;  join scratch on  &#xA;    ( profiles.device_wmo_ref = scratch.device_wmo_ref &#xA;    and profiles.timestamp = scratch.timestamp&#xA;    and profiles.geom = scratch.geom )&#xA;    order by profile_id, pressure&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -659,6 +909,8 @@
     <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
     <elementParameter field="TABLE" name="TRIM_COLUMN">
       <elementValue elementRef="SCHEMA_COLUMN" value="profile_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="device_id"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -678,6 +930,20 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="sattag_program"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="tag_type"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="common_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="release_site"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="state_country"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="age_class"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="sex"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -685,6 +951,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlInput_3">
       <column comment="" defaultValue="" key="true" name="profile_id" nullable="false" pattern="" sourceType="" type="id_Long"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" name="device_id" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="true" name="device_wmo_ref" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="true" name="timestamp" nullable="true" pattern="" sourceType="" type="id_Date"/>
@@ -694,6 +961,13 @@
       <column comment="" defaultValue="" key="false" name="temperature" nullable="true" pattern="" sourceType="" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="salinity" nullable="true" pattern="" sourceType="" type="id_Double"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
+      <column comment="" key="false" name="sattag_program" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="tag_type" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="common_name" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="release_site" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="state_country" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="age_class" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="sex" nullable="true" pattern="" sourceType="" type="id_String"/>
     </metadata>
   </node>
   <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="0">
@@ -726,6 +1000,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="device_id"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -771,6 +1050,41 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="sattag_program"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="tag_type"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="common_name"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="release_site"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="state_country"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="age_class"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="sex"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -781,28 +1095,44 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_3">
-      <column comment="" defaultValue="" key="true" name="profile_id" nullable="false" pattern="" sourceType="" type="id_Long"/>
-      <column comment="" key="false" name="device_id" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="true" name="device_wmo_ref" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="true" name="timestamp" nullable="true" pattern="" sourceType="" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" name="lon" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="lat" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="true" name="pressure" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" name="temperature" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="salinity" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="true" name="profile_id" nullable="false" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="device_id" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="true" name="device_wmo_ref" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="true" name="timestamp" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" name="lon" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="lat" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="true" name="pressure" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" name="temperature" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="salinity" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
+      <column comment="" key="false" name="sattag_program" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="tag_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="common_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="release_site" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="state_country" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="age_class" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="sex" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" defaultValue="" key="true" name="profile_id" nullable="false" pattern="" sourceType="" type="id_Long"/>
-      <column comment="" key="false" name="device_id" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="true" name="device_wmo_ref" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="true" name="timestamp" nullable="true" pattern="" sourceType="" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" name="lon" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="lat" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="true" name="pressure" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" name="temperature" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="salinity" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="true" name="profile_id" nullable="false" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="device_id" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="true" name="device_wmo_ref" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="true" name="timestamp" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" name="lon" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="lat" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="true" name="pressure" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" name="temperature" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="salinity" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
+      <column comment="" key="false" name="sattag_program" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="tag_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="common_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="release_site" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="state_country" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="age_class" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="sex" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -974,94 +1304,6 @@
       <column comment="" key="false" name="time" nullable="true" pattern="&quot;dd-MM-yyyy hh:mm&quot;" sourceType="" type="id_Date"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="288">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_3"/>
-    <elementParameter field="TEXT" name="HOST" value="context.DestinationDatabase_Server"/>
-    <elementParameter field="TEXT" name="PORT" value="context.DestinationDatabase_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDatabase_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDatabase_Schema"/>
-    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="USER" value="context.DestinationDatabase_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.DestinationDatabase_Password"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
-    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM measurements&#xA;WHERE id IN (SELECT id&#xA;FROM (SELECT id, row_number() OVER (PARTITION BY device_wmo_ref,timestamp, pressure ORDER BY id) AS rnum FROM measurements) t&#xA;WHERE t.rnum > 1);&quot;"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
-    <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
-    <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
-    <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
-    <elementParameter field="TABLE" name="SET_PREPAREDSTATEMENT_PARAMETERS"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
-    <elementParameter field="TEXT" name="LABEL" value="Delete_duplicate_measurements"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlRow_1"/>
-    <metadata connector="REJECT" name="REJECT">
-      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
-    </metadata>
-  </node>
-  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-32" posY="288">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_2"/>
-    <elementParameter field="CHECK" name="START" value="true"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_3"/>
-    <elementParameter field="TEXT" name="HOST" value="context.DestinationDatabase_Server"/>
-    <elementParameter field="TEXT" name="PORT" value="context.DestinationDatabase_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDatabase_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDatabase_Schema"/>
-    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="USER" value="context.DestinationDatabase_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.DestinationDatabase_Password"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
-    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM profiles CASCADE&#xA;WHERE id IN (SELECT id&#xA;FROM (SELECT id, row_number() OVER (PARTITION BY device_wmo_ref,timestamp ORDER BY id) AS rnum FROM profiles) t&#xA;WHERE t.rnum > 1);&quot;"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
-    <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
-    <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
-    <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
-    <elementParameter field="TABLE" name="SET_PREPAREDSTATEMENT_PARAMETERS"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
-    <elementParameter field="TEXT" name="LABEL" value="Delete_duplicate_profiles"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlRow_2"/>
-    <metadata connector="REJECT" name="REJECT">
-      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
-    </metadata>
-  </node>
-  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-32" posY="416">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_2"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_3"/>
-    <elementParameter field="CHECK" name="CLOSE" value="false"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlCommit_2"/>
-  </node>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIncludeSdiLibraries_1" offsetLabelX="0" offsetLabelY="0" source="iIncludeSdiLibraries_1" target="iPostgresqlDbUpdate_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
@@ -1230,6 +1472,27 @@
       <elementValue elementRef="TRACE_COLUMN" value="colour"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="sex"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="release_site"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="common_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="age_class"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="sattag_program"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="state_country"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="tag_type"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -1268,6 +1531,15 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="colour"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="max_pressure"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="min_pressure"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="nb_measurements"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -1315,6 +1587,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="geom"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="file_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -1395,14 +1670,6 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk8"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlRow_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_1" target="tPostgresqlCommit_2">
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk11"/>
-  </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlRow_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_2" target="tPostgresqlRow_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
-  </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIncludeSdiLibraries_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
@@ -1450,25 +1717,6 @@
   </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFixedFlowInput_1"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
-  <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Delete duplicate measurements"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
-  <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_2"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Delete duplicate profiles"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
-  <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_2"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
