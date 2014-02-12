@@ -7,8 +7,8 @@
     <contextParameter comment="" name="OriginDb_Login" prompt="OriginDb_Login?" promptNeeded="false" repositoryContextId="_y655oHjlEeOwXYnbNsOr_w" type="id_String" value="aatams_acoustic"/>
     <contextParameter comment="" name="OriginDb_Port" prompt="OriginDb_Port?" promptNeeded="false" repositoryContextId="_y655oHjlEeOwXYnbNsOr_w" type="id_String" value="5432"/>
     <contextParameter comment="" name="OriginDb_Server" prompt="OriginDb_Server?" promptNeeded="false" repositoryContextId="_y655oHjlEeOwXYnbNsOr_w" type="id_String" value="dbprod.emii.org.au"/>
-    <contextParameter comment="" name="DestinationDb_Database" prompt="DestinationDb_Database?" promptNeeded="false" repositoryContextId="_xzWbsHjlEeOwXYnbNsOr_w" type="id_String" value="data_warehouse?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
-    <contextParameter comment="" name="DestinationDb_Port" prompt="DestinationDb_Port?" promptNeeded="false" repositoryContextId="_xzWbsHjlEeOwXYnbNsOr_w" type="id_String" value="15432"/>
+    <contextParameter comment="" name="DestinationDb_Database" prompt="DestinationDb_Database?" promptNeeded="false" repositoryContextId="_xzWbsHjlEeOwXYnbNsOr_w" type="id_String" value="maplayers"/>
+    <contextParameter comment="" name="DestinationDb_Port" prompt="DestinationDb_Port?" promptNeeded="false" repositoryContextId="_xzWbsHjlEeOwXYnbNsOr_w" type="id_String" value="5432"/>
     <contextParameter comment="" name="DestinationDb_Schema" prompt="DestinationDb_Schema?" promptNeeded="false" repositoryContextId="_xzWbsHjlEeOwXYnbNsOr_w" type="id_String" value="aatams_acoustic"/>
     <contextParameter comment="" name="DestinationDb_Login" prompt="DestinationDb_Login?" promptNeeded="false" repositoryContextId="_xzWbsHjlEeOwXYnbNsOr_w" type="id_String" value="aatams_acoustic"/>
     <contextParameter comment="" name="DestinationDb_Password" prompt="DestinationDb_Password?" promptNeeded="false" repositoryContextId="_xzWbsHjlEeOwXYnbNsOr_w" type="id_Password" value="yhqxplJv1O8i2nMZoK2LVA=="/>
@@ -2160,11 +2160,11 @@
       <column comment="" defaultValue="" key="false" length="1" name="provisional" nullable="false" pattern="" precision="0" sourceType="" type="id_Boolean"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="736" posY="288">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlOutput_2"/>
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="736" posY="288">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_13"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_yCZkUHjlEeOwXYnbNsOr_w"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_3"/>
     <elementParameter field="TEXT" name="HOST" value="context.DestinationDb_Server"/>
     <elementParameter field="TEXT" name="PORT" value="context.DestinationDb_Port"/>
@@ -2266,7 +2266,7 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlOutput_2">
+    <metadata connector="FLOW" name="iPostgresqlOutput_13">
       <column comment="" defaultValue="" key="true" length="19" name="id" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
       <column comment="" defaultValue="" key="false" length="19" name="version" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
       <column comment="" key="false" length="255" name="location" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="255"/>
@@ -2354,7 +2354,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_12"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_yCZkUHjlEeOwXYnbNsOr_w"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_3"/>
     <elementParameter field="TEXT" name="HOST" value="context.DestinationDb_Server"/>
     <elementParameter field="TEXT" name="PORT" value="context.DestinationDb_Port"/>
@@ -2936,7 +2936,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk10"/>
   </connection>
-  <connection connectorName="FLOW" label="row11" lineStyle="0" metaname="tPostgresqlInput_11" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_11" target="tPostgresqlOutput_2">
+  <connection connectorName="FLOW" label="row11" lineStyle="0" metaname="tPostgresqlInput_11" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_11" target="iPostgresqlOutput_13">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="id"/>
@@ -2991,7 +2991,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row11"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlOutput_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlOutput_2" target="tPostgresqlInput_12">
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlOutput_13" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlOutput_13" target="tPostgresqlInput_12">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk11"/>
   </connection>
