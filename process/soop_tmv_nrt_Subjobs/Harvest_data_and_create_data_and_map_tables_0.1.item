@@ -79,7 +79,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT trajectory_id AS file_id,&#xA;size,&#xA;COUNT(trajectory_id) AS no_measurements,&#xA;min(time) AT TIME ZONE 'UTC' AS time_start,&#xA;max(time) AT TIME ZONE 'UTC' AS time_end,&#xA;st_simplify(st_makeline(geom ORDER BY time),0.05) AS geom&#xA;FROM soop_tmv_nrt_trajectory_data&#xA;LEFT JOIN indexed_file ON indexed_file.id = soop_tmv_nrt_trajectory_data.trajectory_id&#xA;GROUP BY trajectory_id,size&#xA;ORDER BY file_id;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT trajectory_id AS file_id,&#xA;size,&#xA;COUNT(trajectory_id) AS no_measurements,&#xA;min(time) AT TIME ZONE 'UTC' AS time_start,&#xA;max(time) AT TIME ZONE 'UTC' AS time_end,&#xA;st_simplify(st_makeline(geom ORDER BY time),0.05) AS geom&#xA;FROM soop_tmv_nrt_trajectory_data&#xA;LEFT JOIN indexed_file ON indexed_file.id = soop_tmv_nrt_trajectory_data.trajectory_id&#xA;WHERE trajectory_id = &quot; + context.fileId + &quot;&#xA;GROUP BY trajectory_id,size;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
