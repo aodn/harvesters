@@ -682,7 +682,6 @@
     <elementParameter field="TABLE" name="SCHEMAS">
       <elementValue elementRef="SCHEMA" value="variables"/>
     </elementParameter>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
     <elementParameter field="CHECK" name="SCALE_MISSING" value="true"/>
     <elementParameter field="CHECK" name="CONVERT_ENUMS" value="true"/>
     <elementParameter field="CHECK" name="FILLER_MISSING" value="true"/>
@@ -697,7 +696,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="variables" name="variables">
-      <column comment="" defaultValue="" key="false" name="time" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="TIME" nullable="true" pattern="" sourceType="" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="fluorescence" nullable="true" pattern="" sourceType="" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="fluorescence_quality_control" nullable="true" pattern="" sourceType="" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
@@ -778,10 +777,10 @@
       <column comment="" key="false" name="trip_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(variables.LONGITUDE,variables.LATITUDE,&quot;EPSG:4326&quot;)" type="id_Geometry"/>
-        <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1970-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,variables.time/3600/24,true) " type="id_Date"/>
+        <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1970-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,variables.TIME/3600/24,true) " type="id_Date"/>
         <mapperTableEntries name="lat_qc" expression="variables.LATITUDE_quality_control==null?null:variables.LATITUDE_quality_control.toString()" type="id_String"/>
         <mapperTableEntries name="lon_qc" expression="variables.LONGITUDE_quality_control==null?null:variables.LONGITUDE_quality_control.toString()" type="id_String"/>
         <mapperTableEntries name="psal_qc" expression="variables.PSAL_quality_control==null?null:variables.PSAL_quality_control.toString()" type="id_String"/>
@@ -842,7 +841,7 @@
         <mapperTableEntries name="trip_id" expression="copyOfout1.trip_id" type="id_Integer" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="variables" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
-        <mapperTableEntries name="time" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="TIME" type="id_Double" nullable="true"/>
         <mapperTableEntries name="fluorescence" type="id_Double" nullable="true"/>
         <mapperTableEntries name="fluorescence_quality_control" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="LATITUDE" type="id_Double" nullable="true"/>
@@ -2105,7 +2104,7 @@
   <connection connectorName="FLOW" label="variables" lineStyle="0" metaname="variables" offsetLabelX="0" offsetLabelY="0" source="iNetCDFInput_1" target="tMap_3">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="time"/>
+      <elementValue elementRef="TRACE_COLUMN" value="TIME"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="fluorescence"/>
