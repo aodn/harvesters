@@ -64,7 +64,7 @@
     <elementParameter field="TEXT" name="PASS" value="context.metadataDb_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/media/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE deployments&#xA;(&#xA;  deploy_id bigserial,&#xA;  file_id integer NOT NULL,&#xA;  time_coverage_start character varying(100),&#xA;  time_coverage_end character varying(100),&#xA;  platform_code character varying(100),&#xA;  file_version character varying(500),&#xA;  aims_channel_id integer,&#xA;  trip_id integer,&#xA;  metadata_uuid character varying(100),&#xA;  cdm_data_type character varying(100),&#xA;  institution character varying(100),&#xA;  data_centre_email character varying(100),&#xA;  principal_investigator_email character varying(100),&#xA;  source character varying(100),&#xA;  project character varying(100),&#xA;  geospatial_vertical_min character varying(100),&#xA;  netcdf_version character varying(100),&#xA;  local_time_zone character varying(100),&#xA;  geospatial_vertical_max character varying(100),&#xA;  data_centre character varying(100),&#xA;  naming_authority character varying(100),&#xA;  author character varying(100),&#xA;  date_created character varying(100),&#xA;  title character varying(100),&#xA;  &quot;references&quot; character varying(100),&#xA;  vessel_name character varying(100),&#xA;  principal_investigator character varying(100),&#xA;  CONSTRAINT deployments_pkey PRIMARY KEY (deploy_id ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;   &#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-2&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE measurements_fluo&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp without time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LATITUDE_quality_control&quot; character(1),&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;LONGITUDE_quality_control&quot; character(1),&#xA;  geom geometry,&#xA;  fluorescence real,&#xA;  fluorescence_quality_control character(1),&#xA;  trip_id smallint,&#xA;  CONSTRAINT measurements_fluo_pkey PRIMARY KEY (measurement ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;&#xA;)&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-3&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE measurements_psal&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp without time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LATITUDE_quality_control&quot; character(1),&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;LONGITUDE_quality_control&quot; character(1),&#xA;  geom geometry,&#xA;  &quot;PSAL&quot; real,&#xA;  &quot;PSAL_quality_control&quot; character(1),&#xA;  trip_id  smallint,&#xA;  CONSTRAINT measurements_psal_pkey PRIMARY KEY (measurement ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-4&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE measurements_temp&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp without time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LATITUDE_quality_control&quot; character(1),&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;LONGITUDE_quality_control&quot; character(1),&#xA;  geom geometry,&#xA;  &quot;Seawater_Intake_Temperature&quot; real,&#xA;  &quot;Seawater_Intake_Temperature_quality_control&quot; character(1),&#xA;  trip_id smallint,&#xA;  CONSTRAINT measurements_temp_pkey PRIMARY KEY (measurement ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-5&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE measurements_turb&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp without time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LATITUDE_quality_control&quot; character(1),&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;LONGITUDE_quality_control&quot; character(1),&#xA;  geom geometry,&#xA;  &quot;TURB&quot; real,&#xA;  &quot;TURB_quality_control&quot; character(1),&#xA;  trip_id smallint,&#xA;  CONSTRAINT measurements_turb_pkey PRIMARY KEY (measurement ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-6&quot;>&#xA;       &lt;sql>&#xA;ALTER TABLE measurements_fluo&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX measurements_fluo_gist_idx ON measurements_fluo USING GIST (geom); &#xA; &lt;/sql>&#xA;        &lt;sql>&#xA;ALTER TABLE measurements_psal&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX measurements_psal_gist_idx ON measurements_psal USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA;        &lt;sql>&#xA;ALTER TABLE measurements_temp&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX measurements_temp_gist_idx ON measurements_temp USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA;        &lt;sql>&#xA;ALTER TABLE measurements_turb&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX measurements_turb_gist_idx ON measurements_turb USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-7&quot;>&#xA;       &lt;sql>&#xA;ALTER TABLE measurements_fluo ADD CHECK (ST_IsValid(geom));&#xA;ALTER TABLE measurements_psal ADD CHECK (ST_IsValid(geom));&#xA;ALTER TABLE measurements_temp ADD CHECK (ST_IsValid(geom));&#xA;ALTER TABLE measurements_turb ADD CHECK (ST_IsValid(geom));&#xA;&#x9;&lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE deployments&#xA;(&#xA;  deploy_id bigserial,&#xA;  file_id integer NOT NULL,&#xA;  time_coverage_start character varying(100),&#xA;  time_coverage_end character varying(100),&#xA;  platform_code character varying(100),&#xA;  file_version character varying(500),&#xA;  aims_channel_id integer,&#xA;  trip_id integer,&#xA;  metadata_uuid character varying(100),&#xA;  cdm_data_type character varying(100),&#xA;  institution character varying(100),&#xA;  data_centre_email character varying(100),&#xA;  principal_investigator_email character varying(100),&#xA;  source character varying(100),&#xA;  project character varying(100),&#xA;  geospatial_vertical_min character varying(100),&#xA;  netcdf_version character varying(100),&#xA;  local_time_zone character varying(100),&#xA;  geospatial_vertical_max character varying(100),&#xA;  data_centre character varying(100),&#xA;  naming_authority character varying(100),&#xA;  author character varying(100),&#xA;  date_created character varying(100),&#xA;  title character varying(100),&#xA;  &quot;references&quot; character varying(100),&#xA;  vessel_name character varying(100),&#xA;  principal_investigator character varying(100),&#xA;  CONSTRAINT deployments_pkey PRIMARY KEY (deploy_id ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;   &#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-2&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE measurements_fluo&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp without time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LATITUDE_quality_control&quot; character(1),&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;LONGITUDE_quality_control&quot; character(1),&#xA;  geom geometry,&#xA;  fluorescence real,&#xA;  fluorescence_quality_control character(1),&#xA;  trip_id smallint,&#xA;  CONSTRAINT measurements_fluo_pkey PRIMARY KEY (measurement ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;&#xA;)&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-3&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE measurements_psal&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp without time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LATITUDE_quality_control&quot; character(1),&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;LONGITUDE_quality_control&quot; character(1),&#xA;  geom geometry,&#xA;  &quot;PSAL&quot; real,&#xA;  &quot;PSAL_quality_control&quot; character(1),&#xA;  trip_id  smallint,&#xA;  CONSTRAINT measurements_psal_pkey PRIMARY KEY (measurement ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-4&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE measurements_temp&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp without time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LATITUDE_quality_control&quot; character(1),&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;LONGITUDE_quality_control&quot; character(1),&#xA;  geom geometry,&#xA;  &quot;Seawater_Intake_Temperature&quot; real,&#xA;  &quot;Seawater_Intake_Temperature_quality_control&quot; character(1),&#xA;  trip_id smallint,&#xA;  CONSTRAINT measurements_temp_pkey PRIMARY KEY (measurement ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-5&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE measurements_turb&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp without time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LATITUDE_quality_control&quot; character(1),&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;LONGITUDE_quality_control&quot; character(1),&#xA;  geom geometry,&#xA;  &quot;TURB&quot; real,&#xA;  &quot;TURB_quality_control&quot; character(1),&#xA;  trip_id smallint,&#xA;  CONSTRAINT measurements_turb_pkey PRIMARY KEY (measurement ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-6&quot;>&#xA;       &lt;sql>&#xA;ALTER TABLE measurements_fluo&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX measurements_fluo_gist_idx ON measurements_fluo USING GIST (geom); &#xA; &lt;/sql>&#xA;        &lt;sql>&#xA;ALTER TABLE measurements_psal&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX measurements_psal_gist_idx ON measurements_psal USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA;        &lt;sql>&#xA;ALTER TABLE measurements_temp&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX measurements_temp_gist_idx ON measurements_temp USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA;        &lt;sql>&#xA;ALTER TABLE measurements_turb&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX measurements_turb_gist_idx ON measurements_turb USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-7&quot;>&#xA;       &lt;sql>&#xA;ALTER TABLE measurements_fluo ADD CHECK (ST_IsValid(geom));&#xA;ALTER TABLE measurements_psal ADD CHECK (ST_IsValid(geom));&#xA;ALTER TABLE measurements_temp ADD CHECK (ST_IsValid(geom));&#xA;ALTER TABLE measurements_turb ADD CHECK (ST_IsValid(geom));&#xA;&#x9;&lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
     <elementParameter field="TEXT" name="LABEL" value="liquidBade_createTables"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -682,7 +682,6 @@
     <elementParameter field="TABLE" name="SCHEMAS">
       <elementValue elementRef="SCHEMA" value="variables"/>
     </elementParameter>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
     <elementParameter field="CHECK" name="SCALE_MISSING" value="true"/>
     <elementParameter field="CHECK" name="CONVERT_ENUMS" value="true"/>
     <elementParameter field="CHECK" name="FILLER_MISSING" value="true"/>
@@ -697,7 +696,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="variables" name="variables">
-      <column comment="" defaultValue="" key="false" name="time" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="TIME" nullable="true" pattern="" sourceType="" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="fluorescence" nullable="true" pattern="" sourceType="" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="fluorescence_quality_control" nullable="true" pattern="" sourceType="" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
@@ -781,7 +780,7 @@
       <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(variables.LONGITUDE,variables.LATITUDE,&quot;EPSG:4326&quot;)" type="id_Geometry"/>
-        <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1970-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,variables.time/3600/24,true) " type="id_Date"/>
+        <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1970-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,variables.TIME/3600/24,true) " type="id_Date"/>
         <mapperTableEntries name="lat_qc" expression="variables.LATITUDE_quality_control==null?null:variables.LATITUDE_quality_control.toString()" type="id_String"/>
         <mapperTableEntries name="lon_qc" expression="variables.LONGITUDE_quality_control==null?null:variables.LONGITUDE_quality_control.toString()" type="id_String"/>
         <mapperTableEntries name="psal_qc" expression="variables.PSAL_quality_control==null?null:variables.PSAL_quality_control.toString()" type="id_String"/>
@@ -842,7 +841,7 @@
         <mapperTableEntries name="trip_id" expression="copyOfout1.trip_id" type="id_Integer" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="variables" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
-        <mapperTableEntries name="time" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="TIME" type="id_Double" nullable="true"/>
         <mapperTableEntries name="fluorescence" type="id_Double" nullable="true"/>
         <mapperTableEntries name="fluorescence_quality_control" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="LATITUDE" type="id_Double" nullable="true"/>
@@ -1530,7 +1529,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="896" posY="704">
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="960" posY="640">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJava_1"/>
     <elementParameter field="MEMO_JAVA" name="CODE" value=""/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
@@ -1550,7 +1549,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlCommit_3"/>
   </node>
-  <node componentName="iDeletedResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="448" posY="416">
+  <node componentName="iDeletedResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="96" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
@@ -1573,7 +1572,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="576">
+  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="256" posY="32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -1607,6 +1606,16 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
+  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_5"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="CHECK" name="CLOSE" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlCommit_5"/>
+  </node>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIncludeSdiLibraries_1" offsetLabelX="0" offsetLabelY="0" source="iIncludeSdiLibraries_1" target="iPostgresqlDbUpdate_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
@@ -1617,13 +1626,13 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate3"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tPostgresqlConnection_1" target="iNewResources_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
-  </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tPostgresqlConnection_1" target="iDeletedResources_1">
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tPostgresqlConnection_1" target="iDeletedResources_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk4"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tPostgresqlConnection_1" target="iNewResources_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
   </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" outputId="3" source="tPostgresqlConnection_1" target="tPostgresqlCommit_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
@@ -2105,7 +2114,7 @@
   <connection connectorName="FLOW" label="variables" lineStyle="0" metaname="variables" offsetLabelX="0" offsetLabelY="0" source="iNetCDFInput_1" target="tMap_3">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="time"/>
+      <elementValue elementRef="TRACE_COLUMN" value="TIME"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="fluorescence"/>
@@ -2532,6 +2541,10 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate5"/>
   </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlRow_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_1" target="tPostgresqlCommit_5">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk5"/>
+  </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIncludeSdiLibraries_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
@@ -2559,6 +2572,11 @@
   </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_5"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
