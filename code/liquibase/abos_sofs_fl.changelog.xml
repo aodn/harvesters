@@ -105,11 +105,20 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="create_rt_map_view-3">
+    <changeSet author="talend" id="create_rt_map_view-3" runOnChange="true">
       <sql>
 	DROP VIEW IF EXISTS abos_sofs_surfaceflux_rt_map;
 	CREATE VIEW abos_sofs_surfaceflux_rt_map AS
-	  SELECT m.*, i.url, i.size, t.geom
+	  SELECT 
+	    m.file_id,
+	    m.deployment_number,
+	    m.delivery_mode,
+	    m.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+	    m.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
+	    m.date_created AT TIME ZONE 'UTC' AS date_created,
+	    i.url, 
+	    i.size, 
+	    t.geom
 	    FROM timeseries t JOIN file_metadata m USING (deployment_number)
 	                      JOIN indexed_file i ON m.file_id = i.id
 	    WHERE delivery_mode = 'RT'
@@ -118,24 +127,80 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="create_rt_data_view-2">
+    <changeSet author="talend" id="create_rt_data_view-2" runOnChange="true">
       <sql>
+	DROP VIEW IF EXISTS abos_sofs_surfaceflux_rt_data;
 	CREATE VIEW abos_sofs_surfaceflux_rt_data AS
 	  SELECT 
-	    measurement.*,
-	    timeseries.geom
-	  FROM measurement JOIN timeseries USING (deployment_number)
+	    m.deployment_number,
+	    m.delivery_mode,
+	    m.file_id,
+	    m.index,
+	    m."TIME" AT TIME ZONE 'UTC' AS "TIME",
+	    m."LATITUDE",
+	    m."LONGITUDE",
+	    m."PL_CMP",
+	    m."WDIR",
+	    m."WSPD",
+	    m."WIND_H",
+	    m."WIND_FLAG",
+	    m."ATMP",
+	    m."ATMP_H",
+	    m."ATMP_FLAG",
+	    m."AIRT",
+	    m."AIRT_H",
+	    m."AIRT_FLAG",
+	    m."RELH",
+	    m."RELH_H",
+	    m."RELH_FLAG",
+	    m."TEMP",
+	    m."TEMP_H",
+	    m."TEMP_FLAG",
+	    m."RAIN_AMOUNT",
+	    m."RAIN_AMOUNT_H",
+	    m."RAIN_AMOUNT_FLAG",
+	    m."SW",
+	    m."SW_H",
+	    m."SW_FLAG",
+	    m."LW",
+	    m."LW_H",
+	    m."LW_FLAG",
+	    m."HS",
+	    m."HL",
+	    m."H_RAIN",
+	    m."TAU",
+	    m."SST",
+	    m."HEAT_NET",
+	    m."MASS_NET",
+	    m."LW_NET",
+	    m."SW_NET",
+	    m."WSPD10M",
+	    m."AIRT1_5M",
+	    m."AIRT2_0M",
+	    m."RELH1_5M",
+	    m."RELH2_0M",
+	    t.geom
+	  FROM measurement m JOIN timeseries t USING (deployment_number)
 	  WHERE delivery_mode = 'RT'
 	  ORDER BY file_id, index;
       </sql>
     </changeSet>
 
 
-    <changeSet author="talend" id="create_dm_map_view-3">
+    <changeSet author="talend" id="create_dm_map_view-3" runOnChange="true">
       <sql>
 	DROP VIEW IF EXISTS abos_sofs_surfaceflux_dm_map;
 	CREATE VIEW abos_sofs_surfaceflux_dm_map AS
-	  SELECT m.*, i.url, i.size, t.geom
+	  SELECT
+	    m.file_id,
+	    m.deployment_number,
+	    m.delivery_mode,
+	    m.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+	    m.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
+	    m.date_created AT TIME ZONE 'UTC' AS date_created,
+	    i.url, 
+	    i.size, 
+	    t.geom
 	    FROM timeseries t JOIN file_metadata m USING (deployment_number)
 	                      JOIN indexed_file i ON m.file_id = i.id
 	    WHERE delivery_mode = 'DM'
@@ -144,13 +209,60 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="create_dm_data_view-2">
+    <changeSet author="talend" id="create_dm_data_view-2" runOnChange="true">
       <sql>
+	DROP VIEW IF EXISTS abos_sofs_surfaceflux_dm_data;
 	CREATE VIEW abos_sofs_surfaceflux_dm_data AS
 	  SELECT 
-	    measurement.*,
-	    timeseries.geom
-	  FROM measurement JOIN timeseries USING (deployment_number)
+	    m.deployment_number,
+	    m.delivery_mode,
+	    m.file_id,
+	    m.index,
+	    m."TIME" AT TIME ZONE 'UTC' AS "TIME",
+	    m."LATITUDE",
+	    m."LONGITUDE",
+	    m."PL_CMP",
+	    m."WDIR",
+	    m."WSPD",
+	    m."WIND_H",
+	    m."WIND_FLAG",
+	    m."ATMP",
+	    m."ATMP_H",
+	    m."ATMP_FLAG",
+	    m."AIRT",
+	    m."AIRT_H",
+	    m."AIRT_FLAG",
+	    m."RELH",
+	    m."RELH_H",
+	    m."RELH_FLAG",
+	    m."TEMP",
+	    m."TEMP_H",
+	    m."TEMP_FLAG",
+	    m."RAIN_AMOUNT",
+	    m."RAIN_AMOUNT_H",
+	    m."RAIN_AMOUNT_FLAG",
+	    m."SW",
+	    m."SW_H",
+	    m."SW_FLAG",
+	    m."LW",
+	    m."LW_H",
+	    m."LW_FLAG",
+	    m."HS",
+	    m."HL",
+	    m."H_RAIN",
+	    m."TAU",
+	    m."SST",
+	    m."HEAT_NET",
+	    m."MASS_NET",
+	    m."LW_NET",
+	    m."SW_NET",
+	    m."WSPD10M",
+	    m."AIRT1_5M",
+	    m."AIRT2_0M",
+	    m."RELH1_5M",
+	    m."RELH2_0M",
+	    t.geom
+	  FROM measurement m JOIN timeseries t USING (deployment_number)
 	  WHERE delivery_mode = 'DM'
 	  ORDER BY file_id, index;
       </sql>
