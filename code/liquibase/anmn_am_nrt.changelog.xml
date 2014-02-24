@@ -59,26 +59,49 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="create_map_view-1">
+    <changeSet author="talend" id="create_map_view-1" runOnChange="true">
       <sql>
 	DROP VIEW IF EXISTS anmn_am_nrt_map;
 	CREATE VIEW anmn_am_nrt_map AS 
-	  SELECT 
-	    t.*, f.url, f.size
+	  SELECT
+	    t.file_id,
+	    t.site_code,
+	    t.platform_code,
+	    t.deployment_code,
+	    t.mean_latitude,
+	    t.mean_longitude,
+	    t.geom,
+	    t.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+	    t.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
+	    t.date_created,
+	    t.sea_surface_temperature_b,
+	    t.sea_surface_salinity_b,
+	    f.url,
+	    f.size
 	    FROM timeseries t JOIN indexed_file f ON t.file_id = f.id
 	    ORDER BY deployment_code;
       </sql>
     </changeSet>
 
 
-    <changeSet author="talend" id="create_data_view-1">
+    <changeSet author="talend" id="create_data_view-1" runOnChange="true">
       <sql>
 	DROP VIEW IF EXISTS anmn_am_nrt_data;
 	CREATE VIEW anmn_am_nrt_data AS 
 	  SELECT 
 	    t.site_code,
 	    t.deployment_code,
-	    m.*,
+	    m.file_id,
+	    m.index,
+	    m."TIME" AT TIME ZONE 'UTC' AS "TIME",
+	    m."LATITUDE",
+	    m."LONGITUDE",
+	    m."XCO2_WATER",
+	    m."XCO2_WATER_standard_deviation",
+	    m."XCO2_AIR",
+	    m."XCO2_AIR_standard_deviation",
+	    m."SSTI",
+	    m."SSS", 
 	    t.sea_surface_temperature_b,
 	    t.sea_surface_salinity_b,
 	    t.geom
