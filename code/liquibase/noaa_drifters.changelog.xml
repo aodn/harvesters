@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet author="talend" id="create_track_table-1">
+      <sql>
+	CREATE TABLE track
+	(
+	  driftnum bigint NOT NULL,
+	  file_id bigint NOT NULL,
+	  geom geometry(Geometry,4326),
+	  time_coverage_start timestamp with time zone,
+	  time_coverage_end timestamp with time zone,
+	  CONSTRAINT track_pk PRIMARY KEY (driftnum),
+	  CONSTRAINT track_file_fk FOREIGN KEY (file_id)
+	      REFERENCES indexed_file (id) MATCH SIMPLE
+	      ON UPDATE CASCADE ON DELETE CASCADE,
+	  CONSTRAINT track_geom_check CHECK (st_isvalid(geom))
+	);
+
+	CREATE INDEX track_gist_idx ON track USING GIST (geom); 
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_measurement_table-1">
+      <sql>
+	CREATE TABLE measurement
+	(
+	  driftnum bigint NOT NULL,
+	  file_id bigint NOT NULL,
+	  index bigint NOT NULL,
+	  date timestamp with time zone NOT NULL,
+	  latitude double precision,
+	  longitude double precision,
+	  geom geometry(Geometry,4326),
+	  CONSTRAINT measurement_pk PRIMARY KEY (driftnum, index),
+	  CONSTRAINT measurement_file_fk FOREIGN KEY (file_id)
+	      REFERENCES indexed_file (id) MATCH SIMPLE
+	      ON UPDATE CASCADE ON DELETE CASCADE
+	--  CONSTRAINT measurement_track_fk FOREIGN KEY (driftnum)
+	--      REFERENCES track (driftnum) MATCH SIMPLE
+	--      ON UPDATE CASCADE ON DELETE CASCADE
+	);
+	COMMENT ON COLUMN measurement.index IS 'index of measurement in netCDF file';
+	
+	CREATE INDEX measurement_gist_idx ON measurement USING GIST (geom); 
+      </sql>
+    </changeSet>
+
+
+
+</databaseChangeLog>
