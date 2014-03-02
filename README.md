@@ -1,4 +1,4 @@
-ABOS_TS_TIMESERIES
+ABOS_TS_SINGLE_INST_TIMESERIES
 ==================
 
-Harvests ABOS Temperature and Salinity timeseries from ASFS/SOFS/Sub-surface_temperature_pressure_conductivity, DA/.../CTD_timeseries, DA/.../Temperature and SOTS/SAZ
+Harvests ABOS Temperature and Salinity timeseries from single instrument datasets from ASFS/SOFS/Sub-surface_temperature_pressure_conductivity, DA/.../CTD_timeseries and DA/.../Temperature
