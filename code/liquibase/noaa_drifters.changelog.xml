@@ -48,5 +48,38 @@
     </changeSet>
 
 
+    <changeSet author="talend" id="create_map_view-1" runOnChange="true">
+      <sql>
+	DROP VIEW IF EXISTS noaa_drifters_map;
+	CREATE VIEW noaa_drifters_map AS
+	  SELECT
+	    t.driftnum,
+	    t.file_id,
+	    t.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+	    t.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
+	    t.geom,
+	    f.url, 
+	    f.size
+	    FROM track t JOIN indexed_file f ON t.file_id = f.id;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_data_view-1" runOnChange="true">
+      <sql>
+	DROP VIEW IF EXISTS noaa_drifters_data;
+	CREATE VIEW noaa_drifters_data AS
+	  SELECT 
+	   driftnum,
+	   file_id,
+	   index,
+	   date AT TIME ZONE 'UTC' AS date,
+	   latitude,
+	   longitude,
+	   geom
+	   FROM measurement;
+      </sql>
+    </changeSet>
+
 
 </databaseChangeLog>
