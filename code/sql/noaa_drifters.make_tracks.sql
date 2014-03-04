@@ -3,7 +3,7 @@ INSERT INTO track(driftnum, file_id, geom, time_coverage_start, time_coverage_en
   SELECT 
     driftnum,
     file_id,
-    ST_MakeLine(geom ORDER BY date),
+    make_trajectory(geom ORDER BY date),
     min(date), 
     max(date)
   FROM measurement
