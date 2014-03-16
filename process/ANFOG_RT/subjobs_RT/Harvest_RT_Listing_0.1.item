@@ -64,7 +64,7 @@
     <elementParameter field="TEXT" name="PASS" value="context.metadataDb_RT_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/Users/bpasquer/Documents/TALEND_projects/workspace/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;harvList-3&quot;>&#xA;        &lt;sql>&#xA;&#xA;CREATE TABLE harvest_listing&#xA;(&#xA;pkid serial, &#xA;deployment_name character varying(50),&#xA;current boolean, &#xA;completed boolean,&#xA;delayed_mode boolean,&#xA;status character varying(6),&#xA; CONSTRAINT harvest_listing_pkey PRIMARY KEY (pkid )&#xA;)&#xA;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&lt;/databaseChangeLog> "/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;harvList-3&quot;>&#xA;        &lt;sql>&#xA;&#xA;CREATE TABLE harvest_listing&#xA;(&#xA;pkid serial, &#xA;deployment_name character varying(50),&#xA;platform_type character varying(20),&#xA;current boolean, &#xA;completed boolean,&#xA;delayed_mode boolean,&#xA;status character varying(6),&#xA; CONSTRAINT harvest_listing_pkey PRIMARY KEY (pkid )&#xA;)&#xA;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&lt;/databaseChangeLog> "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -88,8 +88,6 @@
     <elementParameter field="CHECK" name="REMOVE_EMPTY_ROW" value="true"/>
     <elementParameter field="CHECK" name="UNCOMPRESS" value="false"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="TECHNICAL" name="SCHEMA:SCHEMA_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="SCHEMA:REPOSITORY_SCHEMA_TYPE" value="_ODkjgKJ8EeOZjJHvdpU0ZA - metadata"/>
     <elementParameter field="TECHNICAL" name="SCHEMA_REJECT:SCHEMA_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="SCHEMA_REJECT:REPOSITORY_SCHEMA_TYPE" value="_ODkjgKJ8EeOZjJHvdpU0ZA - metadata"/>
     <elementParameter field="DIRECTORY" name="TEMP_DIR" value="&quot;/Users/bpasquer/Documents/TALEND_projects/workspace&quot;"/>
@@ -101,6 +99,8 @@
     <elementParameter field="CHECK" name="TRIMALL" value="false"/>
     <elementParameter field="TABLE" name="TRIMSELECT">
       <elementValue elementRef="SCHEMA_COLUMN" value="deployment_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="platform_type"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="current"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -121,6 +121,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="metadata" name="tFileInputDelimited_1">
       <column comment="" key="false" length="50" name="deployment_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="50"/>
+      <column comment="" key="false" length="20" name="platform_type" nullable="true" pattern="" sourceType="" type="id_String" originalLength="20"/>
       <column comment="" key="false" length="0" name="current" nullable="true" pattern="" precision="0" type="id_Boolean"/>
       <column comment="" key="false" length="0" name="completed" nullable="true" pattern="" precision="0" type="id_Boolean"/>
       <column comment="" key="false" length="0" name="delayed_mode" nullable="true" pattern="" precision="0" type="id_Boolean"/>
@@ -150,22 +151,25 @@
     <metadata connector="FLOW" label="harvest_listing" name="harvest_listing">
       <column comment="" key="true" name="pkid" nullable="true" pattern="" sourceType="" type="id_Integer"/>
       <column comment="" key="false" length="50" name="deployment_name" nullable="true" pattern="" sourceType="" type="id_String" originalLength="50"/>
+      <column comment="" key="false" length="20" name="platform_type" nullable="true" pattern="" sourceType="" type="id_String" originalLength="20"/>
       <column comment="" key="false" name="current" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
       <column comment="" key="false" name="completed" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
       <column comment="" key="false" name="delayed_mode" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="harvest_listing">
         <mapperTableEntries name="pkid" expression="Numeric.sequence(&quot;s1&quot;,1,1)   " type="id_Integer" nullable="true"/>
         <mapperTableEntries name="deployment_name" expression="row1.deployment_name " type="id_String" nullable="true"/>
+        <mapperTableEntries name="platform_type" expression="row1.platform_type " type="id_String" nullable="true"/>
         <mapperTableEntries name="current" expression="row1.current " type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="completed" expression="row1.completed " type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="delayed_mode" expression="row1.delayed_mode " type="id_Boolean" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row1" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="deployment_name" type="id_String" nullable="true"/>
+        <mapperTableEntries name="platform_type" type="id_String" nullable="true"/>
         <mapperTableEntries name="current" type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="completed" type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="delayed_mode" type="id_Boolean" nullable="true"/>
@@ -207,6 +211,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="platform_type"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="current"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -232,18 +241,20 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="harvest_listing" name="iPostgresqlOutput_1">
-      <column comment="" key="true" name="pkid" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" length="50" name="deployment_name" nullable="true" pattern="" sourceType="" type="id_String" originalLength="50"/>
-      <column comment="" key="false" name="current" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
-      <column comment="" key="false" name="completed" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
-      <column comment="" key="false" name="delayed_mode" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
+      <column comment="" key="true" name="pkid" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="50" name="deployment_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="50"/>
+      <column comment="" key="false" length="20" name="platform_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="20"/>
+      <column comment="" key="false" name="current" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" key="false" name="completed" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" key="false" name="delayed_mode" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
     </metadata>
     <metadata connector="REJECT" label="harvest_listing" name="REJECT">
-      <column comment="" key="true" name="pkid" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" length="50" name="deployment_name" nullable="true" pattern="" sourceType="" type="id_String" originalLength="50"/>
-      <column comment="" key="false" name="current" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
-      <column comment="" key="false" name="completed" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
-      <column comment="" key="false" name="delayed_mode" nullable="true" pattern="" sourceType="" type="id_Boolean"/>
+      <column comment="" key="true" name="pkid" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="50" name="deployment_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="50"/>
+      <column comment="" key="false" length="20" name="platform_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="20"/>
+      <column comment="" key="false" name="current" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" key="false" name="completed" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" key="false" name="delayed_mode" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -339,6 +350,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="delayed_mode"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="platform_type"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -365,6 +379,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="delayed_mode"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="platform_type"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
