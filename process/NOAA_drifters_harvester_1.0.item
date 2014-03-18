@@ -6,7 +6,7 @@
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_Password" value="i3HALOh7Gb/UbLE7XDsDcQ=="/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="noaa_drifters"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_2J3MAEwOEeO4-pdcY94iZw" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_2J3MAEwOEeO4-pdcY94iZw" type="id_String" value="null"/>
     <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_A9GAoFGXEeOFRtW2h_ugHg" type="id_String" value=""/>
@@ -51,13 +51,13 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_yCojcFpdEeO08paGH1Z8mA"/>
-    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;10.11.12.13&quot;"/>
     <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;noaa_drifters&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;noaa_drifters&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;noaa_drifters&quot;"/>
     <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
     <elementParameter field="TEXT" name="HARVEST_TYPE" value="&quot;harvest&quot;"/>
     <elementParameter field="RADIO" name="USE_DEFAULT" value="true"/>
@@ -74,7 +74,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_3"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
-    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="HarvestTimeseriesFile"/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="HarvestDrifterFile"/>
     <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_YZ0AcDEvEeOm3NYRQTSI_w"/>
     <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
     <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
@@ -101,13 +101,13 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_yCojcFpdEeO08paGH1Z8mA"/>
-    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;10.11.12.13&quot;"/>
     <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;noaa_drifters&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;noaa_drifters&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;noaa_drifters&quot;"/>
     <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
     <elementParameter field="TEXT" name="HARVEST_TYPE" value="&quot;harvest&quot;"/>
     <elementParameter field="RADIO" name="USE_DEFAULT" value="true"/>
@@ -124,7 +124,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_5"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
-    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="DeleteTimeseriesFileData"/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="DeleteDrifterFileData"/>
     <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_8Ljq0DboEeOhUNOF0l0jkg"/>
     <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
     <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
@@ -149,13 +149,13 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_yCojcFpdEeO08paGH1Z8mA"/>
-    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;10.11.12.13&quot;"/>
     <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;noaa_drifters&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;noaa_drifters&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;noaa_drifters&quot;"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/home/mhidas/work/sql/data_harvest/anmn_ts.changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
     <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_track_table-1&quot;>&#xA;      &lt;sql>&#xA;&#x9;CREATE TABLE track&#xA;&#x9;(&#xA;&#x9;  driftnum bigint NOT NULL,&#xA;&#x9;  file_id bigint NOT NULL,&#xA;&#x9;  geom geometry(Geometry,4326),&#xA;&#x9;  time_coverage_start timestamp with time zone,&#xA;&#x9;  time_coverage_end timestamp with time zone,&#xA;&#x9;  CONSTRAINT track_pk PRIMARY KEY (driftnum),&#xA;&#x9;  CONSTRAINT track_file_fk FOREIGN KEY (file_id)&#xA;&#x9;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;&#x9;      ON UPDATE CASCADE ON DELETE CASCADE,&#xA;&#x9;  CONSTRAINT track_geom_check CHECK (st_isvalid(geom))&#xA;&#x9;);&#xA;&#xA;&#x9;CREATE INDEX track_gist_idx ON track USING GIST (geom); &#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_measurement_table-1&quot;>&#xA;      &lt;sql>&#xA;&#x9;CREATE TABLE measurement&#xA;&#x9;(&#xA;&#x9;  driftnum bigint NOT NULL,&#xA;&#x9;  file_id bigint NOT NULL,&#xA;&#x9;  index bigint NOT NULL,&#xA;&#x9;  date timestamp with time zone NOT NULL,&#xA;&#x9;  latitude double precision,&#xA;&#x9;  longitude double precision,&#xA;&#x9;  geom geometry(Geometry,4326),&#xA;&#x9;  CONSTRAINT measurement_pk PRIMARY KEY (driftnum, index),&#xA;&#x9;  CONSTRAINT measurement_file_fk FOREIGN KEY (file_id)&#xA;&#x9;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;&#x9;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;&#x9;--  CONSTRAINT measurement_track_fk FOREIGN KEY (driftnum)&#xA;&#x9;--      REFERENCES track (driftnum) MATCH SIMPLE&#xA;&#x9;--      ON UPDATE CASCADE ON DELETE CASCADE&#xA;&#x9;);&#xA;&#x9;COMMENT ON COLUMN measurement.index IS 'index of measurement in netCDF file';&#xA;&#x9;&#xA;&#x9;CREATE INDEX measurement_gist_idx ON measurement USING GIST (geom); &#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_map_view-1&quot; runOnChange=&quot;true&quot;>&#xA;      &lt;sql>&#xA;&#x9;DROP VIEW IF EXISTS noaa_drifters_map;&#xA;&#x9;CREATE VIEW noaa_drifters_map AS&#xA;&#x9;  SELECT&#xA;&#x9;    t.driftnum,&#xA;&#x9;    t.file_id,&#xA;&#x9;    t.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,&#xA;&#x9;    t.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,&#xA;&#x9;    t.geom,&#xA;&#x9;    f.url, &#xA;&#x9;    f.size&#xA;&#x9;    FROM track t JOIN indexed_file f ON t.file_id = f.id;&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_data_view-1&quot; runOnChange=&quot;true&quot;>&#xA;      &lt;sql>&#xA;&#x9;DROP VIEW IF EXISTS noaa_drifters_data;&#xA;&#x9;CREATE VIEW noaa_drifters_data AS&#xA;&#x9;  SELECT &#xA;&#x9;   driftnum,&#xA;&#x9;   file_id,&#xA;&#x9;   index,&#xA;&#x9;   date AT TIME ZONE 'UTC' AS date,&#xA;&#x9;   latitude,&#xA;&#x9;   longitude,&#xA;&#x9;   geom&#xA;&#x9;   FROM measurement;&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
@@ -169,12 +169,12 @@
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_yCojcFpdEeO08paGH1Z8mA"/>
-    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
-    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;10.11.12.13&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;noaa_drifters&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;noaa_drifters&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;noaa_drifters&quot;"/>
     <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
     <elementParameter field="CLOSED_LIST" name="LIST_MODE" value="FILES"/>
     <elementParameter field="DIRECTORY" name="DIRECTORY" value="context.sourceDir"/>
