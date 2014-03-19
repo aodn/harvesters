@@ -7,10 +7,10 @@
 	(
 	  driftnum bigint NOT NULL,
 	  file_id bigint NOT NULL,
-	  geom geometry(Geometry,4326),
-	  time_coverage_start timestamp with time zone,
-	  time_coverage_end timestamp with time zone,
-	  CONSTRAINT track_pk PRIMARY KEY (driftnum),
+	  date_utc date,
+	  duration interval,
+	  geom geometry(Geometry,4326) NOT NULL,
+	  CONSTRAINT track_pk PRIMARY KEY (driftnum, date_utc),
 	  CONSTRAINT track_file_fk FOREIGN KEY (file_id)
 	      REFERENCES indexed_file (id) MATCH SIMPLE
 	      ON UPDATE CASCADE ON DELETE CASCADE,
@@ -55,12 +55,13 @@
 	  SELECT
 	    t.driftnum,
 	    t.file_id,
-	    t.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
-	    t.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
+	    t.date_utc,
+	    t.duration,
 	    t.geom,
 	    f.url, 
 	    f.size
-	    FROM track t JOIN indexed_file f ON t.file_id = f.id;
+	    FROM track t JOIN indexed_file f ON t.file_id = f.id
+	    ORDER BY t.driftnum, t.date_utc;
       </sql>
     </changeSet>
 
@@ -70,14 +71,16 @@
 	DROP VIEW IF EXISTS noaa_drifters_data;
 	CREATE VIEW noaa_drifters_data AS
 	  SELECT 
-	   driftnum,
-	   file_id,
-	   index,
-	   date AT TIME ZONE 'UTC' AS date,
-	   latitude,
-	   longitude,
-	   geom
-	   FROM measurement;
+	    driftnum,
+	    file_id,
+	    index,
+	    date(date AT TIME ZONE 'UTC') AS date_utc,
+	    date AT TIME ZONE 'UTC' AS time_utc,
+	    latitude,
+	    longitude,
+	    geom
+	    FROM measurement
+	    ORDER BY driftnum, time_utc;
       </sql>
     </changeSet>
 

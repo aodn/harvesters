@@ -643,7 +643,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;INSERT INTO track(driftnum, file_id, geom, time_coverage_start, time_coverage_end)&#xA;  SELECT &#xA;    driftnum,&#xA;    file_id,&#xA;    make_trajectory(geom ORDER BY date),&#xA;    min(date), &#xA;    max(date)&#xA;  FROM measurement&#xA;  WHERE file_id = '&quot; + context.fileId + &quot;'&#xA;  GROUP BY driftnum, file_id&#xA;;&quot;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;INSERT INTO track(driftnum, file_id, geom, date_utc, duration)&#xA;  SELECT &#xA;    driftnum, &#xA;    file_id, &#xA;    make_trajectory(geom ORDER BY time),&#xA;    date_utc,&#xA;    max(time) - min(time)&#xA;  FROM (&#xA;    SELECT driftnum,  file_id, geom, date AS time,&#xA;      date(date AT TIME ZONE 'UTC') AS date_utc&#xA;      FROM measurement&#xA;    UNION&#xA;    SELECT driftnum,  file_id, geom, date AS time,&#xA;      date(date AT TIME ZONE 'UTC' - interval '6 hours') AS date_utc&#xA;      FROM measurement&#xA;    ) AS dates&#xA;  WHERE file_id = &quot; + context.fileId + &quot;&#xA;  GROUP BY driftnum, file_id, date_utc&#xA;  ORDER BY driftnum, file_id, date_utc&#xA;;&quot;&#xA;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
