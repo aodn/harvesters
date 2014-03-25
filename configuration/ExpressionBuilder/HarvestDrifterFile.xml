@@ -1,12 +1,5 @@
 <?xml version="1.1" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:expression="http:///expression.ecore">
-  <expression:EMFExpression id="null=>measurement=>driftnum" expression="DataOperation.FIX(data.driftnum)">
-    <variables name="data.driftnum" value="137.0" talendType="id_Double"/>
-    <variables name="data.index" value="0" talendType="id_Double"/>
-    <variables name="data.date" value="0" talendType="id_Double"/>
-    <variables name="data.latitude" value="null" talendType="id_Double" nullable="true"/>
-    <variables name="data.longitude" value="null" talendType="id_Double" nullable="true"/>
-  </expression:EMFExpression>
   <expression:EMFExpression id="null=>measurement=>date" expression="NetCDFUtils.addDays(&quot;1900-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,data.date, true)">
     <variables name="data.driftnum" value="0" talendType="id_Double"/>
     <variables name="data.index" value="0" talendType="id_Double"/>
@@ -27,5 +20,21 @@
     <variables name="data.date" value="0" talendType="id_Double"/>
     <variables name="data.latitude" value="null" talendType="id_Double" nullable="true"/>
     <variables name="data.longitude" value="180.1" talendType="id_Double" nullable="true"/>
+  </expression:EMFExpression>
+  <expression:EMFExpression id="null=>measurement=>driftnum" expression="Long.parseLong(context.driftNum)">
+    <variables name="data.index" value="0" talendType="id_Double"/>
+    <variables name="data.time" value="0" talendType="id_Double"/>
+    <variables name="data.latitude" value="null" talendType="id_Double" nullable="true"/>
+    <variables name="data.longitude" value="null" talendType="id_Double" nullable="true"/>
+    <variables name="data.longitude > 180.  ?  data.longitude - 360.  :  data.longitude " value="0" talendType="id_Double"/>
+    <variables name="data.driftnum" value="137.0" talendType="id_Double"/>
+    <variables name="data.date" value="0" talendType="id_Double"/>
+  </expression:EMFExpression>
+  <expression:EMFExpression id="null=>measurement=>time" expression="NetCDFUtils.addDays(&quot;1900-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;, data.time, true)">
+    <variables name="data.index" value="0" talendType="id_Double"/>
+    <variables name="data.time" value="0" talendType="id_Double"/>
+    <variables name="data.latitude" value="null" talendType="id_Double" nullable="true"/>
+    <variables name="data.longitude" value="null" talendType="id_Double" nullable="true"/>
+    <variables name="data.longitude > 180.  ?  data.longitude - 360.  :  data.longitude " value="0" talendType="id_Double"/>
   </expression:EMFExpression>
 </xmi:XMI>

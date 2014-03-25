@@ -7,12 +7,12 @@ INSERT INTO track(driftnum, file_id, geom, date_utc, duration)
     date_utc,
     max(time) - min(time)
   FROM (
-    SELECT driftnum,  file_id, geom, date AS time,
-      date(date AT TIME ZONE 'UTC') AS date_utc
+    SELECT driftnum,  file_id, geom, time,
+      date(time AT TIME ZONE 'UTC') AS date_utc
       FROM measurement
     UNION
-    SELECT driftnum,  file_id, geom, date AS time,
-      date(date AT TIME ZONE 'UTC' - interval '6 hours') AS date_utc
+    SELECT driftnum,  file_id, geom, time,
+      date(time AT TIME ZONE 'UTC' - interval '6 hours') AS date_utc
       FROM measurement
     ) AS dates
   WHERE file_id = " + context.fileId + "
