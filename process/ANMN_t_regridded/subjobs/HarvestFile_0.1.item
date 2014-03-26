@@ -88,7 +88,6 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tConvertType_1">
-      <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="" type="id_String"/>
       <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="" type="id_String"/>
       <column comment="" key="false" length="50" name="deployment_code" nullable="true" pattern="" sourceType="" type="id_String"/>
@@ -98,12 +97,9 @@
       <column comment="" key="false" length="35" name="geospatial_lat_min" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="geospatial_lat_max" nullable="true" pattern="" sourceType="" type="id_Double"/>
       <column comment="" key="false" length="35" name="geospatial_lon_min" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="35" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="35" name="site_nominal_depth" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" length="50" name="instrument" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="100" name="instrument_nominal_depth" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="200" name="instrument_nominal_depth" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" length="50" name="featureType" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="35" name="file_version" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" length="35" name="temporal_resolution" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" length="10" name="vertical_resolution" nullable="true" pattern="" sourceType="" type="id_String"/>
     </metadata>
@@ -145,7 +141,6 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="deployment">
       <column comment="" key="true" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="" type="id_String"/>
       <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="" type="id_String"/>
       <column comment="" key="false" length="50" name="deployment_code" nullable="true" pattern="" sourceType="" type="id_String"/>
@@ -155,22 +150,18 @@
       <column comment="" key="false" length="35" name="geospatial_lat_min" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="geospatial_lat_max" nullable="true" pattern="" sourceType="" type="id_Double"/>
       <column comment="" key="false" length="35" name="geospatial_lon_min" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="35" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="35" name="site_nominal_depth" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" length="50" name="instrument" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="100" name="instrument_nominal_depth" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="200" name="instrument_nominal_depth" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" length="50" name="featureType" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="35" name="file_version" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" length="35" name="temporal_resolution" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" length="10" name="vertical_resolution" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="deployment">
         <mapperTableEntries name="file_id" expression="context.fileId.intValue()  " type="id_Integer"/>
-        <mapperTableEntries name="title" expression="row2.title " type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_start" expression="row2.time_coverage_start " type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_end" expression="row2.time_coverage_end " type="id_String" nullable="true"/>
         <mapperTableEntries name="deployment_code" expression="row2.deployment_code " type="id_String" nullable="true"/>
@@ -180,18 +171,14 @@
         <mapperTableEntries name="geospatial_lat_min" expression="row2.geospatial_lat_min " type="id_String" nullable="true"/>
         <mapperTableEntries name="geospatial_lat_max" expression="row2.geospatial_lat_max " type="id_Double" nullable="true"/>
         <mapperTableEntries name="geospatial_lon_min" expression="row2.geospatial_lon_min " type="id_String" nullable="true"/>
-        <mapperTableEntries name="geospatial_vertical_max" expression="row2.geospatial_vertical_max " type="id_String" nullable="true"/>
-        <mapperTableEntries name="site_nominal_depth" expression="row2.site_nominal_depth " type="id_String" nullable="true"/>
         <mapperTableEntries name="instrument" expression="row2.instrument " type="id_String" nullable="true"/>
         <mapperTableEntries name="instrument_nominal_depth" expression="row2.instrument_nominal_depth " type="id_String" nullable="true"/>
         <mapperTableEntries name="featureType" expression="row2.featureType " type="id_String" nullable="true"/>
-        <mapperTableEntries name="file_version" expression="row2.file_version " type="id_String" nullable="true"/>
         <mapperTableEntries name="temporal_resolution" expression="row2.temporal_resolution " type="id_String" nullable="true"/>
         <mapperTableEntries name="vertical_resolution" expression="row2.vertical_resolution " type="id_String" nullable="true"/>
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row2.geospatial_lon_max,row2.geospatial_lat_max,&quot;EPSG:4326&quot;)  " type="id_Geometry" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row2" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
-        <mapperTableEntries name="title" type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_start" type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_end" type="id_String" nullable="true"/>
         <mapperTableEntries name="deployment_code" type="id_String" nullable="true"/>
@@ -201,12 +188,9 @@
         <mapperTableEntries name="geospatial_lat_min" type="id_String" nullable="true"/>
         <mapperTableEntries name="geospatial_lat_max" type="id_Double" nullable="true"/>
         <mapperTableEntries name="geospatial_lon_min" type="id_String" nullable="true"/>
-        <mapperTableEntries name="geospatial_vertical_max" type="id_String" nullable="true"/>
-        <mapperTableEntries name="site_nominal_depth" type="id_String" nullable="true"/>
         <mapperTableEntries name="instrument" type="id_String" nullable="true"/>
         <mapperTableEntries name="instrument_nominal_depth" type="id_String" nullable="true"/>
         <mapperTableEntries name="featureType" type="id_String" nullable="true"/>
-        <mapperTableEntries name="file_version" type="id_String" nullable="true"/>
         <mapperTableEntries name="temporal_resolution" type="id_String" nullable="true"/>
         <mapperTableEntries name="vertical_resolution" type="id_String" nullable="true"/>
       </inputTables>
@@ -238,11 +222,6 @@
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS">
       <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="title"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -292,16 +271,6 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="geospatial_vertical_max"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="site_nominal_depth"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="instrument"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -313,11 +282,6 @@
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="featureType"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="file_version"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -348,7 +312,6 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_1">
       <column comment="" key="true" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="deployment_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -358,19 +321,15 @@
       <column comment="" key="false" length="35" name="geospatial_lat_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="geospatial_lat_max" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="35" name="geospatial_lon_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="35" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="35" name="site_nominal_depth" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="instrument" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="100" name="instrument_nominal_depth" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="200" name="instrument_nominal_depth" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="featureType" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="35" name="file_version" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="35" name="temporal_resolution" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="10" name="vertical_resolution" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="true" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="deployment_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -380,12 +339,9 @@
       <column comment="" key="false" length="35" name="geospatial_lat_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="geospatial_lat_max" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="35" name="geospatial_lon_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="35" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="35" name="site_nominal_depth" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="instrument" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="100" name="instrument_nominal_depth" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="200" name="instrument_nominal_depth" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="featureType" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="35" name="file_version" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="35" name="temporal_resolution" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="10" name="vertical_resolution" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
@@ -443,7 +399,7 @@
       <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" pattern="" sourceType="" type="id_Float"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="measurement">
         <mapperTableEntries name="file_id" expression="context.fileId.intValue()  " type="id_Long"/>
