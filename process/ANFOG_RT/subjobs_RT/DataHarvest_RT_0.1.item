@@ -70,7 +70,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="iDeletedResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="384" posY="416">
+  <node componentName="iDeletedResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="384" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_g7OhkHmhEeOZBbqazZ-jaQ"/>
@@ -93,17 +93,19 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="416">
+  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_g7OhkHmhEeOZBbqazZ-jaQ"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;localhost&quot;"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="HOST" value="context.metadataDb_RT_Server"/>
+    <elementParameter field="TEXT" name="PORT" value="context.metadataDb_RT_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.metadataDb_RT_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.metadataDb_RT_Schema"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="USER" value="context.metadataDb_RT_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.metadataDb_RT_Password"/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
@@ -127,7 +129,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="384" posY="256">
+  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="384" posY="352">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_g7OhkHmhEeOZBbqazZ-jaQ"/>
@@ -150,7 +152,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="736" posY="256">
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="736" posY="352">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_1"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
@@ -177,7 +179,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_1"/>
   </node>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iHarvestResources_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iDeletedResources_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
   </connection>
@@ -187,15 +189,15 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate4"/>
   </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="iHarvestResources_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
+  </connection>
   <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tRunJob_1">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate1"/>
-  </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="iDeletedResources_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
