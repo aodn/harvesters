@@ -8,7 +8,7 @@
     <contextParameter comment="" name="metadataDb_Schema" prompt="metadataDb_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="soop_co2"/>
     <contextParameter comment="" name="metadataDb_Server" prompt="metadataDb_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="localhost"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
-    <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value="1"/>
+    <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value="2"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -195,7 +195,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_a AS(SELECT  file_id,value AS platform_code FROM attribute WHERE name = 'platform_code' AND file_id = &quot; + context.file_id +&quot;),&#xA;table_b AS(SELECT   CASE WHEN value = 'RV Southern Surveyor' THEN 'Southern Surveyor' ELSE value END AS vessel_name FROM attribute WHERE name = 'vessel_name' AND file_id = &quot; + context.file_id +&quot;),&#xA;table_c AS(SELECT value AS voyage_number FROM attribute WHERE name = 'voyage_id' AND file_id = &quot; + context.file_id +&quot;),&#xA;table_d AS(SELECT vessel_name, platform_code,  colour FROM vessel_names where (SELECT  vessel_name FROM deployments WHERE file_id = &quot; + context.file_id +&quot; ) =  vessel_name),&#xA;table_e AS(SELECT url,size from indexed_file where id = &quot; + context.file_id +&quot;),&#xA;&#xA;data AS (SELECT  &#xA;min(\&quot;TIME\&quot;) AS time_start, &#xA;max(\&quot;TIME\&quot;) AS time_end, &#xA;&#xA;ST_SimplifyPreserveTopology(make_trajectory(geom ORDER BY \&quot;TIME\&quot;),0.005) AS geom&#xA;FROM  measurements&#xA;WHERE (\&quot;LATITUDE_quality_control\&quot; = '1' OR \&quot;LATITUDE_quality_control\&quot; = '2') AND (\&quot;LONGITUDE_quality_control\&quot; = '1' OR \&quot;LONGITUDE_quality_control\&quot; = '2') AND \&quot;LATITUDE\&quot; != 0 AND \&quot;LONGITUDE\&quot; != 0&#xA;AND  file_id = &quot; + context.file_id + &quot; )&#xA;&#xA;SELECT DISTINCT &#xA;file_id,&#xA;url,&#xA;size,&#xA;time_start,&#xA;time_end,&#xA;voyage_number,&#xA;table_d.vessel_name,&#xA;colour, &#xA;&#xA;geom&#xA;FROM data,table_a,table_b,table_c,table_d,table_e;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_a AS(SELECT  file_id,value AS platform_code FROM attribute WHERE name = 'platform_code' AND file_id = &quot; + context.file_id +&quot;),&#xA;table_b AS(SELECT   CASE WHEN value = 'RV Southern Surveyor' THEN 'Southern Surveyor' ELSE value END AS vessel_name FROM attribute WHERE name = 'vessel_name' AND file_id = &quot; + context.file_id +&quot;),&#xA;table_c AS(SELECT value AS voyage_number FROM attribute WHERE name = 'cruise_id' AND file_id = &quot; + context.file_id +&quot;),&#xA;table_d AS(SELECT vessel_name, platform_code,  colour FROM vessel_names where (SELECT  vessel_name FROM deployments WHERE file_id = &quot; + context.file_id +&quot; ) =  vessel_name),&#xA;table_e AS(SELECT url,size from indexed_file where id = &quot; + context.file_id +&quot;),&#xA;&#xA;data AS (SELECT  &#xA;min(\&quot;TIME\&quot;) AS time_start, &#xA;max(\&quot;TIME\&quot;) AS time_end, &#xA;&#xA;ST_SimplifyPreserveTopology(make_trajectory(geom ORDER BY \&quot;TIME\&quot;),0.005) AS geom&#xA;FROM  measurements&#xA;WHERE (\&quot;LATITUDE_quality_control\&quot; = '1' OR \&quot;LATITUDE_quality_control\&quot; = '2') AND (\&quot;LONGITUDE_quality_control\&quot; = '1' OR \&quot;LONGITUDE_quality_control\&quot; = '2') AND \&quot;LATITUDE\&quot; != 0 AND \&quot;LONGITUDE\&quot; != 0&#xA;AND  file_id = &quot; + context.file_id + &quot; )&#xA;&#xA;SELECT DISTINCT &#xA;file_id,&#xA;url,&#xA;size,&#xA;time_start,&#xA;time_end,&#xA;voyage_number,&#xA;table_d.vessel_name,&#xA;colour, &#xA;&#xA;geom&#xA;FROM data,table_a,table_b,table_c,table_d,table_e;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -422,7 +422,7 @@
       <column comment="" key="false" name="distribution_statement" nullable="true" pattern="" sourceType="" type="id_String"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="var1" expression="StringHandling.CHANGE(row1.vessel_name,&quot;RV Southern Surveyor&quot;,&quot;Southern Surveyor&quot;)  " type="id_String"/>
       </varTables>
@@ -785,7 +785,7 @@
       <column comment="" key="false" length="1" name="xCO2EQ_PPM_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(variables.LONGITUDE,variables.LATITUDE,&quot;EPSG:4326&quot;)   " type="id_Geometry"/>
         <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1950-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,variables.TIME,true) " type="id_Date"/>
