@@ -36,7 +36,8 @@
 	  CONSTRAINT measurement_pk PRIMARY KEY (driftnum, index),
 	  CONSTRAINT measurement_file_fk FOREIGN KEY (file_id)
 	      REFERENCES indexed_file (id) MATCH SIMPLE
-	      ON UPDATE CASCADE ON DELETE CASCADE
+	      ON UPDATE CASCADE ON DELETE CASCADE,
+	  CONSTRAINT measurement_geom_check CHECK (st_isvalid(geom))
 	--  CONSTRAINT measurement_track_fk FOREIGN KEY (driftnum)
 	--      REFERENCES track (driftnum) MATCH SIMPLE
 	--      ON UPDATE CASCADE ON DELETE CASCADE
