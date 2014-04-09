@@ -132,11 +132,8 @@
       <column comment="" key="false" length="32" name="site_code" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
       <column comment="" key="false" length="32" name="platform_code" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
       <column comment="" key="false" length="64" name="deployment_code" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
-      <column comment="" key="false" length="2147483647" name="instrument" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
-      <column comment="" key="false" length="2147483647" name="instrument_serial_number" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
       <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_String"/>
       <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_String"/>
-      <column comment="" key="false" length="32" name="_abstract" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="352" posY="128">
@@ -174,19 +171,10 @@
       <column key="false" length="2147483647" name="geom" nullable="true" pattern="" precision="0" sourceType="GEOMETRY" type="id_Geometry">
         <additionalField key="Comment" value=""/>
       </column>
-      <column key="false" length="2147483647" name="instrument" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column key="false" length="2147483647" name="instrument_serial_number" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
       <column key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
         <additionalField key="Comment" value=""/>
       </column>
       <column key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column key="false" length="2147483647" name="_abstract" nullable="true" originalDbColumnName="abstract" pattern="" precision="0" sourceType="TEXT" type="id_String">
         <additionalField key="Comment" value=""/>
       </column>
     </metadata>
@@ -201,21 +189,15 @@
         <mapperTableEntries name="LATITUDE" type="id_Double" nullable="true"/>
         <mapperTableEntries name="LONGITUDE" type="id_Double" nullable="true"/>
         <mapperTableEntries name="geom" type="id_Geometry" nullable="true"/>
-        <mapperTableEntries name="instrument" expression="row1.instrument" type="id_String" nullable="true"/>
-        <mapperTableEntries name="instrument_serial_number" expression="row1.instrument_serial_number" type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_start" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_start,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
         <mapperTableEntries name="time_coverage_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_end,&quot;Z&quot;,&quot;+0000&quot;))" type="id_Date" nullable="true"/>
-        <mapperTableEntries name="_abstract" expression="row1._abstract" type="id_String" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row1" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="site_code" type="id_String"/>
         <mapperTableEntries name="platform_code" type="id_String"/>
         <mapperTableEntries name="deployment_code" type="id_String"/>
-        <mapperTableEntries name="instrument" type="id_String" nullable="true"/>
-        <mapperTableEntries name="instrument_serial_number" type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_start" type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_end" type="id_String" nullable="true"/>
-        <mapperTableEntries name="_abstract" type="id_String" nullable="true"/>
       </inputTables>
     </nodeData>
   </node>
@@ -279,27 +261,12 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="instrument"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="instrument_serial_number"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="_abstract"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -335,19 +302,10 @@
       <column key="false" length="2147483647" name="geom" nullable="true" pattern="" precision="0" sourceType="GEOMETRY" type="id_Geometry">
         <additionalField key="Comment" value=""/>
       </column>
-      <column key="false" length="2147483647" name="instrument" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column key="false" length="2147483647" name="instrument_serial_number" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
       <column key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
         <additionalField key="Comment" value=""/>
       </column>
       <column key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column key="false" length="2147483647" name="_abstract" nullable="true" originalDbColumnName="abstract" pattern="" precision="0" sourceType="TEXT" type="id_String">
         <additionalField key="Comment" value=""/>
       </column>
     </metadata>
@@ -373,19 +331,10 @@
       <column key="false" length="2147483647" name="geom" nullable="true" pattern="" precision="0" sourceType="GEOMETRY" type="id_Geometry">
         <additionalField key="Comment" value=""/>
       </column>
-      <column key="false" length="2147483647" name="instrument" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column key="false" length="2147483647" name="instrument_serial_number" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
       <column key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
         <additionalField key="Comment" value=""/>
       </column>
       <column key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column key="false" length="2147483647" name="_abstract" nullable="true" originalDbColumnName="abstract" pattern="" precision="0" sourceType="TEXT" type="id_String">
         <additionalField key="Comment" value=""/>
       </column>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
