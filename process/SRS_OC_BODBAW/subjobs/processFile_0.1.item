@@ -12,14 +12,14 @@
     <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_X28C0FZQEeO1nIjDowevtg" type="id_String" value=""/>
     <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_X28C0FZQEeO1nIjDowevtg" type="id_String" value=".*/IMOS_SRS-OC-BODBAW_X_.*nc"/>
     <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_X28C0FZQEeO1nIjDowevtg" type="id_String" value="/mnt/imos-t3/IMOS/opendap/SRS/SRS-OC-BODBAW"/>
-    <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value="154"/>
-    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="/mnt/imos-t3/IMOS/opendap/SRS/SRS-OC-BODBAW/1997_cruise-ER051997/pigment/IMOS_SRS-OC-BODBAW_X_19970514T021500Z_ER051997-pigment_END-19970515T230800Z_C-20140317T140000Z.nc"/>
+    <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value="1"/>
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value=""/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="320"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="192"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="448"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="160"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
     <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
     <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
@@ -417,7 +417,7 @@
       <column comment="" defaultValue="" key="false" name="geom" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(variables.LONGITUDE,variables.LATITUDE,&quot;EPSG:4326&quot;)   " type="id_Geometry"/>
         <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1970-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,(variables.TIME))    " type="id_Date"/>
@@ -513,110 +513,6 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="384">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_2"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
-    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH table_a AS (SELECT DISTINCT  vessel_name, platform_code FROM deployments )&#xA;SELECT vessel_name,platform_code,&#xA;'#'::text || upper(lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour&#xA;FROM table_a&#xA;ORDER BY vessel_name;&#xA;&quot;"/>
-    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
-    <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
-    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
-    <elementParameter field="TABLE" name="TRIM_COLUMN">
-      <elementValue elementRef="SCHEMA_COLUMN" value="vessel_name"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="platform_code"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="colour"/>
-      <elementValue elementRef="TRIM" value="false"/>
-    </elementParameter>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlInput_2">
-      <column comment="" key="false" length="0" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="0" name="platform_code" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="0" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
-    </metadata>
-  </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="416" posY="384">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_3"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;vessel_names&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
-    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT_OR_UPDATE"/>
-    <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
-    <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
-    <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
-    <elementParameter field="TABLE" name="ADD_COLS"/>
-    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
-    <elementParameter field="TABLE" name="FIELD_OPTIONS">
-      <elementValue elementRef="SCHEMA_COLUMN" value="vessel_name"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="platform_code"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="colour"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
-    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
-    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
-    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
-    <elementParameter field="TEXT" name="LABEL" value="createVessel"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="iPostgresqlOutput_3">
-      <column comment="" key="true" length="50" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="platform_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-    </metadata>
-    <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="true" length="50" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="platform_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
-    </metadata>
-  </node>
   <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="544">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_3"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
@@ -633,7 +529,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH&#xA;table_b AS(SELECT abstract, \&quot;references\&quot;  as url_marlin_metadata, cruise_id ,  vessel_name FROM deployments WHERE file_id = &quot; + context.file_id + &quot;  ),&#xA;table_c AS(SELECT size , &quot; +  context.file_id  + &quot; as file_id FROM indexed_file  WHERE id = &quot; + context.file_id + &quot; ),&#xA;table_d AS(SELECT vessel_name, platform_code,  colour FROM vessel_names where (SELECT  vessel_name FROM deployments WHERE file_id = &quot; + context.file_id +&quot; ) =  vessel_name),&#xA;table_e AS(SELECT  CASE&#xA;&#x9;&#x9;&#x9;WHEN url ~ '/pigment/' THEN 'pigment' &#xA;&#x9;&#x9;&#x9;WHEN url ~ '/absorption/' THEN 'absorption' &#xA;&#x9;&#x9;&#x9;WHEN url ~ '/suspended_matter/' THEN 'suspended matter' &#xA;&#x9;&#x9;&#x9;ELSE 'unknown' END AS data_type from indexed_file WHERE id = &quot;+ context.file_id +&quot;),&#xA;&#xA;table_f AS (SELECT url as url_nc, regexp_replace (replace (replace( url, '/mnt/imos-t3/', 'http://data.aodn.org.au/') , 'opendap', 'public') ,'_C-.*', '.csv') as url_csv, regexp_replace (replace (replace( url, '/mnt/imos-t3/', 'http://data.aodn.org.au/') , 'opendap', 'public') ,'_C-.*', '.png') as url_plot FROM indexed_file WHERE id = &quot; + context.file_id + &quot; ),&#xA;&#xA;&#xA;data AS (SELECT &#xA;min(\&quot;TIME\&quot;) AT TIME ZONE 'UTC' AS  time_start, &#xA;max(\&quot;TIME\&quot;) AT TIME ZONE 'UTC' AS time_end, &#xA;ST_Multi(ST_Union(geom)) AS geom &#xA;FROM  measurements&#xA; WHERE  file_id =&quot;+  context.file_id +&quot;)&#xA;&#xA;SELECT &#xA;file_id,&#xA;abstract,&#xA;url_marlin_metadata,&#xA;cruise_id,&#xA;data_type,&#xA;url_nc,&#xA;url_csv,&#xA;url_plot,&#xA;size,&#xA;time_start,&#xA;time_end,&#xA;table_d.vessel_name,&#xA;colour, &#xA;geom&#xA;FROM data,table_b,table_c,table_d,table_e,table_f; &quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH&#xA;table_b AS(SELECT abstract, \&quot;references\&quot;  as url_marlin_metadata, cruise_id  FROM deployments WHERE file_id = &quot; + context.file_id + &quot;  ),&#xA;table_c AS(SELECT size , &quot; +  context.file_id  + &quot; as file_id FROM indexed_file  WHERE id = &quot; + context.file_id + &quot; ),&#xA;table_d AS(SELECT vessel_name, platform_code,  colour FROM cruise_id where (SELECT  cruise_id FROM deployments WHERE file_id = &quot; + context.file_id +&quot; ) =  cruise_id),&#xA;table_e AS(SELECT  CASE&#xA;&#x9;&#x9;&#x9;WHEN url ~ '/pigment/' THEN 'pigment' &#xA;&#x9;&#x9;&#x9;WHEN url ~ '/absorption/' THEN 'absorption' &#xA;&#x9;&#x9;&#x9;WHEN url ~ '/suspended_matter/' THEN 'suspended matter' &#xA;&#x9;&#x9;&#x9;WHEN url ~ '/backscattering/' THEN 'backscattering'&#xA;&#x9;&#x9;&#x9;ELSE 'unknown' END AS data_type from indexed_file WHERE id = &quot;+ context.file_id +&quot;),&#xA;&#xA;table_f AS (SELECT url as url_nc, regexp_replace (replace (replace( url, '/mnt/imos-t3/', 'http://data.aodn.org.au/') , 'opendap', 'public') ,'_C-.*', '.csv') as url_csv, regexp_replace (replace (replace( url, '/mnt/imos-t3/', 'http://data.aodn.org.au/') , 'opendap', 'public') ,'_C-.*', '.png') as url_plot FROM indexed_file WHERE id = &quot; + context.file_id + &quot; ),&#xA;&#xA;&#xA;data AS (SELECT &#xA;min(\&quot;TIME\&quot;) AT TIME ZONE 'UTC' AS  time_start, &#xA;max(\&quot;TIME\&quot;) AT TIME ZONE 'UTC' AS time_end, &#xA;ST_Multi(ST_Union(geom)) AS geom &#xA;FROM  measurements&#xA; WHERE  file_id =&quot;+  context.file_id +&quot;)&#xA;&#xA;SELECT &#xA;file_id,&#xA;abstract,&#xA;url_marlin_metadata,&#xA;cruise_id,&#xA;data_type,&#xA;url_nc,&#xA;url_csv,&#xA;url_plot,&#xA;size,&#xA;time_start,&#xA;time_end,&#xA;vessel_name,&#xA;colour, &#xA;geom&#xA;FROM data,table_b,table_c,table_d,table_e,table_f; &quot;&#xA;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -841,7 +737,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlCommit_1"/>
   </node>
-  <node componentName="tPostgresqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-32" posY="32">
+  <node componentName="tPostgresqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-192" posY="32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
@@ -862,7 +758,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="iIncludeSdiLibraries" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-256" posY="32">
+  <node componentName="iIncludeSdiLibraries" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-384" posY="32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIncludeSdiLibraries_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import org.talend.sdi.geometry.Geometry;"/>
@@ -886,6 +782,168 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="320" posY="384">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_4"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH table_a AS (SELECT cruise_id, vessel_name, platform_code FROM deployments where file_id = &quot; + context.file_id + &quot; )&#xA;SELECT cruise_id, vessel_name,platform_code,&#xA;'#'::text || upper(lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour&#xA;FROM table_a WHERE table_a.cruise_id NOT IN (SELECT cruise_id FROM cruise_id);&#xA;&quot;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
+    <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="cruise_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="vessel_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="platform_code"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="colour"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlInput_4">
+      <column comment="" key="false" name="cruise_id" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="vessel_name" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="544" posY="384">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_5"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;cruise_id&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
+    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT_OR_UPDATE"/>
+    <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
+    <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
+    <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TABLE" name="ADD_COLS"/>
+    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
+    <elementParameter field="TABLE" name="FIELD_OPTIONS">
+      <elementValue elementRef="SCHEMA_COLUMN" value="cruise_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="vessel_name"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="platform_code"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="colour"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
+    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
+    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
+    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
+    <elementParameter field="TEXT" name="LABEL" value="createColour"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="iPostgresqlOutput_5">
+      <column comment="" key="true" name="cruise_id" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="vessel_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+    </metadata>
+    <metadata connector="REJECT" name="REJECT">
+      <column comment="" key="true" name="cruise_id" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="vessel_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="0" posY="32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_6"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select url from indexed_file where id =&quot;+ context.file_id +&quot;;&quot;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
+    <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="url"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="LABEL" value="getURL"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlInput_6">
+      <column comment="" key="false" name="url" nullable="false" pattern="" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="0" posY="128">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_2"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#xA;//&#xA;// multiply by 2 the row identifier&#xA;// output_row.id = input_row.id * 2;&#xA;//&#xA;// lowercase the name&#xA;// output_row.name = input_row.name.toLowerCase();&#xA;&#xA;context.url=row7.url;"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tJavaRow_2">
+      <column comment="" key="false" name="url" nullable="false" pattern="" sourceType="" type="id_String"/>
+    </metadata>
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="iNetCDFGlobalAttributes_1" offsetLabelX="0" offsetLabelY="0" source="iNetCDFGlobalAttributes_1" target="tMap_1">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
@@ -1457,35 +1515,9 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="out1"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlOutput_2" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlOutput_2" target="tPostgresqlInput_2">
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlOutput_2" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlOutput_2" target="tPostgresqlInput_4">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk2"/>
-  </connection>
-  <connection connectorName="FLOW" label="row3" lineStyle="0" metaname="tPostgresqlInput_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_2" target="iPostgresqlOutput_3">
-    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="vessel_name"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="platform_code"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="colour"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
-    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
-    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
-    <elementParameter field="TABLE" name="THRESHLODS"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row3"/>
-  </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlOutput_3" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlOutput_3" target="tPostgresqlInput_3">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk3"/>
   </connection>
   <connection connectorName="FLOW" label="row4" lineStyle="0" metaname="tPostgresqlInput_3" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_3" target="iPostgresqlOutput_4">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
@@ -1531,7 +1563,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk4"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="iNetCDFGlobalAttributes_1">
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="tPostgresqlInput_6">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk5"/>
   </connection>
@@ -1543,6 +1575,52 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk6"/>
   </connection>
+  <connection connectorName="FLOW" label="row5" lineStyle="0" metaname="tPostgresqlInput_4" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_4" target="iPostgresqlOutput_5">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="vessel_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="platform_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="colour"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row5"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlOutput_5" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlOutput_5" target="tPostgresqlInput_3">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk3"/>
+  </connection>
+  <connection connectorName="FLOW" label="row7" lineStyle="0" metaname="tPostgresqlInput_6" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_6" target="tJavaRow_2">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="url"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row7"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlInput_6" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_6" target="iNetCDFGlobalAttributes_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk7"/>
+  </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttributes_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
@@ -1550,11 +1628,6 @@
   </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFInput_1"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
-  <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_2"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
@@ -1586,6 +1659,16 @@
   </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_4"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_6"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
