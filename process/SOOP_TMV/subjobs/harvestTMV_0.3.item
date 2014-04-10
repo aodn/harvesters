@@ -69,7 +69,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&#xA;&quot;&#xA;WITH table_a AS (SELECT DISTINCT  vessel_name, platform_code FROM deployments )&#xA;SELECT vessel_name,platform_code,&#xA;'#'::text || upper(lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour&#xA;FROM table_a&#xA;ORDER BY vessel_name;&#xA;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH table_a AS (SELECT DISTINCT  vessel_name, platform_code FROM deployments where file_id = &quot; + context.file_id + &quot;)&#xA;SELECT vessel_name,platform_code,&#xA;'#'::text || upper(lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour&#xA;FROM table_a where table_a.vessel_name NOT IN (SELECT vessel_name FROM vessel_names);&#xA;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -539,7 +539,7 @@
       <column comment="" defaultValue="" key="false" name="geom" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row2.LONGITUDE,row2.LATITUDE,&quot;EPSG:4326&quot;)   " type="id_Geometry"/>
         <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1950-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,row2.TIME,true) " type="id_Date"/>
@@ -921,7 +921,7 @@
       <column comment="" key="false" name="vessel_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="var1" expression="StringHandling.CHANGE(row1.vessel_name,&quot;Spirit of Tasmania I&quot;,&quot;Spirit of Tasmania 1&quot;) " type="id_String"/>
       </varTables>
