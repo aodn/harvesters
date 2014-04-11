@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet author="talend" id="create_track_table-1">
+      <sql>
+	CREATE TABLE track
+	(
+	  driftnum bigint NOT NULL,
+	  file_id bigint NOT NULL,
+	  date_utc date,
+	  duration interval,
+	  geom geometry(Geometry,4326) NOT NULL,
+	  CONSTRAINT track_pk PRIMARY KEY (driftnum, date_utc),
+	  CONSTRAINT track_file_fk FOREIGN KEY (file_id)
+	      REFERENCES indexed_file (id) MATCH SIMPLE
+	      ON UPDATE CASCADE ON DELETE CASCADE,
+	  CONSTRAINT track_geom_check CHECK (st_isvalid(geom))
+	);
+
+	CREATE INDEX track_gist_idx ON track USING GIST (geom); 
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_measurement_table-1">
+      <sql>
+	CREATE TABLE measurement
+	(
+	  driftnum bigint NOT NULL,
+	  file_id bigint NOT NULL,
+	  index bigint NOT NULL,
+	  time timestamp with time zone NOT NULL,
+	  latitude double precision,
+	  longitude double precision,
+	  geom geometry(Geometry,4326),
+	  CONSTRAINT measurement_pk PRIMARY KEY (driftnum, index),
+	  CONSTRAINT measurement_file_fk FOREIGN KEY (file_id)
+	      REFERENCES indexed_file (id) MATCH SIMPLE
+	      ON UPDATE CASCADE ON DELETE CASCADE,
+	  CONSTRAINT measurement_geom_check CHECK (st_isvalid(geom))
+	--  CONSTRAINT measurement_track_fk FOREIGN KEY (driftnum)
+	--      REFERENCES track (driftnum) MATCH SIMPLE
+	--      ON UPDATE CASCADE ON DELETE CASCADE
+	);
+	COMMENT ON COLUMN measurement.index IS 'index of measurement in netCDF file';
+	
+	CREATE INDEX measurement_gist_idx ON measurement USING GIST (geom); 
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_map_view-1" runOnChange="true">
+      <sql>
+	DROP VIEW IF EXISTS noaa_drifters_map;
+	CREATE VIEW noaa_drifters_map AS
+	  SELECT
+	    t.driftnum,
+	    t.file_id,
+	    t.date_utc,
+	    t.duration,
+	    t.geom,
+	    f.url, 
+	    f.size
+	    FROM track t JOIN indexed_file f ON t.file_id = f.id
+	    ORDER BY t.driftnum, t.date_utc;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_data_view-1" runOnChange="true">
+      <sql>
+	DROP VIEW IF EXISTS noaa_drifters_data;
+	CREATE VIEW noaa_drifters_data AS
+	  SELECT 
+	    driftnum,
+	    file_id,
+	    index,
+	    date(time AT TIME ZONE 'UTC') AS date_utc,
+	    time AT TIME ZONE 'UTC' AS time_utc,
+	    latitude,
+	    longitude,
+	    geom
+	    FROM measurement
+	    ORDER BY driftnum, time_utc;
+      </sql>
+    </changeSet>
+
+
+</databaseChangeLog>
