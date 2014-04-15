@@ -17,7 +17,7 @@
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms512M -Xmx2048M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="160"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="256"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
     <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
     <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
@@ -50,7 +50,7 @@
     <routinesParameter id="_cRn34BQsEeKRFb0vPU_LNg" name="DAPUtils"/>
     <routinesParameter id="_IMfY4Dp8EeKYTu4DLH4cKg" name="NetCDFUtils"/>
   </parameters>
-  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="32">
+  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="-32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_QKA6EAlGEeObitNNn0mU_g"/>
@@ -63,35 +63,13 @@
     <elementParameter field="TEXT" name="PASS" value="context.DestinationDatabase_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/Users/xavierhoenner/Work/Resources/TOS_DI-r96646-V5.1.3/workspace/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_attribute_table&quot;>&#xA;        &lt;createTable tableName=&quot;attribute&quot;>&#xA;            &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;container&quot; type=&quot;TEXT&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;name&quot; type=&quot;TEXT&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;type&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;value&quot; type=&quot;TEXT&quot;/>&#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_file_table&quot;>&#xA;        &lt;createTable tableName=&quot;file&quot;>&#xA;            &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;file_pk&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;url&quot; type=&quot;TEXT&quot;/>&#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_variable_table&quot;>&#xA;        &lt;createTable tableName=&quot;variable&quot;>&#xA;            &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;name&quot; type=&quot;TEXT&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;type&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;dimensions&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;shape&quot; type=&quot;TEXT&quot;/>&#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_pkey_to_attribute_table&quot;>&#xA;        &lt;addPrimaryKey columnNames=&quot;file_id, container, name&quot; constraintName=&quot;attribute_pk&quot; tableName=&quot;attribute&quot;/>&#xA;    &lt;/changeSet>&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_pkey_to_variable_table&quot;>&#xA;        &lt;addPrimaryKey columnNames=&quot;file_id, name&quot; constraintName=&quot;variable_pk&quot; tableName=&quot;variable&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_measurements_table&quot;>&#xA;        &lt;sql>&#xA;        CREATE TABLE measurements&#xA;        (&#xA;          profile_id integer,&#xA;          measurement_id bigserial NOT NULL,&#xA;          &quot;DEPTH&quot; real,&#xA;          &quot;DEPTH_quality_control&quot; smallint,&#xA;          &quot;TEMP&quot; real,&#xA;          &quot;TEMP_quality_control&quot; smallint,&#xA;          CONSTRAINT measurements_pk PRIMARY KEY (measurement_id),&#xA;          CONSTRAINT measurements_fkey FOREIGN KEY (profile_id)&#xA;              REFERENCES indexed_file (id) MATCH SIMPLE&#xA;              ON UPDATE CASCADE ON DELETE CASCADE&#xA;        );&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_qc_flags_table&quot;>&#xA;        &lt;sql>&#xA;        CREATE TABLE qc_flags&#xA;        (&#xA;          profile_id bigint NOT NULL,&#xA;          &quot;TIME_quality_control&quot; smallint,&#xA;          &quot;LONGITUDE_quality_control&quot; smallint,&#xA;          &quot;LATITUDE_quality_control&quot; smallint,&#xA;          CONSTRAINT qc_flags_pk PRIMARY KEY (profile_id),&#xA;          CONSTRAINT qc_flags_fkey FOREIGN KEY (profile_id)&#xA;              REFERENCES indexed_file (id) MATCH SIMPLE&#xA;              ON UPDATE CASCADE ON DELETE CASCADE&#xA;        );&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_xbt_lines_table&quot;>&#xA;        &lt;sql>&#xA;        CREATE TABLE xbt_lines&#xA;        (&#xA;          &quot;XBT_line&quot; character varying(20) NOT NULL,&#xA;          colour character varying(7),&#xA;          CONSTRAINT xbt_lines_pkey PRIMARY KEY (&quot;XBT_line&quot;)&#xA;        );&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_ soop_xbt_dm_profile_map_table&quot;>&#xA;        &lt;sql>&#xA;        CREATE TABLE soop_xbt_dm_profile_map&#xA;        (&#xA;          profile_id bigint NOT NULL,&#xA;          url character varying(512) NOT NULL,&#xA;          &quot;XBT_line&quot; character varying(20) NOT NULL,&#xA;          &quot;XBT_line_description&quot; character varying(50),&#xA;          &quot;Callsign&quot; character varying(10),&#xA;          &quot;XBT_cruise_ID&quot; character varying(20),&#xA;          &quot;XBT_uniqueid&quot; character varying(12),&#xA;          &quot;TIME&quot; timestamp without time zone,&#xA;          max_depth double precision,&#xA;         &quot;XBT_probetype_fallrate_equation&quot; character varying(256),&#xA;          &quot;XBT_recorder_type&quot; character varying(256),&#xA;          &quot;XBT_instrument_serialnumber&quot; character varying(10),&#xA;          &quot;XBT_calibration_OFFS&quot; character varying(10),&#xA;          &quot;XBT_calibration_SCAL&quot; character varying(10),&#xA;          colour character varying(7),&#xA;          geom geometry(Geometry,4326),&#xA;&#x9;  size double precision,&#xA;          CONSTRAINT soop_xbt_dm_profile_map_pkey PRIMARY KEY (profile_id),&#xA;          CONSTRAINT soop_xbt_dm_profile_map_fkey FOREIGN KEY (profile_id)&#xA;              REFERENCES indexed_file (id) MATCH SIMPLE&#xA;              ON UPDATE CASCADE ON DELETE CASCADE&#xA;        );&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;    &#xA;    &#x9;&lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_gist_index_and_add_geom_check_on_map_table&quot;>&#xA;&#x9;      &lt;sql>&#xA;&#x9;        CREATE INDEX soop_xbt_dm_profile_map_gist_idx ON soop_xbt_dm_profile_map USING GIST (geom);&#xA;&#x9;&#x9;ALTER TABLE soop_xbt_dm_profile_map ADD CHECK (ST_ISVALID(geom));&#xA;&#x9;      &lt;/sql>&#xA;&#x9;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_ soop_xbt_dm_profile_data_view&quot;>&#xA;      &lt;createView viewName=&quot;soop_xbt_dm_profile_data&quot;> SELECT measurements.profile_id,&#xA;         measurements.measurement_id, &#xA;         soop_xbt_dm_profile_map.&quot;XBT_line&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_line_description&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;Callsign&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_cruise_ID&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_uniqueid&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_probetype_fallrate_equation&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_recorder_type&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_instrument_serialnumber&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_calibration_OFFS&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_calibration_SCAL&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;TIME&quot;::timestamp without time zone AS &quot;TIME&quot;,&#xA;         qc_flags.&quot;TIME_quality_control&quot;, &#xA;         st_x(soop_xbt_dm_profile_map.geom) AS &quot;LONGITUDE&quot;, &#xA;         qc_flags.&quot;LONGITUDE_quality_control&quot;, &#xA;         st_y(soop_xbt_dm_profile_map.geom) AS &quot;LATITUDE&quot;, &#xA;         qc_flags.&quot;LATITUDE_quality_control&quot;, &#xA;         measurements.&quot;DEPTH&quot;, &#xA;         measurements.&quot;DEPTH_quality_control&quot;, &#xA;         measurements.&quot;TEMP&quot;, &#xA;         measurements.&quot;TEMP_quality_control&quot;, &#xA;         soop_xbt_dm_profile_map.geom&#xA;         FROM ((measurements&#xA;         LEFT JOIN soop_xbt_dm_profile_map ON ((soop_xbt_dm_profile_map.profile_id = measurements.profile_id)))&#xA;         LEFT JOIN qc_flags ON ((qc_flags.profile_id = measurements.profile_id)))&#xA;         ORDER BY measurements.measurement_id;&lt;/createView>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_attribute_table&quot;>&#xA;        &lt;createTable tableName=&quot;attribute&quot;>&#xA;            &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;container&quot; type=&quot;TEXT&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;name&quot; type=&quot;TEXT&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;type&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;value&quot; type=&quot;TEXT&quot;/>&#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_file_table&quot;>&#xA;        &lt;createTable tableName=&quot;file&quot;>&#xA;            &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;file_pk&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;url&quot; type=&quot;TEXT&quot;/>&#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_variable_table&quot;>&#xA;        &lt;createTable tableName=&quot;variable&quot;>&#xA;            &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;name&quot; type=&quot;TEXT&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;type&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;dimensions&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;shape&quot; type=&quot;TEXT&quot;/>&#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_pkey_to_attribute_table&quot;>&#xA;        &lt;addPrimaryKey columnNames=&quot;file_id, container, name&quot; constraintName=&quot;attribute_pk&quot; tableName=&quot;attribute&quot;/>&#xA;    &lt;/changeSet>&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_pkey_to_variable_table&quot;>&#xA;        &lt;addPrimaryKey columnNames=&quot;file_id, name&quot; constraintName=&quot;variable_pk&quot; tableName=&quot;variable&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_measurements_table&quot;>&#xA;        &lt;sql>&#xA;        CREATE TABLE measurements&#xA;        (&#xA;          profile_id integer,&#xA;          measurement_id bigserial NOT NULL,&#xA;          &quot;DEPTH&quot; real,&#xA;          &quot;DEPTH_quality_control&quot; smallint,&#xA;          &quot;TEMP&quot; real,&#xA;          &quot;TEMP_quality_control&quot; smallint,&#xA;          CONSTRAINT measurements_pk PRIMARY KEY (measurement_id),&#xA;          CONSTRAINT measurements_fkey FOREIGN KEY (profile_id)&#xA;              REFERENCES indexed_file (id) MATCH SIMPLE&#xA;              ON UPDATE CASCADE ON DELETE CASCADE&#xA;        );&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_index_on_measurements_table&quot;>&#xA;        &lt;sql>&#xA;&#x9;CREATE INDEX measurements_idx&#xA;  &#x9;ON soop_xbt_dm.measurements&#xA;  &#x9;USING btree&#xA; &#x9; (profile_id);&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_qc_flags_table&quot;>&#xA;        &lt;sql>&#xA;        CREATE TABLE qc_flags&#xA;        (&#xA;          profile_id bigint NOT NULL,&#xA;          &quot;TIME_quality_control&quot; smallint,&#xA;          &quot;LONGITUDE_quality_control&quot; smallint,&#xA;          &quot;LATITUDE_quality_control&quot; smallint,&#xA;          CONSTRAINT qc_flags_pk PRIMARY KEY (profile_id),&#xA;          CONSTRAINT qc_flags_fkey FOREIGN KEY (profile_id)&#xA;              REFERENCES indexed_file (id) MATCH SIMPLE&#xA;              ON UPDATE CASCADE ON DELETE CASCADE&#xA;        );&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_xbt_lines_table&quot;>&#xA;        &lt;sql>&#xA;        CREATE TABLE xbt_lines&#xA;        (&#xA;          &quot;XBT_line&quot; character varying(20) NOT NULL,&#xA;          colour character varying(7),&#xA;          CONSTRAINT xbt_lines_pkey PRIMARY KEY (&quot;XBT_line&quot;)&#xA;        );&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_ soop_xbt_dm_profile_map_table&quot;>&#xA;        &lt;sql>&#xA;        CREATE TABLE soop_xbt_dm_profile_map&#xA;        (&#xA;          profile_id bigint NOT NULL,&#xA;          url character varying(512) NOT NULL,&#xA;          &quot;XBT_line&quot; character varying(20) NOT NULL,&#xA;          &quot;XBT_line_description&quot; character varying(50),&#xA;          &quot;Callsign&quot; character varying(10),&#xA;          &quot;XBT_cruise_ID&quot; character varying(20),&#xA;          &quot;XBT_uniqueid&quot; character varying(12),&#xA;          &quot;TIME&quot; timestamp without time zone,&#xA;          max_depth double precision,&#xA;         &quot;XBT_probetype_fallrate_equation&quot; character varying(256),&#xA;          &quot;XBT_recorder_type&quot; character varying(256),&#xA;          &quot;XBT_instrument_serialnumber&quot; character varying(10),&#xA;          &quot;XBT_calibration_OFFS&quot; character varying(10),&#xA;          &quot;XBT_calibration_SCAL&quot; character varying(10),&#xA;          colour character varying(7),&#xA;          geom geometry(Geometry,4326),&#xA;&#x9;  size double precision,&#xA;          CONSTRAINT soop_xbt_dm_profile_map_pkey PRIMARY KEY (profile_id),&#xA;          CONSTRAINT soop_xbt_dm_profile_map_fkey FOREIGN KEY (profile_id)&#xA;              REFERENCES indexed_file (id) MATCH SIMPLE&#xA;              ON UPDATE CASCADE ON DELETE CASCADE&#xA;        );&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;    &#xA;    &#x9;&lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_gist_index_and_add_geom_check_on_map_table&quot;>&#xA;&#x9;      &lt;sql>&#xA;&#x9;        CREATE INDEX soop_xbt_dm_profile_map_gist_idx ON soop_xbt_dm_profile_map USING GIST (geom);&#xA;&#x9;&#x9;ALTER TABLE soop_xbt_dm_profile_map ADD CHECK (ST_ISVALID(geom));&#xA;&#x9;      &lt;/sql>&#xA;&#x9;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_ soop_xbt_dm_profile_data_view&quot;>&#xA;      &lt;createView viewName=&quot;soop_xbt_dm_profile_data&quot;> SELECT measurements.profile_id,&#xA;         measurements.measurement_id, &#xA;         soop_xbt_dm_profile_map.&quot;XBT_line&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_line_description&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;Callsign&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_cruise_ID&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_uniqueid&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_probetype_fallrate_equation&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_recorder_type&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_instrument_serialnumber&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_calibration_OFFS&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_calibration_SCAL&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;TIME&quot;::timestamp without time zone AS &quot;TIME&quot;,&#xA;         qc_flags.&quot;TIME_quality_control&quot;, &#xA;         st_x(soop_xbt_dm_profile_map.geom) AS &quot;LONGITUDE&quot;, &#xA;         qc_flags.&quot;LONGITUDE_quality_control&quot;, &#xA;         st_y(soop_xbt_dm_profile_map.geom) AS &quot;LATITUDE&quot;, &#xA;         qc_flags.&quot;LATITUDE_quality_control&quot;, &#xA;         measurements.&quot;DEPTH&quot;, &#xA;         measurements.&quot;DEPTH_quality_control&quot;, &#xA;         measurements.&quot;TEMP&quot;, &#xA;         measurements.&quot;TEMP_quality_control&quot;, &#xA;         soop_xbt_dm_profile_map.geom&#xA;         FROM ((measurements&#xA;         LEFT JOIN soop_xbt_dm_profile_map ON ((soop_xbt_dm_profile_map.profile_id = measurements.profile_id)))&#xA;         LEFT JOIN qc_flags ON ((qc_flags.profile_id = measurements.profile_id)))&#xA;         ORDER BY measurements.measurement_id;&lt;/createView>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="160" posY="288">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_5"/>
-    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
-    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
-    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Delete_SOOP_XBT_DM_data_from_deleted_files"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_PrepYIn6EeOzfuJSTFON-w"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
-    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
-    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
-    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
-    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
-    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
-    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="Delete data from deleted files"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tRunJob_5"/>
-  </node>
-  <node componentName="iIndexFiles" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="-96">
+  <node componentName="iIndexFiles" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="-192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
@@ -131,7 +109,7 @@
       <column defaultValue="" key="false" length="0" name="fileSize" nullable="true" precision="0" sourceType="" type="id_Double"/>
     </metadata>
   </node>
-  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="160">
+  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="96">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_QKA6EAlGEeObitNNn0mU_g"/>
@@ -154,7 +132,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="384" posY="160">
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="416" posY="96">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_3"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
@@ -181,6 +159,28 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_3"/>
   </node>
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="160" posY="224">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_5"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Delete_SOOP_XBT_DM_data_from_deleted_files"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_PrepYIn6EeOzfuJSTFON-w"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="Delete data from deleted files"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tRunJob_5"/>
+  </node>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iHarvestResources_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
@@ -189,15 +189,15 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tRunJob_5">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk4"/>
-  </connection>
   <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tRunJob_3">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate1"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tRunJob_5">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk4"/>
   </connection>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
@@ -207,14 +207,6 @@
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_5"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Delete data from deleted files"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
-  <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
@@ -223,6 +215,13 @@
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Harvest data and populate map table"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_5"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Delete data from deleted files"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
