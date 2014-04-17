@@ -136,11 +136,20 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="create_rt_map_view-3">
+    <changeSet author="talend" id="create_rt_map_view-3" runOnChange="true">
       <sql>
 	DROP VIEW IF EXISTS abos_sofs_surfaceprop_rt_map;
 	CREATE VIEW abos_sofs_surfaceprop_rt_map AS
-	  SELECT m.*, i.url, i.size, t.geom
+	  SELECT
+            m.file_id,
+            m.deployment_number,
+            m.delivery_mode,
+            m.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+            m.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
+            m.date_created AT TIME ZONE 'UTC' AS date_created,
+            i.url, 
+            i.size, 
+            t.geom
 	    FROM timeseries t JOIN file_metadata m USING (deployment_number)
 	                      JOIN indexed_file i ON m.file_id = i.id
 	    WHERE delivery_mode = 'RT'
@@ -149,7 +158,7 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="create_rt_data_view-3">
+    <changeSet author="talend" id="create_rt_data_view-3" runOnChange="true">
       <sql>
 	DROP VIEW IF EXISTS abos_sofs_surfaceprop_rt_data;
 	CREATE VIEW abos_sofs_surfaceprop_rt_data AS
@@ -158,7 +167,8 @@
 	    delivery_mode,
 	    file_id, 
 	    index, 
-	    "TIME", "TIME_quality_control", 
+	    "TIME" AT TIME ZONE 'UTC' AS "TIME", 
+	    "TIME_quality_control", 
 	    "LATITUDE", "LATITUDE_quality_control", 
 	    "LONGITUDE", "LONGITUDE_quality_control", 
 	    "TEMP", "TEMP_quality_control", 
@@ -199,11 +209,20 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="create_dm_map_view-3">
+    <changeSet author="talend" id="create_dm_map_view-3" runOnChange="true">
       <sql>
 	DROP VIEW IF EXISTS abos_sofs_surfaceprop_dm_map;
 	CREATE VIEW abos_sofs_surfaceprop_dm_map AS
-	  SELECT m.*, i.url, i.size, t.geom
+	  SELECT
+            m.file_id,
+            m.deployment_number,
+            m.delivery_mode,
+            m.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+            m.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
+            m.date_created AT TIME ZONE 'UTC' AS date_created,
+            i.url, 
+            i.size, 
+            t.geom
 	    FROM timeseries t JOIN file_metadata m USING (deployment_number)
 	                      JOIN indexed_file i ON m.file_id = i.id
 	    WHERE delivery_mode = 'DM'
@@ -212,12 +231,89 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="create_dm_data_view-3">
+    <changeSet author="talend" id="create_dm_data_view-3" runOnChange="true">
       <sql>
 	DROP VIEW IF EXISTS abos_sofs_surfaceprop_dm_data;
 	CREATE VIEW abos_sofs_surfaceprop_dm_data AS
 	  SELECT 
-	    measurement.*,
+	    deployment_number,
+	    delivery_mode,
+	    file_id,
+	    index,
+	    "TIME" AT TIME ZONE 'UTC' AS "TIME",
+	    "TIME_quality_control",
+	    "LATITUDE",
+	    "LATITUDE_quality_control",
+	    "LONGITUDE",
+	    "LONGITUDE_quality_control",
+	    "TEMP",
+	    "TEMP_quality_control",
+	    "TEMP_2",
+	    "TEMP_2_quality_control",
+	    "CNDC",
+	    "CNDC_quality_control",
+	    "CNDC_2",
+	    "CNDC_2_quality_control",
+	    "PSAL",
+	    "PSAL_quality_control",
+	    "PSAL_2",
+	    "PSAL_2_quality_control",
+	    "AIRT",
+	    "AIRT_quality_control",
+	    "AIRT_2",
+	    "AIRT_2_quality_control",
+	    "ATMP",
+	    "ATMP_quality_control",
+	    "ATMP_2",
+	    "ATMP_2_quality_control",
+	    "RELH",
+	    "RELH_quality_control",
+	    "RELH_2",
+	    "RELH_2_quality_control",
+	    "RAIN_AMOUNT",
+	    "RAIN_AMOUNT_quality_control",
+	    "RAIN_AMOUNT_2",
+	    "RAIN_AMOUNT_2_quality_control",
+	    "SW",
+	    "SW_quality_control",
+	    "SW_2",
+	    "SW_2_quality_control",
+	    "LW",
+	    "LW_quality_control",
+	    "LW_2",
+	    "LW_2_quality_control",
+	    "PL_CMP",
+	    "PL_CMP_quality_control",
+	    "PL_CMP2",
+	    "PL_CMP2_quality_control",
+	    "UWND",
+	    "UWND_quality_control",
+	    "UWND_2",
+	    "UWND_2_quality_control",
+	    "VWND",
+	    "VWND_quality_control",
+	    "VWND_2",
+	    "VWND_2_quality_control",
+	    "WDIR",
+	    "WDIR_quality_control",
+	    "WDIR_2",
+	    "WDIR_2_quality_control",
+	    "WSPD",
+	    "WSPD_quality_control",
+	    "WSPD_2",
+	    "WSPD_2_quality_control",
+	    "WSPD_3",
+	    "WSPD_3_quality_control",
+	    "WSPD_4",
+	    "WSPD_4_quality_control",
+	    "WSPD_MIN",
+	    "WSPD_MIN_quality_control",
+	    "WSPD_MIN_2",
+	    "WSPD_MIN_2_quality_control",
+	    "WSPD_MAX",
+	    "WSPD_MAX_quality_control",
+	    "WSPD_MAX_2",
+	    "WSPD_MAX_2_quality_control",
 	    geom
 	  FROM measurement JOIN timeseries USING (deployment_number)
 	  WHERE delivery_mode = 'DM'
