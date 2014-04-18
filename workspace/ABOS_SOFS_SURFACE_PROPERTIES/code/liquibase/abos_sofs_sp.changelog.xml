@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet author="talend" id="create_file_metadata_table-1">
+      <sql>
+	CREATE TABLE file_metadata
+	(
+	  file_id bigint NOT NULL,
+	  deployment_number varchar(3) NOT NULL,
+	  delivery_mode varchar(3) NOT NULL,
+	  time_coverage_start timestamp with time zone,
+	  time_coverage_end timestamp with time zone,
+	  date_created  timestamp with time zone,
+	  CONSTRAINT file_metadata_indexed_file_fk FOREIGN KEY (file_id)
+	      REFERENCES indexed_file (id) MATCH SIMPLE
+	      ON UPDATE CASCADE ON DELETE CASCADE,
+	  CONSTRAINT file_metadata_file_id_uc UNIQUE (file_id)
+	);
+      </sql>
+    </changeSet>
+	  
+
+    <changeSet author="talend" id="create_timeseries_table-1">
+      <sql>
+	CREATE TABLE timeseries
+	(
+	  deployment_number varchar(3) NOT NULL,
+	  mean_latitude double precision,
+	  mean_longitude double precision,
+	  geom geometry(Geometry,4326),
+	  time_deployment_start timestamp with time zone,
+	  time_deployment_end timestamp with time zone,
+	  CONSTRAINT timeseries_pk PRIMARY KEY (deployment_number),
+	  CONSTRAINT timeseries_geom_check CHECK (st_isvalid(geom))
+	);
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_geometry_index-1">
+      <sql>
+	CREATE INDEX timeseries_gist_idx ON timeseries USING GIST (geom); 
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_measurement_table-1">
+      <sql>
+	CREATE TABLE measurement
+	(
+	  deployment_number varchar(3) NOT NULL,
+	  delivery_mode varchar(3) NOT NULL,
+	  file_id bigint NOT NULL,
+	  index bigint NOT NULL,
+	  "TIME" timestamp with time zone NOT NULL,
+	  "TIME_quality_control" character(1),
+	  "LATITUDE" real,
+	  "LATITUDE_quality_control" character(1),
+	  "LONGITUDE" real,
+	  "LONGITUDE_quality_control" character(1),
+	  "TEMP" real,
+	  "TEMP_quality_control" character(1),
+	  "TEMP_2" real,
+	  "TEMP_2_quality_control" character(1),
+	  "CNDC" real,
+	  "CNDC_quality_control" character(1),
+	  "CNDC_2" real,
+	  "CNDC_2_quality_control" character(1),
+	  "PSAL" real,
+	  "PSAL_quality_control" character(1),
+	  "PSAL_2" real,
+	  "PSAL_2_quality_control" character(1),
+	  "AIRT" real,
+	  "AIRT_quality_control" character(1),
+	  "AIRT_2" real,
+	  "AIRT_2_quality_control" character(1),
+	  "ATMP" real,
+	  "ATMP_quality_control" character(1),
+	  "ATMP_2" real,
+	  "ATMP_2_quality_control" character(1),
+	  "RELH" real,
+	  "RELH_quality_control" character(1),
+	  "RELH_2" real,
+	  "RELH_2_quality_control" character(1),
+	  "RAIN_AMOUNT" real,
+	  "RAIN_AMOUNT_quality_control" character(1),
+	  "RAIN_AMOUNT_2" real,
+	  "RAIN_AMOUNT_2_quality_control" character(1),
+	  "SW" real,
+	  "SW_quality_control" character(1),
+	  "SW_2" real,
+	  "SW_2_quality_control" character(1),
+	  "LW" real,
+	  "LW_quality_control" character(1),
+	  "LW_2" real,
+	  "LW_2_quality_control" character(1),
+	  "PL_CMP" real,
+	  "PL_CMP_quality_control" character(1),
+	  "PL_CMP2" real,
+	  "PL_CMP2_quality_control" character(1),
+	  "UWND" real,
+	  "UWND_quality_control" character(1),
+	  "UWND_2" real,
+	  "UWND_2_quality_control" character(1),
+	  "VWND" real,
+	  "VWND_quality_control" character(1),
+	  "VWND_2" real,
+	  "VWND_2_quality_control" character(1),
+	  "WDIR" real,
+	  "WDIR_quality_control" character(1),
+	  "WDIR_2" real,
+	  "WDIR_2_quality_control" character(1),
+	  "WSPD" real,
+	  "WSPD_quality_control" character(1),
+	  "WSPD_2" real,
+	  "WSPD_2_quality_control" character(1),
+	  "WSPD_3" real,
+	  "WSPD_3_quality_control" character(1),
+	  "WSPD_4" real,
+	  "WSPD_4_quality_control" character(1),
+	  "WSPD_MIN" real,
+	  "WSPD_MIN_quality_control" character(1),
+	  "WSPD_MIN_2" real,
+	  "WSPD_MIN_2_quality_control" character(1),
+	  "WSPD_MAX" real,
+	  "WSPD_MAX_quality_control" character(1),
+	  "WSPD_MAX_2" real,
+	  "WSPD_MAX_2_quality_control" character(1),
+	  CONSTRAINT measurement_pk PRIMARY KEY (file_id , index ),
+	  CONSTRAINT measurement_file_metadata_fk FOREIGN KEY (file_id)
+	      REFERENCES file_metadata (file_id) MATCH SIMPLE
+	      ON UPDATE CASCADE ON DELETE CASCADE
+	);
+	COMMENT ON COLUMN measurement.index IS 'index of measurement in netCDF file';
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_rt_map_view-3" runOnChange="true">
+      <sql>
+	DROP VIEW IF EXISTS abos_sofs_surfaceprop_rt_map;
+	CREATE VIEW abos_sofs_surfaceprop_rt_map AS
+	  SELECT
+            m.file_id,
+            m.deployment_number,
+            m.delivery_mode,
+            m.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+            m.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
+            m.date_created AT TIME ZONE 'UTC' AS date_created,
+            i.url, 
+            i.size, 
+            t.geom
+	    FROM timeseries t JOIN file_metadata m USING (deployment_number)
+	                      JOIN indexed_file i ON m.file_id = i.id
+	    WHERE delivery_mode = 'RT'
+	    ORDER BY time_coverage_start;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_rt_data_view-3" runOnChange="true">
+      <sql>
+	DROP VIEW IF EXISTS abos_sofs_surfaceprop_rt_data;
+	CREATE VIEW abos_sofs_surfaceprop_rt_data AS
+	  SELECT 
+	    deployment_number,
+	    delivery_mode,
+	    file_id, 
+	    index, 
+	    "TIME" AT TIME ZONE 'UTC' AS "TIME", 
+	    "TIME_quality_control", 
+	    "LATITUDE", "LATITUDE_quality_control", 
+	    "LONGITUDE", "LONGITUDE_quality_control", 
+	    "TEMP", "TEMP_quality_control", 
+	    "TEMP_2", "TEMP_2_quality_control", 
+	    "CNDC", "CNDC_quality_control", 
+	    "CNDC_2", "CNDC_2_quality_control", 
+	    "PSAL", "PSAL_quality_control", 
+	    "PSAL_2", "PSAL_2_quality_control", 
+	    "AIRT", "AIRT_quality_control", 
+	    "AIRT_2", "AIRT_2_quality_control", 
+	    "ATMP", "ATMP_quality_control", 
+	    "ATMP_2", "ATMP_2_quality_control", 
+	    "RELH", "RELH_quality_control", 
+	    "RELH_2", "RELH_2_quality_control", 
+	    "RAIN_AMOUNT", "RAIN_AMOUNT_quality_control", 
+	    "RAIN_AMOUNT_2", "RAIN_AMOUNT_2_quality_control", 
+	    "SW", "SW_quality_control", 
+	    "SW_2", "SW_2_quality_control", 
+	    "LW", "LW_quality_control", 
+	    "LW_2", "LW_2_quality_control", 
+	    "PL_CMP", "PL_CMP_quality_control", 
+	    "PL_CMP2", "PL_CMP2_quality_control", 
+	    "UWND", "UWND_quality_control", 
+	    "UWND_2", "UWND_2_quality_control", 
+	    "VWND", "VWND_quality_control", 
+	    "VWND_2", "VWND_2_quality_control", 
+	    "WDIR", "WDIR_quality_control", 
+	    "WDIR_2", "WDIR_2_quality_control", 
+	    "WSPD", "WSPD_quality_control", 
+	    "WSPD_2", "WSPD_2_quality_control", 
+	    "WSPD_3", "WSPD_3_quality_control", 
+	    "WSPD_4", "WSPD_4_quality_control",
+	    geom
+	  FROM measurement JOIN timeseries USING (deployment_number)
+	  WHERE delivery_mode = 'RT'
+	  ORDER BY file_id, index;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_dm_map_view-3" runOnChange="true">
+      <sql>
+	DROP VIEW IF EXISTS abos_sofs_surfaceprop_dm_map;
+	CREATE VIEW abos_sofs_surfaceprop_dm_map AS
+	  SELECT
+            m.file_id,
+            m.deployment_number,
+            m.delivery_mode,
+            m.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+            m.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
+            m.date_created AT TIME ZONE 'UTC' AS date_created,
+            i.url, 
+            i.size, 
+            t.geom
+	    FROM timeseries t JOIN file_metadata m USING (deployment_number)
+	                      JOIN indexed_file i ON m.file_id = i.id
+	    WHERE delivery_mode = 'DM'
+	    ORDER BY time_coverage_start;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_dm_data_view-3" runOnChange="true">
+      <sql>
+	DROP VIEW IF EXISTS abos_sofs_surfaceprop_dm_data;
+	CREATE VIEW abos_sofs_surfaceprop_dm_data AS
+	  SELECT 
+	    deployment_number,
+	    delivery_mode,
+	    file_id,
+	    index,
+	    "TIME" AT TIME ZONE 'UTC' AS "TIME",
+	    "TIME_quality_control",
+	    "LATITUDE",
+	    "LATITUDE_quality_control",
+	    "LONGITUDE",
+	    "LONGITUDE_quality_control",
+	    "TEMP",
+	    "TEMP_quality_control",
+	    "TEMP_2",
+	    "TEMP_2_quality_control",
+	    "CNDC",
+	    "CNDC_quality_control",
+	    "CNDC_2",
+	    "CNDC_2_quality_control",
+	    "PSAL",
+	    "PSAL_quality_control",
+	    "PSAL_2",
+	    "PSAL_2_quality_control",
+	    "AIRT",
+	    "AIRT_quality_control",
+	    "AIRT_2",
+	    "AIRT_2_quality_control",
+	    "ATMP",
+	    "ATMP_quality_control",
+	    "ATMP_2",
+	    "ATMP_2_quality_control",
+	    "RELH",
+	    "RELH_quality_control",
+	    "RELH_2",
+	    "RELH_2_quality_control",
+	    "RAIN_AMOUNT",
+	    "RAIN_AMOUNT_quality_control",
+	    "RAIN_AMOUNT_2",
+	    "RAIN_AMOUNT_2_quality_control",
+	    "SW",
+	    "SW_quality_control",
+	    "SW_2",
+	    "SW_2_quality_control",
+	    "LW",
+	    "LW_quality_control",
+	    "LW_2",
+	    "LW_2_quality_control",
+	    "PL_CMP",
+	    "PL_CMP_quality_control",
+	    "PL_CMP2",
+	    "PL_CMP2_quality_control",
+	    "UWND",
+	    "UWND_quality_control",
+	    "UWND_2",
+	    "UWND_2_quality_control",
+	    "VWND",
+	    "VWND_quality_control",
+	    "VWND_2",
+	    "VWND_2_quality_control",
+	    "WDIR",
+	    "WDIR_quality_control",
+	    "WDIR_2",
+	    "WDIR_2_quality_control",
+	    "WSPD",
+	    "WSPD_quality_control",
+	    "WSPD_2",
+	    "WSPD_2_quality_control",
+	    "WSPD_3",
+	    "WSPD_3_quality_control",
+	    "WSPD_4",
+	    "WSPD_4_quality_control",
+	    "WSPD_MIN",
+	    "WSPD_MIN_quality_control",
+	    "WSPD_MIN_2",
+	    "WSPD_MIN_2_quality_control",
+	    "WSPD_MAX",
+	    "WSPD_MAX_quality_control",
+	    "WSPD_MAX_2",
+	    "WSPD_MAX_2_quality_control",
+	    geom
+	  FROM measurement JOIN timeseries USING (deployment_number)
+	  WHERE delivery_mode = 'DM'
+	  ORDER BY file_id, index;
+      </sql>
+    </changeSet>
+
+
+</databaseChangeLog>
