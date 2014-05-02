@@ -282,7 +282,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE aatams_sattag_nrt_profile_data&#xA;SET profile_id = aatams_sattag_nrt_profile_map.profile_id&#xA;FROM aatams_sattag_nrt_profile_map&#xA;WHERE  aatams_sattag_nrt_profile_data.device_id = aatams_sattag_nrt_profile_map.device_id AND aatams_sattag_nrt_profile_data.timestamp = aatams_sattag_nrt_profile_map.timestamp;&quot;"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
     <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
@@ -320,7 +320,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM aatams_sattag_nrt_profile_data&#xA;WHERE measurement_id IN (SELECT measurement_id&#xA;FROM (SELECT measurement_id, row_number() OVER (PARTITION BY device_wmo_ref,timestamp, pressure ORDER BY measurement_id) AS rnum FROM aatams_sattag_nrt_profile_data) t&#xA;WHERE t.rnum > 1);&quot;"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
     <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
@@ -357,7 +357,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE aatams_sattag_nrt_profile_data &#xA;SET sattag_program = b.sattag_program,&#xA;device_id = b.device_id,&#xA;device_wmo_ref = b.device_wmo_ref,&#xA;tag_type = b.tag_type,&#xA;common_name = b.common_name,&#xA;release_site = b.release_site,&#xA;state_country = b.state_country,&#xA;age_class = b.age_class,&#xA;sex = b.sex&#xA;FROM aatams_sattag_nrt_metadata b&#xA;WHERE aatams_sattag_nrt_profile_data.device_id = b.device_id;&quot;"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
     <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
