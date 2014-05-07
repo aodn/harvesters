@@ -94,8 +94,6 @@
 	CREATE VIEW anmn_ts_timeseries_map AS 
 	  SELECT 
 	    t.id AS timeseries_id,
-	    f.url AS file_url,
-	    -- date(f.first_indexed AT TIME ZONE 'UTC') AS date_published,
 	    t.site_code,
 	    t.platform_code,
 	    t.deployment_code,
@@ -107,6 +105,9 @@
 	    t.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
 	    t.instrument,
 	    t.instrument_serial_number,
+	    f.url AS file_url,
+	    f.size,
+	    -- date(f.first_indexed AT TIME ZONE 'UTC') AS date_published,
 	    t.depth_b,
 	    t.sea_water_temperature_b,
 	    t.sea_water_electrical_conductivity_b,
