@@ -12,8 +12,8 @@
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_RlVF8FuiEeOppMtV64iEfQ" type="id_String" value="/tmp"/>
   </context>
   <context confirmationNeeded="false" name="Test">
-    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="/home/ggalibert/Documents/ACORN/gridded_1h-avg-current-map_non-QC/BONC/2013/12/01/IMOS_ACORN_V_20131201T000000Z_BONC_FV00_1-hour-avg.nc"/>
-    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="/home/ggalibert/Documents/ACORN/radial/IMOS_ACORN_RV_20140409T230000Z_NOCR_FV00_radial.nc"/>
+    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1247"/>
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="harvest"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="acorn_radial_nonqc"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_Password" value="zX7meEFwpIFLnZxEcX9l1A02TUWdk9XW"/>
@@ -129,8 +129,12 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="globalAttributes" name="iNetCDFGlobalAttributes_1">
+      <column comment="" key="false" length="35" name="time_coverage_start" nullable="false" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_String"/>
+      <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="" precision="6" sourceType="" type="id_String" originalLength="35"/>
+      <column comment="" key="false" length="32" name="time_coverage_duration" nullable="true" pattern="" sourceType="" type="id_String" originalLength="32"/>
+      <column comment="" key="false" length="32" name="platform_code" nullable="false" pattern="" sourceType="" type="id_String" originalLength="32"/>
       <column comment="" key="false" length="32" name="site_code" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
-      <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_String"/>
+      <column comment="" key="false" length="32" name="ssr_Radar" nullable="true" pattern="" sourceType="" type="id_String" originalLength="32"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="352" posY="128">
@@ -150,24 +154,36 @@
       <column comment="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="2147483647" name="site_code" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String" originalLength="32">
+      <column comment="" key="false" length="35" name="time_coverage_start" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="35" name="time" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
+      <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="" type="id_Date" originalLength="35"/>
+      <column comment="" key="false" length="32" name="time_coverage_duration" nullable="true" pattern="" sourceType="" type="id_String" originalLength="32"/>
+      <column comment="" key="false" length="32" name="platform_code" nullable="false" pattern="" sourceType="" type="id_String" originalLength="32"/>
+      <column comment="" key="false" length="32" name="site_code" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String" originalLength="32">
         <additionalField key="Comment" value=""/>
       </column>
+      <column comment="" key="false" length="32" name="ssr_Radar" nullable="true" pattern="" sourceType="" type="id_String" originalLength="32"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="timeseries">
         <mapperTableEntries name="file_id" expression="context.fileId" type="id_Long"/>
+        <mapperTableEntries name="time_coverage_start" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_start,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date"/>
+        <mapperTableEntries name="time_coverage_end" expression="row1.time_coverage_end!=null?TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_end,&quot;Z&quot;,&quot;+0000&quot;)):null" type="id_Date" nullable="true"/>
+        <mapperTableEntries name="time_coverage_duration" expression="row1.time_coverage_duration" type="id_String" nullable="true"/>
+        <mapperTableEntries name="platform_code" expression="row1.platform_code" type="id_String"/>
         <mapperTableEntries name="site_code" expression="row1.site_code" type="id_String"/>
-        <mapperTableEntries name="time" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_start,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="ssr_Radar" expression="row1.ssr_Radar" type="id_String" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row1" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
+        <mapperTableEntries name="time_coverage_start" type="id_String"/>
+        <mapperTableEntries name="time_coverage_end" type="id_String" nullable="true"/>
+        <mapperTableEntries name="time_coverage_duration" type="id_String" nullable="true"/>
+        <mapperTableEntries name="platform_code" type="id_String"/>
         <mapperTableEntries name="site_code" type="id_String"/>
-        <mapperTableEntries name="time_coverage_start" type="id_String" nullable="true"/>
+        <mapperTableEntries name="ssr_Radar" type="id_String" nullable="true"/>
       </inputTables>
     </nodeData>
   </node>
@@ -201,12 +217,32 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_duration"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="platform_code"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="site_code"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="ssr_Radar"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -224,23 +260,31 @@
       <column comment="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="2147483647" name="site_code" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String" originalLength="32">
+      <column comment="" key="false" length="35" name="time_coverage_start" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="35" name="time" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
+      <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date" originalLength="35"/>
+      <column comment="" key="false" length="32" name="time_coverage_duration" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="32"/>
+      <column comment="" key="false" length="32" name="platform_code" nullable="false" pattern="" sourceType="VARCHAR" type="id_String" originalLength="32"/>
+      <column comment="" key="false" length="32" name="site_code" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String" originalLength="32">
         <additionalField key="Comment" value=""/>
       </column>
+      <column comment="" key="false" length="32" name="ssr_Radar" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="32"/>
     </metadata>
     <metadata connector="REJECT" label="timeseries" name="REJECT">
       <column comment="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="2147483647" name="site_code" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String" originalLength="32">
+      <column comment="" key="false" length="35" name="time_coverage_start" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="35" name="time" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
+      <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date" originalLength="35"/>
+      <column comment="" key="false" length="32" name="time_coverage_duration" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="32"/>
+      <column comment="" key="false" length="32" name="platform_code" nullable="false" pattern="" sourceType="VARCHAR" type="id_String" originalLength="32"/>
+      <column comment="" key="false" length="32" name="site_code" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String" originalLength="32">
         <additionalField key="Comment" value=""/>
       </column>
+      <column comment="" key="false" length="32" name="ssr_Radar" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="32"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -285,6 +329,21 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="time_coverage_start"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_duration"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ssr_Radar"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="date_created"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="platform_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -350,6 +409,18 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="toolbox_version"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ssr_Radar"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_start"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="date_created"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_duration"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
