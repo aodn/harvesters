@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+  <context confirmationNeeded="false" name="Default">
+    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="SLNppeSh1MtyE4s/ohRzEQ=="/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="soop_auscpr"/>
+    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest"/>
+    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="soop_auscpr"/>
+    <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
+  </context>
+  <parameters>
+    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx2G"/>
+    <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="true"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="224"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="96"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
+    <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
+    <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
+    <elementParameter field="TEXT" name="JOBID_FOR_OOZIE" value=""/>
+    <elementParameter field="CHECK" name="IMPLICITCONTEXT_USE_PROJECT_SETTINGS" value="true"/>
+    <elementParameter field="CHECK" name="STATANDLOG_USE_PROJECT_SETTINGS" value="true"/>
+    <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LOAD_NEW_VARIABLE" value=""/>
+    <elementParameter field="CLOSED_LIST" name="NOT_LOAD_OLD_VARIABLE" value=""/>
+    <elementParameter field="CHECK" name="DISABLE_WARNINGS" value="false"/>
+    <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="ojdbc14-10g.jar"/>
+    <routinesParameter id="_72_pIOf4EeGBu5qQIqdKow" name="DataOperation"/>
+    <routinesParameter id="_77jZAOf4EeGBu5qQIqdKow" name="GeoOperation"/>
+    <routinesParameter id="_77hj0Of4EeGBu5qQIqdKow" name="GeometryOperation"/>
+    <routinesParameter id="_76__YOf4EeGBu5qQIqdKow" name="Mathematical"/>
+    <routinesParameter id="_77BNgOf4EeGBu5qQIqdKow" name="Numeric"/>
+    <routinesParameter id="_77pfoOf4EeGBu5qQIqdKow" name="OpenStreetMap"/>
+    <routinesParameter id="_77ZoAOf4EeGBu5qQIqdKow" name="Relational"/>
+    <routinesParameter id="_77a2IOf4EeGBu5qQIqdKow" name="StringHandling"/>
+    <routinesParameter id="_77crUOf4EeGBu5qQIqdKow" name="TalendDataGenerator"/>
+    <routinesParameter id="_77d5cOf4EeGBu5qQIqdKow" name="TalendDate"/>
+    <routinesParameter id="_77fuoOf4EeGBu5qQIqdKow" name="TalendString"/>
+    <routinesParameter id="_Twz0sLEtEeKJ5a2TCuEVdg" name="GeometryUtility"/>
+    <routinesParameter id="_BzxlsElWEeK5TPMSOHM6dA" name="ArgoUtils"/>
+  </parameters>
+  <node componentName="sWfsInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="224" posY="128">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="sWfsInput_1"/>
+    <elementParameter field="TEXT" name="FORMAT_TYPE" value="WFS"/>
+    <elementParameter field="TEXT" name="WFS_URL" value="&quot;http://www.cmar.csiro.au/geoserver/wfs&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="WFS_VERSION" value="org.geotools.wfs.protocol.Version.v1_1_0"/>
+    <elementParameter field="TEXT" name="TYPE_NAME" value="&quot;imos:AUSCPR_PHYTO&quot;"/>
+    <elementParameter field="CHECK" name="FORCE_CRS" value="false"/>
+    <elementParameter field="TEXT" name="CRS" value="&quot;EPSG:4326&quot;"/>
+    <elementParameter field="TEXT" name="CQL" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="USERNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASSWORD" value="&quot;&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="USE_METHOD" value="USE_GET"/>
+    <elementParameter field="TEXT" name="TIMEOUT" value="3000"/>
+    <elementParameter field="TEXT" name="BUFFER_SIZE" value="100"/>
+    <elementParameter field="CHECK" name="LENIENT" value="true"/>
+    <elementParameter field="CHECK" name="TRY_GZIP" value="false"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import org.talend.sdi.geometry.Geometry;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" label="csiro_auscpr_phyto" name="sWfsInput_1">
+      <column comment="" key="false" length="16" name="ROUTE_CODE" nullable="true" originalDbColumnName="route_code" pattern="" precision="0" type="id_String" originalLength="16"/>
+      <column comment="" key="false" length="16" name="START_PORT" nullable="true" originalDbColumnName="start_port" pattern="" precision="0" type="id_String" originalLength="16"/>
+      <column comment="" key="false" length="16" name="END_PORT" nullable="true" originalDbColumnName="end_port" pattern="" precision="0" type="id_String" originalLength="16"/>
+      <column comment="" key="false" length="256" name="ROUTE_FREQUENCY" nullable="true" originalDbColumnName="route_frequency" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="ROUTE_START_DATE" nullable="true" originalDbColumnName="route_start_date" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="VESSEL_NAME" nullable="true" originalDbColumnName="vessel_name" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="16" name="TRIP_CODE" nullable="true" originalDbColumnName="trip_code" pattern="" precision="0" type="id_String" originalLength="16"/>
+      <column comment="" defaultValue="" key="false" length="8" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" precision="5" sourceType="NUMERIC" type="id_BigDecimal" originalLength="8"/>
+      <column comment="" key="false" length="8" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" precision="5" type="id_BigDecimal" originalLength="8"/>
+      <column comment="" key="false" length="256" name="TIME_UTC" nullable="true" originalDbColumnName="time_utc" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="TAXON_NAME" nullable="true" originalDbColumnName="taxon_name" pattern="" precision="0" sourceType="" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="FAMILY" nullable="true" originalDbColumnName="family" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="GENUS" nullable="true" originalDbColumnName="genus" pattern="" precision="0" sourceType="" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="SPECIES" nullable="true" originalDbColumnName="species" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="TAXON_GROUP" nullable="true" originalDbColumnName="taxon_group" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="10" name="CAAB_CODE" nullable="true" originalDbColumnName="caab_code" pattern="" precision="0" sourceType="NUMERIC" type="id_BigDecimal" originalLength="10"/>
+      <column comment="" key="false" length="256" name="TAXON_START_DATE" nullable="true" originalDbColumnName="taxon_start_date" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" defaultValue="" key="false" length="7" name="TAXON_PER_M3" nullable="true" originalDbColumnName="taxon_per_m3" pattern="" precision="1" sourceType="NUMERIC" type="id_BigDecimal" originalLength="12"/>
+      <column comment="" key="false" length="256" name="PHYTO_COMMENTS" nullable="true" originalDbColumnName="phyto_comments" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="ACKNOWLEDGEMENTS" nullable="true" originalDbColumnName="acknowledgements" pattern="" precision="0" type="id_String" originalLength="256"/>
+    </metadata>
+  </node>
+  <node componentName="tConvertType" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="384" posY="128">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tConvertType_2"/>
+    <elementParameter field="CHECK" name="AUTOCAST" value="true"/>
+    <elementParameter field="TABLE" name="MANUALTABLE"/>
+    <elementParameter field="CHECK" name="EMPTYTONULL" value="false"/>
+    <elementParameter field="CHECK" name="DIEONERROR" value="true"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" label="csiro_auscpr_phyto" name="tConvertType_2">
+      <column comment="" key="false" length="16" name="ROUTE_CODE" nullable="true" originalDbColumnName="route_code" pattern="" precision="0" type="id_String" originalLength="16"/>
+      <column comment="" key="false" length="16" name="START_PORT" nullable="true" originalDbColumnName="start_port" pattern="" precision="0" type="id_String" originalLength="16"/>
+      <column comment="" key="false" length="16" name="END_PORT" nullable="true" originalDbColumnName="end_port" pattern="" precision="0" type="id_String" originalLength="16"/>
+      <column comment="" key="false" length="256" name="ROUTE_FREQUENCY" nullable="true" originalDbColumnName="route_frequency" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="ROUTE_START_DATE" nullable="true" originalDbColumnName="route_start_date" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="VESSEL_NAME" nullable="true" originalDbColumnName="vessel_name" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="16" name="TRIP_CODE" nullable="true" originalDbColumnName="trip_code" pattern="" precision="0" type="id_String" originalLength="16"/>
+      <column comment="" defaultValue="" key="false" length="8" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" precision="5" sourceType="NUMERIC" type="id_Double" originalLength="8"/>
+      <column comment="" key="false" length="8" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" precision="5" type="id_Double" originalLength="8"/>
+      <column comment="" key="false" length="256" name="TIME_UTC" nullable="true" originalDbColumnName="time_utc" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="TAXON_NAME" nullable="true" originalDbColumnName="taxon_name" pattern="" precision="0" sourceType="" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="FAMILY" nullable="true" originalDbColumnName="family" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="GENUS" nullable="true" originalDbColumnName="genus" pattern="" precision="0" sourceType="" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="SPECIES" nullable="true" originalDbColumnName="species" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="TAXON_GROUP" nullable="true" originalDbColumnName="taxon_group" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="10" name="CAAB_CODE" nullable="true" originalDbColumnName="caab_code" pattern="" precision="0" sourceType="NUMERIC" type="id_BigDecimal" originalLength="10"/>
+      <column comment="" key="false" length="256" name="TAXON_START_DATE" nullable="true" originalDbColumnName="taxon_start_date" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" defaultValue="" key="false" length="7" name="TAXON_PER_M3" nullable="true" originalDbColumnName="taxon_per_m3" pattern="" precision="1" sourceType="NUMERIC" type="id_BigDecimal" originalLength="12"/>
+      <column comment="" key="false" length="256" name="PHYTO_COMMENTS" nullable="true" originalDbColumnName="phyto_comments" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="ACKNOWLEDGEMENTS" nullable="true" originalDbColumnName="acknowledgements" pattern="" precision="0" type="id_String" originalLength="256"/>
+    </metadata>
+    <metadata connector="REJECT" label="csiro_auscpr_phyto" name="REJECT">
+      <column comment="" key="false" length="16" name="ROUTE_CODE" nullable="true" originalDbColumnName="route_code" pattern="" precision="0" type="id_String" originalLength="16"/>
+      <column comment="" key="false" length="16" name="START_PORT" nullable="true" originalDbColumnName="start_port" pattern="" precision="0" type="id_String" originalLength="16"/>
+      <column comment="" key="false" length="16" name="END_PORT" nullable="true" originalDbColumnName="end_port" pattern="" precision="0" type="id_String" originalLength="16"/>
+      <column comment="" key="false" length="256" name="ROUTE_FREQUENCY" nullable="true" originalDbColumnName="route_frequency" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="ROUTE_START_DATE" nullable="true" originalDbColumnName="route_start_date" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="VESSEL_NAME" nullable="true" originalDbColumnName="vessel_name" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="16" name="TRIP_CODE" nullable="true" originalDbColumnName="trip_code" pattern="" precision="0" type="id_String" originalLength="16"/>
+      <column comment="" defaultValue="" key="false" length="8" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" precision="5" sourceType="NUMERIC" type="id_Double" originalLength="8"/>
+      <column comment="" key="false" length="8" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" precision="5" type="id_Double" originalLength="8"/>
+      <column comment="" key="false" length="256" name="TIME_UTC" nullable="true" originalDbColumnName="time_utc" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="TAXON_NAME" nullable="true" originalDbColumnName="taxon_name" pattern="" precision="0" sourceType="" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="FAMILY" nullable="true" originalDbColumnName="family" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="GENUS" nullable="true" originalDbColumnName="genus" pattern="" precision="0" sourceType="" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="SPECIES" nullable="true" originalDbColumnName="species" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="TAXON_GROUP" nullable="true" originalDbColumnName="taxon_group" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="10" name="CAAB_CODE" nullable="true" originalDbColumnName="caab_code" pattern="" precision="0" sourceType="NUMERIC" type="id_BigDecimal" originalLength="10"/>
+      <column comment="" key="false" length="256" name="TAXON_START_DATE" nullable="true" originalDbColumnName="taxon_start_date" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" defaultValue="" key="false" length="7" name="TAXON_PER_M3" nullable="true" originalDbColumnName="taxon_per_m3" pattern="" precision="1" sourceType="NUMERIC" type="id_BigDecimal" originalLength="12"/>
+      <column comment="" key="false" length="256" name="PHYTO_COMMENTS" nullable="true" originalDbColumnName="phyto_comments" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="ACKNOWLEDGEMENTS" nullable="true" originalDbColumnName="acknowledgements" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="512" posY="128">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_1"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_m-CWAOtVEeGEG_wjOK3XCQ-tMap_1-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" label="csiro_harvest_pci" name="phyto_record">
+      <column comment="" key="false" length="16" name="route_code" nullable="true" pattern="" precision="0" sourceType="varchar" type="id_String"/>
+      <column comment="" key="false" length="16" name="start_port" nullable="true" pattern="" precision="0" sourceType="varchar" type="id_String"/>
+      <column comment="" key="false" length="16" name="end_port" nullable="true" pattern="" precision="0" sourceType="varchar" type="id_String"/>
+      <column comment="" key="false" length="256" name="route_frequency" nullable="true" pattern="" precision="0" sourceType="varchar" type="id_String"/>
+      <column comment="" key="false" length="256" name="route_start_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="DATE" type="id_Date"/>
+      <column comment="" key="false" length="256" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="varchar" type="id_String"/>
+      <column comment="" key="false" length="16" name="trip_code" nullable="true" pattern="" precision="0" sourceType="varchar" type="id_String"/>
+      <column comment="" key="false" length="29" name="TIME" nullable="true" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" precision="0" sourceType="timestamp" type="id_Date"/>
+      <column comment="" key="false" length="2147483647" name="geom" nullable="true" pattern="" precision="0" sourceType="geometry" type="id_Geometry"/>
+      <column comment="" key="false" length="256" name="taxon_name" nullable="true" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="family" nullable="true" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="genus" nullable="true" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="species" nullable="true" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="taxon_group" nullable="true" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="10" name="caab_code" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Long" originalLength="10"/>
+      <column comment="" key="false" length="256" name="taxon_start_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Date" originalLength="256"/>
+      <column comment="" key="false" length="7" name="taxon_per_m3" nullable="true" pattern="" precision="1" sourceType="NUMERIC" type="id_Float" originalLength="12"/>
+      <column comment="" key="false" length="256" name="phyto_comments" nullable="true" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="acknowledgements" nullable="true" pattern="" precision="0" type="id_String" originalLength="256"/>
+      <column comment="" defaultValue="" key="false" length="8" name="longitude" nullable="true" pattern="" precision="5" sourceType="NUMERIC" type="id_Double" originalLength="8"/>
+      <column comment="" key="false" length="8" name="latitude" nullable="true" pattern="" precision="5" type="id_Double" originalLength="8"/>
+    </metadata>
+    <nodeData xsi:type="MapperData">
+      <uiProperties/>
+      <varTables sizeState="INTERMEDIATE" name="Var">
+        <mapperTableEntries name="var1" expression="ArgoUtils.makePoint(row2.LONGITUDE,row2.LATITUDE,&quot;EPSG:4326&quot;)   " type="id_Geometry"/>
+        <mapperTableEntries name="var2" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;, row2.TIME_UTC) &#xA;   " type="id_Date"/>
+        <mapperTableEntries name="var4" expression="row2.ROUTE_START_DATE == null ? null : TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, row2.ROUTE_START_DATE) " type="id_Date"/>
+        <mapperTableEntries name="var5" expression="row2.TAXON_PER_M3.floatValue()" type="id_Float"/>
+        <mapperTableEntries name="var3" expression="row2.CAAB_CODE == null ? null : row2.CAAB_CODE.longValueExact()       " type="id_Long" nullable="true"/>
+        <mapperTableEntries name="var6" expression="TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, row2.TAXON_START_DATE)" type="id_Date"/>
+      </varTables>
+      <outputTables sizeState="INTERMEDIATE" name="phyto_record">
+        <mapperTableEntries name="route_code" expression="row2.ROUTE_CODE" type="id_String" nullable="true"/>
+        <mapperTableEntries name="start_port" expression="row2.START_PORT" type="id_String" nullable="true"/>
+        <mapperTableEntries name="end_port" expression="row2.END_PORT" type="id_String" nullable="true"/>
+        <mapperTableEntries name="route_frequency" expression="row2.ROUTE_FREQUENCY" type="id_String" nullable="true"/>
+        <mapperTableEntries name="route_start_date" expression="Var.var4 " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="vessel_name" expression="row2.VESSEL_NAME" type="id_String" nullable="true"/>
+        <mapperTableEntries name="trip_code" expression="row2.TRIP_CODE" type="id_String" nullable="true"/>
+        <mapperTableEntries name="TIME" expression="Var.var2 " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="geom" expression="Var.var1 " type="id_Geometry" nullable="true"/>
+        <mapperTableEntries name="taxon_name" expression="row2.TAXON_NAME " type="id_String" nullable="true"/>
+        <mapperTableEntries name="family" expression="row2.FAMILY " type="id_String" nullable="true"/>
+        <mapperTableEntries name="genus" expression="row2.GENUS " type="id_String" nullable="true"/>
+        <mapperTableEntries name="species" expression="row2.SPECIES " type="id_String" nullable="true"/>
+        <mapperTableEntries name="taxon_group" expression="row2.TAXON_GROUP " type="id_String" nullable="true"/>
+        <mapperTableEntries name="caab_code" expression="Var.var3 " type="id_Long" nullable="true"/>
+        <mapperTableEntries name="taxon_start_date" expression="Var.var6 " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="taxon_per_m3" expression="Var.var5 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="phyto_comments" expression="row2.PHYTO_COMMENTS " type="id_String" nullable="true"/>
+        <mapperTableEntries name="acknowledgements" expression="row2.ACKNOWLEDGEMENTS " type="id_String" nullable="true"/>
+        <mapperTableEntries name="longitude" expression="row2.LONGITUDE " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="latitude" expression="row2.LATITUDE " type="id_Double" nullable="true"/>
+      </outputTables>
+      <inputTables sizeState="INTERMEDIATE" name="row2" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
+        <mapperTableEntries name="ROUTE_CODE" type="id_String" nullable="true"/>
+        <mapperTableEntries name="START_PORT" type="id_String" nullable="true"/>
+        <mapperTableEntries name="END_PORT" type="id_String" nullable="true"/>
+        <mapperTableEntries name="ROUTE_FREQUENCY" type="id_String" nullable="true"/>
+        <mapperTableEntries name="ROUTE_START_DATE" type="id_String" nullable="true"/>
+        <mapperTableEntries name="VESSEL_NAME" type="id_String" nullable="true"/>
+        <mapperTableEntries name="TRIP_CODE" type="id_String" nullable="true"/>
+        <mapperTableEntries name="LONGITUDE" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="LATITUDE" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="TIME_UTC" type="id_String" nullable="true"/>
+        <mapperTableEntries name="TAXON_NAME" type="id_String" nullable="true"/>
+        <mapperTableEntries name="FAMILY" type="id_String" nullable="true"/>
+        <mapperTableEntries name="GENUS" type="id_String" nullable="true"/>
+        <mapperTableEntries name="SPECIES" type="id_String" nullable="true"/>
+        <mapperTableEntries name="TAXON_GROUP" type="id_String" nullable="true"/>
+        <mapperTableEntries name="CAAB_CODE" type="id_BigDecimal" nullable="true"/>
+        <mapperTableEntries name="TAXON_START_DATE" type="id_String" nullable="true"/>
+        <mapperTableEntries name="TAXON_PER_M3" type="id_BigDecimal" nullable="true"/>
+        <mapperTableEntries name="PHYTO_COMMENTS" type="id_String" nullable="true"/>
+        <mapperTableEntries name="ACKNOWLEDGEMENTS" type="id_String" nullable="true"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="128">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlOutput_1"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;soop_auscpr_phyto_trajectory_map&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="TRUNCATE"/>
+    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA_REJECT:SCHEMA_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA_REJECT:REPOSITORY_SCHEMA_TYPE" value="_zMGjQOsyEeGeDt0D3-u34w - csiro_harvest_pci"/>
+    <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
+    <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
+    <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="50"/>
+    <elementParameter field="TABLE" name="ADD_COLS"/>
+    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
+    <elementParameter field="TABLE" name="FIELD_OPTIONS">
+      <elementValue elementRef="SCHEMA_COLUMN" value="route_code"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="start_port"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="end_port"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="route_frequency"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="route_start_date"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="vessel_name"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="trip_code"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="TIME"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="taxon_name"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="family"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="genus"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="species"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="taxon_group"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="caab_code"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="taxon_start_date"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="taxon_per_m3"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="phyto_comments"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="acknowledgements"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="longitude"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="latitude"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
+    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
+    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
+    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
+    <elementParameter field="TEXT" name="LABEL" value="cpr_localhost"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" label="csiro_harvest_pci" name="tPostgresqlOutput_1">
+      <column comment="" key="false" length="16" name="route_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="16" name="start_port" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="16" name="end_port" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="256" name="route_frequency" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="256" name="route_start_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="DATE" type="id_Date"/>
+      <column comment="" key="false" length="256" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="16" name="trip_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="29" name="TIME" nullable="true" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="2147483647" name="geom" nullable="true" pattern="" precision="0" sourceType="GEOMETRY" type="id_Geometry"/>
+      <column comment="" key="false" length="256" name="taxon_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="family" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="genus" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="species" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="taxon_group" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="10" name="caab_code" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long" originalLength="10"/>
+      <column comment="" key="false" length="256" name="taxon_start_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" originalLength="256"/>
+      <column comment="" key="false" length="7" name="taxon_per_m3" nullable="true" pattern="" precision="1" sourceType="NUMERIC" type="id_Float" originalLength="12"/>
+      <column comment="" key="false" length="256" name="phyto_comments" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="acknowledgements" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="256"/>
+      <column comment="" defaultValue="" key="false" length="8" name="longitude" nullable="true" pattern="" precision="5" sourceType="NUMERIC" type="id_Double" originalLength="8"/>
+      <column comment="" key="false" length="8" name="latitude" nullable="true" pattern="" precision="5" sourceType="FLOAT8" type="id_Double" originalLength="8"/>
+    </metadata>
+    <metadata connector="REJECT" label="csiro_harvest_pci" name="REJECT">
+      <column comment="" key="false" length="16" name="route_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="16" name="start_port" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="16" name="end_port" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="256" name="route_frequency" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="256" name="route_start_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="DATE" type="id_Date"/>
+      <column comment="" key="false" length="256" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="16" name="trip_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="29" name="TIME" nullable="true" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="2147483647" name="geom" nullable="true" pattern="" precision="0" sourceType="GEOMETRY" type="id_Geometry"/>
+      <column comment="" key="false" length="256" name="taxon_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="family" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="genus" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="species" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="taxon_group" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="10" name="caab_code" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long" originalLength="10"/>
+      <column comment="" key="false" length="256" name="taxon_start_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" originalLength="256"/>
+      <column comment="" key="false" length="7" name="taxon_per_m3" nullable="true" pattern="" precision="1" sourceType="NUMERIC" type="id_Float" originalLength="12"/>
+      <column comment="" key="false" length="256" name="phyto_comments" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="256"/>
+      <column comment="" key="false" length="256" name="acknowledgements" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="256"/>
+      <column comment="" defaultValue="" key="false" length="8" name="longitude" nullable="true" pattern="" precision="5" sourceType="NUMERIC" type="id_Double" originalLength="8"/>
+      <column comment="" key="false" length="8" name="latitude" nullable="true" pattern="" precision="5" sourceType="FLOAT8" type="id_Double" originalLength="8"/>
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="iIncludeSdiLibraries" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-160" posY="-32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIncludeSdiLibraries_1"/>
+    <elementParameter field="CHECK" name="START" value="true"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import org.talend.sdi.geometry.Geometry;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="64" posY="128">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;/media/lbesnard/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/harvesters/workspace/changelog.xml&quot;"/>
+    <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;soop_auscpr_phyto_trajectory_map&quot;>&#xA;       &lt;sql>&#x9;&#xA;CREATE TABLE soop_auscpr_phyto_trajectory_map&#xA;(&#xA;  measurement bigserial NOT NULL,&#xA;  route_code text,&#xA;  start_port text,&#xA;  end_port text,&#xA;  route_frequency text,&#xA;  route_start_date date,&#xA;  vessel_name text,&#xA;  trip_code text,&#xA;  &quot;TIME&quot; timestamp(6) with time zone,&#xA;  geom geometry,&#xA;  taxon_name text,&#xA;  family text,&#xA;  genus text,&#xA;  species text,&#xA;  taxon_group text,&#xA;  caab_code bigint,&#xA;  taxon_start_date timestamp(6) with time zone,&#xA;  taxon_per_m3 numeric(7,1),&#xA;  phyto_comments text,&#xA;  acknowledgements text,&#xA;  longitude double precision,&#xA;  latitude double precision,&#xA;  CONSTRAINT measurements_phyto_pkey PRIMARY KEY (measurement)&#xA;)&#xA;       &lt;/sql>&#xA;&#xA;&#xA;        &lt;sql>&#xA;ALTER TABLE soop_auscpr_phyto_trajectory_map&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;ALTER TABLE soop_auscpr_phyto_trajectory_map ADD CHECK (ST_IsValid(geom));&#xA;CREATE INDEX soop_auscpr_phyto_trajectory_map_gist_idx ON soop_auscpr_phyto_trajectory_map USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&lt;/databaseChangeLog> "/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tPostgresqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-160" posY="128">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_SHARED_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="SHARED_CONNECTION_NAME" value=""/>
+    <elementParameter field="CHECK" name="AUTO_COMMIT" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-128" posY="288">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1"/>
+    <elementParameter field="CHECK" name="START" value="true"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="288">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="256">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="CHECK" name="CLOSE" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlCommit_1"/>
+  </node>
+  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="sWfsInput_1" offsetLabelX="0" offsetLabelY="0" source="sWfsInput_1" target="tConvertType_2">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="ROUTE_CODE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="START_PORT"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="END_PORT"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ROUTE_FREQUENCY"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ROUTE_START_DATE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="VESSEL_NAME"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TRIP_CODE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="LONGITUDE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="LATITUDE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TIME_UTC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TAXON_NAME"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="FAMILY"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="GENUS"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="SPECIES"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TAXON_GROUP"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="CAAB_CODE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TAXON_START_DATE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TAXON_PER_M3"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PHYTO_COMMENTS"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ACKNOWLEDGEMENTS"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
+  </connection>
+  <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tConvertType_2" offsetLabelX="0" offsetLabelY="0" source="tConvertType_2" target="tMap_1">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="ROUTE_CODE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TIME_UTC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ACKNOWLEDGEMENTS"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PHYTO_COMMENTS"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="GENUS"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TAXON_NAME"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="LATITUDE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="FAMILY"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TAXON_PER_M3"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="CAAB_CODE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TAXON_GROUP"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="START_PORT"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="END_PORT"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ROUTE_FREQUENCY"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="SPECIES"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="ROUTE_START_DATE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="VESSEL_NAME"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TAXON_START_DATE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="LONGITUDE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TRIP_CODE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row2"/>
+  </connection>
+  <connection connectorName="FLOW" label="phyto_record" lineStyle="0" metaname="phyto_record" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tPostgresqlOutput_1">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="route_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="start_port"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="end_port"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="route_frequency"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="route_start_date"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="vessel_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="trip_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="colour_index"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="colour"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="pci_comments"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="acknowledgements"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TIME"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geom"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="phyto_comments"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="taxon_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="species"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="family"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="taxon_start_date"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="taxon_per_m3"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="taxon_group"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="genus"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="caab_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="longitude"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="latitude"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="phyto_record"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlOutput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlOutput_1" target="tPostgresqlCommit_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk5"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iIncludeSdiLibraries_1" offsetLabelX="0" offsetLabelY="0" source="iIncludeSdiLibraries_1" target="tPostgresqlConnection_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="sWfsInput_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk2"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="iPostgresqlDbUpdate_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk4"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostjob_1" offsetLabelX="0" offsetLabelY="0" source="tPostjob_1" target="tPostgresqlClose_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk3"/>
+  </connection>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="sWfsInput_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIncludeSdiLibraries_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="230;100;0"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="255;220;180"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+</talendfile:ProcessType>
