@@ -41,6 +41,7 @@
   </parameters>
   <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="64">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
+    <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_yCZkUHjlEeOwXYnbNsOr_w"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
@@ -57,7 +58,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;  SELECT ar.id AS animal_release_id,&#xA;&#x9;p.name AS project_name,&#xA;&#x9;s.phylum,&#xA;&#x9;s.order_name,&#xA;&#x9;s.common_name,&#xA;&#x9;ar.release_locality,&#xA;&#x9;date(ar.embargo_date) AS embargo_date,&#xA;&#x9;COUNT(vd.timestamp) AS no_detections,&#xA;&#x9;date(min(vd.timestamp)) AS first_detection,&#xA;&#x9;date(max(vd.timestamp)) AS last_detection,&#xA;&#x9;date_part('day', max(vd.timestamp) - min(vd.timestamp)) AS coverage_duration&#xA;  FROM valid_detection vd&#xA;  JOIN detection_surgery ds ON vd.id = ds.detection_id&#xA;  JOIN surgery su ON ds.surgery_id = su.id&#xA;  FULL JOIN animal_release ar ON su.release_id = ar.id&#xA;  JOIN animal a ON ar.animal_id = a.id&#xA;  JOIN species s ON a.species_id = s.id&#xA;  JOIN project p ON p.id = ar.project_id&#xA;&#x9;GROUP BY ar.id, p.name, s.phylum, s.order_name, s.common_name, ar.embargo_date&#xA;&#x9;ORDER BY animal_release_id, phylum,order_name,common_name;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;  SELECT ar.id AS animal_release_id,&#xA;&#x9;p.name AS project_name,&#xA;&#x9;s.phylum,&#xA;&#x9;s.order_name,&#xA;&#x9;s.common_name,&#xA;&#x9;ar.release_locality,&#xA;&#x9;date(ar.embargo_date) AS embargo_date,&#xA;&#x9;COUNT(vd.timestamp) AS no_detections,&#xA;&#x9;date(min(vd.timestamp)) AS first_detection,&#xA;&#x9;date(max(vd.timestamp)) AS last_detection,&#xA;&#x9;round((date_part('days', max(vd.timestamp) - min(vd.timestamp)) + date_part('hours', max(vd.timestamp) - min(vd.timestamp))/24)::numeric, 1) AS coverage_duration&#xA;  FROM valid_detection vd&#xA;  JOIN detection_surgery ds ON vd.id = ds.detection_id&#xA;  JOIN surgery su ON ds.surgery_id = su.id&#xA;  FULL JOIN animal_release ar ON su.release_id = ar.id&#xA;  JOIN animal a ON ar.animal_id = a.id&#xA;  JOIN species s ON a.species_id = s.id&#xA;  JOIN project p ON p.id = ar.project_id&#xA;&#x9;GROUP BY ar.id, p.name, s.phylum, s.order_name, s.common_name, ar.embargo_date&#xA;&#x9;ORDER BY animal_release_id, phylum,order_name,common_name;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -103,7 +104,7 @@
       <column comment="" defaultValue="" key="false" length="19" name="no_detections" nullable="true" pattern="" precision="0" sourceType="" type="id_Long"/>
       <column comment="" key="false" length="13" name="first_detection" nullable="true" pattern="" precision="0" sourceType="" type="id_Date"/>
       <column comment="" key="false" length="13" name="last_detection" nullable="true" pattern="" precision="0" sourceType="" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="17" name="coverage_duration" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" length="17" name="coverage_duration" nullable="true" pattern="" precision="17" sourceType="INT8" type="id_Long"/>
     </metadata>
   </node>
   <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="64">
@@ -208,7 +209,7 @@
       <column comment="" defaultValue="" key="false" length="19" name="no_detections" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="13" name="first_detection" nullable="true" pattern="" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="13" name="last_detection" nullable="true" pattern="" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="17" name="coverage_duration" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" length="17" name="coverage_duration" nullable="true" pattern="" precision="17" sourceType="INT8" type="id_Long"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" defaultValue="" key="true" length="19" name="animal_release_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
@@ -221,7 +222,7 @@
       <column comment="" defaultValue="" key="false" length="19" name="no_detections" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="13" name="first_detection" nullable="true" pattern="" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="13" name="last_detection" nullable="true" pattern="" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="17" name="coverage_duration" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" length="17" name="coverage_duration" nullable="true" pattern="" precision="17" sourceType="INT8" type="id_Long"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -244,7 +245,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;  SELECT phylum,&#xA;&#x9;order_name,&#xA;&#x9;common_name,&#xA;&#x9;COUNT(DISTINCT project_name) AS no_projects,&#xA;&#x9;COUNT(DISTINCT release_locality) AS no_localities,&#xA;&#x9;COUNT(animal_release_id) AS no_releases,&#xA;&#x9;SUM (CASE WHEN no_detections = 0 THEN 0 ELSE 1 END) AS no_releases_with_detections,&#xA;&#x9;SUM (CASE WHEN embargo_date > now() THEN 1 ELSE 0 END) AS no_embargo,&#xA;&#x9;max(embargo_date) AS latest_embargo_date,&#xA;&#x9;SUM(no_detections) AS total_no_detections,&#xA;&#x9;min(first_detection) AS earliest_detection,&#xA;&#x9;max(last_detection) AS latest_detection,&#xA;&#x9;round(avg(coverage_duration)::numeric, 1) AS mean_coverage_duration&#xA;  FROM aatams_acoustic_species_all_deployments_view&#xA;&#x9;GROUP BY phylum, order_name, common_name&#xA;&#x9;ORDER BY phylum, order_name, common_name;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH a AS (&#xA;  SELECT common_name,&#xA;&#x9;COUNT(DISTINCT transmitter_id) AS no_individuals_public,&#xA;&#x9;SUM(no_detections) AS no_detections_public&#xA;  FROM aatams_acoustic_detections_map&#xA;  WHERE common_name IS NOT NULL&#xA;&#x9;GROUP BY common_name)&#xA;  SELECT v.phylum,&#xA;&#x9;v.order_name,&#xA;&#x9;v.common_name,&#xA;&#x9;COUNT(DISTINCT v.project_name) AS no_projects,&#xA;&#x9;COUNT(DISTINCT v.release_locality) AS no_localities,&#xA;&#x9;COUNT(v.animal_release_id) AS no_releases,&#xA;&#x9;SUM (CASE WHEN v.embargo_date > now() THEN 1 ELSE 0 END) AS no_embargo,&#xA;&#x9;SUM (CASE WHEN v.no_detections = 0 THEN 0 ELSE 1 END) AS no_releases_with_detections,&#xA;&#x9;CASE WHEN no_individuals_public IS NULL THEN 0 ELSE no_individuals_public END AS no_public_releases_with_detections,&#xA;&#x9;max(v.embargo_date) AS latest_embargo_date,&#xA;&#x9;SUM(v.no_detections) AS total_no_detections,&#xA;&#x9;CASE WHEN no_detections_public IS NULL THEN 0 ELSE no_detections_public END AS no_detections_public,&#xA;&#x9;min(v.first_detection) AS earliest_detection,&#xA;&#x9;max(v.last_detection) AS latest_detection,&#xA;&#x9;round(avg(v.coverage_duration)::numeric, 1) AS mean_coverage_duration&#xA;  FROM aatams_acoustic_species_all_deployments_view v&#xA;  FULL JOIN a ON v.common_name = a.common_name&#xA;&#x9;GROUP BY v.phylum, v.order_name, v.common_name, no_individuals_public, no_detections_public&#xA;&#x9;ORDER BY phylum, order_name, common_name;&#xA;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -264,13 +265,17 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="no_releases"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="no_embargo"/>
+      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="no_releases_with_detections"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="no_embargo"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="no_public_releases_with_detections"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="latest_embargo_date"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="total_no_detections"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="no_detections_public"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="earliest_detection"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -290,10 +295,12 @@
       <column comment="" defaultValue="" key="false" name="no_projects" nullable="true" pattern="" sourceType="" type="id_Long"/>
       <column comment="" defaultValue="" key="false" name="no_localities" nullable="true" pattern="" sourceType="" type="id_Long"/>
       <column comment="" defaultValue="" key="false" name="no_releases" nullable="true" pattern="" sourceType="" type="id_Long"/>
-      <column comment="" defaultValue="" key="false" name="no_releases_with_detections" nullable="true" pattern="" sourceType="" type="id_Long"/>
       <column comment="" defaultValue="" key="false" name="no_embargo" nullable="true" pattern="" sourceType="" type="id_Long"/>
+      <column comment="" defaultValue="" key="false" name="no_releases_with_detections" nullable="true" pattern="" sourceType="" type="id_Long"/>
+      <column comment="" key="false" name="no_public_releases_with_detections" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" name="latest_embargo_date" nullable="true" pattern="" sourceType="" type="id_Date"/>
       <column comment="" defaultValue="" key="false" name="total_no_detections" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" key="false" name="no_detections_public" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" name="earliest_detection" nullable="true" pattern="" sourceType="" type="id_Date"/>
       <column comment="" key="false" name="latest_detection" nullable="true" pattern="" sourceType="" type="id_Date"/>
       <column comment="" defaultValue="" key="false" name="mean_coverage_duration" nullable="true" pattern="" sourceType="" type="id_Double"/>
@@ -356,12 +363,17 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="no_embargo"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="no_releases_with_detections"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="no_embargo"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="no_public_releases_with_detections"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -372,6 +384,11 @@
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="total_no_detections"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="no_detections_public"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -407,10 +424,12 @@
       <column comment="" defaultValue="" key="false" name="no_projects" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" defaultValue="" key="false" name="no_localities" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" defaultValue="" key="false" name="no_releases" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
-      <column comment="" defaultValue="" key="false" name="no_releases_with_detections" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" defaultValue="" key="false" name="no_embargo" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" defaultValue="" key="false" name="no_releases_with_detections" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="no_public_releases_with_detections" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" name="latest_embargo_date" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" defaultValue="" key="false" name="total_no_detections" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" name="no_detections_public" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" name="earliest_detection" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="latest_detection" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" defaultValue="" key="false" name="mean_coverage_duration" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
@@ -422,10 +441,12 @@
       <column comment="" defaultValue="" key="false" name="no_projects" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" defaultValue="" key="false" name="no_localities" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" defaultValue="" key="false" name="no_releases" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
-      <column comment="" defaultValue="" key="false" name="no_releases_with_detections" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" defaultValue="" key="false" name="no_embargo" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" defaultValue="" key="false" name="no_releases_with_detections" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="no_public_releases_with_detections" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" name="latest_embargo_date" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" defaultValue="" key="false" name="total_no_detections" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" name="no_detections_public" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" name="earliest_detection" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="latest_detection" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" defaultValue="" key="false" name="mean_coverage_duration" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
@@ -451,7 +472,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT COUNT(*) AS statistics,&#xA;&#x9;'no_species' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;  SELECT COUNT(*)-SUM(CASE WHEN total_no_detections = 0 THEN 1 ELSE 0 END) AS statistics,&#xA;&#x9;'no_species_detected' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;  SELECT SUM (no_releases) AS statistics,&#xA;&#x9;'no_releases' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;    SELECT SUM (no_releases_with_detections) AS statistics,&#xA;&#x9;'no_releases_with_detections' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;  SELECT SUM (total_no_detections) AS statistics,&#xA;&#x9;'no_detections' AS statistics_type&#xA;&#x9;FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;  SELECT COUNT(DISTINCT transmitter_id) AS statistics,&#xA;&#x9;'no_unique_tag_ids_detected' AS statistics_type&#xA;  FROM valid_detection &#xA;UNION ALL&#xA;  SELECT COUNT(*) AS statistics,&#xA;&#x9;'tag_aatams_knows_about' AS statistics_type&#xA;  FROM device &#xA;&#x9;WHERE class = 'au.org.emii.aatams.Tag'&#xA;UNION ALL&#xA;  SELECT COUNT(DISTINCT sensor.transmitter_id) AS statistics,&#xA;&#x9;'no_detected_tags_aatams_knows_about' AS statistics_type&#xA;  FROM valid_detection &#xA;  JOIN sensor ON valid_detection.transmitter_id = sensor.transmitter_id&#xA;UNION ALL&#xA;  SELECT COUNT(DISTINCT tag_id) AS statistics,&#xA;&#x9;'tags_detected_by_species' AS statistics_type&#xA;  FROM valid_detection &#xA;  JOIN detection_surgery ON valid_detection.id = detection_surgery.detection_id &#xA;  JOIN surgery ON detection_surgery.surgery_id = surgery.id&#xA;UNION ALL&#xA;  SELECT COUNT(*) AS statistics, 'Total number of tags embargoed for less than or equal to a year' AS statistics_type&#xA;  FROM animal_release ar&#xA;  WHERE ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) &lt;= 1 AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) IS NOT NULL&#xA;UNION ALL&#xA;  SELECT COUNT(*) AS statistics, 'Total number of tags embargoed for more than a year, but less than or equal to 2 years' AS statistics_type&#xA;  FROM animal_release ar&#xA;  WHERE ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) > 1 AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) &lt;= 2&#xA;  AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) IS NOT NULL&#xA;UNION ALL&#xA;  SELECT COUNT(*) AS statistics, 'Total number of tags embargoed for more than two years, but less than or equal to 3 years' AS statistics_type&#xA;  FROM animal_release ar&#xA;  WHERE ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) > 2 AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) &lt;= 3&#xA;  AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) IS NOT NULL&#xA;UNION ALL&#xA;  SELECT COUNT(*) AS statistics, 'Total number of tags embargoed for more than three years' AS statistics_type&#xA;  FROM animal_release ar&#xA;  WHERE ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) > 3 AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) IS NOT NULL&#xA;UNION ALL&#xA;  SELECT COUNT(*) AS statistics, 'Total number of animals currently embargoed' AS statistics_type&#xA;  FROM animal_release ar&#xA;  WHERE embargo_date > now();&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;  SELECT COUNT(*) AS statistics,&#xA;&#x9;'no_species' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;  SELECT COUNT(*)-SUM(CASE WHEN total_no_detections = 0 THEN 1 ELSE 0 END) AS statistics,&#xA;&#x9;'no_species_detected' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;  SELECT SUM (no_releases) AS statistics,&#xA;&#x9;'no_releases' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;  SELECT SUM(no_embargo) AS statistics, &#xA;&#x9;'Total number of animals currently embargoed' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;  WHERE embargo_date > now();&#xA;UNION ALL&#xA;    SELECT SUM (no_releases_with_detections) AS statistics,&#xA;&#x9;'no_releases_with_detections' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;    SELECT SUM (no_public_releases_with_detections) AS statistics,&#xA;&#x9;'no_public_releases_with_detections' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;  SELECT SUM (total_no_detections) AS statistics,&#xA;&#x9;'no_detections' AS statistics_type&#xA;&#x9;FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;  SELECT SUM (no_detections_public) AS statistics,&#xA;&#x9;'no_public_detections' AS statistics_type&#xA;&#x9;FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;  SELECT COUNT(DISTINCT transmitter_id) AS statistics,&#xA;&#x9;'no_unique_tag_ids_detected' AS statistics_type&#xA;  FROM valid_detection &#xA;UNION ALL&#xA;  SELECT COUNT(*) AS statistics,&#xA;&#x9;'tag_aatams_knows_about' AS statistics_type&#xA;  FROM device &#xA;&#x9;WHERE class = 'au.org.emii.aatams.Tag'&#xA;UNION ALL&#xA;  SELECT COUNT(DISTINCT sensor.transmitter_id) AS statistics,&#xA;&#x9;'no_detected_tags_aatams_knows_about' AS statistics_type&#xA;  FROM valid_detection &#xA;  JOIN sensor ON valid_detection.transmitter_id = sensor.transmitter_id&#xA;UNION ALL&#xA;  SELECT COUNT(DISTINCT tag_id) AS statistics,&#xA;&#x9;'tags_detected_by_species' AS statistics_type&#xA;  FROM valid_detection &#xA;  JOIN detection_surgery ON valid_detection.id = detection_surgery.detection_id &#xA;  JOIN surgery ON detection_surgery.surgery_id = surgery.id&#xA;UNION ALL&#xA;  SELECT COUNT(*) AS statistics, 'Total number of tags embargoed for less than or equal to a year' AS statistics_type&#xA;  FROM animal_release ar&#xA;  WHERE ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) &lt;= 1 AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) IS NOT NULL&#xA;UNION ALL&#xA;  SELECT COUNT(*) AS statistics, 'Total number of tags embargoed for more than a year, but less than or equal to 2 years' AS statistics_type&#xA;  FROM animal_release ar&#xA;  WHERE ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) > 1 AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) &lt;= 2&#xA;  AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) IS NOT NULL&#xA;UNION ALL&#xA;  SELECT COUNT(*) AS statistics, 'Total number of tags embargoed for more than two years, but less than or equal to 3 years' AS statistics_type&#xA;  FROM animal_release ar&#xA;  WHERE ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) > 2 AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) &lt;= 3&#xA;  AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) IS NOT NULL&#xA;UNION ALL&#xA;  SELECT COUNT(*) AS statistics, 'Total number of tags embargoed for more than three years' AS statistics_type&#xA;  FROM animal_release ar&#xA;  WHERE ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) > 3 AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) IS NOT NULL;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -1265,10 +1286,6 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tPostgresqlInput_3">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
-  </connection>
   <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tPostgresqlInput_3" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_3" target="iPostgresqlOutput_2">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
@@ -1276,6 +1293,12 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="statistics_type"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="no_detections_public"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="no_public_releases_with_detections"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -1487,9 +1510,9 @@
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_7" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_7" target="tPostgresqlCommit_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk7"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="tPostgresqlInput_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="tPostgresqlInput_3">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
