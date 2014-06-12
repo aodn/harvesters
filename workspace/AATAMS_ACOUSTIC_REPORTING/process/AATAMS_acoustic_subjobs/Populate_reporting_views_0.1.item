@@ -41,7 +41,6 @@
   </parameters>
   <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="64">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
-    <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_yCZkUHjlEeOwXYnbNsOr_w"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
@@ -472,7 +471,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;  SELECT COUNT(*) AS statistics,&#xA;&#x9;'no_species' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;  SELECT COUNT(*)-SUM(CASE WHEN total_no_detections = 0 THEN 1 ELSE 0 END) AS statistics,&#xA;&#x9;'no_species_detected' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;  SELECT SUM (no_releases) AS statistics,&#xA;&#x9;'no_releases' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;  SELECT SUM(no_embargo) AS statistics, &#xA;&#x9;'Total number of animals currently embargoed' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;    SELECT SUM (no_releases_with_detections) AS statistics,&#xA;&#x9;'no_releases_with_detections' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;    SELECT SUM (no_public_releases_with_detections) AS statistics,&#xA;&#x9;'no_public_releases_with_detections' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;  SELECT SUM (total_no_detections) AS statistics,&#xA;&#x9;'no_detections' AS statistics_type&#xA;&#x9;FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;  SELECT SUM (no_detections_public) AS statistics,&#xA;&#x9;'no_public_detections' AS statistics_type&#xA;&#x9;FROM aatams_acoustic_species_data_summary_view&#xA;UNION ALL&#xA;  SELECT COUNT(DISTINCT transmitter_id) AS statistics,&#xA;&#x9;'no_unique_tag_ids_detected' AS statistics_type&#xA;  FROM valid_detection &#xA;UNION ALL&#xA;  SELECT COUNT(*) AS statistics,&#xA;&#x9;'tag_aatams_knows_about' AS statistics_type&#xA;  FROM device &#xA;&#x9;WHERE class = 'au.org.emii.aatams.Tag'&#xA;UNION ALL&#xA;  SELECT COUNT(DISTINCT sensor.transmitter_id) AS statistics,&#xA;&#x9;'no_detected_tags_aatams_knows_about' AS statistics_type&#xA;  FROM valid_detection &#xA;  JOIN sensor ON valid_detection.transmitter_id = sensor.transmitter_id&#xA;UNION ALL&#xA;  SELECT COUNT(DISTINCT tag_id) AS statistics,&#xA;&#x9;'tags_detected_by_species' AS statistics_type&#xA;  FROM valid_detection &#xA;  JOIN detection_surgery ON valid_detection.id = detection_surgery.detection_id &#xA;  JOIN surgery ON detection_surgery.surgery_id = surgery.id&#xA;UNION ALL&#xA;  SELECT COUNT(*) AS statistics, 'Total number of tags embargoed for less than or equal to a year' AS statistics_type&#xA;  FROM animal_release ar&#xA;  WHERE ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) &lt;= 1 AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) IS NOT NULL&#xA;UNION ALL&#xA;  SELECT COUNT(*) AS statistics, 'Total number of tags embargoed for more than a year, but less than or equal to 2 years' AS statistics_type&#xA;  FROM animal_release ar&#xA;  WHERE ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) > 1 AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) &lt;= 2&#xA;  AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) IS NOT NULL&#xA;UNION ALL&#xA;  SELECT COUNT(*) AS statistics, 'Total number of tags embargoed for more than two years, but less than or equal to 3 years' AS statistics_type&#xA;  FROM animal_release ar&#xA;  WHERE ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) > 2 AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) &lt;= 3&#xA;  AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) IS NOT NULL&#xA;UNION ALL&#xA;  SELECT COUNT(*) AS statistics, 'Total number of tags embargoed for more than three years' AS statistics_type&#xA;  FROM animal_release ar&#xA;  WHERE ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) > 3 AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) IS NOT NULL;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH total_species AS (&#xA;  SELECT COUNT(*) AS t,&#xA;&#x9;'total no tagged species' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view),&#xA;total_species_public AS(&#xA;  SELECT COUNT(*) AS t, &#xA;&#x9;'no tagged species for which all animals are public' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;    WHERE no_embargo = 0),&#xA;total_species_embargo AS (&#xA;  SELECT COUNT(*) AS t,&#xA;&#x9;'no tagged species for which some animals are currently under embargo' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;  WHERE no_embargo != 0),&#xA;total_species_detections AS (&#xA;    SELECT COUNT(*) AS t,&#xA;&#x9;'no tagged species with detections' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;  WHERE total_no_detections != 0),&#xA;total_species_public_detections AS (&#xA;    SELECT COUNT(*) AS t,&#xA;&#x9;'no tagged species with public detections' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;  WHERE no_detections_public != 0),&#xA;total_species_embargo_detections AS (&#xA;    SELECT COUNT(*) AS t,&#xA;&#x9;'no tagged species with embargoed detections' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view&#xA;  WHERE no_detections_public = 0 AND total_no_detections != 0),&#xA;total_animals AS (&#xA;  SELECT SUM (no_releases) AS t,&#xA;&#x9;'total no tagged animals' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view),&#xA;total_animals_public AS (&#xA;  SELECT SUM (no_releases) - SUM(no_embargo) AS t, &#xA;&#x9;'no tagged animals that are public' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view),&#xA;total_animals_embargo AS (&#xA;  SELECT SUM(no_embargo) AS t, &#xA;&#x9;'no tagged animals currently under embargo' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view),&#xA;total_animals_detections AS (&#xA;    SELECT SUM (no_releases_with_detections) AS t,&#xA;&#x9;'no tagged animals with detections' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view),&#xA;total_animals_public_detections AS (&#xA;    SELECT SUM (no_public_releases_with_detections) AS t,&#xA;&#x9;'no tagged animals with public detections' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view),&#xA;total_animals_embargo_detections AS (&#xA;    SELECT SUM(no_releases_with_detections) - SUM(no_public_releases_with_detections) AS t,&#xA;&#x9;'no tagged animals with embargoed detections' AS statistics_type&#xA;  FROM aatams_acoustic_species_data_summary_view),&#xA;total_detections AS (&#xA;  SELECT SUM (total_no_detections) AS t,&#xA;&#x9;'no detections' AS statistics_type&#xA;&#x9;FROM aatams_acoustic_species_data_summary_view),&#xA;total_detections_public AS (&#xA;  SELECT SUM (no_detections_public) AS t,&#xA;&#x9;'no detections that are public' AS statistics_type&#xA;&#x9;FROM aatams_acoustic_species_data_summary_view),&#xA;total_detections_embargo AS (&#xA;  SELECT SUM (total_no_detections) - SUM (no_detections_public) AS t,&#xA;&#x9;'no detections that are currently under embargo' AS statistics_type&#xA;&#x9;FROM aatams_acoustic_species_data_summary_view),&#xA;tag_ids AS (&#xA;  SELECT COUNT(DISTINCT transmitter_id) AS t,&#xA;&#x9;'no unique tag ids detected' AS statistics_type&#xA;  FROM valid_detection),&#xA;tag_aatams_knows AS (&#xA;  SELECT COUNT(*) AS t,&#xA;&#x9;'tag aatams knows about' AS statistics_type&#xA;  FROM device &#xA;&#x9;WHERE class = 'au.org.emii.aatams.Tag'),&#xA;detected_tags_aatams_knows AS (&#xA;  SELECT COUNT(DISTINCT sensor.transmitter_id) AS t,&#xA;&#x9;'no detected tags aatams knows about' AS statistics_type&#xA;  FROM valid_detection &#xA;  JOIN sensor ON valid_detection.transmitter_id = sensor.transmitter_id),&#xA;tags_by_species AS (&#xA;  SELECT COUNT(DISTINCT tag_id) AS t,&#xA;&#x9;'tags detected by species' AS statistics_type&#xA;  FROM valid_detection &#xA;  JOIN detection_surgery ON valid_detection.id = detection_surgery.detection_id &#xA;  JOIN surgery ON detection_surgery.surgery_id = surgery.id),&#xA;embargo_1 AS (&#xA;  SELECT COUNT(*) AS t, &#xA;&#x9;'Total number of tags embargoed for less than or equal to a year' AS statistics_type&#xA;  FROM animal_release ar&#xA;  WHERE ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) &lt;= 1 AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) IS NOT NULL),&#xA;embargo_2 AS (&#xA;  SELECT COUNT(*) AS t, &#xA;&#x9;'Total number of tags embargoed for more than a year, but less than or equal to 2 years' AS statistics_type&#xA;  FROM animal_release ar&#xA;  WHERE ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) > 1 AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) &lt;= 2&#xA;  AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) IS NOT NULL),&#xA;embargo_3 AS (&#xA;  SELECT COUNT(*) AS t,&#xA;&#x9;'Total number of tags embargoed for more than two years, but less than or equal to 3 years' AS statistics_type&#xA;  FROM animal_release ar&#xA;  WHERE ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) > 2 AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) &lt;= 3&#xA;  AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) IS NOT NULL),&#xA;embargo_3_more AS (&#xA;  SELECT COUNT(*) AS t,&#xA;&#x9;'Total number of tags embargoed for more than three years' AS statistics_type&#xA;  FROM animal_release ar&#xA;  WHERE ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) > 3 AND ROUND((EXTRACT (day FROM embargo_date - releasedatetime_timestamp)/365.25)::numeric,1) IS NOT NULL)&#xA;  SELECT 'Species' AS type, &#xA;&#x9;s.t AS total, &#xA;&#x9;sp.t AS total_public,&#xA;&#x9;se.t AS total_embargo, &#xA;&#x9;sd.t AS detections_total, &#xA;&#x9;spd.t AS detections_public, &#xA;&#x9;sed.t AS detections_embargo,&#xA;&#x9;NULL::bigint AS other_1,&#xA;&#x9;NULL::bigint AS other_2&#xA;  FROM total_species s, total_species_public sp,total_species_embargo se, total_species_detections sd, total_species_public_detections spd,total_species_embargo_detections sed&#xA;UNION ALL&#xA;  SELECT 'Animals' AS type, &#xA;&#x9;a.t AS total, &#xA;&#x9;ap.t AS total_public,&#xA;&#x9;ae.t AS total_embargo, &#xA;&#x9;ad.t AS detections_total, &#xA;&#x9;apd.t AS detections_public, &#xA;&#x9;aed.t AS detections_embargo,&#xA;&#x9;NULL AS other_1,&#xA;&#x9;NULL AS other_2&#xA;  FROM total_animals a, total_animals_public ap,total_animals_embargo ae, total_animals_detections ad, total_animals_public_detections apd,total_animals_embargo_detections aed&#xA;UNION ALL&#xA;  SELECT 'Detections' AS type, &#xA;&#x9;NULL AS total, &#xA;&#x9;NULL AS total_public,&#xA;&#x9;NULL AS total_embargo, &#xA;&#x9;d.t AS detections_total, &#xA;&#x9;dp.t AS detections_public, &#xA;&#x9;de.t AS detections_embargo,&#xA;&#x9;NULL AS other_1,&#xA;&#x9;NULL AS other_2&#xA;  FROM total_detections d, total_detections_public dp, total_detections_embargo de&#x9;&#xA;UNION ALL&#xA;  SELECT 'Other stats' AS type,&#xA;&#x9;ti.t AS total, &#xA;&#x9;ta.t AS total_public,&#xA;&#x9;dta.t AS total_embargo, &#xA;&#x9;ts.t AS detections_total, &#xA;&#x9;e1.t AS detections_public, &#xA;&#x9;e2.t AS detections_embargo,&#xA;&#x9;e3.t AS other_1,&#xA;&#x9;e3m.t AS other_2&#xA;  FROM tag_ids ti, tag_aatams_knows ta, detected_tags_aatams_knows dta, tags_by_species ts, embargo_1 e1, embargo_2 e2, embargo_3 e3, embargo_3_more e3m;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -480,9 +479,23 @@
     <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
     <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
     <elementParameter field="TABLE" name="TRIM_COLUMN">
-      <elementValue elementRef="SCHEMA_COLUMN" value="statistics"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="type"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="statistics_type"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="total"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="total_public"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="total_embargo"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="detections_total"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="detections_public"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="detections_embargo"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="other_1"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="other_2"/>
       <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -490,8 +503,15 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlInput_4">
-      <column comment="" key="false" name="statistics" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="false" length="255" name="statistics_type" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
+      <column comment="" key="true" length="255" name="type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="total" nullable="true" pattern="" sourceType="INT8" type="id_Long" originalLength="255"/>
+      <column comment="" key="false" name="total_public" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="total_embargo" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="detections_total" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="detections_public" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="detections_embargo" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="other_1" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="other_2" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
     </metadata>
   </node>
   <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="320">
@@ -521,12 +541,47 @@
     <elementParameter field="TABLE" name="ADD_COLS"/>
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS">
-      <elementValue elementRef="SCHEMA_COLUMN" value="statistics"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="type"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="statistics_type"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="total"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="total_public"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="total_embargo"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="detections_total"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="detections_public"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="detections_embargo"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="other_1"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="other_2"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -541,12 +596,26 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_3">
-      <column comment="" key="false" name="statistics" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="false" length="255" name="statistics_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
+      <column comment="" key="true" length="255" name="type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="total" nullable="true" pattern="" sourceType="INT8" type="id_Long" originalLength="255"/>
+      <column comment="" key="false" name="total_public" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="total_embargo" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="detections_total" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="detections_public" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="detections_embargo" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="other_1" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="other_2" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="false" name="statistics" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="false" length="255" name="statistics_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
+      <column comment="" key="true" length="255" name="type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="total" nullable="true" pattern="" sourceType="INT8" type="id_Long" originalLength="255"/>
+      <column comment="" key="false" name="total_public" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="total_embargo" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="detections_total" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="detections_public" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="detections_embargo" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="other_1" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="other_2" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1286,6 +1355,10 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
   </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tPostgresqlInput_3">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
+  </connection>
   <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tPostgresqlInput_3" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_3" target="iPostgresqlOutput_2">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
@@ -1357,10 +1430,31 @@
       <elementValue elementRef="TRACE_COLUMN" value="station_lon"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="statistics_type"/>
+      <elementValue elementRef="TRACE_COLUMN" value="total"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="statistics"/>
+      <elementValue elementRef="TRACE_COLUMN" value="type"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="detections_embargo"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="detections_total"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="total_embargo"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="detections_public"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="total_public"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="other_2"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="other_1"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -1510,9 +1604,9 @@
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_7" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_7" target="tPostgresqlCommit_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk7"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="tPostgresqlInput_3">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="tPostgresqlInput_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
