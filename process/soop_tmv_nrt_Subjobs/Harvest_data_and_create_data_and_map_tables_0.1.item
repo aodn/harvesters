@@ -79,7 +79,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT trajectory_id AS file_id,&#xA;size,&#xA;COUNT(trajectory_id) AS no_measurements,&#xA;min(time) AT TIME ZONE 'UTC' AS time_start,&#xA;max(time) AT TIME ZONE 'UTC' AS time_end,&#xA;st_simplify(st_makeline(geom ORDER BY time),0.05) AS geom&#xA;FROM soop_tmv_nrt_trajectory_data&#xA;LEFT JOIN indexed_file ON indexed_file.id = soop_tmv_nrt_trajectory_data.trajectory_id&#xA;WHERE trajectory_id = &quot; + context.fileId + &quot;&#xA;GROUP BY trajectory_id,size;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT trajectory_id AS file_id,&#xA;size,&#xA;COUNT(trajectory_id) AS no_measurements,&#xA;min(\&quot;TIME\&quot;) AT TIME ZONE 'UTC' AS time_start,&#xA;max(\&quot;TIME\&quot;) AT TIME ZONE 'UTC' AS time_end,&#xA;st_simplify(st_makeline(geom ORDER BY \&quot;TIME\&quot;),0.05) AS geom&#xA;FROM soop_tmv_nrt_trajectory_data&#xA;LEFT JOIN indexed_file ON indexed_file.id = soop_tmv_nrt_trajectory_data.trajectory_id&#xA;WHERE trajectory_id = &quot; + context.fileId + &quot;&#xA;GROUP BY trajectory_id,size;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -478,16 +478,16 @@
     </metadata>
     <metadata connector="FILTER" label="metadata" name="FILTER">
       <column comment="" key="false" name="trajectory_id" nullable="true" pattern="" sourceType="" type="id_Long"/>
-      <column comment="" key="false" length="19" name="time" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" type="id_Date"/>
+      <column comment="" key="false" length="19" name="time" nullable="true" originalDbColumnName="TIME" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" type="id_Date"/>
       <column comment="" key="false" length="10" name="status_flag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="10"/>
       <column comment="" key="false" length="3" name="mode" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
       <column comment="" key="false" length="3" name="distance_from_port_km" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="2" type="id_Float"/>
-      <column comment="" key="false" length="8" name="latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
-      <column comment="" key="false" length="8" name="longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
-      <column comment="" key="false" length="7" name="temperature" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Float"/>
-      <column comment="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Float"/>
-      <column comment="" key="false" length="3" name="fluorescence" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Float"/>
-      <column comment="" key="false" length="3" name="turbidity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Float"/>
+      <column comment="" key="false" length="8" name="latitude" nullable="true" originalDbColumnName="LATITUDE" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
+      <column comment="" key="false" length="8" name="longitude" nullable="true" originalDbColumnName="LONGITUDE" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
+      <column comment="" key="false" length="7" name="temperature" nullable="true" originalDbColumnName="TEMP" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Float"/>
+      <column comment="" key="false" length="7" name="salinity" nullable="true" originalDbColumnName="PSAL" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Float"/>
+      <column comment="" key="false" length="3" name="fluorescence" nullable="true" originalDbColumnName="CPHL" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Float"/>
+      <column comment="" key="false" length="3" name="turbidity" nullable="true" originalDbColumnName="TURB" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Float"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
     </metadata>
     <metadata connector="REJECT" label="metadata" name="REJECT">
@@ -604,30 +604,30 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="metadata" name="iPostgresqlOutput_1">
       <column comment="" key="true" name="trajectory_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="true" length="19" name="time" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="true" length="19" name="time" nullable="true" originalDbColumnName="TIME" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="10" name="status_flag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="10"/>
       <column comment="" key="false" length="3" name="mode" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="3" name="distance_from_port_km" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="2" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="8" name="latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="8" name="longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="7" name="temperature" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="3" name="fluorescence" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="3" name="turbidity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="latitude" nullable="true" originalDbColumnName="LATITUDE" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="8" name="longitude" nullable="true" originalDbColumnName="LONGITUDE" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="7" name="temperature" nullable="true" originalDbColumnName="TEMP" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="7" name="salinity" nullable="true" originalDbColumnName="PSAL" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="3" name="fluorescence" nullable="true" originalDbColumnName="CPHL" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="3" name="turbidity" nullable="true" originalDbColumnName="TURB" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
     </metadata>
     <metadata connector="REJECT" label="metadata" name="REJECT">
       <column comment="" key="true" name="trajectory_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="true" length="19" name="time" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="true" length="19" name="time" nullable="true" originalDbColumnName="TIME" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="10" name="status_flag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="10"/>
       <column comment="" key="false" length="3" name="mode" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="3" name="distance_from_port_km" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="2" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="8" name="latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="8" name="longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="7" name="temperature" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="3" name="fluorescence" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="3" name="turbidity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="latitude" nullable="true" originalDbColumnName="LATITUDE" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="8" name="longitude" nullable="true" originalDbColumnName="LONGITUDE" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="7" name="temperature" nullable="true" originalDbColumnName="TEMP" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="7" name="salinity" nullable="true" originalDbColumnName="PSAL" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="3" name="fluorescence" nullable="true" originalDbColumnName="CPHL" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="3" name="turbidity" nullable="true" originalDbColumnName="TURB" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
