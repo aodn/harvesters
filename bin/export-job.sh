@@ -1,12 +1,13 @@
 #!/bin/bash
 
 # most likely you'll need to setup the following variables:
-# TALEND_DIR               - talend directory
-# TALEND_CUSTOM_COMPONENTS - talend custom components directory
-# TALEND_EXEC              - talend executable
-# TALEND_BUILD             - where to export the jobs to
-# TALEND_WORKSPACE         - talend workspace
-# TALEND_REPO              - location of the talend repository to build
+# TALEND_DIR                     - talend directory
+# TALEND_CUSTOM_COMPONENTS       - talend custom components directory
+# TALEND_COMPONENTS_DOWNLOAD_URL - talend custom components download url 
+# TALEND_EXEC                    - talend executable
+# TALEND_BUILD                   - where to export the jobs to
+# TALEND_WORKSPACE               - talend workspace
+# TALEND_REPO                    - location of the talend repository to build
 #
 # Any environment variables of the form BUILD_xxxx will be added to a build.properties file along with the 
 # git commit from which the harvester is built
@@ -66,6 +67,18 @@ add_build_properties() {
 	(cd $temp_dir && zip $zip_file $zipped_dir/build.properties)
 }
 
+# pull down and unpack latest version of components
+update_components() {
+	_lock
+
+	rm -rf $TALEND_CUSTOM_COMPONENTS
+	mkdir -p $TALEND_CUSTOM_COMPONENTS
+	curl -o $TALEND_CUSTOM_COMPONENTS/components.zip "$TALEND_COMPONENTS_DOWNLOAD_URL"
+	(cd $TALEND_CUSTOM_COMPONENTS && unzip components.zip && rm components.zip)
+
+	_unlock
+}
+
 # builds a job
 # $1 - job name
 export_job() {
@@ -97,6 +110,9 @@ export_job() {
 main() {
 	local -i retval=0
 	local failed_jobs=""
+	
+	update_components
+	
 	for job in "$@"; do
 		echo "Exporting job $job"
 		export_job $job
