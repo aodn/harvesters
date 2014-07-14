@@ -92,34 +92,6 @@ CREATE TABLE anmn_nrs_bgc_phypig
 	</sql>
     </changeSet>
 
-<changeSet author="talend" id="phypig_map_view" runOnChange="true">
-
-       <sql>
-DROP VIEW IF EXISTS anmn_nrs_bgc_phypig_map ;
-CREATE VIEW anmn_nrs_bgc_phypig_map as (
-with 
-table_a as (select distinct "STATION_NAME","IMOS_SITE_CODE", 
-min("UTC_TRIP_START_TIME")  AS  time_start ,
-max("UTC_TRIP_START_TIME")  AS  time_end
-from  anmn_nrs_bgc_phypig
-GROUP BY "STATION_NAME" ,"IMOS_SITE_CODE"),
-table_b as (select * from station_name)
-
-SELECT
-table_a."IMOS_SITE_CODE",
-table_a."STATION_NAME",
-"NODE",
-"STATE",
-"STATION_DEPTH_M",
-"LONGITUDE",
-"LATITUDE",
-time_start,
-time_end,
-geom
-from table_a,table_b where table_a."STATION_NAME" = table_b."STATION_NAME")
-	</sql>
-    </changeSet>
-
 
 <changeSet author="talend" id="phypig_data_view" runOnChange="true">
 
@@ -169,35 +141,6 @@ CREATE TABLE anmn_nrs_bgc_picoplankton
   CONSTRAINT measurement_pkey_picoplankton PRIMARY KEY (measurement)
 )
 
-	</sql>
-    </changeSet>
-
-
-<changeSet author="talend" id="picoplankton_map_view" runOnChange="true">
-
-       <sql>
-DROP VIEW IF EXISTS anmn_nrs_bgc_picoplankton_map ;
-CREATE VIEW anmn_nrs_bgc_picoplankton_map as (
-with 
-table_a as (select distinct "STATION_NAME","IMOS_SITE_CODE", 
-min("UTC_TRIP_START_TIME")  AS  time_start ,
-max("UTC_TRIP_START_TIME")  AS  time_end
-from  anmn_nrs_bgc_picoplankton
-GROUP BY "STATION_NAME" ,"IMOS_SITE_CODE"),
-table_b as (select * from station_name)
-
-SELECT
-table_a."IMOS_SITE_CODE",
-table_a."STATION_NAME",
-"NODE",
-"STATE",
-"STATION_DEPTH_M",
-"LONGITUDE",
-"LATITUDE",
-time_start,
-time_end,
-geom
-from table_a,table_b where table_a."STATION_NAME" = table_b."STATION_NAME")
 	</sql>
     </changeSet>
 
@@ -264,35 +207,6 @@ CREATE TABLE anmn_nrs_bgc_chemistry
   "OXYGEN_COMMENTS" text,
   CONSTRAINT measurement_pkey_chemistry PRIMARY KEY (measurement)
 )
-	</sql>
-    </changeSet>
-
-
-<changeSet author="talend" id="chemistry_map_view" runOnChange="true">
-
-       <sql>
-DROP VIEW IF EXISTS anmn_nrs_bgc_chemistry_map ;
-CREATE VIEW anmn_nrs_bgc_chemistry_map as (
-with 
-table_a as (select distinct "STATION_NAME","IMOS_SITE_CODE", 
-min("UTC_TRIP_START_TIME")  AS  time_start ,
-max("UTC_TRIP_START_TIME")  AS  time_end
-from  anmn_nrs_bgc_chemistry
-GROUP BY "STATION_NAME" ,"IMOS_SITE_CODE"),
-table_b as (select * from station_name)
-
-SELECT
-table_a."IMOS_SITE_CODE",
-table_a."STATION_NAME",
-"NODE",
-"STATE",
-"STATION_DEPTH_M",
-"LONGITUDE",
-"LATITUDE",
-time_start,
-time_end,
-geom
-from table_a,table_b where table_a."STATION_NAME" = table_b."STATION_NAME")
 	</sql>
     </changeSet>
 
@@ -371,36 +285,6 @@ CREATE TABLE anmn_nrs_bgc_plankton_biomass
     </changeSet>
 
 
-
-<changeSet author="talend" id="plankton_biomass_map_view" runOnChange="true">
-
-       <sql>
-DROP VIEW IF EXISTS anmn_nrs_bgc_plankton_biomass_map ;
-CREATE VIEW anmn_nrs_bgc_plankton_biomass_map as (
-with 
-table_a as (select distinct "STATION_NAME","IMOS_SITE_CODE", 
-min("UTC_TRIP_START_TIME") AS  time_start ,
-max("UTC_TRIP_START_TIME") AS  time_end
-from  anmn_nrs_bgc_plankton_biomass
-GROUP BY "STATION_NAME" ,"IMOS_SITE_CODE"),
-table_b as (select * from station_name)
-
-SELECT
-table_a."IMOS_SITE_CODE",
-table_a."STATION_NAME",
-"NODE",
-"STATE",
-"STATION_DEPTH_M",
-"LONGITUDE",
-"LATITUDE",
-time_start,
-time_end,
-geom
-from table_a,table_b where table_a."STATION_NAME" = table_b."STATION_NAME")
-	</sql>
-    </changeSet>
-
-
 <changeSet author="talend" id="plankton_biomass_data_view" runOnChange="true">
 
        <sql>
@@ -453,32 +337,6 @@ CREATE TABLE anmn_nrs_bgc_plankton_zooplankton
 	</sql>
     </changeSet>
 
-<changeSet author="talend" id="plankton_zooplankton_map_view" runOnChange="true">
-       <sql>
-DROP VIEW IF EXISTS anmn_nrs_bgc_plankton_zooplankton_map ;
-CREATE VIEW anmn_nrs_bgc_plankton_zooplankton_map as (
-with 
-table_a as (select distinct "STATION_NAME","IMOS_SITE_CODE", 
-min("UTC_TRIP_START_TIME") AS  time_start ,
-max("UTC_TRIP_START_TIME") AS  time_end
-from  anmn_nrs_bgc_plankton_zooplankton
-GROUP BY "STATION_NAME" ,"IMOS_SITE_CODE"),
-table_b as (select * from station_name)
-
-SELECT
-table_a."IMOS_SITE_CODE",
-table_a."STATION_NAME",
-"NODE",
-"STATE",
-"STATION_DEPTH_M",
-"LONGITUDE",
-"LATITUDE",
-time_start,
-time_end,
-geom
-from table_a,table_b where table_a."STATION_NAME" = table_b."STATION_NAME")
-	</sql>
-    </changeSet>
 
 <changeSet author="talend" id="plankton_zooplankton_data_view" runOnChange="true">
 
@@ -533,34 +391,6 @@ CREATE TABLE anmn_nrs_bgc_plankton_phytoplankton
     </changeSet>
 
 
-<changeSet author="talend" id="plankton_phytoplankton_map_view" runOnChange="true">
-
-       <sql>
-DROP VIEW IF EXISTS anmn_nrs_bgc_plankton_phytoplankton_map ;
-CREATE VIEW anmn_nrs_bgc_plankton_phytoplankton_map as (
-with 
-table_a as (select distinct "STATION_NAME","IMOS_SITE_CODE", 
-min("UTC_TRIP_START_TIME")  AS  time_start ,
-max("UTC_TRIP_START_TIME")  AS  time_end
-from  anmn_nrs_bgc_plankton_phytoplankton
-GROUP BY "STATION_NAME" ,"IMOS_SITE_CODE"),
-table_b as (select * from station_name)
-
-SELECT
-table_a."IMOS_SITE_CODE",
-table_a."STATION_NAME",
-"NODE",
-"STATE",
-"STATION_DEPTH_M",
-"LONGITUDE",
-"LATITUDE",
-time_start,
-time_end,
-geom
-from table_a,table_b where table_a."STATION_NAME" = table_b."STATION_NAME")
-	</sql>
-    </changeSet>
-
 <changeSet author="talend" id="plankton_phytoplankton_data_view" runOnChange="true">
 
        <sql>
@@ -606,35 +436,6 @@ CREATE TABLE anmn_nrs_bgc_tss_secchi
   "SECCHI_COMMENTS" text,
   CONSTRAINT measurement_pkey_tss_secchi PRIMARY KEY (measurement)
 )
-	</sql>
-    </changeSet>
-
-
-<changeSet author="talend" id="tss_secchi_map_view" runOnChange="true">
-
-       <sql>
-DROP VIEW IF EXISTS anmn_nrs_bgc_tss_secchi_map ;
-CREATE VIEW anmn_nrs_bgc_tss_secchi_map as (
-with 
-table_a as (select distinct "STATION_NAME","IMOS_SITE_CODE", 
-min("UTC_TRIP_START_TIME")  AS  time_start ,
-max("UTC_TRIP_START_TIME") AS  time_end
-from  anmn_nrs_bgc_tss_secchi
-GROUP BY "STATION_NAME" ,"IMOS_SITE_CODE"),
-table_b as (select * from station_name)
-
-SELECT
-table_a."IMOS_SITE_CODE",
-table_a."STATION_NAME",
-"NODE",
-"STATE",
-"STATION_DEPTH_M",
-"LONGITUDE",
-"LATITUDE",
-time_start,
-time_end,
-geom
-from table_a,table_b where table_a."STATION_NAME" = table_b."STATION_NAME")
 	</sql>
     </changeSet>
 
