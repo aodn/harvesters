@@ -148,7 +148,7 @@
       <column comment="" key="false" length="50" name="NRS_SAMPLE_CODE" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="50" name="STATION_NAME" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="50" name="IMOS_SITE_CODE" nullable="true" pattern="" precision="0" type="id_String"/>
-      <column comment="" key="false" length="50" name="LOCAL_TRIP_START_TIME" nullable="true" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" precision="0" type="id_Date"/>
+      <column comment="" key="false" length="50" name="LOCAL_TRIP_START_TIME" nullable="true" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" precision="0" type="id_String"/>
       <column comment="" key="false" length="0" name="PROCHLOROCOCCUS_CELLSPERML" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
       <column comment="" key="false" length="0" name="SYNECOCHOCCUS_CELLSPERML" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
       <column comment="" key="false" length="0" name="PICOEUKARYOTES_CELLSPERML" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
@@ -158,10 +158,9 @@
       <column comment="" key="false" length="100" name="SAMPLE_COMMENTS" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
-        <mapperTableEntries name="var2" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm'Z'&quot;, row2.UTC_TRIP_START_TIME)" type="id_Date"/>
-        <mapperTableEntries name="var1" expression="TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm&quot;, row2.LOCAL_TRIP_START_TIME)" type="id_Date"/>
+        <mapperTableEntries name="var2" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm'Z'Z&quot;, row2.UTC_TRIP_START_TIME+&quot;+0000&quot;) " type="id_Date"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="pci_record">
         <mapperTableEntries name="UTC_TRIP_START_TIME" expression="Var.var2 " type="id_Date"/>
@@ -169,7 +168,7 @@
         <mapperTableEntries name="NRS_SAMPLE_CODE" expression="row2.NRS_SAMPLE_CODE " type="id_String" nullable="true"/>
         <mapperTableEntries name="STATION_NAME" expression="row2.STATION_NAME " type="id_String" nullable="true"/>
         <mapperTableEntries name="IMOS_SITE_CODE" expression="row2.IMOS_SITE_CODE " type="id_String" nullable="true"/>
-        <mapperTableEntries name="LOCAL_TRIP_START_TIME" expression="Var.var1" type="id_Date" nullable="true"/>
+        <mapperTableEntries name="LOCAL_TRIP_START_TIME" expression="row2.LOCAL_TRIP_START_TIME " type="id_String" nullable="true"/>
         <mapperTableEntries name="PROCHLOROCOCCUS_CELLSPERML" expression="row2.PROCHLOROCOCCUS_CELLSPERML " type="id_Double" nullable="true"/>
         <mapperTableEntries name="SYNECOCHOCCUS_CELLSPERML" expression="row2.SYNECOCHOCCUS_CELLSPERML " type="id_Double" nullable="true"/>
         <mapperTableEntries name="PICOEUKARYOTES_CELLSPERML" expression="row2.PICOEUKARYOTES_CELLSPERML " type="id_Double" nullable="true"/>
@@ -307,7 +306,7 @@
       <column comment="" key="false" length="50" name="NRS_SAMPLE_CODE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="STATION_NAME" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="IMOS_SITE_CODE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="LOCAL_TRIP_START_TIME" nullable="true" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="50" name="LOCAL_TRIP_START_TIME" nullable="true" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="PROCHLOROCOCCUS_CELLSPERML" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
       <column comment="" key="false" length="0" name="SYNECOCHOCCUS_CELLSPERML" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
       <column comment="" key="false" length="0" name="PICOEUKARYOTES_CELLSPERML" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
@@ -322,7 +321,7 @@
       <column comment="" key="false" length="50" name="NRS_SAMPLE_CODE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="STATION_NAME" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="IMOS_SITE_CODE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="LOCAL_TRIP_START_TIME" nullable="true" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="50" name="LOCAL_TRIP_START_TIME" nullable="true" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="PROCHLOROCOCCUS_CELLSPERML" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
       <column comment="" key="false" length="0" name="SYNECOCHOCCUS_CELLSPERML" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
       <column comment="" key="false" length="0" name="PICOEUKARYOTES_CELLSPERML" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>

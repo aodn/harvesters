@@ -16,7 +16,7 @@ CREATE TABLE station_name
   "STATION_DEPTH_M" double precision,
   "LONGITUDE" double precision,
   "LATITUDE" double precision,
-  "START_DATE" timestamp without time zone NOT NULL,
+  "START_DATE" date,
   geom geometry NOT NULL,
   CONSTRAINT station_id_pkey PRIMARY KEY (station_id)
 )
@@ -37,12 +37,12 @@ CREATE INDEX station_name_gist_idx ON station_name USING GIST (geom);
 CREATE TABLE anmn_nrs_bgc_phypig
 (
   measurement bigserial NOT NULL,
-  "UTC_TRIP_START_TIME" timestamp without time zone NOT NULL,
+  "UTC_TRIP_START_TIME" timestamp with time zone NOT NULL,
   "NRS_TRIP_CODE" text,
   "NRS_SAMPLE_CODE" text,
   "STATION_NAME" text,
   "IMOS_SITE_CODE" text,
-  "LOCAL_TRIP_START_TIME"  timestamp without time zone NOT NULL,
+  "LOCAL_TRIP_START_TIME"  text NOT NULL,
   "SAMPLE_DEPTH_M" double precision,
   "CPHL_C3" double precision,
   "MG_DVP" double precision,
@@ -130,7 +130,7 @@ CREATE VIEW anmn_nrs_bgc_phypig_data as
          SELECT station_name."STATION_NAME", station_name."LATITUDE", station_name."LONGITUDE", station_name.geom
            FROM station_name
         ), table_b AS (
-         SELECT anmn_nrs_bgc_phypig.measurement, anmn_nrs_bgc_phypig."UTC_TRIP_START_TIME" ,
+         SELECT anmn_nrs_bgc_phypig.measurement, anmn_nrs_bgc_phypig."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME",
 anmn_nrs_bgc_phypig."LOCAL_TRIP_START_TIME"  , anmn_nrs_bgc_phypig."NRS_TRIP_CODE", anmn_nrs_bgc_phypig."NRS_SAMPLE_CODE", anmn_nrs_bgc_phypig."STATION_NAME", anmn_nrs_bgc_phypig."IMOS_SITE_CODE",  anmn_nrs_bgc_phypig."SAMPLE_DEPTH_M", anmn_nrs_bgc_phypig."CPHL_C3", anmn_nrs_bgc_phypig."MG_DVP", anmn_nrs_bgc_phypig."CPHL_C2", anmn_nrs_bgc_phypig."CPHL_C1", anmn_nrs_bgc_phypig."CPHL_C1C2", anmn_nrs_bgc_phypig."CPHLIDE_A", anmn_nrs_bgc_phypig."PHIDE_A", anmn_nrs_bgc_phypig."PERID", anmn_nrs_bgc_phypig."PYROPHIDE_A", anmn_nrs_bgc_phypig."BUT_FUCO", anmn_nrs_bgc_phypig."FUCO", anmn_nrs_bgc_phypig."NEO", anmn_nrs_bgc_phypig."KETO_HEX_FUCO", anmn_nrs_bgc_phypig."PRAS", anmn_nrs_bgc_phypig."VIOLA", anmn_nrs_bgc_phypig."HEX_FUCO", anmn_nrs_bgc_phypig."ASTA", anmn_nrs_bgc_phypig."DIADCHR", anmn_nrs_bgc_phypig."DIADINO", anmn_nrs_bgc_phypig."DINO", anmn_nrs_bgc_phypig."ANTH", anmn_nrs_bgc_phypig."ALLO", anmn_nrs_bgc_phypig."DIATO", anmn_nrs_bgc_phypig."ZEA", anmn_nrs_bgc_phypig."LUT", anmn_nrs_bgc_phypig."CANTHA", anmn_nrs_bgc_phypig."GYRO", anmn_nrs_bgc_phypig."DV_CPHL_B", anmn_nrs_bgc_phypig."CPHL_B", anmn_nrs_bgc_phypig."DV_CPHL_B_AND_CPHL_B", anmn_nrs_bgc_phypig."DV_CPHL_A", anmn_nrs_bgc_phypig."CPHL_A", anmn_nrs_bgc_phypig."DV_CPHL_A_AND_CPHL_A", anmn_nrs_bgc_phypig."ECHIN", anmn_nrs_bgc_phypig."PHYTIN_B", anmn_nrs_bgc_phypig."PHYTIN_A", anmn_nrs_bgc_phypig."LYCO", anmn_nrs_bgc_phypig."BETA_EPI_CAR", anmn_nrs_bgc_phypig."BETA_BETA_CAR", anmn_nrs_bgc_phypig."ALPHA_BETA_CAR", anmn_nrs_bgc_phypig."PYROPHYTIN_A", anmn_nrs_bgc_phypig."QC_FLAG", anmn_nrs_bgc_phypig."SAMPLE_COMMENTS"
            FROM anmn_nrs_bgc_phypig
         )
@@ -153,12 +153,12 @@ table_b.*
 CREATE TABLE anmn_nrs_bgc_picoplankton
 (
   measurement bigserial NOT NULL,
-  "UTC_TRIP_START_TIME" timestamp without time zone NOT NULL,
+  "UTC_TRIP_START_TIME" timestamp with time zone NOT NULL,
   "NRS_TRIP_CODE" text,
   "NRS_SAMPLE_CODE" text,
   "STATION_NAME" text,
   "IMOS_SITE_CODE" text,
-  "LOCAL_TRIP_START_TIME"  timestamp without time zone NOT NULL,
+  "LOCAL_TRIP_START_TIME"  text NOT NULL,
   "PROCHLOROCOCCUS_CELLSPERML" double precision,
   "SYNECOCHOCCUS_CELLSPERML" double precision,
   "PICOEUKARYOTES_CELLSPERML" double precision,
@@ -211,7 +211,7 @@ CREATE VIEW anmn_nrs_bgc_picoplankton_data as
          SELECT station_name."STATION_NAME", station_name."LATITUDE", station_name."LONGITUDE", station_name.geom
            FROM station_name
         ), table_b AS (
-         SELECT anmn_nrs_bgc_picoplankton.measurement, anmn_nrs_bgc_picoplankton."UTC_TRIP_START_TIME"  ,
+         SELECT anmn_nrs_bgc_picoplankton.measurement, anmn_nrs_bgc_picoplankton."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME",
  anmn_nrs_bgc_picoplankton."LOCAL_TRIP_START_TIME" , anmn_nrs_bgc_picoplankton."NRS_TRIP_CODE", anmn_nrs_bgc_picoplankton."NRS_SAMPLE_CODE", anmn_nrs_bgc_picoplankton."STATION_NAME", anmn_nrs_bgc_picoplankton."IMOS_SITE_CODE", anmn_nrs_bgc_picoplankton."PROCHLOROCOCCUS_CELLSPERML", anmn_nrs_bgc_picoplankton."SYNECOCHOCCUS_CELLSPERML", anmn_nrs_bgc_picoplankton."PICOEUKARYOTES_CELLSPERML", anmn_nrs_bgc_picoplankton."PROCHLOROCOCCUS_FLAG", anmn_nrs_bgc_picoplankton."SYNECOCHOCCUS_FLAG", anmn_nrs_bgc_picoplankton."PICOEUKARYOTES_FLAG", anmn_nrs_bgc_picoplankton."SAMPLE_COMMENTS"
            FROM anmn_nrs_bgc_picoplankton
         )
@@ -234,12 +234,12 @@ table_b.*
 CREATE TABLE anmn_nrs_bgc_chemistry
 (
   measurement bigserial NOT NULL,
-  "UTC_TRIP_START_TIME" timestamp without time zone NOT NULL,
+  "UTC_TRIP_START_TIME" timestamp with time zone NOT NULL,
   "NRS_TRIP_CODE" text,
   "NRS_SAMPLE_CODE" text,
   "STATION_NAME" text,
   "IMOS_SITE_CODE" text,
-  "LOCAL_TRIP_START_TIME"  timestamp without time zone NOT NULL,
+  "LOCAL_TRIP_START_TIME"  text NOT NULL,
   "SAMPLE_DEPTH_M" double precision,
   "SALINITY" double precision,
   "SALINITY_FLAG" text,
@@ -308,7 +308,7 @@ CREATE VIEW anmn_nrs_bgc_chemistry_data AS
         ), table_b AS (
          SELECT 
 	   measurement, 
-           "UTC_TRIP_START_TIME",
+           "UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME",
            "LOCAL_TRIP_START_TIME" , 
            "NRS_TRIP_CODE", 
            "NRS_SAMPLE_CODE", 
@@ -356,12 +356,12 @@ ORDER BY "STATION_NAME","UTC_TRIP_START_TIME" ;
 CREATE TABLE anmn_nrs_bgc_plankton_biomass
 (
   measurement bigserial NOT NULL,
-  "UTC_TRIP_START_TIME" timestamp without time zone NOT NULL,
+  "UTC_TRIP_START_TIME" timestamp with time zone NOT NULL,
   "NRS_TRIP_CODE" text,
   "NRS_SAMPLE_CODE" text,
   "STATION_NAME" text,
   "IMOS_SITE_CODE" text,
-  "LOCAL_TRIP_START_TIME" timestamp without time zone,
+  "LOCAL_TRIP_START_TIME" text,
   "LONGITUDE" double precision,
   "LATITUDE" double precision,
   "MG_PER_M3" double precision,
@@ -410,7 +410,7 @@ CREATE VIEW anmn_nrs_bgc_plankton_biomass_data as
          SELECT station_name."STATION_NAME", station_name.geom
            FROM station_name
         ), table_b AS (
-         SELECT anmn_nrs_bgc_plankton_biomass."UTC_TRIP_START_TIME", anmn_nrs_bgc_plankton_biomass."LOCAL_TRIP_START_TIME" , anmn_nrs_bgc_plankton_biomass."NRS_TRIP_CODE", anmn_nrs_bgc_plankton_biomass."NRS_SAMPLE_CODE", anmn_nrs_bgc_plankton_biomass."STATION_NAME", anmn_nrs_bgc_plankton_biomass."IMOS_SITE_CODE",  anmn_nrs_bgc_plankton_biomass."LONGITUDE", anmn_nrs_bgc_plankton_biomass."LATITUDE", anmn_nrs_bgc_plankton_biomass."MG_PER_M3"
+         SELECT anmn_nrs_bgc_plankton_biomass."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME", anmn_nrs_bgc_plankton_biomass."LOCAL_TRIP_START_TIME" , anmn_nrs_bgc_plankton_biomass."NRS_TRIP_CODE", anmn_nrs_bgc_plankton_biomass."NRS_SAMPLE_CODE", anmn_nrs_bgc_plankton_biomass."STATION_NAME", anmn_nrs_bgc_plankton_biomass."IMOS_SITE_CODE",  anmn_nrs_bgc_plankton_biomass."LONGITUDE", anmn_nrs_bgc_plankton_biomass."LATITUDE", anmn_nrs_bgc_plankton_biomass."MG_PER_M3"
            FROM anmn_nrs_bgc_plankton_biomass
         )
 SELECT 
@@ -428,12 +428,12 @@ table_b.*
 CREATE TABLE anmn_nrs_bgc_plankton_zooplankton
 (
   measurement bigserial NOT NULL,
-  "UTC_TRIP_START_TIME" timestamp without time zone NOT NULL,
+  "UTC_TRIP_START_TIME" timestamp with time zone NOT NULL,
   "NRS_TRIP_CODE" text,
   "NRS_SAMPLE_CODE" text,
   "STATION_NAME" text,
   "IMOS_SITE_CODE" text,
-  "LOCAL_TRIP_START_TIME" timestamp without time zone,
+  "LOCAL_TRIP_START_TIME" text,
   "LONGITUDE" double precision,
   "LATITUDE" double precision,
   "TAXON_NAME" text,
@@ -489,7 +489,7 @@ CREATE VIEW anmn_nrs_bgc_plankton_zooplankton_data as
          SELECT station_name."STATION_NAME", station_name.geom
            FROM station_name
         ), table_b AS (
-         SELECT anmn_nrs_bgc_plankton_zooplankton.measurement, anmn_nrs_bgc_plankton_zooplankton."UTC_TRIP_START_TIME" , anmn_nrs_bgc_plankton_zooplankton."LOCAL_TRIP_START_TIME"  , anmn_nrs_bgc_plankton_zooplankton."NRS_TRIP_CODE", anmn_nrs_bgc_plankton_zooplankton."NRS_SAMPLE_CODE", anmn_nrs_bgc_plankton_zooplankton."STATION_NAME", anmn_nrs_bgc_plankton_zooplankton."IMOS_SITE_CODE",  anmn_nrs_bgc_plankton_zooplankton."LONGITUDE", anmn_nrs_bgc_plankton_zooplankton."LATITUDE", anmn_nrs_bgc_plankton_zooplankton."TAXON_NAME", anmn_nrs_bgc_plankton_zooplankton."FAMILY", anmn_nrs_bgc_plankton_zooplankton."GENUS", anmn_nrs_bgc_plankton_zooplankton."SPECIES", anmn_nrs_bgc_plankton_zooplankton."SEX", anmn_nrs_bgc_plankton_zooplankton."LIFE_STAGE", anmn_nrs_bgc_plankton_zooplankton."TAXON_GROUP", anmn_nrs_bgc_plankton_zooplankton."TAXON_ECO_GROUP", anmn_nrs_bgc_plankton_zooplankton."CAAB_CODE", anmn_nrs_bgc_plankton_zooplankton."TAXON_START_DATE", anmn_nrs_bgc_plankton_zooplankton."TAXON_PER_M3", anmn_nrs_bgc_plankton_zooplankton."SAMPLE_COMMENTS"
+         SELECT anmn_nrs_bgc_plankton_zooplankton.measurement, anmn_nrs_bgc_plankton_zooplankton."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME", anmn_nrs_bgc_plankton_zooplankton."LOCAL_TRIP_START_TIME"  , anmn_nrs_bgc_plankton_zooplankton."NRS_TRIP_CODE", anmn_nrs_bgc_plankton_zooplankton."NRS_SAMPLE_CODE", anmn_nrs_bgc_plankton_zooplankton."STATION_NAME", anmn_nrs_bgc_plankton_zooplankton."IMOS_SITE_CODE",  anmn_nrs_bgc_plankton_zooplankton."LONGITUDE", anmn_nrs_bgc_plankton_zooplankton."LATITUDE", anmn_nrs_bgc_plankton_zooplankton."TAXON_NAME", anmn_nrs_bgc_plankton_zooplankton."FAMILY", anmn_nrs_bgc_plankton_zooplankton."GENUS", anmn_nrs_bgc_plankton_zooplankton."SPECIES", anmn_nrs_bgc_plankton_zooplankton."SEX", anmn_nrs_bgc_plankton_zooplankton."LIFE_STAGE", anmn_nrs_bgc_plankton_zooplankton."TAXON_GROUP", anmn_nrs_bgc_plankton_zooplankton."TAXON_ECO_GROUP", anmn_nrs_bgc_plankton_zooplankton."CAAB_CODE", anmn_nrs_bgc_plankton_zooplankton."TAXON_START_DATE", anmn_nrs_bgc_plankton_zooplankton."TAXON_PER_M3", anmn_nrs_bgc_plankton_zooplankton."SAMPLE_COMMENTS"
            FROM anmn_nrs_bgc_plankton_zooplankton
         )
  SELECT 
@@ -509,12 +509,12 @@ table_b.*
 CREATE TABLE anmn_nrs_bgc_plankton_phytoplankton
 (
   measurement bigserial NOT NULL,
-  "UTC_TRIP_START_TIME" timestamp without time zone NOT NULL,
+  "UTC_TRIP_START_TIME" timestamp with time zone NOT NULL,
   "NRS_TRIP_CODE" text,
   "NRS_SAMPLE_CODE" text,
   "STATION_NAME" text,
   "IMOS_SITE_CODE" text,
-  "LOCAL_TRIP_START_TIME" timestamp without time zone,
+  "LOCAL_TRIP_START_TIME" text,
   "LONGITUDE" double precision,
   "LATITUDE" double precision,
   "TAXON_NAME" text,
@@ -570,7 +570,7 @@ CREATE VIEW anmn_nrs_bgc_plankton_phytoplankton_data as
          SELECT station_name."STATION_NAME", station_name.geom
            FROM station_name
         ), table_b AS (
-         SELECT anmn_nrs_bgc_plankton_phytoplankton.measurement, anmn_nrs_bgc_plankton_phytoplankton."UTC_TRIP_START_TIME" , anmn_nrs_bgc_plankton_phytoplankton."LOCAL_TRIP_START_TIME"  , anmn_nrs_bgc_plankton_phytoplankton."NRS_TRIP_CODE", anmn_nrs_bgc_plankton_phytoplankton."NRS_SAMPLE_CODE", anmn_nrs_bgc_plankton_phytoplankton."STATION_NAME", anmn_nrs_bgc_plankton_phytoplankton."IMOS_SITE_CODE",  anmn_nrs_bgc_plankton_phytoplankton."LONGITUDE", anmn_nrs_bgc_plankton_phytoplankton."LATITUDE", anmn_nrs_bgc_plankton_phytoplankton."TAXON_NAME", anmn_nrs_bgc_plankton_phytoplankton."FAMILY", anmn_nrs_bgc_plankton_phytoplankton."GENUS", anmn_nrs_bgc_plankton_phytoplankton."SPECIES", anmn_nrs_bgc_plankton_phytoplankton."TAXON_ECO_GROUP", anmn_nrs_bgc_plankton_phytoplankton."CAAB_CODE", anmn_nrs_bgc_plankton_phytoplankton."TAXON_START_DATE", anmn_nrs_bgc_plankton_phytoplankton."CELL_PER_LITRE", anmn_nrs_bgc_plankton_phytoplankton."BIOVOLUME_ML_PER_L", anmn_nrs_bgc_plankton_phytoplankton."SAMPLE_COMMENTS"
+         SELECT anmn_nrs_bgc_plankton_phytoplankton.measurement, anmn_nrs_bgc_plankton_phytoplankton."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME", anmn_nrs_bgc_plankton_phytoplankton."LOCAL_TRIP_START_TIME"  , anmn_nrs_bgc_plankton_phytoplankton."NRS_TRIP_CODE", anmn_nrs_bgc_plankton_phytoplankton."NRS_SAMPLE_CODE", anmn_nrs_bgc_plankton_phytoplankton."STATION_NAME", anmn_nrs_bgc_plankton_phytoplankton."IMOS_SITE_CODE",  anmn_nrs_bgc_plankton_phytoplankton."LONGITUDE", anmn_nrs_bgc_plankton_phytoplankton."LATITUDE", anmn_nrs_bgc_plankton_phytoplankton."TAXON_NAME", anmn_nrs_bgc_plankton_phytoplankton."FAMILY", anmn_nrs_bgc_plankton_phytoplankton."GENUS", anmn_nrs_bgc_plankton_phytoplankton."SPECIES", anmn_nrs_bgc_plankton_phytoplankton."TAXON_ECO_GROUP", anmn_nrs_bgc_plankton_phytoplankton."CAAB_CODE", anmn_nrs_bgc_plankton_phytoplankton."TAXON_START_DATE", anmn_nrs_bgc_plankton_phytoplankton."CELL_PER_LITRE", anmn_nrs_bgc_plankton_phytoplankton."BIOVOLUME_ML_PER_L", anmn_nrs_bgc_plankton_phytoplankton."SAMPLE_COMMENTS"
            FROM anmn_nrs_bgc_plankton_phytoplankton
         )
  SELECT 
@@ -589,12 +589,12 @@ table_b.*
 CREATE TABLE anmn_nrs_bgc_tss_secchi
 (
   measurement bigserial NOT NULL,
-  "UTC_TRIP_START_TIME" timestamp without time zone NOT NULL,
+  "UTC_TRIP_START_TIME" timestamp with time zone NOT NULL,
   "NRS_TRIP_CODE" text,
   "NRS_SAMPLE_CODE" text,
   "STATION_NAME" text,
   "IMOS_SITE_CODE" text,
-  "LOCAL_TRIP_START_TIME" timestamp without time zone NOT NULL,
+  "LOCAL_TRIP_START_TIME" text NOT NULL,
   "REPLICATE" double precision,
   "TSS_MG_PER_L" double precision,
   "INORGANIC_FRACTION_MG_PER_L" double precision,
@@ -648,7 +648,7 @@ CREATE VIEW anmn_nrs_bgc_tss_secchi_data as
          SELECT station_name."STATION_NAME", station_name."LATITUDE", station_name."LONGITUDE", station_name.geom
            FROM station_name
         ), table_b AS (
-         SELECT anmn_nrs_bgc_tss_secchi.measurement, anmn_nrs_bgc_tss_secchi."UTC_TRIP_START_TIME" ,anmn_nrs_bgc_tss_secchi."LOCAL_TRIP_START_TIME"  , anmn_nrs_bgc_tss_secchi."NRS_TRIP_CODE", anmn_nrs_bgc_tss_secchi."NRS_SAMPLE_CODE", anmn_nrs_bgc_tss_secchi."STATION_NAME", anmn_nrs_bgc_tss_secchi."IMOS_SITE_CODE",  anmn_nrs_bgc_tss_secchi."REPLICATE", anmn_nrs_bgc_tss_secchi."TSS_MG_PER_L", anmn_nrs_bgc_tss_secchi."INORGANIC_FRACTION_MG_PER_L", anmn_nrs_bgc_tss_secchi."ORGANIC_FRACTION_MG_PER_L", anmn_nrs_bgc_tss_secchi."QC_FLAG", anmn_nrs_bgc_tss_secchi."TSS_COMMENTS", anmn_nrs_bgc_tss_secchi."SECCHI_DEPTH_M", anmn_nrs_bgc_tss_secchi."SECCHI_FLAG", anmn_nrs_bgc_tss_secchi."SECCHI_COMMENTS"
+         SELECT anmn_nrs_bgc_tss_secchi.measurement, anmn_nrs_bgc_tss_secchi."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME", anmn_nrs_bgc_tss_secchi."LOCAL_TRIP_START_TIME"  , anmn_nrs_bgc_tss_secchi."NRS_TRIP_CODE", anmn_nrs_bgc_tss_secchi."NRS_SAMPLE_CODE", anmn_nrs_bgc_tss_secchi."STATION_NAME", anmn_nrs_bgc_tss_secchi."IMOS_SITE_CODE",  anmn_nrs_bgc_tss_secchi."REPLICATE", anmn_nrs_bgc_tss_secchi."TSS_MG_PER_L", anmn_nrs_bgc_tss_secchi."INORGANIC_FRACTION_MG_PER_L", anmn_nrs_bgc_tss_secchi."ORGANIC_FRACTION_MG_PER_L", anmn_nrs_bgc_tss_secchi."QC_FLAG", anmn_nrs_bgc_tss_secchi."TSS_COMMENTS", anmn_nrs_bgc_tss_secchi."SECCHI_DEPTH_M", anmn_nrs_bgc_tss_secchi."SECCHI_FLAG", anmn_nrs_bgc_tss_secchi."SECCHI_COMMENTS"
            FROM anmn_nrs_bgc_tss_secchi
         )
 SELECT 
