@@ -9,15 +9,23 @@
     <contextParameter comment="" name="DestinationDb_Server" prompt="DestinationDb_Server?" promptNeeded="false" repositoryContextId="_i5o8cH16EeOTGfN6m9kVCA" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_OFNrQH16EeOTGfN6m9kVCA" type="id_String" value="/tmp/aatams_biologging_shearwater"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_OFNrQH16EeOTGfN6m9kVCA" type="id_String" value="null"/>
-    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_Iw-KcH16EeOTGfN6m9kVCA" type="id_String" value="null"/>
+    <contextParameter comment="" name="Metadata_Password" prompt="Metadata_Password?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
+    <contextParameter comment="" name="Metadata_SpatialColumn" prompt="Metadata_SpatialColumn?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="geom"/>
+    <contextParameter comment="" name="Metadata_SpatialResolution" prompt="Metadata_SpatialResolution?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="2"/>
+    <contextParameter comment="" name="Metadata_SpatialTable" prompt="Metadata_SpatialTable?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="aatams_biologging_shearwater_map"/>
+    <contextParameter comment="" name="Metadata_URL" prompt="Metadata_URL?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="http://10.11.12.13/geonetwork"/>
+    <contextParameter comment="" name="Metadata_Username" prompt="Metadata_Username?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
+    <contextParameter comment="" name="Metadata_UUID" prompt="Metadata_UUID?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="8cea53a2-68d6-4d94-a3bf-29d76f14d092"/>
+    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_Iw-KcH16EeOTGfN6m9kVCA" type="id_String" value=".*aatams_gls_metadata.csv"/>
     <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_Iw-KcH16EeOTGfN6m9kVCA" type="id_String" value=".*csv"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_Iw-KcH16EeOTGfN6m9kVCA" type="id_String" value="/Users/xavierhoenner/Work/AATAMS_Biologging/shearwater_data"/>
+    <contextParameter comment="" name="metadata" prompt="metadata?" promptNeeded="false" repositoryContextId="_Iw-KcH16EeOTGfN6m9kVCA" type="id_String" value="/Users/xavierhoenner/Work/AATAMS_Biologging/shearwaters/aatams_gls_metadata.csv"/>
+    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_Iw-KcH16EeOTGfN6m9kVCA" type="id_String" value="/Users/xavierhoenner/Work/AATAMS_Biologging/shearwaters"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="32"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="32"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="352"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
     <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
     <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
@@ -48,7 +56,7 @@
     <routinesParameter id="_EdVyEH16EeOTGfN6m9kVCA" name="TalendString"/>
     <routinesParameter id="_BzxlsElWEeK5TPMSOHM6dA" name="ArgoUtils"/>
   </parameters>
-  <node componentName="iIndexFiles" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="160">
+  <node componentName="iIndexFiles" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="-128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_jTauYH16EeOTGfN6m9kVCA"/>
@@ -87,7 +95,7 @@
       <column defaultValue="" key="false" length="0" name="fileSize" nullable="true" precision="0" sourceType="" type="id_Double"/>
     </metadata>
   </node>
-  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="32">
+  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="-288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
@@ -101,35 +109,13 @@
     <elementParameter field="TEXT" name="PASS" value="context.DestinationDb_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/Users/xavierhoenner/Work/Resources/TOS_DI-r96646-V5.1.3/workspace/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aatams_biologging_shearwater_data_table&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE aatams_biologging_shearwater_data&#xA;(&#xA;  id bigserial NOT NULL,&#xA;  file_id integer,&#xA;  ref character varying(14),&#xA;  trip integer,&#xA;  birdtrip character varying(16),&#xA;  &quot;timestamp&quot; timestamp(6) without time zone,&#xA;  latitude double precision,&#xA;  longitude double precision,&#xA;  min_sst double precision,&#xA;  max_sst double precision,&#xA;  med_temp double precision,&#xA;  activity character varying(3),&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT aatams_biologging_shearwater_data_pkey PRIMARY KEY (id),&#xA;  CONSTRAINT aatams_biologging_shearwater_data_geom_check CHECK (st_isvalid(geom))&#xA;)&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_animal_id_table&quot;>&#xA;        &lt;sql>&#xA;            CREATE TABLE animal_id&#xA;(&#xA;  ref character varying(14) NOT NULL,&#xA;  file_id integer,&#xA;  colour character varying(7),&#xA;  CONSTRAINT animal_id_pkey PRIMARY KEY (ref)&#xA;)&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aatams_biologging_shearwater_map_table&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE aatams_biologging_shearwater_map&#xA;(&#xA;  ref character varying(14) NOT NULL,&#xA;  file_id integer,&#xA;  no_trips bigint,&#xA;  no_observations bigint,&#xA;  start_date timestamp(6) without time zone,&#xA;  end_date timestamp(6) without time zone,&#xA;  colour character varying(7),&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT aatams_biologging_shearwater_map_pkey PRIMARY KEY (ref),&#xA;  CONSTRAINT aatams_biologging_shearwater_map_geom_check CHECK (st_isvalid(geom))&#xA;)&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#x9;&lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_gist_index_on_geom&quot;>&#xA;&#x9;&#x9;&lt;sql>&#xA;&#x9;&#x9;CREATE INDEX aatams_biologging_shearwater_data_gist_idx ON aatams_biologging_shearwater_data USING GIST (geom); &#xA;&#x9;&#x9;&lt;/sql>&#xA;&#x9;&#x9;&lt;sql>&#xA;&#x9;&#x9;CREATE INDEX aatams_biologging_shearwater_map_gist_idx ON aatams_biologging_shearwater_map USING GIST (geom); &#xA;&#x9;&#x9;&lt;/sql>&#xA;&#x9;&lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aatams_biologging_shearwater_metadata_table&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE aatams_biologging_shearwater_metadata&#xA;(&#xA;  animal_id bigserial NOT NULL,&#xA;  scientific_name character varying(255),&#xA;  common_name character varying(255),&#xA;  sex character varying(7),&#xA;  age_class character varying(50),&#xA;  tag_type character varying(10) NOT NULL,&#xA;  tag_code character varying(10) NOT NULL,&#xA;  tag_id character varying(10) NOT NULL,&#xA;  release_date timestamp(6) with time zone NOT NULL,&#xA;  recovery_date timestamp(6) with time zone,&#xA;  release_location character varying(255),&#xA;  recovery_location character varying(255),&#xA;  release_latitude double precision,&#xA;  release_longitude double precision,&#xA;  mass_at_release real,&#xA;  mass_at_recovery real,&#xA;  culman_length real,&#xA;  culman_width real,&#xA;  culman_height real,&#xA;  tarsus_length real,&#xA;  wing_length real,&#xA;  comments character varying(255),&#xA;  principal_investigator character varying(255),&#xA;  CONSTRAINT aatams_biologging_shearwater_metadata_pkey PRIMARY KEY (animal_id)&#xA;)&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_measurements_table&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE measurements&#xA;(&#xA;  id bigserial NOT NULL,&#xA;  file_id integer,&#xA;  ref character varying(14),&#xA;  trip integer,&#xA;  &quot;timestamp&quot; timestamp(6) with time zone NOT NULL,&#xA;  latitude double precision,&#xA;  longitude double precision,&#xA;  temperature double precision,&#xA;  activity character varying(3),&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT measurements_pkey PRIMARY KEY (id),&#xA;  CONSTRAINT measurements_geom_check CHECK (st_isvalid(geom))&#xA;)&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_animal_id_table&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE animal_id&#xA;(&#xA;  file_id integer,&#xA;  animal_id character varying(14),&#xA;  tag_type text,&#xA;  tag_id text,&#xA;  scientific_name character varying(255),&#xA;  common_name character varying(255),&#xA;  sex character varying(7),&#xA;  age_class character varying(50),&#xA;  release_date timestamp(6) with time zone,&#xA;  recovery_date timestamp(6) with time zone,&#xA;  release_location character varying(255),&#xA;  recovery_location character varying(255),&#xA;  release_latitude double precision,&#xA;  release_longitude double precision,&#xA;  mass_at_release real,&#xA;  mass_at_recovery real,&#xA;  culman_length real,&#xA;  culman_width real,&#xA;  culman_height real,&#xA;  tarsus_length real,&#xA;  wing_length real,&#xA;  comments character varying(255),&#xA;  principal_investigator character varying(255),&#xA;  colour text,&#xA;  CONSTRAINT animal_id_pkey PRIMARY KEY (animal_id)&#xA;)&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aatams_biologging_shearwater_map_table&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE aatams_biologging_shearwater_map&#xA;(&#xA;  animal_id character varying(14),&#xA;  file_id integer,&#xA;  scientific_name character varying(255),&#xA;  common_name character varying(255),&#xA;  sex character varying(7),&#xA;  age_class character varying(50),&#xA;  release_date timestamp(6) with time zone,&#xA;  release_location character varying(255),&#xA;  no_trips bigint,&#xA;  no_observations bigint,&#xA;  start_date timestamp without time zone,&#xA;  end_date timestamp without time zone,&#xA;  colour text,&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT aatams_biologging_shearwater_map_pkey PRIMARY KEY (animal_id),&#xA;  CONSTRAINT aatams_biologging_shearwater_map_geom_check CHECK (st_isvalid(geom))&#xA;)&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#x9;&lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_gist_index_on_geom&quot;>&#xA;&#x9;&#x9;&lt;sql>&#xA;&#x9;&#x9;CREATE INDEX measurements_gist_idx ON measurements USING GIST (geom); &#xA;&#x9;&#x9;&lt;/sql>&#xA;&#x9;&#x9;&lt;sql>&#xA;&#x9;&#x9;CREATE INDEX aatams_biologging_shearwater_map_gist_idx ON aatams_biologging_shearwater_map USING GIST (geom); &#xA;&#x9;&#x9;&lt;/sql>&#xA;&#x9;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aatams_biologging_shearwater_data_view&quot; runOnChange=&quot;true&quot;>&#xA;    &#x9;&lt;sql>&#xA;       &#x9;DROP VIEW IF EXISTS aatams_biologging_shearwater_data;&#xA;CREATE VIEW aatams_biologging_shearwater_data AS&#xA;  SELECT m.id AS measurement_id,&#xA;&#x9;m.file_id,&#xA;&#x9;sm.animal_id,&#xA;&#x9;sm.scientific_name,&#xA;&#x9;sm.common_name,&#xA;&#x9;sm.sex,&#xA;&#x9;sm.age_class,&#xA;&#x9;sm.release_date,&#xA;&#x9;sm.release_location,&#xA;&#x9;m.trip,&#xA;&#x9;m.timestamp AT TIME ZONE 'UTC' AS timestamp,&#xA;&#x9;m.longitude,&#xA;&#x9;m.latitude,&#xA;&#x9;CASE WHEN m.temperature = (-1) THEN NULL ELSE round(m.temperature::numeric,3) END AS temperature,&#xA;&#x9;m.activity,&#xA;&#x9;m.geom&#xA;  FROM measurements m&#xA;  JOIN aatams_biologging_shearwater_map sm ON sm.animal_id = m.ref&#xA;&#x9;ORDER BY animal_id, timestamp;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="448">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_6"/>
-    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
-    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
-    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Delete_data_from_deleted_files"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_H39tUIfXEeOnQLEWCSPLOg"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
-    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
-    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
-    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
-    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
-    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
-    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tRunJob_6"/>
-  </node>
-  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="288" posY="160">
+  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_jTauYH16EeOTGfN6m9kVCA"/>
@@ -152,7 +138,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="480" posY="160">
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="320" posY="288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_5"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
@@ -179,12 +165,108 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_5"/>
   </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="320">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_7"/>
+  <node componentName="iDeletedResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_jTauYH16EeOTGfN6m9kVCA"/>
+    <elementParameter field="TEXT" name="HOST" value="context.DestinationDb_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.DestinationDb_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDb_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDb_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.DestinationDb_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.DestinationDb_Password"/>
+    <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
+    <elementParameter field="TEXT" name="HARVEST_TYPE" value="&quot;harvest&quot;"/>
+    <elementParameter field="RADIO" name="USE_DEFAULT" value="true"/>
+    <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
+    <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
+    <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
+    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select id, url, modified &quot; +&#xA;&quot;  from deleted_resource &quot; +&#xA;&quot; where job_name = ? &quot; +&#xA;&quot;   and harvest_type = ? &quot;&#xA;      "/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="320" posY="32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_jTauYH16EeOTGfN6m9kVCA"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
+    <elementParameter field="TEXT" name="HOST" value="context.DestinationDb_Server"/>
+    <elementParameter field="TEXT" name="PORT" value="context.DestinationDb_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDb_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDb_Schema"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="USER" value="context.DestinationDb_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.DestinationDb_Password"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from aatams_biologging_shearwater_data where file_id = &quot;+ ((Long)globalMap.get(&quot;iDeletedResources_1_FILE_ID&quot;)) + &quot; ; &quot;+&#xA;&quot;delete from animal_id where file_id = &quot;+ ((Long)globalMap.get(&quot;iDeletedResources_1_FILE_ID&quot;)) + &quot; ; &quot;+&#xA;&quot;delete from aatams_biologging_shearwater_map where file_id=&quot; +((Long)globalMap.get(&quot;iDeletedResources_1_FILE_ID&quot;)) +&quot; ; &quot;"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
+    <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
+    <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
+    <elementParameter field="TABLE" name="SET_PREPAREDSTATEMENT_PARAMETERS"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlRow_1"/>
+    <metadata connector="REJECT" name="REJECT">
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="416">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_2"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_jTauYH16EeOTGfN6m9kVCA"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
+    <elementParameter field="TEXT" name="HOST" value="context.DestinationDb_Server"/>
+    <elementParameter field="TEXT" name="PORT" value="context.DestinationDb_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDb_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDb_Schema"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="USER" value="context.DestinationDb_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.DestinationDb_Password"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM measurements CASCADE&#xA;WHERE id IN (SELECT id&#xA;FROM (SELECT id, row_number() OVER (PARTITION BY ref,timestamp ORDER BY ref) AS rnum FROM measurements) t&#xA;WHERE t.rnum > 1);&quot;"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
+    <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
+    <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
+    <elementParameter field="TABLE" name="SET_PREPAREDSTATEMENT_PARAMETERS"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TEXT" name="LABEL" value="Delete duplicates from measurements table"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlRow_2"/>
+    <metadata connector="REJECT" name="REJECT">
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="160">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_3"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
-    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Delete_shearwater_duplicates"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_osIaIK47EeOwy5HMHeb4tw"/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Harvest_shearwater_metadata"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_l9BxwAYuEeSW8YhVVcGBJg"/>
     <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
     <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
     <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
@@ -194,20 +276,75 @@
     <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
     <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
     <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="Delete duplicates"/>
+    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tRunJob_7"/>
+    <metadata connector="FLOW" name="tRunJob_3"/>
   </node>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="iIndexFiles_1" target="iHarvestResources_1">
+  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="384" posY="416">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_3"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_jTauYH16EeOTGfN6m9kVCA"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
+    <elementParameter field="TEXT" name="HOST" value="context.DestinationDb_Server"/>
+    <elementParameter field="TEXT" name="PORT" value="context.DestinationDb_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDb_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDb_Schema"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="USER" value="context.DestinationDb_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.DestinationDb_Password"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM aatams_biologging_shearwater_map CASCADE&#xA;WHERE animal_id IN (SELECT animal_id&#xA;FROM (SELECT animal_id, row_number() OVER (PARTITION BY animal_id,start_date, end_date ORDER BY animal_id) AS rnum FROM aatams_biologging_shearwater_map) t&#xA;WHERE t.rnum > 1);&quot;"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
+    <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
+    <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
+    <elementParameter field="TABLE" name="SET_PREPAREDSTATEMENT_PARAMETERS"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TEXT" name="LABEL" value="Delete duplicates from _map table"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlRow_3"/>
+    <metadata connector="REJECT" name="REJECT">
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="576">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_4"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="UpdateMetadata"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_vz6RsBB-EeStr5IkyHBECw"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="Update spatial extent in metadata record"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tRunJob_4"/>
+  </node>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" source="iIndexFiles_1" target="iDeletedResources_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
-  </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="iIndexFiles_1" target="tRunJob_7">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk6"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iIndexFiles_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
@@ -219,9 +356,31 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate1"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_7" offsetLabelX="0" offsetLabelY="0" source="tRunJob_7" target="tRunJob_6">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tPostgresqlRow_2">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk6"/>
+  </connection>
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="tPostgresqlRow_1">
+    <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
+    <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="tRunJob_3">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlRow_2" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tPostgresqlRow_2" target="tPostgresqlRow_3">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlRow_2" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tPostgresqlRow_2" target="tRunJob_4">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk7"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_3" offsetLabelX="0" offsetLabelY="0" source="tRunJob_3" target="iHarvestResources_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk7"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_1"/>
@@ -235,13 +394,6 @@
   </subjob>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_6"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Delete data from deleted files"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
-  <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Harvest data"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
@@ -249,8 +401,32 @@
   </subjob>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_7"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Delete duplicates"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Delete data from deleted files"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_2"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_3"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Harvest metadata"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_3"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_4"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Update spatial extent in metadata record"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
