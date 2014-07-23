@@ -415,8 +415,8 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_3"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
     <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
     <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
@@ -678,7 +678,7 @@
     <elementParameter field="CHECK" name="AUTOCAST" value="true"/>
     <elementParameter field="TABLE" name="MANUALTABLE"/>
     <elementParameter field="CHECK" name="EMPTYTONULL" value="false"/>
-    <elementParameter field="CHECK" name="DIEONERROR" value="false"/>
+    <elementParameter field="CHECK" name="DIEONERROR" value="true"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -790,26 +790,11 @@
       <column comment="" key="false" length="19" name="timestamp" nullable="true" pattern="" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="16" name="lat" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="16" name="lon" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="7" name="max_dbar" nullable="true" pattern="" precision="1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="16" name="num" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="2" name="qc_profile" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="4" name="n_temp" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="400" name="temp_dbar" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float"/>
+      <column comment="" key="false" length="400" name="pressure" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float"/>
       <column comment="" key="false" length="400" name="temp_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float" originalLength="400"/>
-      <column comment="" key="false" length="200" name="qc_temp" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="4" name="n_sal" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="400" name="sal_dbar" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float"/>
       <column comment="" key="false" length="400" name="sal_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float" originalLength="400"/>
       <column comment="" key="false" length="400" name="sal_corrected_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float" originalLength="400"/>
-      <column comment="" key="false" length="200" name="qc_sal" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="4" name="n_fluoro" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="400" name="fluoro_dbar" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float"/>
       <column comment="" key="false" length="400" name="fluoro_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float" originalLength="400"/>
-      <column comment="" defaultValue="" key="false" length="4" name="n_oxy" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="400" name="oxy_dbar" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float"/>
-      <column comment="" key="false" length="400" name="oxy_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float" originalLength="200"/>
-      <column comment="" defaultValue="" key="false" length="4" name="n_cond" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="200" name="cond_dbar" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float"/>
       <column comment="" key="false" length="400" name="cond_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float" originalLength="400"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -832,26 +817,11 @@
         <mapperTableEntries name="timestamp" expression="row2.end_date" type="id_Date" nullable="true"/>
         <mapperTableEntries name="lat" expression="row2.lat" type="id_Double" nullable="true"/>
         <mapperTableEntries name="lon" expression="row2.lon" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="max_dbar" expression="row2.max_dbar" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="num" expression="row2.num" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="qc_profile" expression="row2.qc_profile" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="n_temp" expression="row2.n_temp" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="temp_dbar" expression="row2.temp_dbar" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="pressure" expression="row2.temp_dbar" type="id_Float" nullable="true"/>
         <mapperTableEntries name="temp_vals" expression="row2.temp_vals" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="qc_temp" expression="row2.qc_temp" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="n_sal" expression="row2.n_sal" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="sal_dbar" expression="row2.sal_dbar" type="id_Float" nullable="true"/>
         <mapperTableEntries name="sal_vals" expression="row2.sal_vals" type="id_Float" nullable="true"/>
         <mapperTableEntries name="sal_corrected_vals" expression="row2.sal_corrected_vals" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="qc_sal" expression="row2.qc_sal" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="n_fluoro" expression="row2.n_fluoro" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="fluoro_dbar" expression="row2.fluoro_dbar" type="id_Float" nullable="true"/>
         <mapperTableEntries name="fluoro_vals" expression="row2.fluoro_vals" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="n_oxy" expression="row2.n_oxy" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="oxy_dbar" expression="row2.oxy_dbar" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="oxy_vals" expression="row2.oxy_vals" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="n_cond" expression="row2.n_cond" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="cond_dbar" expression="row2.cond_dbar" type="id_Float" nullable="true"/>
         <mapperTableEntries name="cond_vals" expression="row2.cond_vals" type="id_Float" nullable="true"/>
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row2.lon,row2.lat,&quot;EPSG:4326&quot;) " type="id_Geometry" nullable="true"/>
         <mapperTableEntries name="colour" expression="row2.colour" type="id_String" nullable="true"/>
@@ -993,47 +963,12 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="max_dbar"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="num"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="qc_profile"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="n_temp"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="temp_dbar"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="pressure"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="temp_vals"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="qc_temp"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="n_sal"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="sal_dbar"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -1048,47 +983,7 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="qc_sal"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="n_fluoro"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="fluoro_dbar"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="fluoro_vals"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="n_oxy"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="oxy_dbar"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="oxy_vals"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="n_cond"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="cond_dbar"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -1132,26 +1027,11 @@
       <column comment="" key="false" length="19" name="timestamp" nullable="true" pattern="" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="16" name="lat" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="16" name="lon" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="7" name="max_dbar" nullable="true" pattern="" precision="1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="16" name="num" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="2" name="qc_profile" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="4" name="n_temp" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="400" name="temp_dbar" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="400" name="pressure" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="400" name="temp_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="400"/>
-      <column comment="" key="false" length="200" name="qc_temp" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="4" name="n_sal" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="400" name="sal_dbar" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="400" name="sal_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="400"/>
       <column comment="" key="false" length="400" name="sal_corrected_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="400"/>
-      <column comment="" key="false" length="200" name="qc_sal" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="4" name="n_fluoro" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="400" name="fluoro_dbar" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="400" name="fluoro_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="400"/>
-      <column comment="" defaultValue="" key="false" length="4" name="n_oxy" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="400" name="oxy_dbar" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="400" name="oxy_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="200"/>
-      <column comment="" defaultValue="" key="false" length="4" name="n_cond" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="200" name="cond_dbar" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="400" name="cond_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="400"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -1171,26 +1051,11 @@
       <column comment="" key="false" length="19" name="timestamp" nullable="true" pattern="" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="16" name="lat" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="16" name="lon" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="7" name="max_dbar" nullable="true" pattern="" precision="1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="16" name="num" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="2" name="qc_profile" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="4" name="n_temp" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="400" name="temp_dbar" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="400" name="pressure" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="400" name="temp_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="400"/>
-      <column comment="" key="false" length="200" name="qc_temp" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="4" name="n_sal" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="400" name="sal_dbar" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="400" name="sal_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="400"/>
       <column comment="" key="false" length="400" name="sal_corrected_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="400"/>
-      <column comment="" key="false" length="200" name="qc_sal" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="4" name="n_fluoro" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="400" name="fluoro_dbar" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="400" name="fluoro_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="400"/>
-      <column comment="" defaultValue="" key="false" length="4" name="n_oxy" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="400" name="oxy_dbar" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="400" name="oxy_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="200"/>
-      <column comment="" defaultValue="" key="false" length="4" name="n_cond" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="200" name="cond_dbar" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="400" name="cond_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="400"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -1251,7 +1116,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH table_a AS (SELECT device_id, timestamp, COUNT(*) AS nb_measurements FROM aatams_sattag_dm.aatams_sattag_dm_profile_data WHERE file_id = &quot; + context.fileId + &quot; GROUP BY device_id,timestamp ORDER BY device_id,timestamp) &#xA;SELECT file_id,&#xA;sattag_program,&#xA;aatams_sattag_dm_profile_data.device_id,&#xA;device_wmo_ref,&#xA;tag_type,&#xA;common_name,&#xA;release_site,&#xA;state_country,&#xA;age_class,&#xA;sex,&#xA;aatams_sattag_dm_profile_data.timestamp,&#xA;CASE WHEN SUM(temp_dbar) IS NULL THEN min(sal_dbar) ELSE min(temp_dbar) END AS min_pressure,&#xA;max(max_dbar) AS max_pressure,&#xA;nb_measurements,&#xA;ST_SIMPLIFY(make_point_or_shortest_line(geom,CASE WHEN lead(geom,1) OVER (PARTITION BY aatams_sattag_dm_profile_data.device_id ORDER BY aatams_sattag_dm_profile_data.device_id, aatams_sattag_dm_profile_data.timestamp) IS NULL THEN geom &#xA;ELSE lead(geom,1) OVER (PARTITION BY aatams_sattag_dm_profile_data.device_id ORDER BY aatams_sattag_dm_profile_data.device_id, aatams_sattag_dm_profile_data.timestamp) END),0.1) AS geom,&#xA;colour,&#xA;size&#xA;FROM aatams_sattag_dm.aatams_sattag_dm_profile_data&#xA;LEFT JOIN aatams_sattag_dm.indexed_file ON indexed_file.id = aatams_sattag_dm_profile_data.file_id&#xA;LEFT JOIN table_a ON table_a.device_id = aatams_sattag_dm_profile_data.device_id AND table_a.timestamp = aatams_sattag_dm_profile_data.timestamp&#xA;WHERE geom IS NOT NULL AND file_id = &quot; + context.fileId + &quot;&#xA;GROUP BY file_id,sattag_program,aatams_sattag_dm_profile_data.device_id,device_wmo_ref,tag_type,common_name,release_site,state_country,age_class,sex,aatams_sattag_dm_profile_data.timestamp,colour,geom,size, table_a.nb_measurements&#xA;ORDER by device_wmo_ref, timestamp;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH table_a AS (SELECT device_id, timestamp, COUNT(*) AS nb_measurements FROM aatams_sattag_dm.aatams_sattag_dm_profile_data WHERE file_id = &quot; + context.fileId + &quot; GROUP BY device_id,timestamp ORDER BY device_id,timestamp) &#xA;SELECT file_id,&#xA;sattag_program,&#xA;aatams_sattag_dm_profile_data.device_id,&#xA;device_wmo_ref,&#xA;tag_type,&#xA;common_name,&#xA;release_site,&#xA;state_country,&#xA;age_class,&#xA;sex,&#xA;aatams_sattag_dm_profile_data.timestamp,&#xA;CASE WHEN SUM(pressure) IS NULL THEN min(pressure) ELSE min(pressure) END AS min_pressure,&#xA;CASE WHEN SUM(pressure) IS NULL THEN max(pressure) ELSE max(pressure) END AS max_pressure,&#xA;nb_measurements,&#xA;ST_SIMPLIFY(make_point_or_shortest_line(geom,CASE WHEN lead(geom,1) OVER (PARTITION BY aatams_sattag_dm_profile_data.device_id ORDER BY aatams_sattag_dm_profile_data.device_id, aatams_sattag_dm_profile_data.timestamp) IS NULL THEN geom &#xA;ELSE lead(geom,1) OVER (PARTITION BY aatams_sattag_dm_profile_data.device_id ORDER BY aatams_sattag_dm_profile_data.device_id, aatams_sattag_dm_profile_data.timestamp) END),0.1) AS geom,&#xA;colour,&#xA;size&#xA;FROM aatams_sattag_dm.aatams_sattag_dm_profile_data&#xA;LEFT JOIN aatams_sattag_dm.indexed_file ON indexed_file.id = aatams_sattag_dm_profile_data.file_id&#xA;LEFT JOIN table_a ON table_a.device_id = aatams_sattag_dm_profile_data.device_id AND table_a.timestamp = aatams_sattag_dm_profile_data.timestamp&#xA;WHERE geom IS NOT NULL AND file_id = &quot; + context.fileId + &quot;&#xA;GROUP BY file_id,sattag_program,aatams_sattag_dm_profile_data.device_id,device_wmo_ref,tag_type,common_name,release_site,state_country,age_class,sex,aatams_sattag_dm_profile_data.timestamp,colour,geom,size, table_a.nb_measurements&#xA;ORDER by device_wmo_ref, timestamp;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -1494,7 +1359,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM aatams_sattag_dm_profile_data WHERE file_id = &quot; + context.fileId + &quot; ; &quot; +&#xA;&quot;DELETE FROM aatams_sattag_dm_profile_map WHERE file_id = &quot; + context.fileId + &quot; ; &quot;&#xA;"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
     <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
@@ -2269,7 +2134,7 @@
       <elementValue elementRef="TRACE_COLUMN" value="n_temp"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="temp_dbar"/>
+      <elementValue elementRef="TRACE_COLUMN" value="pressure"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="temp_vals"/>
