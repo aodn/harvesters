@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="metadataDb_Database" prompt="metadataDb_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="maplayers"/>
-    <contextParameter comment="" name="metadataDb_Login" prompt="metadataDb_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="anfog_dm"/>
-    <contextParameter comment="" name="metadataDb_Password" prompt="metadataDb_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="UH6ZhD07sy7096uhdGeE6g=="/>
-    <contextParameter comment="" name="metadataDb_Port" prompt="metadataDb_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
-    <contextParameter comment="" name="metadataDb_Schema" prompt="metadataDb_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="anfog_dm"/>
-    <contextParameter comment="" name="metadataDb_Server" prompt="metadataDb_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="localhost"/>
-    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value=""/>
+    <contextParameter comment="" name="DestinationDB_Database" prompt="DestinationDB_Database?" promptNeeded="false" repositoryContextId="_1gORYAfEEeS6S4wYAZSNCg" type="id_String" value="maplayers"/>
+    <contextParameter comment="" name="DestinationDB_Login" prompt="DestinationDB_Login?" promptNeeded="false" repositoryContextId="_1gORYAfEEeS6S4wYAZSNCg" type="id_String" value="anfog_dm"/>
+    <contextParameter comment="" name="DestinationDB_Password" prompt="DestinationDB_Password?" promptNeeded="false" repositoryContextId="_1gORYAfEEeS6S4wYAZSNCg" type="id_Password" value="UH6ZhD07sy7096uhdGeE6g=="/>
+    <contextParameter comment="" name="DestinationDB_Port" prompt="DestinationDB_Port?" promptNeeded="false" repositoryContextId="_1gORYAfEEeS6S4wYAZSNCg" type="id_String" value="5432"/>
+    <contextParameter comment="" name="DestinationDB_Schema" prompt="DestinationDB_Schema?" promptNeeded="false" repositoryContextId="_1gORYAfEEeS6S4wYAZSNCg" type="id_String" value="anfog_dm"/>
+    <contextParameter comment="" name="DestinationDB_Server" prompt="DestinationDB_Server?" promptNeeded="false" repositoryContextId="_1gORYAfEEeS6S4wYAZSNCg" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_b2CKgHgOEeOMHsnb02Unfg" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_b2CKgHgOEeOMHsnb02Unfg" type="id_String" value="null"/>
+    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value=".*/REALTIME/.*"/>
+    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value=".*FV01.*.nc"/>
+    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value="/Users/bpasquer/Documents/TALEND_projects/ANFOG_data"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
+    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value=""/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -82,8 +87,8 @@
     <metadata connector="FLOW" name="deployment">
       <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String" originalLength="500"/>
+      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_Date" originalLength="500"/>
+      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_Date" originalLength="500"/>
       <column comment="" key="false" length="50" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="50" name="cdm_data_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="50" name="geospatial_lon_max" nullable="true" pattern="" sourceType="FLOAT4" type="id_String" originalLength="500"/>
@@ -100,8 +105,8 @@
       <outputTables sizeState="INTERMEDIATE" name="deployment">
         <mapperTableEntries name="file_id" expression="context.fileId.intValue()" type="id_Integer"/>
         <mapperTableEntries name="title" expression="row1.title " type="id_String" nullable="true"/>
-        <mapperTableEntries name="time_coverage_start" expression="row1.time_coverage_start " type="id_String" nullable="true"/>
-        <mapperTableEntries name="time_coverage_end" expression="row1.time_coverage_end " type="id_String" nullable="true"/>
+        <mapperTableEntries name="time_coverage_start" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_start,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="time_coverage_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_end,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
         <mapperTableEntries name="platform_code" expression="row1.platform_code " type="id_String" nullable="true"/>
         <mapperTableEntries name="cdm_data_type" expression="row1.cdm_data_type " type="id_String" nullable="true"/>
         <mapperTableEntries name="geospatial_lon_max" expression="row1.geospatial_lon_max " type="id_String" nullable="true"/>
@@ -230,8 +235,8 @@
     <metadata connector="FLOW" name="iPostgresqlOutput_1">
       <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String" originalLength="500"/>
+      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMPTZ" type="id_Date" originalLength="500"/>
+      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMPTZ" type="id_Date" originalLength="500"/>
       <column comment="" key="false" length="50" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="50" name="cdm_data_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="50" name="geospatial_lon_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
@@ -245,8 +250,8 @@
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String" originalLength="500"/>
+      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMPTZ" type="id_Date" originalLength="500"/>
+      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMPTZ" type="id_Date" originalLength="500"/>
       <column comment="" key="false" length="50" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="50" name="cdm_data_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="50" name="geospatial_lon_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
@@ -266,7 +271,6 @@
     <elementParameter field="TABLE" name="SCHEMAS">
       <elementValue elementRef="SCHEMA" value="variables"/>
     </elementParameter>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
     <elementParameter field="CHECK" name="SCALE_MISSING" value="true"/>
     <elementParameter field="CHECK" name="CONVERT_ENUMS" value="true"/>
     <elementParameter field="CHECK" name="FILLER_MISSING" value="true"/>
@@ -1314,8 +1318,8 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_3">
-      <column comment="" key="true" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" name="TIME" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="TIME" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMPTZ" type="id_Date"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
@@ -1419,8 +1423,8 @@
       <column comment="" key="false" length="1" name="OCR670_9_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="true" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" name="TIME" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="TIME" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMPTZ" type="id_Date"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
@@ -1526,7 +1530,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="480">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="608">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
     <elementParameter field="CHECK" name="TSTATCATCHER_STATS" value="true"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
@@ -1574,7 +1578,7 @@
       <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="480">
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="608">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_2"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -1653,13 +1657,15 @@
   </node>
   <node componentName="tPostgresqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="352" posY="-32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="context.metadataDb_Server"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_T73w8AfEEeS6S4wYAZSNCg"/>
+    <elementParameter field="TEXT" name="HOST" value="context.DestinationDB_Server"/>
     <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="PORT" value="context.metadataDb_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.metadataDb_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.metadataDb_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.metadataDb_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.metadataDb_Password"/>
+    <elementParameter field="TEXT" name="PORT" value="context.DestinationDB_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDB_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDB_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.DestinationDB_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.DestinationDB_Password"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="CHECK" name="USE_SHARED_CONNECTION" value="false"/>
@@ -1670,7 +1676,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="608">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="736">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_2"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -1817,8 +1823,8 @@
       <column comment="" key="false" length="20" name="platform_type" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="10" name="platform_code" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMPTZ" type="id_Date"/>
+      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMPTZ" type="id_Date"/>
       <column comment="" key="false" length="50" name="geospatial_vertical_min" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="geospatial_vertical_max" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="1" name="TEMP_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
@@ -1870,7 +1876,7 @@
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="LINE" type="id_Object"/>
     </metadata>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="608">
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="736">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_4"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -2191,8 +2197,8 @@
       <column comment="" key="false" length="20" name="platform_type" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="10" name="platform_code" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMPTZ" type="id_Date"/>
+      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMPTZ" type="id_Date"/>
       <column comment="" key="false" length="50" name="geospatial_vertical_min" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="geospatial_vertical_max" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="1" name="TEMP_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
@@ -2249,8 +2255,8 @@
       <column comment="" key="false" length="20" name="platform_type" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="10" name="platform_code" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMPTZ" type="id_Date"/>
+      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMPTZ" type="id_Date"/>
       <column comment="" key="false" length="50" name="geospatial_vertical_min" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="geospatial_vertical_max" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="1" name="TEMP_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
@@ -2304,7 +2310,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="736">
+  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="864">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="CHECK" name="CLOSE" value="false"/>
@@ -2314,7 +2320,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlCommit_1"/>
   </node>
-  <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="352" posY="736">
+  <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="352" posY="864">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -2322,7 +2328,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="544" posY="736">
+  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="544" posY="864">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -2355,7 +2361,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from deployments where file_id = &quot;+ context.fileId + &quot; ; &quot;+&#xA;&quot;delete from measurements where file_id=&quot; + context.fileId  +&quot; ; &quot; +&#xA;&quot;delete from deployment_id where file_id = &quot;+ context.fileId  + &quot; ; &quot;+&#xA;&quot;delete from anfog_dm_trajectory_wms where file_id = &quot;+ context.fileId  + &quot; ; &quot;"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
     <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
@@ -2368,6 +2374,40 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlRow_1"/>
+    <metadata connector="REJECT" name="REJECT">
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="480">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_2"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;localhost&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;measurements&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;UPDATE measurements&#xA;SET \&quot;DOXY_units\&quot; = ( SELECT value FROM attribute WHERE container='DOXY' AND name='units'  AND  file_id = &quot; + context.fileId + &quot; )&#xA;&quot;"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
+    <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
+    <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
+    <elementParameter field="TABLE" name="SET_PREPAREDSTATEMENT_PARAMETERS"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlRow_2"/>
     <metadata connector="REJECT" name="REJECT">
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
@@ -2797,7 +2837,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="variables"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iNetCDFInput_1" offsetLabelX="0" offsetLabelY="0" source="iNetCDFInput_1" target="tPostgresqlInput_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iNetCDFInput_1" offsetLabelX="0" offsetLabelY="0" source="iNetCDFInput_1" target="tPostgresqlRow_2">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
   </connection>
@@ -3359,6 +3399,10 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
   </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlRow_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_2" target="tPostgresqlInput_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk8"/>
+  </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttributes_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
@@ -3407,6 +3451,11 @@
   </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_2"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
