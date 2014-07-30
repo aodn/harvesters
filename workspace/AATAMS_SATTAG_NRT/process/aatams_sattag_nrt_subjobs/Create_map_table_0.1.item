@@ -54,7 +54,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH a AS (SELECT device_id, timestamp, COUNT(*) AS nb_measurements FROM measurements GROUP BY device_id,timestamp ORDER BY device_id, timestamp) &#xA;SELECT sattag_program,&#xA;m.device_id,&#xA;device_wmo_ref,&#xA;tag_type,&#xA;common_name,&#xA;release_site,&#xA;state_country,&#xA;age_class,&#xA;sex,&#xA;m.timestamp AT TIME ZONE 'UTC' AS timestamp,&#xA;min(pressure) AS min_pressure,&#xA;max(pressure) AS max_pressure,&#xA;nb_measurements,&#xA;ST_SIMPLIFY(make_point_or_shortest_line(geom,CASE WHEN lead(geom,1) OVER (PARTITION BY m.device_id ORDER BY m.device_id, m.timestamp) IS NULL THEN geom &#xA;ELSE lead(geom,1) OVER (PARTITION BY m.device_id ORDER BY m.device_id, m.timestamp) END),0.1) AS geom,&#xA;colour&#xA;FROM measurements m&#xA;LEFT JOIN a ON a.device_id = m.device_id AND a.timestamp = m.timestamp&#xA;GROUP BY sattag_program,m.device_id,device_wmo_ref,tag_type,common_name,release_site,state_country,age_class,sex,m.timestamp, a.nb_measurements,colour,geom&#xA;ORDER by device_wmo_ref, timestamp;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH a AS (SELECT device_id, timestamp, COUNT(*) AS nb_measurements FROM measurements GROUP BY device_id,timestamp ORDER BY device_id, timestamp) &#xA;SELECT sattag_program,&#xA;m.device_id,&#xA;device_wmo_ref,&#xA;tag_type,&#xA;common_name,&#xA;release_site,&#xA;state_country,&#xA;age_class,&#xA;sex,&#xA;m.timestamp,&#xA;min(pressure) AS min_pressure,&#xA;max(pressure) AS max_pressure,&#xA;nb_measurements,&#xA;ST_SIMPLIFY(make_point_or_shortest_line(geom,CASE WHEN lead(geom,1) OVER (PARTITION BY m.device_id ORDER BY m.device_id, m.timestamp) IS NULL THEN geom &#xA;ELSE lead(geom,1) OVER (PARTITION BY m.device_id ORDER BY m.device_id, m.timestamp) END),0.1) AS geom,&#xA;colour&#xA;FROM measurements m&#xA;LEFT JOIN a ON a.device_id = m.device_id AND a.timestamp = m.timestamp&#xA;GROUP BY sattag_program,m.device_id,device_wmo_ref,tag_type,common_name,release_site,state_country,age_class,sex,m.timestamp, a.nb_measurements,colour,geom&#xA;ORDER by device_wmo_ref, timestamp;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -237,7 +237,7 @@
       <column comment="" key="false" length="29" name="state_country" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="8" name="age_class" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="6" name="sex" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="true" length="35" name="timestamp" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="true" length="35" name="timestamp" nullable="true" pattern="" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="10" name="min_pressure" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" length="10" name="max_pressure" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" length="19" name="nb_measurements" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
@@ -254,7 +254,7 @@
       <column comment="" key="false" length="29" name="state_country" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="8" name="age_class" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="6" name="sex" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="true" length="35" name="timestamp" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="true" length="35" name="timestamp" nullable="true" pattern="" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="10" name="min_pressure" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" length="10" name="max_pressure" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" length="19" name="nb_measurements" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
@@ -281,7 +281,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE measurements m&#xA;SET profile_id = map.profile_id&#xA;FROM aatams_sattag_nrt_profile_map map&#xA;WHERE m.device_id = map.device_id AND m.timestamp AT TIME ZONE 'UTC' = map.timestamp;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE measurements m&#xA;SET profile_id = map.profile_id&#xA;FROM aatams_sattag_nrt_profile_map map&#xA;WHERE m.device_id = map.device_id AND m.timestamp = map.timestamp;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
