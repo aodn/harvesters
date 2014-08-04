@@ -49,8 +49,6 @@
     <elementParameter field="TEXT" name="WFS_URL" value="context.WfsServerURL"/>
     <elementParameter field="CLOSED_LIST" name="WFS_VERSION" value="org.geotools.wfs.protocol.Version.v1_1_0"/>
     <elementParameter field="TEXT" name="TYPE_NAME" value="&quot;imos:NRS_TSS_SECCHI&quot;"/>
-    <elementParameter field="TECHNICAL" name="SCHEMA:SCHEMA_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="SCHEMA:REPOSITORY_SCHEMA_TYPE" value="_AJd6wObFEeOxf5dQL706JQ - NRS_TSS_SECCHI"/>
     <elementParameter field="CHECK" name="FORCE_CRS" value="false"/>
     <elementParameter field="TEXT" name="CRS" value="&quot;EPSG:4326&quot;"/>
     <elementParameter field="TEXT" name="CQL" value="&quot;&quot;"/>
@@ -77,11 +75,11 @@
       <column comment="" key="false" length="0" name="TSS_MG_PER_L" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
       <column comment="" key="false" length="0" name="INORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
       <column comment="" key="false" length="0" name="ORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
-      <column comment="" key="false" length="100" name="QC_FLAG" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="100" name="TSS_COMMENTS" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
+      <column comment="" key="false" length="100" name="TSS_FLAG" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
+      <column comment="" key="false" length="100" name="TSS_COMMENTS" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="0" name="SECCHI_DEPTH_M" nullable="true" pattern="" precision="0" sourceType="" type="id_BigDecimal"/>
       <column comment="" key="false" length="0" name="SECCHI_FLAG" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
-      <column comment="" key="false" length="100" name="SECCHI_COMMENTS" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
+      <column comment="" key="false" length="100" name="SECCHI_COMMENTS" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="0" name="STATION_PT" nullable="true" pattern="" precision="0" type="id_Geometry"/>
     </metadata>
   </node>
@@ -102,15 +100,25 @@
       <column comment="" key="false" length="100" name="IMOS_SITE_CODE" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
       <column comment="" key="false" length="100" name="UTC_TRIP_START_TIME" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
       <column comment="" key="false" length="100" name="LOCAL_TRIP_START_TIME" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="0" name="REPLICATE" nullable="true" pattern="" precision="0" type="id_Double"/>
+      <column comment="" key="false" length="0" name="REPLICATE" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="0" name="TSS_MG_PER_L" nullable="true" pattern="" precision="0" type="id_Double"/>
       <column comment="" key="false" length="0" name="INORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="0" type="id_Double"/>
       <column comment="" key="false" length="0" name="ORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="100" name="QC_FLAG" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="100" name="TSS_COMMENTS" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="0" name="SECCHI_DEPTH_M" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
-      <column comment="" key="false" length="0" name="SECCHI_FLAG" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="100" name="SECCHI_COMMENTS" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
+      <column comment="" key="false" length="2147483647" name="TSS_FLAG" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="TSS_COMMENTS" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="SECCHI_DEPTH_M" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="SECCHI_FLAG" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="SECCHI_COMMENTS" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
     </metadata>
     <metadata connector="REJECT" label="NRS_TSS_SECCHI" name="REJECT">
       <column comment="" key="false" length="100" name="NRS_TRIP_CODE" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
@@ -119,15 +127,25 @@
       <column comment="" key="false" length="100" name="IMOS_SITE_CODE" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
       <column comment="" key="false" length="100" name="UTC_TRIP_START_TIME" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
       <column comment="" key="false" length="100" name="LOCAL_TRIP_START_TIME" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="0" name="REPLICATE" nullable="true" pattern="" precision="0" type="id_Double"/>
+      <column comment="" key="false" length="0" name="REPLICATE" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="0" name="TSS_MG_PER_L" nullable="true" pattern="" precision="0" type="id_Double"/>
       <column comment="" key="false" length="0" name="INORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="0" type="id_Double"/>
       <column comment="" key="false" length="0" name="ORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="100" name="QC_FLAG" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="100" name="TSS_COMMENTS" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="0" name="SECCHI_DEPTH_M" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
-      <column comment="" key="false" length="0" name="SECCHI_FLAG" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="100" name="SECCHI_COMMENTS" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
+      <column comment="" key="false" length="2147483647" name="TSS_FLAG" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="TSS_COMMENTS" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="SECCHI_DEPTH_M" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="SECCHI_FLAG" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="SECCHI_COMMENTS" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -145,22 +163,52 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="csiro_harvest_pci" name="pci_record">
-      <column comment="" key="false" name="UTC_TRIP_START_TIME" nullable="false" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" sourceType="" type="id_Date"/>
-      <column comment="" key="false" length="50" name="NRS_TRIP_CODE" nullable="true" pattern="" precision="0" type="id_String"/>
-      <column comment="" key="false" length="50" name="NRS_SAMPLE_CODE" nullable="true" pattern="" precision="0" type="id_String"/>
-      <column comment="" key="false" length="50" name="STATION_NAME" nullable="true" pattern="" precision="0" type="id_String"/>
-      <column comment="" key="false" length="50" name="IMOS_SITE_CODE" nullable="true" pattern="" precision="0" type="id_String"/>
-      <column comment="" key="false" length="50" name="LOCAL_TRIP_START_TIME" nullable="true" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" precision="0" type="id_String"/>
-      <column comment="" key="false" length="0" name="REPLICATE" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="0" name="TSS_MG_PER_L" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="0" name="INORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="0" name="ORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="100" name="QC_FLAG" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="100" name="TSS_COMMENTS" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="0" name="SECCHI_DEPTH_M" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
-      <column comment="" key="false" length="0" name="SECCHI_FLAG" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="100" name="SECCHI_COMMENTS" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
+    <metadata connector="FLOW" label="anmn_nrs_bgc_tss_secchi" name="pci_record">
+      <column comment="" key="false" length="35" name="UTC_TRIP_START_TIME" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="NRS_TRIP_CODE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="NRS_SAMPLE_CODE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="STATION_NAME" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="IMOS_SITE_CODE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="LOCAL_TRIP_START_TIME" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="REPLICATE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="TSS_MG_PER_L" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="INORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="ORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="TSS_FLAG" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="TSS_COMMENTS" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="SECCHI_DEPTH_M" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="SECCHI_FLAG" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="SECCHI_COMMENTS" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
     </metadata>
     <nodeData xsi:type="MapperData">
       <uiProperties shellMaximized="true"/>
@@ -173,15 +221,15 @@
         <mapperTableEntries name="NRS_SAMPLE_CODE" expression="row2.NRS_SAMPLE_CODE " type="id_String" nullable="true"/>
         <mapperTableEntries name="STATION_NAME" expression="row2.STATION_NAME " type="id_String" nullable="true"/>
         <mapperTableEntries name="IMOS_SITE_CODE" expression="row2.IMOS_SITE_CODE " type="id_String" nullable="true"/>
-        <mapperTableEntries name="LOCAL_TRIP_START_TIME" expression="row2.LOCAL_TRIP_START_TIME " type="id_String" nullable="true"/>
-        <mapperTableEntries name="REPLICATE" expression="row2.REPLICATE " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="LOCAL_TRIP_START_TIME" expression="row2.LOCAL_TRIP_START_TIME " type="id_String"/>
+        <mapperTableEntries name="REPLICATE" expression="row2.REPLICATE " type="id_String" nullable="true"/>
         <mapperTableEntries name="TSS_MG_PER_L" expression="row2.TSS_MG_PER_L " type="id_Double" nullable="true"/>
         <mapperTableEntries name="INORGANIC_FRACTION_MG_PER_L" expression="row2.INORGANIC_FRACTION_MG_PER_L " type="id_Double" nullable="true"/>
         <mapperTableEntries name="ORGANIC_FRACTION_MG_PER_L" expression="row2.ORGANIC_FRACTION_MG_PER_L " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="QC_FLAG" expression="row2.QC_FLAG " type="id_String" nullable="true"/>
+        <mapperTableEntries name="TSS_FLAG" expression="row2.TSS_FLAG" type="id_String" nullable="true"/>
         <mapperTableEntries name="TSS_COMMENTS" expression="row2.TSS_COMMENTS " type="id_String" nullable="true"/>
         <mapperTableEntries name="SECCHI_DEPTH_M" expression="row2.SECCHI_DEPTH_M " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="SECCHI_FLAG" expression="row2.SECCHI_FLAG " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="SECCHI_FLAG" expression="row2.SECCHI_FLAG " type="id_String" nullable="true"/>
         <mapperTableEntries name="SECCHI_COMMENTS" expression="row2.SECCHI_COMMENTS " type="id_String" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row2" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
@@ -191,14 +239,14 @@
         <mapperTableEntries name="IMOS_SITE_CODE" type="id_String" nullable="true"/>
         <mapperTableEntries name="UTC_TRIP_START_TIME" type="id_String" nullable="true"/>
         <mapperTableEntries name="LOCAL_TRIP_START_TIME" type="id_String" nullable="true"/>
-        <mapperTableEntries name="REPLICATE" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="REPLICATE" type="id_String" nullable="true"/>
         <mapperTableEntries name="TSS_MG_PER_L" type="id_Double" nullable="true"/>
         <mapperTableEntries name="INORGANIC_FRACTION_MG_PER_L" type="id_Double" nullable="true"/>
         <mapperTableEntries name="ORGANIC_FRACTION_MG_PER_L" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="QC_FLAG" type="id_String" nullable="true"/>
+        <mapperTableEntries name="TSS_FLAG" type="id_String" nullable="true"/>
         <mapperTableEntries name="TSS_COMMENTS" type="id_String" nullable="true"/>
         <mapperTableEntries name="SECCHI_DEPTH_M" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="SECCHI_FLAG" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="SECCHI_FLAG" type="id_String" nullable="true"/>
         <mapperTableEntries name="SECCHI_COMMENTS" type="id_String" nullable="true"/>
       </inputTables>
     </nodeData>
@@ -283,7 +331,7 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="QC_FLAG"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="TSS_FLAG"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -318,39 +366,99 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="csiro_harvest_pci" name="tPostgresqlOutput_1">
-      <column comment="" key="false" name="UTC_TRIP_START_TIME" nullable="false" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="50" name="NRS_TRIP_CODE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="NRS_SAMPLE_CODE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="STATION_NAME" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="IMOS_SITE_CODE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="LOCAL_TRIP_START_TIME" nullable="true" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="0" name="REPLICATE" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="TSS_MG_PER_L" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="INORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="ORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="100" name="QC_FLAG" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="100" name="TSS_COMMENTS" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="0" name="SECCHI_DEPTH_M" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="SECCHI_FLAG" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="100" name="SECCHI_COMMENTS" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="100"/>
+    <metadata connector="FLOW" label="anmn_nrs_bgc_tss_secchi" name="tPostgresqlOutput_1">
+      <column comment="" key="false" length="35" name="UTC_TRIP_START_TIME" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="NRS_TRIP_CODE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="NRS_SAMPLE_CODE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="STATION_NAME" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="IMOS_SITE_CODE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="LOCAL_TRIP_START_TIME" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="REPLICATE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="TSS_MG_PER_L" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="INORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="ORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="TSS_FLAG" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="TSS_COMMENTS" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="SECCHI_DEPTH_M" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="SECCHI_FLAG" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="SECCHI_COMMENTS" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
     </metadata>
-    <metadata connector="REJECT" label="csiro_harvest_pci" name="REJECT">
-      <column comment="" key="false" name="UTC_TRIP_START_TIME" nullable="false" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="50" name="NRS_TRIP_CODE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="NRS_SAMPLE_CODE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="STATION_NAME" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="IMOS_SITE_CODE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="LOCAL_TRIP_START_TIME" nullable="true" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="0" name="REPLICATE" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="TSS_MG_PER_L" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="INORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="ORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="100" name="QC_FLAG" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="100" name="TSS_COMMENTS" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="0" name="SECCHI_DEPTH_M" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="SECCHI_FLAG" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="100" name="SECCHI_COMMENTS" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="100"/>
+    <metadata connector="REJECT" label="anmn_nrs_bgc_tss_secchi" name="REJECT">
+      <column comment="" key="false" length="35" name="UTC_TRIP_START_TIME" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="NRS_TRIP_CODE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="NRS_SAMPLE_CODE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="STATION_NAME" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="IMOS_SITE_CODE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="LOCAL_TRIP_START_TIME" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="REPLICATE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="TSS_MG_PER_L" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="INORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="ORGANIC_FRACTION_MG_PER_L" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="TSS_FLAG" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="TSS_COMMENTS" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="SECCHI_DEPTH_M" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="SECCHI_FLAG" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="SECCHI_COMMENTS" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -509,6 +617,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="ACKNOWLEDGEMENTS"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TSS_FLAG"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -828,6 +939,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="SECCHI_DEPTH_M"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TSS_FLAG"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>

@@ -172,7 +172,7 @@
       <column comment="" key="false" length="100" name="SAMPLE_COMMENTS" nullable="true" pattern="" precision="0" type="id_String"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="var2" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm'Z'Z&quot;, row2.UTC_TRIP_START_TIME+&quot;+0000&quot;) " type="id_Date"/>
       </varTables>
@@ -348,45 +348,117 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="csiro_harvest_pci" name="tPostgresqlOutput_1">
-      <column comment="" key="false" name="UTC_TRIP_START_TIME" nullable="false" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="50" name="NRS_TRIP_CODE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="NRS_SAMPLE_CODE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="STATION_NAME" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="IMOS_SITE_CODE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="LOCAL_TRIP_START_TIME" nullable="true" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="0" name="LONGITUDE" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
-      <column comment="" key="false" length="0" name="LATITUDE" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
-      <column comment="" key="false" length="100" name="TAXON_NAME" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="100" name="FAMILY" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="100" name="GENUS" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="100" name="SPECIES" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="100" name="TAXON_ECO_GROUP" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="0" name="CAAB_CODE" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
-      <column comment="" key="false" length="100" name="TAXON_START_DATE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="0" name="CELL_PER_LITRE" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
-      <column comment="" key="false" length="0" name="BIOVOLUME_ML_PER_L" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
-      <column comment="" key="false" length="100" name="SAMPLE_COMMENTS" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+    <metadata connector="FLOW" label="anmn_nrs_bgc_plankton_phytoplankton" name="tPostgresqlOutput_1">
+      <column comment="" key="false" length="35" name="UTC_TRIP_START_TIME" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="NRS_TRIP_CODE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="NRS_SAMPLE_CODE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="STATION_NAME" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="IMOS_SITE_CODE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="LOCAL_TRIP_START_TIME" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="LONGITUDE" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="LATITUDE" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="TAXON_NAME" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="FAMILY" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="GENUS" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="SPECIES" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="TAXON_ECO_GROUP" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="CAAB_CODE" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="TAXON_START_DATE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="CELL_PER_LITRE" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="BIOVOLUME_ML_PER_L" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="SAMPLE_COMMENTS" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
     </metadata>
-    <metadata connector="REJECT" label="csiro_harvest_pci" name="REJECT">
-      <column comment="" key="false" name="UTC_TRIP_START_TIME" nullable="false" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="50" name="NRS_TRIP_CODE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="NRS_SAMPLE_CODE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="STATION_NAME" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="IMOS_SITE_CODE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="LOCAL_TRIP_START_TIME" nullable="true" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="0" name="LONGITUDE" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
-      <column comment="" key="false" length="0" name="LATITUDE" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
-      <column comment="" key="false" length="100" name="TAXON_NAME" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="100" name="FAMILY" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="100" name="GENUS" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="100" name="SPECIES" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="100" name="TAXON_ECO_GROUP" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="0" name="CAAB_CODE" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
-      <column comment="" key="false" length="100" name="TAXON_START_DATE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="0" name="CELL_PER_LITRE" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
-      <column comment="" key="false" length="0" name="BIOVOLUME_ML_PER_L" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_Double"/>
-      <column comment="" key="false" length="100" name="SAMPLE_COMMENTS" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+    <metadata connector="REJECT" label="anmn_nrs_bgc_plankton_phytoplankton" name="REJECT">
+      <column comment="" key="false" length="35" name="UTC_TRIP_START_TIME" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="NRS_TRIP_CODE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="NRS_SAMPLE_CODE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="STATION_NAME" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="IMOS_SITE_CODE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="LOCAL_TRIP_START_TIME" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="LONGITUDE" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="LATITUDE" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="TAXON_NAME" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="FAMILY" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="GENUS" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="SPECIES" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="TAXON_ECO_GROUP" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="CAAB_CODE" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="TAXON_START_DATE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="CELL_PER_LITRE" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="17" name="BIOVOLUME_ML_PER_L" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="" key="false" length="2147483647" name="SAMPLE_COMMENTS" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
+        <additionalField key="Comment" value=""/>
+      </column>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>

@@ -85,7 +85,7 @@ CREATE TABLE anmn_nrs_bgc_phypig
   "BETA_BETA_CAR" double precision,
   "ALPHA_BETA_CAR" double precision,
   "PYROPHYTIN_A" double precision,
-  "QC_FLAG" double precision,
+  "QC_FLAG" text,
   "SAMPLE_COMMENTS" text,
   CONSTRAINT measurement_pkey_phypig PRIMARY KEY (measurement)
 )
@@ -131,12 +131,13 @@ CREATE TABLE anmn_nrs_bgc_picoplankton
   "STATION_NAME" text,
   "IMOS_SITE_CODE" text,
   "LOCAL_TRIP_START_TIME"  text NOT NULL,
+  "REPLICATE" text,
   "PROCHLOROCOCCUS_CELLSPERML" double precision,
   "SYNECOCHOCCUS_CELLSPERML" double precision,
   "PICOEUKARYOTES_CELLSPERML" double precision,
-  "PROCHLOROCOCCUS_FLAG" double precision,
-  "SYNECOCHOCCUS_FLAG" double precision,
-  "PICOEUKARYOTES_FLAG" double precision,
+  "PROCHLOROCOCCUS_FLAG" text,
+  "SYNECOCHOCCUS_FLAG" text,
+  "PICOEUKARYOTES_FLAG" text,
   "SAMPLE_COMMENTS" text,
   CONSTRAINT measurement_pkey_picoplankton PRIMARY KEY (measurement)
 )
@@ -188,13 +189,13 @@ CREATE TABLE anmn_nrs_bgc_chemistry
   "SALINITY_FLAG" text,
   "SALINITY_COMMENTS" text,
   "SILICATE_UMOL_PER_L" double precision,
-  "SILICATE_FLAG" double precision,
+  "SILICATE_FLAG" text,
   "NITRATE_UMOL_PER_L" double precision,
-  "NITRATE_FLAG" double precision,
+  "NITRATE_FLAG" text,
   "PHOSPHATE_UMOL_PER_L" double precision,
-  "PHOSPHATE_FLAG" double precision,
+  "PHOSPHATE_FLAG" text,
   "AMMONIUM_UMOL_PER_L" double precision,
-  "AMMONIUM_FLAG" double precision,
+  "AMMONIUM_FLAG" text,
   "NUTRIENT_COMMENTS" text,
   "TCO2_UMOL_PER_KG" double precision,
   "CARBON_FLAG" text,
@@ -425,14 +426,14 @@ CREATE TABLE anmn_nrs_bgc_tss_secchi
   "STATION_NAME" text,
   "IMOS_SITE_CODE" text,
   "LOCAL_TRIP_START_TIME" text NOT NULL,
-  "REPLICATE" double precision,
+  "REPLICATE" text,
   "TSS_MG_PER_L" double precision,
   "INORGANIC_FRACTION_MG_PER_L" double precision,
   "ORGANIC_FRACTION_MG_PER_L" double precision,
-  "QC_FLAG" text,
+  "TSS_FLAG" text,
   "TSS_COMMENTS" text,
   "SECCHI_DEPTH_M" double precision,
-  "SECCHI_FLAG" double precision,
+  "SECCHI_FLAG" text,
   "SECCHI_COMMENTS" text,
   CONSTRAINT measurement_pkey_tss_secchi PRIMARY KEY (measurement)
 )
@@ -449,7 +450,7 @@ CREATE VIEW anmn_nrs_bgc_tss_secchi_data as
          SELECT station_name."STATION_NAME", station_name."LATITUDE", station_name."LONGITUDE", station_name.geom
            FROM station_name
         ), table_b AS (
-         SELECT anmn_nrs_bgc_tss_secchi.measurement, anmn_nrs_bgc_tss_secchi."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME", anmn_nrs_bgc_tss_secchi."LOCAL_TRIP_START_TIME"  , anmn_nrs_bgc_tss_secchi."NRS_TRIP_CODE", anmn_nrs_bgc_tss_secchi."NRS_SAMPLE_CODE", anmn_nrs_bgc_tss_secchi."STATION_NAME", anmn_nrs_bgc_tss_secchi."IMOS_SITE_CODE",  anmn_nrs_bgc_tss_secchi."REPLICATE", anmn_nrs_bgc_tss_secchi."TSS_MG_PER_L", anmn_nrs_bgc_tss_secchi."INORGANIC_FRACTION_MG_PER_L", anmn_nrs_bgc_tss_secchi."ORGANIC_FRACTION_MG_PER_L", anmn_nrs_bgc_tss_secchi."QC_FLAG", anmn_nrs_bgc_tss_secchi."TSS_COMMENTS", anmn_nrs_bgc_tss_secchi."SECCHI_DEPTH_M", anmn_nrs_bgc_tss_secchi."SECCHI_FLAG", anmn_nrs_bgc_tss_secchi."SECCHI_COMMENTS"
+         SELECT anmn_nrs_bgc_tss_secchi.measurement, anmn_nrs_bgc_tss_secchi."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME", anmn_nrs_bgc_tss_secchi."LOCAL_TRIP_START_TIME"  , anmn_nrs_bgc_tss_secchi."NRS_TRIP_CODE", anmn_nrs_bgc_tss_secchi."NRS_SAMPLE_CODE", anmn_nrs_bgc_tss_secchi."STATION_NAME", anmn_nrs_bgc_tss_secchi."IMOS_SITE_CODE",  anmn_nrs_bgc_tss_secchi."REPLICATE", anmn_nrs_bgc_tss_secchi."TSS_MG_PER_L", anmn_nrs_bgc_tss_secchi."INORGANIC_FRACTION_MG_PER_L", anmn_nrs_bgc_tss_secchi."ORGANIC_FRACTION_MG_PER_L", anmn_nrs_bgc_tss_secchi."TSS_FLAG", anmn_nrs_bgc_tss_secchi."TSS_COMMENTS", anmn_nrs_bgc_tss_secchi."SECCHI_DEPTH_M", anmn_nrs_bgc_tss_secchi."SECCHI_FLAG", anmn_nrs_bgc_tss_secchi."SECCHI_COMMENTS"
            FROM anmn_nrs_bgc_tss_secchi
         )
 SELECT 
