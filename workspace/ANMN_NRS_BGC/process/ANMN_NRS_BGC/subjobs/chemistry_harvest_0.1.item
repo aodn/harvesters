@@ -7,25 +7,37 @@
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="anmn_nrs_bgc"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="10.11.12.13"/>
+    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="__UkjUFfbEeOI06CSaOCVIQ" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="WfsServerURL" prompt="WfsServerURL?" promptNeeded="false" repositoryContextId="_keR-0ArvEeSHSpYlVevlXQ" type="id_String" value="https://www.cmar.csiro.au/geoserver/wfs"/>
+  </context>
+  <context confirmationNeeded="false" name="Deployment">
+    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="anmn_nrs_bgc"/>
+    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value=""/>
+    <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
+    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="anmn_nrs_bgc"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="#{node['talend']['destination_database_server']}"/>
+    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="__UkjUFfbEeOI06CSaOCVIQ" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="WfsServerURL" prompt="WfsServerURL?" promptNeeded="false" repositoryContextId="_keR-0ArvEeSHSpYlVevlXQ" type="id_String" value="https://www.cmar.csiro.au/geoserver/wfs"/>
   </context>
   <parameters>
-    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx2G"/>
-    <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="true"/>
+    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
+    <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="128"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="0"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
     <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
     <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
     <elementParameter field="TEXT" name="JOBID_FOR_OOZIE" value=""/>
-    <elementParameter field="CHECK" name="IMPLICITCONTEXT_USE_PROJECT_SETTINGS" value="true"/>
-    <elementParameter field="CHECK" name="STATANDLOG_USE_PROJECT_SETTINGS" value="true"/>
-    <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;&quot;"/>
+    <elementParameter field="RADIO" name="FROM_FILE_FLAG_IMPLICIT_CONTEXT" value="true"/>
+    <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="context.paramFile"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;=>&quot;"/>
     <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
-    <elementParameter field="CHECK" name="DISABLE_WARNINGS" value="false"/>
     <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
-    <elementParameter field="DIRECTORY" name="FILE_PATH" value="&quot;/media/lbesnard/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/harvesters/workspace/.metadata&quot;"/>
+    <elementParameter field="CHECK" name="ON_STATCATCHER_FLAG" value="true"/>
+    <elementParameter field="CHECK" name="ON_LOGCATCHER_FLAG" value="true"/>
+    <elementParameter field="CHECK" name="ON_FILES_FLAG" value="true"/>
+    <elementParameter field="DIRECTORY" name="FILE_PATH" value="context.logDir"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="ojdbc14-10g.jar"/>
     <routinesParameter id="_72_pIOf4EeGBu5qQIqdKow" name="DataOperation"/>
@@ -48,8 +60,6 @@
     <elementParameter field="TEXT" name="WFS_URL" value="context.WfsServerURL"/>
     <elementParameter field="CLOSED_LIST" name="WFS_VERSION" value="org.geotools.wfs.protocol.Version.v1_1_0"/>
     <elementParameter field="TEXT" name="TYPE_NAME" value="&quot;imos:NRS_CHEMISTRY&quot;"/>
-    <elementParameter field="TECHNICAL" name="SCHEMA:SCHEMA_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="SCHEMA:REPOSITORY_SCHEMA_TYPE" value="_evdvwOYtEeOYT4GpKsVItw - NRS_CHEMISTRY"/>
     <elementParameter field="CHECK" name="FORCE_CRS" value="false"/>
     <elementParameter field="TEXT" name="CRS" value="&quot;EPSG:4326&quot;"/>
     <elementParameter field="TEXT" name="CQL" value="&quot;&quot;"/>
@@ -66,16 +76,16 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="NRS_CHEMISTRY" name="sWfsInput_1">
-      <column comment="" key="false" length="100" name="NRS_TRIP_CODE" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="100" name="NRS_SAMPLE_CODE" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="100" name="STATION_NAME" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="100" name="IMOS_SITE_CODE" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="100" name="UTC_TRIP_START_TIME" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="100" name="LOCAL_TRIP_START_TIME" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
+      <column comment="" key="false" length="100" name="NRS_TRIP_CODE" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="100" name="NRS_SAMPLE_CODE" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="100" name="STATION_NAME" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="100" name="IMOS_SITE_CODE" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="100" name="UTC_TRIP_START_TIME" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="100" name="LOCAL_TRIP_START_TIME" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="0" name="SAMPLE_DEPTH_M" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
       <column comment="" key="false" length="0" name="SALINITY" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
-      <column comment="" key="false" length="100" name="SALINITY_FLAG" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="100" name="SALINITY_COMMENTS" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
+      <column comment="" key="false" length="100" name="SALINITY_FLAG" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
+      <column comment="" key="false" length="100" name="SALINITY_COMMENTS" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="0" name="SILICATE_UMOL_PER_L" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
       <column comment="" key="false" length="0" name="SILICATE_FLAG" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
       <column comment="" key="false" length="0" name="NITRATE_UMOL_PER_L" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
@@ -84,15 +94,15 @@
       <column comment="" key="false" length="0" name="PHOSPHATE_FLAG" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
       <column comment="" key="false" length="0" name="AMMONIUM_UMOL_PER_L" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
       <column comment="" key="false" length="0" name="AMMONIUM_FLAG" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
-      <column comment="" key="false" length="100" name="NUTRIENT_COMMENTS" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
+      <column comment="" key="false" length="100" name="NUTRIENT_COMMENTS" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="0" name="TCO2_UMOL_PER_KG" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
-      <column comment="" key="false" length="100" name="CARBON_FLAG" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="100" name="CARBON_COMMENTS" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
+      <column comment="" key="false" length="100" name="CARBON_FLAG" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
+      <column comment="" key="false" length="100" name="CARBON_COMMENTS" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="0" name="TALKALINITY_UMOL_PER_KG" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
-      <column comment="" key="false" length="100" name="ALKALINITY_FLAG" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
-      <column comment="" key="false" length="100" name="ALKALINITY_COMMENTS" nullable="true" pattern="" precision="0" type="id_String" originalLength="100"/>
+      <column comment="" key="false" length="100" name="ALKALINITY_FLAG" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
+      <column comment="" key="false" length="100" name="ALKALINITY_COMMENTS" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="0" name="OXYGEN_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="NUMERIC" type="id_BigDecimal"/>
-      <column comment="" key="false" length="0" name="OXYGEN_FLAG" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="0" name="OXYGEN_FLAG" nullable="true" pattern="" precision="0" type="id_BigDecimal"/>
       <column comment="" key="false" length="0" name="OXYGEN_COMMENTS" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="0" name="STATION_PT" nullable="true" pattern="" precision="0" type="id_Geometry"/>
     </metadata>
@@ -119,13 +129,13 @@
       <column comment="" key="false" length="100" name="SALINITY_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="100" name="SALINITY_COMMENTS" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="SILICATE_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="SILICATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
+      <column comment="" key="false" length="0" name="SILICATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="NITRATE_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="NITRATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
+      <column comment="" key="false" length="0" name="NITRATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="PHOSPHATE_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="PHOSPHATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
+      <column comment="" key="false" length="0" name="PHOSPHATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="AMMONIUM_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="AMMONIUM_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
+      <column comment="" key="false" length="0" name="AMMONIUM_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="100" name="NUTRIENT_COMMENTS" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="TCO2_UMOL_PER_KG" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
       <column comment="" key="false" length="100" name="CARBON_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
@@ -149,13 +159,13 @@
       <column comment="" key="false" length="100" name="SALINITY_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="100" name="SALINITY_COMMENTS" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="SILICATE_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="SILICATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
+      <column comment="" key="false" length="0" name="SILICATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="NITRATE_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="NITRATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
+      <column comment="" key="false" length="0" name="NITRATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="PHOSPHATE_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="PHOSPHATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
+      <column comment="" key="false" length="0" name="PHOSPHATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="AMMONIUM_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="AMMONIUM_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
+      <column comment="" key="false" length="0" name="AMMONIUM_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="100" name="NUTRIENT_COMMENTS" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="TCO2_UMOL_PER_KG" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
       <column comment="" key="false" length="100" name="CARBON_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
@@ -195,13 +205,13 @@
       <column comment="" key="false" length="100" name="SALINITY_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="100" name="SALINITY_COMMENTS" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="SILICATE_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="SILICATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
+      <column comment="" key="false" length="0" name="SILICATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="NITRATE_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="NITRATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
+      <column comment="" key="false" length="0" name="NITRATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="PHOSPHATE_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="PHOSPHATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
+      <column comment="" key="false" length="0" name="PHOSPHATE_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="AMMONIUM_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="AMMONIUM_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
+      <column comment="" key="false" length="0" name="AMMONIUM_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="100" name="NUTRIENT_COMMENTS" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="TCO2_UMOL_PER_KG" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
       <column comment="" key="false" length="100" name="CARBON_FLAG" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
@@ -214,7 +224,7 @@
       <column comment="" key="false" length="0" name="OXYGEN_COMMENTS" nullable="true" pattern="" precision="0" type="id_String"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="var2" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm'Z'Z&quot;, row2.UTC_TRIP_START_TIME+&quot;+0000&quot;) " type="id_Date"/>
       </varTables>
@@ -230,13 +240,13 @@
         <mapperTableEntries name="SALINITY_FLAG" expression="row2.SALINITY_FLAG " type="id_String" nullable="true"/>
         <mapperTableEntries name="SALINITY_COMMENTS" expression="row2.SALINITY_COMMENTS " type="id_String" nullable="true"/>
         <mapperTableEntries name="SILICATE_UMOL_PER_L" expression="row2.SILICATE_UMOL_PER_L " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="SILICATE_FLAG" expression="row2.SILICATE_FLAG " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="SILICATE_FLAG" expression="row2.SILICATE_FLAG " type="id_String" nullable="true"/>
         <mapperTableEntries name="NITRATE_UMOL_PER_L" expression="row2.NITRATE_UMOL_PER_L " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="NITRATE_FLAG" expression="row2.NITRATE_FLAG " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="NITRATE_FLAG" expression="row2.NITRATE_FLAG " type="id_String" nullable="true"/>
         <mapperTableEntries name="PHOSPHATE_UMOL_PER_L" expression="row2.PHOSPHATE_UMOL_PER_L " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="PHOSPHATE_FLAG" expression="row2.PHOSPHATE_FLAG " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="PHOSPHATE_FLAG" expression="row2.PHOSPHATE_FLAG " type="id_String" nullable="true"/>
         <mapperTableEntries name="AMMONIUM_UMOL_PER_L" expression="row2.AMMONIUM_UMOL_PER_L " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="AMMONIUM_FLAG" expression="row2.AMMONIUM_FLAG " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="AMMONIUM_FLAG" expression="row2.AMMONIUM_FLAG " type="id_String" nullable="true"/>
         <mapperTableEntries name="NUTRIENT_COMMENTS" expression="row2.NUTRIENT_COMMENTS " type="id_String" nullable="true"/>
         <mapperTableEntries name="TCO2_UMOL_PER_KG" expression="row2.TCO2_UMOL_PER_KG " type="id_Double" nullable="true"/>
         <mapperTableEntries name="CARBON_FLAG" expression="row2.CARBON_FLAG " type="id_String" nullable="true"/>
@@ -260,13 +270,13 @@
         <mapperTableEntries name="SALINITY_FLAG" type="id_String" nullable="true"/>
         <mapperTableEntries name="SALINITY_COMMENTS" type="id_String" nullable="true"/>
         <mapperTableEntries name="SILICATE_UMOL_PER_L" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="SILICATE_FLAG" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="SILICATE_FLAG" type="id_String" nullable="true"/>
         <mapperTableEntries name="NITRATE_UMOL_PER_L" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="NITRATE_FLAG" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="NITRATE_FLAG" type="id_String" nullable="true"/>
         <mapperTableEntries name="PHOSPHATE_UMOL_PER_L" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="PHOSPHATE_FLAG" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="PHOSPHATE_FLAG" type="id_String" nullable="true"/>
         <mapperTableEntries name="AMMONIUM_UMOL_PER_L" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="AMMONIUM_FLAG" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="AMMONIUM_FLAG" type="id_String" nullable="true"/>
         <mapperTableEntries name="NUTRIENT_COMMENTS" type="id_String" nullable="true"/>
         <mapperTableEntries name="TCO2_UMOL_PER_KG" type="id_Double" nullable="true"/>
         <mapperTableEntries name="CARBON_FLAG" type="id_String" nullable="true"/>
@@ -472,13 +482,13 @@
       <column comment="" key="false" length="100" name="SALINITY_FLAG" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="100" name="SALINITY_COMMENTS" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="SILICATE_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="SILICATE_FLAG" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="0" name="SILICATE_FLAG" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="NITRATE_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="NITRATE_FLAG" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="0" name="NITRATE_FLAG" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="PHOSPHATE_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="PHOSPHATE_FLAG" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="0" name="PHOSPHATE_FLAG" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="AMMONIUM_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="AMMONIUM_FLAG" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="0" name="AMMONIUM_FLAG" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="100" name="NUTRIENT_COMMENTS" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="TCO2_UMOL_PER_KG" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="100" name="CARBON_FLAG" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -502,13 +512,13 @@
       <column comment="" key="false" length="100" name="SALINITY_FLAG" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="100" name="SALINITY_COMMENTS" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="SILICATE_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="SILICATE_FLAG" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="0" name="SILICATE_FLAG" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="NITRATE_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="NITRATE_FLAG" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="0" name="NITRATE_FLAG" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="PHOSPHATE_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="PHOSPHATE_FLAG" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="0" name="PHOSPHATE_FLAG" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="AMMONIUM_UMOL_PER_L" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="0" name="AMMONIUM_FLAG" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="0" name="AMMONIUM_FLAG" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="100" name="NUTRIENT_COMMENTS" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="0" name="TCO2_UMOL_PER_KG" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="100" name="CARBON_FLAG" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
