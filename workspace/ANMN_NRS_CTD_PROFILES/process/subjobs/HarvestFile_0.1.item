@@ -10,8 +10,8 @@
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_b2CKgHgOEeOMHsnb02Unfg" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_b2CKgHgOEeOMHsnb02Unfg" type="id_String" value="null"/>
     <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value=".*FV00.*.nc"/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value=".*.nc"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value="/Users/bpasquer/Documents/ANMN_NRS_CTDPRO/DATA_test_harvester/Biogeochem_profiles"/>
+    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value=".*FV01.*.nc"/>
+    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value="/Users/bpasquer/Documents/ANMN_NRS_CTDPRO/DATA_test_harvester/Biogeochem_profiles/"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value=""/>
   </context>
@@ -51,25 +51,25 @@
     <routinesParameter id="_cRn34BQsEeKRFb0vPU_LNg" name="DAPUtils"/>
     <routinesParameter id="_IMfY4Dp8EeKYTu4DLH4cKg" name="NetCDFUtils"/>
   </parameters>
-  <node componentName="iNetCDFGlobalAttributes" componentVersion="0.1" offsetLabelX="-9" offsetLabelY="0" posX="128" posY="224" sizeX="32" sizeY="35">
+  <node componentName="iNetCDFGlobalAttributes" componentVersion="0.1" offsetLabelX="-9" offsetLabelY="0" posX="128" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttributes_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="&quot;/Users/bpasquer/Documents/TALEND_harvester/harvesters/workspace/in.nc&quot;"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iNetCDFGlobalAttributes_1">
-      <column comment="" key="false" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="50" name="site_code" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="50" name="geospatial_lon_max" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="50" name="geospatial_lat_min" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="50" name="geospatial_vertical_min" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="50" name="geospatial_lat_max" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="50" name="geospatial_lon_min" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="50" name="geospatial_vertical_max" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="50" name="cruise" nullable="true" pattern="" sourceType="" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="50" name="station" nullable="true" pattern="" sourceType="" type="id_String" originalLength="50"/>
+      <column comment="" key="false" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="50" name="site_code" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_lon_max" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" key="false" length="50" name="geospatial_lat_min" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_vertical_min" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_lat_max" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" key="false" length="50" name="geospatial_lon_min" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="50" name="cruise" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="50" name="station" nullable="true" pattern="" sourceType="" type="id_String"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="256" posY="224">
@@ -87,43 +87,45 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="deployment">
       <column comment="" key="true" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_Date" originalLength="500"/>
-      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_Date" originalLength="500"/>
-      <column comment="" key="false" length="50" name="site_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_lon_max" nullable="true" pattern="" sourceType="FLOAT4" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_lat_min" nullable="true" pattern="" sourceType="FLOAT4" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_vertical_min" nullable="true" pattern="" sourceType="FLOAT4" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_lat_max" nullable="true" pattern="" sourceType="FLOAT4" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_lon_min" nullable="true" pattern="" sourceType="FLOAT4" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="FLOAT4" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="cruise_id" nullable="true" pattern="" sourceType="" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="1" name="station" nullable="true" pattern="" sourceType="" type="id_String" originalLength="1"/>
+      <column comment="" key="false" length="50" name="time_coverage_start" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_Date" originalLength="500"/>
+      <column comment="" key="false" length="50" name="time_coverage_end" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_Date" originalLength="500"/>
+      <column comment="" key="false" length="50" name="site_code" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_lon_max" nullable="false" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" key="false" length="50" name="latitude" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_vertical_min" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_lat_max" nullable="false" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" key="false" length="50" name="longitude" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_vertical_max" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="50" name="cruise_id" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="50" name="station" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="deployment">
         <mapperTableEntries name="file_id" expression="context.fileId.intValue()" type="id_Integer"/>
-        <mapperTableEntries name="time_coverage_start" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_start,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
-        <mapperTableEntries name="time_coverage_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_end,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
-        <mapperTableEntries name="site_code" expression="row1.site_code  " type="id_String" nullable="true"/>
-        <mapperTableEntries name="geospatial_lon_max" expression="row1.geospatial_lon_max " type="id_String" nullable="true"/>
-        <mapperTableEntries name="geospatial_lat_min" expression="row1.geospatial_lat_min " type="id_String" nullable="true"/>
-        <mapperTableEntries name="geospatial_vertical_min" expression="row1.geospatial_vertical_min " type="id_String" nullable="true"/>
-        <mapperTableEntries name="geospatial_lat_max" expression="row1.geospatial_lat_max " type="id_String" nullable="true"/>
-        <mapperTableEntries name="geospatial_lon_min" expression="row1.geospatial_lon_min " type="id_String" nullable="true"/>
-        <mapperTableEntries name="geospatial_vertical_max" expression="row1.geospatial_vertical_max " type="id_String" nullable="true"/>
-        <mapperTableEntries name="cruise_id" expression="row1.cruise " type="id_String" nullable="true"/>
-        <mapperTableEntries name="station" expression="row1.station " type="id_String" nullable="true"/>
+        <mapperTableEntries name="time_coverage_start" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_start,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date"/>
+        <mapperTableEntries name="time_coverage_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_end,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date"/>
+        <mapperTableEntries name="site_code" expression="row1.site_code " type="id_String"/>
+        <mapperTableEntries name="geospatial_lon_max" expression="row1.geospatial_lon_max " type="id_Double"/>
+        <mapperTableEntries name="latitude" expression="row1.geospatial_lat_min " type="id_String"/>
+        <mapperTableEntries name="geospatial_vertical_min" expression="row1.geospatial_vertical_min " type="id_String"/>
+        <mapperTableEntries name="geospatial_lat_max" expression="row1.geospatial_lat_max " type="id_Double"/>
+        <mapperTableEntries name="longitude" expression="row1.geospatial_lon_min " type="id_String"/>
+        <mapperTableEntries name="geospatial_vertical_max" expression="row1.geospatial_vertical_max " type="id_String"/>
+        <mapperTableEntries name="cruise_id" expression="row1.cruise " type="id_String"/>
+        <mapperTableEntries name="station" expression="row1.station " type="id_String"/>
+        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row1.geospatial_lon_max,row1.geospatial_lat_max,&quot;EPSG:4326&quot;)  " type="id_Geometry"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row1" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="time_coverage_start" type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_end" type="id_String" nullable="true"/>
         <mapperTableEntries name="site_code" type="id_String" nullable="true"/>
-        <mapperTableEntries name="geospatial_lon_max" type="id_String" nullable="true"/>
+        <mapperTableEntries name="geospatial_lon_max" type="id_Double" nullable="true"/>
         <mapperTableEntries name="geospatial_lat_min" type="id_String" nullable="true"/>
         <mapperTableEntries name="geospatial_vertical_min" type="id_String" nullable="true"/>
-        <mapperTableEntries name="geospatial_lat_max" type="id_String" nullable="true"/>
+        <mapperTableEntries name="geospatial_lat_max" type="id_Double" nullable="true"/>
         <mapperTableEntries name="geospatial_lon_min" type="id_String" nullable="true"/>
         <mapperTableEntries name="geospatial_vertical_max" type="id_String" nullable="true"/>
         <mapperTableEntries name="cruise" type="id_String" nullable="true"/>
@@ -131,7 +133,7 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="416" posY="224" sizeX="32" sizeY="35">
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="416" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_1"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -181,7 +183,7 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="geospatial_lat_min"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="latitude"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -196,7 +198,7 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="geospatial_lon_min"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="longitude"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -216,6 +218,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -227,40 +234,42 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_1">
       <column comment="" key="true" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date" originalLength="500"/>
-      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date" originalLength="500"/>
-      <column comment="" key="false" length="50" name="site_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_lon_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_lat_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_vertical_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_lat_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_lon_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="cruise_id" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="1" name="station" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="1"/>
+      <column comment="" key="false" length="50" name="time_coverage_start" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date" originalLength="500"/>
+      <column comment="" key="false" length="50" name="time_coverage_end" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date" originalLength="500"/>
+      <column comment="" key="false" length="50" name="site_code" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_lon_max" nullable="false" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="50" name="latitude" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_vertical_min" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_lat_max" nullable="false" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="50" name="longitude" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_vertical_max" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="cruise_id" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="station" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="true" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date" originalLength="500"/>
-      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date" originalLength="500"/>
-      <column comment="" key="false" length="50" name="site_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_lon_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_lat_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_vertical_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_lat_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_lon_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="cruise_id" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="1" name="station" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="1"/>
+      <column comment="" key="false" length="50" name="time_coverage_start" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date" originalLength="500"/>
+      <column comment="" key="false" length="50" name="time_coverage_end" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date" originalLength="500"/>
+      <column comment="" key="false" length="50" name="site_code" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_lon_max" nullable="false" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="50" name="latitude" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_vertical_min" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_lat_max" nullable="false" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="50" name="longitude" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="geospatial_vertical_max" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="cruise_id" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="station" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="iNetCDFInput" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="352" sizeX="32" sizeY="35">
+  <node componentName="iNetCDFInput" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="352">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFInput_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="&quot;/Users/bpasquer/Documents/TALEND_harvester/harvesters/workspace/in.nc&quot;"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
     <elementParameter field="TABLE" name="SCHEMAS">
-      <elementValue elementRef="SCHEMA" value="variable"/>
+      <elementValue elementRef="SCHEMA" value="variables"/>
     </elementParameter>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="SCALE_MISSING" value="true"/>
@@ -276,38 +285,38 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="variable" name="variable">
-      <column comment="" defaultValue="" key="false" length="-1" name="DEPTH" nullable="true" originalDbColumnName="depth" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="1" name="DEPTH_quality_control" nullable="true" originalDbColumnName="depth_quality_control" pattern="" precision="-1" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="1" name="INSTANCE" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="TIME" nullable="true" originalDbColumnName="time" pattern="" precision="-1" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="1" name="TIME_quality_control" nullable="true" originalDbColumnName="time_quality_control" pattern="" precision="-1" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" precision="-1" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="1" name="LATITUDE_quality_control" nullable="true" originalDbColumnName="latitude_quality_control" pattern="" precision="-1" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" precision="-1" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="1" name="LONGITUDE_quality_control" nullable="true" originalDbColumnName="longitude_quality_control" pattern="" precision="-1" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" length="-1" name="DIRECTION" nullable="true" pattern="" precision="-1" sourceType="" type="id_String"/>
-      <column comment="" defaultValue="" key="false" length="1" name="DIRECTION_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="BOT_DEPTH" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="1" name="BOT_DEPTH_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="TEMP" nullable="true" originalDbColumnName="temp" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="1" name="TEMP_quality_control" nullable="true" originalDbColumnName="temp_quality_control" pattern="" precision="-1" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="PSAL" nullable="true" originalDbColumnName="psal" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="1" name="PSAL_quality_control" nullable="true" originalDbColumnName="psal_quality_control" pattern="" precision="-1" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="DOX2" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="1" name="DOX2_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="CNDC" nullable="true" originalDbColumnName="cndc" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="1" name="CNDC_quality_control" nullable="true" originalDbColumnName="cndc_quality_control" pattern="" precision="-1" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="CHLF" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="1" name="CHLF_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="TURB" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="1" name="TURB_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="DESC" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="1" name="DESC_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="DENS" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="1" name="DENS_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" name="PRES_REL" nullable="true" pattern="" sourceType="" type="id_Float"/>
-      <column comment="" key="false" length="1" name="PRES_REL_quality_control" nullable="true" pattern="" sourceType="" type="id_Integer" originalLength="1"/>
+    <metadata connector="FLOW" label="variables" name="variables">
+      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" originalDbColumnName="depth" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" length="1" name="INSTANCE" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" name="DIRECTION" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="TIME" nullable="true" originalDbColumnName="time" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="CHLF" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="BOT_DEPTH" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="TURB" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" originalDbColumnName="temp" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="DESC" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" originalDbColumnName="psal" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="DENS" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="DOX2" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="PRES_REL" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="CNDC" nullable="true" originalDbColumnName="cndc" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" length="1" name="DEPTH_quality_control" nullable="true" originalDbColumnName="depth_quality_control" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="1" name="TIME_quality_control" nullable="true" originalDbColumnName="time_quality_control" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="1" name="LATITUDE_quality_control" nullable="true" originalDbColumnName="latitude_quality_control" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="1" name="LONGITUDE_quality_control" nullable="true" originalDbColumnName="longitude_quality_control" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="1" name="DIRECTION_quality_control" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="1" name="TEMP_quality_control" nullable="true" originalDbColumnName="temp_quality_control" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="1" name="PSAL_quality_control" nullable="true" originalDbColumnName="psal_quality_control" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="1" name="CNDC_quality_control" nullable="true" originalDbColumnName="cndc_quality_control" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="1" name="BOT_DEPTH_quality_control" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="1" name="DOX2_quality_control" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="1" name="CHLF_quality_control" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="1" name="TURB_quality_control" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="1" name="DESC_quality_control" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="1" name="DENS_quality_control" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="1" name="PRES_REL_quality_control" nullable="true" pattern="" sourceType="" type="id_Integer"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="256" posY="352">
@@ -324,12 +333,23 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="measurement">
-      <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" name="TIME" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" length="1" name="INSTANCE" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" name="DIRECTION" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="BOT_DEPTH" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="DOX2" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="CNDC" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="CHLF" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="TURB" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="DESC" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="DENS" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="PRES_REL" nullable="true" pattern="" sourceType="" type="id_Float"/>
       <column comment="" key="false" name="TIME_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="LATITUDE_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="LONGITUDE_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
@@ -337,53 +357,52 @@
       <column comment="" key="false" name="PSAL_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="TEMP_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="CNDC_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="DENS_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="PRES_REL" nullable="true" pattern="" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="DENS" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="1" name="INSTANCE" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" length="-1" name="DIRECTION" nullable="true" pattern="" precision="-1" sourceType="" type="id_String"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="BOT_DEPTH" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="TEMP" nullable="true" originalDbColumnName="temp" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="PSAL" nullable="true" originalDbColumnName="psal" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="DOX2" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="CNDC" nullable="true" originalDbColumnName="cndc" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="CHLF" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="TURB" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="DESC" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="DIRECTION_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="BOT_DEPTH_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="DOX2_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="CHLF_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="BOT_DEPTH_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="DIRECTION_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="TURB_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="DESC_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="DENS_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="PRES_REL_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
-        <mapperTableEntries name="TIME_quality_control" expression="variable.TIME_quality_control==null?null:variable.TIME_quality_control.toString()    " type="id_String" nullable="true"/>
-        <mapperTableEntries name="LATITUDE_quality_control" expression="variable.LATITUDE_quality_control==null?null:variable&#xA;.LATITUDE_quality_control.toString() &#xA;   " type="id_String" nullable="true"/>
-        <mapperTableEntries name="LONGITUDE_quality_control" expression="variable.LONGITUDE_quality_control==null?null:variable.LONGITUDE_quality_control.toString()    " type="id_String" nullable="true"/>
-        <mapperTableEntries name="DEPTH_quality_control" expression="variable.DEPTH_quality_control==null?null:variable.DEPTH_quality_control.toString()  " type="id_String" nullable="true"/>
-        <mapperTableEntries name="PRES_REL_quality_control" expression="variable.PRES_REL_quality_control==null?null:variable.PRES_REL_quality_control.toString()  " type="id_String" nullable="true"/>
-        <mapperTableEntries name="PSAL_quality_control" expression="variable.PSAL_quality_control==null?null:variable.PSAL_quality_control.toString()  " type="id_String" nullable="true"/>
-        <mapperTableEntries name="TEMP_quality_control" expression="variable.TEMP_quality_control==null?null:variable.TEMP_quality_control.toString()  " type="id_String" nullable="true"/>
-        <mapperTableEntries name="DOX2_quality_control" expression="variable.DOX2_quality_control==null?null:variable.DOX2_quality_control.toString()  " type="id_String" nullable="true"/>
-        <mapperTableEntries name="CHLF_quality_control" expression="variable.CHLF_quality_control==null?null:variable.CHLF_quality_control.toString()  " type="id_String" nullable="true"/>
-        <mapperTableEntries name="DIRECTION_quality_control" expression="variable.DIRECTION_quality_control==null?null:variable.DIRECTION_quality_control.toString()  " type="id_String" nullable="true"/>
-        <mapperTableEntries name="TURB_quality_control" expression="variable.TURB_quality_control==null?null:variable.TURB_quality_control.toString()  " type="id_String" nullable="true"/>
-        <mapperTableEntries name="CNDC_quality_control" expression="variable.CNDC_quality_control==null?null:variable.CNDC_quality_control.toString()      " type="id_String" nullable="true"/>
-        <mapperTableEntries name="DENS_quality_control" expression="variable.DENS_quality_control==null?null:variable.DENS_quality_control.toString()     " type="id_String" nullable="true"/>
-        <mapperTableEntries name="BOT_DEPTH_quality_control" expression="variable.BOT_DEPTH_quality_control==null?null:variable.BOT_DEPTH_quality_control.toString()     " type="id_String" nullable="true"/>
-        <mapperTableEntries name="DESC_quality_control" expression="variable.DESC_quality_control==null?null:variable.DESC_quality_control.toString() " type="id_String" nullable="true"/>
+        <mapperTableEntries name="TIME_quality_control" expression="variables.TIME_quality_control==null?null:variables.TIME_quality_control.toString()   " type="id_String" nullable="true"/>
+        <mapperTableEntries name="LATITUDE_quality_control" expression="variables.LATITUDE_quality_control==null?null:variables.LATITUDE_quality_control.toString()   " type="id_String" nullable="true"/>
+        <mapperTableEntries name="LONGITUDE_quality_control" expression="variables.LONGITUDE_quality_control==null?null:variables.LONGITUDE_quality_control.toString()   " type="id_String" nullable="true"/>
+        <mapperTableEntries name="DEPTH_quality_control" expression="variables.DEPTH_quality_control==null?null:variables.DEPTH_quality_control.toString() " type="id_String" nullable="true"/>
+        <mapperTableEntries name="PSAL_quality_control" expression="variables.PSAL_quality_control==null?null:variables.PSAL_quality_control.toString() " type="id_String" nullable="true"/>
+        <mapperTableEntries name="TEMP_quality_control" expression="variables.TEMP_quality_control==null?null:variables.TEMP_quality_control.toString() " type="id_String" nullable="true"/>
+        <mapperTableEntries name="CNDC_quality_control" expression="variables.CNDC_quality_control==null?null:variables.CNDC_quality_control.toString()     " type="id_String" nullable="true"/>
+        <mapperTableEntries name="DIRECTION_quality_control" expression="variables.DIRECTION_quality_control==null?null:variables.DIRECTION_quality_control.toString()  &#xA; " type="id_String" nullable="true"/>
+        <mapperTableEntries name="BOT_DEPTH_quality_control" expression="variables.BOT_DEPTH_quality_control==null?null:variables.BOT_DEPTH_quality_control.toString()  " type="id_String" nullable="true"/>
+        <mapperTableEntries name="DOX2_quality_control" expression="variables.DOX2_quality_control==null?null:variables.DOX2_quality_control.toString()  " type="id_String" nullable="true"/>
+        <mapperTableEntries name="CHLF_quality_control" expression="variables.CHLF_quality_control==null?null:variables.CHLF_quality_control.toString()  " type="id_String" nullable="true"/>
+        <mapperTableEntries name="TURB_quality_control" expression="variables.TURB_quality_control==null?null:variables.TURB_quality_control.toString()   " type="id_String" nullable="true"/>
+        <mapperTableEntries name="DESC_quality_control" expression="variables.DESC_quality_control==null?null:variables.DESC_quality_control.toString()  " type="id_String" nullable="true"/>
+        <mapperTableEntries name="DENS_quality_control" expression="variables.DENS_quality_control==null?null:variables.DENS_quality_control.toString()   " type="id_String" nullable="true"/>
+        <mapperTableEntries name="PRES_REL_quality_control" expression="variables.PRES_REL_quality_control==null?null:variables.PRES_REL_quality_control.toString()    " type="id_String" nullable="true"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="measurement">
         <mapperTableEntries name="file_id" expression="context.fileId.intValue() " type="id_Integer"/>
-        <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1950-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,variable.TIME,true)     " type="id_Date" nullable="true"/>
-        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(variable.LONGITUDE,variable.LATITUDE,&quot;EPSG:4326&quot;)  " type="id_Geometry" nullable="true"/>
-        <mapperTableEntries name="LATITUDE" expression="variable.LATITUDE  " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="LONGITUDE" expression="variable.LONGITUDE  " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="DEPTH" expression="variable.DEPTH  " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1950-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,variables.TIME,true) " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="LATITUDE" expression="variables.LATITUDE" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="LONGITUDE" expression="variables.LONGITUDE" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="DEPTH" expression="variables.DEPTH" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="INSTANCE" expression="variables.INSTANCE" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="DIRECTION" expression="variables.DIRECTION" type="id_String" nullable="true"/>
+        <mapperTableEntries name="BOT_DEPTH" expression="variables.BOT_DEPTH" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="TEMP" expression="variables.TEMP" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="PSAL" expression="variables.PSAL" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="DOX2" expression="variables.DOX2" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="CNDC" expression="variables.CNDC" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="CHLF" expression="variables.CHLF" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="TURB" expression="variables.TURB" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="DESC" expression="variables.DESC " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="DENS" expression="variables.DENS " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="PRES_REL" expression="variables.PRES_REL " type="id_Float" nullable="true"/>
         <mapperTableEntries name="TIME_quality_control" expression="Var.TIME_quality_control " type="id_String" nullable="true"/>
         <mapperTableEntries name="LATITUDE_quality_control" expression="Var.LATITUDE_quality_control " type="id_String" nullable="true"/>
         <mapperTableEntries name="LONGITUDE_quality_control" expression="Var.LONGITUDE_quality_control " type="id_String" nullable="true"/>
@@ -391,63 +410,51 @@
         <mapperTableEntries name="PSAL_quality_control" expression="Var.PSAL_quality_control " type="id_String" nullable="true"/>
         <mapperTableEntries name="TEMP_quality_control" expression="Var.TEMP_quality_control " type="id_String" nullable="true"/>
         <mapperTableEntries name="CNDC_quality_control" expression="Var.CNDC_quality_control " type="id_String" nullable="true"/>
-        <mapperTableEntries name="DENS_quality_control" expression="Var.DENS_quality_control " type="id_String" nullable="true"/>
-        <mapperTableEntries name="PRES_REL" expression="variable.PRES_REL " type="id_Float" nullable="true"/>
-        <mapperTableEntries name="DENS" expression="variable.DENS " type="id_Float" nullable="true"/>
-        <mapperTableEntries name="INSTANCE" expression="variable.INSTANCE " type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="DIRECTION" expression="variable.DIRECTION " type="id_String" nullable="true"/>
-        <mapperTableEntries name="BOT_DEPTH" expression="variable.BOT_DEPTH " type="id_Float" nullable="true"/>
-        <mapperTableEntries name="TEMP" expression="variable.TEMP " type="id_Float" nullable="true"/>
-        <mapperTableEntries name="PSAL" expression="variable.PSAL " type="id_Float" nullable="true"/>
-        <mapperTableEntries name="DOX2" expression="variable.DOX2 " type="id_Float" nullable="true"/>
-        <mapperTableEntries name="CNDC" expression="variable.CNDC " type="id_Float" nullable="true"/>
-        <mapperTableEntries name="CHLF" expression="variable.CHLF " type="id_Float" nullable="true"/>
-        <mapperTableEntries name="TURB" expression="variable.TURB " type="id_Float" nullable="true"/>
-        <mapperTableEntries name="DESC" expression="variable.DESC " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="DIRECTION_quality_control" expression="Var.DIRECTION_quality_control " type="id_String" nullable="true"/>
+        <mapperTableEntries name="BOT_DEPTH_quality_control" expression="Var.BOT_DEPTH_quality_control " type="id_String" nullable="true"/>
         <mapperTableEntries name="DOX2_quality_control" expression="Var.DOX2_quality_control " type="id_String" nullable="true"/>
         <mapperTableEntries name="CHLF_quality_control" expression="Var.CHLF_quality_control " type="id_String" nullable="true"/>
-        <mapperTableEntries name="BOT_DEPTH_quality_control" expression="Var.BOT_DEPTH_quality_control " type="id_String" nullable="true"/>
-        <mapperTableEntries name="DIRECTION_quality_control" expression="Var.DIRECTION_quality_control " type="id_String" nullable="true"/>
-        <mapperTableEntries name="TURB_quality_control" expression="Var.TURB_quality_control  " type="id_String" nullable="true"/>
+        <mapperTableEntries name="TURB_quality_control" expression="Var.TURB_quality_control " type="id_String" nullable="true"/>
         <mapperTableEntries name="DESC_quality_control" expression="Var.DESC_quality_control " type="id_String" nullable="true"/>
+        <mapperTableEntries name="DENS_quality_control" expression="Var.DENS_quality_control " type="id_String" nullable="true"/>
         <mapperTableEntries name="PRES_REL_quality_control" expression="Var.PRES_REL_quality_control " type="id_String" nullable="true"/>
       </outputTables>
-      <inputTables sizeState="INTERMEDIATE" name="variable" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
+      <inputTables sizeState="INTERMEDIATE" name="variables" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="DEPTH" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="DEPTH_quality_control" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="INSTANCE" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="TIME" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="TIME_quality_control" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="LATITUDE" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="LATITUDE_quality_control" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="LONGITUDE" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="LONGITUDE_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="INSTANCE" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="DIRECTION" type="id_String" nullable="true"/>
-        <mapperTableEntries name="DIRECTION_quality_control" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="BOT_DEPTH" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="BOT_DEPTH_quality_control" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="TEMP" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="TEMP_quality_control" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="PSAL" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="PSAL_quality_control" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="DOX2" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="DOX2_quality_control" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="CNDC" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="CNDC_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="TIME" type="id_Double" nullable="true"/>
         <mapperTableEntries name="CHLF" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="CHLF_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="BOT_DEPTH" type="id_Float" nullable="true"/>
         <mapperTableEntries name="TURB" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="TURB_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="TEMP" type="id_Float" nullable="true"/>
         <mapperTableEntries name="DESC" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="DESC_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="PSAL" type="id_Float" nullable="true"/>
         <mapperTableEntries name="DENS" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="DENS_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="DOX2" type="id_Float" nullable="true"/>
         <mapperTableEntries name="PRES_REL" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="CNDC" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="DEPTH_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="TIME_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="LATITUDE_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="LONGITUDE_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="DIRECTION_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="TEMP_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="PSAL_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="CNDC_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="BOT_DEPTH_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="DOX2_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="CHLF_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="TURB_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="DESC_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="DENS_quality_control" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="PRES_REL_quality_control" type="id_Integer" nullable="true"/>
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="416" posY="352" sizeX="32" sizeY="35">
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="416" posY="352">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_3"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -482,11 +489,6 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="LATITUDE"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -498,56 +500,6 @@
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="DEPTH"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="TIME_quality_control"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="LATITUDE_quality_control"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="LONGITUDE_quality_control"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DEPTH_quality_control"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PSAL_quality_control"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="TEMP_quality_control"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="CNDC_quality_control"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DENS_quality_control"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PRES_REL"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DENS"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -602,6 +554,61 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="DENS"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="PRES_REL"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="TIME_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="LATITUDE_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="LONGITUDE_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="DEPTH_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="PSAL_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="TEMP_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="CNDC_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="DIRECTION_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="BOT_DEPTH_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="DOX2_quality_control"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -612,22 +619,17 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="BOT_DEPTH_quality_control"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DIRECTION_quality_control"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="TURB_quality_control"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="DESC_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="DENS_quality_control"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -646,13 +648,24 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="iPostgresqlOutput_2">
-      <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
+    <metadata connector="FLOW" name="iPostgresqlOutput_3">
+      <column comment="" defaultValue="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" name="TIME" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" length="1" name="INSTANCE" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="DIRECTION" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="BOT_DEPTH" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="DOX2" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="CNDC" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="CHLF" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="TURB" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="DESC" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="DENS" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="PRES_REL" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" name="TIME_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="LATITUDE_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="LONGITUDE_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -660,34 +673,33 @@
       <column comment="" key="false" name="PSAL_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="TEMP_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="CNDC_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="DENS_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="PRES_REL" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="DENS" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="1" name="INSTANCE" nullable="true" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="-1" name="DIRECTION" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="BOT_DEPTH" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="TEMP" nullable="true" originalDbColumnName="temp" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="PSAL" nullable="true" originalDbColumnName="psal" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="DOX2" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="CNDC" nullable="true" originalDbColumnName="cndc" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="CHLF" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="TURB" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="DESC" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="DIRECTION_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="BOT_DEPTH_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="DOX2_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="CHLF_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="BOT_DEPTH_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="DIRECTION_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="TURB_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="DESC_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="DENS_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="PRES_REL_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" name="TIME" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" length="1" name="INSTANCE" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="DIRECTION" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="BOT_DEPTH" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="DOX2" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="CNDC" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="CHLF" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="TURB" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" defaultValue="" key="false" name="DESC" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="DENS" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="PRES_REL" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" name="TIME_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="LATITUDE_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="LONGITUDE_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -695,25 +707,13 @@
       <column comment="" key="false" name="PSAL_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="TEMP_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="CNDC_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="DENS_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="PRES_REL" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="DENS" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="1" name="INSTANCE" nullable="true" pattern="" precision="-1" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="-1" name="DIRECTION" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="BOT_DEPTH" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="TEMP" nullable="true" originalDbColumnName="temp" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="PSAL" nullable="true" originalDbColumnName="psal" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="DOX2" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="CNDC" nullable="true" originalDbColumnName="cndc" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="CHLF" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="TURB" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="DESC" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="DIRECTION_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="BOT_DEPTH_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="DOX2_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="CHLF_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="BOT_DEPTH_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="DIRECTION_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="TURB_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="DESC_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="DENS_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="PRES_REL_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
@@ -740,7 +740,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="544">
+  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="512">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="CHECK" name="CLOSE" value="false"/>
@@ -750,7 +750,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlCommit_1"/>
   </node>
-  <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="352" posY="864">
+  <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -758,7 +758,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="544" posY="864">
+  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="480">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -766,7 +766,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="iIncludeSdiLibraries" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="-32" sizeX="32" sizeY="35">
+  <node componentName="iIncludeSdiLibraries" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="-32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIncludeSdiLibraries_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import org.talend.sdi.geometry.Geometry;"/>
@@ -818,7 +818,7 @@
       <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="site_code"/>
+      <elementValue elementRef="TRACE_COLUMN" value="platform_code"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="cdm_data_type"/>
@@ -849,6 +849,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="station"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="site_code"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="cruise"/>
@@ -886,7 +889,7 @@
       <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="site_code"/>
+      <elementValue elementRef="TRACE_COLUMN" value="platform_code"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="cdm_data_type"/>
@@ -895,7 +898,7 @@
       <elementValue elementRef="TRACE_COLUMN" value="geospatial_lon_max"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geospatial_lat_min"/>
+      <elementValue elementRef="TRACE_COLUMN" value="latitude"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_min"/>
@@ -916,7 +919,16 @@
       <elementValue elementRef="TRACE_COLUMN" value="station"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="site_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="cruise_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geom"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="longitude"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -929,31 +941,334 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="deployment"/>
   </connection>
-  <connection connectorName="FLOW" label="variable" lineStyle="0" metaname="variable" offsetLabelX="0" offsetLabelY="0" source="iNetCDFInput_1" target="tMap_2">
+  <connection connectorName="FLOW" label="variables" lineStyle="0" metaname="variables" offsetLabelX="0" offsetLabelY="23" source="iNetCDFInput_1" target="tMap_2">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="DIRECTION"/>
+      <elementValue elementRef="TRACE_COLUMN" value="CDOM"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="DOX2_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN" value="CDOM_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="DESC_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN" value="CDOM_uncertainty"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="TIME_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN" value="CNDC"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="TEMP"/>
+      <elementValue elementRef="TRACE_COLUMN" value="CNDC_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="DIRECTION_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN" value="DEPTH"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DEPTH_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DOXY"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DOXY_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DOXY_raw"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DOXY_uncertainty"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="FLU2"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="FLU2_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="FLU2_uncertainty"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="HEAD"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="HEAD_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="LATITUDE"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="LATITUDE_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="LONGITUDE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="LONGITUDE_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443_1"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443_1_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443_42"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443_42_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443_52"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443_52_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443_8"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443_8_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443_9"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443_9_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR443_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR455_9"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR455_9_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR456_6"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR456_6_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR470_3"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR470_3_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR470_5"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR470_5_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_1"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_1_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_2"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_2_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_4"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_4_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_59"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_59_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_64"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_64_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_7"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR489_7_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR520"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR520_3"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR520_3_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR520_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR554_2"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR554_24"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR554_24_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR554_2_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR554_4"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR554_4_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR554_77"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR554_77_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR554_9"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR554_9_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR555_3"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR555_3_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR555_4"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR555_4_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR664_67"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR664_67_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR664_89"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR664_89_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR669_3"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR669_3_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR670_2"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR670_2_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR670_8"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR670_8_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR670_9"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OCR670_9_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PRES"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PRES_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PSAL"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PSAL_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TEMP"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="TEMP_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TIME"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TIME_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="UCUR"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="UCUR_GPS"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="UCUR_GPS_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="UCUR_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="VBSC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="VBSC_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="VBSC_uncertainty"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="VCUR"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="VCUR_GPS"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="VCUR_GPS_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="VCUR_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DIRECTION"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PRES_REL"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DOX2_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DENS"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="CHLF"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DESC_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="INSTANCE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DIRECTION_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="TURB"/>
@@ -965,64 +1280,22 @@
       <elementValue elementRef="TRACE_COLUMN" value="BOT_DEPTH"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="TURB_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="DEPTH"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="PSAL_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="CNDC_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="TIME"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="LATITUDE_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="DEPTH_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="DENS"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="CHLF"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="INSTANCE"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="CNDC"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="DOX2"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="LONGITUDE_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN" value="TURB_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="DESC"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="PSAL"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="BOT_DEPTH_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="LONGITUDE"/>
+      <elementValue elementRef="TRACE_COLUMN" value="PRES_REL_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="CHLF_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="PRES_REL"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="PRES_REL_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -1033,11 +1306,11 @@
     <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
     <elementParameter field="TABLE" name="THRESHLODS"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="variable"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="variables"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iNetCDFInput_1" offsetLabelX="0" offsetLabelY="0" source="iNetCDFInput_1" target="tPostgresqlCommit_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk4"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk6"/>
   </connection>
   <connection connectorName="FLOW" label="measurement" lineStyle="0" metaname="measurement" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="iPostgresqlOutput_3">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
@@ -1354,28 +1627,19 @@
       <elementValue elementRef="TRACE_COLUMN" value="VBSC"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="TURB"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="DIRECTION"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="DOX2"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="BOT_DEPTH"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="DENS_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="PRES_REL"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="DESC"/>
+      <elementValue elementRef="TRACE_COLUMN" value="DOX2_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="DENS"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DESC_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="CHLF"/>
@@ -1384,13 +1648,25 @@
       <elementValue elementRef="TRACE_COLUMN" value="INSTANCE"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DIRECTION_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TURB"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DENS_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="TURB_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="DOX2_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN" value="BOT_DEPTH"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="DESC_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN" value="DOX2"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DESC"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="BOT_DEPTH_quality_control"/>
@@ -1400,9 +1676,6 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="CHLF_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="DIRECTION_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
