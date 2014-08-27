@@ -32,7 +32,7 @@ git checkout -b {short-change-name}
  ```
  git push -u origin {short-change-name}
  ```
-* The modified harvester should be reviewed by another talend developer by pulling updates to the repository from github to their local repository, cchecking out the branch created above, importing the project if necessary into Talend Open Studio and reviewing chnages made as per description in the pull request
+* The modified harvester should be reviewed by another project officer by pulling updates to the repository from github to their local repository, cchecking out the branch created above, importing the project if necessary into Talend Open Studio and reviewing chnages made as per description in the pull request
 * When the harvester has been reviewed and any agreed changes have been made, the reviewer will merge the pull request into master and delete the branch from github.
 * A developer will make/review any changes required to deploy the changes and deploy the harvester to the Release Candidate environment
 
