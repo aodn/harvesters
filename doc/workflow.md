@@ -1,4 +1,4 @@
-## Talend Developer Workflow
+## Project Officer Workflow
 
 ### Setting up Talend to use the harvester repository
 
