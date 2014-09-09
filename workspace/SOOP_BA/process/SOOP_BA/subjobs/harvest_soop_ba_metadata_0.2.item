@@ -195,7 +195,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_a AS(SELECT voyage_id,  platform_code FROM deployments where  file_id = &quot; + context.file_id + &quot; ),&#xA;table_c AS ( select size,url,  id as file_id from indexed_file WHERE  id = &quot; + context.file_id + &quot; ),&#xA;table_d AS(SELECT vessel_name, platform_code,  colour FROM vessel_names where (SELECT  vessel_name FROM deployments WHERE file_id = &quot; + context.file_id +&quot; ) =  vessel_name),&#xA;&#xA;data AS (SELECT &#xA;min(\&quot;TIME\&quot;) AS  time_start, &#xA;max(\&quot;TIME\&quot;)  AS time_end, &#xA;ST_SimplifyPreserveTopology(make_trajectory(geom ORDER BY \&quot;TIME\&quot;),0.005) AS geom&#xA;FROM  measurements&#xA;where file_id = &quot; + context.file_id + &quot; )&#xA;&#xA;SELECT DISTINCT voyage_id,&#xA;file_id,&#xA;url,&#xA;size,&#xA;time_start,&#xA;time_end,&#xA;vessel_name,&#xA;colour, &#xA;geom&#xA;FROM data,table_a,table_c,table_d;&#xA;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_a AS(SELECT voyage_id,  platform_code FROM deployments where  file_id = &quot; + context.file_id + &quot; ),&#xA;table_c AS ( select size,url,  id as file_id from indexed_file WHERE  id = &quot; + context.file_id + &quot; ),&#xA;table_d AS(SELECT vn.vessel_name, vn.platform_code, vn.colour FROM soop_ba.deployments d LEFT OUTER JOIN soop_ba.vessel_names vn ON vn.vessel_name = d.vessel_name WHERE d.file_id = &quot; + context.file_id +&quot;),&#xA;&#xA;data AS (SELECT &#xA;min(\&quot;TIME\&quot;) AS  time_start, &#xA;max(\&quot;TIME\&quot;)  AS time_end, &#xA;ST_SimplifyPreserveTopology(make_trajectory(geom ORDER BY \&quot;TIME\&quot;),0.005) AS geom&#xA;FROM  measurements&#xA;where file_id = &quot; + context.file_id + &quot; )&#xA;&#xA;SELECT DISTINCT voyage_id,&#xA;file_id,&#xA;url,&#xA;size,&#xA;time_start,&#xA;time_end,&#xA;vessel_name,&#xA;colour, &#xA;geom&#xA;FROM data,table_a,table_c,table_d;&#xA;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -526,7 +526,7 @@
       <column comment="" key="false" name="source" nullable="true" pattern="" sourceType="" type="id_String"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="time_coverage_start" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;,row1.time_coverage_start) " type="id_Date"/>
         <mapperTableEntries name="time_coverage_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;,row1.time_coverage_end) " type="id_Date"/>
