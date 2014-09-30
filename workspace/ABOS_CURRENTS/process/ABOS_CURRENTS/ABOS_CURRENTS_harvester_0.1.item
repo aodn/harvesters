@@ -242,7 +242,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select url, &#xA;&#x9;case  &#xA;&#x9;when url ~ 'IMOS_ABOS-DA_' then 'Velocity' &#xA;&#x9;when url ~ 'IMOS_ABOS-ASFS_V_' then 'Sub-surface_currents'&#xA;&#x9;END AS data_type&#xA;from indexed_file where id = &quot; + ((Long)globalMap.get(&quot;iHarvestResources_1_FILE_ID&quot;)).intValue() + &quot;; &quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select url, &#xA;&#x9;CASE &#xA;&#x9;&#x9;WHEN url ~ 'IMOS_ABOS-ASFS_V_' THEN 'Sub-surface_currents'&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;   ELSE 'Velocity'&#xA;&#x9;END  AS data_type&#xA;from indexed_file where id = &quot; + ((Long)globalMap.get(&quot;iHarvestResources_1_FILE_ID&quot;)).intValue() + &quot;; &quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
