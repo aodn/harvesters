@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="/data/tmp/opendap/ABOS/SOTS/Pulse/IMOS_ABOS-SOTS_20090928T000000Z_PULSE_FV01_PULSE-6-2009_END-20100318T020500Z_C-20131021T043735Z.nc"/>
-    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="5"/>
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value=""/>
+    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="harvest"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="abos_sots"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_Password" value="kuCcoHBbKRv6xtilBbB5+A=="/>
@@ -454,7 +454,41 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="576" posY="256">
+  <node componentName="tAggregateRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="512" posY="256">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tAggregateRow_1"/>
+    <elementParameter field="TABLE" name="GROUPBYS">
+      <elementValue elementRef="OUTPUT_COLUMN" value="file_id"/>
+      <elementValue elementRef="INPUT_COLUMN" value="file_id"/>
+    </elementParameter>
+    <elementParameter field="TABLE" name="OPERATIONS">
+      <elementValue elementRef="OUTPUT_COLUMN" value="LATITUDE"/>
+      <elementValue elementRef="FUNCTION" value="avg"/>
+      <elementValue elementRef="INPUT_COLUMN" value="LATITUDE"/>
+      <elementValue elementRef="IGNORE_NULL" value="false"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="LONGITUDE"/>
+      <elementValue elementRef="FUNCTION" value="avg"/>
+      <elementValue elementRef="INPUT_COLUMN" value="LONGITUDE"/>
+      <elementValue elementRef="IGNORE_NULL" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="LIST_DELIMITER" value="&quot;,&quot;"/>
+    <elementParameter field="CHECK" name="USE_FINANCIAL_PRECISION" value="true"/>
+    <elementParameter field="CHECK" name="CHECK_TYPE_OVERFLOW" value="false"/>
+    <elementParameter field="CHECK" name="CHECK_ULP" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" label="timeseries" name="tAggregateRow_1">
+      <column comment="" key="true" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long">
+        <additionalField key="Comment" value=""/>
+      </column>
+      <column comment="actual latitude of deployment" key="false" length="8" name="LATITUDE" nullable="false" pattern="" precision="8" sourceType="FLOAT8" type="id_Double">
+        <additionalField key="Comment" value="actual latitude of deployment"/>
+      </column>
+      <column comment="actual longitude of deployment" defaultValue="" key="false" length="8" name="LONGITUDE" nullable="false" pattern="" precision="8" sourceType="FLOAT8" type="id_Double" originalLength="8"/>
+    </metadata>
+  </node>
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="704" posY="256">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_3"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -833,7 +867,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
   </connection>
-  <connection connectorName="FLOW" label="timeseries_location" lineStyle="0" metaname="timeseries_location" offsetLabelX="0" offsetLabelY="0" source="tMap_4" target="iPostgresqlOutput_3">
+  <connection connectorName="FLOW" label="timeseries_location" lineStyle="0" metaname="timeseries_location" offsetLabelX="0" offsetLabelY="0" source="tMap_4" target="tAggregateRow_1">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="file_id"/>
@@ -842,13 +876,7 @@
       <elementValue elementRef="TRACE_COLUMN" value="LATITUDE"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="LATITUDE_quality_control"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="LONGITUDE"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="LONGITUDE_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -860,6 +888,28 @@
     <elementParameter field="TABLE" name="THRESHLODS"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="timeseries_location"/>
+  </connection>
+  <connection connectorName="FLOW" label="row3" lineStyle="0" metaname="tAggregateRow_1" offsetLabelX="0" offsetLabelY="0" source="tAggregateRow_1" target="iPostgresqlOutput_3">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="file_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="LATITUDE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="LONGITUDE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row3"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlRow_3" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_3" target="tPostgresqlCommit_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
