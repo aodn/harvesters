@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="harvest"/>
+    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="abos_currents"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_Password" value="Y9mS7tL1r9LfD3FnvaxKeA=="/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="abos_currents"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_RlVF8FuiEeOppMtV64iEfQ" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_RlVF8FuiEeOppMtV64iEfQ" type="id_String" value="null"/>
     <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value=""/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value=".*DA/.*/Velocity/.*FV01.*\.nc|.*SOFS/Sub-surface_currents/.*FV01.*\.nc"/>
+    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value=".*/Velocity/.*FV01.*\.nc|.*/Sub-surface_currents/.*FV01.*\.nc"/>
     <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value="/mnt/imos-t3/IMOS/opendap/ABOS"/>
     <contextParameter comment="" name="data_type" prompt="data_type?" promptNeeded="false" type="id_String" value="null"/>
   </context>
@@ -62,14 +62,7 @@
     <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
     <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
     <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
-    <elementParameter field="TABLE" name="CONTEXTPARAMS">
-      <elementValue elementRef="PARAM_NAME_COLUMN" value="include"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="context.include"/>
-      <elementValue elementRef="PARAM_NAME_COLUMN" value="exclude"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="context.exclude"/>
-      <elementValue elementRef="PARAM_NAME_COLUMN" value="sourceDir"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="context.sourceDir"/>
-    </elementParameter>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
     <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
     <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
     <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
@@ -249,7 +242,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select url, &#xA;&#x9;case  &#xA;&#x9;when url ~ 'IMOS_ABOS-DA_' then 'Velocity' &#xA;&#x9;when url ~ 'IMOS_ABOS-ASFS_V_' then 'Sub-surface_currents'&#xA;&#x9;END AS data_type&#xA;from indexed_file where id = &quot; + ((Long)globalMap.get(&quot;iHarvestResources_1_FILE_ID&quot;)).intValue() + &quot;; &quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select url, &#xA;&#x9;CASE &#xA;&#x9;&#x9;WHEN url ~ 'IMOS_ABOS-ASFS_V_' THEN 'Sub-surface_currents'&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;   ELSE 'Velocity'&#xA;&#x9;END  AS data_type&#xA;from indexed_file where id = &quot; + ((Long)globalMap.get(&quot;iHarvestResources_1_FILE_ID&quot;)).intValue() + &quot;; &quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -267,8 +260,8 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlInput_1">
-      <column comment="" key="false" name="url" nullable="false" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="data_type" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="url" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="data_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
     </metadata>
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="832" posY="96">
