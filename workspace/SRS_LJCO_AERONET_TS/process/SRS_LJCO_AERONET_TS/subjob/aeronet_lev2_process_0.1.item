@@ -1,0 +1,1313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+  <context confirmationNeeded="false" name="Default">
+    <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value="1"/>
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
+    <contextParameter comment="" name="output_file" prompt="output_file?" promptNeeded="false" type="id_String" value="/tmp/lucinda_modified.csv"/>
+    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest"/>
+    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="srs_oc_ljco_aeronet"/>
+    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="RXP3wbs+TG306uq/ym9hK01/I7rVBj8/"/>
+    <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
+    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="srs_oc_ljco_aeronet"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
+    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="null"/>
+    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="&quot;.*Lucinda.lev20$&quot;"/>
+    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/mnt/imos-t4/IMOS/public/SRS/SRS-OC-LJCO/AERONET"/>
+  </context>
+  <context confirmationNeeded="false" name="Deployment">
+    <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value=""/>
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
+    <contextParameter comment="" name="output_file" prompt="output_file?" promptNeeded="false" type="id_String" value="null"/>
+    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="srs_oc_ljco_aeronet"/>
+    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="RXP3wbs+TG306uq/ym9hK01/I7rVBj8/"/>
+    <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
+    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="srs_oc_ljco_aeronet"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="#{node['talend']['destination_database_server']}"/>
+    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
+    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="null"/>
+    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="null"/>
+    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="#{node['talend']['data1']}/IMOS/opendap/SOOP/SOOP-TRV/"/>
+  </context>
+  <parameters>
+    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
+    <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="32"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="32"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
+    <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
+    <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
+    <elementParameter field="TEXT" name="JOBID_FOR_OOZIE" value=""/>
+    <elementParameter field="CHECK" name="IMPLICITCONTEXT_USE_PROJECT_SETTINGS" value="true"/>
+    <elementParameter field="CHECK" name="STATANDLOG_USE_PROJECT_SETTINGS" value="true"/>
+    <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
+    <elementParameter field="CHECK" name="DISABLE_WARNINGS" value="false"/>
+    <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="ojdbc14-10g.jar"/>
+    <routinesParameter id="_hG-EcEIIEeSpJrWF0Q1dog" name="DataOperation"/>
+    <routinesParameter id="_hHBu0EIIEeSpJrWF0Q1dog" name="GeoOperation"/>
+    <routinesParameter id="_hHEyIEIIEeSpJrWF0Q1dog" name="GeometryOperation"/>
+    <routinesParameter id="_hHHOYEIIEeSpJrWF0Q1dog" name="GeometryUtility"/>
+    <routinesParameter id="_hG_SkEIIEeSpJrWF0Q1dog" name="Mathematical"/>
+    <routinesParameter id="_hG4k4EIIEeSpJrWF0Q1dog" name="Numeric"/>
+    <routinesParameter id="_hHC88EIIEeSpJrWF0Q1dog" name="OpenStreetMap"/>
+    <routinesParameter id="_g_7oUEIIEeSpJrWF0Q1dog" name="Relational"/>
+    <routinesParameter id="_hG0TcEIIEeSpJrWF0Q1dog" name="StringHandling"/>
+    <routinesParameter id="_hGzFUEIIEeSpJrWF0Q1dog" name="TalendDataGenerator"/>
+    <routinesParameter id="_hG8PQEIIEeSpJrWF0Q1dog" name="TalendDate"/>
+    <routinesParameter id="_hG2vsEIIEeSpJrWF0Q1dog" name="TalendString"/>
+    <routinesParameter id="_BzxlsElWEeK5TPMSOHM6dA" name="ArgoUtils"/>
+    <routinesParameter id="_cRn34BQsEeKRFb0vPU_LNg" name="DAPUtils"/>
+    <routinesParameter id="_IMfY4Dp8EeKYTu4DLH4cKg" name="NetCDFUtils"/>
+  </parameters>
+  <node componentName="iIncludeSdiLibraries" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="64" posY="32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIncludeSdiLibraries_1"/>
+    <elementParameter field="CHECK" name="START" value="true"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import org.talend.sdi.geometry.Geometry;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tPostgresqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_SHARED_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="SHARED_CONNECTION_NAME" value=""/>
+    <elementParameter field="CHECK" name="AUTO_COMMIT" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select url from indexed_file where id =&quot;+ context.file_id +&quot; ;&quot;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
+    <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="url"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="LABEL" value="getURL"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlInput_1">
+      <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="448" posY="128">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_1"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#xA;//&#xA;// multiply by 2 the row identifier&#xA;// output_row.id = input_row.id * 2;&#xA;//&#xA;// lowercase the name&#xA;// output_row.name = input_row.name.toLowerCase();&#xA;&#xA;context.url=row13.url;"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tJavaRow_1"/>
+  </node>
+  <node componentName="tFileInputDelimited" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="768" posY="32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileInputDelimited_1"/>
+    <elementParameter field="CHECK" name="TSTATCATCHER_STATS" value="true"/>
+    <elementParameter field="LABEL" name="FILENAMETEXT" value="&quot;When the input source is a stream or a zip file,footer and random shouldn't be bigger than 0.&quot;"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.output_file"/>
+    <elementParameter field="TEXT" name="ROWSEPARATOR" value="&quot;\n&quot;"/>
+    <elementParameter field="OPENED_LIST" name="CSVROWSEPARATOR" value="&quot;\n&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;,&quot;"/>
+    <elementParameter field="CHECK" name="CSV_OPTION" value="true"/>
+    <elementParameter field="TEXT" name="ESCAPE_CHAR" value="&quot;&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TEXT_ENCLOSURE" value="&quot;&quot;&quot;"/>
+    <elementParameter field="TEXT" name="HEADER" value="5"/>
+    <elementParameter field="TEXT" name="FOOTER" value="0"/>
+    <elementParameter field="TEXT" name="LIMIT" value=""/>
+    <elementParameter field="CHECK" name="REMOVE_EMPTY_ROW" value="true"/>
+    <elementParameter field="CHECK" name="UNCOMPRESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA:SCHEMA_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA:REPOSITORY_SCHEMA_TYPE" value="_65aB4Ez3EeSDYe1HMLDBuQ - metadata"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA_REJECT:SCHEMA_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA_REJECT:REPOSITORY_SCHEMA_TYPE" value="_65aB4Ez3EeSDYe1HMLDBuQ - metadata"/>
+    <elementParameter field="DIRECTORY" name="TEMP_DIR" value="&quot;/opt/TOS_DI-r96646-V5.1.3/workspace_sdi/harvesters/workspace&quot;"/>
+    <elementParameter field="CHECK" name="ADVANCED_SEPARATOR" value="false"/>
+    <elementParameter field="TEXT" name="THOUSANDS_SEPARATOR" value="&quot;,&quot;"/>
+    <elementParameter field="TEXT" name="DECIMAL_SEPARATOR" value="&quot;.&quot;"/>
+    <elementParameter field="CHECK" name="RANDOM" value="false"/>
+    <elementParameter field="TEXT" name="NB_RANDOM" value="10"/>
+    <elementParameter field="CHECK" name="TRIMALL" value="true"/>
+    <elementParameter field="TABLE" name="TRIMSELECT">
+      <elementValue elementRef="SCHEMA_COLUMN" value="Date_dd_mm_yy_"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="Time_hh_mm_ss_"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="Julian_Day"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_1640"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_1020"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_870"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_675"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_667"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_555"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_551"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_532"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_531"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_500"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_490"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_443"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_440"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_412"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_380"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_340"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="Water_cm_"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_1640"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_1020"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_870"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_675"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_667"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_555"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_551"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_532"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_531"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_500"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_490"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_443"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_440"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_412"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_380"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_340"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_WaterError"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_40_870Angstrom"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_80_500Angstrom"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_40_675Angstrom"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_00_870Angstrom"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_40_440Angstrom"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_40_675Angstrom_Polar_"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="Last_Processing_Date_dd_mm_yyyy_"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="Solar_Zenith_Angle"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="CHECK_FIELDS_NUM" value="false"/>
+    <elementParameter field="CHECK" name="CHECK_DATE" value="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;US-ASCII&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="CUSTOM"/>
+    <elementParameter field="CHECK" name="SPLITRECORD" value="false"/>
+    <elementParameter field="TEXT" name="DESTINATION" value=""/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" label="metadata" name="tFileInputDelimited_1">
+      <column comment="" key="false" length="10" name="Date_dd_mm_yy_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
+      <column comment="" key="false" length="8" name="Time_hh_mm_ss_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
+      <column comment="" key="false" length="10" name="Julian_Day" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_1640" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_1020" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_870" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_675" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_667" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_555" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_551" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_532" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_531" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_500" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_490" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_443" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_440" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_412" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_380" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_340" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="Water_cm_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_1640" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_1020" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_870" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_675" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_667" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_555" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_551" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_532" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_531" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_500" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_490" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_443" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_440" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_412" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_380" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_340" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_WaterError" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_40_870Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_80_500Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_40_675Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_00_870Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_40_440Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_40_675Angstrom_Polar_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="10" name="Last_Processing_Date_dd_mm_yyyy_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_String"/>
+      <column comment="" key="false" length="9" name="Solar_Zenith_Angle" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+    </metadata>
+    <metadata connector="REJECT" label="metadata" name="REJECT">
+      <column comment="" key="false" length="10" name="Date_dd_mm_yy_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
+      <column comment="" key="false" length="8" name="Time_hh_mm_ss_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
+      <column comment="" key="false" length="10" name="Julian_Day" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_1640" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_1020" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_870" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_675" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_667" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_555" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_551" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_532" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_531" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_500" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_490" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_443" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_440" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_412" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_380" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_340" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="Water_cm_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_1640" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_1020" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_870" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_675" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_667" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_555" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_551" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_532" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_531" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_500" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_490" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_443" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_440" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_412" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_380" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_340" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_WaterError" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_40_870Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_80_500Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_40_675Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_00_870Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_40_440Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_40_675Angstrom_Polar_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="10" name="Last_Processing_Date_dd_mm_yyyy_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_String"/>
+      <column comment="" key="false" length="9" name="Solar_Zenith_Angle" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="928" posY="32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_1"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_VnYgYEz4EeSDYe1HMLDBuQ-tMap_1-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="track">
+      <column comment="" key="false" length="20" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer" originalLength="20"/>
+      <column comment="" key="false" length="16" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd-hh:mm:ss&quot;" precision="0" type="id_Date"/>
+      <column comment="" key="false" length="8" name="AOT_1640" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_1020" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_870" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_675" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_667" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_555" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_551" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_532" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_531" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_500" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_490" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_443" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_440" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_412" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_380" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_340" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="Water_cm_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_1640" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_1020" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_870" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_675" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_667" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_555" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_551" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_532" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_531" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_500" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_490" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_443" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_440" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_412" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_380" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_340" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_WaterError" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_40_870Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_80_500Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_40_675Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_00_870Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_40_440Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_40_675Angstrom_Polar_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="10" name="Last_Processing_Date_dd_mm_yyyy_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_String"/>
+      <column comment="" key="false" length="9" name="Solar_Zenith_Angle" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Float"/>
+      <column comment="" key="false" length="5" name="latitude" nullable="true" pattern="" precision="4" sourceType="" type="id_Double" originalLength="5"/>
+      <column comment="" key="false" length="5" name="longitude" nullable="true" pattern="" precision="4" sourceType="" type="id_Double" originalLength="5"/>
+      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
+    </metadata>
+    <nodeData xsi:type="MapperData">
+      <uiProperties/>
+      <varTables sizeState="INTERMEDIATE" name="Var">
+        <mapperTableEntries name="Date" expression="(row1.Date_dd_mm_yy_)+(&quot;_&quot;)+(row1.Time_hh_mm_ss_)&#xA;  " type="id_String"/>
+      </varTables>
+      <outputTables sizeState="INTERMEDIATE" name="track">
+        <mapperTableEntries name="file_id" expression="context.file_id" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="TIME" expression="TalendDate.parseDate(&quot;dd:MM:yyyy_HH:mm:ss&quot;,Var.Date) " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="AOT_1640" expression="row1.AOT_1640 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_1020" expression="row1.AOT_1020 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_870" expression="row1.AOT_870 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_675" expression="row1.AOT_675 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_667" expression="row1.AOT_667 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_555" expression="row1.AOT_555 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_551" expression="row1.AOT_551 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_532" expression="row1.AOT_532 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_531" expression="row1.AOT_531 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_500" expression="row1.AOT_500 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_490" expression="row1.AOT_490 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_443" expression="row1.AOT_443 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_440" expression="row1.AOT_440 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_412" expression="row1.AOT_412 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_380" expression="row1.AOT_380 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_340" expression="row1.AOT_340 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="Water_cm_" expression="row1.Water_cm_ " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_1640" expression="row1._TripletVar_1640 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_1020" expression="row1._TripletVar_1020 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_870" expression="row1._TripletVar_870 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_675" expression="row1._TripletVar_675 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_667" expression="row1._TripletVar_667 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_555" expression="row1._TripletVar_555 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_551" expression="row1._TripletVar_551 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_532" expression="row1._TripletVar_532 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_531" expression="row1._TripletVar_531 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_500" expression="row1._TripletVar_500 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_490" expression="row1._TripletVar_490 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_443" expression="row1._TripletVar_443 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_440" expression="row1._TripletVar_440 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_412" expression="row1._TripletVar_412 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_380" expression="row1._TripletVar_380 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_340" expression="row1._TripletVar_340 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_WaterError" expression="row1._WaterError " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_40_870Angstrom" expression="row1._40_870Angstrom " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_80_500Angstrom" expression="row1._80_500Angstrom " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_40_675Angstrom" expression="row1._40_675Angstrom " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_00_870Angstrom" expression="row1._00_870Angstrom " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_40_440Angstrom" expression="row1._40_440Angstrom " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_40_675Angstrom_Polar_" expression="row1._40_675Angstrom_Polar_ " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="Last_Processing_Date_dd_mm_yyyy_" expression="row1.Last_Processing_Date_dd_mm_yyyy_ " type="id_String" nullable="true"/>
+        <mapperTableEntries name="Solar_Zenith_Angle" expression="row1.Solar_Zenith_Angle " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="latitude" expression="-18.520" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="longitude" expression="146.386" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="geom" type="id_Geometry" nullable="true"/>
+      </outputTables>
+      <inputTables sizeState="INTERMEDIATE" name="row1" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
+        <mapperTableEntries name="Date_dd_mm_yy_" type="id_String" nullable="true"/>
+        <mapperTableEntries name="Time_hh_mm_ss_" type="id_String" nullable="true"/>
+        <mapperTableEntries name="Julian_Day" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_1640" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_1020" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_870" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_675" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_667" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_555" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_551" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_532" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_531" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_500" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_490" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_443" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_440" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_412" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_380" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="AOT_340" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="Water_cm_" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_1640" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_1020" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_870" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_675" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_667" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_555" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_551" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_532" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_531" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_500" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_490" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_443" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_440" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_412" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_380" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_TripletVar_340" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_WaterError" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_40_870Angstrom" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_80_500Angstrom" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_40_675Angstrom" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_00_870Angstrom" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_40_440Angstrom" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="_40_675Angstrom_Polar_" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="Last_Processing_Date_dd_mm_yyyy_" type="id_String" nullable="true"/>
+        <mapperTableEntries name="Solar_Zenith_Angle" type="id_Float" nullable="true"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1152" posY="32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_1"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;srs_oc_ljco_aeronet_map&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="TRUNCATE"/>
+    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
+    <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
+    <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
+    <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TABLE" name="ADD_COLS"/>
+    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
+    <elementParameter field="TABLE" name="FIELD_OPTIONS">
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="TIME"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_1640"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_1020"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_870"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_675"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_667"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_555"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_551"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_532"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_531"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_500"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_490"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_443"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_440"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_412"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_380"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="AOT_340"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="Water_cm_"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_1640"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_1020"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_870"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_675"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_667"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_555"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_551"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_532"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_531"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_500"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_490"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_443"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_440"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_412"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_380"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_TripletVar_340"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_WaterError"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_40_870Angstrom"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_80_500Angstrom"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_40_675Angstrom"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_00_870Angstrom"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_40_440Angstrom"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="_40_675Angstrom_Polar_"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="Last_Processing_Date_dd_mm_yyyy_"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="Solar_Zenith_Angle"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="latitude"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="longitude"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
+    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
+    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
+    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="iPostgresqlOutput_1">
+      <column comment="" key="false" length="20" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer" originalLength="20"/>
+      <column comment="" key="false" length="16" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd-hh:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="8" name="AOT_1640" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_1020" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_870" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_675" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_667" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_555" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_551" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_532" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_531" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_500" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_490" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_443" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_440" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_412" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_380" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_340" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="Water_cm_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_1640" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_1020" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_870" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_675" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_667" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_555" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_551" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_532" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_531" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_500" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_490" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_443" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_440" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_412" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_380" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_340" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_WaterError" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_40_870Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_80_500Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_40_675Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_00_870Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_40_440Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_40_675Angstrom_Polar_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="10" name="Last_Processing_Date_dd_mm_yyyy_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="9" name="Solar_Zenith_Angle" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="5" name="latitude" nullable="true" pattern="" precision="4" sourceType="FLOAT8" type="id_Double" originalLength="5"/>
+      <column comment="" key="false" length="5" name="longitude" nullable="true" pattern="" precision="4" sourceType="FLOAT8" type="id_Double" originalLength="5"/>
+    </metadata>
+    <metadata connector="REJECT" name="REJECT">
+      <column comment="" key="false" length="20" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer" originalLength="20"/>
+      <column comment="" key="false" length="16" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd-hh:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="8" name="AOT_1640" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_1020" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_870" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_675" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_667" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_555" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_551" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_532" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_531" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_500" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_490" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_443" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_440" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_412" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="AOT_380" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="AOT_340" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="Water_cm_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_1640" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_1020" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_870" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_675" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_667" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_555" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_551" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_532" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_531" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_500" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_490" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_443" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_440" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_412" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_TripletVar_380" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_TripletVar_340" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_WaterError" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_40_870Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_80_500Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_40_675Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_00_870Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="8" name="_40_440Angstrom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="8" name="_40_675Angstrom_Polar_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float" originalLength="8"/>
+      <column comment="" key="false" length="10" name="Last_Processing_Date_dd_mm_yyyy_" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="9" name="Solar_Zenith_Angle" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="5" name="latitude" nullable="true" pattern="" precision="4" sourceType="FLOAT8" type="id_Double" originalLength="5"/>
+      <column comment="" key="false" length="5" name="longitude" nullable="true" pattern="" precision="4" sourceType="FLOAT8" type="id_Double" originalLength="5"/>
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="384">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1"/>
+    <elementParameter field="CHECK" name="START" value="true"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="704" posY="384">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1152" posY="384">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="CHECK" name="CLOSE" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlCommit_1"/>
+  </node>
+  <node componentName="tSystem" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="576" posY="32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tSystem_1"/>
+    <elementParameter field="CHECK" name="TSTATCATCHER_STATS" value="true"/>
+    <elementParameter field="CHECK" name="ROOTDIR" value="false"/>
+    <elementParameter field="DIRECTORY" name="DIRECTORY" value="&quot;/opt/TOS_DI-r96646-V5.1.3/workspace_sdi/harvesters/workspace&quot;"/>
+    <elementParameter field="RADIO" name="USE_SINGLE_COMMAND" value="false"/>
+    <elementParameter field="MEMO_JAVA" name="COMMAND" value="&quot;sed   s/N\\/A//g &quot; + context.url + &quot; > &quot; + context.output_file"/>
+    <elementParameter field="RADIO" name="USE_ARRAY_COMMAND" value="true"/>
+    <elementParameter field="TABLE" name="ARRAY_COMMAND">
+      <elementValue elementRef="VALUE" value="&quot;/bin/bash&quot;"/>
+      <elementValue elementRef="VALUE" value="&quot;-c&quot;"/>
+      <elementValue elementRef="VALUE" value="&quot;sed   's/N\\/A//g' &quot; + context.url + &quot; > &quot; + context.output_file "/>
+    </elementParameter>
+    <elementParameter field="CLOSED_LIST" name="OUTPUT" value="OUTPUT_TO_CONSOLE"/>
+    <elementParameter field="CLOSED_LIST" name="ERROROUTPUT" value="OUTPUT_TO_CONSOLE"/>
+    <elementParameter field="TABLE" name="PARAMS"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tSystem_1"/>
+  </node>
+  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1152" posY="224">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;localhost&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE srs_oc_ljco_aeronet_map&#xA;SET geom = st_geomfromtext('POINT(' || \&quot;longitude\&quot;::text || ' ' || \&quot;latitude\&quot;::text || ')', 4326)&#xA;WHERE file_id = &quot; + context.file_id + &quot;;&quot;"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
+    <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
+    <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
+    <elementParameter field="TABLE" name="SET_PREPAREDSTATEMENT_PARAMETERS"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlRow_1"/>
+    <metadata connector="REJECT" name="REJECT">
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iIncludeSdiLibraries_1" offsetLabelX="0" offsetLabelY="0" source="iIncludeSdiLibraries_1" target="tPostgresqlConnection_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="tPostgresqlInput_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk2"/>
+  </connection>
+  <connection connectorName="FLOW" label="row13" lineStyle="0" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tJavaRow_1">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="url"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row13"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tSystem_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk4"/>
+  </connection>
+  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tFileInputDelimited_1" offsetLabelX="0" offsetLabelY="0" source="tFileInputDelimited_1" target="tMap_1">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="dive_number"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="dive_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="dive_metadata_uuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="facility_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="campaign_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="dive_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="distance_covered_in_m"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="number_of_images"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="image_path"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="Column9"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="platform_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="pattern"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="dive_report_path"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="kml_path"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_lat_min"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_lon_min"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_lat_max"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_lon_max"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_min"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_max"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_start"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
+  </connection>
+  <connection connectorName="FLOW" label="track" lineStyle="0" metaname="track" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="iPostgresqlOutput_1">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="file_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TIME"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="AOT_1640"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="AOT_1020"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="AOT_870"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="AOT_675"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="AOT_667"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="AOT_555"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="AOT_551"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="AOT_532"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="AOT_531"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="AOT_500"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="AOT_490"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="AOT_443"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="AOT_440"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="AOT_412"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="AOT_380"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="AOT_340"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="Water_cm_"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_TripletVar_1640"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_TripletVar_1020"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_TripletVar_870"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_TripletVar_675"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_TripletVar_667"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_TripletVar_555"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_TripletVar_551"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_TripletVar_532"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_TripletVar_531"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_TripletVar_500"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_TripletVar_490"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_TripletVar_443"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_TripletVar_440"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_TripletVar_412"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_TripletVar_380"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_TripletVar_340"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_WaterError"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_40_870Angstrom"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_80_500Angstrom"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_40_675Angstrom"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_00_870Angstrom"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_40_440Angstrom"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="_40_675Angstrom_Polar_"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="Last_Processing_Date_dd_mm_yyyy_"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="Solar_Zenith_Angle"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="latitude"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="longitude"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geom"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="track"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlOutput_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlOutput_1" target="tPostgresqlRow_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk5"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostjob_1" offsetLabelX="0" offsetLabelY="0" source="tPostjob_1" target="tPostgresqlClose_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk6"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tSystem_1" offsetLabelX="0" offsetLabelY="0" source="tSystem_1" target="tFileInputDelimited_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlRow_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_1" target="tPostgresqlCommit_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk3"/>
+  </connection>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIncludeSdiLibraries_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Get URL of file_id"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileInputDelimited_1"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Read and parse NASA file"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="230;100;0"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="255;220;180"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tSystem_1"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="SED on csv file"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Update geometry column"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+</talendfile:ProcessType>
