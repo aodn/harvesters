@@ -287,7 +287,7 @@
       <column comment="" key="false" length="49" name="fid" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="10" name="pttid" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_String"/>
       <column comment="" key="false" length="2" name="location_class" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="20" name="observation_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="20" name="observation_date" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="7" name="latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="4" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="6" name="longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="4" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="8" name="rms_velocity_kmhr" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
@@ -445,7 +445,7 @@
       <column comment="" key="false" length="49" name="fid" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="10" name="pttid" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="2" name="location_class" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="20" name="observation_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="20" name="observation_date" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMPTZ" type="id_Date"/>
       <column comment="" key="false" length="7" name="latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="4" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="6" name="longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="4" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="8" name="rms_velocity_kmhr" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
@@ -461,7 +461,7 @@
       <column comment="" key="false" length="49" name="fid" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="10" name="pttid" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="2" name="location_class" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="20" name="observation_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="20" name="observation_date" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMPTZ" type="id_Date"/>
       <column comment="" key="false" length="7" name="latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="4" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="6" name="longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="4" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="8" name="rms_velocity_kmhr" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT4" type="id_Float"/>
@@ -626,7 +626,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT animal_id.pttid,&#xA;COUNT(id) AS no_observations,&#xA;min(observation_date) AT TIME ZONE 'UTC' AS observation_start_date, &#xA;max(observation_date) AT TIME ZONE 'UTC' AS observation_end_date, &#xA;ST_SimplifyPreserveTopology(make_trajectory(geom ORDER BY observation_date),0.005) AS geom,&#xA;colour,&#xA;measurements.file_id&#xA;FROM measurements&#xA;LEFT JOIN animal_id ON animal_id.pttid = measurements.pttid&#xA;WHERE measurements.file_id = &quot; + context.fileId +&quot;&#xA;GROUP BY animal_id.pttid,measurements.file_id&#xA;ORDER BY pttid;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT animal_id.pttid,&#xA;COUNT(id) AS no_observations,&#xA;min(observation_date) AS observation_start_date, &#xA;max(observation_date) AS observation_end_date, &#xA;ST_SimplifyPreserveTopology(make_trajectory(geom ORDER BY observation_date),0.005) AS geom,&#xA;colour,&#xA;measurements.file_id&#xA;FROM measurements&#xA;LEFT JOIN animal_id ON animal_id.pttid = measurements.pttid&#xA;WHERE measurements.file_id = &quot; + context.fileId +&quot;&#xA;GROUP BY animal_id.pttid,measurements.file_id&#xA;ORDER BY pttid;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -655,11 +655,11 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlInput_2">
       <column comment="" key="true" length="10" name="pttid" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" length="19" name="no_observations" nullable="true" pattern="" precision="0" sourceType="" type="id_Long"/>
-      <column comment="" key="false" length="35" name="observation_start_date" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
-      <column comment="" key="false" length="35" name="observation_end_date" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" length="19" name="no_observations" nullable="true" pattern="" precision="0" sourceType="INT2" type="id_Long"/>
+      <column comment="" key="false" length="35" name="observation_start_date" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
+      <column comment="" key="false" length="35" name="observation_end_date" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="LINE" type="id_Object"/>
-      <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
     </metadata>
   </node>
@@ -736,18 +736,18 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_3">
       <column comment="" key="true" length="10" name="pttid" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" length="19" name="no_observations" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="false" length="35" name="observation_start_date" nullable="true" pattern="" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
-      <column comment="" key="false" length="35" name="observation_end_date" nullable="true" pattern="" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" length="19" name="no_observations" nullable="true" pattern="" precision="0" sourceType="INT2" type="id_Long"/>
+      <column comment="" key="false" length="35" name="observation_start_date" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
+      <column comment="" key="false" length="35" name="observation_end_date" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="LINE" type="id_Object"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="true" length="10" name="pttid" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" length="19" name="no_observations" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="false" length="35" name="observation_start_date" nullable="true" pattern="" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
-      <column comment="" key="false" length="35" name="observation_end_date" nullable="true" pattern="" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" length="19" name="no_observations" nullable="true" pattern="" precision="0" sourceType="INT2" type="id_Long"/>
+      <column comment="" key="false" length="35" name="observation_start_date" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
+      <column comment="" key="false" length="35" name="observation_end_date" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="LINE" type="id_Object"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
