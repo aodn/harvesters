@@ -8,7 +8,7 @@
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_Password" value="kuCcoHBbKRv6xtilBbB5+A=="/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="abos_sots"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_RlVF8FuiEeOppMtV64iEfQ" type="id_String" value="/tmp"/>
   </context>
   <parameters>
@@ -166,7 +166,7 @@
       <column key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="50" name="instrument_type" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="50"/>
+      <column comment="" key="false" length="50" name="data_type" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="50"/>
     </metadata>
     <nodeData xsi:type="MapperData">
       <uiProperties/>
@@ -181,7 +181,7 @@
         <mapperTableEntries name="geom" type="id_Geometry" nullable="true"/>
         <mapperTableEntries name="time_coverage_start" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_start,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
         <mapperTableEntries name="time_coverage_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_end,&quot;Z&quot;,&quot;+0000&quot;))" type="id_Date" nullable="true"/>
-        <mapperTableEntries name="instrument_type" expression="row2.instrument_type " type="id_String" nullable="true"/>
+        <mapperTableEntries name="data_type" expression="row2.data_type " type="id_String" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row1" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="site_code" type="id_String"/>
@@ -193,7 +193,7 @@
       <inputTables sizeState="INTERMEDIATE" name="row2" matchingMode="ALL_ROWS" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="id" type="id_Integer"/>
         <mapperTableEntries name="url" type="id_String"/>
-        <mapperTableEntries name="instrument_type" type="id_String" nullable="true"/>
+        <mapperTableEntries name="data_type" type="id_String" nullable="true"/>
       </inputTables>
     </nodeData>
   </node>
@@ -267,7 +267,7 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="instrument_type"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="data_type"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -309,7 +309,7 @@
       <column key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="50" name="instrument_type" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
+      <column comment="" key="false" length="50" name="data_type" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
     </metadata>
     <metadata connector="REJECT" label="timeseries" name="REJECT">
       <column key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long">
@@ -339,7 +339,7 @@
       <column key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="50" name="instrument_type" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
+      <column comment="" key="false" length="50" name="data_type" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -360,7 +360,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT  id,&#xA;        url,&#xA;&#x9;&#x9;substring(url, '/([a-zA-Z0-9.\\-\\_]+)/IMOS_ABOS' ) AS instrument_type&#xA;from indexed_file where id = &quot; + context.fileId + &quot; ; &quot;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT  id,&#xA;        url,&#xA;&#x9;&#x9;substring(url, '/([a-zA-Z0-9.\\-\\_]+)/IMOS_ABOS' ) AS data_type&#xA;from indexed_file where id = &quot; + context.fileId + &quot; ; &quot;&#xA;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -372,7 +372,7 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="url"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="instrument_type"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="data_type"/>
       <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -382,7 +382,7 @@
     <metadata connector="FLOW" name="tPostgresqlInput_2">
       <column comment="" defaultValue="" key="false" length="10" name="id" nullable="false" pattern="" precision="0" sourceType="" type="id_Integer"/>
       <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="0" name="instrument_type" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="0" name="data_type" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
   <node componentName="iIncludeSdiLibraries" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="160" posY="-480">
@@ -796,7 +796,7 @@
       <elementValue elementRef="TRACE_COLUMN" value="LATITUDE"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="instrument_type"/>
+      <elementValue elementRef="TRACE_COLUMN" value="data_type"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
