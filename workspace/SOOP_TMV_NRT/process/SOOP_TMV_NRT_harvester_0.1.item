@@ -18,6 +18,13 @@
     <contextParameter comment="" name="ftp_mirror_password" prompt="ftp_mirror_password?" promptNeeded="false" repositoryContextId="_nOfBMBEbEeO0IuQ9jwSuLw" type="id_String" value="&quot;underway&quot;"/>
     <contextParameter comment="" name="ftp_mirror_site" prompt="ftp_mirror_site?" promptNeeded="false" repositoryContextId="_nOfBMBEbEeO0IuQ9jwSuLw" type="id_String" value="&quot;epa.svpelican.com.au&quot;"/>
     <contextParameter comment="" name="ftp_mirror_user" prompt="ftp_mirror_user?" promptNeeded="false" repositoryContextId="_nOfBMBEbEeO0IuQ9jwSuLw" type="id_String" value="&quot;epaspirit&quot;"/>
+    <contextParameter comment="" name="Metadata_Password" prompt="Metadata_Password?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="MicroCuts2001!"/>
+    <contextParameter comment="" name="Metadata_SpatialColumn" prompt="Metadata_SpatialColumn?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="geom"/>
+    <contextParameter comment="" name="Metadata_SpatialResolution" prompt="Metadata_SpatialResolution?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="1"/>
+    <contextParameter comment="" name="Metadata_SpatialTable" prompt="Metadata_SpatialTable?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="soop_tmv_nrt_trajectory_data"/>
+    <contextParameter comment="" name="Metadata_URL" prompt="Metadata_URL?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="https://catalogue-rc.aodn.org.au/geonetwork"/>
+    <contextParameter comment="" name="Metadata_Username" prompt="Metadata_Username?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="xhoenner"/>
+    <contextParameter comment="" name="Metadata_UUID" prompt="Metadata_UUID?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="d24d26cc-cd8c-4c5b-94e5-809051043d7e"/>
     <contextParameter comment="" name="archived_folder" prompt="archived_folder?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/Users/xavierhoenner/Work/Talend/SOOP_TMV_NRT/data/zipped"/>
     <contextParameter comment="" name="exclude_10secs" prompt="exclude_10secs?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=".*[0-9].zip"/>
     <contextParameter comment="" name="exclude_1sec" prompt="exclude_1sec?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=".*log.1SecRaw.zip"/>
@@ -240,6 +247,28 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_4"/>
   </node>
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="160" posY="544">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_5"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="UpdateMetadata"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_i1jXYE9UEeSwpI1qo3lu9A"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tRunJob_5"/>
+  </node>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" source="iIndexFiles_1" target="iPostgresqlDbUpdate_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
@@ -259,6 +288,10 @@
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tSystem_2" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tSystem_2" target="iIndexFiles_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_3" offsetLabelX="0" offsetLabelY="0" source="tRunJob_3" target="tRunJob_5">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk6"/>
   </connection>
   <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tRunJob_2">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
@@ -303,6 +336,13 @@
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_4"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Copy all data to public folder"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_5"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Update Geonetwork's Spatial Extent"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
