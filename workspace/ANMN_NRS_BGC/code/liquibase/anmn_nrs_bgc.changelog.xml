@@ -339,6 +339,21 @@ CREATE TABLE anmn_nrs_bgc_plankton_zooplankton
     </changeSet>
 
 
+    <changeSet author="talend" id="zoop_taxon_changelog-1">
+      <sql>
+	CREATE TABLE nrs_zoop_taxon_changelog (
+	  "TAXON_NAME" text NOT NULL,
+	  "TAXON_START_DATE" date,
+	  "FIRST_OCCURRENCE" date,
+	  "PARENT_TAXON_NAME" text NOT NULL,
+	  "TRAINING" text,
+	  "COMMENTS" text,
+	  CONSTRAINT nrs_zoop_taxon_changelog_pkey PRIMARY KEY ("TAXON_NAME")
+	)
+      </sql>
+    </changeSet>
+
+
 <changeSet author="talend" id="plankton_zooplankton_data_view" runOnChange="true">
 
        <sql>
@@ -391,6 +406,21 @@ CREATE TABLE anmn_nrs_bgc_plankton_phytoplankton
   CONSTRAINT measurement_pkey_plankton_phytoplankton PRIMARY KEY (measurement)
 )
 	</sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="phyto_taxon_changelog-1">
+      <sql>
+	CREATE TABLE nrs_phyto_taxon_changelog (
+	  "TAXON_NAME" text NOT NULL,
+	  "TAXON_START_DATE" date,
+	  "FIRST_OCCURRENCE" date,
+	  "PARENT_TAXON_NAME" text NOT NULL,
+	  "TRAINING" text,
+	  "COMMENTS" text,
+	  CONSTRAINT nrs_phyto_taxon_changelog_pkey PRIMARY KEY ("TAXON_NAME")
+	)
+      </sql>
     </changeSet>
 
 
