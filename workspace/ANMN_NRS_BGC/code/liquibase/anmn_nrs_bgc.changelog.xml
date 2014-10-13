@@ -412,8 +412,14 @@ CREATE VIEW anmn_nrs_bgc_plankton_zooplankton_data as
     z."CAAB_CODE",
     z."TAXON_START_DATE",
     z."TAXON_PER_M3",
-    z."SAMPLE_COMMENTS"
-  FROM anmn_nrs_bgc_plankton_zooplankton z  LEFT JOIN  station_name s  USING ("IMOS_SITE_CODE")
+    z."SAMPLE_COMMENTS",
+    c."FIRST_OCCURRENCE"  AS "TAXON_FIRST_OCCURRENCE",
+    c."PARENT_TAXON_NAME",
+    c."TRAINING"  AS "TAXON_TRAINING",
+    c."COMMENTS"  AS "TAXON_COMMENTS"
+  FROM anmn_nrs_bgc_plankton_zooplankton z  
+       LEFT JOIN  station_name s  USING ("IMOS_SITE_CODE")
+       LEFT JOIN  nrs_zoop_taxon_changelog c  USING ("TAXON_NAME")
   ORDER BY z."NRS_SAMPLE_CODE";
       </sql>
     </changeSet>
@@ -488,8 +494,14 @@ CREATE VIEW anmn_nrs_bgc_plankton_phytoplankton_data as
     p."TAXON_START_DATE",
     p."CELL_PER_LITRE",
     p."BIOVOLUME_ML_PER_L",
-    p."SAMPLE_COMMENTS"
-  FROM anmn_nrs_bgc_plankton_phytoplankton p  LEFT JOIN  station_name s  USING ("IMOS_SITE_CODE")
+    p."SAMPLE_COMMENTS",
+    c."FIRST_OCCURRENCE"  AS "TAXON_FIRST_OCCURRENCE",
+    c."PARENT_TAXON_NAME",
+    c."TRAINING"  AS "TAXON_TRAINING",
+    c."COMMENTS"  AS "TAXON_COMMENTS"
+  FROM anmn_nrs_bgc_plankton_phytoplankton p
+       LEFT JOIN  station_name s  USING ("IMOS_SITE_CODE")
+       LEFT JOIN  nrs_phyto_taxon_changelog c  USING ("TAXON_NAME")
   ORDER BY p."NRS_SAMPLE_CODE";
       </sql>
     </changeSet>
