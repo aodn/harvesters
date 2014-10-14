@@ -2,13 +2,14 @@
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="nqeXvFH+otv/B3VkX/j3nQ=="/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="srs_oc_soop_rad"/>
-    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest"/>
+    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="srs_oc_soop_rad"/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
-    <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value="1"/>
+    <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value="3"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
+    <contextParameter comment="" name="vessel_name" prompt="vessel_name?" promptNeeded="false" type="id_String" value="null"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -425,7 +426,7 @@
       <column comment="" key="false" name="principal_investigator" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="project" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="vessel_name" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="vessel_name" nullable="false" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="time_coverage_start" nullable="true" pattern=" &quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date"/>
       <column comment="" key="false" name="time_coverage_end" nullable="true" pattern=" &quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date"/>
       <column comment="" key="false" name="geospatial_lat_min" nullable="true" pattern="" sourceType="" type="id_String"/>
@@ -437,7 +438,7 @@
       <column comment="" key="false" name="source" nullable="true" pattern="" sourceType="" type="id_String"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="time_coverage_start" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;,row1.time_coverage_start) " type="id_Date"/>
         <mapperTableEntries name="time_coverage_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;,row1.time_coverage_end) " type="id_Date"/>
@@ -449,7 +450,7 @@
         <mapperTableEntries name="principal_investigator" expression="row1.principal_investigator " type="id_String" nullable="true"/>
         <mapperTableEntries name="project" expression="row1.project " type="id_String" nullable="true"/>
         <mapperTableEntries name="platform_code" expression="row1.platform_code " type="id_String" nullable="true"/>
-        <mapperTableEntries name="vessel_name" expression="&quot;Southern Surveyor&quot;" type="id_String" nullable="true"/>
+        <mapperTableEntries name="vessel_name" expression="context.vessel_name" type="id_String"/>
         <mapperTableEntries name="time_coverage_start" expression="Var.time_coverage_start " type="id_Date" nullable="true"/>
         <mapperTableEntries name="time_coverage_end" expression="Var.time_coverage_end " type="id_Date" nullable="true"/>
         <mapperTableEntries name="geospatial_lat_min" expression="row1.geospatial_lat_min " type="id_String" nullable="true"/>
@@ -619,7 +620,7 @@
       <column comment="" key="false" name="principal_investigator" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="project" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="vessel_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="vessel_name" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="time_coverage_start" nullable="true" pattern=" &quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="time_coverage_end" nullable="true" pattern=" &quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="geospatial_lat_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -637,7 +638,7 @@
       <column comment="" key="false" name="principal_investigator" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="project" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="vessel_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="vessel_name" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="time_coverage_start" nullable="true" pattern=" &quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="time_coverage_end" nullable="true" pattern=" &quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="geospatial_lat_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -697,7 +698,7 @@
       <column comment="" defaultValue="" key="false" name="geom" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(variables.LONGITUDE,variables.LATITUDE,&quot;EPSG:4326&quot;)   " type="id_Geometry"/>
         <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1970-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,(variables.TIME/(3600*24)))    " type="id_Date"/>
@@ -845,7 +846,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select url from indexed_file where id =&quot;+ context.file_id +&quot;;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT  &#xA;        url,&#xA;        CASE &#xA;&#x9;&#x9;WHEN (substring(url, '/SRS-OC-SOOP_Rad/([^\\s]+?)/'  ) = 'VLHJ_Southern-Surveyor' )&#xA;&#x9;&#x9;&#x9;THEN 'Southern Surveyor'&#xA;&#x9;&#x9;WHEN (substring(url, '/SRS-OC-SOOP_Rad/([^\\s]+?)/'  ) = 'VMQ9273_Solander' )&#xA;&#x9;&#x9;&#x9;THEN 'Solander'&#xA;&#x9;END AS vessel_name     &#xA;        &#xA;from indexed_file where id =&quot; +context.file_id + &quot;;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -855,6 +856,8 @@
     <elementParameter field="TABLE" name="TRIM_COLUMN">
       <elementValue elementRef="SCHEMA_COLUMN" value="url"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="vessel_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="LABEL" value="getURL"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -862,19 +865,21 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlInput_4">
-      <column comment="" key="false" name="url" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="0" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="352" posY="288">
+  <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="352" posY="384">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_1"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#xA;//&#xA;// multiply by 2 the row identifier&#xA;// output_row.id = input_row.id * 2;&#xA;//&#xA;// lowercase the name&#xA;// output_row.name = input_row.name.toLowerCase();&#xA;&#xA;context.url=row5.url;"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="context.url=row4.url;&#xA;context.vessel_name=row4.vessel_name;&#xA;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tJavaRow_1">
-      <column comment="" key="false" name="url" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="100" name="vessel_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String" originalLength="100"/>
     </metadata>
   </node>
   <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="928" posY="736">
@@ -1670,10 +1675,13 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk2"/>
   </connection>
-  <connection connectorName="FLOW" label="row5" lineStyle="0" metaname="tPostgresqlInput_4" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_4" target="tJavaRow_1">
+  <connection connectorName="FLOW" label="row4" lineStyle="0" metaname="tPostgresqlInput_4" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_4" target="tJavaRow_1">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="url"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="vessel_name"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -1684,7 +1692,7 @@
     <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
     <elementParameter field="TABLE" name="THRESHLODS"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row5"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row4"/>
   </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlInput_4" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tPostgresqlInput_4" target="tPostgresqlRow_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
