@@ -1,30 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="argo_dev">
-  <context confirmationNeeded="false" name="argo_dev">
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="default">
+  <context confirmationNeeded="false" name="default">
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_Password" value="bQdsCI2gjYQ="/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="argo"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="argo"/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="5432"/>
-    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="harvest"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="localhost"/>
-    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="76196"/>
-    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="/mnt/imos-t3/csiro/7900331/profiles/R7900331_037.nc"/>
-  </context>
-  <context confirmationNeeded="false" name="soop_asf_flux_dev">
-    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_Password" value="bQdsCI2gjYQ="/>
-    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="argo"/>
-    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="argo"/>
-    <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="5432"/>
-    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="harvest"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="localhost"/>
-    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value=""/>
+    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="harvest?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="10.11.12.13"/>
+    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Integer" value="10"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="96"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="864"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="992"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
     <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
     <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
@@ -84,7 +74,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from profile_metadata &quot; +&#xA;&quot; where file_id = &quot; + context.fileId"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from profile_metadata &quot; + &quot; where file_id = &quot; + context.fileId +&quot;;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -120,7 +110,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from profile_general &quot; +&#xA;&quot; where file_id = &quot; + context.fileId"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from profile_general &quot; + &quot; where file_id = &quot; + context.fileId +&quot;;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -156,7 +146,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from profile_measurements &quot; +&#xA;&quot; where file_id = &quot; + context.fileId"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from profile_measurements &quot; + &quot; where file_id = &quot; + context.fileId +&quot;;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -192,7 +182,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from profile_params &quot; +&#xA;&quot; where file_id = &quot; + context.fileId"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from profile_params &quot; + &quot; where file_id = &quot; + context.fileId +&quot;;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -228,7 +218,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from profile_param_calibration &quot; +&#xA;&quot; where file_id = &quot; + context.fileId"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from profile_param_calibration &quot; + &quot; where file_id = &quot; + context.fileId +&quot;;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -264,7 +254,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from profile_history &quot; +&#xA;&quot; where file_id = &quot; + context.fileId"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from profile_history &quot; + &quot; where file_id = &quot; + context.fileId +&quot;;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -418,7 +408,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="profile_metadata" name="profile_metadata_table">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Long"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
       <column comment="" key="false" length="16" name="DATA_TYPE" nullable="true" originalDbColumnName="data_type" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" length="4" name="FORMAT_VERSION" nullable="true" originalDbColumnName="format_version" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" length="4" name="HANDBOOK_VERSION" nullable="true" originalDbColumnName="handbook_version" pattern="" sourceType="" type="id_String"/>
@@ -430,7 +420,7 @@
       <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="profile_metadata_table">
-        <mapperTableEntries name="file_id" expression="context.fileId" type="id_Long" nullable="true"/>
+        <mapperTableEntries name="file_id" expression="context.fileId" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="DATA_TYPE" expression="profile_metadata.DATA_TYPE" type="id_String" nullable="true"/>
         <mapperTableEntries name="FORMAT_VERSION" expression="profile_metadata.FORMAT_VERSION" type="id_String" nullable="true"/>
         <mapperTableEntries name="HANDBOOK_VERSION" expression="profile_metadata.HANDBOOK_VERSION" type="id_String" nullable="true"/>
@@ -462,7 +452,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="profile_params" name="profile_params_table">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
       <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="true" name="N_PARAM" nullable="true" originalDbColumnName="param_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="16" name="STATION_PARAMETERS" nullable="true" originalDbColumnName="station_parameters" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -471,7 +461,7 @@
       <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="profile_params_table">
-        <mapperTableEntries name="file_id" expression="context.fileId" type="id_Long" nullable="true"/>
+        <mapperTableEntries name="file_id" expression="context.fileId" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="N_PROF" expression="profile_params.N_PROF" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="N_PARAM" expression="profile_params.N_PARAM" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="STATION_PARAMETERS" expression="profile_params.STATION_PARAMETERS" type="id_String" nullable="true"/>
@@ -497,7 +487,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="profile_param_calibration" name="profile_param_calib_table">
-      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
       <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="true" name="N_CALIB" nullable="true" originalDbColumnName="calib_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="true" name="N_PARAM" nullable="true" originalDbColumnName="param_no" pattern="" sourceType="INT4" type="id_Integer"/>
@@ -513,7 +503,7 @@
         <mapperTableEntries name="CalibrationDate" expression="profile_param_calibration.CALIBRATION_DATE != null ? profile_param_calibration.CALIBRATION_DATE : profile_param_calibration.SCIENTIFIC_CALIB_DATE" type="id_String"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="profile_param_calib_table">
-        <mapperTableEntries name="file_id" expression="context.fileId" type="id_Long" nullable="true"/>
+        <mapperTableEntries name="file_id" expression="context.fileId" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="N_PROF" expression="profile_param_calibration.N_PROF" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="N_CALIB" expression="profile_param_calibration.N_CALIB" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="N_PARAM" expression="profile_param_calibration.N_PARAM" type="id_Integer" nullable="true"/>
@@ -550,7 +540,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="profile_history" name="profile_history_table">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
       <column comment="" key="true" name="N_HISTORY" nullable="true" originalDbColumnName="history_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="4" name="HISTORY_INSTITUTION" nullable="true" originalDbColumnName="history_institution" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -570,7 +560,7 @@
       <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="profile_history_table">
-        <mapperTableEntries name="file_id" expression="context.fileId" type="id_Long" nullable="true"/>
+        <mapperTableEntries name="file_id" expression="context.fileId" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="N_HISTORY" expression="profile_history.N_HISTORY" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="N_PROF" expression="profile_history.N_PROF" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="HISTORY_INSTITUTION" expression="profile_history.HISTORY_INSTITUTION" type="id_String" nullable="true"/>
@@ -618,7 +608,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="profile_measurements" name="profile_measurements_table">
-      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
       <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="true" name="N_LEVELS" nullable="true" originalDbColumnName="level_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" name="PRES" nullable="true" originalDbColumnName="pres" pattern="" sourceType="FLOAT4" type="id_Float"/>
@@ -651,7 +641,7 @@
       <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="profile_measurements_table">
-        <mapperTableEntries name="file_id" expression="context.fileId" type="id_Long" nullable="true"/>
+        <mapperTableEntries name="file_id" expression="context.fileId" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="N_PROF" expression="profile_measurements.N_PROF" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="N_LEVELS" expression="profile_measurements.N_LEVELS" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="PRES" expression="profile_measurements.PRES" type="id_Float" nullable="true"/>
@@ -725,7 +715,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="profile_general" name="profile_general_table">
-      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="" type="id_Long"/>
+      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
       <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="" type="id_Integer"/>
       <column comment="" key="false" length="8" name="PLATFORM_NUMBER" nullable="true" originalDbColumnName="platform_number" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" length="64" name="PROJECT_NAME" nullable="true" originalDbColumnName="project_name" pattern="" sourceType="" type="id_String"/>
@@ -756,7 +746,7 @@
       <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="profile_general_table">
-        <mapperTableEntries name="file_id" expression="context.fileId" type="id_Long" nullable="true"/>
+        <mapperTableEntries name="file_id" expression="context.fileId" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="N_PROF" expression="profile_general.N_PROF" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="PLATFORM_NUMBER" expression="profile_general.PLATFORM_NUMBER" type="id_String" nullable="true"/>
         <mapperTableEntries name="PROJECT_NAME" expression="profile_general.PROJECT_NAME" type="id_String" nullable="true"/>
@@ -882,22 +872,22 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="profile_metadata" name="iPostgresqlOutput_1">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Long"/>
-      <column comment="" key="false" length="16" name="DATA_TYPE" nullable="true" originalDbColumnName="data_type" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="4" name="FORMAT_VERSION" nullable="true" originalDbColumnName="format_version" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="4" name="HANDBOOK_VERSION" nullable="true" originalDbColumnName="handbook_version" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="14" name="REFERENCE_DATE_TIME" nullable="true" originalDbColumnName="reference_date_time" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" sourceType="" type="id_Date"/>
-      <column comment="" key="false" length="14" name="DATE_CREATION" nullable="true" originalDbColumnName="date_creation" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" sourceType="" type="id_Date"/>
-      <column comment="" key="false" length="14" name="DATE_UPDATE" nullable="true" originalDbColumnName="date_update" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" sourceType="" type="id_Date"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
+      <column comment="" key="false" length="16" name="DATA_TYPE" nullable="true" originalDbColumnName="data_type" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="4" name="FORMAT_VERSION" nullable="true" originalDbColumnName="format_version" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="4" name="HANDBOOK_VERSION" nullable="true" originalDbColumnName="handbook_version" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="14" name="REFERENCE_DATE_TIME" nullable="true" originalDbColumnName="reference_date_time" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="14" name="DATE_CREATION" nullable="true" originalDbColumnName="date_creation" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="14" name="DATE_UPDATE" nullable="true" originalDbColumnName="date_update" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" sourceType="TIMESTAMP" type="id_Date"/>
     </metadata>
     <metadata connector="REJECT" label="profile_metadata" name="REJECT">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Long"/>
-      <column comment="" key="false" length="16" name="DATA_TYPE" nullable="true" originalDbColumnName="data_type" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="4" name="FORMAT_VERSION" nullable="true" originalDbColumnName="format_version" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="4" name="HANDBOOK_VERSION" nullable="true" originalDbColumnName="handbook_version" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="14" name="REFERENCE_DATE_TIME" nullable="true" originalDbColumnName="reference_date_time" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" sourceType="" type="id_Date"/>
-      <column comment="" key="false" length="14" name="DATE_CREATION" nullable="true" originalDbColumnName="date_creation" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" sourceType="" type="id_Date"/>
-      <column comment="" key="false" length="14" name="DATE_UPDATE" nullable="true" originalDbColumnName="date_update" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" sourceType="" type="id_Date"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
+      <column comment="" key="false" length="16" name="DATA_TYPE" nullable="true" originalDbColumnName="data_type" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="4" name="FORMAT_VERSION" nullable="true" originalDbColumnName="format_version" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="4" name="HANDBOOK_VERSION" nullable="true" originalDbColumnName="handbook_version" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="14" name="REFERENCE_DATE_TIME" nullable="true" originalDbColumnName="reference_date_time" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="14" name="DATE_CREATION" nullable="true" originalDbColumnName="date_creation" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="14" name="DATE_UPDATE" nullable="true" originalDbColumnName="date_update" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" sourceType="TIMESTAMP" type="id_Date"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1067,60 +1057,60 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="profile_general" name="iPostgresqlOutput_2">
-      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="" type="id_Long"/>
-      <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" length="8" name="PLATFORM_NUMBER" nullable="true" originalDbColumnName="platform_number" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="64" name="PROJECT_NAME" nullable="true" originalDbColumnName="project_name" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="64" name="PI_NAME" nullable="true" originalDbColumnName="pi_name" pattern="" sourceType="" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="CYCLE_NUMBER" nullable="true" originalDbColumnName="cycle_number" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" name="DIRECTION" nullable="true" originalDbColumnName="direction" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" key="false" length="2" name="DATA_CENTRE" nullable="true" originalDbColumnName="data_centre" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="32" name="DC_REFERENCE" nullable="true" originalDbColumnName="dc_reference" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="4" name="DATA_STATE_INDICATOR" nullable="true" originalDbColumnName="data_state_indicator" pattern="" sourceType="" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="DATA_MODE" nullable="true" originalDbColumnName="data_mode" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" key="false" length="64" name="INST_REFERENCE" nullable="true" originalDbColumnName="inst_reference" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="4" name="WMO_INST_TYPE" nullable="true" originalDbColumnName="wmo_inst_type" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="JULD" nullable="true" originalDbColumnName="juld" pattern="&quot;dd-MM-yyyy&quot;" sourceType="" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" name="JULD_QC" nullable="true" originalDbColumnName="juld_qc" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" key="false" name="JULD_LOCATION" nullable="true" originalDbColumnName="juld_location" pattern="&quot;dd-MM-yyyy&quot;" sourceType="" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="POSITION_QC" nullable="true" originalDbColumnName="position_qc" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" key="false" length="8" name="POSITIONING_SYSTEM" nullable="true" originalDbColumnName="positioning_system" pattern="" sourceType="" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PROFILE_PRES_QC" nullable="true" originalDbColumnName="profile_pres_qc" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" defaultValue="" key="false" name="PROFILE_TEMP_QC" nullable="true" originalDbColumnName="profile_temp_qc" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" defaultValue="" key="false" name="PROFILE_PSAL_QC" nullable="true" originalDbColumnName="profile_psal_qc" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" key="false" name="PROFILE_DOXY_QC" nullable="true" originalDbColumnName="profile_doxy_qc" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" key="false" name="PROFILE_TEMP_DOXY_QC" nullable="true" originalDbColumnName="profile_temp_doxy_qc" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" key="false" name="position" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
+      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
+      <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="8" name="PLATFORM_NUMBER" nullable="true" originalDbColumnName="platform_number" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="64" name="PROJECT_NAME" nullable="true" originalDbColumnName="project_name" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="64" name="PI_NAME" nullable="true" originalDbColumnName="pi_name" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="CYCLE_NUMBER" nullable="true" originalDbColumnName="cycle_number" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" name="DIRECTION" nullable="true" originalDbColumnName="direction" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" length="2" name="DATA_CENTRE" nullable="true" originalDbColumnName="data_centre" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="32" name="DC_REFERENCE" nullable="true" originalDbColumnName="dc_reference" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="4" name="DATA_STATE_INDICATOR" nullable="true" originalDbColumnName="data_state_indicator" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="DATA_MODE" nullable="true" originalDbColumnName="data_mode" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" length="64" name="INST_REFERENCE" nullable="true" originalDbColumnName="inst_reference" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="4" name="WMO_INST_TYPE" nullable="true" originalDbColumnName="wmo_inst_type" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="JULD" nullable="true" originalDbColumnName="juld" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" name="JULD_QC" nullable="true" originalDbColumnName="juld_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" name="JULD_LOCATION" nullable="true" originalDbColumnName="juld_location" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="POSITION_QC" nullable="true" originalDbColumnName="position_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" length="8" name="POSITIONING_SYSTEM" nullable="true" originalDbColumnName="positioning_system" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="PROFILE_PRES_QC" nullable="true" originalDbColumnName="profile_pres_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" defaultValue="" key="false" name="PROFILE_TEMP_QC" nullable="true" originalDbColumnName="profile_temp_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" defaultValue="" key="false" name="PROFILE_PSAL_QC" nullable="true" originalDbColumnName="profile_psal_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" name="PROFILE_DOXY_QC" nullable="true" originalDbColumnName="profile_doxy_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" name="PROFILE_TEMP_DOXY_QC" nullable="true" originalDbColumnName="profile_temp_doxy_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" name="position" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
     </metadata>
     <metadata connector="REJECT" label="profile_general" name="REJECT">
-      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="" type="id_Long"/>
-      <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" length="8" name="PLATFORM_NUMBER" nullable="true" originalDbColumnName="platform_number" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="64" name="PROJECT_NAME" nullable="true" originalDbColumnName="project_name" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="64" name="PI_NAME" nullable="true" originalDbColumnName="pi_name" pattern="" sourceType="" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="CYCLE_NUMBER" nullable="true" originalDbColumnName="cycle_number" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" defaultValue="" key="false" name="DIRECTION" nullable="true" originalDbColumnName="direction" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" key="false" length="2" name="DATA_CENTRE" nullable="true" originalDbColumnName="data_centre" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="32" name="DC_REFERENCE" nullable="true" originalDbColumnName="dc_reference" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="4" name="DATA_STATE_INDICATOR" nullable="true" originalDbColumnName="data_state_indicator" pattern="" sourceType="" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="DATA_MODE" nullable="true" originalDbColumnName="data_mode" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" key="false" length="64" name="INST_REFERENCE" nullable="true" originalDbColumnName="inst_reference" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="4" name="WMO_INST_TYPE" nullable="true" originalDbColumnName="wmo_inst_type" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="JULD" nullable="true" originalDbColumnName="juld" pattern="&quot;dd-MM-yyyy&quot;" sourceType="" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" name="JULD_QC" nullable="true" originalDbColumnName="juld_qc" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" key="false" name="JULD_LOCATION" nullable="true" originalDbColumnName="juld_location" pattern="&quot;dd-MM-yyyy&quot;" sourceType="" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="POSITION_QC" nullable="true" originalDbColumnName="position_qc" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" key="false" length="8" name="POSITIONING_SYSTEM" nullable="true" originalDbColumnName="positioning_system" pattern="" sourceType="" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="PROFILE_PRES_QC" nullable="true" originalDbColumnName="profile_pres_qc" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" defaultValue="" key="false" name="PROFILE_TEMP_QC" nullable="true" originalDbColumnName="profile_temp_qc" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" defaultValue="" key="false" name="PROFILE_PSAL_QC" nullable="true" originalDbColumnName="profile_psal_qc" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" key="false" name="PROFILE_DOXY_QC" nullable="true" originalDbColumnName="profile_doxy_qc" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" key="false" name="PROFILE_TEMP_DOXY_QC" nullable="true" originalDbColumnName="profile_temp_doxy_qc" pattern="" sourceType="" type="id_Character"/>
-      <column comment="" key="false" name="position" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
+      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
+      <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="8" name="PLATFORM_NUMBER" nullable="true" originalDbColumnName="platform_number" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="64" name="PROJECT_NAME" nullable="true" originalDbColumnName="project_name" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="64" name="PI_NAME" nullable="true" originalDbColumnName="pi_name" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="CYCLE_NUMBER" nullable="true" originalDbColumnName="cycle_number" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" name="DIRECTION" nullable="true" originalDbColumnName="direction" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" length="2" name="DATA_CENTRE" nullable="true" originalDbColumnName="data_centre" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="32" name="DC_REFERENCE" nullable="true" originalDbColumnName="dc_reference" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="4" name="DATA_STATE_INDICATOR" nullable="true" originalDbColumnName="data_state_indicator" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="DATA_MODE" nullable="true" originalDbColumnName="data_mode" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" length="64" name="INST_REFERENCE" nullable="true" originalDbColumnName="inst_reference" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="4" name="WMO_INST_TYPE" nullable="true" originalDbColumnName="wmo_inst_type" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="JULD" nullable="true" originalDbColumnName="juld" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" name="JULD_QC" nullable="true" originalDbColumnName="juld_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" name="JULD_LOCATION" nullable="true" originalDbColumnName="juld_location" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="POSITION_QC" nullable="true" originalDbColumnName="position_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" length="8" name="POSITIONING_SYSTEM" nullable="true" originalDbColumnName="positioning_system" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="PROFILE_PRES_QC" nullable="true" originalDbColumnName="profile_pres_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" defaultValue="" key="false" name="PROFILE_TEMP_QC" nullable="true" originalDbColumnName="profile_temp_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" defaultValue="" key="false" name="PROFILE_PSAL_QC" nullable="true" originalDbColumnName="profile_psal_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" name="PROFILE_DOXY_QC" nullable="true" originalDbColumnName="profile_doxy_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" name="PROFILE_TEMP_DOXY_QC" nullable="true" originalDbColumnName="profile_temp_doxy_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" name="position" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1300,7 +1290,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="profile_measurements" name="iPostgresqlOutput_3">
-      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
       <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="true" name="N_LEVELS" nullable="true" originalDbColumnName="level_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" name="PRES" nullable="true" originalDbColumnName="pres" pattern="" sourceType="FLOAT4" type="id_Float"/>
@@ -1330,7 +1320,7 @@
       <column comment="" defaultValue="" key="false" name="TEMP_DOXY_ADJUSTED_ERROR" nullable="true" originalDbColumnName="temp_doxy_adjusted_error" pattern="" sourceType="FLOAT4" type="id_Float"/>
     </metadata>
     <metadata connector="REJECT" label="profile_measurements" name="REJECT">
-      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
       <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="true" name="N_LEVELS" nullable="true" originalDbColumnName="level_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" name="PRES" nullable="true" originalDbColumnName="pres" pattern="" sourceType="FLOAT4" type="id_Float"/>
@@ -1417,13 +1407,13 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="profile_params" name="iPostgresqlOutput_4">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
       <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="true" name="N_PARAM" nullable="true" originalDbColumnName="param_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="16" name="STATION_PARAMETERS" nullable="true" originalDbColumnName="station_parameters" pattern="" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" label="profile_params" name="REJECT">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
       <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="true" name="N_PARAM" nullable="true" originalDbColumnName="param_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="16" name="STATION_PARAMETERS" nullable="true" originalDbColumnName="station_parameters" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -1511,7 +1501,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="profile_param_calibration" name="iPostgresqlOutput_5">
-      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
       <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="true" name="N_CALIB" nullable="true" originalDbColumnName="calib_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="true" name="N_PARAM" nullable="true" originalDbColumnName="param_no" pattern="" sourceType="INT4" type="id_Integer"/>
@@ -1522,7 +1512,7 @@
       <column comment="" key="false" length="14" name="CALIBRATION_DATE" nullable="true" originalDbColumnName="calibration_date" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
     </metadata>
     <metadata connector="REJECT" label="profile_param_calibration" name="REJECT">
-      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
       <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="true" name="N_CALIB" nullable="true" originalDbColumnName="calib_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="true" name="N_PARAM" nullable="true" originalDbColumnName="param_no" pattern="" sourceType="INT4" type="id_Integer"/>
@@ -1645,7 +1635,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="profile_history" name="iPostgresqlOutput_6">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
       <column comment="" key="true" name="N_HISTORY" nullable="true" originalDbColumnName="history_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="4" name="HISTORY_INSTITUTION" nullable="true" originalDbColumnName="history_institution" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -1662,7 +1652,7 @@
       <column comment="" key="false" length="16" name="HISTORY_QCTEST" nullable="true" originalDbColumnName="history_qctest" pattern="" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" label="profile_history" name="REJECT">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
       <column comment="" key="true" name="N_HISTORY" nullable="true" originalDbColumnName="history_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="4" name="HISTORY_INSTITUTION" nullable="true" originalDbColumnName="history_institution" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -1681,7 +1671,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="iIncludeSdiLibraries" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-32" posY="-800">
+  <node componentName="iIncludeSdiLibraries" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-32" posY="-928">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIncludeSdiLibraries_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import org.talend.sdi.geometry.Geometry;"/>
@@ -1690,7 +1680,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-32" posY="-608">
+  <node componentName="tPostgresqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-32" posY="-768">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_HtNvQDKiEeKrFtsLd2Qz2g"/>
@@ -1721,11 +1711,60 @@
   </node>
   <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="448">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-32" posY="-608">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
+    <elementParameter field="CHECK" name="TSTATCATCHER_STATS" value="true"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select url  from indexed_file where id =&quot;+ context.fileId+&quot;;&quot;"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
+    <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
+    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+    <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="url"/>
+      <elementValue elementRef="TRIM" value="true"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="LABEL" value="getURL"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlInput_1">
+      <column comment="" key="false" name="url" nullable="false" pattern="" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="64" posY="-608">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_1"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#xA;//&#xA;// multiply by 2 the row identifier&#xA;// output_row.id = input_row.id * 2;&#xA;//&#xA;// lowercase the name&#xA;// output_row.name = input_row.name.toLowerCase();&#xA;&#xA;context.url=row2.url;&#xA;&#xA;"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tJavaRow_1">
+      <column comment="" key="false" name="url" nullable="false" pattern="" sourceType="" type="id_String"/>
+    </metadata>
   </node>
   <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="tPostgresqlRow_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_1" target="tPostgresqlRow_2">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
@@ -2444,13 +2483,39 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk4"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="tPostgresqlRow_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="tPostgresqlInput_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
   </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostjob_1" offsetLabelX="0" offsetLabelY="0" source="tPostjob_1" target="tPostgresqlClose_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
+  </connection>
+  <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tJavaRow_1">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="url"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="campaign_code_context"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="dive_code_context"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row2"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tPostgresqlRow_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk6"/>
   </connection>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
@@ -2491,6 +2556,11 @@
   </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
