@@ -26,7 +26,7 @@
     <contextParameter comment="" name="MetadataArgos_Username" prompt="MetadataArgos_Username?" promptNeeded="false" repositoryContextId="_eu-DkFMlEeSUx7J3JCM2fA" type="id_String" value="xhoenner"/>
     <contextParameter comment="" name="MetadataArgos_UUID" prompt="MetadataArgos_UUID?" promptNeeded="false" repositoryContextId="_eu-DkFMlEeSUx7J3JCM2fA" type="id_String" value="d1d624b5-57fe-4739-a7c3-778105361220"/>
     <contextParameter comment="" name="aatams_sattag_nrt_Schema" prompt="aatams_sattag_nrt_Schema?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="aatams_sattag_nrt"/>
-    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=""/>
+    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=".*ct91.mdb|.*ct101.mdb|.*ct110.mdb"/>
     <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=".*.mdb"/>
     <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/usr/local/talend/aatams_sattag_dm"/>
   </context>
@@ -380,7 +380,50 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" source="iIndexFiles_1" target="iPostgresqlDbUpdate_1">
+  <node componentName="iIndexFiles" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="352" posY="32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_2"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="TEXT" name="JOBNAME" value="&quot;index_locdive&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="LIST_MODE" value="FILES"/>
+    <elementParameter field="DIRECTORY" name="DIRECTORY" value="context.sourceDir"/>
+    <elementParameter field="CHECK" name="INCLUDSUBDIR" value="true"/>
+    <elementParameter field="CLOSED_LIST" name="CASE_SENSITIVE" value="YES"/>
+    <elementParameter field="CHECK" name="ERROR" value="false"/>
+    <elementParameter field="CHECK" name="GLOBEXPRESSIONS" value="false"/>
+    <elementParameter field="TABLE" name="FILES">
+      <elementValue elementRef="FILEMASK" value="context.include"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="IFEXCLUDE" value="true"/>
+    <elementParameter field="TEXT" name="EXCLUDEFILEMASK" value="context.exclude"/>
+    <elementParameter field="CHECK" name="FORMAT_FILEPATH_TO_SLASH" value="false"/>
+    <elementParameter field="RADIO" name="ORDER_BY_NOTHING" value="true"/>
+    <elementParameter field="RADIO" name="ORDER_BY_FILENAME" value="false"/>
+    <elementParameter field="RADIO" name="ORDER_BY_FILESIZE" value="false"/>
+    <elementParameter field="RADIO" name="ORDER_BY_MODIFIEDDATE" value="false"/>
+    <elementParameter field="RADIO" name="ORDER_ACTION_ASC" value="true"/>
+    <elementParameter field="RADIO" name="ORDER_ACTION_DESC" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="iIndexFiles_2">
+      <column defaultValue="" key="false" length="255" name="filePath" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="0" name="fileLastModified" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" precision="0" sourceType="" type="id_Date"/>
+      <column defaultValue="" key="false" length="0" name="fileSize" nullable="true" precision="0" sourceType="" type="id_Double"/>
+    </metadata>
+  </node>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="iIndexFiles_1" target="iIndexFiles_2">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk9"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="iIndexFiles_1" target="iPostgresqlDbUpdate_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
   </connection>
@@ -429,7 +472,9 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
   </connection>
   <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_1"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Index CTD profile datafiles"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
@@ -495,5 +540,12 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="230;100;0"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="255;220;180"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_2"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Index location and dive datafiles"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
 </talendfile:ProcessType>
