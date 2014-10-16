@@ -97,16 +97,14 @@ CREATE TABLE anmn_nrs_bgc_phypig
 DROP VIEW IF EXISTS anmn_nrs_bgc_phypig_data ;
 CREATE VIEW anmn_nrs_bgc_phypig_data as 
   SELECT 
-    s."LATITUDE",
-    s."LONGITUDE",
-    s.geom,
-    p.measurement, 
-    p."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME",
+    s."STATION_NAME",
     p."LOCAL_TRIP_START_TIME", 
+    p."IMOS_SITE_CODE",
     p."NRS_TRIP_CODE",
     p."NRS_SAMPLE_CODE",
-    s."STATION_NAME",
-    p."IMOS_SITE_CODE",
+    p."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME",
+    s."LATITUDE",
+    s."LONGITUDE",
     p."SAMPLE_DEPTH_M", 
     p."CPHL_C3", 
     p."MG_DVP", 
@@ -150,7 +148,8 @@ CREATE VIEW anmn_nrs_bgc_phypig_data as
     p."ALPHA_BETA_CAR", 
     p."PYROPHYTIN_A", 
     p."QC_FLAG", 
-    p."SAMPLE_COMMENTS"
+    p."SAMPLE_COMMENTS",
+    s.geom
   FROM anmn_nrs_bgc_phypig p  LEFT JOIN  station_name s  USING ("IMOS_SITE_CODE")
   ORDER BY p."NRS_SAMPLE_CODE";
       </sql>
@@ -189,24 +188,23 @@ CREATE TABLE anmn_nrs_bgc_picoplankton
 DROP VIEW IF EXISTS anmn_nrs_bgc_picoplankton_data ;
 CREATE VIEW anmn_nrs_bgc_picoplankton_data as 
   SELECT 
+    s."STATION_NAME",
+    p."LOCAL_TRIP_START_TIME", 
+    p."IMOS_SITE_CODE",
+    p."NRS_TRIP_CODE",
+    p."NRS_SAMPLE_CODE",
+    p."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME",
     s."LATITUDE",
     s."LONGITUDE",
-    s.geom,
-    p.measurement, 
-    p."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME",
-    p."LOCAL_TRIP_START_TIME" , 
-    p."NRS_TRIP_CODE", 
-    p."NRS_SAMPLE_CODE", 
     p."REPLICATE",
-    p."STATION_NAME", 
-    p."IMOS_SITE_CODE", 
     p."PROCHLOROCOCCUS_CELLSPERML", 
     p."SYNECOCHOCCUS_CELLSPERML", 
     p."PICOEUKARYOTES_CELLSPERML", 
     p."PROCHLOROCOCCUS_FLAG", 
     p."SYNECOCHOCCUS_FLAG", 
     p."PICOEUKARYOTES_FLAG", 
-    p."SAMPLE_COMMENTS"
+    p."SAMPLE_COMMENTS",
+    s.geom
   FROM anmn_nrs_bgc_picoplankton p  LEFT JOIN  station_name s  USING ("IMOS_SITE_CODE")
   ORDER BY p."NRS_SAMPLE_CODE";
       </sql>
@@ -259,16 +257,14 @@ CREATE TABLE anmn_nrs_bgc_chemistry
 DROP VIEW IF EXISTS anmn_nrs_bgc_chemistry_data ;
 CREATE VIEW anmn_nrs_bgc_chemistry_data AS 
   SELECT 
-    s."LATITUDE",
-    s."LONGITUDE",
-    s.geom,
-    c.measurement, 
-    c."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME",
-    c."LOCAL_TRIP_START_TIME" , 
+    c."STATION_NAME", 
+    c."LOCAL_TRIP_START_TIME", 
+    c."IMOS_SITE_CODE",  
     c."NRS_TRIP_CODE", 
     c."NRS_SAMPLE_CODE", 
-    c."STATION_NAME", 
-    c."IMOS_SITE_CODE",  
+    c."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME",
+    s."LATITUDE",
+    s."LONGITUDE",
     c."SAMPLE_DEPTH_M", 
     c."SALINITY", 
     c."SALINITY_FLAG", 
@@ -290,7 +286,8 @@ CREATE VIEW anmn_nrs_bgc_chemistry_data AS
     c."ALKALINITY_COMMENTS",
     c."OXYGEN_UMOL_PER_L",
     c."OXYGEN_FLAG",
-    c."OXYGEN_COMMENTS"
+    c."OXYGEN_COMMENTS",
+    s.geom
   FROM anmn_nrs_bgc_chemistry c  LEFT JOIN  station_name s  USING ("IMOS_SITE_CODE")
   ORDER BY c."NRS_SAMPLE_CODE";
       </sql>
@@ -324,16 +321,16 @@ CREATE TABLE anmn_nrs_bgc_plankton_biomass
 DROP VIEW IF EXISTS anmn_nrs_bgc_plankton_biomass_data ;
 CREATE VIEW anmn_nrs_bgc_plankton_biomass_data as 
   SELECT
-    s.geom,
-    b."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME",
-    b."LOCAL_TRIP_START_TIME" ,
+    s."STATION_NAME",
+    b."LOCAL_TRIP_START_TIME",
+    b."IMOS_SITE_CODE", 
     b."NRS_TRIP_CODE",
     b."NRS_SAMPLE_CODE",
-    b."STATION_NAME",
-    b."IMOS_SITE_CODE", 
-    s."LONGITUDE",
+    b."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME",
     s."LATITUDE",
-    b."MG_PER_M3"
+    s."LONGITUDE",
+    b."MG_PER_M3",
+    s.geom
   FROM anmn_nrs_bgc_plankton_biomass b  LEFT JOIN  station_name s  USING ("IMOS_SITE_CODE")
   ORDER BY b."NRS_SAMPLE_CODE";
       </sql>
@@ -391,16 +388,14 @@ CREATE TABLE anmn_nrs_bgc_plankton_zooplankton
 DROP VIEW IF EXISTS anmn_nrs_bgc_plankton_zooplankton_data ;
 CREATE VIEW anmn_nrs_bgc_plankton_zooplankton_data as
   SELECT
-    s.geom,
-    z.measurement,
-    z."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME",
-    z."LOCAL_TRIP_START_TIME"  ,
+    s."STATION_NAME",
+    z."LOCAL_TRIP_START_TIME",
+    z."IMOS_SITE_CODE", 
     z."NRS_TRIP_CODE",
     z."NRS_SAMPLE_CODE",
-    z."STATION_NAME",
-    z."IMOS_SITE_CODE", 
-    s."LONGITUDE",
+    z."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME",
     s."LATITUDE",
+    s."LONGITUDE",
     z."TAXON_NAME",
     z."FAMILY",
     z."GENUS",
@@ -417,7 +412,8 @@ CREATE VIEW anmn_nrs_bgc_plankton_zooplankton_data as
     c."FIRST_OCCURRENCE"  AS "TAXON_FIRST_OCCURRENCE",
     c."PARENT_TAXON_NAME",
     c."TRAINING"  AS "TAXON_TRAINING",
-    c."COMMENTS"  AS "TAXON_COMMENTS"
+    c."COMMENTS"  AS "TAXON_COMMENTS",
+    s.geom
   FROM anmn_nrs_bgc_plankton_zooplankton z  
        LEFT JOIN  station_name s  USING ("IMOS_SITE_CODE")
        LEFT JOIN  nrs_zoop_taxon_changelog c  USING ("TAXON_NAME")
@@ -476,16 +472,14 @@ CREATE TABLE anmn_nrs_bgc_plankton_phytoplankton
 DROP VIEW IF EXISTS anmn_nrs_bgc_plankton_phytoplankton_data ;
 CREATE VIEW anmn_nrs_bgc_plankton_phytoplankton_data as
   SELECT
-    s.geom,
-    p.measurement,
-    p."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME",
-    p."LOCAL_TRIP_START_TIME"  ,
+    s."STATION_NAME",
+    p."LOCAL_TRIP_START_TIME",
+    p."IMOS_SITE_CODE", 
     p."NRS_TRIP_CODE",
     p."NRS_SAMPLE_CODE",
-    p."STATION_NAME",
-    p."IMOS_SITE_CODE", 
-    p."LONGITUDE",
-    p."LATITUDE",
+    p."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME",
+    s."LATITUDE",
+    s."LONGITUDE",
     p."TAXON_NAME",
     p."FAMILY",
     p."GENUS",
@@ -499,7 +493,8 @@ CREATE VIEW anmn_nrs_bgc_plankton_phytoplankton_data as
     c."FIRST_OCCURRENCE"  AS "TAXON_FIRST_OCCURRENCE",
     c."PARENT_TAXON_NAME",
     c."TRAINING"  AS "TAXON_TRAINING",
-    c."COMMENTS"  AS "TAXON_COMMENTS"
+    c."COMMENTS"  AS "TAXON_COMMENTS",
+    s.geom
   FROM anmn_nrs_bgc_plankton_phytoplankton p
        LEFT JOIN  station_name s  USING ("IMOS_SITE_CODE")
        LEFT JOIN  nrs_phyto_taxon_changelog c  USING ("TAXON_NAME")
@@ -539,16 +534,14 @@ CREATE TABLE anmn_nrs_bgc_tss_secchi
 DROP VIEW IF EXISTS anmn_nrs_bgc_tss_secchi_data ;
 CREATE VIEW anmn_nrs_bgc_tss_secchi_data as
   SELECT
-    s."LATITUDE",
-    s."LONGITUDE",
-    s.geom,
-    t.measurement,
-    t."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME",
-    t."LOCAL_TRIP_START_TIME"  ,
+    s."STATION_NAME",
+    t."LOCAL_TRIP_START_TIME",
+    t."IMOS_SITE_CODE", 
     t."NRS_TRIP_CODE",
     t."NRS_SAMPLE_CODE",
-    t."STATION_NAME",
-    t."IMOS_SITE_CODE", 
+    t."UTC_TRIP_START_TIME" AT TIME ZONE 'UTC' AS "UTC_TRIP_START_TIME",
+    s."LATITUDE",
+    s."LONGITUDE",
     t."REPLICATE",
     t."TSS_MG_PER_L",
     t."INORGANIC_FRACTION_MG_PER_L",
@@ -557,7 +550,8 @@ CREATE VIEW anmn_nrs_bgc_tss_secchi_data as
     t."TSS_COMMENTS",
     t."SECCHI_DEPTH_M",
     t."SECCHI_FLAG",
-    t."SECCHI_COMMENTS"
+    t."SECCHI_COMMENTS",
+    s.geom
   FROM anmn_nrs_bgc_tss_secchi t  LEFT JOIN  station_name s  USING ("IMOS_SITE_CODE")
   ORDER BY t."NRS_SAMPLE_CODE";
 	</sql>
