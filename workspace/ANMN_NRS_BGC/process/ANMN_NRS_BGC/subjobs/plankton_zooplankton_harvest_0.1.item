@@ -8,6 +8,13 @@
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="anmn_nrs_bgc"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="__UkjUFfbEeOI06CSaOCVIQ" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="Metadata_Password" prompt="Metadata_Password?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
+    <contextParameter comment="" name="Metadata_SpatialColumn" prompt="Metadata_SpatialColumn?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="geom"/>
+    <contextParameter comment="" name="Metadata_SpatialResolution" prompt="Metadata_SpatialResolution?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="1"/>
+    <contextParameter comment="" name="Metadata_URL" prompt="Metadata_URL?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="http://10.11.12.13/geonetwork"/>
+    <contextParameter comment="" name="Metadata_Username" prompt="Metadata_Username?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
+    <contextParameter comment="" name="Metadata_SpatialTable_zooplankton" prompt="Metadata_SpatialTable_zooplankton?" promptNeeded="false" repositoryContextId="_5zS7wFjnEeSoCp0jfWWv0g" type="id_String" value="anmn_nrs_bgc_plankton_zooplankton_data"/>
+    <contextParameter comment="" name="Metadata_UUID_zooplankton" prompt="Metadata_UUID_zooplankton?" promptNeeded="false" repositoryContextId="_5zS7wFjnEeSoCp0jfWWv0g" type="id_String" value="c13451a9-7cfc-091c-e044-00144f7bc0f4"/>
     <contextParameter comment="" name="WfsServerURL" prompt="WfsServerURL?" promptNeeded="false" repositoryContextId="_keR-0ArvEeSHSpYlVevlXQ" type="id_String" value="https://www.cmar.csiro.au/geoserver/wfs"/>
   </context>
   <context confirmationNeeded="false" name="Deployment">
@@ -18,6 +25,13 @@
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="anmn_nrs_bgc"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="#{node['talend']['destination_database_server']}"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="__UkjUFfbEeOI06CSaOCVIQ" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="Metadata_Password" prompt="Metadata_Password?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
+    <contextParameter comment="" name="Metadata_SpatialColumn" prompt="Metadata_SpatialColumn?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="geom"/>
+    <contextParameter comment="" name="Metadata_SpatialResolution" prompt="Metadata_SpatialResolution?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="1"/>
+    <contextParameter comment="" name="Metadata_URL" prompt="Metadata_URL?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="http://10.11.12.13/geonetwork"/>
+    <contextParameter comment="" name="Metadata_Username" prompt="Metadata_Username?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
+    <contextParameter comment="" name="Metadata_SpatialTable_zooplankton" prompt="Metadata_SpatialTable_zooplankton?" promptNeeded="false" repositoryContextId="_5zS7wFjnEeSoCp0jfWWv0g" type="id_String" value="anmn_nrs_bgc_plankton_zooplankton_data"/>
+    <contextParameter comment="" name="Metadata_UUID_zooplankton" prompt="Metadata_UUID_zooplankton?" promptNeeded="false" repositoryContextId="_5zS7wFjnEeSoCp0jfWWv0g" type="id_String" value="c13451a9-7cfc-091c-e044-00144f7bc0f4"/>
     <contextParameter comment="" name="WfsServerURL" prompt="WfsServerURL?" promptNeeded="false" repositoryContextId="_keR-0ArvEeSHSpYlVevlXQ" type="id_String" value="https://www.cmar.csiro.au/geoserver/wfs"/>
   </context>
   <parameters>
@@ -630,7 +644,7 @@
       </column>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="zoop_changelog">
         <mapperTableEntries name="TAXON_NAME" expression="row3.TAXON_NAME" type="id_String"/>
@@ -764,6 +778,29 @@
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
+  </node>
+  <node componentName="iUpdateSpatialExtent" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="800" posY="384">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iUpdateSpatialExtent_1"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="context.Metadata_SpatialTable_zooplankton"/>
+    <elementParameter field="TEXT" name="COLUMN" value="context.Metadata_SpatialColumn"/>
+    <elementParameter field="TEXT" name="RESOLUTION" value="context.Metadata_SpatialResolution"/>
+    <elementParameter field="TEXT" name="GN_SERVICE_URL" value="context.Metadata_URL"/>
+    <elementParameter field="TEXT" name="GN_USERNAME" value="context.Metadata_Username"/>
+    <elementParameter field="TEXT" name="GN_PASSWORD" value="context.Metadata_Password"/>
+    <elementParameter field="TEXT" name="UUID" value="context.Metadata_UUID_zooplankton"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="sWfsInput_1" offsetLabelX="0" offsetLabelY="0" source="sWfsInput_1" target="tConvertType_1">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
@@ -1225,6 +1262,10 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk4"/>
   </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlClose_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlClose_1" target="iUpdateSpatialExtent_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk6"/>
+  </connection>
   <connection connectorName="FLOW" label="row3" lineStyle="0" metaname="sWfsInput_2" offsetLabelX="0" offsetLabelY="0" source="sWfsInput_2" target="tMap_2">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
@@ -1324,6 +1365,11 @@
   </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="sWfsInput_2"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iUpdateSpatialExtent_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
