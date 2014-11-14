@@ -604,7 +604,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from auv_tracks where file_id = &quot; + context.file_id +&quot;  ; &quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from indexed_file where id = (select distinct(file_id) from auv_images where fk_auv_tracks = &#xA;(select pkid from auv_tracks where file_id = &quot;+ context.file_id  +&quot; ));&quot; +&#xA;&quot;delete from auv_tracks where file_id = &quot; + context.file_id +&quot;  ; &quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
