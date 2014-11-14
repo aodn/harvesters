@@ -745,7 +745,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH m AS (SELECT profile_id, COUNT(*) AS nb_measurements, MAX(depth) AS max_depth FROM measurements GROUP BY profile_id ORDER BY profile_id)&#xA;SELECT a.file_id AS profile_id,&#xA;r.line_name AS xbt_line,&#xA;a.callsign,&#xA;r.vessel_name,&#xA;a.timestamp AT TIME ZONE 'UTC' AS \&quot;TIME\&quot;,&#xA;m.nb_measurements,&#xA;m.max_depth,&#xA;s.colour,&#xA;a.geom&#xA;FROM attribute a&#xA;LEFT JOIN m ON m.profile_id = a.file_id&#xA;LEFT JOIN &quot; + context.ReportSchema + &quot;.soop_xbt_realtime_manual r ON r.callsign = a.callsign AND a.timestamp  AT TIME ZONE 'UTC' > start_date AND a.timestamp AT TIME ZONE 'UTC' &lt; end_date&#xA;LEFT JOIN &quot; + context.DMSchema + &quot;.xbt_lines s ON s.\&quot;XBT_line\&quot; = r.line_name&#xA;WHERE a.file_id = &quot; + context.fileId + &quot; AND a.longitude > 133&#xA;ORDER BY profile_id;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH m AS (SELECT profile_id, COUNT(*) AS nb_measurements, MAX(depth) AS max_depth FROM measurements GROUP BY profile_id ORDER BY profile_id)&#xA;SELECT a.file_id AS profile_id,&#xA;a.url AS url,&#xA;r.line_name AS xbt_line,&#xA;a.callsign,&#xA;r.vessel_name,&#xA;a.timestamp AT TIME ZONE 'UTC' AS \&quot;TIME\&quot;,&#xA;m.nb_measurements,&#xA;m.max_depth,&#xA;s.colour,&#xA;a.geom,&#xA;i.size&#xA;FROM attribute a&#xA;LEFT JOIN m ON m.profile_id = a.file_id&#xA;LEFT JOIN &quot; + context.ReportSchema + &quot;.soop_xbt_realtime_manual r ON r.callsign = a.callsign AND a.timestamp  AT TIME ZONE 'UTC' > start_date AND a.timestamp AT TIME ZONE 'UTC' &lt; end_date&#xA;LEFT JOIN &quot; + context.DMSchema + &quot;.xbt_lines s ON s.\&quot;XBT_line\&quot; = r.line_name&#xA;LEFT JOIN indexed_file i ON i.id = a.file_id &#xA;WHERE a.file_id = &quot; + context.fileId + &quot; AND a.longitude > 133&#xA;ORDER BY profile_id;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -754,6 +754,8 @@
     <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
     <elementParameter field="TABLE" name="TRIM_COLUMN">
       <elementValue elementRef="SCHEMA_COLUMN" value="profile_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="url"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="xbt_line"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -771,6 +773,8 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="size"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -778,6 +782,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlInput_1">
       <column comment="" defaultValue="" key="true" length="19" name="profile_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="url" nullable="true" pattern="" sourceType="TEXT" type="id_String"/>
       <column comment="" key="false" length="100" name="xbt_line" nullable="true" originalDbColumnName="XBT_line" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="10" name="callsign" nullable="false" originalDbColumnName="Callsign" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="100" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -786,6 +791,7 @@
       <column comment="" defaultValue="" key="false" length="10" name="max_depth" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
+      <column comment="" key="false" name="size" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
     </metadata>
   </node>
   <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="352" posY="384">
@@ -820,6 +826,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="url"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="xbt_line"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -860,6 +871,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="size"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -871,6 +887,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_3">
       <column comment="" defaultValue="" key="true" length="19" name="profile_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="url" nullable="true" pattern="" sourceType="TEXT" type="id_String"/>
       <column comment="" key="false" length="100" name="xbt_line" nullable="true" originalDbColumnName="XBT_line" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="10" name="callsign" nullable="false" originalDbColumnName="Callsign" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="100" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -879,9 +896,11 @@
       <column comment="" defaultValue="" key="false" length="10" name="max_depth" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
+      <column comment="" key="false" name="size" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" defaultValue="" key="true" length="19" name="profile_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="url" nullable="true" pattern="" sourceType="TEXT" type="id_String"/>
       <column comment="" key="false" length="100" name="xbt_line" nullable="true" originalDbColumnName="XBT_line" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="10" name="callsign" nullable="false" originalDbColumnName="Callsign" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="100" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -890,6 +909,7 @@
       <column comment="" defaultValue="" key="false" length="10" name="max_depth" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
+      <column comment="" key="false" name="size" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1285,6 +1305,12 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="geom"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="url"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="size"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
