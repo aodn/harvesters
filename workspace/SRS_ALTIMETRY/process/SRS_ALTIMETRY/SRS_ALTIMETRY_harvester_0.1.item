@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_qD47cFZQEeO1nIjDowevtg" type="id_String" value="/tmp"/>
-    <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_qD47cFZQEeO1nIjDowevtg" type="id_String" value=""/>
-    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest"/>
+    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="srs_altimetry"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="VvCQgd+qTy5wuahPjYmyiQ=="/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="srs_altimetry"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="10.11.12.13"/>
+    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_qD47cFZQEeO1nIjDowevtg" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_qD47cFZQEeO1nIjDowevtg" type="id_String" value=""/>
+    <contextParameter comment="" name="Metadata_Password" prompt="Metadata_Password?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
+    <contextParameter comment="" name="Metadata_SpatialColumn" prompt="Metadata_SpatialColumn?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="geom"/>
+    <contextParameter comment="" name="Metadata_SpatialResolution" prompt="Metadata_SpatialResolution?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="2"/>
+    <contextParameter comment="" name="Metadata_SpatialTable" prompt="Metadata_SpatialTable?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="srs_altimetry_timeseries_map"/>
+    <contextParameter comment="" name="Metadata_URL" prompt="Metadata_URL?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="http://localhost:8080/geonetwork"/>
+    <contextParameter comment="" name="Metadata_Username" prompt="Metadata_Username?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
+    <contextParameter comment="" name="Metadata_UUID" prompt="Metadata_UUID?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="78d588ed-79dd-47e2-b806-d39025194e7e"/>
     <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_X28C0FZQEeO1nIjDowevtg" type="id_String" value=""/>
     <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_X28C0FZQEeO1nIjDowevtg" type="id_String" value=".*/IMOS_SRS.*nc"/>
     <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_X28C0FZQEeO1nIjDowevtg" type="id_String" value="/mnt/imos-t3/IMOS/opendap/SRS/SRSALT"/>
@@ -16,7 +23,7 @@
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="32"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="0"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
     <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
@@ -50,7 +57,7 @@
     <routinesParameter id="_cRn34BQsEeKRFb0vPU_LNg" name="DAPUtils"/>
     <routinesParameter id="_IMfY4Dp8EeKYTu4DLH4cKg" name="NetCDFUtils"/>
   </parameters>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="96" posY="384">
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="288" posY="160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
@@ -73,7 +80,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_1"/>
   </node>
-  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="544" posY="288">
+  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="704" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
@@ -96,7 +103,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="768" posY="288">
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="864" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_5"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
@@ -121,7 +128,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_5"/>
   </node>
-  <node componentName="iDeletedResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="544" posY="480">
+  <node componentName="iDeletedResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="704" posY="160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
@@ -144,7 +151,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="704" posY="480">
+  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="864" posY="160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
@@ -180,7 +187,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="320" posY="384">
+  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="512" posY="160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
@@ -193,12 +200,34 @@
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/media/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;deployments_table&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE deployments&#xA;(&#xA;deploy_id bigserial,&#xA;file_id integer NOT NULL,&#xA;site_code character varying(50),&#xA;instrument character varying(150),&#xA;conventions character varying(50),&#xA;keywords character varying(400),&#xA;author_email character varying(100),&#xA;project character varying(100),&#xA;data_centre_email character varying(100),&#xA;date_created character varying(100),&#xA;geospatial_vertical_min character varying(100),&#xA;geospatial_vertical_max character varying(100),&#xA;time_coverage_start character varying(100),&#xA;time_coverage_end character varying(100),&#xA;geospatial_lat_min character varying(100),&#xA;geospatial_lat_max character varying(100),&#xA;geospatial_lon_min character varying(100),&#xA;geospatial_lon_max character varying(100),&#xA;author character varying(100),&#xA;title character varying(100),&#xA;principal_investigator character varying(100),&#xA;institution character varying(100),&#xA;  CONSTRAINT deployments_pkey PRIMARY KEY (deploy_id ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;   &#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;measurements_table&quot;>&#xA;       &lt;sql>&#xA;CREATE TABLE measurements&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; real,&#xA;  &quot;CNDC&quot; real,&#xA;  &quot;PRES&quot; real,&#xA;  &quot;PSAL&quot; real,&#xA;  &quot;TEMP&quot; real,&#xA;  &quot;UCUR&quot; real,&#xA;  &quot;VCUR&quot; real,&#xA;  &quot;CNDC_quality_control&quot; character varying(1),&#xA;  &quot;PRES_quality_control&quot; character varying(1),&#xA;  &quot;PSAL_quality_control&quot; character varying(1),&#xA;  &quot;TEMP_quality_control&quot; character varying(1),&#xA;  &quot;UCUR_quality_control&quot; character varying(1),&#xA;  &quot;VCUR_quality_control&quot; character varying(1),&#xA;  geom geometry ,     &#xA;  CONSTRAINT measurements_pkey PRIMARY KEY (measurement),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;      &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;    &#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-3&quot;>&#xA;       &lt;sql>&#xA;ALTER TABLE measurements ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326) USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX measurements_gist_idx ON measurements USING GIST (geom); &#xA; &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;visualisation_wms_table&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE visualisation_wms&#xA;(&#xA;  file_id integer, &#xA;  site_name character varying(50),&#xA;  instrument character varying(150),&#xA;  time_start timestamp with time zone,&#xA;  time_end timestamp with time zone,&#xA;  &quot;CNDC_b&quot; boolean,&#xA;  &quot;PRES_b&quot; boolean,&#xA;  &quot;PSAL_b&quot; boolean,&#xA;  &quot;TEMP_b&quot; boolean,&#xA;  &quot;UCUR_b&quot; boolean,&#xA;  &quot;VCUR_b&quot; boolean,&#xA;  geom geometry)&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-2&quot;>&#xA;        &lt;sql>&#xA;ALTER TABLE visualisation_wms&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX visualisation_wms_gist_idx ON visualisation_wms USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;temporary_wms_table&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE temporary_sub_select_wms&#xA;(file_id integer, &#xA;time_start timestamp with time zone, &#xA;time_end timestamp with time zone, &#xA;&quot;TEMP&quot; bigint,&#xA;&quot;PSAL&quot; bigint,&#xA;&quot;PRES&quot; bigint,&#xA;&quot;CNDC&quot; bigint,&#xA;&quot;UCUR&quot; bigint,&#xA;&quot;VCUR&quot; bigint,&#xA;geom geometry)&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-4&quot;>&#xA;        &lt;sql>&#xA;CREATE INDEX measurements_fileid_idx  ON measurements  USING btree  (file_id );&#xA;CREATE INDEX measurements_fileid_time_idx  ON measurements  USING btree  (file_id ,&quot;TIME&quot;);&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-5&quot;>&#xA;        &lt;sql>&#xA;ALTER TABLE temporary_sub_select_wms&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-6&quot;>     &#xA;    &#x9;&#x9;&lt;sql>&#xA;ALTER TABLE visualisation_wms ADD CHECK (ST_IsValid(geom));&#xA;ALTER TABLE temporary_sub_select_wms ADD CHECK (ST_IsValid(geom));&#xA;ALTER TABLE measurements ADD CHECK (ST_IsValid(geom));&#xA;&lt;/sql>&#xA;&#x9;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-11&quot;>&#xA;        &lt;sql>&#xA;CREATE INDEX visualisation_wms_trip_idx  ON visualisation_wms  USING btree  (file_id );&#xA;ALTER TABLE visualisation_wms ADD CONSTRAINT visualisation_wms_pkey PRIMARY KEY (file_id );&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;srs_altimetry_timeseries_map&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;           DROP VIEW IF EXISTS srs_altimetry_timeseries_map;&#xA;CREATE VIEW srs_altimetry_timeseries_map AS&#xA; SELECT a.file_id, b.size,b.url,a.site_name,a.instrument, timezone('UTC'::text, a.time_start) AS time_start, timezone('UTC'::text, a.time_end) AS time_end,  a.&quot;TEMP_b&quot;  , a.&quot;PSAL_b&quot;, a.&quot;PRES_b&quot;, a.&quot;CNDC_b&quot;, a.&quot;UCUR_b&quot;, a.&quot;VCUR_b&quot;, a.geom&#xA;           FROM visualisation_wms a , indexed_file b  WHERE a.file_id = b.id &#xA;&#xA;    &lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;srs_altimetry_timeseries_data&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;           DROP VIEW IF EXISTS srs_altimetry_timeseries_data;&#xA;CREATE VIEW srs_altimetry_timeseries_data AS&#xA;SELECT &#xA;visualisation_wms.site_name,&#xA;visualisation_wms.instrument,&#xA;timezone('UTC'::text, measurements.&quot;TIME&quot;) AS &quot;TIME&quot;,&#xA;measurements.&quot;LATITUDE&quot;  ,&#xA;measurements.&quot;LONGITUDE&quot;  ,&#xA;measurements.&quot;DEPTH&quot;,&#xA;measurements.&quot;CNDC&quot; ,&#xA;measurements.&quot;PRES&quot; ,&#xA;measurements.&quot;PSAL&quot; ,&#xA;measurements.&quot;TEMP&quot; ,&#xA;measurements.&quot;UCUR&quot; ,&#xA;measurements.&quot;VCUR&quot; ,&#xA;measurements.&quot;CNDC_quality_control&quot; ,&#xA;measurements.&quot;PRES_quality_control&quot; ,&#xA;measurements.&quot;PSAL_quality_control&quot; ,&#xA;measurements.&quot;TEMP_quality_control&quot; ,&#xA;measurements.&quot;UCUR_quality_control&quot; ,&#xA;measurements.&quot;VCUR_quality_control&quot; ,&#xA;measurements.&quot;CNDC&quot; IS NOT NULL AS &quot;CNDC_b&quot; ,&#xA;measurements.&quot;PRES&quot; IS NOT NULL AS &quot;PRES_b&quot; ,&#xA;measurements.&quot;PSAL&quot; IS NOT NULL AS &quot;PSAL_b&quot; ,&#xA;measurements.&quot;TEMP&quot; IS NOT NULL AS &quot;TEMP_b&quot; ,&#xA;measurements.&quot;UCUR&quot; IS NOT NULL AS &quot;UCUR_b&quot; ,&#xA;measurements.&quot;VCUR&quot; IS NOT NULL AS &quot;VCUR_b&quot; &#xA;from measurements ,visualisation_wms&#xA; where visualisation_wms.file_id = measurements.file_id&#xA;  ORDER BY measurements.file_id, measurements.&quot;TIME&quot; ;&#xA;    &lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;deployments_table&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE deployments&#xA;(&#xA;deploy_id bigserial,&#xA;file_id integer NOT NULL,&#xA;site_code character varying(50),&#xA;instrument character varying(150),&#xA;conventions character varying(50),&#xA;keywords character varying(400),&#xA;author_email character varying(100),&#xA;project character varying(100),&#xA;data_centre_email character varying(100),&#xA;date_created character varying(100),&#xA;geospatial_vertical_min character varying(100),&#xA;geospatial_vertical_max character varying(100),&#xA;time_coverage_start character varying(100),&#xA;time_coverage_end character varying(100),&#xA;geospatial_lat_min character varying(100),&#xA;geospatial_lat_max character varying(100),&#xA;geospatial_lon_min character varying(100),&#xA;geospatial_lon_max character varying(100),&#xA;author character varying(100),&#xA;title character varying(100),&#xA;principal_investigator character varying(100),&#xA;institution character varying(100),&#xA;  CONSTRAINT deployments_pkey PRIMARY KEY (deploy_id ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;   &#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;measurements_table&quot;>&#xA;       &lt;sql>&#xA;CREATE TABLE measurements&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; real,&#xA;  &quot;CNDC&quot; real,&#xA;  &quot;PRES&quot; real,&#xA;  &quot;PSAL&quot; real,&#xA;  &quot;TEMP&quot; real,&#xA;  &quot;UCUR&quot; real,&#xA;  &quot;VCUR&quot; real,&#xA;  &quot;CNDC_quality_control&quot; character varying(1),&#xA;  &quot;PRES_quality_control&quot; character varying(1),&#xA;  &quot;PSAL_quality_control&quot; character varying(1),&#xA;  &quot;TEMP_quality_control&quot; character varying(1),&#xA;  &quot;UCUR_quality_control&quot; character varying(1),&#xA;  &quot;VCUR_quality_control&quot; character varying(1),&#xA;  geom geometry ,     &#xA;  CONSTRAINT measurements_pkey PRIMARY KEY (measurement),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;      &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;    &#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-3&quot;>&#xA;       &lt;sql>&#xA;ALTER TABLE measurements ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326) USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX measurements_gist_idx ON measurements USING GIST (geom); &#xA; &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;visualisation_wms_table&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE visualisation_wms&#xA;(&#xA;  file_id integer, &#xA;  site_name character varying(50),&#xA;  instrument character varying(150),&#xA;  time_start timestamp with time zone,&#xA;  time_end timestamp with time zone,&#xA;  &quot;CNDC_b&quot; boolean,&#xA;  &quot;PRES_b&quot; boolean,&#xA;  &quot;PSAL_b&quot; boolean,&#xA;  &quot;TEMP_b&quot; boolean,&#xA;  &quot;UCUR_b&quot; boolean,&#xA;  &quot;VCUR_b&quot; boolean,&#xA;  geom geometry)&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-2&quot;>&#xA;        &lt;sql>&#xA;ALTER TABLE visualisation_wms&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX visualisation_wms_gist_idx ON visualisation_wms USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;temporary_wms_table&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE temporary_sub_select_wms&#xA;(file_id integer, &#xA;time_start timestamp with time zone, &#xA;time_end timestamp with time zone, &#xA;&quot;TEMP&quot; bigint,&#xA;&quot;PSAL&quot; bigint,&#xA;&quot;PRES&quot; bigint,&#xA;&quot;CNDC&quot; bigint,&#xA;&quot;UCUR&quot; bigint,&#xA;&quot;VCUR&quot; bigint,&#xA;geom geometry)&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-4&quot;>&#xA;        &lt;sql>&#xA;CREATE INDEX measurements_fileid_idx  ON measurements  USING btree  (file_id );&#xA;CREATE INDEX measurements_fileid_time_idx  ON measurements  USING btree  (file_id ,&quot;TIME&quot;);&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-5&quot;>&#xA;        &lt;sql>&#xA;ALTER TABLE temporary_sub_select_wms&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-6&quot;>     &#xA;    &#x9;&#x9;&lt;sql>&#xA;ALTER TABLE visualisation_wms ADD CHECK (ST_IsValid(geom));&#xA;ALTER TABLE temporary_sub_select_wms ADD CHECK (ST_IsValid(geom));&#xA;ALTER TABLE measurements ADD CHECK (ST_IsValid(geom));&#xA;&lt;/sql>&#xA;&#x9;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;1382580250144-11&quot;>&#xA;        &lt;sql>&#xA;CREATE INDEX visualisation_wms_trip_idx  ON visualisation_wms  USING btree  (file_id );&#xA;ALTER TABLE visualisation_wms ADD CONSTRAINT visualisation_wms_pkey PRIMARY KEY (file_id );&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;srs_altimetry_timeseries_map&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;           DROP VIEW IF EXISTS srs_altimetry_timeseries_map;&#xA;CREATE VIEW srs_altimetry_timeseries_map AS&#xA; SELECT a.file_id, b.size,b.url,a.site_name,a.instrument, timezone('UTC'::text, a.time_start) AS time_start, timezone('UTC'::text, a.time_end) AS time_end,  a.&quot;TEMP_b&quot;  , a.&quot;PSAL_b&quot;, a.&quot;PRES_b&quot;, a.&quot;CNDC_b&quot;, a.&quot;UCUR_b&quot;, a.&quot;VCUR_b&quot;, a.geom&#xA;           FROM visualisation_wms a , indexed_file b  WHERE a.file_id = b.id &#xA;&#xA;    &lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;srs_altimetry_timeseries_data&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;           DROP VIEW IF EXISTS srs_altimetry_timeseries_data;&#xA;CREATE VIEW srs_altimetry_timeseries_data AS&#xA;SELECT &#xA;visualisation_wms.site_name,&#xA;visualisation_wms.instrument,&#xA;timezone('UTC'::text, measurements.&quot;TIME&quot;) AS &quot;TIME&quot;,&#xA;measurements.&quot;LATITUDE&quot;  ,&#xA;measurements.&quot;LONGITUDE&quot;  ,&#xA;measurements.&quot;DEPTH&quot;,&#xA;measurements.&quot;CNDC&quot; ,&#xA;measurements.&quot;PRES&quot; ,&#xA;measurements.&quot;PSAL&quot; ,&#xA;measurements.&quot;TEMP&quot; ,&#xA;measurements.&quot;UCUR&quot; ,&#xA;measurements.&quot;VCUR&quot; ,&#xA;measurements.&quot;CNDC_quality_control&quot; ,&#xA;measurements.&quot;PRES_quality_control&quot; ,&#xA;measurements.&quot;PSAL_quality_control&quot; ,&#xA;measurements.&quot;TEMP_quality_control&quot; ,&#xA;measurements.&quot;UCUR_quality_control&quot; ,&#xA;measurements.&quot;VCUR_quality_control&quot; ,&#xA;measurements.&quot;CNDC&quot; IS NOT NULL AS &quot;CNDC_b&quot; ,&#xA;measurements.&quot;PRES&quot; IS NOT NULL AS &quot;PRES_b&quot; ,&#xA;measurements.&quot;PSAL&quot; IS NOT NULL AS &quot;PSAL_b&quot; ,&#xA;measurements.&quot;TEMP&quot; IS NOT NULL AS &quot;TEMP_b&quot; ,&#xA;measurements.&quot;UCUR&quot; IS NOT NULL AS &quot;UCUR_b&quot; ,&#xA;measurements.&quot;VCUR&quot; IS NOT NULL AS &quot;VCUR_b&quot; ,&#xA;measurements.geom&#xA;from measurements ,visualisation_wms&#xA; where visualisation_wms.file_id = measurements.file_id&#xA;  ORDER BY measurements.file_id, measurements.&quot;TIME&quot; ;&#xA;    &lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
     <elementParameter field="TEXT" name="LABEL" value="liquidBade_createTables"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="704" posY="480">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_3"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="updateMetadata"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_M8FD0HUeEeSMGfJlj7FlLQ"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tRunJob_3"/>
   </node>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tRunJob_1" offsetLabelX="0" offsetLabelY="0" source="tRunJob_1" target="iPostgresqlDbUpdate_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
@@ -210,19 +239,23 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate1"/>
   </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tRunJob_3">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
+  </connection>
   <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="tPostgresqlRow_1">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="iPostgresqlDbUpdate_1" target="iDeletedResources_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="iHarvestResources_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlDbUpdate_1" offsetLabelX="50" offsetLabelY="50" source="iPostgresqlDbUpdate_1" target="iDeletedResources_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk3"/>
-  </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="iPostgresqlDbUpdate_1" target="iHarvestResources_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk4"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_1"/>
@@ -241,6 +274,11 @@
   </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_3"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
