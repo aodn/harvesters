@@ -118,4 +118,14 @@
     </changeSet>
 
 
+    <changeSet author="talend" id="delete_old_timeseries-1">
+      <sql>
+	DELETE FROM timeseries  USING index_job, indexed_file
+	  WHERE timeseries.file_id = indexed_file.id  AND
+	        indexed_file.job_id = index_job.id    AND
+		indexed_file.last_indexed_run &lt;> index_job.last_run_no;
+      </sql>
+    </changeSet>
+
+
 </databaseChangeLog>
