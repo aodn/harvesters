@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet author="talend" id="create_timeseries_table-1">
+      <sql>
+	CREATE TABLE timeseries
+	(
+	  id bigserial NOT NULL,
+	  file_id bigint NOT NULL,
+	  site_code text NOT NULL,
+	  platform_code text NOT NULL,
+	  deployment_code text NOT NULL,
+	  "LATITUDE" double precision,
+	  "LATITUDE_quality_control" character(1),
+	  "LONGITUDE" double precision,
+	  "LONGITUDE_quality_control" character(1),
+	  geom geometry(Geometry,4326),
+	  instrument_nominal_depth real,
+	  site_nominal_depth real,
+	  instrument text,
+	  time_coverage_start timestamp with time zone,
+	  time_coverage_end timestamp with time zone,
+	  sea_surface_wave_significant_height_b boolean,
+	  CONSTRAINT timeseries_pk PRIMARY KEY (id ),
+	  CONSTRAINT timeseries_file_fk FOREIGN KEY (file_id)
+	      REFERENCES indexed_file (id) MATCH SIMPLE
+	      ON UPDATE CASCADE ON DELETE CASCADE,
+          CONSTRAINT timeseries_geom_check CHECK (st_isvalid(geom))
+	);
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_measurement_table-1">
+      <sql>
+	CREATE TABLE measurement
+	(
+	  ts_id bigint NOT NULL,
+	  index bigint NOT NULL,
+	  "TIME" timestamp with time zone NOT NULL,
+	  "TIME_quality_control" character(1),
+	  "VAVH" real,
+	  "VAVH_quality_control" character(1),
+	  CONSTRAINT measurement_fk PRIMARY KEY (ts_id , index ),
+	  CONSTRAINT measurement_ts_fk FOREIGN KEY (ts_id)
+	      REFERENCES timeseries (id) MATCH SIMPLE
+	      ON UPDATE CASCADE ON DELETE CASCADE
+	);
+	COMMENT ON COLUMN measurement.index IS 'index of measurement in netCDF file';
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="update_geometry_column-1">
+      <sql>
+	ALTER TABLE timeseries
+	  ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)
+	  USING ST_SetSRID(geom,4326);
+	CREATE INDEX timeseries_gist_idx ON timeseries USING GIST (geom); 
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="drop_map_view-2">
+      <preConditions onFail="MARK_RAN">
+        <viewExists viewName="anmn_nrs_rt_wave_timeseries_map"/>
+      </preConditions>
+      <sql>drop view anmn_nrs_rt_wave_timeseries_map</sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_map_view-3">
+      <sql>
+	CREATE OR REPLACE VIEW anmn_nrs_rt_wave_timeseries_map AS 
+	  SELECT 
+	    t.id AS timeseries_id,
+	    f.url AS file_url,
+	    f.size,
+	    -- date(f.first_indexed AT TIME ZONE 'UTC') AS date_published,
+	    t.site_code,
+	    t.platform_code,
+	    t.deployment_code,
+	    t.geom,
+	    t."LATITUDE",
+	    t."LONGITUDE",
+	    t.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+	    t.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
+	    t.instrument_nominal_depth,
+	    t.instrument,
+	    t.sea_surface_wave_significant_height_b
+	    FROM timeseries t JOIN indexed_file f ON t.file_id = f.id;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_data_view-1">
+      <sql>
+	CREATE OR REPLACE VIEW anmn_nrs_rt_wave_timeseries_data AS 
+	  SELECT 
+	    m.ts_id AS timeseries_id,
+	    m.index,
+	    t.site_code,
+	    t.platform_code,
+	    t.deployment_code,
+	    t.instrument_nominal_depth,
+	    m."TIME" AT TIME ZONE 'UTC' AS "TIME",
+	    m."TIME_quality_control",
+	    t."LATITUDE",
+	    t."LATITUDE_quality_control",
+	    t."LONGITUDE",
+	    t."LONGITUDE_quality_control",
+	    m."VAVH",
+	    m."VAVH_quality_control",
+	    t.geom,
+	    t.sea_surface_wave_significant_height_b
+	    FROM  timeseries t  JOIN  measurement m  ON  t.id = m.ts_id;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="delete_old_timeseries-1">
+      <sql>
+	DELETE FROM timeseries  USING index_job, indexed_file
+	  WHERE timeseries.file_id = indexed_file.id  AND
+	        indexed_file.job_id = index_job.id    AND
+		indexed_file.last_indexed_run &lt;> index_job.last_run_no;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="add_unique_constraints-1">
+      <sql>
+	ALTER TABLE timeseries
+	  ADD CONSTRAINT timeseries_platform_start_unique UNIQUE (platform_code, time_coverage_start);
+      </sql>
+    </changeSet>
+
+
+</databaseChangeLog>
