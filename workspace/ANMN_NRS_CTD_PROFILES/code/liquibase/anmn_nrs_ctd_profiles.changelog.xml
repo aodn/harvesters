@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet author="talend" id="cr_deployments-1">
+       <sql>
+       CREATE TABLE deployments
+(
+  file_id integer UNIQUE NOT NULL,
+  time_coverage_start timestamp with time zone,
+  time_coverage_end  timestamp with time zone,
+  site_code character varying(50),
+  cruise_id character varying(50),
+  station character varying(1),
+  longitude character varying(50),
+  latitude character varying(50),
+  quality_control_set character varying(50),
+  geospatial_vertical_min character varying(50),
+  geospatial_vertical_max character varying(50),
+  geospatial_lat_max double precision,
+  geospatial_lon_max double precision,
+    geom geometry(Geometry,4326),
+  CONSTRAINT deployments_pkey PRIMARY KEY (file_id),
+ CONSTRAINT deployments_geom_check CHECK (st_isvalid(geom)),
+  CONSTRAINT fk_file_id FOREIGN KEY (file_id)
+      REFERENCES indexed_file (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE
+)
+
+       </sql>
+    </changeSet>
+   
+
+    <changeSet author="talend" id="cr_measurements-1">
+       <sql>
+    CREATE TABLE measurements
+(
+  measurement bigserial NOT NULL,
+  file_id integer NOT NULL,
+  "TIME" timestamp with time zone,
+  "LATITUDE" double precision,
+  "LONGITUDE" double precision,
+  "DEPTH" real,
+  "PSAL" real,
+  "TEMP" real,
+  "DOX2" real,
+  "CHLF" real,
+  "TURB" real,
+  "BOT_DEPTH" real,
+  "DIRECTION" character varying(1),
+  "PRES_REL" real,
+  "CNDC" real, 
+  "INSTANCE" integer,
+  "DESC" real,
+  "DENS" real,
+    "TIME_quality_control" character varying(1),
+  "LATITUDE_quality_control" character varying(1),
+  "LONGITUDE_quality_control" character varying(1),
+  "DEPTH_quality_control" character varying(1),
+  "PRES_REL_quality_control" character varying(1),
+  "PSAL_quality_control" character varying(1),
+  "TEMP_quality_control" character varying(1),
+  "DOX2_quality_control" character varying(1),
+  "CHLF_quality_control" character varying(1),
+  "TURB_quality_control" character varying(1),
+  "BOT_DEPTH_quality_control" character varying(1),
+  "DIRECTION_quality_control" character varying(1),
+  "DESC_quality_control" character varying(1),
+ "CNDC_quality_control" character varying(1),
+ "DENS_quality_control" character varying(1),
+  CONSTRAINT measurements_pkey PRIMARY KEY (measurement),
+  CONSTRAINT fk_file_id FOREIGN KEY (file_id)
+      REFERENCES indexed_file (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE
+)
+       </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="cr_indx-1">
+       <sql>
+CREATE INDEX measurements_file_id_idx ON measurements (file_id ASC NULLS LAST);
+CREATE INDEX measurements_time_dpth_idx ON measurements (file_id,"TIME","DEPTH");
+CREATE INDEX deployments_gist_idx ON deployments USING GIST (geom); 
+       </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="alter_deployments_table-1">
+       <sql>
+-- Drop views that depend on columns to be changed
+DROP VIEW IF EXISTS anmn_nrs_ctd_profiles_map;
+DROP VIEW IF EXISTS anmn_nrs_ctd_profiles_data;
+
+ALTER TABLE deployments
+   ALTER COLUMN site_code TYPE character varying,
+   ALTER COLUMN cruise_id TYPE character varying,
+   ALTER COLUMN station TYPE character varying;
+       </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="anmn_nrs_ctdpro_map-2" runOnChange="true">
+      <sql>
+DROP VIEW IF EXISTS anmn_nrs_ctd_profiles_map; 
+CREATE VIEW anmn_nrs_ctd_profiles_map AS
+ SELECT d.file_id,
+    	f.url,
+    	f.size,
+    	site_code,
+	cruise_id,
+	station,
+	time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+	time_coverage_end  AT TIME ZONE 'UTC' AS time_coverage_end, 
+    	geospatial_lon_max,
+    	geospatial_lat_max,
+    	geospatial_vertical_min, 
+    	geospatial_vertical_max ,
+   	geom
+    FROM deployments d
+    JOIN indexed_file f ON d.file_id = f.id 
+      </sql>
+    </changeSet>
+
+    <changeSet author="talend" id="anmn_nrs_ctdpro_data-2" runOnChange="true">
+      <sql>
+DROP VIEW IF EXISTS anmn_nrs_ctd_profiles_data; 
+CREATE VIEW anmn_nrs_ctd_profiles_data AS
+ SELECT measurements.file_id, 
+ 	a.site_code,
+ 	a.cruise_id,
+	a.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+  	a.time_coverage_end  AT TIME ZONE 'UTC' AS time_coverage_end, 
+  	"TIME" AT TIME ZONE 'UTC' AS "TIME",
+  	"INSTANCE",
+  	"DIRECTION",
+   	"TIME_quality_control", 
+	"LATITUDE", 
+	"LATITUDE_quality_control",
+	"LONGITUDE",
+	"LONGITUDE_quality_control",
+	"DEPTH", 
+	"DEPTH_quality_control",
+	"BOT_DEPTH",
+	"BOT_DEPTH_quality_control",
+	"PRES_REL" ,
+	"PRES_REL_quality_control",
+	"TEMP",
+	"TEMP_quality_control",
+	"PSAL",   
+	"PSAL_quality_control",
+	"DOX2",
+	"DOX2_quality_control",
+	"TURB", 
+	"TURB_quality_control",
+	"CHLF", 
+	"CHLF_quality_control",
+	"CNDC" ,
+	"CNDC_quality_control",
+	"DESC" , 
+	"DESC_quality_control",
+	"DENS" ,
+	"DENS_quality_control",
+	a.geom
+	FROM measurements
+	 JOIN deployments a ON measurements.file_id = a.file_id
+     ORDER BY measurements.file_id,measurements."TIME",measurements."DEPTH";	
+      </sql>
+    </changeSet>
+
+
+</databaseChangeLog>
