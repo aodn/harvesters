@@ -75,19 +75,32 @@
        </sql>
     </changeSet>
 
+
     <changeSet author="talend" id="cr_indx-1">
        <sql>
 CREATE INDEX measurements_file_id_idx ON measurements (file_id ASC NULLS LAST);
 CREATE INDEX measurements_time_dpth_idx ON measurements (file_id,"TIME","DEPTH");
 CREATE INDEX deployments_gist_idx ON deployments USING GIST (geom); 
-   
        </sql>
     </changeSet>
 
 
+    <changeSet author="talend" id="alter_deployments_table-1">
+       <sql>
+-- Drop views that depend on columns to be changed
+DROP VIEW IF EXISTS anmn_nrs_ctd_profiles_map;
+DROP VIEW IF EXISTS anmn_nrs_ctd_profiles_data;
 
-<changeSet author="talend" id="anmn_nrs_ctdpro_map-1" runOnChange="true">
-        <sql>
+ALTER TABLE deployments
+   ALTER COLUMN site_code TYPE character varying,
+   ALTER COLUMN cruise_id TYPE character varying,
+   ALTER COLUMN station TYPE character varying;
+       </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="anmn_nrs_ctdpro_map-2" runOnChange="true">
+      <sql>
 DROP VIEW IF EXISTS anmn_nrs_ctd_profiles_map; 
 CREATE VIEW anmn_nrs_ctd_profiles_map AS
  SELECT d.file_id,
@@ -105,11 +118,11 @@ CREATE VIEW anmn_nrs_ctd_profiles_map AS
    	geom
     FROM deployments d
     JOIN indexed_file f ON d.file_id = f.id 
-	</sql>
- </changeSet>
+      </sql>
+    </changeSet>
 
-<changeSet author="talend" id="anmn_nrs_ctdpro_data-1" runOnChange="true">
-        <sql>
+    <changeSet author="talend" id="anmn_nrs_ctdpro_data-2" runOnChange="true">
+      <sql>
 DROP VIEW IF EXISTS anmn_nrs_ctd_profiles_data; 
 CREATE VIEW anmn_nrs_ctd_profiles_data AS
  SELECT measurements.file_id, 
@@ -151,8 +164,8 @@ CREATE VIEW anmn_nrs_ctd_profiles_data AS
 	FROM measurements
 	 JOIN deployments a ON measurements.file_id = a.file_id
      ORDER BY measurements.file_id,measurements."TIME",measurements."DEPTH";	
-   </sql>
-   </changeSet>
+      </sql>
+    </changeSet>
 
 
 </databaseChangeLog>
