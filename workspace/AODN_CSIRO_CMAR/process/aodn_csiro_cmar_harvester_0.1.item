@@ -23,7 +23,7 @@
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="32"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="32"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
     <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
@@ -108,13 +108,13 @@
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/Users/xavierhoenner/Work/Resources/TOS_DI-r96646-V5.1.3/workspace/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_adcp_measurements_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE adcp_measurements&#xA;(&#xA;  measurement_id bigserial NOT NULL,&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;PROJECT_NAME&quot; text,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;BOTTOM_DEPTH&quot; integer,&#xA;  &quot;AVERAGING_PERIOD&quot; integer,&#xA;  &quot;DEPTH&quot; double precision,&#xA;  &quot;U_SHIP&quot; double precision,&#xA;  &quot;V_SHIP&quot; double precision,&#xA;  &quot;U&quot; double precision,&#xA;  &quot;V&quot; double precision,&#xA;  &quot;AVG_QC&quot; double precision,&#xA;  &quot;BIN_ATTENDANCE&quot; integer,&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT adcp_measurements_pkey PRIMARY KEY (measurement_id),&#xA;CONSTRAINT adcp_measurements_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_ctd_measurements_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE ctd_measurements&#xA;(&#xA;  measurement_id bigserial NOT NULL,&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;PROJECT_NAME&quot; text,&#xA;  &quot;STATION_NAME&quot; text,&#xA;  &quot;TIME_START&quot; timestamp with time zone,&#xA;  &quot;TIME_END&quot; timestamp with time zone,&#xA;  &quot;LON_START&quot; double precision,&#xA;  &quot;LAT_START&quot; double precision,&#xA;  &quot;LON_BOTTOM&quot; double precision,&#xA;  &quot;LAT_BOTTOM&quot; double precision,&#xA;  &quot;LON_END&quot; double precision,&#xA;  &quot;LAT_END&quot; double precision,&#xA;  &quot;MIN_DEPTH&quot; double precision,&#xA;  &quot;MAX_DEPTH&quot; double precision,&#xA;  &quot;BOTTOM_DEPTH&quot; double precision,&#xA;  &quot;PRESSURE&quot; double precision,&#xA;  &quot;SALINITY&quot; double precision,&#xA;  &quot;SALINITY_QC&quot; integer,&#xA;  &quot;TEMPERATURE&quot; double precision,&#xA;  &quot;TEMPERATURE_QC&quot; integer,&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT ctd_measurements_pkey PRIMARY KEY (measurement_id),&#xA;CONSTRAINT ctd_measurements_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_hydrology_measurements_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE hydrology_measurements&#xA;(&#xA;  measurement_id bigserial NOT NULL,&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;PROJECT_NAME&quot; text,&#xA;  &quot;PROJECT_ID&quot; text,&#xA;  &quot;DEPLOYMENT_ID&quot; text,&#xA;  &quot;DATA_ID&quot; text,&#xA;  &quot;CAST_NO&quot; text,&#xA;  &quot;BOTTLE_NUMBER&quot; integer,&#xA;  &quot;TIME_START&quot; timestamp with time zone,&#xA;  &quot;TIME_END&quot; timestamp with time zone,&#xA;  &quot;TIME_BOTTOM&quot; text,&#xA;  &quot;TIME_QC_FLAG&quot; integer,&#xA;  &quot;LON_START&quot; double precision,&#xA;  &quot;LAT_START&quot; double precision,&#xA;  &quot;LON_BOTTOM&quot; double precision,&#xA;  &quot;LAT_BOTTOM&quot; double precision,&#xA;  &quot;LON_END&quot; double precision,&#xA;  &quot;LAT_END&quot; double precision,&#xA;  &quot;POSITION_QC_FLAG&quot; integer,&#xA;  &quot;PRESSURE&quot; double precision,&#xA;  &quot;SALINITY&quot; double precision,&#xA;  &quot;SALINITY_QC&quot; integer,&#xA;  &quot;TEMPERATURE&quot; double precision,&#xA;  &quot;TEMPERATURE_QC&quot; integer,&#xA;  &quot;ROSETTAPOSITION&quot; double precision,&#xA;  &quot;ROSETTAPOSITION_QC&quot; integer,&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT hydrology_measurements_pkey PRIMARY KEY (measurement_id),&#xA;CONSTRAINT hydrology_measurements_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_mooring_measurements_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE mooring_measurements&#xA;(&#xA;  measurement_id bigserial NOT NULL,&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;PROJECT_NAME&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;STATION_NO&quot; text,&#xA;  &quot;FILTER_ID&quot; text,&#xA;  &quot;MOORING_NAME&quot; text,&#xA;  &quot;MODEL_NO&quot; text,&#xA;  &quot;SERIAL_NO&quot; text,&#xA;  &quot;START_TIME&quot; text,&#xA;  &quot;END_TIME&quot; text,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;TIME_QC_FLAG&quot; integer,&#xA;  &quot;START_LON&quot; double precision,&#xA;  &quot;START_LAT&quot; double precision,&#xA;  &quot;NOMINAL_METER_DEPTH&quot; double precision,&#xA;  &quot;METER_TYPE&quot; text,&#xA;  &quot;NORTH_COMPONENT&quot; double precision,&#xA;  &quot;NORTH_COMPONENT_QC_FLAG&quot; integer,&#xA;  &quot;EAST_COMPONENT&quot; double precision,&#xA;  &quot;EAST_COMPONENT_QC_FLAG&quot; integer,&#xA;  &quot;SALINITY&quot; double precision,&#xA;  &quot;SALINITY_QC_FLAG&quot; integer,&#xA;  &quot;TEMPERATURE&quot; double precision,&#xA;  &quot;TEMPERATURE_QC_FLAG&quot; integer,&#xA;  &quot;PRESSURE&quot; double precision,&#xA;  &quot;PRESSURE_QC_FLAG&quot; integer,&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT mooring_measurements_pkey PRIMARY KEY (measurement_id),&#xA;CONSTRAINT mooring_measurements_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_trajectory_measurements_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE trajectory_measurements&#xA;(&#xA;  measurement_id bigserial NOT NULL,&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;PROJECT_ID&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;INSTRUMENT&quot; text,&#xA;  &quot;LEG&quot; text,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;PRESSURE&quot; double precision,&#xA;  &quot;TEMPERATURE&quot; double precision,&#xA;  &quot;TEMPERATURE_QC&quot; integer,&#xA;  &quot;SALINITY&quot; double precision,&#xA;  &quot;SALINITY_QC&quot; integer,&#xA;  &quot;SIGMA&quot; double precision,&#xA;  &quot;WATER_DEPTH&quot; double precision,&#xA;  &quot;OXYGEN&quot; double precision,&#xA;  &quot;PITCH&quot; double precision,&#xA;  &quot;FLUORESCENCE&quot; double precision,&#xA;  &quot;LIGHT&quot; double precision,&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT trajectory_measurements_pkey PRIMARY KEY (measurement_id),&#xA;CONSTRAINT trajectory_measurements_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_underway_measurements_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE underway_measurements&#xA;(&#xA;  measurement_id bigserial NOT NULL,&#xA;  file_id integer,&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;PROJECT_ID&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;POSITION_QC&quot; integer,&#xA;  &quot;SALINITY&quot; double precision,&#xA;  &quot;SALINITY_QC&quot; integer,&#xA;  &quot;SEA_SURFACE_TEMP&quot; double precision,&#xA;  &quot;SEA_SURFACE_TEMP_QC&quot; integer,&#xA;  &quot;AIR_TEMP&quot; double precision,&#xA;  &quot;AIR_TEMP_QC&quot; integer,&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT underway_measurements_pkey PRIMARY KEY (measurement_id),&#xA;CONSTRAINT underway_measurements_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_xbt_measurements_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE xbt_measurements&#xA;(&#xA;  measurement_id bigserial NOT NULL,&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;PROJECT_NAME&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;STATION_NAME&quot; text,&#xA;  &quot;MIN_DEPTH&quot; double precision,&#xA;  &quot;MAX_DEPTH&quot; double precision,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; double precision,&#xA;  &quot;TEMPERATURE&quot; double precision,&#xA;  &quot;TEMPERATURE_QC&quot; integer,&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT xbt_measurements_pkey PRIMARY KEY (measurement_id),&#xA;CONSTRAINT xbt_measurements_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;xhoenner&quot; id= &quot;set_srid_and_add_stisvalid_on_geom_for_measurements_tables&quot;>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('adcp_measurements','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX adcp_measurements_gist_idx ON adcp_measurements USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('ctd_measurements','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX ctd_measurements_gist_idx ON ctd_measurements USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('hydrology_measurements','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX hydrology_measurements_gist_idx ON hydrology_measurements USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('mooring_measurements','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX mooring_measurements_gist_idx ON mooring_measurements USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('trajectory_measurements','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX trajectory_measurements_gist_idx ON trajectory_measurements USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('underway_measurements','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX underway_measurements_gist_idx ON underway_measurements USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('xbt_measurements','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX xbt_measurements_gist_idx ON xbt_measurements USING GIST (geom);&#xA;&#x9;&lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;   &lt;changeSet author=&quot;xhoenner&quot; id=&quot;Add_index_on_measurements_tables&quot;>&#xA;      &lt;sql>&#xA;&#x9;&#x9;CREATE INDEX adcp_measurements_idx ON adcp_measurements USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));&#xA;&#x9;&#x9;CREATE INDEX ctd_measurements_idx ON ctd_measurements USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME_START&quot;), timezone('UTC'::text, &quot;TIME_END&quot;));&#xA;&#x9;&#x9;CREATE INDEX hydrology_measurements_idx ON hydrology_measurements USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME_START&quot;), timezone('UTC'::text, &quot;TIME_END&quot;));&#xA;&#x9;&#x9;CREATE INDEX mooring_measurements_idx ON mooring_measurements USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));&#xA;&#x9;&#x9;CREATE INDEX trajectory_measurements_idx ON trajectory_measurements USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));&#xA;&#x9;&#x9;CREATE INDEX underway_measurements_idx ON underway_measurements USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));&#xA;&#x9;&#x9;CREATE INDEX xbt_measurements_idx ON xbt_measurements USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_adcp_measurements_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE adcp_measurements&#xA;(&#xA;  measurement_id bigserial NOT NULL,&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;PROJECT_NAME&quot; text,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;BOTTOM_DEPTH&quot; integer,&#xA;  &quot;AVERAGING_PERIOD&quot; integer,&#xA;  &quot;DEPTH&quot; double precision,&#xA;  &quot;U_SHIP&quot; double precision,&#xA;  &quot;V_SHIP&quot; double precision,&#xA;  &quot;U&quot; double precision,&#xA;  &quot;V&quot; double precision,&#xA;  &quot;AVG_QC&quot; double precision,&#xA;  &quot;BIN_ATTENDANCE&quot; integer,&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT adcp_measurements_pkey PRIMARY KEY (measurement_id),&#xA;CONSTRAINT adcp_measurements_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_ctd_measurements_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE ctd_measurements&#xA;(&#xA;  measurement_id bigserial NOT NULL,&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;PROJECT_NAME&quot; text,&#xA;  &quot;STATION_NAME&quot; text,&#xA;  &quot;TIME_START&quot; timestamp with time zone,&#xA;  &quot;TIME_END&quot; timestamp with time zone,&#xA;  &quot;LON_START&quot; double precision,&#xA;  &quot;LAT_START&quot; double precision,&#xA;  &quot;LON_BOTTOM&quot; double precision,&#xA;  &quot;LAT_BOTTOM&quot; double precision,&#xA;  &quot;LON_END&quot; double precision,&#xA;  &quot;LAT_END&quot; double precision,&#xA;  &quot;MIN_DEPTH&quot; double precision,&#xA;  &quot;MAX_DEPTH&quot; double precision,&#xA;  &quot;BOTTOM_DEPTH&quot; double precision,&#xA;  &quot;PRESSURE&quot; double precision,&#xA;  &quot;SALINITY&quot; double precision,&#xA;  &quot;SALINITY_QC&quot; integer,&#xA;  &quot;TEMPERATURE&quot; double precision,&#xA;  &quot;TEMPERATURE_QC&quot; integer,&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT ctd_measurements_pkey PRIMARY KEY (measurement_id),&#xA;CONSTRAINT ctd_measurements_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_hydrology_measurements_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE hydrology_measurements&#xA;(&#xA;  measurement_id bigserial NOT NULL,&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;PROJECT_NAME&quot; text,&#xA;  &quot;PROJECT_ID&quot; text,&#xA;  &quot;DEPLOYMENT_ID&quot; text,&#xA;  &quot;DATA_ID&quot; text,&#xA;  &quot;CAST_NO&quot; text,&#xA;  &quot;BOTTLE_NUMBER&quot; integer,&#xA;  &quot;TIME_START&quot; timestamp with time zone,&#xA;  &quot;TIME_END&quot; timestamp with time zone,&#xA;  &quot;TIME_BOTTOM&quot; text,&#xA;  &quot;TIME_QC_FLAG&quot; integer,&#xA;  &quot;LON_START&quot; double precision,&#xA;  &quot;LAT_START&quot; double precision,&#xA;  &quot;LON_BOTTOM&quot; double precision,&#xA;  &quot;LAT_BOTTOM&quot; double precision,&#xA;  &quot;LON_END&quot; double precision,&#xA;  &quot;LAT_END&quot; double precision,&#xA;  &quot;POSITION_QC_FLAG&quot; integer,&#xA;  &quot;PRESSURE&quot; double precision,&#xA;  &quot;SALINITY&quot; double precision,&#xA;  &quot;SALINITY_QC&quot; integer,&#xA;  &quot;TEMPERATURE&quot; double precision,&#xA;  &quot;TEMPERATURE_QC&quot; integer,&#xA;  &quot;ROSETTAPOSITION&quot; double precision,&#xA;  &quot;ROSETTAPOSITION_QC&quot; integer,&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT hydrology_measurements_pkey PRIMARY KEY (measurement_id),&#xA;CONSTRAINT hydrology_measurements_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_mooring_measurements_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE mooring_measurements&#xA;(&#xA;  measurement_id bigserial NOT NULL,&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;PROJECT_NAME&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;STATION_NO&quot; text,&#xA;  &quot;FILTER_ID&quot; text,&#xA;  &quot;MOORING_NAME&quot; text,&#xA;  &quot;MODEL_NO&quot; text,&#xA;  &quot;SERIAL_NO&quot; text,&#xA;  &quot;START_TIME&quot; text,&#xA;  &quot;END_TIME&quot; text,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;TIME_QC_FLAG&quot; integer,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;NOMINAL_METER_DEPTH&quot; double precision,&#xA;  &quot;METER_TYPE&quot; text,&#xA;  &quot;NORTH_COMPONENT&quot; double precision,&#xA;  &quot;NORTH_COMPONENT_QC_FLAG&quot; integer,&#xA;  &quot;EAST_COMPONENT&quot; double precision,&#xA;  &quot;EAST_COMPONENT_QC_FLAG&quot; integer,&#xA;  &quot;SALINITY&quot; double precision,&#xA;  &quot;SALINITY_QC_FLAG&quot; integer,&#xA;  &quot;TEMPERATURE&quot; double precision,&#xA;  &quot;TEMPERATURE_QC_FLAG&quot; integer,&#xA;  &quot;PRESSURE&quot; double precision,&#xA;  &quot;PRESSURE_QC_FLAG&quot; integer,&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT mooring_measurements_pkey PRIMARY KEY (measurement_id),&#xA;CONSTRAINT mooring_measurements_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_trajectory_measurements_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE trajectory_measurements&#xA;(&#xA;  measurement_id bigserial NOT NULL,&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;PROJECT_ID&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;INSTRUMENT&quot; text,&#xA;  &quot;LEG&quot; text,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;PRESSURE&quot; double precision,&#xA;  &quot;TEMPERATURE&quot; double precision,&#xA;  &quot;TEMPERATURE_QC&quot; integer,&#xA;  &quot;SALINITY&quot; double precision,&#xA;  &quot;SALINITY_QC&quot; integer,&#xA;  &quot;SIGMA&quot; double precision,&#xA;  &quot;WATER_DEPTH&quot; double precision,&#xA;  &quot;OXYGEN&quot; double precision,&#xA;  &quot;PITCH&quot; double precision,&#xA;  &quot;FLUORESCENCE&quot; double precision,&#xA;  &quot;LIGHT&quot; double precision,&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT trajectory_measurements_pkey PRIMARY KEY (measurement_id),&#xA;CONSTRAINT trajectory_measurements_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_underway_measurements_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE underway_measurements&#xA;(&#xA;  measurement_id bigserial NOT NULL,&#xA;  file_id integer,&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;PROJECT_ID&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;POSITION_QC&quot; integer,&#xA;  &quot;SALINITY&quot; double precision,&#xA;  &quot;SALINITY_QC&quot; integer,&#xA;  &quot;SEA_SURFACE_TEMP&quot; double precision,&#xA;  &quot;SEA_SURFACE_TEMP_QC&quot; integer,&#xA;  &quot;AIR_TEMP&quot; double precision,&#xA;  &quot;AIR_TEMP_QC&quot; integer,&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT underway_measurements_pkey PRIMARY KEY (measurement_id),&#xA;CONSTRAINT underway_measurements_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_xbt_measurements_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE xbt_measurements&#xA;(&#xA;  measurement_id bigserial NOT NULL,&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;PROJECT_NAME&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;STATION_NAME&quot; text,&#xA;  &quot;MIN_DEPTH&quot; double precision,&#xA;  &quot;MAX_DEPTH&quot; double precision,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; double precision,&#xA;  &quot;TEMPERATURE&quot; double precision,&#xA;  &quot;TEMPERATURE_QC&quot; integer,&#xA;  geom geometry(Geometry,4326),&#xA;  CONSTRAINT xbt_measurements_pkey PRIMARY KEY (measurement_id),&#xA;CONSTRAINT xbt_measurements_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;xhoenner&quot; id= &quot;set_srid_and_add_stisvalid_on_geom_for_measurements_tables&quot;>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('adcp_measurements','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX adcp_measurements_gist_idx ON adcp_measurements USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('ctd_measurements','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX ctd_measurements_gist_idx ON ctd_measurements USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('hydrology_measurements','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX hydrology_measurements_gist_idx ON hydrology_measurements USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('mooring_measurements','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX mooring_measurements_gist_idx ON mooring_measurements USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('trajectory_measurements','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX trajectory_measurements_gist_idx ON trajectory_measurements USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('underway_measurements','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX underway_measurements_gist_idx ON underway_measurements USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('xbt_measurements','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX xbt_measurements_gist_idx ON xbt_measurements USING GIST (geom);&#xA;&#x9;&lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;   &lt;changeSet author=&quot;xhoenner&quot; id=&quot;Add_index_on_measurements_tables&quot;>&#xA;      &lt;sql>&#xA;&#x9;&#x9;CREATE INDEX adcp_measurements_idx ON adcp_measurements USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));&#xA;&#x9;&#x9;CREATE INDEX ctd_measurements_idx ON ctd_measurements USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME_START&quot;), timezone('UTC'::text, &quot;TIME_END&quot;));&#xA;&#x9;&#x9;CREATE INDEX hydrology_measurements_idx ON hydrology_measurements USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME_START&quot;), timezone('UTC'::text, &quot;TIME_END&quot;));&#xA;&#x9;&#x9;CREATE INDEX mooring_measurements_idx ON mooring_measurements USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));&#xA;&#x9;&#x9;CREATE INDEX trajectory_measurements_idx ON trajectory_measurements USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));&#xA;&#x9;&#x9;CREATE INDEX underway_measurements_idx ON underway_measurements USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));&#xA;&#x9;&#x9;CREATE INDEX xbt_measurements_idx ON xbt_measurements USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="288">
+  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="416">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_yeBT0HmqEeOnMNAUOu1ENQ"/>
@@ -137,11 +137,11 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="352" posY="288">
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="288" posY="416">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_1"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
-    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Harvest_data"/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Harvest_underway_data"/>
     <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_j_DKkHykEeOBc4eP00PLRQ"/>
     <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
     <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
@@ -164,7 +164,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_1"/>
   </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="544">
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="672" posY="544">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_5"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
@@ -246,59 +246,167 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="416">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_2"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_yeBT0HmqEeOnMNAUOu1ENQ"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
-    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
-    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
-    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
-    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM measurements CASCADE&#xA;WHERE id IN (SELECT id&#xA;FROM (SELECT id, row_number() OVER (PARTITION BY pttid,observation_date ORDER BY pttid) AS rnum FROM measurements) t&#xA;WHERE t.rnum > 1);&quot;&#xA;+&#xA;&quot;DELETE FROM aatams_biologging_penguin_map CASCADE&#xA;WHERE pttid IN (SELECT pttid&#xA;FROM (SELECT pttid, row_number() OVER (PARTITION BY pttid,observation_start_date, observation_end_date ORDER BY pttid) AS rnum FROM aatams_biologging_penguin_map) t&#xA;WHERE t.rnum > 1);&quot;"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
-    <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
-    <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
-    <elementParameter field="TABLE" name="SET_PREPAREDSTATEMENT_PARAMETERS"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
-    <elementParameter field="TEXT" name="LABEL" value="Delete duplicates from _map and _data tables"/>
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="128" posY="288">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_3"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Harvest_other_csiro_data"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_AYiQkLMgEeSNiJndeoRexw"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="Harvest_adcp_data"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlRow_2"/>
-    <metadata connector="REJECT" name="REJECT">
-      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
-    </metadata>
   </node>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="iIndexFiles_1" target="iHarvestResources_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
-  </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="iIndexFiles_1" target="iDeletedResources_1">
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="288" posY="288">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_4"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Harvest_ctd_data"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_GH3ZcLVmEeS2v8brSWKWzA"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tRunJob_4"/>
+  </node>
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="448" posY="288">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_6"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Harvest_hydrology_data"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_L4q6cLVmEeS2v8brSWKWzA"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tRunJob_6"/>
+  </node>
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="640" posY="288">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_7"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Harvest_mooring_data"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_LlaAMLVmEeS2v8brSWKWzA"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tRunJob_7"/>
+  </node>
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="832" posY="288">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_8"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Harvest_trajectory_data"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_LROf8LVmEeS2v8brSWKWzA"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tRunJob_8"/>
+  </node>
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="992" posY="288">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_9"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Harvest_xbt_data"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_K4AusLVmEeS2v8brSWKWzA"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tRunJob_9"/>
+  </node>
+  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="544">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_2"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_yeBT0HmqEeOnMNAUOu1ENQ"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;/Users/xavierhoenner/Work/Resources/TOS_DI-r96646-V5.1.3/workspace/changelog.xml&quot;"/>
+    <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aodn_csiro_cmar_surveys_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE aodn_csiro_cmar_surveys&#xA;(&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  colour text,&#xA;  CONSTRAINT surveys_pkey PRIMARY KEY (&quot;SURVEY_ID&quot;)&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aodn_csiro_cmar_adcp_map_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE aodn_csiro_cmar_adcp_map&#xA;(&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;PROJECT_NAME&quot; text,&#xA;  &quot;TIME_START&quot; timestamp with time zone,&#xA;  &quot;TIME_END&quot; timestamp with time zone,&#xA;  &quot;MIN_DEPTH&quot; double precision,&#xA;  &quot;MAX_DEPTH&quot; double precision,&#xA;  geom geometry(Geometry,4326),&#xA;  colour text,&#xA;  CONSTRAINT adcp_map_pkey PRIMARY KEY (measurement_id),&#xA;CONSTRAINT adcp_map_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aodn_csiro_cmar_ctd_map_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE aodn_csiro_cmar_ctd_map&#xA;(&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;PROJECT_NAME&quot; text,&#xA;  &quot;TIME_START&quot; timestamp with time zone,&#xA;  &quot;TIME_END&quot; timestamp with time zone,&#xA;  &quot;MIN_DEPTH&quot; double precision,&#xA;  &quot;MAX_DEPTH&quot; double precision,&#xA;  geom geometry(Geometry,4326),&#xA;  colour text,&#xA;  CONSTRAINT ctd_map_pkey PRIMARY KEY (&quot;SURVEY_ID&quot;, &quot;TIME_START&quot;),&#xA;CONSTRAINT ctd_map_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aodn_csiro_cmar_hydrology_map_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE aodn_csiro_cmar_hydrology_map&#xA;(&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;PROJECT_NAME&quot; text,&#xA;  &quot;TIME_START&quot; timestamp with time zone,&#xA;  &quot;TIME_END&quot; timestamp with time zone,&#xA;  &quot;MIN_PRESSURE&quot; double precision,&#xA;  &quot;MAX_PRESSURE&quot; double precision,&#xA;  geom geometry(Geometry,4326),&#xA;  colour text,&#xA;  CONSTRAINT hydrology_map_pkey PRIMARY KEY (&quot;SURVEY_ID&quot;, &quot;TIME_START&quot;, &quot;TIME_END&quot;),&#xA;CONSTRAINT hydrology_map_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aodn_csiro_cmar_mooring_map_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE aodn_csiro_cmar_mooring_map&#xA;(&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;PROJECT_NAME&quot; text,&#xA;  &quot;TIME_START&quot; timestamp with time zone,&#xA;  &quot;TIME_END&quot; timestamp with time zone,&#xA;  &quot;MIN_DEPTH&quot; double precision,&#xA;  &quot;MAX_DEPTH&quot; double precision,&#xA;  geom geometry(Geometry,4326),&#xA;  colour text,&#xA;  CONSTRAINT mooring_map_pkey PRIMARY KEY (&quot;SURVEY_ID&quot;, &quot;TIME_START&quot;),&#xA;CONSTRAINT mooring_map_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aodn_csiro_cmar_trajectory_map_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE aodn_csiro_cmar_trajectory_map&#xA;(&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;PROJECT_ID&quot; text,&#xA;  &quot;TIME_START&quot; timestamp with time zone,&#xA;  &quot;TIME_END&quot; timestamp with time zone,&#xA;  &quot;MIN_PRESSURE&quot; double precision,&#xA;  &quot;MAX_PRESSURE&quot; double precision,&#xA;  geom geometry(Geometry,4326),&#xA;  colour text,&#xA;  CONSTRAINT trajectory_map_pkey PRIMARY KEY (&quot;SURVEY_ID&quot;, &quot;TIME_START&quot;),&#xA;CONSTRAINT trajectory_map_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aodn_csiro_cmar_underway_map_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE aodn_csiro_cmar_underway_map&#xA;(&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;PROJECT_ID&quot; text,&#xA;  &quot;TIME_START&quot; timestamp with time zone,&#xA;  &quot;TIME_END&quot; timestamp with time zone,&#xA;  geom geometry(Geometry,4326),&#xA;  colour text,&#xA;  CONSTRAINT underway_map_pkey PRIMARY KEY (&quot;SURVEY_ID&quot;, &quot;TIME_START&quot;),&#xA;CONSTRAINT underway_map_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aodn_csiro_cmar_xbt_map_table&quot;>&#xA;&#x9;&lt;sql>&#xA;CREATE TABLE aodn_csiro_cmar_xbt_map&#xA;(&#xA;  &quot;SURVEY_ID&quot; text,&#xA;  &quot;MARLIN_ID&quot; text,&#xA;  &quot;PROJECT_NAME&quot; text,&#xA;  &quot;TIME_START&quot; timestamp with time zone,&#xA;  &quot;TIME_END&quot; timestamp with time zone,&#xA;  &quot;MIN_DEPTH&quot; double precision,&#xA;  &quot;MAX_DEPTH&quot; double precision,&#xA;  geom geometry(Geometry,4326),&#xA;  colour text,&#xA;  CONSTRAINT xbt_map_pkey PRIMARY KEY (&quot;SURVEY_ID&quot;, &quot;TIME_START&quot;),&#xA;CONSTRAINT xbt_map_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;xhoenner&quot; id= &quot;set_srid_and_add_stisvalid_on_geom_for_map_tables&quot;>&#xA;&#x9;&lt;sql>&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('aodn_csiro_cmar_adcp_map','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX adcp_map_gist_idx ON aodn_csiro_cmar_adcp_map USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('aodn_csiro_cmar_ctd_map','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX ctd_map_gist_idx ON aodn_csiro_cmar_ctd_map USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('aodn_csiro_cmar_hydrology_map','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX hydrology_map_gist_idx ON aodn_csiro_cmar_hydrology_map USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('aodn_csiro_cmar_mooring_map','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX mooring_map_gist_idx ON aodn_csiro_cmar_mooring_map USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('aodn_csiro_cmar_trajectory_map','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX trajectory_map_gist_idx ON aodn_csiro_cmar_trajectory_map USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('aodn_csiro_cmar_underway_map','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX underway_map_gist_idx ON aodn_csiro_cmar_underway_map USING GIST (geom);&#xA;&#x9;&#x9;SELECT UpdateGeometrySRID('aodn_csiro_cmar_xbt_map','geom',4326);&#xA;&#x9;&#x9;CREATE INDEX xbt_map_gist_idx ON aodn_csiro_cmar_xbt_map USING GIST (geom);&#xA;&#x9;&lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;   &lt;changeSet author=&quot;xhoenner&quot; id=&quot;Add_index_on_map_tables&quot;>&#xA;      &lt;sql>&#xA;&#x9;&#x9;CREATE INDEX adcp_map_idx ON aodn_csiro_cmar_adcp_map USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME_START&quot;), timezone('UTC'::text, &quot;TIME_END&quot;));&#xA;&#x9;&#x9;CREATE INDEX ctd_map_idx ON aodn_csiro_cmar_ctd_map USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME_START&quot;), timezone('UTC'::text, &quot;TIME_END&quot;));&#xA;&#x9;&#x9;CREATE INDEX hydrology_map_idx ON aodn_csiro_cmar_hydrology_map USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME_START&quot;), timezone('UTC'::text, &quot;TIME_END&quot;));&#xA;&#x9;&#x9;CREATE INDEX mooring_map_idx ON aodn_csiro_cmar_mooring_map USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME_START&quot;), timezone('UTC'::text, &quot;TIME_END&quot;));&#xA;&#x9;&#x9;CREATE INDEX trajectory_map_idx ON aodn_csiro_cmar_trajectory_map USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME_START&quot;), timezone('UTC'::text, &quot;TIME_END&quot;));&#xA;&#x9;&#x9;CREATE INDEX underway_map_idx ON aodn_csiro_cmar_underway_map USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME_START&quot;), timezone('UTC'::text, &quot;TIME_END&quot;));&#xA;&#x9;&#x9;CREATE INDEX xbt_map_idx ON aodn_csiro_cmar_xbt_map USING btree (&quot;SURVEY_ID&quot;, timezone('UTC'::text, &quot;TIME_START&quot;), timezone('UTC'::text, &quot;TIME_END&quot;));&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="iIndexFiles_1" target="iDeletedResources_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="iIndexFiles_1" target="tRunJob_3">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iIndexFiles_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
-  </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tPostgresqlRow_2">
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
   </connection>
   <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tRunJob_1">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
@@ -306,20 +414,44 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate1"/>
   </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="iPostgresqlDbUpdate_2">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk10"/>
+  </connection>
   <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="tPostgresqlRow_1">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlRow_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_2" target="tRunJob_5">
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_3" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tRunJob_3" target="tRunJob_4">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_3" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tRunJob_3" target="iHarvestResources_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk4"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_4" offsetLabelX="0" offsetLabelY="0" source="tRunJob_4" target="tRunJob_6">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk6"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_6" offsetLabelX="0" offsetLabelY="0" source="tRunJob_6" target="tRunJob_7">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk7"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_7" offsetLabelX="0" offsetLabelY="0" source="tRunJob_7" target="tRunJob_8">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk8"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_8" offsetLabelX="0" offsetLabelY="0" source="tRunJob_8" target="tRunJob_9">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk9"/>
   </connection>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_1"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Index all underway data"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Index UNDERWAY"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
@@ -333,7 +465,7 @@
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Harvest underway data"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="UNDERWAY"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
@@ -353,8 +485,50 @@
   </subjob>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_2"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Delete duplicates"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_3"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="ADCP"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_4"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="CTD"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_6"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="HYDROLOGY"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_7"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="MOORING"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_8"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="TRAJECTORY"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_9"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="XBT"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_2"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Create survey and map tables"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
