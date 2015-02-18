@@ -1117,7 +1117,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT id, name FROM aatams.project&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT id, name, is_protected FROM aatams.project&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -1129,6 +1129,8 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="name"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="is_protected"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -1137,6 +1139,7 @@
     <metadata connector="FLOW" name="tPostgresqlInput_10">
       <column comment="" defaultValue="" key="true" length="19" name="id" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
       <column comment="" key="false" length="255" name="name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="1" name="is_protected" nullable="false" pattern="" precision="0" sourceType="" type="id_Boolean"/>
     </metadata>
   </node>
   <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="704" posY="544">
@@ -1174,6 +1177,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="is_protected"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -1186,10 +1194,12 @@
     <metadata connector="FLOW" name="iPostgresqlOutput_10">
       <column comment="" defaultValue="" key="true" length="19" name="id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="255" name="name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="1" name="is_protected" nullable="false" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" defaultValue="" key="true" length="19" name="id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="255" name="name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="1" name="is_protected" nullable="false" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
