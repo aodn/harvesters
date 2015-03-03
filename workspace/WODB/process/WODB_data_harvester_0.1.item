@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+  <context confirmationNeeded="false" name="Default">
+    <contextParameter comment="" name="Database_Database" prompt="Database_Database?" promptNeeded="false" repositoryContextId="_7EGDgLvHEeSIoptOi4UNTw" type="id_String" value="maplayers"/>
+    <contextParameter comment="" name="Database_Login" prompt="Database_Login?" promptNeeded="false" repositoryContextId="_7EGDgLvHEeSIoptOi4UNTw" type="id_String" value="wodb"/>
+    <contextParameter comment="" name="Database_Password" prompt="Database_Password?" promptNeeded="false" repositoryContextId="_7EGDgLvHEeSIoptOi4UNTw" type="id_Password" value="IKehMrhbx4k="/>
+    <contextParameter comment="" name="Database_Port" prompt="Database_Port?" promptNeeded="false" repositoryContextId="_7EGDgLvHEeSIoptOi4UNTw" type="id_String" value="5432"/>
+    <contextParameter comment="" name="Database_Schema" prompt="Database_Schema?" promptNeeded="false" repositoryContextId="_7EGDgLvHEeSIoptOi4UNTw" type="id_String" value="wodb"/>
+    <contextParameter comment="" name="Database_Server" prompt="Database_Server?" promptNeeded="false" repositoryContextId="_7EGDgLvHEeSIoptOi4UNTw" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" type="id_String" value="null"/>
+  </context>
+  <parameters>
+    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
+    <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="0"/>
+    <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
+    <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
+    <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
+    <elementParameter field="TEXT" name="JOBID_FOR_OOZIE" value=""/>
+    <elementParameter field="CHECK" name="IMPLICIT_TCONTEXTLOAD" value="true"/>
+    <elementParameter field="RADIO" name="FROM_FILE_FLAG_IMPLICIT_CONTEXT" value="true"/>
+    <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="context.paramFile"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;=>&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
+    <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
+    <elementParameter field="CHECK" name="ON_STATCATCHER_FLAG" value="true"/>
+    <elementParameter field="CHECK" name="ON_LOGCATCHER_FLAG" value="true"/>
+    <elementParameter field="CHECK" name="ON_FILES_FLAG" value="true"/>
+    <elementParameter field="DIRECTORY" name="FILE_PATH" value="context.logDir"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="ojdbc14-10g.jar"/>
+    <routinesParameter id="_gS4q0LvHEeSIoptOi4UNTw" name="DataOperation"/>
+    <routinesParameter id="_gXLU8LvHEeSIoptOi4UNTw" name="GeoOperation"/>
+    <routinesParameter id="_gW-goLvHEeSIoptOi4UNTw" name="GeometryOperation"/>
+    <routinesParameter id="_gXJfwLvHEeSIoptOi4UNTw" name="GeometryUtility"/>
+    <routinesParameter id="_gWxsULvHEeSIoptOi4UNTw" name="Mathematical"/>
+    <routinesParameter id="_gWzhgLvHEeSIoptOi4UNTw" name="Numeric"/>
+    <routinesParameter id="_gXNKILvHEeSIoptOi4UNTw" name="OpenStreetMap"/>
+    <routinesParameter id="_gW1WsLvHEeSIoptOi4UNTw" name="Relational"/>
+    <routinesParameter id="_gW3L4LvHEeSIoptOi4UNTw" name="StringHandling"/>
+    <routinesParameter id="_gW5BELvHEeSIoptOi4UNTw" name="TalendDataGenerator"/>
+    <routinesParameter id="_gW62QLvHEeSIoptOi4UNTw" name="TalendDate"/>
+    <routinesParameter id="_gW8rcLvHEeSIoptOi4UNTw" name="TalendString"/>
+  </parameters>
+  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="96">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
+    <elementParameter field="CHECK" name="START" value="true"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_7XHGILvHEeSIoptOi4UNTw"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Database_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Database_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Database_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Database_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Database_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Database_Password"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;/Users/bpasquer/Documents/MARVL/MARVL3/HARVESTER/changelog.xml&quot;"/>
+    <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;  &#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;cr_apb_dplymt-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE apb_deployments&#xA;(&#xA;deployment_id bigserial NOT NULL,&#xA;&quot;SOURCE&quot; character varying (10),&#xA;&quot;CAST_ID&quot;  integer,&#xA;&quot;NODC_CRUISE_ID&quot; character varying(20),&#xA;&quot;ORIGINATOR_CRUISE_ID&quot; character varying (20), &#xA;&quot;ORIGINATOR_STATION_ID&quot; character varying (20),&#xA;&quot;LATITUDE&quot; double precision,&#xA;&quot;LONGITUDE&quot; double precision,&#xA;&quot;TIME&quot; timestamp with time zone,&#xA;&quot;DATASET&quot; character varying (8),&#xA;&quot;DEPTH_MAX&quot;  integer,&#xA;&quot;DEPTH_MIN&quot;  integer,&#xA;&quot;TEMPERATURE_BOOL&quot;  character varying (1),&#xA;&quot;SALINITY_BOOL&quot;  character varying (1),&#xA;geom geometry(Geometry,4326),&#xA;CONSTRAINT apb_dplymt_pkey PRIMARY KEY (deployment_id),&#xA;CONSTRAINT apb_dplymt_geom_check CHECK (st_isvalid(geom))&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr_ctd_dplymt-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE ctd_deployments&#xA;(&#xA;deployment_id bigserial NOT NULL,&#xA;&quot;SOURCE&quot; character varying (10),&#xA;&quot;CAST_ID&quot;  integer,&#xA;&quot;NODC_CRUISE_ID&quot; character varying(20),&#xA;&quot;ORIGINATOR_CRUISE_ID&quot; character varying (20), &#xA;&quot;ORIGINATOR_STATION_ID&quot; character varying (20),&#xA;&quot;LATITUDE&quot; double precision,&#xA;&quot;LONGITUDE&quot; double precision,&#xA;&quot;TIME&quot; timestamp with time zone,&#xA;&quot;DATASET&quot; character varying (8),&#xA;&quot;DEPTH_MAX&quot;  integer,&#xA;&quot;DEPTH_MIN&quot;  integer,&#xA;&quot;TEMPERATURE_BOOL&quot;  character varying (1),&#xA;&quot;SALINITY_BOOL&quot;  character varying (1),&#xA;geom geometry(Geometry,4326),&#xA;CONSTRAINT ctd_dplymt_pkey PRIMARY KEY (deployment_id),&#xA;CONSTRAINT ctd_dplymt_geom_check CHECK (st_isvalid(geom))&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr_gld_dplymt-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE gld_deployments&#xA;(&#xA;deployment_id bigserial NOT NULL,&#xA;&quot;SOURCE&quot; character varying (10),&#xA;&quot;CAST_ID&quot;  integer,&#xA;&quot;NODC_CRUISE_ID&quot; character varying(20),&#xA;&quot;ORIGINATOR_CRUISE_ID&quot; character varying (20), &#xA;&quot;ORIGINATOR_STATION_ID&quot; character varying (20),&#xA;&quot;LATITUDE&quot; double precision,&#xA;&quot;LONGITUDE&quot; double precision,&#xA;&quot;TIME&quot; timestamp with time zone,&#xA;&quot;DATASET&quot; character varying (8),&#xA;&quot;DEPTH_MAX&quot;  integer,&#xA;&quot;DEPTH_MIN&quot;  integer,&#xA;&quot;TEMPERATURE_BOOL&quot;  character varying (1),&#xA;&quot;SALINITY_BOOL&quot;  character varying (1),&#xA;geom geometry(Geometry,4326),&#xA;CONSTRAINT gld_dplymt_pkey PRIMARY KEY (deployment_id),&#xA;CONSTRAINT gld_dplymt_geom_check CHECK (st_isvalid(geom))&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr_mbt_dplymt-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE mbt_deployments&#xA;(&#xA;deployment_id bigserial NOT NULL,&#xA;&quot;SOURCE&quot; character varying (10),&#xA;&quot;CAST_ID&quot;  integer,&#xA;&quot;NODC_CRUISE_ID&quot; character varying(20),&#xA;&quot;ORIGINATOR_CRUISE_ID&quot; character varying (20), &#xA;&quot;ORIGINATOR_STATION_ID&quot; character varying (20),&#xA;&quot;LATITUDE&quot; double precision,&#xA;&quot;LONGITUDE&quot; double precision,&#xA;&quot;TIME&quot; timestamp with time zone,&#xA;&quot;DATASET&quot; character varying (8),&#xA;&quot;DEPTH_MAX&quot;  integer,&#xA;&quot;DEPTH_MIN&quot;  integer,&#xA;&quot;TEMPERATURE_BOOL&quot;  character varying (1),&#xA;&quot;SALINITY_BOOL&quot;  character varying (1),&#xA;geom geometry(Geometry,4326),&#xA;CONSTRAINT mbt_dplymt_pkey PRIMARY KEY (deployment_id),&#xA;CONSTRAINT mbt_dplymt_geom_check CHECK (st_isvalid(geom))&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr_osd_dplymt-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE osd_deployments&#xA;(&#xA;deployment_id bigserial NOT NULL,&#xA;&quot;SOURCE&quot; character varying (10),&#xA;&quot;CAST_ID&quot;  integer,&#xA;&quot;NODC_CRUISE_ID&quot; character varying(20),&#xA;&quot;ORIGINATOR_CRUISE_ID&quot; character varying (20), &#xA;&quot;ORIGINATOR_STATION_ID&quot; character varying (20),&#xA;&quot;LATITUDE&quot; double precision,&#xA;&quot;LONGITUDE&quot; double precision,&#xA;&quot;TIME&quot; timestamp with time zone,&#xA;&quot;DATASET&quot; character varying (8),&#xA;&quot;DEPTH_MAX&quot;  integer,&#xA;&quot;DEPTH_MIN&quot;  integer,&#xA;&quot;TEMPERATURE_BOOL&quot;  character varying (1),&#xA;&quot;SALINITY_BOOL&quot;  character varying (1),&#xA;geom geometry(Geometry,4326),&#xA;CONSTRAINT osd_dplymt_pkey PRIMARY KEY (deployment_id),&#xA;CONSTRAINT osd_dplymt_geom_check CHECK (st_isvalid(geom))&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA; &#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;cr_pfl_dplymt-1&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;     CREATE TABLE pfl_deployments&#xA;(&#xA;deployment_id bigserial NOT NULL,&#xA;&quot;SOURCE&quot; character varying (10),&#xA;&quot;CAST_ID&quot;  integer,&#xA;&quot;NODC_CRUISE_ID&quot; character varying(20),&#xA;&quot;ORIGINATOR_CRUISE_ID&quot; character varying (20), &#xA;&quot;ORIGINATOR_STATION_ID&quot; character varying (20),&#xA;&quot;LATITUDE&quot; double precision,&#xA;&quot;LONGITUDE&quot; double precision,&#xA;&quot;TIME&quot; timestamp with time zone,&#xA;&quot;DATASET&quot; character varying (8),&#xA;&quot;DEPTH_MAX&quot;  integer,&#xA;&quot;DEPTH_MIN&quot;  integer,&#xA;&quot;TEMPERATURE_BOOL&quot;  character varying (1),&#xA;&quot;SALINITY_BOOL&quot;  character varying (1),&#xA;geom geometry(Geometry,4326),&#xA;CONSTRAINT pfl_dplymt_pkey PRIMARY KEY (deployment_id),&#xA;CONSTRAINT pfl_dplymt_geom_check CHECK (st_isvalid(geom))&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr_dplymt_d-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE sur_deployments&#xA;(&#xA;deployment_id bigserial NOT NULL,&#xA;&quot;SOURCE&quot; character varying (10),&#xA;&quot;CAST_ID&quot;  integer,&#xA;&quot;NODC_CRUISE_ID&quot; character varying(20),&#xA;&quot;ORIGINATOR_CRUISE_ID&quot; character varying (20), &#xA;&quot;ORIGINATOR_STATION_ID&quot; character varying (20),&#xA;&quot;LATITUDE&quot; double precision,&#xA;&quot;LONGITUDE&quot; double precision,&#xA;&quot;TIME&quot; timestamp with time zone,&#xA;&quot;DATASET&quot; character varying (8),&#xA;&quot;DEPTH_MAX&quot;  integer,&#xA;&quot;DEPTH_MIN&quot;  integer,&#xA;&quot;TEMPERATURE_BOOL&quot;  character varying (1),&#xA;&quot;SALINITY_BOOL&quot;  character varying (1),&#xA;geom geometry(Geometry,4326),&#xA;CONSTRAINT sur_dplymt_pkey PRIMARY KEY (deployment_id),&#xA;CONSTRAINT sur_dplymt_geom_check CHECK (st_isvalid(geom))&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr_uor_dplymt-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE uor_deployments&#xA;(&#xA;deployment_id bigserial NOT NULL,&#xA;&quot;SOURCE&quot; character varying (10),&#xA;&quot;CAST_ID&quot;  integer,&#xA;&quot;NODC_CRUISE_ID&quot; character varying(20),&#xA;&quot;ORIGINATOR_CRUISE_ID&quot; character varying (20), &#xA;&quot;ORIGINATOR_STATION_ID&quot; character varying (20),&#xA;&quot;LATITUDE&quot; double precision,&#xA;&quot;LONGITUDE&quot; double precision,&#xA;&quot;TIME&quot; timestamp with time zone,&#xA;&quot;DATASET&quot; character varying (8),&#xA;&quot;DEPTH_MAX&quot;  integer,&#xA;&quot;DEPTH_MIN&quot;  integer,&#xA;&quot;TEMPERATURE_BOOL&quot;  character varying (1),&#xA;&quot;SALINITY_BOOL&quot;  character varying (1),&#xA;geom geometry(Geometry,4326),&#xA;CONSTRAINT uor_dplymt_pkey PRIMARY KEY (deployment_id),&#xA;CONSTRAINT uor_dplymt_geom_check CHECK (st_isvalid(geom))&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr_xbt_dplymt-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE xbt_deployments&#xA;(&#xA;deployment_id bigserial NOT NULL,&#xA;&quot;SOURCE&quot; character varying (10),&#xA;&quot;CAST_ID&quot;  integer,&#xA;&quot;NODC_CRUISE_ID&quot; character varying(20),&#xA;&quot;ORIGINATOR_CRUISE_ID&quot; character varying (20), &#xA;&quot;ORIGINATOR_STATION_ID&quot; character varying (20),&#xA;&quot;LATITUDE&quot; double precision,&#xA;&quot;LONGITUDE&quot; double precision,&#xA;&quot;TIME&quot; timestamp with time zone,&#xA;&quot;DATASET&quot; character varying (8),&#xA;&quot;DEPTH_MAX&quot;  integer,&#xA;&quot;DEPTH_MIN&quot;  integer,&#xA;&quot;TEMPERATURE_BOOL&quot;  character varying (1),&#xA;&quot;SALINITY_BOOL&quot;  character varying (1),&#xA;geom geometry(Geometry,4326),&#xA;CONSTRAINT xbt_dplymt_pkey PRIMARY KEY (deployment_id),&#xA;CONSTRAINT xbt_dplymt_geom_check CHECK (st_isvalid(geom))&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr_idx_ maps-1&quot;>&#xA;       &lt;sql>&#xA;CREATE INDEX apb_gist_idx ON apb_deployments USING GIST (geom);&#xA;CREATE INDEX apb_idx ON apb_deployments USING btree (&quot;CAST_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));  &#xA;&#xA;CREATE INDEX ctd_gist_idx ON ctd_deployments USING GIST (geom);&#xA;CREATE INDEX ctd_idx ON ctd_deployments USING btree (&quot;CAST_ID&quot;,  timezone('UTC'::text, &quot;TIME&quot;));     &#xA;&#xA;CREATE INDEX gld_gist_idx ON gld_deployments USING GIST (geom);&#xA;CREATE INDEX gld_idx ON gld_deployments USING btree (&quot;CAST_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));&#xA;&#xA;CREATE INDEX mbt_gist_idx ON mbt_deployments USING GIST (geom);&#xA;CREATE INDEX mbt_idx ON mbt_deployments USING btree (&quot;CAST_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));&#xA;&#x9;&#xA;CREATE INDEX osd_gist_idx ON osd_deployments USING GIST (geom);&#xA;CREATE INDEX osd_idx ON osd_deployments USING btree (&quot;CAST_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));&#xA;&#xA;CREATE INDEX pfl_gist_idx ON pfl_deployments USING GIST (geom);&#xA;CREATE INDEX pfl_idx ON pfl_deployments USING btree (&quot;CAST_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));&#xA;&#xA;CREATE INDEX sur_gist_idx ON sur_deployments USING GIST (geom);&#xA;CREATE INDEX sur_idx ON sur_deployments USING btree (&quot;CAST_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));&#xA;&#xA;CREATE INDEX uor_gist_idx ON uor_deployments USING GIST (geom);&#xA;CREATE INDEX uor_idx ON uor_deployments USING btree (&quot;CAST_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));&#xA;&#xA;CREATE INDEX xbt_gist_idx ON xbt_deployments USING GIST (geom);&#xA;CREATE INDEX xbt_idx ON xbt_deployments USING btree (&quot;CAST_ID&quot;, timezone('UTC'::text, &quot;TIME&quot;));&#xA;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="352" posY="96">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_2"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_7XHGILvHEeSIoptOi4UNTw"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Database_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Database_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Database_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Database_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Database_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Database_Password"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;/Users/bpasquer/Documents/MARVL/MARVL3/HARVESTER/changelog.xml&quot;"/>
+    <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;  &lt;changeSet author=&quot;talend&quot; id=&quot;cr_apb_msrmt-2&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE apb_measurements&#xA;(&#xA;pkid bigserial NOT NULL,&#xA;cast_id integer,&#xA;prof_flag integer,&#xA;depth real,&#xA;nodc_depth_flag integer,&#xA;temperature real,&#xA;nodc_temperature_flag integer,&#xA;salinity real,&#xA;nodc_salinity_flag integer,&#xA;CONSTRAINT apb_msrmt_pkey PRIMARY KEY (pkid)&#xA;&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;  &lt;changeSet author=&quot;talend&quot; id=&quot;cr_ctd_msrmt-2&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE ctd_measurements&#xA;(&#xA;pkid bigserial NOT NULL,&#xA;cast_id integer,&#xA;prof_flag integer,&#xA;depth real,&#xA;nodc_depth_flag integer,&#xA;originator_depth_flag integer,&#xA;temperature real,&#xA;nodc_temperature_flag integer,&#xA;originator_temperature_flag integer,&#xA;salinity real,&#xA;nodc_salinity_flag integer,&#xA;originator_salinity_flag integer,&#xA;CONSTRAINT ctd_msrmt_pkey PRIMARY KEY (pkid)&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;  &lt;changeSet author=&quot;talend&quot; id=&quot;cr_gld_msrmt-2&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE gld_measurements&#xA;(&#xA;pkid bigserial NOT NULL,&#xA;cast_id integer,&#xA;prof_flag integer,&#xA;depth real,&#xA;nodc_depth_flag integer,&#xA;originator_depth_flag integer,&#xA;temperature real,&#xA;nodc_temperature_flag integer,&#xA;originator_temperature_flag integer,&#xA;salinity real,&#xA;nodc_salinity_flag integer,&#xA;originator_salinity_flag integer,&#xA;latitude double precision,&#xA;nodc_latitude_flag integer,&#xA;originator_latitude_flag integer,&#xA;longitude double precision,&#xA;nodc_longitude_flag integer,&#xA;originator_longitude_flag integer,&#xA;julian_day real,&#xA;nodc_julian_day_flag integer,&#xA;originator_julian_day_flag integer, &#xA;geom geometry (Geometry,4326),&#xA;CONSTRAINT gld_msrmt_pkey PRIMARY KEY (pkid),&#xA;CONSTRAINT gld_msrmt_geom_check CHECK (st_isvalid(geom))&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;  &lt;changeSet author=&quot;talend&quot; id=&quot;cr_mbt_msrmt-2&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE mbt_measurements&#xA;(&#xA;pkid bigserial NOT NULL,&#xA;cast_id integer,&#xA;prof_flag integer,&#xA;depth real,&#xA;nodc_depth_flag integer,&#xA;temperature real,&#xA;nodc_temperature_flag integer,&#xA;CONSTRAINT mbt_msrmt_pkey PRIMARY KEY (pkid)&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;  &lt;changeSet author=&quot;talend&quot; id=&quot;cr_osd_msrmt-3&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE osd_measurements&#xA;(&#xA;pkid bigserial NOT NULL,&#xA;cast_id integer,&#xA;prof_flag integer,&#xA;depth real,&#xA;nodc_depth_flag integer,&#xA;originator_depth_flag integer,&#xA;temperature real,&#xA;nodc_temperature_flag integer,&#xA;originator_temperature_flag integer,&#xA;salinity real,&#xA;nodc_salinity_flag integer,&#xA;originator_salinity_flag integer,&#xA;CONSTRAINT osd_msrmt_pkey PRIMARY KEY (pkid)&#xA;)&#xA;&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&#xA;  &lt;changeSet author=&quot;talend&quot; id=&quot;cr_pfl_msrmt-2&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE pfl_measurements&#xA;(&#xA;pkid bigserial NOT NULL,&#xA;cast_id integer,&#xA;prof_flag integer,&#xA;depth real,&#xA;nodc_depth_flag integer,&#xA;originator_depth_flag integer,&#xA;temperature real,&#xA;nodc_temperature_flag integer,&#xA;originator_temperature_flag integer,&#xA;salinity real,&#xA;nodc_salinity_flag integer,&#xA;originator_salinity_flag integer,&#xA;CONSTRAINT pfl_msrmt_pkey PRIMARY KEY (pkid)&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&#xA;  &lt;changeSet author=&quot;talend&quot; id=&quot;cr_sur_msrmt-2&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE sur_measurements&#xA;(&#xA;pkid bigserial NOT NULL,&#xA;cast_id integer,&#xA;prof_flag integer,&#xA;depth real,&#xA;nodc_depth_flag integer,&#xA;salinity real,&#xA;nodc_salinity_flag integer,&#xA;latitude double precision,&#xA;nodc_latitude_flag integer,&#xA;longitude double precision,&#xA;nodc_longitude_flag integer,&#xA;julian_day real,&#xA;nodc_julian_day_flag integer,&#xA;geom geometry (Geometry,4326),&#xA;CONSTRAINT sur_msrmt_pkey PRIMARY KEY (pkid),&#xA;CONSTRAINT sur_msrmt_geom_check CHECK (st_isvalid(geom))&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;  &lt;changeSet author=&quot;talend&quot; id=&quot;cr_uor_msrmt-2&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE uor_measurements&#xA;(&#xA;pkid bigserial NOT NULL,&#xA;cast_id integer,&#xA;prof_flag integer,&#xA;depth real,&#xA;nodc_depth_flag integer,&#xA;temperature real,&#xA;nodc_temperature_flag integer,&#xA;salinity real,&#xA;nodc_salinity_flag integer,&#xA;CONSTRAINT uor_msrmt_pkey PRIMARY KEY (pkid)&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;  &lt;changeSet author=&quot;talend&quot; id=&quot;cr_xbt_msrmt-2&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE xbt_measurements&#xA;(&#xA;pkid bigserial NOT NULL,&#xA;cast_id integer,&#xA;prof_flag integer,&#xA;depth real,&#xA;nodc_depth_flag integer,&#xA;originator_depth_flag integer,&#xA;temperature real,&#xA;nodc_temperature_flag integer,&#xA;originator_temperature_flag integer,&#xA;CONSTRAINT xbt_msrmt_pkey PRIMARY KEY (pkid)&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr_idx_ tbl-2&quot;>&#xA;       &lt;sql>&#xA;&#xA;&#xA;CREATE INDEX apb_msrmt_idx ON apb_measurements (cast_id);  &#xA;&#xA;CREATE INDEX ctd_msrmt_idx ON ctd_measurements (cast_id);     &#xA;&#xA;CREATE INDEX gld_msrmt_gist_idx ON gld_measurements USING GIST (geom);&#xA;CREATE INDEX gld_msrmt_idx ON gld_measurements  (cast_id, julian_day);&#xA;&#xA;CREATE INDEX mbt_imsrmt_idx ON mbt_measurements (cast_id);&#xA;&#x9;&#xA;CREATE INDEX osd_msrmt_idx ON osd_measurements (cast_id);&#xA;&#xA;CREATE INDEX pfl_msrmt_idx ON pfl_measurements (cast_id);&#xA;&#xA;CREATE INDEX sur_msrmt_gist_idx ON sur_measurements USING GIST (geom);&#xA;CREATE INDEX sur_msrmt_idx ON sur_measurements  (cast_id,  julian_day);&#xA;&#xA;CREATE INDEX uor_msrmt_idx ON uor_measurements  (cast_id);&#xA;&#xA;CREATE INDEX xbt_msrmt_idx ON xbt_measurements  (cast_id);&#xA;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="160" posY="256">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_1"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Harvest_metadata"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_zLydoL0_EeS_WvZ0PKAfug"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tRunJob_1"/>
+  </node>
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="352" posY="256">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_2"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Harvest_data"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_Edf2AL1AEeS_WvZ0PKAfug"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tRunJob_2"/>
+  </node>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="iPostgresqlDbUpdate_1" target="iPostgresqlDbUpdate_2">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk10"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="iPostgresqlDbUpdate_1" target="tRunJob_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_1" offsetLabelX="0" offsetLabelY="0" source="tRunJob_1" target="tRunJob_2">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
+  </connection>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="CREATE DEPLOYMENT TABLES"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_2"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="CREATE MEASUREMENT TABLES"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_2"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+</talendfile:ProcessType>
