@@ -135,8 +135,6 @@
     <elementParameter field="CHECK" name="REMOVE_EMPTY_ROW" value="false"/>
     <elementParameter field="CHECK" name="UNCOMPRESS" value="false"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="TECHNICAL" name="SCHEMA:SCHEMA_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="SCHEMA:REPOSITORY_SCHEMA_TYPE" value="_zmHREL1eEeS_WvZ0PKAfug - metadata"/>
     <elementParameter field="TECHNICAL" name="SCHEMA_REJECT:SCHEMA_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="SCHEMA_REJECT:REPOSITORY_SCHEMA_TYPE" value="_zmHREL1eEeS_WvZ0PKAfug - metadata"/>
     <elementParameter field="DIRECTORY" name="TEMP_DIR" value="&quot;/Users/bpasquer/Documents/MARVL/MARVL3/HARVESTER&quot;"/>
@@ -161,7 +159,7 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="longitude"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="julian_day"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time"/>
       <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="CHECK_FIELDS_NUM" value="false"/>
@@ -182,7 +180,7 @@
       <column comment="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Float"/>
       <column comment="" key="false" length="8" name="latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
       <column comment="" key="false" length="9" name="longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" type="id_Double"/>
-      <column comment="" key="false" length="8" name="julian_day" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Float"/>
+      <column comment="" key="false" length="20" name="time" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" label="metadata" name="REJECT">
       <column comment="" key="false" length="12" name="cast_id" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Float"/>
@@ -192,7 +190,7 @@
       <column comment="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Float"/>
       <column comment="" key="false" length="8" name="latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
       <column comment="" key="false" length="9" name="longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" type="id_Double"/>
-      <column comment="" key="false" length="8" name="julian_day" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Float"/>
+      <column comment="" key="false" length="20" name="time" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_String" originalLength="20"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -215,7 +213,7 @@
       <column comment="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Float"/>
       <column comment="" key="false" length="8" name="latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
       <column comment="" key="false" length="9" name="longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" type="id_Double"/>
-      <column comment="" key="false" length="8" name="julian_day" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
+      <column comment="" key="false" length="20" name="time" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" label="metadata" name="REJECT">
       <column comment="" key="false" length="12" name="cast_id" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Integer"/>
@@ -225,7 +223,7 @@
       <column comment="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Float"/>
       <column comment="" key="false" length="8" name="latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
       <column comment="" key="false" length="9" name="longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" type="id_Double"/>
-      <column comment="" key="false" length="8" name="julian_day" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
+      <column comment="" key="false" length="20" name="time" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -251,7 +249,7 @@
       <column comment="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Float"/>
       <column comment="" key="false" length="8" name="latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
       <column comment="" key="false" length="9" name="longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" type="id_Double"/>
-      <column comment="" key="false" length="8" name="julian_day" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double"/>
+      <column comment="" key="false" length="20" name="time" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="0" type="id_Date"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
     </metadata>
     <nodeData xsi:type="MapperData">
@@ -265,7 +263,7 @@
         <mapperTableEntries name="salinity" expression="row2.salinity " type="id_Float" nullable="true"/>
         <mapperTableEntries name="latitude" expression="row2.latitude " type="id_Double" nullable="true"/>
         <mapperTableEntries name="longitude" expression="row2.longitude " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="julian_day" expression="row2.julian_day " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="time" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row2.time,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row2.longitude,row2.latitude,&quot;EPSG:4326&quot;)  &#xA; " type="id_Geometry" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row2" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
@@ -276,7 +274,7 @@
         <mapperTableEntries name="salinity" type="id_Float" nullable="true"/>
         <mapperTableEntries name="latitude" type="id_Double" nullable="true"/>
         <mapperTableEntries name="longitude" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="julian_day" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="time" type="id_String" nullable="true"/>
       </inputTables>
     </nodeData>
   </node>
@@ -342,7 +340,7 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="julian_day"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -369,7 +367,7 @@
       <column comment="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="8" name="latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="9" name="longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="8" name="julian_day" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="20" name="time" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
     </metadata>
     <metadata connector="REJECT" label="deployments" name="REJECT">
@@ -380,7 +378,7 @@
       <column comment="" key="false" length="7" name="salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="8" name="latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="9" name="longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="8" name="julian_day" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="20" name="time" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
@@ -474,7 +472,7 @@
       <elementValue elementRef="TRACE_COLUMN" value="salinity"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="julian_day"/>
+      <elementValue elementRef="TRACE_COLUMN" value="time"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="nodc_salinity_flag"/>
@@ -568,7 +566,7 @@
       <elementValue elementRef="TRACE_COLUMN" value="salinity"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="julian_day"/>
+      <elementValue elementRef="TRACE_COLUMN" value="time"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="nodc_salinity_flag"/>
