@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="DestinationDB_Database" prompt="DestinationDB_Database?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="maplayers"/>
-    <contextParameter comment="" name="DestinationDB_Login" prompt="DestinationDB_Login?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="aodn_ran_ctd"/>
-    <contextParameter comment="" name="DestinationDB_Password" prompt="DestinationDB_Password?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_Password" value="792hqJxtlnbAmksuIbThSg=="/>
-    <contextParameter comment="" name="DestinationDB_Port" prompt="DestinationDB_Port?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="5432"/>
-    <contextParameter comment="" name="DestinationDB_Schema" prompt="DestinationDB_Schema?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="aodn_ran_ctd"/>
-    <contextParameter comment="" name="DestinationDB_Server" prompt="DestinationDB_Server?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="maplayers"/>
+    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="aodn_ran_ctd"/>
+    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_Password" value="792hqJxtlnbAmksuIbThSg=="/>
+    <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="5432"/>
+    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="aodn_ran_ctd"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="localhost"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
@@ -56,13 +56,13 @@
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_goeyIJNzEeOrg7p9UOD4pA"/>
-    <elementParameter field="TEXT" name="HOST" value="context.DestinationDB_Server"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
     <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="PORT" value="context.DestinationDB_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDB_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDB_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.DestinationDB_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.DestinationDB_Password"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/media/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
     <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;cr_deployments-5&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE deployments&#xA;(&#xA;  file_id integer NOT NULL,&#xA;  time_coverage_start timestamp with time zone,&#xA;  time_coverage_end  timestamp with time zone,&#xA;  geospatial_vertical_min  character varying(20),&#xA;  geospatial_vertical_max character varying(20),&#xA;  cruise_id character varying(20),&#xA;  CONSTRAINT deployments_pkey PRIMARY KEY (file_id ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;measurements-1&quot;>&#xA;       &lt;sql>&#xA;    CREATE TABLE measurements&#xA;(&#xA;  measurement_id bigserial,&#xA;  file_id integer NOT NULL,&#xA;  time timestamp with time zone,&#xA;  time_qc_flag character varying(1),&#xA;  latitude double precision,&#xA;  longitude double precision,&#xA;  position_qc_flag character varying(1),&#xA;  pressure double precision,&#xA;  profile integer,&#xA;  salinity double precision,&#xA;  salinity_qc_flag character varying(1),&#xA;  salinity_sd_test character varying(1),&#xA;  salinity_whole_profile_flag character varying(1),&#xA;  temperature double precision,&#xA;  temperature_qc_flag character varying(1),&#xA;  temperature_sd_test character varying(1),&#xA;  temperature_whole_profile_flag character varying(1), &#xA;  geom geometry(GEOMETRY,4326) CHECK (ST_IsValid(geom)),&#xA;  CONSTRAINT measurements_pkey PRIMARY KEY (measurement_id),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;index_measurments-4&quot;>&#xA;       &lt;sql>&#xA;&#x9;CREATE INDEX measurements_file_id_idx ON measurements (file_id ASC NULLS LAST);&#xA;&#x9;CREATE INDEX measurements_T_idx ON measurements (file_id,time);&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;aodn_ran_ctd_data_view-1&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;&#x9;DROP VIEW IF EXISTS aodn_ran_ctd_data;&#xA;&#x9;CREATE VIEW aodn_ran_ctd_data AS &#xA;&#x9;SELECT measurements.file_id, &#xA;        d.cruise_id,&#xA;&#x9;measurements.geom,&#xA;&#x9;measurements.time AT TIME ZONE 'UTC' AS time,&#xA;   &#x9;measurements.latitude, &#xA;&#x9;measurements.longitude,&#xA;&#x9;measurements. pressure,&#xA;&#x9;measurements. profile,&#xA;&#x9;measurements. salinity,&#xA;&#x9;measurements. temperature,&#xA;&#x9;measurements. temperature_qc_flag,&#xA;&#x9;measurements. temperature_sd_test,&#xA;&#x9;measurements. temperature_whole_profile_flag,&#xA;&#x9;measurements. salinity_qc_flag,&#xA;&#x9;measurements. salinity_whole_profile_flag,&#xA;&#x9;measurements.salinity_sd_test,&#xA;&#x9;measurements.position_qc_flag,&#xA;&#x9;measurements.time_qc_flag&#xA;&#x9;FROM measurements &#xA;JOIN deployments d ON  measurements.file_id =d.file_id&#xA;ORDER BY measurements.file_id,measurements.time;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA; &#xA; &#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;aodn_ran_ctd_map_view-1&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;     DROP VIEW IF EXISTS aodn_ran_ctd_map;&#xA;     CREATE VIEW aodn_ran_ctd_map AS      &#xA;&#x9; SELECT d.file_id,&#xA;   &#x9; f.url,&#xA;  &#x9; f.size,&#xA;  &#x9; time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,&#xA;  &#x9; time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,&#xA;&#x9; cruise_id,&#xA;         geospatial_vertical_min,&#xA;&#x9; geospatial_vertical_max,&#xA;         m.latitude,&#xA;         m.longitude,        &#xA;&#x9; geom&#xA;     FROM deployments d&#xA;     JOIN indexed_file f ON d.file_id = f.id&#xA;     JOIN measurements m ON d.file_id=m.file_id&#xA;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog>&#xA;&#xA;"/>
@@ -76,13 +76,13 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_goeyIJNzEeOrg7p9UOD4pA"/>
-    <elementParameter field="TEXT" name="HOST" value="context.DestinationDB_Server"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
     <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="PORT" value="context.DestinationDB_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDB_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDB_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.DestinationDB_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.DestinationDB_Password"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
     <elementParameter field="TEXT" name="HARVEST_TYPE" value="&quot;data&quot;"/>
     <elementParameter field="RADIO" name="USE_DEFAULT" value="true"/>
@@ -101,13 +101,13 @@
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_goeyIJNzEeOrg7p9UOD4pA"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="context.DestinationDB_Server"/>
-    <elementParameter field="TEXT" name="PORT" value="context.DestinationDB_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDB_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDB_Schema"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
     <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="USER" value="context.DestinationDB_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.DestinationDB_Password"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
@@ -135,13 +135,13 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_goeyIJNzEeOrg7p9UOD4pA"/>
-    <elementParameter field="TEXT" name="HOST" value="context.DestinationDB_Server"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
     <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="PORT" value="context.DestinationDB_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.DestinationDB_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.DestinationDB_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.DestinationDB_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.DestinationDB_Password"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
     <elementParameter field="TEXT" name="HARVEST_TYPE" value="&quot;data&quot;"/>
     <elementParameter field="RADIO" name="USE_DEFAULT" value="true"/>
