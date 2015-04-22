@@ -88,6 +88,13 @@
     </changeSet>
 
 
+    <changeSet author="talend" id="create_time_index-1">
+      <sql>
+	CREATE INDEX timeseries_time_idx ON measurement USING btree ("TIME");
+      </sql>
+    </changeSet>
+
+
     <changeSet author="talend" id="create_map_view-2" runOnChange="true">
       <sql>
 	DROP VIEW IF EXISTS anmn_ts_timeseries_map;
@@ -161,4 +168,5 @@
 
 
 </databaseChangeLog>
+
 
