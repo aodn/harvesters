@@ -38,12 +38,18 @@ public class ArgoUtils {
      */
 	
     public static Date parseArgoDate(String argoDateStr) {
-    	if (argoDateStr.trim().equals("")) {
+    	try {    	    	
+		    	if (argoDateStr.trim().equals("")) {
+		    		return null;
+		    	} else {
+		    		return TalendDate.parseDate("yyyyMMddHHmmssZ", rpad(argoDateStr, '0', 14) + "+0000");
+		    	}
+	    	}
+    	catch (Exception e) {
+    		System.err.print("err with date type. check netcdf file");
     		return null;
-    	} else {
-    		return TalendDate.parseDate("yyyyMMddHHmmssZ", rpad(argoDateStr, '0', 14) + "+0000");
-    	}
-    }
+    		}
+    }	
     
     /**
      * rpad: right pad string with provided character.
