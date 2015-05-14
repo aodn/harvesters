@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="fileid" prompt="fileid?" promptNeeded="false" type="id_Integer" value=""/>
+    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Integer" value=""/>
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="faimms"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="t1ScqC/kWbE="/>
@@ -12,10 +12,10 @@
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
     <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="null"/>
     <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="&quot;.*/IMOS_FAIMMS.*_FV00.*|.*/IMOS_FAIMMS.*_FV01.*&quot;"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/home/lbesnard/IMOS_DATA/FAIMMS"/>
+    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/home/lbesnard/faimms_test"/>
   </context>
   <context confirmationNeeded="false" name="Deployment">
-    <contextParameter comment="" name="fileid" prompt="fileid?" promptNeeded="false" type="id_Integer" value=""/>
+    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Integer" value=""/>
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="faimms"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value=""/>
@@ -78,7 +78,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM indexed_file where id =  &quot; + context.fileid + &quot; ; &quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM indexed_file where id =  &quot; + context.fileId + &quot; ; &quot; +&#xA;&quot;DELETE FROM attribute where file_id = '&quot; + context.fileId + &quot;';&quot; +&#xA;&quot;DELETE FROM variable where file_id = '&quot; + context.fileId + &quot;';&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
