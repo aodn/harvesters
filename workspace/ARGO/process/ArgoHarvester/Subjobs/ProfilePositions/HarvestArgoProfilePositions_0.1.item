@@ -13,7 +13,7 @@
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="64"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="0"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
     <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
     <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
@@ -48,6 +48,7 @@
   </parameters>
   <node componentName="iDeletedResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="192" posY="160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
+    <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_HtNvQDKiEeKrFtsLd2Qz2g"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
@@ -93,26 +94,6 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_1"/>
-  </node>
-  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="192" posY="0">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
-    <elementParameter field="CHECK" name="START" value="true"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_HtNvQDKiEeKrFtsLd2Qz2g"/>
-    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
-    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
-    <elementParameter field="FILE" name="FILENAME" value="&quot;/home/craigj/TOS_DI-r96646-V5.1.3/workspace/changelog.xml&quot;"/>
-    <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1370230075940-13&quot;>&#xA;        &lt;createTable tableName=&quot;profile_position&quot;>&#xA;            &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;profile_no&quot; type=&quot;int4&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;data_centre&quot; type=&quot;VARCHAR(2)&quot;/>&#xA;            &lt;column name=&quot;platform_number&quot; type=&quot;VARCHAR(8)&quot;/>&#xA;            &lt;column name=&quot;cycle_number&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;direction&quot; type=&quot;char(1)&quot;/>&#xA;            &lt;column name=&quot;data_mode&quot; type=&quot;char(1)&quot;/>&#xA;        &lt;/createTable>&#xA;&#xA;        &lt;sql>select AddGeometryColumn('profile_position','position',4326,'GEOMETRY',2)&lt;/sql>&#xA;&#xA;&#x9;&lt;sql>create index profile_position_position_gist ON profile_position USING GIST (position)&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1370230075940-13-1&quot;>&#xA;&#x9;&lt;addPrimaryKey columnNames=&quot;file_id, profile_no&quot; constraintName=&quot;profile_position_pk&quot; tableName=&quot;profile_position&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;!-- Make sure only valid geometries can be inserted -->&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;8c9d7380-7807-11e3-981f-0800200c9a66&quot;>&#xA;&#x9;&lt;sql>ALTER TABLE profile_position ADD CHECK (ST_IsValid(position))&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;!-- Create a view containing all australian floats. -->&#xA;    &lt;!-- Australian floats are floats that belong to the CSIRO or that have passed through -->&#xA;    &lt;!-- the Australian region -->&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;370230075940-13&quot;>&#xA;        &lt;createView viewName=&quot;australian_floats&quot;>&#xA;            select distinct platform_number&#xA;              from profile_position&#xA;             where data_centre = 'CS'&#xA;                or position &amp;amp;&amp;amp; ST_SetSRID(ST_MakeBox2D(ST_Point(90, -90), ST_Point(180, 0)),4326); &#xA;&#x9;&lt;/createView>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;updateHarvestTypeValues2&quot;>&#xA;    &lt;sql splitStatements=&quot;true&quot;>&#xA;update file_harvest set harvest_type = 'POSITION' where harvest_type = 'position';&#xA;&#xA;insert into file_harvest (file_id, harvest_type, last_moddate_harvested,&#xA;last_change_type, last_change_run)&#xA;   select distinct on (file_id) file_id, 'ARGOPLAT',&#xA;last_moddate_harvested, null, null&#xA;     from file_harvest&#xA;    where harvest_type is null&#xA;      and exists (select 1 from indexed_file if where if.id = file_id&#xA;and url like '%_meta.nc')&#xA;    order by file_id, last_moddate_harvested desc;&#xA;&#xA;insert into file_harvest (file_id, harvest_type, last_moddate_harvested,&#xA;last_change_type, last_change_run)&#xA;   select distinct on (file_id) file_id, 'ARGOPROF',&#xA;last_moddate_harvested, null, null&#xA;     from file_harvest&#xA;    where harvest_type is null&#xA;      and exists (select 1 from indexed_file if where if.id = file_id&#xA;and url like '%profiles/%.nc')&#xA;    order by file_id, last_moddate_harvested desc;&#xA;&#xA;delete from file_harvest where harvest_type is null;&#xA;    &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
   <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="192" posY="320" sizeX="32" sizeY="35">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
@@ -172,10 +153,6 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iDeletedResources_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
-  </connection>
   <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tRunJob_2">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
@@ -186,13 +163,6 @@
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Delete postion information for deleted profiles"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
-  <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Create/update profile position tables"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
