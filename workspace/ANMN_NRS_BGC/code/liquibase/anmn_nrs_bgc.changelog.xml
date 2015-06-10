@@ -452,6 +452,16 @@ CREATE TABLE anmn_nrs_bgc_plankton_phytoplankton
     </changeSet>
 
 
+    <changeSet author="talend" id="phyto_biovolume_column_change">
+      <sql>
+	UPDATE anmn_nrs_bgc_plankton_phytoplankton
+	  SET "BIOVOLUME_ML_PER_L" = DEFAULT;
+	ALTER TABLE anmn_nrs_bgc_plankton_phytoplankton
+	  RENAME COLUMN "BIOVOLUME_ML_PER_L" TO "BIOVOLUME_UM3_PER_L";
+      </sql>
+    </changeSet>
+
+
     <changeSet author="talend" id="phyto_taxon_changelog-1">
       <sql>
 	CREATE TABLE nrs_phyto_taxon_changelog (
@@ -488,7 +498,7 @@ CREATE VIEW anmn_nrs_bgc_plankton_phytoplankton_data as
     p."CAAB_CODE",
     p."TAXON_START_DATE",
     p."CELL_PER_LITRE",
-    p."BIOVOLUME_ML_PER_L",
+    p."BIOVOLUME_UM3_PER_L",
     p."SAMPLE_COMMENTS",
     c."FIRST_OCCURRENCE"  AS "TAXON_FIRST_OCCURRENCE",
     c."PARENT_TAXON_NAME",
