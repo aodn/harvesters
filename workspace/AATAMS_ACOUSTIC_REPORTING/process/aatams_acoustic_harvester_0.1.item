@@ -10,11 +10,11 @@
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_8qN7YH12EeO8KdXPymp3hg" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_8qN7YH12EeO8KdXPymp3hg" type="id_String" value="null"/>
     <contextParameter comment="" name="Origin_Database" prompt="Origin_Database?" promptNeeded="false" repositoryContextId="_UGt2UPKMEeOzcoSVTh1lXQ" type="id_String" value="aatams3?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
-    <contextParameter comment="" name="Origin_Login" prompt="Origin_Login?" promptNeeded="false" repositoryContextId="_UGt2UPKMEeOzcoSVTh1lXQ" type="id_String" value="aatams_acoustic"/>
-    <contextParameter comment="" name="Origin_Password" prompt="Origin_Password?" promptNeeded="false" repositoryContextId="_UGt2UPKMEeOzcoSVTh1lXQ" type="id_Password" value="or1PDibzSX54XDkuwUX9cRE1bJXwPpqH"/>
+    <contextParameter comment="" name="Origin_Login" prompt="Origin_Login?" promptNeeded="false" repositoryContextId="_UGt2UPKMEeOzcoSVTh1lXQ" type="id_String" value="aatams"/>
+    <contextParameter comment="" name="Origin_Password" prompt="Origin_Password?" promptNeeded="false" repositoryContextId="_UGt2UPKMEeOzcoSVTh1lXQ" type="id_Password" value="Ao7t16izV3I="/>
     <contextParameter comment="" name="Origin_Port" prompt="Origin_Port?" promptNeeded="false" repositoryContextId="_UGt2UPKMEeOzcoSVTh1lXQ" type="id_String" value="5433"/>
     <contextParameter comment="" name="Origin_Schema" prompt="Origin_Schema?" promptNeeded="false" repositoryContextId="_UGt2UPKMEeOzcoSVTh1lXQ" type="id_String" value="aatams"/>
-    <contextParameter comment="" name="Origin_Server" prompt="Origin_Server?" promptNeeded="false" repositoryContextId="_UGt2UPKMEeOzcoSVTh1lXQ" type="id_String" value="dbprod.emii.org.au"/>
+    <contextParameter comment="" name="Origin_Server" prompt="Origin_Server?" promptNeeded="false" repositoryContextId="_UGt2UPKMEeOzcoSVTh1lXQ" type="id_String" value="localhost"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx4096M"/>
@@ -52,6 +52,7 @@
   </parameters>
   <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="192" posY="416">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_2"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
     <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Populate_reporting_views"/>
@@ -95,6 +96,7 @@
   </node>
   <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="192" posY="160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_1"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
     <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Copy_Tables"/>
@@ -117,6 +119,7 @@
   </node>
   <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="192" posY="288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_4"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
     <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Populate_layers"/>
@@ -138,15 +141,15 @@
     <metadata connector="FLOW" name="tRunJob_4"/>
   </node>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="tRunJob_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_1" offsetLabelX="0" offsetLabelY="0" source="tRunJob_1" target="tRunJob_4">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_4" offsetLabelX="0" offsetLabelY="0" source="tRunJob_4" target="tRunJob_2">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
   </connection>
   <subjob>
