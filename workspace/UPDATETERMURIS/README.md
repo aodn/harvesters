@@ -19,9 +19,12 @@ Using this project to update term URI's, requires Talend Open Studio to be insta
 
 #### Externalisation parameters 
 
-Used to enable execution of this job as a packaged java application using externally sourced context parameters as per talend harvesters.
+Used to enable execution of this job as a packaged java application using externally sourced context parameters as per talend harvesters
 
-NOT REQUIRED when running this job within Talend Open Studio and configuring context parameters there.
+parameter | description
+---- | ----
+paramFile | location of the file from which to load other context parameters (NOT REQUIRED when running this job within Talend Open Studio and configuring context parameters there)
+logDir | location of the directory where log files will be written (before and after copies of the metadata are written to this directory for comparison)
 
 #### GeoNetwork parameters
 
@@ -46,6 +49,9 @@ platform | platform vocabulary file
 The xsl used to perform the update only updates the vocabularyTermURL element of a term to the URI of a concept only if:
 
  * the term occurs within the element specified
- * the term matches the preferred label of the concept, and
- * there is one and only one concept in the thesaurus with a preferred label matching the term
+ * the term matches the preferred label of the concept
+
+If more than one concept is found in the thesaurus with a preferred label matching the term, an exception will be thrown.  
+
+Check the end of the before file in the log directory to see the metadata record being processed when an exception is thrown processing a metadata record.
 
