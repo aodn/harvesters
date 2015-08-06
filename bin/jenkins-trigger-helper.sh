@@ -22,6 +22,12 @@ main() {
     local artifact_directory="$1"; shift
     local projects_directory="$1"; shift
     local output_directory="$1"; shift
+    local -i rebuild_all=0
+
+    if [ x"$1" != x ] && [ "$1" == "--rebuild" ]; then
+        rebuild_all=1; shift
+        echo "REBUILDING ALL HARVESTERS!!!"
+    fi
 
     # Write harvesters to be rebuilt to $output_directory directory
     rm -rf --preserve-root $output_directory
@@ -33,10 +39,14 @@ main() {
         local project_name=$(basename $project_directory)
         local harvester_job_name=$(get_harvester_job_name $project_directory)
 
-        if rebuild_artifact "$artifact_directory" "$project_directory" "$harvester_job_name"; then
-            echo "Rebuilding $harvester_job_name"
-            echo "PROJECT_NAME=$project_name" > "$output_directory/$harvester_job_name.properties"
-            echo "HARVESTER_NAME=$harvester_job_name" >> "$output_directory/$harvester_job_name.properties"
+        if [ x"$harvester_job_name" != x ]; then
+            if [ $rebuild_all -eq 1 ] || rebuild_artifact "$artifact_directory" "$project_directory" "$harvester_job_name"; then
+                echo "Rebuilding $harvester_job_name"
+                echo "PROJECT_NAME=$project_name" > "$output_directory/$harvester_job_name.properties"
+                echo "HARVESTER_NAME=$harvester_job_name" >> "$output_directory/$harvester_job_name.properties"
+            fi
+        else
+            echo "Skipping $project_directory"
         fi
     done
 }
