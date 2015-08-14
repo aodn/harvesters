@@ -89,7 +89,7 @@
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/Users/bpasquer/Documents/MARVL/MARVL3/HARVESTER/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;    &#xA;  &lt;changeSet author=&quot;talend&quot; id=&quot;cr_aims_ctd_msrmt-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE aims_ctd_measurements&#xA;(&#xA;measurement bigserial NOT NULL,&#xA;file_id bigint NOT NULL,&#xA;&quot;Station&quot; character varying (20),&#xA;&quot;Time&quot; timestamp with time zone,&#xA;&quot;Latitude&quot;  double precision,&#xA;&quot;Longitude&quot; double precision,&#xA;&quot;Water_depth&quot; integer,&#xA;&quot;Depth&quot; real,&#xA;&quot;Temp&quot; real,&#xA;&quot;Salinity&quot; real,&#xA;&quot;Sigma_t&quot; real,&#xA;&quot;Chl&quot; real,&#xA;&quot;PAR&quot; real,&#xA;&quot;C&quot; real,&#xA;&quot;OBS&quot; real,&#xA;&quot;Oxygen&quot; real,&#xA;&quot;Pressure&quot; real,&#xA;&quot;Trans&quot; real,&#xA;geom geometry(Geometry,4326),&#xA;CONSTRAINT aims_ctd_msrmt_pkey PRIMARY KEY (measurement),&#xA;CONSTRAINT aims_ctd_map_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;cr_aodn_aims_ctd_map_table-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE aodn_aims_ctd_map&#xA;(&#xA;pkid bigserial NOT NULL,&#xA;&quot;Station&quot; character varying (20),&#xA;&quot;Time&quot; timestamp with time zone,&#xA;&quot;Latitude&quot;  double precision,&#xA;&quot;Longitude&quot; double precision,&#xA;&quot;Temp_b&quot; boolean,&#xA;&quot;Salinity_b&quot; boolean,&#xA;&quot;Sigma_t_b&quot; boolean,&#xA;&quot;Chl_b&quot; boolean,&#xA;&quot;PAR_b&quot; boolean,&#xA;&quot;C_b&quot; boolean,&#xA;&quot;OBS_b&quot; boolean,&#xA;&quot;Oxygen_b&quot; boolean,&#xA;&quot;Pressure_b&quot; boolean,&#xA;&quot;Trans_b&quot; boolean,&#xA;geom geometry(Geometry,4326),&#xA;CONSTRAINT aims_ctd_map_pkey PRIMARY KEY (pkid),&#xA;CONSTRAINT aims_ctd_map_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;  &lt;changeSet author=&quot;talend&quot; id=&quot;cr_aims_ctd_data_view-1&quot; runOnChange=&quot;true&quot;>&#xA;      &lt;sql>&#xA;&#x9;DROP VIEW IF EXISTS aodn_aims_ctd_data;&#xA;&#x9;CREATE VIEW aodn_aims_ctd_data AS&#xA;SELECT m.measurement,&#xA;m.file_id ,&#xA;f.url,&#xA;f.size,&#xA;m.&quot;Station&quot; ,&#xA;m.&quot;Time&quot; AT TIME ZONE 'UTC' AS &quot;Time&quot;,&#xA;m.&quot;Latitude&quot;,&#xA;m.&quot;Longitude&quot;,&#xA;m.&quot;Depth&quot;,&#xA;m.&quot;Temp&quot;,&#xA;m.&quot;Salinity&quot;,&#xA;m.&quot;Sigma_t&quot;,&#xA;m.&quot;Chl&quot;,&#xA;m.&quot;PAR&quot;,&#xA;m.&quot;C&quot;,&#xA;m.&quot;OBS&quot;,&#xA;m.&quot;Oxygen&quot;,&#xA;m.&quot;Pressure&quot;,&#xA;m.&quot;Trans&quot;,&#xA;m.geom&#xA;FROM aims_ctd_measurements m&#xA;JOIN indexed_file f ON m.file_id = f.id&#xA;ORDER BY &quot;Station&quot;,&quot;Time&quot;,&quot;Depth&quot;;&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;cr_idx_measurement-1&quot;>&#xA;      &lt;sql>&#xA;CREATE INDEX measurement_idx ON  aims_ctd_measurements (&quot;Station&quot;,&quot;Time&quot;,&quot;Depth&quot;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;cr_gist_idx-1&quot;>&#xA;      &lt;sql>&#xA;CREATE INDEX gist_idx ON aims_ctd_measurements USING GIST(geom)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;add_depthrange_map-1&quot;>&#xA;      &lt;sql>&#xA;ALTER  TABLE aodn_aims_ctd_map&#xA;ADD depth_min real,&#xA;ADD depth_max real;&#xA;&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;cr_gist_idx_map_table-1&quot;>&#xA;      &lt;sql>&#xA;CREATE INDEX map_gist_idx ON aodn_aims_ctd_map USING GIST(geom)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr_idx_measurement-2-1&quot;>&#xA;      &lt;sql>&#xA;DROP INDEX measurement_idx;&#xA;CREATE INDEX measurement_idx_2 ON  aims_ctd_measurements (&quot;Station&quot;,timezone('UTC'::text, &quot;Time&quot;),&quot;Depth&quot;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;    &#xA;  &lt;changeSet author=&quot;talend&quot; id=&quot;cr_aims_ctd_msrmt-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE aims_ctd_measurements&#xA;(&#xA;measurement bigserial NOT NULL,&#xA;file_id bigint NOT NULL,&#xA;&quot;Station&quot; character varying (20),&#xA;&quot;Time&quot; timestamp with time zone,&#xA;&quot;Latitude&quot;  double precision,&#xA;&quot;Longitude&quot; double precision,&#xA;&quot;Water_depth&quot; integer,&#xA;&quot;Depth&quot; real,&#xA;&quot;Temp&quot; real,&#xA;&quot;Salinity&quot; real,&#xA;&quot;Sigma_t&quot; real,&#xA;&quot;Chl&quot; real,&#xA;&quot;PAR&quot; real,&#xA;&quot;C&quot; real,&#xA;&quot;OBS&quot; real,&#xA;&quot;Oxygen&quot; real,&#xA;&quot;Pressure&quot; real,&#xA;&quot;Trans&quot; real,&#xA;geom geometry(Geometry,4326),&#xA;CONSTRAINT aims_ctd_msrmt_pkey PRIMARY KEY (measurement),&#xA;CONSTRAINT aims_ctd_map_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;cr_aodn_aims_ctd_map_table-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE aodn_aims_ctd_map&#xA;(&#xA;pkid bigserial NOT NULL,&#xA;&quot;Station&quot; character varying (20),&#xA;&quot;Time&quot; timestamp with time zone,&#xA;&quot;Latitude&quot;  double precision,&#xA;&quot;Longitude&quot; double precision,&#xA;&quot;Temp_b&quot; boolean,&#xA;&quot;Salinity_b&quot; boolean,&#xA;&quot;Sigma_t_b&quot; boolean,&#xA;&quot;Chl_b&quot; boolean,&#xA;&quot;PAR_b&quot; boolean,&#xA;&quot;C_b&quot; boolean,&#xA;&quot;OBS_b&quot; boolean,&#xA;&quot;Oxygen_b&quot; boolean,&#xA;&quot;Pressure_b&quot; boolean,&#xA;&quot;Trans_b&quot; boolean,&#xA;geom geometry(Geometry,4326),&#xA;CONSTRAINT aims_ctd_map_pkey PRIMARY KEY (pkid),&#xA;CONSTRAINT aims_ctd_map_geom_check CHECK (st_isvalid(geom))&#xA;);&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;  &lt;changeSet author=&quot;talend&quot; id=&quot;cr_aims_ctd_data_view-1&quot; runOnChange=&quot;true&quot;>&#xA;      &lt;sql>&#xA;&#x9;DROP VIEW IF EXISTS aodn_aims_ctd_data;&#xA;&#x9;CREATE VIEW aodn_aims_ctd_data AS&#xA;SELECT m.measurement,&#xA;m.file_id ,&#xA;f.url,&#xA;f.size,&#xA;m.&quot;Station&quot; ,&#xA;m.&quot;Time&quot; AT TIME ZONE 'UTC' AS &quot;Time&quot;,&#xA;m.&quot;Latitude&quot;,&#xA;m.&quot;Longitude&quot;,&#xA;m.&quot;Depth&quot;,&#xA;m.&quot;Temp&quot;,&#xA;m.&quot;Salinity&quot;,&#xA;m.&quot;Sigma_t&quot;,&#xA;m.&quot;Chl&quot;,&#xA;m.&quot;PAR&quot;,&#xA;m.&quot;C&quot;,&#xA;m.&quot;OBS&quot;,&#xA;m.&quot;Oxygen&quot;,&#xA;m.&quot;Pressure&quot;,&#xA;m.&quot;Trans&quot;,&#xA;m.geom&#xA;FROM aims_ctd_measurements m&#xA;JOIN indexed_file f ON m.file_id = f.id&#xA;ORDER BY &quot;Station&quot;,&quot;Time&quot;,&quot;Depth&quot;;&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;cr_idx_measurement-1&quot;>&#xA;      &lt;sql>&#xA;CREATE INDEX measurement_idx ON  aims_ctd_measurements (&quot;Station&quot;,&quot;Time&quot;,&quot;Depth&quot;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;cr_gist_idx-1&quot;>&#xA;      &lt;sql>&#xA;CREATE INDEX gist_idx ON aims_ctd_measurements USING GIST(geom)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;add_depthrange_map-1&quot;>&#xA;      &lt;sql>&#xA;ALTER  TABLE aodn_aims_ctd_map&#xA;ADD depth_min real,&#xA;ADD depth_max real;&#xA;&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;cr_gist_idx_map_table-1&quot;>&#xA;      &lt;sql>&#xA;CREATE INDEX map_gist_idx ON aodn_aims_ctd_map USING GIST(geom)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr_idx_measurement-2-1&quot;>&#xA;      &lt;sql>&#xA;DROP INDEX measurement_idx;&#xA;CREATE INDEX measurement_idx_2 ON  aims_ctd_measurements (&quot;Station&quot;,timezone('UTC'::text, &quot;Time&quot;),&quot;Depth&quot;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;update_map-1&quot;>&#xA;      &lt;sql>&#xA;ALTER  TABLE aodn_aims_ctd_map&#xA;ADD colour character varying(7)&#xA;;&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;add_fileId_map-1&quot;>&#xA;      &lt;sql>&#xA;ALTER  TABLE aodn_aims_ctd_map&#xA;ADD file_id bigint&#xA;;&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -250,7 +250,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot; WITH a AS (&#xA;SELECT &#xA;\&quot;Station\&quot;,&#xA;min(\&quot;Depth\&quot;) AS depth_min,  &#xA;max(\&quot;Depth\&quot;) AS depth_max&#xA;FROM aodn_aims_ctd.aims_ctd_measurements ms&#xA;WHERE ms.file_id = &quot; + context.fileId + &quot;&#xA;GROUP BY \&quot;Station\&quot;)&#xA;&#xA;UPDATE aodn_aims_ctd.aodn_aims_ctd_map m&#xA;SET depth_min= a.depth_min,&#xA;depth_max=a.depth_max&#xA;FROM a&#xA;WHERE&#xA;m.\&quot;Station\&quot;= a.\&quot;Station\&quot;;&#xA;&quot;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot; WITH a AS (&#xA;SELECT &#xA;\&quot;Station\&quot;,&#xA;min(\&quot;Depth\&quot;) AS depth_min,  &#xA;max(\&quot;Depth\&quot;) AS depth_max&#xA;FROM aodn_aims_ctd.aims_ctd_measurements ms&#xA;GROUP BY \&quot;Station\&quot;)&#xA;&#xA;UPDATE aodn_aims_ctd.aodn_aims_ctd_map m&#xA;SET depth_min= a.depth_min,&#xA;depth_max=a.depth_max&#xA;FROM a&#xA;WHERE&#xA;m.\&quot;Station\&quot;= a.\&quot;Station\&quot;;&#xA;&quot;&#xA;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -258,7 +258,7 @@
     <elementParameter field="TABLE" name="SET_PREPAREDSTATEMENT_PARAMETERS"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -269,7 +269,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="576" posY="640">
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="736" posY="640">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_4"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
@@ -290,6 +290,42 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_4"/>
+  </node>
+  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="544" posY="640">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_2"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_T73w8AfEEeS6S4wYAZSNCg"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;aodn_aims_ctd_map&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot; WITH A AS(SELECT &#xA;distinct file_id,&#xA;'#'::text || upper(lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour&#xA;FROM aodn_aims_ctd.aims_ctd_measurements ms&#xA;GROUP BY file_id),&#xA;&#xA;B AS( SELECT  &#xA;distinct \&quot;Station\&quot;,&#xA;file_id &#xA;FROM aodn_aims_ctd.aims_ctd_measurements ms),&#xA;&#xA;C AS (SELECT A.file_id,&#xA;A.colour,&#xA;B.\&quot;Station\&quot;&#xA;from A&#xA;JOIN B on B.file_id=A.file_id)&#xA;&#xA;UPDATE aodn_aims_ctd.aodn_aims_ctd_map mp&#xA;SET colour=c.colour,&#xA;file_id=c.file_id&#xA;from C&#xA;where C.\&quot;Station\&quot; =mp.\&quot;Station\&quot;&#xA;&quot;&#xA;"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
+    <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
+    <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
+    <elementParameter field="TABLE" name="SET_PREPAREDSTATEMENT_PARAMETERS"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlRow_2"/>
+    <metadata connector="REJECT" name="REJECT">
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
   </node>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iDeletedResources_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
@@ -319,7 +355,11 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate1"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlRow_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_1" target="tRunJob_4">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlRow_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_1" target="tPostgresqlRow_2">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk6"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlRow_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_2" target="tRunJob_4">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
   </connection>
@@ -346,12 +386,21 @@
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Add depth_min and depth_max to _map"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_4"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_2"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Add colour and file_id to _map"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
