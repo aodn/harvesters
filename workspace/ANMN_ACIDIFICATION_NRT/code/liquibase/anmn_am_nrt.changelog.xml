@@ -34,6 +34,24 @@
     </changeSet>
 
 
+    <changeSet author="talend" id="remove_data_from_deleted_files-1">
+      <sql>
+	DELETE FROM timeseries WHERE file_id NOT IN (
+	  SELECT file_id FROM file_harvest WHERE last_change_type != 'deleted'
+	);
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="timeseries_add_unique_constraint-1">
+      <sql>
+	ALTER TABLE timeseries
+	   ADD CONSTRAINT timeseries_deployment_code_unique UNIQUE (deployment_code),
+	   ADD CONSTRAINT timeseries_platform_time_start_unique UNIQUE (platform_code, time_coverage_start);
+      </sql>
+    </changeSet>
+
+
     <changeSet author="talend" id="create_measurement_table-1">
       <sql>
 	CREATE TABLE measurement
