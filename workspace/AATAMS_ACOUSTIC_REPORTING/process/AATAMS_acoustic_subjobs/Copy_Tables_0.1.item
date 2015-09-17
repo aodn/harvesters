@@ -2,10 +2,10 @@
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="harvest"/>
-    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="aatams_acoustic"/>
-    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_Password" value="yhqxplJv1O8i2nMZoK2LVA=="/>
+    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="dw_aatams_acoustic"/>
+    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_Password" value="w4f4Njyz3s/GOv5BOG+06C4Tc2Ozi37q"/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="5433"/>
-    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="aatams_acoustic"/>
+    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="dw_aatams_acoustic"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="localhost"/>
     <contextParameter comment="" name="Origin_Database" prompt="Origin_Database?" promptNeeded="false" repositoryContextId="_UGt2UPKMEeOzcoSVTh1lXQ" type="id_String" value="aatams3"/>
     <contextParameter comment="" name="Origin_Login" prompt="Origin_Login?" promptNeeded="false" repositoryContextId="_UGt2UPKMEeOzcoSVTh1lXQ" type="id_String" value="aatams"/>
@@ -15,8 +15,8 @@
     <contextParameter comment="" name="Origin_Server" prompt="Origin_Server?" promptNeeded="false" repositoryContextId="_UGt2UPKMEeOzcoSVTh1lXQ" type="id_String" value="localhost"/>
   </context>
   <parameters>
-    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx4096M"/>
-    <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
+    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xmx4096M"/>
+    <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="true"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="0"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
@@ -164,7 +164,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT id, animal_id, embargo_date, project_id, releasedatetime_timestamp, release_locality FROM aatams.animal_release;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT id, &#xA;animal_id, &#xA;capturedatetime_timestamp, &#xA;capture_locality,&#xA;embargo_date, &#xA;project_id, &#xA;releasedatetime_timestamp,&#xA;release_locality,&#xA; ST_SetSRID(capture_location,4326),&#xA; ST_SetSRID(release_location,4326)&#xA;FROM aatams.animal_release;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -176,6 +176,10 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="animal_id"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="capturedatetime_timestamp"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="capture_locality"/>
+      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="embargo_date"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="project_id"/>
@@ -183,6 +187,10 @@
       <elementValue elementRef="SCHEMA_COLUMN" value="releasedatetime_timestamp"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="release_locality"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="capture_location"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="release_location"/>
       <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -192,10 +200,14 @@
     <metadata connector="FLOW" name="tPostgresqlInput_2">
       <column comment="" defaultValue="" key="true" length="19" name="id" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
       <column comment="" defaultValue="" key="false" length="19" name="animal_id" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
+      <column comment="" key="false" name="capturedatetime_timestamp" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="capture_locality" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" length="35" name="embargo_date" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="19" name="project_id" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
       <column comment="" key="false" length="35" name="releasedatetime_timestamp" nullable="false" pattern="" precision="6" sourceType="" type="id_Date"/>
       <column comment="" key="false" length="255" name="release_locality" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="capture_location" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
+      <column comment="" key="false" name="release_location" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
     </metadata>
   </node>
   <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1056" posY="64">
@@ -233,6 +245,16 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="capturedatetime_timestamp"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="capture_locality"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="embargo_date"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -253,6 +275,16 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="capture_location"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="release_location"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -265,18 +297,26 @@
     <metadata connector="FLOW" name="iPostgresqlOutput_2">
       <column comment="" defaultValue="" key="true" length="19" name="id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" defaultValue="" key="false" length="19" name="animal_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="capturedatetime_timestamp" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="capture_locality" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="35" name="embargo_date" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="19" name="project_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="35" name="releasedatetime_timestamp" nullable="false" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="255" name="release_locality" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="capture_location" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
+      <column comment="" key="false" name="release_location" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" defaultValue="" key="true" length="19" name="id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" defaultValue="" key="false" length="19" name="animal_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" name="capturedatetime_timestamp" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="capture_locality" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="35" name="embargo_date" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="19" name="project_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="35" name="releasedatetime_timestamp" nullable="false" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="255" name="release_locality" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="capture_location" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
+      <column comment="" key="false" name="release_location" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1222,7 +1262,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT detection_id AS id, receiver_deployment_id, timestamp, transmitter_id FROM aatams.valid_detection;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT detection.id, receiver_deployment_id, timestamp, transmitter_id, detection.receiver_name &#xA;FROM aatams.detection&#xA;LEFT JOIN aatams.receiver ON detection.receiver_name::text = receiver.receiver_name&#xA;LEFT JOIN aatams.deployment_and_recovery deployment_and_recovery ON receiver.id = deployment_and_recovery.receiver_id AND detection.timestamp >= deployment_and_recovery.initialisationdatetime_timestamp AND detection.timestamp &lt;= deployment_and_recovery.recoverydatetime_timestamp&#xA;WHERE aatams.invalid_reason(detection.*, receiver.*, deployment_and_recovery.*) IS NULL;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -1238,6 +1278,8 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="transmitter_id"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="receiver_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -1248,6 +1290,7 @@
       <column comment="" defaultValue="" key="false" length="19" name="receiver_deployment_id" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
       <column comment="" key="false" length="35" name="timestamp" nullable="false" pattern="" precision="6" sourceType="" type="id_Date"/>
       <column comment="" key="false" length="255" name="transmitter_id" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="255" name="receiver_name" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
     </metadata>
   </node>
   <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="736" posY="288">
@@ -1297,6 +1340,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="receiver_name"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -1311,12 +1359,14 @@
       <column comment="" defaultValue="" key="false" length="19" name="receiver_deployment_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="35" name="timestamp" nullable="false" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="255" name="transmitter_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="receiver_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" defaultValue="" key="true" length="19" name="id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" defaultValue="" key="false" length="19" name="receiver_deployment_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="35" name="timestamp" nullable="false" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="255" name="transmitter_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="receiver_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>

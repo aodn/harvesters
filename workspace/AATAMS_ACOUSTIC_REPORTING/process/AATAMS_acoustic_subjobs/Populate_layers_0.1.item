@@ -2,16 +2,16 @@
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="harvest"/>
-    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="aatams_acoustic"/>
-    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_Password" value="yhqxplJv1O8i2nMZoK2LVA=="/>
+    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="dw_aatams_acoustic"/>
+    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_Password" value="w4f4Njyz3s/GOv5BOG+06C4Tc2Ozi37q"/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="5433"/>
-    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="aatams_acoustic"/>
+    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="dw_aatams_acoustic"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="localhost"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_8qN7YH12EeO8KdXPymp3hg" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_8qN7YH12EeO8KdXPymp3hg" type="id_String" value="null"/>
   </context>
   <parameters>
-    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx4096M"/>
+    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xmx4096M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="true"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="224"/>
@@ -58,7 +58,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT DISTINCT vd.id AS detection_id,&#xA;&#x9;p.name AS project_name,&#xA;&#x9;i.name AS installation_name,&#xA;&#x9;ist.name AS station_name,&#xA;&#x9;rd.bottom_depthm AS bottom_depth,&#xA;&#x9;sp.common_name AS common_name,&#xA;&#x9;vd.transmitter_id AS transmitter_id,&#xA;&#x9;ar.releasedatetime_timestamp AT TIME ZONE 'UTC' AS release_date,&#xA;&#x9;ar.release_locality AS release_locality,&#xA;&#x9;vd.timestamp AT TIME ZONE 'UTC' AS detection_date,&#xA;&#x9;ST_X(ist.location) AS longitude,&#xA;&#x9;ST_Y(ist.location) AS latitude,&#xA;&#x9;sex.sex AS sex,&#xA;&#x9;amt.type AS measurement_type,&#xA;&#x9;am.value AS measurement_value,&#xA;&#x9;mu.unit AS measurement_unit,&#xA;&#x9;sp.phylum AS phylum,&#xA;&#x9;sp.order_name AS order_name,&#xA;&#x9;sp.scientific_name AS scientific_name,&#xA;&#x9;ist.location AS geom,&#xA;    'TRUE' AS detected&#xA;  FROM valid_detection vd&#xA;  FULL JOIN receiver_deployment rd ON vd.receiver_deployment_id = rd.id&#xA;  FULL JOIN installation_station ist ON ist.id = rd.station_id&#xA;  FULL JOIN installation i ON i.id = ist.installation_id&#xA;  FULL JOIN project p ON p.id = i.project_id  &#xA;  LEFT JOIN sensor on vd.transmitter_id = sensor.transmitter_id&#xA;  LEFT JOIN device d on sensor.tag_id = d.id&#xA;  JOIN surgery s ON s.tag_id = d.id&#xA;  JOIN animal_release ar ON ar.id = s.release_id&#xA;  JOIN animal a ON a.id = ar.animal_id&#xA;  JOIN species sp ON sp.id = a.species_id &#xA;  JOIN sex ON a.sex_id = sex.id&#xA;  JOIN animal_measurement am ON am.release_id = ar.id&#xA;  JOIN animal_measurement_type amt ON amt.id = am.type_id&#xA;  JOIN measurement_unit mu ON mu.id = am.unit_id&#xA;&#x9;WHERE date_part('day', ar.embargo_date - now()) &lt; 0 AND p.is_protected = FALSE&#xA;&#x9;ORDER BY common_name, transmitter_id, detection_date;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT DISTINCT vd.id AS detection_id,&#xA;&#x9;p.name AS project_name,&#xA;&#x9;i.name AS installation_name,&#xA;&#x9;ist.name AS station_name,&#xA;&#x9;vd.receiver_name,&#xA;&#x9;rd.bottom_depthm AS bottom_depth,&#xA;&#x9;sp.common_name AS common_name,&#xA;&#x9;vd.transmitter_id AS transmitter_id,&#xA;&#x9;ar.releasedatetime_timestamp AT TIME ZONE 'UTC' AS release_date,&#xA;&#x9;ar.release_locality AS release_locality,&#xA;&#x9;vd.timestamp AT TIME ZONE 'UTC' AS detection_date,&#xA;&#x9;ST_X(ist.location) AS longitude,&#xA;&#x9;ST_Y(ist.location) AS latitude,&#xA;&#x9;sex.sex AS sex,&#xA;&#x9;sp.scientific_name AS scientific_name,&#xA;&#x9;ist.location AS geom,&#xA;&#x9;'TRUE' AS detected&#xA;  FROM valid_detection vd&#xA;  LEFT JOIN receiver_deployment rd ON vd.receiver_deployment_id = rd.id&#xA;  LEFT JOIN installation_station ist ON ist.id = rd.station_id&#xA;  LEFT JOIN installation i ON i.id = ist.installation_id&#xA;  LEFT JOIN project p ON p.id = i.project_id  &#xA;  LEFT JOIN sensor on vd.transmitter_id = sensor.transmitter_id&#xA;  LEFT JOIN device d on sensor.tag_id = d.id&#xA;  LEFT JOIN surgery s ON s.tag_id = d.id&#xA;  LEFT JOIN animal_release ar ON ar.id = s.release_id&#xA;  LEFT JOIN animal a ON a.id = ar.animal_id&#xA;  LEFT JOIN species sp ON sp.id = a.species_id &#xA;  LEFT JOIN sex ON a.sex_id = sex.id&#xA;&#x9;WHERE date_part('day', ar.embargo_date - now()) &lt; 0 AND p.is_protected = FALSE AND&#xA;&#x9;ar.releasedatetime_timestamp AT TIME ZONE 'UTC' &lt; vd.timestamp AT TIME ZONE 'UTC' AND&#xA;&#x9;sp.common_name IS NOT NULL AND sp.scientific_name IS NOT NULL&#xA;&#x9;ORDER BY transmitter_id, detection_date;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -73,6 +73,8 @@
       <elementValue elementRef="SCHEMA_COLUMN" value="installation_name"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="station_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="receiver_name"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="bottom_depth"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -92,16 +94,6 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="sex"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="measurement_type"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="measurement_value"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="measurement_unit"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="phylum"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="order_name"/>
-      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="scientific_name"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
@@ -118,6 +110,7 @@
       <column comment="" key="false" length="255" name="project_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="255" name="installation_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="255" name="station_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="255" name="receiver_name" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
       <column comment="" defaultValue="" key="false" length="8" name="bottom_depth" nullable="true" pattern="" precision="8" sourceType="" type="id_Float"/>
       <column comment="" key="false" length="255" name="common_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="255" name="transmitter_id" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
@@ -127,11 +120,6 @@
       <column comment="" defaultValue="" key="false" length="17" name="longitude" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="17" name="latitude" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
       <column comment="" key="false" length="255" name="sex" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
-      <column comment="" key="true" length="255" name="measurement_type" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
-      <column comment="" defaultValue="" key="false" length="8" name="measurement_value" nullable="false" pattern="" precision="8" sourceType="" type="id_Float"/>
-      <column comment="" key="false" length="255" name="measurement_unit" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="255" name="phylum" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="255" name="order_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="255" name="scientific_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
       <column comment="" key="false" name="detected" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
@@ -182,6 +170,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="receiver_name"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="bottom_depth"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -227,31 +220,6 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="measurement_type"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="measurement_value"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="measurement_unit"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="phylum"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="order_name"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="scientific_name"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -281,6 +249,7 @@
       <column comment="" key="false" length="255" name="project_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="255" name="installation_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="255" name="station_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="receiver_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column comment="" defaultValue="" key="false" length="8" name="bottom_depth" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="255" name="common_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="255" name="transmitter_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -290,11 +259,6 @@
       <column comment="" defaultValue="" key="false" length="17" name="longitude" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="17" name="latitude" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="255" name="sex" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="true" length="255" name="measurement_type" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" length="8" name="measurement_value" nullable="false" pattern="" precision="8" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="255" name="measurement_unit" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="255" name="phylum" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="255" name="order_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="255" name="scientific_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
       <column comment="" key="false" name="detected" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
@@ -304,6 +268,7 @@
       <column comment="" key="false" length="255" name="project_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="255" name="installation_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="255" name="station_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="receiver_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column comment="" defaultValue="" key="false" length="8" name="bottom_depth" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="255" name="common_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="255" name="transmitter_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -313,11 +278,6 @@
       <column comment="" defaultValue="" key="false" length="17" name="longitude" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="17" name="latitude" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="255" name="sex" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="true" length="255" name="measurement_type" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" length="8" name="measurement_value" nullable="false" pattern="" precision="8" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="255" name="measurement_unit" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="255" name="phylum" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="255" name="order_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="255" name="scientific_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
       <column comment="" key="false" name="detected" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
@@ -388,7 +348,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;   WITH a AS (&#xA;  SELECT DISTINCT common_name&#xA;  FROM aatams_acoustic_detections_data),&#xA;&#x9;b AS (&#xA;  SELECT a.common_name,&#xA;&#x9; COALESCE('#'||''||lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour&#xA;  FROM a),&#xA;&#x9;c AS (&#xA;  SELECT station_name, transmitter_id,&#xA;&#x9; COUNT(DISTINCT detection_id) AS no_detections&#xA;  FROM aatams_acoustic_detections_data&#xA;&#x9;GROUP BY station_name, transmitter_id)&#xA;  SELECT project_name,&#xA;&#x9;installation_name,&#xA;&#x9;d.station_name,&#xA;&#x9;d.common_name,&#xA;&#x9;d.transmitter_id,&#xA;&#x9;release_locality,&#xA;&#x9;date(min(detection_date)) AS first_detection_date,&#xA;&#x9;date(max(detection_date)) AS last_detection_date,&#xA;&#x9;sex,&#xA;&#x9;phylum,&#xA;&#x9;d.order_name AS order_name,&#xA;&#x9;scientific_name,&#xA;&#x9;replace(ST_AsEWKT(ST_SIMPLIFY(ST_MAKELINE(geom),0.01)), 'LINESTRING','MULTIPOINT')::geometry AS geom,&#xA;&#x9;b.colour AS colour,&#xA;&#x9;c.no_detections,&#xA;&#x9;bool_or(no_detections > 0) AS detected&#xA;  FROM aatams_acoustic_detections_data d&#xA;  JOIN b ON b.common_name = d.common_name&#xA;  JOIN c ON c.station_name = d.station_name AND c.transmitter_id = d.transmitter_id&#xA;  &#x9;GROUP BY project_name, installation_name, d.station_name, d.common_name, d.transmitter_id, release_locality, sex, phylum, d.order_name, scientific_name, colour, no_detections&#xA;UNION ALL&#xA;SELECT p.name AS project_name, &#xA;i.name AS installation_name, &#xA;ist.name AS station_name, &#xA;NULL AS common_name,&#xA;NULL AS transmitter_id,&#xA;NULL AS release_locality,&#xA;NULL AS first_detection_date,&#xA;NULL AS last_detection_date,&#xA;NULL AS sex,&#xA;NULL AS phylum,&#xA;NULL AS order_name,&#xA;NULL AS scientific_name,&#xA;ist.location AS geom,&#xA;'#FF0000' AS colour,&#xA;0 AS no_detections,&#xA;'FALSE' AS detected&#xA;FROM installation_station ist&#xA;JOIN installation i ON i.id = ist.installation_id&#xA;JOIN project p ON p.id = i.project_id &#xA;WHERE ist.name NOT IN (SELECT DISTINCT station_name FROM aatams_acoustic_detections_data)&#xA;&#x9;ORDER BY detected, common_name, transmitter_id, first_detection_date;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH a AS (&#xA;  SELECT DISTINCT common_name&#xA;  FROM aatams_acoustic_detections_data),&#xA;  b AS (&#xA;  SELECT a.common_name,&#xA;&#x9; COALESCE('#'||''||lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour&#xA;  FROM a),&#xA;  c AS (&#xA;  SELECT station_name, transmitter_id,&#xA;&#x9; COUNT(DISTINCT detection_id) AS no_detections&#xA;  FROM aatams_acoustic_detections_data&#xA;&#x9;GROUP BY station_name, transmitter_id)&#xA;  SELECT project_name,&#xA;&#x9;installation_name,&#xA;&#x9;d.station_name,&#xA;&#x9;d.common_name,&#xA;&#x9;d.transmitter_id,&#xA;&#x9;release_locality,&#xA;&#x9;date(min(detection_date)) AS first_detection_date,&#xA;&#x9;date(max(detection_date)) AS last_detection_date,&#xA;&#x9;sex,&#xA;&#x9;scientific_name,&#xA;&#x9;replace(ST_AsEWKT(ST_SIMPLIFY(ST_MAKELINE(geom),0.01)), 'LINESTRING','MULTIPOINT')::geometry AS geom,&#xA;&#x9;b.colour AS colour,&#xA;&#x9;c.no_detections,&#xA;&#x9;bool_or(no_detections > 0) AS detected&#xA;  FROM aatams_acoustic_detections_data d&#xA;  LEFT JOIN b ON b.common_name = d.common_name&#xA;  LEFT JOIN c ON c.station_name = d.station_name AND c.transmitter_id = d.transmitter_id&#xA;  &#x9;GROUP BY project_name, installation_name, d.station_name, d.common_name, d.transmitter_id, release_locality, sex, scientific_name, colour, no_detections&#xA;UNION ALL&#xA;  SELECT p.name AS project_name, &#xA;&#x9;i.name AS installation_name, &#xA;&#x9;ist.name AS station_name,&#xA;&#x9;NULL AS common_name,&#xA;&#x9;NULL AS transmitter_id,&#xA;&#x9;NULL AS release_locality,&#xA;&#x9;NULL AS first_detection_date,&#xA;&#x9;NULL AS last_detection_date,&#xA;&#x9;NULL AS sex,&#xA;&#x9;NULL AS scientific_name,&#xA;&#x9;ist.location AS geom,&#xA;&#x9;'#FF0000' AS colour,&#xA;&#x9;0 AS no_detections,&#xA;&#x9;'FALSE' AS detected&#xA;  FROM installation_station ist&#xA;  LEFT JOIN installation i ON i.id = ist.installation_id&#xA;  LEFT JOIN project p ON p.id = i.project_id &#xA;&#x9;WHERE ist.name NOT IN (SELECT DISTINCT station_name FROM aatams_acoustic_detections_data)&#xA;&#x9;ORDER BY detected, common_name, transmitter_id, first_detection_date;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -413,10 +373,6 @@
       <elementValue elementRef="SCHEMA_COLUMN" value="last_detection_date"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="sex"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="phylum"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="order_name"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="scientific_name"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -443,8 +399,6 @@
       <column comment="" key="false" name="first_detection_date" nullable="true" pattern="" sourceType="" type="id_Date"/>
       <column comment="" key="false" name="last_detection_date" nullable="true" pattern="" sourceType="" type="id_Date"/>
       <column comment="" key="false" name="sex" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="phylum" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="order_name" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="scientific_name" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
       <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="" type="id_String"/>
@@ -522,16 +476,6 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="phylum"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="order_name"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="scientific_name"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -576,8 +520,6 @@
       <column comment="" key="false" name="first_detection_date" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="last_detection_date" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="sex" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="phylum" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="order_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="scientific_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
       <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -594,8 +536,6 @@
       <column comment="" key="false" name="first_detection_date" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="last_detection_date" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="sex" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="phylum" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="order_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="scientific_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
       <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -664,7 +604,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT DISTINCT p.name AS project_name,&#xA;i.name AS installation_name,&#xA;ist.name AS station_name,&#xA;ist.location AS geom&#xA;FROM installation_station ist&#xA;LEFT JOIN installation i ON i.id = ist.installation_id&#xA;LEFT JOIN project p ON i.project_id = p.id&#xA;ORDER BY i.name;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;  SELECT DISTINCT p.name AS project_name,&#xA;&#x9;i.name AS installation_name,&#xA;&#x9;ist.name AS station_name,&#xA;&#x9;ist.location AS geom&#xA;  FROM installation_station ist&#xA;  LEFT JOIN installation i ON i.id = ist.installation_id&#xA;  LEFT JOIN project p ON i.project_id = p.id&#xA;&#x9;ORDER BY i.name;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -827,6 +767,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="detected"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="receiver_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -839,7 +782,7 @@
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tPostgresqlInput_2">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk6"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="tPostgresqlInput_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
@@ -913,6 +856,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="detected"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="receiver_name,"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -1015,7 +961,7 @@
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_3" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_3" target="tPostgresqlRow_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk6"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
