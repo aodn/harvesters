@@ -12,8 +12,8 @@
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="96"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="640"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="32"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="608"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
     <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
     <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
@@ -46,8 +46,8 @@
     <routinesParameter id="_IMfY4Dp8EeKYTu4DLH4cKg" name="NetCDFUtils"/>
     <routinesParameter id="_BzxlsElWEeK5TPMSOHM6dA" name="ArgoUtils"/>
   </parameters>
-  <node componentName="iDeletedResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="-32" posY="-576">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
+  <node componentName="iDeletedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="32" posY="-544">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedFileList_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_HtNvQDKiEeKrFtsLd2Qz2g"/>
@@ -64,13 +64,14 @@
     <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
     <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
-    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select id, url, modified &quot; +&#xA;&quot;  from deleted_resource &quot; +&#xA;&quot; where job_name = ? &quot; +&#xA;&quot;   and harvest_type = ? &quot;&#xA;      "/>
+    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&#xA;          &quot; select indexed_file.id, indexed_file.url, indexed_file.modified&quot;&#xA;        + &quot;   from indexed_file&quot;&#xA;        + &quot;   join index_job on (indexed_file.job_id = index_job.id)&quot;&#xA;        + &quot;   join file_harvest on (file_harvest.file_id = indexed_file.id)&quot;&#xA;        + &quot; where indexed_file.deleted&quot;&#xA;        + &quot;   and file_harvest.last_change_type &lt;> 'deleted'&quot;&#xA;        + &quot;   and index_job.name = ?&quot;&#xA;        + &quot;   and file_harvest.harvest_type = ?&quot;&#xA;      "/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="192" posY="-576">
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="288" posY="-544">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_2"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
@@ -84,7 +85,7 @@
     <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
     <elementParameter field="TABLE" name="CONTEXTPARAMS">
       <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iDeletedResources_1_FILE_ID&quot;)).intValue()"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iDeletedFileList_1_FILE_ID&quot;)).intValue()"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
     <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
@@ -95,8 +96,8 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_2"/>
   </node>
-  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="-32" posY="-384">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
+  <node componentName="iNewOrModifiedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="32" posY="-384">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_HtNvQDKiEeKrFtsLd2Qz2g"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
@@ -112,13 +113,14 @@
     <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
     <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="true"/>
-    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#xA;&quot;  from indexed_file &quot; +&#xA;&quot;  join index_job &quot; +&#xA;&quot;    on indexed_file.job_id = index_job.id &quot; +&#xA;&quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#xA;&quot;   and index_job.name = ? &quot; +&#xA;&quot;  left join file_harvest &quot; +&#xA;&quot;    on file_harvest.file_id = indexed_file.id &quot; +&#xA;&quot;   and file_harvest.harvest_type = ? &quot; +&#xA;&quot;  join australian_floats &quot; +&#xA;&quot;    on indexed_file.url like '%/'||trim(australian_floats.platform_number)||'/profiles/%.nc' &quot; +&#xA;&quot; where (file_harvest.last_moddate_harvested &lt;> indexed_file.modified &quot; +&#xA;&quot;    or  file_harvest.last_moddate_harvested is null) &quot;;"/>
+    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#xA;&quot;  from indexed_file &quot; +&#xA;&quot;  join index_job &quot; +&#xA;&quot;    on indexed_file.job_id = index_job.id &quot; +&#xA;&quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#xA;&quot;   and index_job.name = ? &quot; +&#xA;&quot;  left join file_harvest &quot; +&#xA;&quot;    on file_harvest.file_id = indexed_file.id &quot; +&#xA;&quot;   and file_harvest.harvest_type = ? &quot; +&#xA;&quot;  join australian_floats &quot; +&#xA;&quot;    on indexed_file.url like '%/'||trim(australian_floats.platform_number)||'/profiles/%.nc' &quot; +&#xA;&quot; where not indexed_file.deleted &quot;"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="192" posY="-384">
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="288" posY="-384">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_1"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
@@ -132,7 +134,7 @@
     <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
     <elementParameter field="TABLE" name="CONTEXTPARAMS">
       <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iHarvestResources_1_FILE_ID&quot;)).intValue()"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iNewOrModifiedFileList_1_FILE_ID&quot;)).intValue()"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
     <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
@@ -143,33 +145,29 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_1"/>
   </node>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="tRunJob_2">
-    <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
-    <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2"/>
-  </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="iHarvestResources_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
-  </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tRunJob_1">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_1" target="tRunJob_2">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate1"/>
   </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_1" target="iNewOrModifiedFileList_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
+  </connection>
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iNewOrModifiedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iNewOrModifiedFileList_1" target="tRunJob_1">
+    <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
+    <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2"/>
+  </connection>
   <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Detele profile data for deleted profiles"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedFileList_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Harvest or re-harvest new or modified profile data"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
