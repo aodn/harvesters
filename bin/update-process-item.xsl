@@ -112,7 +112,7 @@
             <xsl:call-template name="string-replace-all">
                 <xsl:with-param name="text" select="."/>
                 <xsl:with-param name="replace" select="'context.url'"/>
-                <xsl:with-param name="by" select="'context.url + &quot;/&quot; + context.base'"/>
+                <xsl:with-param name="by" select="'context.base + &quot;/&quot; + context.url'"/>
             </xsl:call-template>
         </xsl:attribute>
     </xsl:template>
