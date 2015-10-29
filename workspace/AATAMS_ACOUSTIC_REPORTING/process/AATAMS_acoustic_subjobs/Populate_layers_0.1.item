@@ -58,7 +58,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT DISTINCT vd.id AS detection_id,&#xA;&#x9;p.name AS project_name,&#xA;&#x9;i.name AS installation_name,&#xA;&#x9;ist.name AS station_name,&#xA;&#x9;vd.receiver_name,&#xA;&#x9;rd.bottom_depthm AS bottom_depth,&#xA;&#x9;sp.common_name AS common_name,&#xA;&#x9;vd.transmitter_id AS transmitter_id,&#xA;&#x9;ar.releasedatetime_timestamp AT TIME ZONE 'UTC' AS release_date,&#xA;&#x9;ar.release_locality AS release_locality,&#xA;&#x9;vd.timestamp AT TIME ZONE 'UTC' AS detection_date,&#xA;&#x9;ST_X(ist.location) AS longitude,&#xA;&#x9;ST_Y(ist.location) AS latitude,&#xA;&#x9;sex.sex AS sex,&#xA;&#x9;sp.scientific_name AS scientific_name,&#xA;&#x9;ist.location AS geom,&#xA;&#x9;'TRUE' AS detected&#xA;  FROM valid_detection vd&#xA;  LEFT JOIN receiver_deployment rd ON vd.receiver_deployment_id = rd.id&#xA;  LEFT JOIN installation_station ist ON ist.id = rd.station_id&#xA;  LEFT JOIN installation i ON i.id = ist.installation_id&#xA;  LEFT JOIN project p ON p.id = i.project_id  &#xA;  LEFT JOIN sensor on vd.transmitter_id = sensor.transmitter_id&#xA;  LEFT JOIN device d on sensor.tag_id = d.id&#xA;  LEFT JOIN surgery s ON s.tag_id = d.id&#xA;  LEFT JOIN animal_release ar ON ar.id = s.release_id&#xA;  LEFT JOIN animal a ON a.id = ar.animal_id&#xA;  LEFT JOIN species sp ON sp.id = a.species_id &#xA;  LEFT JOIN sex ON a.sex_id = sex.id&#xA;&#x9;WHERE date_part('day', ar.embargo_date - now()) &lt; 0 AND p.is_protected = FALSE AND&#xA;&#x9;ar.releasedatetime_timestamp AT TIME ZONE 'UTC' &lt; vd.timestamp AT TIME ZONE 'UTC' AND&#xA;&#x9;sp.common_name IS NOT NULL AND sp.scientific_name IS NOT NULL&#xA;&#x9;ORDER BY transmitter_id, detection_date;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT DISTINCT vd.id AS detection_id,&#xA;&#x9;p.name AS project_name,&#xA;&#x9;i.name AS installation_name,&#xA;&#x9;ist.name AS station_name,&#xA;&#x9;vd.receiver_name,&#xA;&#x9;rd.bottom_depthm AS bottom_depth,&#xA;&#x9;CASE WHEN sp.common_name IS NULL THEN 'Unknown' &#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) > 0 THEN 'Embargoed'&#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) &lt; 0 OR ar.embargo_date IS NULL THEN sp.common_name END AS common_name,&#xA;&#x9;vd.transmitter_id AS transmitter_id,&#xA;&#x9;CASE WHEN ar.releasedatetime_timestamp AT TIME ZONE 'UTC' IS NULL THEN NULL &#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) > 0 THEN NULL&#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) &lt; 0 OR ar.embargo_date IS NULL THEN ar.releasedatetime_timestamp AT TIME ZONE 'UTC' END AS release_date,&#xA;&#x9;CASE WHEN ar.release_locality IS NULL THEN 'Unknown'&#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) > 0 THEN 'Embargoed'&#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) &lt; 0 OR ar.embargo_date IS NULL THEN ar.release_locality END AS release_locality,&#xA;&#x9;vd.timestamp AT TIME ZONE 'UTC' AS detection_date,&#xA;&#x9;ST_X(ist.location) AS longitude,&#xA;&#x9;ST_Y(ist.location) AS latitude,&#xA;&#x9;CASE WHEN sex.sex IS NULL THEN 'Unknown' &#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) > 0 THEN 'Embargoed'&#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) &lt; 0 OR ar.embargo_date IS NULL THEN sex.sex END AS sex,&#xA;&#x9;CASE WHEN sp.scientific_name IS NULL THEN 'Unknown'&#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) > 0 THEN 'Embargoed'&#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) &lt; 0 OR ar.embargo_date IS NULL THEN sp.scientific_name END AS scientific_name,&#xA;&#x9;ist.location AS geom,&#xA;&#x9;'TRUE' AS detected,&#xA;&#x9;CASE WHEN date_part('day', ar.embargo_date - now()) &lt; 0 OR ar.embargo_date IS NULL THEN 'Public' ELSE 'Embargoed' END AS embargo,&#xA;&#x9;CASE WHEN s.tag_id IS NULL AND d.id IS NULL THEN 'Unregistered' ELSE 'Registered' END AS registered,&#xA;&#x9;ar.embargo_date AT TIME ZONE 'UTC' AS embargo_date&#xA;  FROM valid_detection vd&#xA;  LEFT JOIN receiver_deployment rd ON vd.receiver_deployment_id = rd.id&#xA;  LEFT JOIN installation_station ist ON ist.id = rd.station_id&#xA;  LEFT JOIN installation i ON i.id = ist.installation_id&#xA;  LEFT JOIN project p ON p.id = i.project_id  &#xA;  LEFT JOIN sensor on vd.transmitter_id = sensor.transmitter_id&#xA;  LEFT JOIN device d on sensor.tag_id = d.id&#xA;  LEFT JOIN surgery s ON s.tag_id = d.id&#xA;  LEFT JOIN animal_release ar ON ar.id = s.release_id&#xA;  LEFT JOIN animal a ON a.id = ar.animal_id&#xA;  LEFT JOIN species sp ON sp.id = a.species_id &#xA;  LEFT JOIN sex ON a.sex_id = sex.id&#xA;&#x9;WHERE p.is_protected = FALSE&#xA;&#x9;ORDER BY transmitter_id, detection_date;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -100,6 +100,12 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="detected"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="embargo"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="registered"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="embargo_date"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -123,6 +129,9 @@
       <column comment="" key="false" length="255" name="scientific_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
       <column comment="" key="false" name="detected" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" key="false" length="255" name="embargo" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="registered" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="embargo_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
     </metadata>
   </node>
   <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="128">
@@ -235,6 +244,21 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="embargo"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="registered"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="embargo_date"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -262,6 +286,9 @@
       <column comment="" key="false" length="255" name="scientific_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
       <column comment="" key="false" name="detected" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" key="false" length="255" name="embargo" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="registered" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="embargo_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" defaultValue="" key="true" length="19" name="detection_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
@@ -281,6 +308,9 @@
       <column comment="" key="false" length="255" name="scientific_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
       <column comment="" key="false" name="detected" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" key="false" length="255" name="embargo" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="registered" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="embargo_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -348,7 +378,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH a AS (&#xA;  SELECT DISTINCT common_name&#xA;  FROM aatams_acoustic_detections_data),&#xA;  b AS (&#xA;  SELECT a.common_name,&#xA;&#x9; COALESCE('#'||''||lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour&#xA;  FROM a),&#xA;  c AS (&#xA;  SELECT station_name, transmitter_id,&#xA;&#x9; COUNT(DISTINCT detection_id) AS no_detections&#xA;  FROM aatams_acoustic_detections_data&#xA;&#x9;GROUP BY station_name, transmitter_id)&#xA;  SELECT project_name,&#xA;&#x9;installation_name,&#xA;&#x9;d.station_name,&#xA;&#x9;d.common_name,&#xA;&#x9;d.transmitter_id,&#xA;&#x9;release_locality,&#xA;&#x9;date(min(detection_date)) AS first_detection_date,&#xA;&#x9;date(max(detection_date)) AS last_detection_date,&#xA;&#x9;sex,&#xA;&#x9;scientific_name,&#xA;&#x9;replace(ST_AsEWKT(ST_SIMPLIFY(ST_MAKELINE(geom),0.01)), 'LINESTRING','MULTIPOINT')::geometry AS geom,&#xA;&#x9;b.colour AS colour,&#xA;&#x9;c.no_detections,&#xA;&#x9;bool_or(no_detections > 0) AS detected&#xA;  FROM aatams_acoustic_detections_data d&#xA;  LEFT JOIN b ON b.common_name = d.common_name&#xA;  LEFT JOIN c ON c.station_name = d.station_name AND c.transmitter_id = d.transmitter_id&#xA;  &#x9;GROUP BY project_name, installation_name, d.station_name, d.common_name, d.transmitter_id, release_locality, sex, scientific_name, colour, no_detections&#xA;UNION ALL&#xA;  SELECT p.name AS project_name, &#xA;&#x9;i.name AS installation_name, &#xA;&#x9;ist.name AS station_name,&#xA;&#x9;NULL AS common_name,&#xA;&#x9;NULL AS transmitter_id,&#xA;&#x9;NULL AS release_locality,&#xA;&#x9;NULL AS first_detection_date,&#xA;&#x9;NULL AS last_detection_date,&#xA;&#x9;NULL AS sex,&#xA;&#x9;NULL AS scientific_name,&#xA;&#x9;ist.location AS geom,&#xA;&#x9;'#FF0000' AS colour,&#xA;&#x9;0 AS no_detections,&#xA;&#x9;'FALSE' AS detected&#xA;  FROM installation_station ist&#xA;  LEFT JOIN installation i ON i.id = ist.installation_id&#xA;  LEFT JOIN project p ON p.id = i.project_id &#xA;&#x9;WHERE ist.name NOT IN (SELECT DISTINCT station_name FROM aatams_acoustic_detections_data)&#xA;&#x9;ORDER BY detected, common_name, transmitter_id, first_detection_date;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH a AS (&#xA;  SELECT DISTINCT common_name, embargo, registered&#xA;  FROM aatams_acoustic_detections_data),&#xA;  b AS (&#xA;  SELECT a.common_name, a.embargo, a.registered,&#xA;&#x9; COALESCE('#'||''||lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour&#xA;  FROM a),&#xA;  c AS (&#xA;  SELECT station_name, transmitter_id,&#xA;&#x9; COUNT(DISTINCT detection_id) AS no_detections&#xA;  FROM aatams_acoustic_detections_data&#xA;&#x9;GROUP BY station_name, transmitter_id)&#xA;  SELECT project_name,&#xA;&#x9;installation_name,&#xA;&#x9;d.station_name,&#xA;&#x9;d.common_name,&#xA;&#x9;d.transmitter_id,&#xA;&#x9;release_locality,&#xA;&#x9;date(min(detection_date)) AS first_detection_date,&#xA;&#x9;date(max(detection_date)) AS last_detection_date,&#xA;&#x9;sex,&#xA;&#x9;scientific_name,&#xA;&#x9;replace(ST_AsEWKT(ST_SIMPLIFY(ST_MAKELINE(geom),0.01)), 'LINESTRING','MULTIPOINT')::geometry AS geom,&#xA;&#x9;CASE WHEN b.colour IS NULL THEN '#140802' ELSE b.colour END AS colour,&#xA;&#x9;c.no_detections,&#xA;&#x9;bool_or(no_detections > 0) AS detected,&#xA;&#x9;d.embargo,&#xA;&#x9;d.registered,&#xA;&#x9;d.embargo_date&#xA;  FROM aatams_acoustic_detections_data d&#xA;  LEFT JOIN b ON b.common_name = d.common_name AND d.embargo = b.embargo AND d.registered = b.registered&#xA;  LEFT JOIN c ON c.station_name = d.station_name AND c.transmitter_id = d.transmitter_id&#xA;  &#x9;GROUP BY project_name, installation_name, d.station_name, d.common_name, d.embargo, d.registered, d.embargo_date, d.transmitter_id, release_locality, sex, scientific_name, colour, no_detections&#xA;UNION ALL&#xA;  SELECT p.name AS project_name, &#xA;&#x9;i.name AS installation_name, &#xA;&#x9;ist.name AS station_name,&#xA;&#x9;NULL AS common_name,&#xA;&#x9;NULL AS transmitter_id,&#xA;&#x9;NULL AS release_locality,&#xA;&#x9;NULL AS first_detection_date,&#xA;&#x9;NULL AS last_detection_date,&#xA;&#x9;NULL AS sex,&#xA;&#x9;NULL AS scientific_name,&#xA;&#x9;ist.location AS geom,&#xA;&#x9;'#FF0000' AS colour,&#xA;&#x9;0 AS no_detections,&#xA;&#x9;'FALSE' AS detected,&#xA;&#x9;NULL AS embargo,&#xA;&#x9;NULL AS registered,&#xA;&#x9;NULL AS embargo_date&#xA;  FROM installation_station ist&#xA;  LEFT JOIN installation i ON i.id = ist.installation_id&#xA;  LEFT JOIN project p ON p.id = i.project_id &#xA;&#x9;WHERE ist.name NOT IN (SELECT DISTINCT station_name FROM aatams_acoustic_detections_data)&#xA;&#x9;ORDER BY detected, common_name, transmitter_id, first_detection_date;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -384,6 +414,12 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="detected"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="embargo"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="registered"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="embargo_date"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -404,6 +440,9 @@
       <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" name="no_detections" nullable="true" pattern="" sourceType="" type="id_Long"/>
       <column comment="" key="false" name="detected" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" key="false" length="255" name="embargo" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="registered" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="embargo_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
     </metadata>
   </node>
   <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="256">
@@ -501,6 +540,21 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="embargo"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="registered"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="embargo_date"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -525,6 +579,9 @@
       <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" name="no_detections" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" name="detected" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" key="false" length="255" name="embargo" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="registered" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="embargo_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="true" name="project_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -541,6 +598,9 @@
       <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" name="no_detections" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" name="detected" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
+      <column comment="" key="false" length="255" name="embargo" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="registered" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="embargo_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -604,7 +664,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;  SELECT DISTINCT p.name AS project_name,&#xA;&#x9;i.name AS installation_name,&#xA;&#x9;ist.name AS station_name,&#xA;&#x9;ist.location AS geom&#xA;  FROM installation_station ist&#xA;  LEFT JOIN installation i ON i.id = ist.installation_id&#xA;  LEFT JOIN project p ON i.project_id = p.id&#xA;&#x9;ORDER BY i.name;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT DISTINCT ON (p.name,i.name, ist.name)&#xA;&#x9;p.name AS project_name,&#xA;&#x9;i.name AS installation_name,&#xA;&#x9;type AS installation_type,&#xA;&#x9;ist.name AS station_name, &#xA;&#x9;COALESCE(dm.model_name || '-' || d.serial_number) AS receiver_name,&#xA;&#x9;rd.deploymentdatetime_timestamp AT TIME ZONE 'UTC' AS deployment_date, &#xA;&#x9;rr.recoverydatetime_timestamp AT TIME ZONE 'UTC' AS recovery_date, &#xA;&#x9;rr.status AS receiver_status,&#xA;&#x9;CASE WHEN rr.status = 'RECOVERED' OR rr.recoverydatetime_timestamp &lt; now() OR rd.deploymentdatetime_timestamp IS NULL THEN 'Inactive' &#xA;&#x9;&#x9;WHEN rd.deploymentdatetime_timestamp &lt; now() AND (rr.recoverydatetime_timestamp IS NULL OR rr.recoverydatetime_timestamp > now()) THEN 'Active' END AS active,&#xA;&#x9;ist.location AS geom&#xA;  FROM installation_station ist&#xA;  LEFT JOIN receiver_deployment rd ON ist.id = rd.station_id&#xA;  LEFT JOIN receiver_recovery rr ON rr.deployment_id = rd.id&#xA;  LEFT JOIN installation i ON i.id = ist.installation_id&#xA;  LEFT JOIN project p ON i.project_id = p.id&#xA;  LEFT JOIN installation_configuration ic ON ic.id = i.configuration_id&#xA;  LEFT JOIN device d ON d.id = rd.receiver_id&#xA;  LEFT JOIN device_model dm ON dm.id = d.model_id&#xA;&#x9;ORDER BY project_name,installation_name, station_name, deploymentdatetime_timestamp DESC;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -616,7 +676,19 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="installation_name"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="installation_type"/>
+      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="station_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="receiver_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="deployment_date"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="recovery_date"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="receiver_status"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="active"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -628,7 +700,13 @@
     <metadata connector="FLOW" name="tPostgresqlInput_3">
       <column comment="" key="true" length="255" name="project_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="true" length="255" name="installation_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="255" name="installation_type" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
       <column comment="" key="true" length="255" name="station_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="255" name="receiver_name" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
+      <column comment="" key="false" name="deployment_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="recovery_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="255" name="receiver_status" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
+      <column comment="" key="false" length="255" name="active" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
     </metadata>
   </node>
@@ -667,7 +745,37 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="installation_type"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="station_name"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="receiver_name"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="deployment_date"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="recovery_date"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="receiver_status"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="active"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -689,17 +797,39 @@
     <metadata connector="FLOW" name="iPostgresqlOutput_4">
       <column comment="" key="true" length="255" name="project_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="true" length="255" name="installation_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="installation_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column comment="" key="true" length="255" name="station_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="receiver_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
+      <column comment="" key="false" name="deployment_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="recovery_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="255" name="receiver_status" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
+      <column comment="" key="false" length="255" name="active" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="true" length="255" name="project_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="true" length="255" name="installation_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="installation_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column comment="" key="true" length="255" name="station_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="receiver_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
+      <column comment="" key="false" name="deployment_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="recovery_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="255" name="receiver_status" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
+      <column comment="" key="false" length="255" name="active" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
+  </node>
+  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="128">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_2"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="CHECK" name="CLOSE" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlCommit_2"/>
   </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="iPostgresqlOutput_1">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
@@ -770,6 +900,15 @@
       <elementValue elementRef="TRACE_COLUMN" value="receiver_name"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="registered"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="embargo"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="embargo_date"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -783,6 +922,10 @@
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tPostgresqlInput_2">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk6"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlOutput_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlOutput_1" target="tPostgresqlCommit_2">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk2"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="tPostgresqlInput_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
@@ -859,6 +1002,15 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="receiver_name,"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="registered"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="embargo"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="embargo_date"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -949,6 +1101,24 @@
       <elementValue elementRef="TRACE_COLUMN" value="detected"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="installation_type"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="receiver_status"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="deployment_date"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="active"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="recovery_date"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="receiver_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -1014,6 +1184,11 @@
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_3"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Populate installation_summary table"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_2"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
