@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+<?xml version="1.0"?>
+<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="/data/tmp/opendap/ANMN/AM/NRSKAI/CO2/real-time/IMOS_ANMN-AM_KST_20120206T060001Z_NRSKAI_FV00_NRSKAI-CO2-1202-realtime-raw_END-20121022T120000Z_C-20130506T014344Z.nc"/>
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
@@ -11,6 +11,7 @@
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="localhost"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_brvNgFGXEeOFRtW2h_ugHg" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_brvNgFGXEeOFRtW2h_ugHg" type="id_String" value="null"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_A9GAoFGXEeOFRtW2h_ugHg" type="id_String" value=""/>
   </context>
   <parameters>
     <elementParameter field="DIRECTORY" name="COMP_DEFAULT_FILE_DIR" value="/sw/TOS_DI-r96646-V5.1.3/workspace"/>
@@ -23,7 +24,7 @@
     <elementParameter field="TEXT" name="NAME" value="HarvestTimeseriesFile"/>
     <elementParameter field="TEXT" name="VERSION" value="0.1"/>
     <elementParameter field="TEXT" name="PURPOSE" value="Harvest one timeseries data from one file"/>
-    <elementParameter field="TEXT" name="DESCRIPTION" value="Harvest metadata and data from one file previously indexed by iIndexFiles. This job assumes there is a single timeseries feature in the file, with a fixed latitude, longitude and nominal depth."/>
+    <elementParameter field="TEXT" name="DESCRIPTION" value="Harvest metadata and data from one file previously indexed by iUpdateIndex. This job assumes there is a single timeseries feature in the file, with a fixed latitude, longitude and nominal depth."/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="384"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
@@ -122,7 +123,7 @@
   </node>
   <node componentName="iNetCDFGlobalAttributes" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttributes_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -416,7 +417,7 @@
   </node>
   <node componentName="iNetCDFInput" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFInput_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TABLE" name="SCHEMAS">
       <elementValue elementRef="SCHEMA" value="data"/>
     </elementParameter>
@@ -724,7 +725,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH summary AS (&#xA;  SELECT &#xA;    avg(\&quot;LATITUDE\&quot;) AS mean_latitude,&#xA;    avg(\&quot;LONGITUDE\&quot;) AS mean_longitude,&#xA;    st_geomfromtext('POINT(' || avg(\&quot;LONGITUDE\&quot;)::text || ' ' || avg(\&quot;LATITUDE\&quot;)::text || ')', 4326) AS geom,&#xA;    count(\&quot;SSTI\&quot;) > 0 AS sea_surface_temperature_b,&#xA;    count(\&quot;SSS\&quot;) > 0 AS sea_surface_salinity_b&#xA;  FROM measurement&#xA;  WHERE \&quot;LATITUDE\&quot; > -60 AND \&quot;LATITUDE\&quot; &lt; 0 AND&#xA;        \&quot;LONGITUDE\&quot; > 100 AND \&quot;LONGITUDE\&quot; &lt; 160 AND&#xA;        file_id = &quot; + context.fileId + &quot;&#xA;)&#xA;UPDATE timeseries&#xA;  SET mean_latitude = s.mean_latitude,&#xA;      mean_longitude = s.mean_longitude,&#xA;      geom = s.geom,&#xA;      sea_surface_temperature_b = s.sea_surface_temperature_b,&#xA;      sea_surface_salinity_b = s.sea_surface_salinity_b&#xA;  FROM summary s&#xA;  WHERE file_id = &quot; + context.fileId + &#xA;&quot;;&quot;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#10;WITH summary AS (&#10;  SELECT &#10;    avg(\&quot;LATITUDE\&quot;) AS mean_latitude,&#10;    avg(\&quot;LONGITUDE\&quot;) AS mean_longitude,&#10;    st_geomfromtext('POINT(' || avg(\&quot;LONGITUDE\&quot;)::text || ' ' || avg(\&quot;LATITUDE\&quot;)::text || ')', 4326) AS geom,&#10;    count(\&quot;SSTI\&quot;) &gt; 0 AS sea_surface_temperature_b,&#10;    count(\&quot;SSS\&quot;) &gt; 0 AS sea_surface_salinity_b&#10;  FROM measurement&#10;  WHERE \&quot;LATITUDE\&quot; &gt; -60 AND \&quot;LATITUDE\&quot; &lt; 0 AND&#10;        \&quot;LONGITUDE\&quot; &gt; 100 AND \&quot;LONGITUDE\&quot; &lt; 160 AND&#10;        file_id = &quot; + context.fileId + &quot;&#10;)&#10;UPDATE timeseries&#10;  SET mean_latitude = s.mean_latitude,&#10;      mean_longitude = s.mean_longitude,&#10;      geom = s.geom,&#10;      sea_surface_temperature_b = s.sea_surface_temperature_b,&#10;      sea_surface_salinity_b = s.sea_surface_salinity_b&#10;  FROM summary s&#10;  WHERE file_id = &quot; + context.fileId + &#10;&quot;;&quot;&#10;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>

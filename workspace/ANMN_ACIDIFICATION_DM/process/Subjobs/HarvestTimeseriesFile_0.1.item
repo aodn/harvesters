@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+<?xml version="1.0"?>
+<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="/mnt/opendap/1/IMOS/opendap/ANMN/AM/NRSKAI/CO2/delayed/IMOS_ANMN-AM_GST_20120208T030000Z_NRSKAI_FV01_NRSKAI-CO2-1202-delayed_END_20121126T210000Z_C-20140801T132113Z.nc"/>
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
@@ -11,6 +11,7 @@
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="localhost"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_brvNgFGXEeOFRtW2h_ugHg" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_brvNgFGXEeOFRtW2h_ugHg" type="id_String" value="null"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_A9GAoFGXEeOFRtW2h_ugHg" type="id_String" value=""/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -61,7 +62,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from timeseries where file_id = &quot; + context.fileId + &quot; ; &quot;+&#xA;&quot;delete from measurements where file_id=&quot; + context.fileId  +&quot; ; &quot; "/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from timeseries where file_id = &quot; + context.fileId + &quot; ; &quot;+&#10;&quot;delete from measurements where file_id=&quot; + context.fileId  +&quot; ; &quot; "/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -113,7 +114,7 @@
   </node>
   <node componentName="iNetCDFGlobalAttributes" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttributes_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -328,7 +329,7 @@
   </node>
   <node componentName="iNetCDFInput" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFInput_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TABLE" name="SCHEMAS">
       <elementValue elementRef="SCHEMA" value="data"/>
     </elementParameter>
@@ -719,7 +720,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH summary AS (&#xA;  SELECT  &#xA;   \&quot;LATITUDE\&quot; AS latitude,&#xA;    \&quot;LONGITUDE\&quot; AS longitude,&#xA;    st_geomfromtext('POINT(' || (\&quot;LONGITUDE\&quot;)::text || ' ' || (\&quot;LATITUDE\&quot;)::text || ')', 4326) AS geom,&#xA;    count(\&quot;TEMP\&quot;) > 0 AS \&quot;TEMP_b\&quot;,&#xA;    count(\&quot;PSAL\&quot;) > 0 AS \&quot;PSAL_b\&quot;,&#xA;  count(\&quot;Press_ATM\&quot;) > 0 AS \&quot;Press_ATM_b\&quot;,&#xA;  count(\&quot;xCO2EQ_PPM\&quot;) > 0 AS \&quot;xCO2EQ_PPM_b\&quot;,&#xA;  count(\&quot;xCO2ATM_PPM\&quot;) > 0 AS  \&quot;xCO2ATM_PPM_b\&quot;,&#xA;  count(\&quot;fCO2SW_UATM\&quot;) > 0 AS \&quot;fCO2SW_UATM_b\&quot;,&#xA;  count(\&quot;DfCO2\&quot;) > 0 AS \&quot;DfCO2_b\&quot;,&#xA;  count(\&quot;DOX1\&quot;) > 0 AS \&quot;DOX1_b\&quot;&#xA;from anmn_am_dm.measurements &#xA;WHERE  file_id = &quot; + context.fileId + &quot;&#xA;GROUP BY \&quot;LATITUDE\&quot;, \&quot;LONGITUDE\&quot;&#xA;)&#xA;UPDATE timeseries&#xA;  SET &#xA;&#x9;  latitude = s.latitude,&#xA;      longitude = s.longitude,&#xA;      geom = s.geom,&#xA;       \&quot;TEMP_b\&quot; = s.\&quot;TEMP_b\&quot;,&#xA;       \&quot;PSAL_b\&quot; =s.\&quot;PSAL_b\&quot; ,&#xA;       \&quot;Press_ATM_b\&quot;= s.\&quot;Press_ATM_b\&quot;,&#xA;&#x9;&#x9;\&quot;xCO2EQ_PPM_b\&quot; =s.\&quot;xCO2EQ_PPM_b\&quot; ,&#xA;   &#x9;&#x9;\&quot;xCO2ATM_PPM_b\&quot; = s.\&quot;xCO2ATM_PPM_b\&quot; ,&#xA; &#x9;&#x9;\&quot;fCO2SW_UATM_b\&quot; = s.\&quot;fCO2SW_UATM_b\&quot;,&#xA;&#x9; &#x9;\&quot;DfCO2_b\&quot; = s.\&quot;DfCO2_b\&quot;,&#xA;&#x9; &#x9;\&quot;DOX1_b\&quot; = s.\&quot;DOX1_b\&quot;&#xA;  FROM summary s&#xA;  WHERE file_id = &quot; + context.fileId + &quot;;&quot;&#xA;&#xA;&#xA; "/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#10;WITH summary AS (&#10;  SELECT  &#10;   \&quot;LATITUDE\&quot; AS latitude,&#10;    \&quot;LONGITUDE\&quot; AS longitude,&#10;    st_geomfromtext('POINT(' || (\&quot;LONGITUDE\&quot;)::text || ' ' || (\&quot;LATITUDE\&quot;)::text || ')', 4326) AS geom,&#10;    count(\&quot;TEMP\&quot;) &gt; 0 AS \&quot;TEMP_b\&quot;,&#10;    count(\&quot;PSAL\&quot;) &gt; 0 AS \&quot;PSAL_b\&quot;,&#10;  count(\&quot;Press_ATM\&quot;) &gt; 0 AS \&quot;Press_ATM_b\&quot;,&#10;  count(\&quot;xCO2EQ_PPM\&quot;) &gt; 0 AS \&quot;xCO2EQ_PPM_b\&quot;,&#10;  count(\&quot;xCO2ATM_PPM\&quot;) &gt; 0 AS  \&quot;xCO2ATM_PPM_b\&quot;,&#10;  count(\&quot;fCO2SW_UATM\&quot;) &gt; 0 AS \&quot;fCO2SW_UATM_b\&quot;,&#10;  count(\&quot;DfCO2\&quot;) &gt; 0 AS \&quot;DfCO2_b\&quot;,&#10;  count(\&quot;DOX1\&quot;) &gt; 0 AS \&quot;DOX1_b\&quot;&#10;from anmn_am_dm.measurements &#10;WHERE  file_id = &quot; + context.fileId + &quot;&#10;GROUP BY \&quot;LATITUDE\&quot;, \&quot;LONGITUDE\&quot;&#10;)&#10;UPDATE timeseries&#10;  SET &#10;&#9;  latitude = s.latitude,&#10;      longitude = s.longitude,&#10;      geom = s.geom,&#10;       \&quot;TEMP_b\&quot; = s.\&quot;TEMP_b\&quot;,&#10;       \&quot;PSAL_b\&quot; =s.\&quot;PSAL_b\&quot; ,&#10;       \&quot;Press_ATM_b\&quot;= s.\&quot;Press_ATM_b\&quot;,&#10;&#9;&#9;\&quot;xCO2EQ_PPM_b\&quot; =s.\&quot;xCO2EQ_PPM_b\&quot; ,&#10;   &#9;&#9;\&quot;xCO2ATM_PPM_b\&quot; = s.\&quot;xCO2ATM_PPM_b\&quot; ,&#10; &#9;&#9;\&quot;fCO2SW_UATM_b\&quot; = s.\&quot;fCO2SW_UATM_b\&quot;,&#10;&#9; &#9;\&quot;DfCO2_b\&quot; = s.\&quot;DfCO2_b\&quot;,&#10;&#9; &#9;\&quot;DOX1_b\&quot; = s.\&quot;DOX1_b\&quot;&#10;  FROM summary s&#10;  WHERE file_id = &quot; + context.fileId + &quot;;&quot;&#10;&#10;&#10; "/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
