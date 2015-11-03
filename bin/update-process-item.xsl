@@ -106,8 +106,13 @@
     <xsl:template match="*[local-name()='node'][@componentName='iUpdateIndex']/*[local-name()='metadata' and @connector='FLOW']"/>
 
     <!-- change references to context.url to context.url + "/" + context.base in component parameter values -->
+    <!-- except where included in an assignment expression (typically used in harvesters written by Loz and -->
+    <!-- which do not need to be adjusted) -->
     
-    <xsl:template match="*[local-name()='elementParameter' and contains(@value, 'context.url') and not(contains(@value, 'context.base'))]/@value">
+    <xsl:template match="*[local-name()='elementParameter' 
+                           and contains(@value, 'context.url')
+                           and not(contains(@value, 'context.base'))
+                           and not(contains(@value, '='))]/@value">
         <xsl:attribute name="value">
             <xsl:call-template name="string-replace-all">
                 <xsl:with-param name="text" select="."/>
