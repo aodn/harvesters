@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="soop_xbt_dm">
+<?xml version="1.0"?>
+<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="soop_xbt_dm">
   <context confirmationNeeded="false" name="soop_xbt_dm">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_String" value="soop_xbt_dm"/>
@@ -16,9 +16,8 @@
     <contextParameter comment="" name="Metadata_URL" prompt="Metadata_URL?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="http://localhost:8080/geonetwork"/>
     <contextParameter comment="" name="Metadata_Username" prompt="Metadata_Username?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
     <contextParameter comment="" name="Metadata_UUID" prompt="Metadata_UUID?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="911f6b96-fa33-4621-9d8c-4d1cc14d94d0"/>
-    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_IndnQAlJEeObitNNn0mU_g" type="id_String" value="&quot;.*aggregated_datasets.*&quot;"/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_IndnQAlJEeObitNNn0mU_g" type="id_String" value="&quot;.*\\.nc$&quot;"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_IndnQAlJEeObitNNn0mU_g" type="id_String" value="/Users/xavierhoenner/Work/Talend/SOOP_XBT/data"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_IndnQAlJEeObitNNn0mU_g" type="id_String" value=""/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_IndnQAlJEeObitNNn0mU_g" type="id_String" value="/tmp/fileList"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms512M -Xmx2048M"/>
@@ -32,7 +31,7 @@
     <elementParameter field="CHECK" name="IMPLICIT_TCONTEXTLOAD" value="true"/>
     <elementParameter field="RADIO" name="FROM_FILE_FLAG_IMPLICIT_CONTEXT" value="true"/>
     <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="context.paramFile"/>
-    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;=>&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;=&gt;&quot;"/>
     <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
     <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
     <elementParameter field="CHECK" name="ON_STATCATCHER_FLAG" value="true"/>
@@ -70,14 +69,14 @@
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/Users/xavierhoenner/Work/Resources/TOS_DI-r96646-V5.1.3/workspace/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_attribute_table&quot;>&#xA;        &lt;createTable tableName=&quot;attribute&quot;>&#xA;            &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;container&quot; type=&quot;TEXT&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;name&quot; type=&quot;TEXT&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;type&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;value&quot; type=&quot;TEXT&quot;/>&#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_file_table&quot;>&#xA;        &lt;createTable tableName=&quot;file&quot;>&#xA;            &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;file_pk&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;url&quot; type=&quot;TEXT&quot;/>&#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_variable_table&quot;>&#xA;        &lt;createTable tableName=&quot;variable&quot;>&#xA;            &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;name&quot; type=&quot;TEXT&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;type&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;dimensions&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;shape&quot; type=&quot;TEXT&quot;/>&#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_pkey_to_attribute_table&quot;>&#xA;        &lt;addPrimaryKey columnNames=&quot;file_id, container, name&quot; constraintName=&quot;attribute_pk&quot; tableName=&quot;attribute&quot;/>&#xA;    &lt;/changeSet>&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_pkey_to_variable_table&quot;>&#xA;        &lt;addPrimaryKey columnNames=&quot;file_id, name&quot; constraintName=&quot;variable_pk&quot; tableName=&quot;variable&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;    &#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_measurements_table&quot;>&#xA;        &lt;sql>&#xA;        CREATE TABLE measurements&#xA;        (&#xA;          profile_id integer,&#xA;          measurement_id bigserial NOT NULL,&#xA;          &quot;DEPTH&quot; real,&#xA;          &quot;DEPTH_quality_control&quot; smallint,&#xA;          &quot;TEMP&quot; real,&#xA;          &quot;TEMP_quality_control&quot; smallint,&#xA;          CONSTRAINT measurements_pk PRIMARY KEY (measurement_id),&#xA;          CONSTRAINT measurements_fkey FOREIGN KEY (profile_id)&#xA;              REFERENCES indexed_file (id) MATCH SIMPLE&#xA;              ON UPDATE CASCADE ON DELETE CASCADE&#xA;        );&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_index_on_measurements_table&quot;>&#xA;        &lt;sql>&#xA;&#x9;CREATE INDEX measurements_idx&#xA;  &#x9;ON soop_xbt_dm.measurements&#xA;  &#x9;USING btree&#xA; &#x9; (profile_id);&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_qc_flags_table&quot;>&#xA;        &lt;sql>&#xA;        CREATE TABLE qc_flags&#xA;        (&#xA;          profile_id bigint NOT NULL,&#xA;          &quot;TIME_quality_control&quot; smallint,&#xA;          &quot;LONGITUDE_quality_control&quot; smallint,&#xA;          &quot;LATITUDE_quality_control&quot; smallint,&#xA;          CONSTRAINT qc_flags_pk PRIMARY KEY (profile_id),&#xA;          CONSTRAINT qc_flags_fkey FOREIGN KEY (profile_id)&#xA;              REFERENCES indexed_file (id) MATCH SIMPLE&#xA;              ON UPDATE CASCADE ON DELETE CASCADE&#xA;        );&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_xbt_lines_table&quot;>&#xA;        &lt;sql>&#xA;        CREATE TABLE xbt_lines&#xA;        (&#xA;          &quot;XBT_line&quot; character varying(20) NOT NULL,&#xA;          colour character varying(7),&#xA;          CONSTRAINT xbt_lines_pkey PRIMARY KEY (&quot;XBT_line&quot;)&#xA;        );&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_ soop_xbt_dm_profile_map_table&quot;>&#xA;        &lt;sql>&#xA;        CREATE TABLE soop_xbt_dm_profile_map&#xA;        (&#xA;          profile_id bigint NOT NULL,&#xA;          url character varying(512) NOT NULL,&#xA;          &quot;XBT_line&quot; character varying(20) NOT NULL,&#xA;          &quot;XBT_line_description&quot; character varying(50),&#xA;          &quot;Callsign&quot; character varying(10),&#xA;          &quot;XBT_cruise_ID&quot; character varying(20),&#xA;          &quot;XBT_uniqueid&quot; character varying(12),&#xA;          &quot;TIME&quot; timestamp with time zone,&#xA;          max_depth double precision,&#xA;         &quot;XBT_probetype_fallrate_equation&quot; character varying(256),&#xA;          &quot;XBT_recorder_type&quot; character varying(256),&#xA;          &quot;XBT_instrument_serialnumber&quot; character varying(10),&#xA;          &quot;XBT_calibration_OFFS&quot; character varying(10),&#xA;          &quot;XBT_calibration_SCAL&quot; character varying(10),&#xA;          colour character varying(7),&#xA;          geom geometry(Geometry,4326),&#xA;&#x9;  size double precision,&#xA;          CONSTRAINT soop_xbt_dm_profile_map_pkey PRIMARY KEY (profile_id),&#xA;          CONSTRAINT soop_xbt_dm_profile_map_fkey FOREIGN KEY (profile_id)&#xA;              REFERENCES indexed_file (id) MATCH SIMPLE&#xA;              ON UPDATE CASCADE ON DELETE CASCADE&#xA;        );&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;    &#xA;    &#x9;&lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_gist_index_and_add_geom_check_on_map_table&quot;>&#xA;&#x9;      &lt;sql>&#xA;&#x9;        CREATE INDEX soop_xbt_dm_profile_map_gist_idx ON soop_xbt_dm_profile_map USING GIST (geom);&#xA;&#x9;&#x9;ALTER TABLE soop_xbt_dm_profile_map ADD CHECK (ST_ISVALID(geom));&#xA;&#x9;      &lt;/sql>&#xA;&#x9;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_ soop_xbt_dm_profile_data_view&quot; runOnChange=&quot;true&quot;>&#xA;&#x9;&lt;sql>&#xA;       &#x9;DROP VIEW IF EXISTS soop_xbt_dm_profile_data;&#xA;       &#x9;CREATE VIEW soop_xbt_dm_profile_data AS&#xA;&#x9;SELECT measurements.profile_id,&#xA;         measurements.measurement_id, &#xA;         soop_xbt_dm_profile_map.&quot;XBT_line&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_line_description&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;Callsign&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_cruise_ID&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_uniqueid&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_probetype_fallrate_equation&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_recorder_type&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_instrument_serialnumber&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_calibration_OFFS&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;XBT_calibration_SCAL&quot;,&#xA;         soop_xbt_dm_profile_map.&quot;TIME&quot; AT TIME ZONE 'UTC' AS &quot;TIME&quot;,&#xA;         qc_flags.&quot;TIME_quality_control&quot;, &#xA;         st_x(soop_xbt_dm_profile_map.geom) AS &quot;LONGITUDE&quot;, &#xA;         qc_flags.&quot;LONGITUDE_quality_control&quot;, &#xA;         st_y(soop_xbt_dm_profile_map.geom) AS &quot;LATITUDE&quot;, &#xA;         qc_flags.&quot;LATITUDE_quality_control&quot;, &#xA;         measurements.&quot;DEPTH&quot;, &#xA;         measurements.&quot;DEPTH_quality_control&quot;, &#xA;         measurements.&quot;TEMP&quot;, &#xA;         measurements.&quot;TEMP_quality_control&quot;, &#xA;         soop_xbt_dm_profile_map.geom&#xA;         FROM measurements&#xA;         LEFT JOIN soop_xbt_dm_profile_map ON soop_xbt_dm_profile_map.profile_id = measurements.profile_id&#xA;         LEFT JOIN qc_flags ON qc_flags.profile_id = measurements.profile_id&#xA;         ORDER BY measurements.measurement_id;&#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;alter_soop_xbt_dm_profile_map_table&quot;>&#xA;        &lt;sql>&#xA;        ALTER TABLE soop_xbt_dm_profile_map ADD COLUMN nb_measurements integer;&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;databaseChangeLog &#10;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#10;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#10;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;&gt;&#10;&#10;&#10;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_attribute_table&quot;&gt;&#10;        &lt;createTable tableName=&quot;attribute&quot;&gt;&#10;            &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;&gt;&#10;                &lt;constraints nullable=&quot;false&quot;/&gt;&#10;            &lt;/column&gt;&#10;            &lt;column name=&quot;container&quot; type=&quot;TEXT&quot;&gt;&#10;                &lt;constraints nullable=&quot;false&quot;/&gt;&#10;            &lt;/column&gt;&#10;            &lt;column name=&quot;name&quot; type=&quot;TEXT&quot;&gt;&#10;                &lt;constraints nullable=&quot;false&quot;/&gt;&#10;            &lt;/column&gt;&#10;            &lt;column name=&quot;type&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;value&quot; type=&quot;TEXT&quot;/&gt;&#10;        &lt;/createTable&gt;&#10;    &lt;/changeSet&gt;&#10;    &#10;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_file_table&quot;&gt;&#10;        &lt;createTable tableName=&quot;file&quot;&gt;&#10;            &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;&gt;&#10;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;file_pk&quot;/&gt;&#10;            &lt;/column&gt;&#10;            &lt;column name=&quot;url&quot; type=&quot;TEXT&quot;/&gt;&#10;        &lt;/createTable&gt;&#10;    &lt;/changeSet&gt;&#10;    &#10;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_variable_table&quot;&gt;&#10;        &lt;createTable tableName=&quot;variable&quot;&gt;&#10;            &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;&gt;&#10;                &lt;constraints nullable=&quot;false&quot;/&gt;&#10;            &lt;/column&gt;&#10;            &lt;column name=&quot;name&quot; type=&quot;TEXT&quot;&gt;&#10;                &lt;constraints nullable=&quot;false&quot;/&gt;&#10;            &lt;/column&gt;&#10;            &lt;column name=&quot;type&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;dimensions&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;shape&quot; type=&quot;TEXT&quot;/&gt;&#10;        &lt;/createTable&gt;&#10;    &lt;/changeSet&gt;&#10;    &#10;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_pkey_to_attribute_table&quot;&gt;&#10;        &lt;addPrimaryKey columnNames=&quot;file_id, container, name&quot; constraintName=&quot;attribute_pk&quot; tableName=&quot;attribute&quot;/&gt;&#10;    &lt;/changeSet&gt;&#10;    &#10;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_pkey_to_variable_table&quot;&gt;&#10;        &lt;addPrimaryKey columnNames=&quot;file_id, name&quot; constraintName=&quot;variable_pk&quot; tableName=&quot;variable&quot;/&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;    &#10;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_measurements_table&quot;&gt;&#10;        &lt;sql&gt;&#10;        CREATE TABLE measurements&#10;        (&#10;          profile_id integer,&#10;          measurement_id bigserial NOT NULL,&#10;          &quot;DEPTH&quot; real,&#10;          &quot;DEPTH_quality_control&quot; smallint,&#10;          &quot;TEMP&quot; real,&#10;          &quot;TEMP_quality_control&quot; smallint,&#10;          CONSTRAINT measurements_pk PRIMARY KEY (measurement_id),&#10;          CONSTRAINT measurements_fkey FOREIGN KEY (profile_id)&#10;              REFERENCES indexed_file (id) MATCH SIMPLE&#10;              ON UPDATE CASCADE ON DELETE CASCADE&#10;        );&#10;        &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_index_on_measurements_table&quot;&gt;&#10;        &lt;sql&gt;&#10;&#9;CREATE INDEX measurements_idx&#10;  &#9;ON soop_xbt_dm.measurements&#10;  &#9;USING btree&#10; &#9; (profile_id);&#10;        &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_qc_flags_table&quot;&gt;&#10;        &lt;sql&gt;&#10;        CREATE TABLE qc_flags&#10;        (&#10;          profile_id bigint NOT NULL,&#10;          &quot;TIME_quality_control&quot; smallint,&#10;          &quot;LONGITUDE_quality_control&quot; smallint,&#10;          &quot;LATITUDE_quality_control&quot; smallint,&#10;          CONSTRAINT qc_flags_pk PRIMARY KEY (profile_id),&#10;          CONSTRAINT qc_flags_fkey FOREIGN KEY (profile_id)&#10;              REFERENCES indexed_file (id) MATCH SIMPLE&#10;              ON UPDATE CASCADE ON DELETE CASCADE&#10;        );&#10;        &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_xbt_lines_table&quot;&gt;&#10;        &lt;sql&gt;&#10;        CREATE TABLE xbt_lines&#10;        (&#10;          &quot;XBT_line&quot; character varying(20) NOT NULL,&#10;          colour character varying(7),&#10;          CONSTRAINT xbt_lines_pkey PRIMARY KEY (&quot;XBT_line&quot;)&#10;        );&#10;        &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_ soop_xbt_dm_profile_map_table&quot;&gt;&#10;        &lt;sql&gt;&#10;        CREATE TABLE soop_xbt_dm_profile_map&#10;        (&#10;          profile_id bigint NOT NULL,&#10;          url character varying(512) NOT NULL,&#10;          &quot;XBT_line&quot; character varying(20) NOT NULL,&#10;          &quot;XBT_line_description&quot; character varying(50),&#10;          &quot;Callsign&quot; character varying(10),&#10;          &quot;XBT_cruise_ID&quot; character varying(20),&#10;          &quot;XBT_uniqueid&quot; character varying(12),&#10;          &quot;TIME&quot; timestamp with time zone,&#10;          max_depth double precision,&#10;         &quot;XBT_probetype_fallrate_equation&quot; character varying(256),&#10;          &quot;XBT_recorder_type&quot; character varying(256),&#10;          &quot;XBT_instrument_serialnumber&quot; character varying(10),&#10;          &quot;XBT_calibration_OFFS&quot; character varying(10),&#10;          &quot;XBT_calibration_SCAL&quot; character varying(10),&#10;          colour character varying(7),&#10;          geom geometry(Geometry,4326),&#10;&#9;  size double precision,&#10;          CONSTRAINT soop_xbt_dm_profile_map_pkey PRIMARY KEY (profile_id),&#10;          CONSTRAINT soop_xbt_dm_profile_map_fkey FOREIGN KEY (profile_id)&#10;              REFERENCES indexed_file (id) MATCH SIMPLE&#10;              ON UPDATE CASCADE ON DELETE CASCADE&#10;        );&#10;        &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;    &#10;    &#9;&lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_gist_index_and_add_geom_check_on_map_table&quot;&gt;&#10;&#9;      &lt;sql&gt;&#10;&#9;        CREATE INDEX soop_xbt_dm_profile_map_gist_idx ON soop_xbt_dm_profile_map USING GIST (geom);&#10;&#9;&#9;ALTER TABLE soop_xbt_dm_profile_map ADD CHECK (ST_ISVALID(geom));&#10;&#9;      &lt;/sql&gt;&#10;&#9;    &lt;/changeSet&gt;&#10;&#10;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_ soop_xbt_dm_profile_data_view&quot; runOnChange=&quot;true&quot;&gt;&#10;&#9;&lt;sql&gt;&#10;       &#9;DROP VIEW IF EXISTS soop_xbt_dm_profile_data;&#10;       &#9;CREATE VIEW soop_xbt_dm_profile_data AS&#10;&#9;SELECT measurements.profile_id,&#10;         measurements.measurement_id, &#10;         soop_xbt_dm_profile_map.&quot;XBT_line&quot;,&#10;         soop_xbt_dm_profile_map.&quot;XBT_line_description&quot;,&#10;         soop_xbt_dm_profile_map.&quot;Callsign&quot;,&#10;         soop_xbt_dm_profile_map.&quot;XBT_cruise_ID&quot;,&#10;         soop_xbt_dm_profile_map.&quot;XBT_uniqueid&quot;,&#10;         soop_xbt_dm_profile_map.&quot;XBT_probetype_fallrate_equation&quot;,&#10;         soop_xbt_dm_profile_map.&quot;XBT_recorder_type&quot;,&#10;         soop_xbt_dm_profile_map.&quot;XBT_instrument_serialnumber&quot;,&#10;         soop_xbt_dm_profile_map.&quot;XBT_calibration_OFFS&quot;,&#10;         soop_xbt_dm_profile_map.&quot;XBT_calibration_SCAL&quot;,&#10;         soop_xbt_dm_profile_map.&quot;TIME&quot; AT TIME ZONE 'UTC' AS &quot;TIME&quot;,&#10;         qc_flags.&quot;TIME_quality_control&quot;, &#10;         st_x(soop_xbt_dm_profile_map.geom) AS &quot;LONGITUDE&quot;, &#10;         qc_flags.&quot;LONGITUDE_quality_control&quot;, &#10;         st_y(soop_xbt_dm_profile_map.geom) AS &quot;LATITUDE&quot;, &#10;         qc_flags.&quot;LATITUDE_quality_control&quot;, &#10;         measurements.&quot;DEPTH&quot;, &#10;         measurements.&quot;DEPTH_quality_control&quot;, &#10;         measurements.&quot;TEMP&quot;, &#10;         measurements.&quot;TEMP_quality_control&quot;, &#10;         soop_xbt_dm_profile_map.geom&#10;         FROM measurements&#10;         LEFT JOIN soop_xbt_dm_profile_map ON soop_xbt_dm_profile_map.profile_id = measurements.profile_id&#10;         LEFT JOIN qc_flags ON qc_flags.profile_id = measurements.profile_id&#10;         ORDER BY measurements.measurement_id;&#10;&#9;&lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;alter_soop_xbt_dm_profile_map_table&quot;&gt;&#10;        &lt;sql&gt;&#10;        ALTER TABLE soop_xbt_dm_profile_map ADD COLUMN nb_measurements integer;&#10;        &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;&lt;/databaseChangeLog&gt; "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="iIndexFiles" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="-192">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_1"/>
+  <node componentName="iUpdateIndex" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="-192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iUpdateIndex_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_QKA6EAlGEeObitNNn0mU_g"/>
@@ -88,36 +87,15 @@
     <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="LIST_MODE" value="FILES"/>
-    <elementParameter field="DIRECTORY" name="DIRECTORY" value="context.sourceDir"/>
-    <elementParameter field="CHECK" name="INCLUDSUBDIR" value="true"/>
-    <elementParameter field="CLOSED_LIST" name="CASE_SENSITIVE" value="YES"/>
-    <elementParameter field="CHECK" name="ERROR" value="true"/>
-    <elementParameter field="CHECK" name="GLOBEXPRESSIONS" value="false"/>
-    <elementParameter field="TABLE" name="FILES">
-      <elementValue elementRef="FILEMASK" value="context.include"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="IFEXCLUDE" value="true"/>
-    <elementParameter field="TEXT" name="EXCLUDEFILEMASK" value="context.exclude"/>
-    <elementParameter field="CHECK" name="FORMAT_FILEPATH_TO_SLASH" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_NOTHING" value="true"/>
-    <elementParameter field="RADIO" name="ORDER_BY_FILENAME" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_FILESIZE" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_MODIFIEDDATE" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_ACTION_ASC" value="true"/>
-    <elementParameter field="RADIO" name="ORDER_ACTION_DESC" value="false"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="iIndexFiles_1">
-      <column defaultValue="" key="false" length="255" name="filePath" nullable="true" precision="0" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="0" name="fileLastModified" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" precision="0" sourceType="" type="id_Date"/>
-      <column defaultValue="" key="false" length="0" name="fileSize" nullable="true" precision="0" sourceType="" type="id_Double"/>
-    </metadata>
+    <elementParameter field="FILE" name="MANIFEST_FILENAME" value="context.fileList"/>
+    <elementParameter field="TEXT" name="BASE_PATH" value="context.base"/>
   </node>
-  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="224">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
+  <node componentName="iNewOrModifiedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="224">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_QKA6EAlGEeObitNNn0mU_g"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
@@ -133,11 +111,12 @@
     <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
     <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
-    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#xA;&quot;  from indexed_file &quot; +&#xA;&quot;  join index_job &quot; +&#xA;&quot;    on indexed_file.job_id = index_job.id &quot; +&#xA;&quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#xA;&quot;   and index_job.name = ? &quot; +&#xA;&quot;  left join file_harvest &quot; +&#xA;&quot;    on file_harvest.file_id = indexed_file.id &quot; +&#xA;&quot;   and file_harvest.harvest_type = ? &quot; +&#xA;&quot; where (file_harvest.last_moddate_harvested &lt;> indexed_file.modified &quot; +&#xA;&quot;    or  file_harvest.last_moddate_harvested is null) &quot;;&#xA;      "/>
+    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#10;&quot;  from indexed_file &quot; +&#10;&quot;  join index_job &quot; +&#10;&quot;    on indexed_file.job_id = index_job.id &quot; +&#10;&quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#10;&quot;   and index_job.name = ? &quot; +&#10;&quot;  left join file_harvest &quot; +&#10;&quot;    on file_harvest.file_id = indexed_file.id &quot; +&#10;&quot;   and file_harvest.harvest_type = ? &quot; +&#10;&quot; where (file_harvest.last_moddate_harvested &lt;&gt; indexed_file.modified &quot; +&#10;&quot;    or  file_harvest.last_moddate_harvested is null) &quot;;&#10;      "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
   </node>
   <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="416" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_3"/>
@@ -153,9 +132,9 @@
     <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
     <elementParameter field="TABLE" name="CONTEXTPARAMS">
       <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iHarvestResources_1_FILE_ID&quot;))"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iNewOrModifiedFileList_1_FILE_ID&quot;))"/>
       <elementValue elementRef="PARAM_NAME_COLUMN" value="url"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;iHarvestResources_1_URL&quot;))"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;iNewOrModifiedFileList_1_URL&quot;))"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
     <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
@@ -183,7 +162,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE soop_xbt_dm_profile_map &#xA;SET nb_measurements = (SELECT COUNT(measurement_id) AS nb_measurements &#xA;FROM soop_xbt_dm_profile_data &#xA;WHERE soop_xbt_dm_profile_map.profile_id = soop_xbt_dm_profile_data.profile_id &#xA;GROUP BY profile_id);&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE soop_xbt_dm_profile_map &#10;SET nb_measurements = (SELECT COUNT(measurement_id) AS nb_measurements &#10;FROM soop_xbt_dm_profile_data &#10;WHERE soop_xbt_dm_profile_map.profile_id = soop_xbt_dm_profile_data.profile_id &#10;GROUP BY profile_id);&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -225,8 +204,8 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_4"/>
   </node>
-  <node componentName="iDeletedResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="96">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
+  <node componentName="iDeletedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="96">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedFileList_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_QKA6EAlGEeObitNNn0mU_g"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
@@ -242,11 +221,12 @@
     <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
     <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
-    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select id, url, modified &quot; +&#xA;&quot;  from deleted_resource &quot; +&#xA;&quot; where job_name = ? &quot; +&#xA;&quot;   and harvest_type = ? &quot;&#xA;      "/>
+    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select id, url, modified &quot; +&#10;&quot;  from deleted_resource &quot; +&#10;&quot; where job_name = ? &quot; +&#10;&quot;   and harvest_type = ? &quot;&#10;      "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
   </node>
   <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="384" posY="96">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_2"/>
@@ -265,7 +245,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from attribute where file_id = &quot;+ ((Long)globalMap.get(&quot;iDeletedResources_1_FILE_ID&quot;)) + &quot; ; &quot;+&#xA;&quot;delete from variable where file_id = &quot;+ ((Long)globalMap.get(&quot;iDeletedResources_1_FILE_ID&quot;)) + &quot; ; &quot;+&#xA;&quot;delete from indexed_file where id = &quot;+ ((Long)globalMap.get(&quot;iDeletedResources_1_FILE_ID&quot;)) + &quot; ; &quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from attribute where file_id = &quot;+ ((Long)globalMap.get(&quot;iDeletedFileList_1_FILE_ID&quot;)) + &quot; ; &quot;+&#10;&quot;delete from variable where file_id = &quot;+ ((Long)globalMap.get(&quot;iDeletedFileList_1_FILE_ID&quot;)) + &quot; ; &quot;+&#10;&quot;delete from indexed_file where id = &quot;+ ((Long)globalMap.get(&quot;iDeletedFileList_1_FILE_ID&quot;)) + &quot; ; &quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -284,21 +264,21 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iDeletedResources_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iDeletedFileList_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" source="iIndexFiles_1" target="iPostgresqlDbUpdate_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iUpdateIndex_1" offsetLabelX="0" offsetLabelY="0" source="iUpdateIndex_1" target="iPostgresqlDbUpdate_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
   </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tRunJob_3">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iNewOrModifiedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iNewOrModifiedFileList_1" target="tRunJob_3">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate1"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tPostgresqlRow_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iNewOrModifiedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iNewOrModifiedFileList_1" target="tPostgresqlRow_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk6"/>
   </connection>
@@ -306,13 +286,13 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
   </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="tPostgresqlRow_2">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_1" target="tPostgresqlRow_2">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="iHarvestResources_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_1" target="iNewOrModifiedFileList_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk4"/>
   </connection>
@@ -324,13 +304,13 @@
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iUpdateIndex_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_1"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Harvest data and populate map table"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
@@ -351,7 +331,7 @@
   </subjob>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedFileList_1"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Delete rows from deleted files"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
