@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet author="talend" id="create_acoustic_deployments_table">
+      <sql>
+	CREATE TABLE acoustic_deployments
+	(
+          pkid serial NOT NULL,
+          curtin_id integer NOT NULL,
+          site_code text NOT NULL,
+          logger_id text,
+          deployment_name text NOT NULL,
+          is_primary boolean,
+          time_deployment_start timestamp with time zone NOT NULL,
+          time_deployment_end timestamp with time zone,
+          frequency integer,
+          logger_position text,
+          set_success text,
+          data_volume real,
+          data_path text,
+          archive_path text,
+          lat double precision,
+          lon double precision,
+          water_depth real,
+          receiver_depth real,
+          start_first_wet_sample timestamp with time zone,
+          start_last_wet_sample timestamp with time zone,
+          first_wet_sample integer,
+          last_wet_sample integer,
+          system_gain_file text,
+          hydrophone_serial_number text,
+          hydrophone_sensitivity real,
+          calibration_noise_level real,
+          comments text,
+          CONSTRAINT acoustic_deployments_pkey PRIMARY KEY (pkid),
+          CONSTRAINT acoustic_deployments_curtin_id_unique UNIQUE (curtin_id)
+	);
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_acoustic_spectrograms_table">
+      <sql>
+        CREATE TABLE acoustic_spectrograms
+        (
+          pkid serial NOT NULL,
+          acoustic_deploy_fk integer NOT NULL,
+          filename text NOT NULL,
+          width integer NOT NULL,
+          time_start timestamp with time zone NOT NULL,
+          subdirectory text,
+          last_updated timestamp with time zone DEFAULT ('now'::text)::timestamp(0) with time zone,
+          CONSTRAINT acoustic_spectrograms_pkey PRIMARY KEY (pkid),
+          CONSTRAINT acoustic_spec2dep_fkey FOREIGN KEY (acoustic_deploy_fk)
+              REFERENCES acoustic_deployments (pkid) MATCH SIMPLE
+              ON UPDATE CASCADE ON DELETE CASCADE
+        )
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_acoustic_recordings_table">
+      <sql>
+        CREATE TABLE acoustic_recordings
+        (
+          pkid bigserial NOT NULL,
+          filename text NOT NULL,    -- could be detailed spec image, wav, mp3 or more
+          x_coord integer,           -- The pixel position from the left of the acoustic_spectrogram
+          acoustic_spec_fk integer NOT NULL,
+          time_recording_start timestamp with time zone NOT NULL,
+          CONSTRAINT acoustic_recordings_pkey PRIMARY KEY (pkid),
+          CONSTRAINT acoustic_rec2spec_fkey FOREIGN KEY (acoustic_spec_fk)
+              REFERENCES acoustic_spectrograms (pkid) MATCH SIMPLE
+              ON UPDATE CASCADE ON DELETE CASCADE
+        )
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="acoustic_deployments_add_geom">
+      <sql>
+        ALTER TABLE acoustic_deployments
+          ADD COLUMN geom geometry(Geometry,4326) CHECK (st_isvalid(geom));
+
+        CREATE INDEX acoustic_deployments_gist_idx ON acoustic_deployments USING GIST (geom);
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="acoustic_deployments_add_last_updated">
+      <sql>
+        ALTER TABLE acoustic_deployments
+          ADD COLUMN first_added  timestamp with time zone DEFAULT ('now'::text)::timestamp(0) with time zone,
+          ADD COLUMN last_updated timestamp with time zone DEFAULT ('now'::text)::timestamp(0) with time zone;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="anmn_acoustics_map_view" runOnChange="true">
+      <sql>
+        DROP VIEW IF EXISTS anmn_acoustics_map;
+
+        CREATE VIEW anmn_acoustics_map AS
+          SELECT
+            curtin_id,
+            site_code,
+	    substring(deployment_name from '(^\\D*) ') AS site_name,
+            deployment_name,
+	    substring(deployment_name from '[\\d-]+$') AS deployment_years,
+            time_deployment_start AT TIME ZONE 'UTC' AS time_coverage_start,
+            time_deployment_end AT TIME ZONE 'UTC' AS time_coverage_end,
+            lat,
+            lon,
+            water_depth,
+            receiver_depth,
+            set_success,
+            comments,
+            data_volume AS data_volume_gb,
+            data_path,
+            geom
+          FROM acoustic_deployments
+          WHERE is_primary
+          ORDER BY site_code, curtin_id
+        ;
+      </sql>
+    </changeSet>
+
+</databaseChangeLog>
