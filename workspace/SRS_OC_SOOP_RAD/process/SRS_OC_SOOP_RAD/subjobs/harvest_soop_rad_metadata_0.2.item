@@ -10,6 +10,7 @@
     <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value="3"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
     <contextParameter comment="" name="vessel_name" prompt="vessel_name?" promptNeeded="false" type="id_String" value="null"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value=""/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -698,7 +699,7 @@
       <column comment="" defaultValue="" key="false" name="geom" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(variables.LONGITUDE,variables.LATITUDE,&quot;EPSG:4326&quot;)   " type="id_Geometry"/>
         <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1970-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,(variables.TIME/(3600*24)))    " type="id_Date"/>
@@ -846,7 +847,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT  &#xA;        url,&#xA;        CASE &#xA;&#x9;&#x9;WHEN (substring(url, '/SRS-OC-SOOP_Rad/([^\\s]+?)/'  ) = 'VLHJ_Southern-Surveyor' )&#xA;&#x9;&#x9;&#x9;THEN 'Southern Surveyor'&#xA;&#x9;&#x9;WHEN (substring(url, '/SRS-OC-SOOP_Rad/([^\\s]+?)/'  ) = 'VMQ9273_Solander' )&#xA;&#x9;&#x9;&#x9;THEN 'Solander'&#xA;&#x9;END AS vessel_name     &#xA;        &#xA;from indexed_file where id =&quot; +context.file_id + &quot;;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT  &#xA;        url,&#xA;        CASE &#xA;&#x9;&#x9;WHEN (substring(url, '/SRS/OC/radiometer/([^\\s]+?)/'  ) = 'VLHJ_Southern-Surveyor' )&#xA;&#x9;&#x9;&#x9;THEN 'Southern Surveyor'&#xA;&#x9;&#x9;WHEN (substring(url, '/SRS/OC/radiometer/([^\\s]+?)/'  ) = 'VMQ9273_Solander' )&#xA;&#x9;&#x9;&#x9;THEN 'Solander'&#xA;&#x9;END AS vessel_name     &#xA;        &#xA;from indexed_file where id =&quot; +context.file_id + &quot;;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -871,7 +872,7 @@
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="352" posY="384">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_1"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="context.url=row4.url;&#xA;context.vessel_name=row4.vessel_name;&#xA;"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="context.url=context.base + &quot;/&quot; + row4.url;&#xA;context.vessel_name=row4.vessel_name;&#xA;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
