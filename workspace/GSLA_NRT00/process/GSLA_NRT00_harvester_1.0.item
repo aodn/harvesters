@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+<?xml version="1.0"?>
+<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="harvest"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="gsla_nrt00"/>
@@ -9,10 +9,9 @@
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="localhost"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_RlVF8FuiEeOppMtV64iEfQ" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_RlVF8FuiEeOppMtV64iEfQ" type="id_String" value="null"/>
-    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value=""/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value=".*/.*_GSLA_FV02_NRT00_.*\.nc\.gz"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value="/home/ggalibert/Documents/OceanCurrent/GSLA/NRT00"/>
     <contextParameter comment="" name="unarchivedTmpDir" prompt="unarchivedTmpDir?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value=""/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value="/tmp/fileList"/>
   </context>
   <context confirmationNeeded="false" name="Test">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="harvest"/>
@@ -23,10 +22,9 @@
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="localhost"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_RlVF8FuiEeOppMtV64iEfQ" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_RlVF8FuiEeOppMtV64iEfQ" type="id_String" value="null"/>
-    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value=""/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value=".*/.*_GSLA_FV02_NRT00_.*\.nc\.gz"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value="/home/ggalibert/Documents/OceanCurrent/GSLA/NRT00"/>
     <contextParameter comment="" name="unarchivedTmpDir" prompt="unarchivedTmpDir?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value=""/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value="/tmp/fileList"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -40,7 +38,7 @@
     <elementParameter field="CHECK" name="IMPLICIT_TCONTEXTLOAD" value="true"/>
     <elementParameter field="RADIO" name="FROM_FILE_FLAG_IMPLICIT_CONTEXT" value="true"/>
     <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="context.paramFile"/>
-    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;=>&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;=&gt;&quot;"/>
     <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
     <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
     <elementParameter field="CHECK" name="ON_STATCATCHER_FLAG" value="true"/>
@@ -62,8 +60,8 @@
     <routinesParameter id="_NhR54AuOEeO-v4jR06LTxA" name="TalendDate"/>
     <routinesParameter id="_NhOPgAuOEeO-v4jR06LTxA" name="TalendString"/>
   </parameters>
-  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="448">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
+  <node componentName="iNewOrModifiedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="448">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_1"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
     <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
     <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
@@ -77,11 +75,12 @@
     <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
     <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
-    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#xA;&quot;  from indexed_file &quot; +&#xA;&quot;  join index_job &quot; +&#xA;&quot;    on indexed_file.job_id = index_job.id &quot; +&#xA;&quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#xA;&quot;   and index_job.name = ? &quot; +&#xA;&quot;  left join file_harvest &quot; +&#xA;&quot;    on file_harvest.file_id = indexed_file.id &quot; +&#xA;&quot;   and file_harvest.harvest_type = ? &quot; +&#xA;&quot; where (file_harvest.last_moddate_harvested &lt;> indexed_file.modified &quot; +&#xA;&quot;    or  file_harvest.last_moddate_harvested is null) &quot;;&#xA;      "/>
+    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#10;&quot;  from indexed_file &quot; +&#10;&quot;  join index_job &quot; +&#10;&quot;    on indexed_file.job_id = index_job.id &quot; +&#10;&quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#10;&quot;   and index_job.name = ? &quot; +&#10;&quot;  left join file_harvest &quot; +&#10;&quot;    on file_harvest.file_id = indexed_file.id &quot; +&#10;&quot;   and file_harvest.harvest_type = ? &quot; +&#10;&quot; where (file_harvest.last_moddate_harvested &lt;&gt; indexed_file.modified &quot; +&#10;&quot;    or  file_harvest.last_moddate_harvested is null) &quot;;&#10;      "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
   </node>
   <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="448" posY="576">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_3"/>
@@ -97,9 +96,9 @@
     <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
     <elementParameter field="TABLE" name="CONTEXTPARAMS">
       <elementValue elementRef="PARAM_NAME_COLUMN" value="url"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;iHarvestResources_1_URL&quot;))"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;iNewOrModifiedFileList_1_URL&quot;))"/>
       <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iHarvestResources_1_FILE_ID&quot;))"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iNewOrModifiedFileList_1_FILE_ID&quot;))"/>
       <elementValue elementRef="PARAM_NAME_COLUMN" value="unzipped_url"/>
       <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;tFileUnarchive_1_CURRENT_FILEPATH&quot;))"/>
     </elementParameter>
@@ -114,7 +113,7 @@
   </node>
   <node componentName="tFileUnarchive" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="448" posY="448">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileUnarchive_1"/>
-    <elementParameter field="FILE" name="ZIPFILE" value="((String)globalMap.get(&quot;iHarvestResources_1_URL&quot;))"/>
+    <elementParameter field="FILE" name="ZIPFILE" value="((String)globalMap.get(&quot;iNewOrModifiedFileList_1_URL&quot;))"/>
     <elementParameter field="DIRECTORY" name="DIRECTORY" value="context.unarchivedTmpDir"/>
     <elementParameter field="CHECK" name="ROOTNAME" value="false"/>
     <elementParameter field="CHECK" name="INTEGRITY" value="false"/>
@@ -127,8 +126,8 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="iDeletedResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="320">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
+  <node componentName="iDeletedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="320">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedFileList_1"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
     <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
     <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
@@ -142,11 +141,12 @@
     <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
     <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
-    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select id, url, modified &quot; +&#xA;&quot;  from deleted_resource &quot; +&#xA;&quot; where job_name = ? &quot; +&#xA;&quot;   and harvest_type = ? &quot;&#xA;      "/>
+    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select id, url, modified &quot; +&#10;&quot;  from deleted_resource &quot; +&#10;&quot; where job_name = ? &quot; +&#10;&quot;   and harvest_type = ? &quot;&#10;      "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
   </node>
   <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="448" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_5"/>
@@ -162,7 +162,7 @@
     <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
     <elementParameter field="TABLE" name="CONTEXTPARAMS">
       <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iDeletedResources_1_FILE_ID&quot;))"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iDeletedFileList_1_FILE_ID&quot;))"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
     <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
@@ -184,14 +184,14 @@
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/home/mhidas/work/sql/data_harvest/anmn_ts.changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_timeseries_table-1&quot;>&#xA;      &lt;sql>&#xA;&#x9;CREATE TABLE timeseries&#xA;&#x9;(&#xA;&#x9;  id bigserial NOT NULL,&#xA;&#x9;  file_id bigint NOT NULL,&#xA;&#x9;  time timestamp with time zone,&#xA;&#x9;  geom geometry(Geometry,4326),&#xA;&#x9;  CONSTRAINT timeseries_pk PRIMARY KEY (id ),&#xA;&#x9;  CONSTRAINT timeseries_file_fk FOREIGN KEY (file_id)&#xA;&#x9;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;&#x9;      ON UPDATE CASCADE ON DELETE CASCADE,&#xA;&#x9;  CONSTRAINT timeseries_uc UNIQUE (time)&#xA;&#x9;);&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_map_view-1&quot;>&#xA;      &lt;sql>&#xA;&#x9;CREATE OR REPLACE VIEW gsla_nrt00_timeseries_url AS &#xA;&#x9;  SELECT &#xA;&#x9;    t.id AS timeseries_id,&#xA;&#x9;    f.url AS file_url,&#xA;&#x9;    f.size,&#xA;&#x9;    -- date(f.first_indexed AT TIME ZONE 'UTC') AS date_published,&#xA;&#x9;    t.time AT TIME ZONE 'UTC' AS time,&#xA;&#x9;    t.geom&#xA;&#x9;    FROM timeseries t JOIN indexed_file f ON t.file_id = f.id;&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&lt;/databaseChangeLog>&#xA;"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;&gt;&#10;&#10;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_timeseries_table-1&quot;&gt;&#10;      &lt;sql&gt;&#10;&#9;CREATE TABLE timeseries&#10;&#9;(&#10;&#9;  id bigserial NOT NULL,&#10;&#9;  file_id bigint NOT NULL,&#10;&#9;  time timestamp with time zone,&#10;&#9;  geom geometry(Geometry,4326),&#10;&#9;  CONSTRAINT timeseries_pk PRIMARY KEY (id ),&#10;&#9;  CONSTRAINT timeseries_file_fk FOREIGN KEY (file_id)&#10;&#9;      REFERENCES indexed_file (id) MATCH SIMPLE&#10;&#9;      ON UPDATE CASCADE ON DELETE CASCADE,&#10;&#9;  CONSTRAINT timeseries_uc UNIQUE (time)&#10;&#9;);&#10;      &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_map_view-1&quot;&gt;&#10;      &lt;sql&gt;&#10;&#9;CREATE OR REPLACE VIEW gsla_nrt00_timeseries_url AS &#10;&#9;  SELECT &#10;&#9;    t.id AS timeseries_id,&#10;&#9;    f.url AS file_url,&#10;&#9;    f.size,&#10;&#9;    -- date(f.first_indexed AT TIME ZONE 'UTC') AS date_published,&#10;&#9;    t.time AT TIME ZONE 'UTC' AS time,&#10;&#9;    t.geom&#10;&#9;    FROM timeseries t JOIN indexed_file f ON t.file_id = f.id;&#10;      &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&lt;/databaseChangeLog&gt;&#10;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="iIndexFiles" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="64">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_1"/>
+  <node componentName="iUpdateIndex" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iUpdateIndex_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
     <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
@@ -200,74 +200,53 @@
     <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="LIST_MODE" value="FILES"/>
-    <elementParameter field="DIRECTORY" name="DIRECTORY" value="context.sourceDir"/>
-    <elementParameter field="CHECK" name="INCLUDSUBDIR" value="true"/>
-    <elementParameter field="CLOSED_LIST" name="CASE_SENSITIVE" value="YES"/>
-    <elementParameter field="CHECK" name="ERROR" value="true"/>
-    <elementParameter field="CHECK" name="GLOBEXPRESSIONS" value="false"/>
-    <elementParameter field="TABLE" name="FILES">
-      <elementValue elementRef="FILEMASK" value="context.include"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="IFEXCLUDE" value="true"/>
-    <elementParameter field="TEXT" name="EXCLUDEFILEMASK" value="context.exclude"/>
-    <elementParameter field="CHECK" name="FORMAT_FILEPATH_TO_SLASH" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_NOTHING" value="true"/>
-    <elementParameter field="RADIO" name="ORDER_BY_FILENAME" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_FILESIZE" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_MODIFIEDDATE" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_ACTION_ASC" value="true"/>
-    <elementParameter field="RADIO" name="ORDER_ACTION_DESC" value="false"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="iIndexFiles_1">
-      <column defaultValue="" key="false" length="255" name="filePath" nullable="true" precision="0" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="0" name="fileLastModified" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" precision="0" sourceType="" type="id_Date"/>
-      <column defaultValue="" key="false" length="0" name="fileSize" nullable="true" precision="0" sourceType="" type="id_Double"/>
-    </metadata>
+    <elementParameter field="FILE" name="MANIFEST_FILENAME" value="context.fileList"/>
+    <elementParameter field="TEXT" name="BASE_PATH" value="context.base"/>
   </node>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="iHarvestResources_1" target="tFileUnarchive_1">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iNewOrModifiedFileList_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="iNewOrModifiedFileList_1" target="tFileUnarchive_1">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate3"/>
   </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="iHarvestResources_1" target="tRunJob_3">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iNewOrModifiedFileList_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="iNewOrModifiedFileList_1" target="tRunJob_3">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate1"/>
   </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="tRunJob_5">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_1" target="tRunJob_5">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="iHarvestResources_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_1" target="iNewOrModifiedFileList_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iDeletedResources_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iDeletedFileList_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" source="iIndexFiles_1" target="iPostgresqlDbUpdate_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iUpdateIndex_1" offsetLabelX="0" offsetLabelY="0" source="iUpdateIndex_1" target="iPostgresqlDbUpdate_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk4"/>
   </connection>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_1"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Harvest/re-harvest metadata and data for new or modified resources"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedFileList_1"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Delete metadata and data for deleted resources"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
@@ -281,7 +260,7 @@
   </subjob>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iUpdateIndex_1"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Check file system for new, modified or deleted files"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
