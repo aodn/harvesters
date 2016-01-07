@@ -238,7 +238,7 @@
       </column>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="timeseries">
         <mapperTableEntries name="file_id" expression="context.file_id" type="id_Long"/>
@@ -250,10 +250,10 @@
         <mapperTableEntries name="site_depth_at_deployment" expression="row6.site_depth_at_deployment " type="id_Double" nullable="true"/>
         <mapperTableEntries name="instrument" expression="row6.instrument" type="id_String" nullable="true"/>
         <mapperTableEntries name="instrument_serial_number" expression="row6.instrument_serial_number" type="id_String" nullable="true"/>
-        <mapperTableEntries name="time_coverage_start" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row6.time_coverage_start,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
-        <mapperTableEntries name="time_coverage_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row6.time_coverage_end,&quot;Z&quot;,&quot;+0000&quot;))" type="id_Date" nullable="true"/>
-        <mapperTableEntries name="time_deployment_start" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row6.time_deployment_start,&quot;Z&quot;,&quot;+0000&quot;))" type="id_Date" nullable="true"/>
-        <mapperTableEntries name="time_deployment_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row6.time_deployment_end,&quot;Z&quot;,&quot;+0000&quot;))" type="id_Date" nullable="true"/>
+        <mapperTableEntries name="time_coverage_start" expression="row6.time_coverage_start == null ? null : TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row6.time_coverage_start,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="time_coverage_end" expression="row6.time_coverage_end == null ? null : TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row6.time_coverage_end,&quot;Z&quot;,&quot;+0000&quot;))" type="id_Date" nullable="true"/>
+        <mapperTableEntries name="time_deployment_start" expression="row6.time_deployment_start == null ? null : TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row6.time_deployment_start,&quot;Z&quot;,&quot;+0000&quot;))" type="id_Date" nullable="true"/>
+        <mapperTableEntries name="time_deployment_end" expression="row6.time_deployment_end == null ? null : TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row6.time_deployment_end,&quot;Z&quot;,&quot;+0000&quot;))" type="id_Date" nullable="true"/>
         <mapperTableEntries name="comment" expression="row6.comment" type="id_String" nullable="true"/>
         <mapperTableEntries name="history" expression="row6.history" type="id_String" nullable="true"/>
         <mapperTableEntries name="toolbox_version" expression="row6.toolbox_version" type="id_String" nullable="true"/>
