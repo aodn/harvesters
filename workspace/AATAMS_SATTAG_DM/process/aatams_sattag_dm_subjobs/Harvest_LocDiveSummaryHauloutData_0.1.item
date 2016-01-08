@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+<?xml version="1.0"?>
+<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
@@ -12,9 +12,8 @@
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_VdH-wBEjEeOEF5U-6QRQFw" type="id_String" value="/tmp/aatams"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_VdH-wBEjEeOEF5U-6QRQFw" type="id_String" value="null"/>
     <contextParameter comment="" name="aatams_sattag_nrt_Schema" prompt="aatams_sattag_nrt_Schema?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="aatams_sattag_nrt"/>
-    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=".*ct91.mdb|.*ct101.mdb|.*ct110.mdb"/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=".*.mdb"/>
     <contextParameter comment="" name="unarchived_folder" prompt="unarchived_folder?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/usr/local/talend/aatams_sattag_dm/unzipped"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=""/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -113,7 +112,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM argos_locations WHERE file_id = &quot; + context.fileId + &quot; ; &quot; + &#xA;&quot;DELETE FROM dive_profiles WHERE file_id = &quot; + context.fileId + &quot; ; &quot; +&#xA;&quot;DELETE FROM summary WHERE file_id = &quot; + context.fileId + &quot; ; &quot; +&#xA;&quot;DELETE FROM haulout WHERE file_id = &quot; + context.fileId + &quot; ; &quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM argos_locations WHERE file_id = &quot; + context.fileId + &quot; ; &quot; + &#10;&quot;DELETE FROM dive_profiles WHERE file_id = &quot; + context.fileId + &quot; ; &quot; +&#10;&quot;DELETE FROM summary WHERE file_id = &quot; + context.fileId + &quot; ; &quot; +&#10;&quot;DELETE FROM haulout WHERE file_id = &quot; + context.fileId + &quot; ; &quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -146,7 +145,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJDBCInput_2"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
-    <elementParameter field="TEXT" name="URL" value="&quot;jdbc:jstels:mdb:&quot; + context.url"/>
+    <elementParameter field="TEXT" name="URL" value="&quot;jdbc:jstels:mdb:&quot; + context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TABLE" name="DRIVER_JAR">
       <elementValue elementRef="JAR_NAME" value="commons_lang.jar"/>
       <elementValue elementRef="JAR_NAME" value="commons_logging.jar"/>
@@ -362,7 +361,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT sattag_program,&#xA;aatams_sattag_nrt_metadata.device_id,&#xA;aatams_sattag_nrt_metadata.ptt,&#xA;aatams_sattag_nrt_metadata.device_wmo_ref,&#xA;tag_type,&#xA;common_name,&#xA;release_site,&#xA;state_country,&#xA;age_class,&#xA;sex,&#xA;colour&#xA;FROM &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_metadata&#xA;LEFT JOIN &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_animal_id ON aatams_sattag_nrt_animal_id.device_id = aatams_sattag_nrt_metadata.device_id&#xA;ORDER BY device_id;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT sattag_program,&#10;aatams_sattag_nrt_metadata.device_id,&#10;aatams_sattag_nrt_metadata.ptt,&#10;aatams_sattag_nrt_metadata.device_wmo_ref,&#10;tag_type,&#10;common_name,&#10;release_site,&#10;state_country,&#10;age_class,&#10;sex,&#10;colour&#10;FROM &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_metadata&#10;LEFT JOIN &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_animal_id ON aatams_sattag_nrt_animal_id.device_id = aatams_sattag_nrt_metadata.device_id&#10;ORDER BY device_id;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -775,7 +774,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJDBCInput_3"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
-    <elementParameter field="TEXT" name="URL" value="&quot;jdbc:jstels:mdb:&quot; + context.url"/>
+    <elementParameter field="TEXT" name="URL" value="&quot;jdbc:jstels:mdb:&quot; + context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TABLE" name="DRIVER_JAR">
       <elementValue elementRef="JAR_NAME" value="commons_lang.jar"/>
       <elementValue elementRef="JAR_NAME" value="commons_logging.jar"/>
@@ -790,7 +789,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ref,&#xA;PTT,&#xA;DE_DATE,&#xA;SURF_DUR,&#xA;DIVE_DUR,&#xA;MAX_DEP,&#xA;D1,&#xA;D2,&#xA;D3,&#xA;D4,&#xA;T1,&#xA;T2,&#xA;T3,&#xA;T4,&#xA;PERCENT_AREA,&#xA;DS_DATE,&#xA;START_LAT,&#xA;START_LON,&#xA;LAT,&#xA;LON&#xA; FROM dive&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ref,&#10;PTT,&#10;DE_DATE,&#10;SURF_DUR,&#10;DIVE_DUR,&#10;MAX_DEP,&#10;D1,&#10;D2,&#10;D3,&#10;D4,&#10;T1,&#10;T2,&#10;T3,&#10;T4,&#10;PERCENT_AREA,&#10;DS_DATE,&#10;START_LAT,&#10;START_LON,&#10;LAT,&#10;LON&#10; FROM dive&quot;"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
@@ -986,7 +985,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT sattag_program,&#xA;aatams_sattag_nrt_metadata.device_id,&#xA;aatams_sattag_nrt_metadata.ptt,&#xA;aatams_sattag_nrt_metadata.device_wmo_ref,&#xA;tag_type,&#xA;common_name,&#xA;release_site,&#xA;state_country,&#xA;age_class,&#xA;sex,&#xA;colour&#xA;FROM &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_metadata&#xA;LEFT JOIN &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_animal_id ON aatams_sattag_nrt_animal_id.device_id = aatams_sattag_nrt_metadata.device_id&#xA;ORDER BY device_id;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT sattag_program,&#10;aatams_sattag_nrt_metadata.device_id,&#10;aatams_sattag_nrt_metadata.ptt,&#10;aatams_sattag_nrt_metadata.device_wmo_ref,&#10;tag_type,&#10;common_name,&#10;release_site,&#10;state_country,&#10;age_class,&#10;sex,&#10;colour&#10;FROM &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_metadata&#10;LEFT JOIN &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_animal_id ON aatams_sattag_nrt_animal_id.device_id = aatams_sattag_nrt_metadata.device_id&#10;ORDER BY device_id;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -1414,7 +1413,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJDBCInput_4"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
-    <elementParameter field="TEXT" name="URL" value="&quot;jdbc:jstels:mdb:&quot; + context.url"/>
+    <elementParameter field="TEXT" name="URL" value="&quot;jdbc:jstels:mdb:&quot; + context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TABLE" name="DRIVER_JAR">
       <elementValue elementRef="JAR_NAME" value="commons_lang.jar"/>
       <elementValue elementRef="JAR_NAME" value="commons_logging.jar"/>
@@ -1429,7 +1428,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ref,&#xA;PTT,&#xA;S_DATE,&#xA;E_DATE,&#xA;SURF_TM,&#xA;DIVE_TM,&#xA;HAUL_TM,&#xA;N_CYCLES,&#xA;AV_DEPTH,&#xA;SD_DEPTH,&#xA;MAX_DEPTH,&#xA;AV_DUR,&#xA;SD_DUR,&#xA;MAX_DUR&#xA; FROM summary&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ref,&#10;PTT,&#10;S_DATE,&#10;E_DATE,&#10;SURF_TM,&#10;DIVE_TM,&#10;HAUL_TM,&#10;N_CYCLES,&#10;AV_DEPTH,&#10;SD_DEPTH,&#10;MAX_DEPTH,&#10;AV_DUR,&#10;SD_DUR,&#10;MAX_DUR&#10; FROM summary&quot;"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
@@ -1595,7 +1594,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT sattag_program,&#xA;aatams_sattag_nrt_metadata.device_id,&#xA;aatams_sattag_nrt_metadata.ptt,&#xA;aatams_sattag_nrt_metadata.device_wmo_ref,&#xA;tag_type,&#xA;common_name,&#xA;release_site,&#xA;state_country,&#xA;age_class,&#xA;sex,&#xA;colour&#xA;FROM &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_metadata&#xA;LEFT JOIN &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_animal_id ON aatams_sattag_nrt_animal_id.device_id = aatams_sattag_nrt_metadata.device_id&#xA;ORDER BY device_id;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT sattag_program,&#10;aatams_sattag_nrt_metadata.device_id,&#10;aatams_sattag_nrt_metadata.ptt,&#10;aatams_sattag_nrt_metadata.device_wmo_ref,&#10;tag_type,&#10;common_name,&#10;release_site,&#10;state_country,&#10;age_class,&#10;sex,&#10;colour&#10;FROM &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_metadata&#10;LEFT JOIN &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_animal_id ON aatams_sattag_nrt_animal_id.device_id = aatams_sattag_nrt_metadata.device_id&#10;ORDER BY device_id;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -1945,7 +1944,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJDBCInput_5"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
-    <elementParameter field="TEXT" name="URL" value="&quot;jdbc:jstels:mdb:&quot; + context.url"/>
+    <elementParameter field="TEXT" name="URL" value="&quot;jdbc:jstels:mdb:&quot; + context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TABLE" name="DRIVER_JAR">
       <elementValue elementRef="JAR_NAME" value="commons_lang.jar"/>
       <elementValue elementRef="JAR_NAME" value="commons_logging.jar"/>
@@ -2096,7 +2095,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT sattag_program,&#xA;aatams_sattag_nrt_metadata.device_id,&#xA;aatams_sattag_nrt_metadata.ptt,&#xA;aatams_sattag_nrt_metadata.device_wmo_ref,&#xA;tag_type,&#xA;common_name,&#xA;release_site,&#xA;state_country,&#xA;age_class,&#xA;sex,&#xA;colour&#xA;FROM &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_metadata&#xA;LEFT JOIN &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_animal_id ON aatams_sattag_nrt_animal_id.device_id = aatams_sattag_nrt_metadata.device_id&#xA;ORDER BY device_id;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT sattag_program,&#10;aatams_sattag_nrt_metadata.device_id,&#10;aatams_sattag_nrt_metadata.ptt,&#10;aatams_sattag_nrt_metadata.device_wmo_ref,&#10;tag_type,&#10;common_name,&#10;release_site,&#10;state_country,&#10;age_class,&#10;sex,&#10;colour&#10;FROM &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_metadata&#10;LEFT JOIN &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_animal_id ON aatams_sattag_nrt_animal_id.device_id = aatams_sattag_nrt_metadata.device_id&#10;ORDER BY device_id;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+<?xml version="1.0"?>
+<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
@@ -12,9 +12,8 @@
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_VdH-wBEjEeOEF5U-6QRQFw" type="id_String" value="/tmp/aatams"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_VdH-wBEjEeOEF5U-6QRQFw" type="id_String" value="null"/>
     <contextParameter comment="" name="aatams_sattag_nrt_Schema" prompt="aatams_sattag_nrt_Schema?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="aatams_sattag_nrt"/>
-    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=".*ct91.mdb|.*ct101.mdb|.*ct110.mdb"/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=".*.mdb"/>
     <contextParameter comment="" name="unarchived_folder" prompt="unarchived_folder?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/usr/local/talend/aatams_sattag_dm/unzipped"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=""/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -65,7 +64,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJDBCInput_4"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
-    <elementParameter field="TEXT" name="URL" value="&quot;jdbc:jstels:mdb:&quot; + context.url"/>
+    <elementParameter field="TEXT" name="URL" value="&quot;jdbc:jstels:mdb:&quot; + context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TABLE" name="DRIVER_JAR">
       <elementValue elementRef="JAR_NAME" value="commons_lang.jar"/>
       <elementValue elementRef="JAR_NAME" value="commons_logging.jar"/>
@@ -298,7 +297,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT sattag_program,&#xA;aatams_sattag_nrt_metadata.device_id,&#xA;aatams_sattag_nrt_metadata.device_wmo_ref,&#xA;tag_type,&#xA;common_name,&#xA;release_site,&#xA;state_country,&#xA;age_class,&#xA;sex,&#xA;colour&#xA;FROM &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_metadata&#xA;LEFT JOIN &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_animal_id ON aatams_sattag_nrt_animal_id.device_id = aatams_sattag_nrt_metadata.device_id&#xA;ORDER BY device_id;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT sattag_program,&#10;aatams_sattag_nrt_metadata.device_id,&#10;aatams_sattag_nrt_metadata.device_wmo_ref,&#10;tag_type,&#10;common_name,&#10;release_site,&#10;state_country,&#10;age_class,&#10;sex,&#10;colour&#10;FROM &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_metadata&#10;LEFT JOIN &quot;+context.aatams_sattag_nrt_Schema+&quot;.aatams_sattag_nrt_animal_id ON aatams_sattag_nrt_animal_id.device_id = aatams_sattag_nrt_metadata.device_id&#10;ORDER BY device_id;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -552,7 +551,7 @@
       <elementValue elementRef="RVALUE" value="-20.0"/>
     </elementParameter>
     <elementParameter field="CHECK" name="USE_ADVANCED" value="false"/>
-    <elementParameter field="MEMO_JAVA" name="ADVANCED_COND" value="// code sample : use input_row to define the condition.&#xA;// input_row.columnName1.equals(&quot;foo&quot;) ||!(input_row.columnName2.equals(&quot;bar&quot;))&#xA;// replace the following expression by your own filter condition &#xA;input_row.columnName1.equals(input_row.columnName2)&#xA;&#x9;&#x9;&#x9;"/>
+    <elementParameter field="MEMO_JAVA" name="ADVANCED_COND" value="// code sample : use input_row to define the condition.&#10;// input_row.columnName1.equals(&quot;foo&quot;) ||!(input_row.columnName2.equals(&quot;bar&quot;))&#10;// replace the following expression by your own filter condition &#10;input_row.columnName1.equals(input_row.columnName2)&#10;&#9;&#9;&#9;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -1116,7 +1115,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH a AS (SELECT device_id, timestamp, COUNT(*) AS nb_measurements FROM measurements WHERE file_id = &quot; + context.fileId + &quot; GROUP BY device_id,timestamp ORDER BY device_id,timestamp) &#xA;SELECT file_id,&#xA;sattag_program,&#xA;m.device_id,&#xA;device_wmo_ref,&#xA;tag_type,&#xA;common_name,&#xA;release_site,&#xA;state_country,&#xA;age_class,&#xA;sex,&#xA;m.timestamp AS timestamp,&#xA;CASE WHEN SUM(pressure) IS NULL THEN min(pressure) ELSE min(pressure) END AS min_pressure,&#xA;CASE WHEN SUM(pressure) IS NULL THEN max(pressure) ELSE max(pressure) END AS max_pressure,&#xA;nb_measurements,&#xA;ST_SIMPLIFY(make_point_or_shortest_line(geom,CASE WHEN lead(geom,1) OVER (PARTITION BY m.device_id ORDER BY m.device_id, m.timestamp) IS NULL THEN geom &#xA;ELSE lead(geom,1) OVER (PARTITION BY m.device_id ORDER BY m.device_id, m.timestamp) END),0.1) AS geom,&#xA;colour,&#xA;size&#xA;FROM measurements m&#xA;LEFT JOIN indexed_file i ON i.id = m.file_id&#xA;LEFT JOIN a ON a.device_id = m.device_id AND a.timestamp = m.timestamp&#xA;WHERE geom IS NOT NULL AND file_id = &quot; + context.fileId + &quot;&#xA;GROUP BY file_id,sattag_program,m.device_id,device_wmo_ref,tag_type,common_name,release_site,state_country,age_class,sex,m.timestamp,colour,geom,size, a.nb_measurements&#xA;ORDER by device_wmo_ref, timestamp;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH a AS (SELECT device_id, timestamp, COUNT(*) AS nb_measurements FROM measurements WHERE file_id = &quot; + context.fileId + &quot; GROUP BY device_id,timestamp ORDER BY device_id,timestamp) &#10;SELECT file_id,&#10;sattag_program,&#10;m.device_id,&#10;device_wmo_ref,&#10;tag_type,&#10;common_name,&#10;release_site,&#10;state_country,&#10;age_class,&#10;sex,&#10;m.timestamp AS timestamp,&#10;CASE WHEN SUM(pressure) IS NULL THEN min(pressure) ELSE min(pressure) END AS min_pressure,&#10;CASE WHEN SUM(pressure) IS NULL THEN max(pressure) ELSE max(pressure) END AS max_pressure,&#10;nb_measurements,&#10;ST_SIMPLIFY(make_point_or_shortest_line(geom,CASE WHEN lead(geom,1) OVER (PARTITION BY m.device_id ORDER BY m.device_id, m.timestamp) IS NULL THEN geom &#10;ELSE lead(geom,1) OVER (PARTITION BY m.device_id ORDER BY m.device_id, m.timestamp) END),0.1) AS geom,&#10;colour,&#10;size&#10;FROM measurements m&#10;LEFT JOIN indexed_file i ON i.id = m.file_id&#10;LEFT JOIN a ON a.device_id = m.device_id AND a.timestamp = m.timestamp&#10;WHERE geom IS NOT NULL AND file_id = &quot; + context.fileId + &quot;&#10;GROUP BY file_id,sattag_program,m.device_id,device_wmo_ref,tag_type,common_name,release_site,state_country,age_class,sex,m.timestamp,colour,geom,size, a.nb_measurements&#10;ORDER by device_wmo_ref, timestamp;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -1358,7 +1357,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM measurements WHERE file_id = &quot; + context.fileId + &quot; ; &quot; +&#xA;&quot;DELETE FROM aatams_sattag_dm_profile_map WHERE file_id = &quot; + context.fileId + &quot; ; &quot;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM measurements WHERE file_id = &quot; + context.fileId + &quot; ; &quot; +&#10;&quot;DELETE FROM aatams_sattag_dm_profile_map WHERE file_id = &quot; + context.fileId + &quot; ; &quot;&#10;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -1392,7 +1391,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE measurements m&#xA;SET profile_id = map.profile_id&#xA;FROM aatams_sattag_dm_profile_map map&#xA;WHERE map.file_id = &quot; + context.fileId + &quot; AND m.device_id = map.device_id AND m.timestamp = map.timestamp;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE measurements m&#10;SET profile_id = map.profile_id&#10;FROM aatams_sattag_dm_profile_map map&#10;WHERE map.file_id = &quot; + context.fileId + &quot; AND m.device_id = map.device_id AND m.timestamp = map.timestamp;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
