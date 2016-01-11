@@ -342,7 +342,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tSetGlobalVar_1"/>
     <elementParameter field="TABLE" name="VARIABLES">
       <elementValue elementRef="KEY" value="&quot;harvest_dive_data&quot;"/>
-      <elementValue elementRef="VALUE" value="!java.util.regex.Pattern.matches(context.exclude)"/>
+      <elementValue elementRef="VALUE" value="!java.util.regex.Pattern.matches(context.exclude, ((String)globalMap.get(&quot;iNewOrModifiedFileList_2_URL&quot;)))"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -531,7 +531,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk10"/>
   </connection>
   <connection connectorName="RUN_IF" label="If" lineStyle="6" metaname="tSetGlobalVar_1" offsetLabelX="0" offsetLabelY="0" source="tSetGlobalVar_1" target="tRunJob_4">
-    <elementParameter field="MEMO_JAVA" name="CONDITION" value="((String)globalMap.get(&quot;harvest_dive_data&quot;)) .equalsIgnoreCase(&quot;TRUE&quot;)"/>
+    <elementParameter field="MEMO_JAVA" name="CONDITION" value="((Boolean)globalMap.get(&quot;harvest_dive_data&quot;)).booleanValue()"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="If1"/>
   </connection>
