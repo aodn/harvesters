@@ -19,15 +19,15 @@
     <contextParameter comment="" name="Metadata_Username" prompt="Metadata_Username?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
     <contextParameter comment="" name="Metadata_UUID" prompt="Metadata_UUID?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="06b09398-d3d0-47dc-a54a-a745319fbece"/>
     <contextParameter comment="" name="aatams_sattag_nrt_Schema" prompt="aatams_sattag_nrt_Schema?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="aatams_sattag_nrt"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/usr/local/talend/aatams_sattag_dm/unzipped"/>
     <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=".*ct91.mdb|.*ct101.mdb|.*ct110.mdb"/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=".*.mdb"/>
-    <contextParameter comment="" name="unarchived_folder" prompt="unarchived_folder?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/usr/local/talend/aatams_sattag_dm/unzipped"/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="null"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx4096M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="true"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="288"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="160"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
     <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
     <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
@@ -62,44 +62,24 @@
     <routinesParameter id="_IMfY4Dp8EeKYTu4DLH4cKg" name="NetCDFUtils"/>
     <routinesParameter id="_E2GA8Ix7EeOVEeTsSyKn0A" name="NormalizeMultipleFields"/>
   </parameters>
-  <node componentName="iIndexFiles" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="-64">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_1"/>
+  <node componentName="iUpdateIndex" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iUpdateIndex_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
     <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
     <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
     <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="LIST_MODE" value="FILES"/>
-    <elementParameter field="DIRECTORY" name="DIRECTORY" value="context.unarchived_folder"/>
-    <elementParameter field="CHECK" name="INCLUDSUBDIR" value="true"/>
-    <elementParameter field="CLOSED_LIST" name="CASE_SENSITIVE" value="YES"/>
-    <elementParameter field="CHECK" name="ERROR" value="true"/>
-    <elementParameter field="CHECK" name="GLOBEXPRESSIONS" value="false"/>
-    <elementParameter field="TABLE" name="FILES">
-      <elementValue elementRef="FILEMASK" value="context.include"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="IFEXCLUDE" value="false"/>
-    <elementParameter field="TEXT" name="EXCLUDEFILEMASK" value=""/>
-    <elementParameter field="CHECK" name="FORMAT_FILEPATH_TO_SLASH" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_NOTHING" value="true"/>
-    <elementParameter field="RADIO" name="ORDER_BY_FILENAME" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_FILESIZE" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_MODIFIEDDATE" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_ACTION_ASC" value="true"/>
-    <elementParameter field="RADIO" name="ORDER_ACTION_DESC" value="false"/>
+    <elementParameter field="TEXT" name="BASE_PATH" value="context.base"/>
+    <elementParameter field="FILE" name="MANIFEST_FILENAME" value="context.fileList"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="iIndexFiles_1">
-      <column defaultValue="" key="false" length="255" name="filePath" nullable="true" precision="0" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="0" name="fileLastModified" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" precision="0" sourceType="" type="id_Date"/>
-      <column defaultValue="" key="false" length="0" name="fileSize" nullable="true" precision="0" sourceType="" type="id_Double"/>
-    </metadata>
   </node>
   <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
@@ -120,8 +100,8 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="448">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
+  <node componentName="iNewOrModifiedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="448">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
@@ -138,6 +118,7 @@
     <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
     <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#xA;&quot;  from indexed_file &quot; +&#xA;&quot;  join index_job &quot; +&#xA;&quot;    on indexed_file.job_id = index_job.id &quot; +&#xA;&quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#xA;&quot;   and index_job.name = ? &quot; +&#xA;&quot;  left join file_harvest &quot; +&#xA;&quot;    on file_harvest.file_id = indexed_file.id &quot; +&#xA;&quot;   and file_harvest.harvest_type = ? &quot; +&#xA;&quot; where (file_harvest.last_moddate_harvested &lt;> indexed_file.modified &quot; +&#xA;&quot;    or  file_harvest.last_moddate_harvested is null) &quot;;&#xA;      "/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -157,9 +138,9 @@
     <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
     <elementParameter field="TABLE" name="CONTEXTPARAMS">
       <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iHarvestResources_1_FILE_ID&quot;))"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iNewOrModifiedFileList_1_FILE_ID&quot;))"/>
       <elementValue elementRef="PARAM_NAME_COLUMN" value="url"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;iHarvestResources_1_URL&quot;))"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;iNewOrModifiedFileList_1_URL&quot;))"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
     <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
@@ -169,6 +150,18 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_1"/>
+  </node>
+  <node componentName="tSetGlobalVar" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="352" posY="576">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tSetGlobalVar_1"/>
+    <elementParameter field="TABLE" name="VARIABLES">
+      <elementValue elementRef="KEY" value="&quot;harvest_dive_data&quot;"/>
+      <elementValue elementRef="VALUE" value="!java.util.regex.Pattern.matches(context.exclude, ((String)globalMap.get(&quot;iNewOrModifiedFileList_1_URL&quot;)))"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tSetGlobalVar_1"/>
   </node>
   <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="160" posY="704">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_2"/>
@@ -266,7 +259,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_2"/>
   </node>
-  <node componentName="tPostgresqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="160" posY="-224">
+  <node componentName="tPostgresqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="160" posY="-96">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
@@ -314,97 +307,8 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="iIndexFiles" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="64">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_2"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
-    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
-    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
-    <elementParameter field="TEXT" name="JOBNAME" value="&quot;index_locdive&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="LIST_MODE" value="FILES"/>
-    <elementParameter field="DIRECTORY" name="DIRECTORY" value="context.unarchived_folder"/>
-    <elementParameter field="CHECK" name="INCLUDSUBDIR" value="true"/>
-    <elementParameter field="CLOSED_LIST" name="CASE_SENSITIVE" value="YES"/>
-    <elementParameter field="CHECK" name="ERROR" value="true"/>
-    <elementParameter field="CHECK" name="GLOBEXPRESSIONS" value="false"/>
-    <elementParameter field="TABLE" name="FILES">
-      <elementValue elementRef="FILEMASK" value="context.include"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="IFEXCLUDE" value="true"/>
-    <elementParameter field="TEXT" name="EXCLUDEFILEMASK" value="context.exclude"/>
-    <elementParameter field="CHECK" name="FORMAT_FILEPATH_TO_SLASH" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_NOTHING" value="true"/>
-    <elementParameter field="RADIO" name="ORDER_BY_FILENAME" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_FILESIZE" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_MODIFIEDDATE" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_ACTION_ASC" value="true"/>
-    <elementParameter field="RADIO" name="ORDER_ACTION_DESC" value="false"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="iIndexFiles_2">
-      <column defaultValue="" key="false" length="255" name="filePath" nullable="true" precision="0" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="0" name="fileLastModified" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" precision="0" sourceType="" type="id_Date"/>
-      <column defaultValue="" key="false" length="0" name="fileSize" nullable="true" precision="0" sourceType="" type="id_Double"/>
-    </metadata>
-  </node>
-  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="576">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_2"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
-    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
-    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
-    <elementParameter field="TEXT" name="JOBNAME" value="&quot;index_locdive&quot;"/>
-    <elementParameter field="TEXT" name="HARVEST_TYPE" value="&quot;h_locdiv&quot;"/>
-    <elementParameter field="RADIO" name="USE_DEFAULT" value="true"/>
-    <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
-    <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
-    <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
-    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#xA;&quot;  from indexed_file &quot; +&#xA;&quot;  join index_job &quot; +&#xA;&quot;    on indexed_file.job_id = index_job.id &quot; +&#xA;&quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#xA;&quot;   and index_job.name = ? &quot; +&#xA;&quot;  left join file_harvest &quot; +&#xA;&quot;    on file_harvest.file_id = indexed_file.id &quot; +&#xA;&quot;   and file_harvest.harvest_type = ? &quot; +&#xA;&quot; where (file_harvest.last_moddate_harvested &lt;> indexed_file.modified &quot; +&#xA;&quot;    or  file_harvest.last_moddate_harvested is null) &quot;;&#xA;      "/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-  </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="352" posY="576">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_4"/>
-    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
-    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
-    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Harvest_LocDiveSummaryHauloutData"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_zkF8kFTLEeS0O8L3aIFSrg"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
-    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
-    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
-    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
-    <elementParameter field="TABLE" name="CONTEXTPARAMS">
-      <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iHarvestResources_2_FILE_ID&quot;))"/>
-      <elementValue elementRef="PARAM_NAME_COLUMN" value="url"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;iHarvestResources_2_URL&quot;))"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
-    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="Harvest_LocDiveSummaryHaulout_data"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tRunJob_4"/>
-  </node>
-  <node componentName="iDeletedResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="320">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
+  <node componentName="iDeletedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="320">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedFileList_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
@@ -421,6 +325,7 @@
     <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
     <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select id, url, modified &quot; +&#xA;&quot;  from deleted_resource &quot; +&#xA;&quot; where job_name = ? &quot; +&#xA;&quot;   and harvest_type = ? &quot;&#xA;      "/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -443,7 +348,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from indexed_file where id = &quot;+ ((Long)globalMap.get(&quot;iDeletedResources_1_FILE_ID&quot;)) +&quot; ; &quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from indexed_file where id = &quot;+ ((Long)globalMap.get(&quot;iDeletedFileList_1_FILE_ID&quot;)) +&quot; ; &quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -499,23 +404,61 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" source="iIndexFiles_1" target="iIndexFiles_2">
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="544" posY="576">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_4"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Harvest_LocDiveSummaryHauloutData"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_zkF8kFTLEeS0O8L3aIFSrg"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS">
+      <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iNewOrModifiedFileList_1_FILE_ID&quot;))"/>
+      <elementValue elementRef="PARAM_NAME_COLUMN" value="url"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;iNewOrModifiedFileList_1_URL&quot;))"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="Harvest_LocDiveSummaryHaulout_data"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tRunJob_4"/>
+  </node>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iUpdateIndex_1" offsetLabelX="0" offsetLabelY="0" source="iUpdateIndex_1" target="iPostgresqlDbUpdate_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk9"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iDeletedResources_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iDeletedFileList_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tRunJob_1">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iNewOrModifiedFileList_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="iNewOrModifiedFileList_1" target="tRunJob_1">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate1"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="iHarvestResources_2">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iNewOrModifiedFileList_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="iNewOrModifiedFileList_1" target="tSetGlobalVar_1">
+    <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
+    <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate3"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iNewOrModifiedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iNewOrModifiedFileList_1" target="tPostgresqlRow_2">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
+  </connection>
+  <connection connectorName="RUN_IF" label="If" lineStyle="6" metaname="tSetGlobalVar_1" offsetLabelX="0" offsetLabelY="0" source="tSetGlobalVar_1" target="tRunJob_4">
+    <elementParameter field="MEMO_JAVA" name="CONDITION" value="((Boolean)globalMap.get(&quot;harvest_dive_data&quot;)).booleanValue()"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="If1"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlRow_2" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tPostgresqlRow_2" target="tPostgresqlRow_3">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
@@ -533,7 +476,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk8"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="iIndexFiles_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="iUpdateIndex_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk7"/>
   </connection>
@@ -541,34 +484,20 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_2" offsetLabelX="0" offsetLabelY="0" source="iIndexFiles_2" target="iPostgresqlDbUpdate_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
-  </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_2" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_2" target="tRunJob_4">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_1" target="tPostgresqlRow_4">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate3"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iHarvestResources_2" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_2" target="tPostgresqlRow_2">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk10"/>
-  </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="tPostgresqlRow_4">
-    <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
-    <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate3"/>
-  </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="iHarvestResources_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_1" target="iNewOrModifiedFileList_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk4"/>
   </connection>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_1"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Index CTD profile datafiles"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iUpdateIndex_1"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Index all mdb datafiles"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
@@ -581,8 +510,8 @@
   </subjob>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Harvest CTD profiles data"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_1"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Harvest data"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
@@ -630,21 +559,7 @@
   </subjob>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_2"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Index location and dive datafiles"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
-  <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_2"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Harvest location, diving, summary, and haulout data"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
-  <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedFileList_1"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Delete data from deleted resources"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
@@ -653,6 +568,11 @@
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_5"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Refresh materialized view"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_4"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
