@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Integer" value=""/>
+    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Integer" value="3"/>
     <contextParameter comment="" name="channel_id" prompt="channel_id?" promptNeeded="false" type="id_Integer" value=""/>
     <contextParameter comment="" name="depth_channel" prompt="depth_channel?" promptNeeded="false" type="id_Double" value=""/>
     <contextParameter comment="" name="site_code" prompt="site_code?" promptNeeded="false" type="id_String" value="null"/>
-    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest"/>
+    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="faimms"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="t1ScqC/kWbE="/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="faimms"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
-    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="null"/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="&quot;.*/IMOS_FAIMMS.*_FV00.*|.*/IMOS_FAIMMS.*_FV01.*&quot;"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/mnt/opendap/1/IMOS/opendap/FAIMMS"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value=""/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/tmp/fileList"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -121,7 +120,7 @@
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="288" posY="-160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_1"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#xA;//&#xA;// multiply by 2 the row identifier&#xA;// output_row.id = input_row.id * 2;&#xA;//&#xA;// lowercase the name&#xA;// output_row.name = input_row.name.toLowerCase();&#xA;&#xA;context.url=row2.url;&#xA;&#xA;"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#xA;//&#xA;// multiply by 2 the row identifier&#xA;// output_row.id = input_row.id * 2;&#xA;//&#xA;// lowercase the name&#xA;// output_row.name = input_row.name.toLowerCase();&#xA;&#xA;context.url= context.base + &quot;/&quot; +  row2.url;&#xA;&#xA;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -761,7 +760,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT name AS \&quot;VARNAME\&quot; from variable where  ( variable.name !~ 'LATITUDE' AND  variable.name !~ 'LONGITUDE' AND variable.name !~ 'TIME' AND variable.name !~ '_quality_control' AND file_id = &quot;+ context.fileId+&quot; )  &quot;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT name AS \&quot;VARNAME\&quot; from variable where  ( variable.name !~ 'LATITUDE' AND  variable.name !~ 'LONGITUDE' AND variable.name !~ 'TIME' AND variable.name !~ 'NOMINAL_DEPTH' AND variable.name !~ '_quality_control' AND file_id = &quot;+ context.fileId+&quot; )  &quot;&#xA;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -830,7 +829,7 @@
     </metadata>
     <metadata connector="FLOW" label="varNC" name="varNC">
       <column comment="" key="false" name="VARIABLE" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" key="false" length="1" name="VARIABLE_QC" nullable="true" pattern="" sourceType="" type="id_String" originalLength="1"/>
+      <column comment="" key="false" length="1" name="VARIABLE_QC" nullable="true" pattern="" sourceType="" type="id_Integer" originalLength="1"/>
       <column comment="" key="false" name="TIME" nullable="true" pattern="" sourceType="" type="id_Double"/>
     </metadata>
   </node>
@@ -851,7 +850,7 @@
       <column comment="" key="true" name="channel_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" key="false" name="NOMINAL_DEPTH" nullable="true" pattern="" sourceType="" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
       <column comment="" key="false" length="40" name="site_code" nullable="true" pattern="" sourceType="" type="id_String" originalLength="20"/>
     </metadata>
@@ -864,7 +863,7 @@
         <mapperTableEntries name="channel_id" expression="context.channel_id" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="LATITUDE" expression="dim.LATITUDE " type="id_Double" nullable="true"/>
         <mapperTableEntries name="LONGITUDE" expression="dim.LONGITUDE " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="DEPTH" expression="context.depth_channel" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="NOMINAL_DEPTH" expression="context.depth_channel" type="id_Double" nullable="true"/>
         <mapperTableEntries name="geom" expression="Var.geom " type="id_Geometry"/>
         <mapperTableEntries name="site_code" expression="context.site_code" type="id_String" nullable="true"/>
       </outputTables>
@@ -897,18 +896,19 @@
     <nodeData xsi:type="MapperData">
       <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
-        <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1970-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,varNC.TIME/3600/24,true) " type="id_Date"/>
+        <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1950-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,varNC.TIME,true) " type="id_Date"/>
+        <mapperTableEntries name="varQC" expression="varNC.VARIABLE_QC==null?null:varNC.VARIABLE_QC.toString()==null?null:varNC.VARIABLE_QC.toString()    " type="id_String"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="copyOftempe">
         <mapperTableEntries name="file_id" expression="context.fileId  " type="id_Integer"/>
         <mapperTableEntries name="channel_id" expression="context.channel_id" type="id_Integer"/>
         <mapperTableEntries name="TIME" expression="Var.TIME     " type="id_Date" nullable="true"/>
         <mapperTableEntries name="VALUES" expression="varNC.VARIABLE " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="VALUES_quality_control" expression="varNC.VARIABLE_QC " type="id_String" nullable="true"/>
+        <mapperTableEntries name="VALUES_quality_control" expression="Var.varQC" type="id_String" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="varNC" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="VARIABLE" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="VARIABLE_QC" type="id_String" nullable="true"/>
+        <mapperTableEntries name="VARIABLE_QC" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="TIME" type="id_Double" nullable="true"/>
       </inputTables>
     </nodeData>
@@ -953,7 +953,7 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DEPTH"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="NOMINAL_DEPTH"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -979,20 +979,20 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_2">
-      <column comment="" defaultValue="" key="true" name="channel_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="true" name="channel_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" name="NOMINAL_DEPTH" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
-      <column comment="" key="false" length="40" name="site_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="40" name="site_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="20"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" defaultValue="" key="true" name="channel_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="true" name="channel_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" name="NOMINAL_DEPTH" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
-      <column comment="" key="false" length="40" name="site_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="40" name="site_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="20"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1693,7 +1693,7 @@
       <elementValue elementRef="TRACE_COLUMN" value="LONGITUDE"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="DEPTH"/>
+      <elementValue elementRef="TRACE_COLUMN" value="NOMINAL_DEPTH"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="geom"/>
