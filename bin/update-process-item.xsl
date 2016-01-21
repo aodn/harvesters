@@ -105,9 +105,15 @@
     
     <xsl:template match="*[local-name()='node'][@componentName='iUpdateIndex']/*[local-name()='metadata' and @connector='FLOW']"/>
 
-    <!-- change references to context.url to context.url + "/" + context.base in component parameter values -->
+    <!-- change references to context.url to context.base + "/" + context.url in component parameter values -->
     
-    <xsl:template match="*[local-name()='elementParameter' and contains(@value, 'context.url') and not(contains(@value, 'context.base'))]/@value">
+    <xsl:template match="*[
+        local-name()='elementParameter'
+        and contains(@value, 'context.url')
+        and not(contains(@value, 'context.base'))
+        and not(contains(@value, 'context.url='))
+        and not(contains(@value, 'context.url ='))
+    ]/@value">
         <xsl:attribute name="value">
             <xsl:call-template name="string-replace-all">
                 <xsl:with-param name="text" select="."/>
