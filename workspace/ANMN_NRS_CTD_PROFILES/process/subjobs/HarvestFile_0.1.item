@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+<?xml version="1.0"?>
+<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="DestinationDB_Database" prompt="DestinationDB_Database?" promptNeeded="false" repositoryContextId="_1gORYAfEEeS6S4wYAZSNCg" type="id_String" value="maplayers"/>
     <contextParameter comment="" name="DestinationDB_Login" prompt="DestinationDB_Login?" promptNeeded="false" repositoryContextId="_1gORYAfEEeS6S4wYAZSNCg" type="id_String" value="anmn_nrs_ctd_profiles"/>
@@ -9,11 +9,10 @@
     <contextParameter comment="" name="DestinationDB_Server" prompt="DestinationDB_Server?" promptNeeded="false" repositoryContextId="_1gORYAfEEeS6S4wYAZSNCg" type="id_String" value="localhost"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_b2CKgHgOEeOMHsnb02Unfg" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_b2CKgHgOEeOMHsnb02Unfg" type="id_String" value="null"/>
-    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value=".*FV00.*.nc"/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value=".*FV01.*.nc"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value="/Users/bpasquer/Documents/ANMN_NRS_CTDPRO/DATA_test_harvester/Biogeochem_profiles/"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value=""/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value=""/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value="/tmp/fileList"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -53,7 +52,7 @@
   </parameters>
   <node componentName="iNetCDFGlobalAttributes" componentVersion="0.1" offsetLabelX="-9" offsetLabelY="0" posX="128" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttributes_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -267,7 +266,7 @@
   </node>
   <node componentName="iNetCDFInput" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="352">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFInput_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TABLE" name="SCHEMAS">
       <elementValue elementRef="SCHEMA" value="variables"/>
     </elementParameter>
@@ -376,7 +375,7 @@
         <mapperTableEntries name="PSAL_quality_control" expression="variables.PSAL_quality_control==null?null:variables.PSAL_quality_control.toString() " type="id_String" nullable="true"/>
         <mapperTableEntries name="TEMP_quality_control" expression="variables.TEMP_quality_control==null?null:variables.TEMP_quality_control.toString() " type="id_String" nullable="true"/>
         <mapperTableEntries name="CNDC_quality_control" expression="variables.CNDC_quality_control==null?null:variables.CNDC_quality_control.toString()     " type="id_String" nullable="true"/>
-        <mapperTableEntries name="DIRECTION_quality_control" expression="variables.DIRECTION_quality_control==null?null:variables.DIRECTION_quality_control.toString()  &#xA; " type="id_String" nullable="true"/>
+        <mapperTableEntries name="DIRECTION_quality_control" expression="variables.DIRECTION_quality_control==null?null:variables.DIRECTION_quality_control.toString()  &#10; " type="id_String" nullable="true"/>
         <mapperTableEntries name="BOT_DEPTH_quality_control" expression="variables.BOT_DEPTH_quality_control==null?null:variables.BOT_DEPTH_quality_control.toString()  " type="id_String" nullable="true"/>
         <mapperTableEntries name="DOX2_quality_control" expression="variables.DOX2_quality_control==null?null:variables.DOX2_quality_control.toString()  " type="id_String" nullable="true"/>
         <mapperTableEntries name="CHLF_quality_control" expression="variables.CHLF_quality_control==null?null:variables.CHLF_quality_control.toString()  " type="id_String" nullable="true"/>
@@ -790,7 +789,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from deployments where file_id = &quot;+ context.fileId + &quot; ; &quot;+&#xA;&quot;delete from measurements where file_id=&quot; + context.fileId  +&quot; ; &quot; &#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from deployments where file_id = &quot;+ context.fileId + &quot; ; &quot;+&#10;&quot;delete from measurements where file_id=&quot; + context.fileId  +&quot; ; &quot; &#10;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
