@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+<?xml version="1.0"?>
+<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="harvest"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="anmn_wave"/>
@@ -11,6 +11,7 @@
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_brvNgFGXEeOFRtW2h_ugHg" type="id_String" value="null"/>
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Integer" value="141"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_A9GAoFGXEeOFRtW2h_ugHg" type="id_String" value=""/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -114,7 +115,7 @@
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="320" posY="-160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_1"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#xA;//&#xA;// multiply by 2 the row identifier&#xA;// output_row.id = input_row.id * 2;&#xA;//&#xA;// lowercase the name&#xA;// output_row.name = input_row.name.toLowerCase();&#xA;&#xA;context.url=row5.url;"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#10;//&#10;// multiply by 2 the row identifier&#10;// output_row.id = input_row.id * 2;&#10;//&#10;// lowercase the name&#10;// output_row.name = input_row.name.toLowerCase();&#10;&#10;context.base + &quot;/&quot; + context.url=row5.url;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -139,7 +140,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from timeseries where file_id = &quot; + context.fileId + &quot;; &#xA;delete from visualisation_awac where file_id = &quot; + context.fileId + &quot;; &#xA; delete from measurement_awac where file_id = &quot; + context.fileId + &quot;;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from timeseries where file_id = &quot; + context.fileId + &quot;; &#10;delete from visualisation_awac where file_id = &quot; + context.fileId + &quot;; &#10; delete from measurement_awac where file_id = &quot; + context.fileId + &quot;;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -160,7 +161,7 @@
   </node>
   <node componentName="iNetCDFGlobalAttributes" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttributes_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -397,7 +398,7 @@
   </node>
   <node componentName="iNetCDFInput" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFInput_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TABLE" name="SCHEMAS">
       <elementValue elementRef="SCHEMA" value="data"/>
     </elementParameter>
@@ -755,7 +756,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH summary AS (&#xA;  SELECT &#xA;    avg(\&quot;LATITUDE\&quot;) AS mean_latitude,&#xA;    avg(\&quot;LONGITUDE\&quot;) AS mean_longitude,&#xA;    st_geomfromtext('POINT(' || avg(\&quot;LONGITUDE\&quot;)::text || ' ' || avg(\&quot;LATITUDE\&quot;)::text || ')', 4326) AS geom    &#xA; &#xA;  FROM measurement_awac&#xA;  WHERE \&quot;LATITUDE\&quot; > -60 AND \&quot;LATITUDE\&quot; &lt; 0 AND&#xA;        \&quot;LONGITUDE\&quot; > 100 AND \&quot;LONGITUDE\&quot; &lt; 160 AND&#xA;        file_id = &quot; + context.fileId + &quot;&#xA;)&#xA;UPDATE timeseries&#xA;  SET mean_latitude = s.mean_latitude,&#xA;      mean_longitude = s.mean_longitude,&#xA;      geom = s.geom      &#xA;  FROM summary s&#xA;  WHERE file_id = &quot; + context.fileId + &#xA;&quot;;&quot;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#10;WITH summary AS (&#10;  SELECT &#10;    avg(\&quot;LATITUDE\&quot;) AS mean_latitude,&#10;    avg(\&quot;LONGITUDE\&quot;) AS mean_longitude,&#10;    st_geomfromtext('POINT(' || avg(\&quot;LONGITUDE\&quot;)::text || ' ' || avg(\&quot;LATITUDE\&quot;)::text || ')', 4326) AS geom    &#10; &#10;  FROM measurement_awac&#10;  WHERE \&quot;LATITUDE\&quot; &gt; -60 AND \&quot;LATITUDE\&quot; &lt; 0 AND&#10;        \&quot;LONGITUDE\&quot; &gt; 100 AND \&quot;LONGITUDE\&quot; &lt; 160 AND&#10;        file_id = &quot; + context.fileId + &quot;&#10;)&#10;UPDATE timeseries&#10;  SET mean_latitude = s.mean_latitude,&#10;      mean_longitude = s.mean_longitude,&#10;      geom = s.geom      &#10;  FROM summary s&#10;  WHERE file_id = &quot; + context.fileId + &#10;&quot;;&quot;&#10;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -790,7 +791,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH table_a AS (&#xA;         SELECT file_id,site_code,deployment_code,geom &#xA;           FROM timeseries where file_id = &quot; + context.fileId + &quot;&#xA;        ),&#xA; table_b AS (&#xA;  SELECT  &#xA;  min(\&quot;TIME\&quot;) AS time_start, &#xA;  max(\&quot;TIME\&quot;) AS time_end, &#xA;&#xA;  COUNT(\&quot;VAVH\&quot;) AS \&quot;VAVH\&quot;,&#xA;  COUNT(\&quot;VAVT\&quot;) AS \&quot;VAVT\&quot; ,&#xA;  COUNT(\&quot;VDIR\&quot;) AS \&quot;VDIR\&quot; ,&#xA;  COUNT(\&quot;SSDS\&quot;) AS \&quot;SSDS\&quot; ,&#xA;  COUNT(\&quot;TEMP\&quot;) AS \&quot;TEMP\&quot; ,&#xA;  COUNT(\&quot;PRES_REL\&quot;) AS \&quot;PRES_REL\&quot;,&#xA;  COUNT(\&quot;DEPTH\&quot;) AS \&quot;DEPTH\&quot; &#xA;&#xA;  FROM  measurement_awac where file_id = &quot; + context.fileId + &quot;&#xA;)&#xA;SELECT table_a.file_id, table_a.site_code,table_a.deployment_code,&#xA;time_start, &#xA;time_end, &#xA;geom,&#xA;\&quot;VAVH\&quot; > 0  AS \&quot;VAVH_b\&quot;,&#xA;\&quot;VAVT\&quot; > 0 AS \&quot;VAVT_b\&quot; ,&#xA;\&quot;VDIR\&quot; > 0 AS \&quot;VDIR_b\&quot; ,&#xA;\&quot;SSDS\&quot; > 0 AS \&quot;SSDS_b\&quot; ,&#xA;\&quot;TEMP\&quot; > 0 AS \&quot;TEMP_b\&quot; ,&#xA;\&quot;PRES_REL\&quot; > 0 AS \&quot;PRES_REL_b\&quot; ,&#xA;\&quot;DEPTH\&quot; > 0 AS \&quot;DEPTH_b\&quot; &#xA;FROM table_b, table_a &quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH table_a AS (&#10;         SELECT file_id,site_code,deployment_code,geom &#10;           FROM timeseries where file_id = &quot; + context.fileId + &quot;&#10;        ),&#10; table_b AS (&#10;  SELECT  &#10;  min(\&quot;TIME\&quot;) AS time_start, &#10;  max(\&quot;TIME\&quot;) AS time_end, &#10;&#10;  COUNT(\&quot;VAVH\&quot;) AS \&quot;VAVH\&quot;,&#10;  COUNT(\&quot;VAVT\&quot;) AS \&quot;VAVT\&quot; ,&#10;  COUNT(\&quot;VDIR\&quot;) AS \&quot;VDIR\&quot; ,&#10;  COUNT(\&quot;SSDS\&quot;) AS \&quot;SSDS\&quot; ,&#10;  COUNT(\&quot;TEMP\&quot;) AS \&quot;TEMP\&quot; ,&#10;  COUNT(\&quot;PRES_REL\&quot;) AS \&quot;PRES_REL\&quot;,&#10;  COUNT(\&quot;DEPTH\&quot;) AS \&quot;DEPTH\&quot; &#10;&#10;  FROM  measurement_awac where file_id = &quot; + context.fileId + &quot;&#10;)&#10;SELECT table_a.file_id, table_a.site_code,table_a.deployment_code,&#10;time_start, &#10;time_end, &#10;geom,&#10;\&quot;VAVH\&quot; &gt; 0  AS \&quot;VAVH_b\&quot;,&#10;\&quot;VAVT\&quot; &gt; 0 AS \&quot;VAVT_b\&quot; ,&#10;\&quot;VDIR\&quot; &gt; 0 AS \&quot;VDIR_b\&quot; ,&#10;\&quot;SSDS\&quot; &gt; 0 AS \&quot;SSDS_b\&quot; ,&#10;\&quot;TEMP\&quot; &gt; 0 AS \&quot;TEMP_b\&quot; ,&#10;\&quot;PRES_REL\&quot; &gt; 0 AS \&quot;PRES_REL_b\&quot; ,&#10;\&quot;DEPTH\&quot; &gt; 0 AS \&quot;DEPTH_b\&quot; &#10;FROM table_b, table_a &quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
