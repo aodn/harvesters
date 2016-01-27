@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+<?xml version="1.0"?>
+<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="maplayers"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="anmn_t_regridded"/>
@@ -9,11 +9,10 @@
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="localhost"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
-    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value="&quot;.*FV01.*&quot;;&quot;.*FV02.*burst_averaged.*&quot;"/>
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value="&quot;.*FV02.*regridded.*&quot;"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value="/Users/bpasquer/Documents/ANMN/routine_Final_v5m/ONimos5/File2Bsent"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value=""/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value=""/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value="/tmp/fileList"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -56,7 +55,7 @@
   </parameters>
   <node componentName="iNetCDFGlobalAttributes" componentVersion="0.1" offsetLabelX="-9" offsetLabelY="0" posX="128" posY="384">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttributes_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -356,7 +355,7 @@
   </node>
   <node componentName="iNetCDFInput" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFInput_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TABLE" name="SCHEMAS">
       <elementValue elementRef="SCHEMA" value="variables"/>
     </elementParameter>
@@ -578,7 +577,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;UPDATE deployments  SET  \&quot;TIME_b\&quot; = EXISTS (SELECT true FROM variable WHERE file_id = deployments.file_id and name = 'TIME') ;&#xA;UPDATE deployments SET  \&quot;DEPTH_b\&quot; = EXISTS (SELECT true FROM variable WHERE file_id = deployments.file_id and name = 'DEPTH') ;&#xA;UPDATE deployments SET  \&quot;TEMP_b\&quot; = EXISTS (SELECT true FROM variable WHERE file_id = deployments.file_id and name = 'TEMP') ;&#xA;UPDATE deployments SET \&quot;LATITUDE_b\&quot; = EXISTS (SELECT true FROM variable WHERE file_id = deployments.file_id and name = 'LATITUDE');&#xA; UPDATE deployments SET \&quot;LONGITUDE_b\&quot; = EXISTS (SELECT true FROM variable WHERE file_id = deployments.file_id and name = 'LONGITUDE'); &#xA;&quot;&#xA;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#10;UPDATE deployments  SET  \&quot;TIME_b\&quot; = EXISTS (SELECT true FROM variable WHERE file_id = deployments.file_id and name = 'TIME') ;&#10;UPDATE deployments SET  \&quot;DEPTH_b\&quot; = EXISTS (SELECT true FROM variable WHERE file_id = deployments.file_id and name = 'DEPTH') ;&#10;UPDATE deployments SET  \&quot;TEMP_b\&quot; = EXISTS (SELECT true FROM variable WHERE file_id = deployments.file_id and name = 'TEMP') ;&#10;UPDATE deployments SET \&quot;LATITUDE_b\&quot; = EXISTS (SELECT true FROM variable WHERE file_id = deployments.file_id and name = 'LATITUDE');&#10; UPDATE deployments SET \&quot;LONGITUDE_b\&quot; = EXISTS (SELECT true FROM variable WHERE file_id = deployments.file_id and name = 'LONGITUDE'); &#10;&quot;&#10;&#10;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -612,7 +611,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from deployments where file_id = &quot;+ context.fileId + &quot; ; &quot;+&#xA;&quot;delete from measurements where file_id=&quot; +  context.fileId +&quot; ; &quot; &#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from deployments where file_id = &quot;+ context.fileId + &quot; ; &quot;+&#10;&quot;delete from measurements where file_id=&quot; +  context.fileId +&quot; ; &quot; &#10;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
