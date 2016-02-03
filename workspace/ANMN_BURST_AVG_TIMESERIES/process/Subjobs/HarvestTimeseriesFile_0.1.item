@@ -6,10 +6,11 @@
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_TXD7kFudEeOp-945VQyxfg" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_TXD7kFudEeOp-945VQyxfg" type="id_String" value="anmn_burst_avg"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_TXD7kFudEeOp-945VQyxfg" type="id_Password" value="GEGamCGF5Js6GeIDNSoxLg=="/>
-    <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_TXD7kFudEeOp-945VQyxfg" type="id_String" value="15432"/>
+    <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_TXD7kFudEeOp-945VQyxfg" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_TXD7kFudEeOp-945VQyxfg" type="id_String" value="anmn_burst_avg"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_TXD7kFudEeOp-945VQyxfg" type="id_String" value="localhost"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_jRKWYFfwEeOEn7_9n6WFKw" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_FG7zcFfwEeOEn7_9n6WFKw" type="id_String" value=""/>
   </context>
   <context confirmationNeeded="false" name="Test">
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="/home/ggalibert/Documents/ANMN/NRS/NRSROT/Biogeochem_timeseries/IMOS_ANMN-NRS_KOSTUZ_20120928T080100Z_NRSROT_FV02_NRSROT-1209-WQM-43_burst-averaged_END-20130124T234600Z_C-20131023T225600Z.nc"/>
@@ -17,10 +18,11 @@
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_TXD7kFudEeOp-945VQyxfg" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_TXD7kFudEeOp-945VQyxfg" type="id_String" value="anmn_burst_avg"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_TXD7kFudEeOp-945VQyxfg" type="id_Password" value="GEGamCGF5Js6GeIDNSoxLg=="/>
-    <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_TXD7kFudEeOp-945VQyxfg" type="id_String" value="15432"/>
+    <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_TXD7kFudEeOp-945VQyxfg" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_TXD7kFudEeOp-945VQyxfg" type="id_String" value="anmn_burst_avg"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_TXD7kFudEeOp-945VQyxfg" type="id_String" value="localhost"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_jRKWYFfwEeOEn7_9n6WFKw" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_FG7zcFfwEeOEn7_9n6WFKw" type="id_String" value=""/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -91,7 +93,7 @@
   </node>
   <node componentName="iNetCDFGlobalAttributes" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="288" posY="-32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttributes_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -433,7 +435,7 @@
   </node>
   <node componentName="iNetCDFInput" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="192" posY="160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFInput_2"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TABLE" name="SCHEMAS">
       <elementValue elementRef="SCHEMA" value="variables"/>
       <elementValue elementRef="SCHEMA" value="location"/>

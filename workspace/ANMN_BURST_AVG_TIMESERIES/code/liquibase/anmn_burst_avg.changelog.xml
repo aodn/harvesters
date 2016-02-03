@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet author="talend" id="1381295243277-1">
+        <sql>
+	        CREATE TABLE timeseries
+					(
+						id bigserial NOT NULL,
+						file_id bigint NOT NULL,
+						site_code text NOT NULL,
+						platform_code text NOT NULL,
+						deployment_code text NOT NULL,
+						"LATITUDE" double precision, -- actual latitude of deployment
+						"LONGITUDE" double precision, -- actual longitude of deployment
+						geom geometry(Geometry,4326),
+						instrument_nominal_depth real, 
+						site_nominal_depth real, 
+						site_depth_at_deployment real, 
+						instrument text,
+						instrument_serial_number text,
+						time_coverage_start timestamp with time zone,
+						time_coverage_end timestamp with time zone,
+						time_deployment_start timestamp with time zone,
+						time_deployment_end timestamp with time zone,
+						comment text,
+						history text,
+						toolbox_version text,
+						depth_b boolean,
+						sea_water_temperature_b boolean,
+						sea_water_pressure_due_to_sea_water_b boolean,
+						sea_water_salinity_b boolean,
+            mole_concentration_of_dissolved_molecular_oxygen_in_sea_water_b boolean,
+						moles_of_oxygen_per_unit_mass_in_sea_water_b boolean,
+						turbidity_b boolean,
+						mass_concentration_of_chlorophyll_in_sea_water_b boolean,
+						CONSTRAINT timeseries_pk PRIMARY KEY (id ),
+						CONSTRAINT timeseries_file_fk FOREIGN KEY (file_id)
+								REFERENCES indexed_file (id) MATCH SIMPLE
+								ON UPDATE CASCADE ON DELETE CASCADE,
+						CONSTRAINT timeseries_deployment_instrument_depth_uc UNIQUE (deployment_code , instrument , instrument_nominal_depth ),
+						CONSTRAINT timeseries_geom_check CHECK (st_isvalid(geom))
+					);
+					COMMENT ON COLUMN timeseries."LATITUDE" IS 'actual latitude of deployment';
+					COMMENT ON COLUMN timeseries."LONGITUDE" IS 'actual longitude of deployment';
+
+					CREATE INDEX timeseries_gist_idx
+						ON timeseries
+						USING gist
+						(geom );
+        </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="drop_file_table" runOnChange="true">
+        <sql>
+          DROP TABLE IF EXISTS file;
+        </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="1381295243277-2">
+        <sql>
+					CREATE TABLE measurement
+					(
+						ts_id bigint NOT NULL,
+						index bigint NOT NULL,
+						"TIME" timestamp with time zone NOT NULL,
+						"DEPTH" real,
+						"DEPTH_burst_sd" real,
+						"DEPTH_burst_min" real,
+						"DEPTH_burst_max" real,
+						"DEPTH_num_obs" integer,
+						"TEMP" real,
+						"TEMP_burst_sd" real,
+						"TEMP_burst_min" real,
+						"TEMP_burst_max" real,
+						"TEMP_num_obs" integer,
+						"PRES_REL" real,
+						"PRES_REL_burst_sd" real,
+						"PRES_REL_burst_min" real,
+						"PRES_REL_burst_max" real,
+						"PRES_REL_num_obs" integer,
+						"PSAL" real,
+						"PSAL_burst_sd" real,
+						"PSAL_burst_min" real,
+						"PSAL_burst_max" real,
+						"PSAL_num_obs" integer,
+						"DOX1_1" real,
+						"DOX1_1_burst_sd" real,
+						"DOX1_1_burst_min" real,
+						"DOX1_1_burst_max" real,
+						"DOX1_1_num_obs" integer,
+						"DOX1_2" real,
+						"DOX1_2_burst_sd" real,
+						"DOX1_2_burst_min" real,
+						"DOX1_2_burst_max" real,
+						"DOX1_2_num_obs" integer,
+						"DOX1_3" real,
+						"DOX1_3_burst_sd" real,
+						"DOX1_3_burst_min" real,
+						"DOX1_3_burst_max" real,
+						"DOX1_3_num_obs" integer,
+						"DOX2" real,
+						"DOX2_burst_sd" real,
+						"DOX2_burst_min" real,
+						"DOX2_burst_max" real,
+						"DOX2_num_obs" integer,
+						"TURB" real,
+						"TURB_burst_sd" real,
+						"TURB_burst_min" real,
+						"TURB_burst_max" real,
+						"TURB_num_obs" integer,
+						"CPHL" real,
+						"CPHL_burst_sd" real,
+						"CPHL_burst_min" real,
+						"CPHL_burst_max" real,
+						"CPHL_num_obs" integer,
+						"CHLU" real,
+						"CHLU_burst_sd" real,
+						"CHLU_burst_min" real,
+						"CHLU_burst_max" real,
+						"CHLU_num_obs" integer,
+						"CHLF" real,
+						"CHLF_burst_sd" real,
+						"CHLF_burst_min" real,
+						"CHLF_burst_max" real,
+						"CHLF_num_obs" integer,
+						CONSTRAINT measurement_pk PRIMARY KEY (ts_id , index ),
+						CONSTRAINT measurement_ts_fk FOREIGN KEY (ts_id)
+								REFERENCES timeseries (id) MATCH SIMPLE
+								ON UPDATE CASCADE ON DELETE CASCADE
+					);
+        </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="drop_map_view-3">
+      <preConditions onFail="MARK_RAN">
+        <viewExists viewName="anmn_burst_avg_timeseries_map"/>
+      </preConditions>
+      <sql>drop view anmn_burst_avg_timeseries_map</sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="1381295243277-7" runOnChange="true">
+        <sql>
+            CREATE OR REPLACE VIEW anmn_burst_avg_timeseries_map AS 
+ SELECT t.id as t_id, f.url as file_url, f.size, t.site_code, t.platform_code, t.deployment_code, t."LATITUDE", t."LONGITUDE", t.geom, t.instrument_nominal_depth, t.instrument, t.instrument_serial_number, timezone('UTC'::text, t.time_coverage_start) AS time_coverage_start, timezone('UTC'::text, t.time_coverage_end) AS time_coverage_end, timezone('UTC'::text, t.time_deployment_start) AS time_deployment_start, timezone('UTC'::text, t.time_deployment_end) AS time_deployment_end, t.depth_b, t.sea_water_temperature_b, t.sea_water_pressure_due_to_sea_water_b, t.sea_water_salinity_b, t.mole_concentration_of_dissolved_molecular_oxygen_in_sea_water_b, t.moles_of_oxygen_per_unit_mass_in_sea_water_b, t.turbidity_b, t.mass_concentration_of_chlorophyll_in_sea_water_b
+   FROM timeseries t
+   JOIN indexed_file f ON t.file_id = f.id;
+        </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="1381295243277-5" runOnChange="true">
+        <sql>
+DROP VIEW IF EXISTS anmn_burst_avg_timeseries_data;
+CREATE VIEW anmn_burst_avg_timeseries_data AS 
+ SELECT m.ts_id AS timeseries_id, m.index, t.site_code, t.platform_code, t.deployment_code, t.instrument_nominal_depth, timezone('UTC'::text, m."TIME") AS "TIME", t."LATITUDE", t."LONGITUDE", m."DEPTH", m."DEPTH_burst_sd", m."DEPTH_burst_min", m."DEPTH_burst_max", m."DEPTH_num_obs", m."TEMP", m."TEMP_burst_sd", m."TEMP_burst_min", m."TEMP_burst_max", m."TEMP_num_obs", m."PRES_REL", m."PRES_REL_burst_sd", m."PRES_REL_burst_min", m."PRES_REL_burst_max", m."PRES_REL_num_obs", m."PSAL", m."PSAL_burst_sd", m."PSAL_burst_min", m."PSAL_burst_max", m."PSAL_num_obs", m."DOX1_1", m."DOX1_1_burst_sd", m."DOX1_1_burst_min", m."DOX1_1_burst_max", m."DOX1_1_num_obs", m."DOX1_2", m."DOX1_2_burst_sd", m."DOX1_2_burst_min", m."DOX1_2_burst_max", m."DOX1_2_num_obs", m."DOX1_3", m."DOX1_3_burst_sd", m."DOX1_3_burst_min", m."DOX1_3_burst_max", m."DOX1_3_num_obs", m."DOX2", m."DOX2_burst_sd", m."DOX2_burst_min", m."DOX2_burst_max", m."DOX2_num_obs", m."TURB", m."TURB_burst_sd", m."TURB_burst_min", m."TURB_burst_max", m."TURB_num_obs", m."CPHL", m."CPHL_burst_sd", m."CPHL_burst_min", m."CPHL_burst_max", m."CPHL_num_obs", m."CHLU", m."CHLU_burst_sd", m."CHLU_burst_min", m."CHLU_burst_max", m."CHLU_num_obs", m."CHLF", m."CHLF_burst_sd", m."CHLF_burst_min", m."CHLF_burst_max", m."CHLF_num_obs", t.geom, t.depth_b, t.sea_water_temperature_b, t.sea_water_pressure_due_to_sea_water_b, t.sea_water_salinity_b, t.mole_concentration_of_dissolved_molecular_oxygen_in_sea_water_b, t.moles_of_oxygen_per_unit_mass_in_sea_water_b, t.turbidity_b, t.mass_concentration_of_chlorophyll_in_sea_water_b
+   FROM measurement m
+   JOIN timeseries t ON t.id = m.ts_id;
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
