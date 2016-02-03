@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet author="talend" id="global_attribute_table">
+      <sql>
+        CREATE TABLE global_attribute 
+        (
+          file_id bigint NOT NULL,
+          name text NOT NULL,
+          type text,
+          value text,
+          CONSTRAINT global_attribute_pk PRIMARY KEY (file_id, name),
+          CONSTRAINT global_attribute_file_fk FOREIGN KEY (file_id)
+              REFERENCES indexed_file (id) MATCH SIMPLE
+              ON UPDATE CASCADE ON DELETE CASCADE
+        );
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="variable_table">
+      <sql>
+        CREATE TABLE variable
+        (
+          file_id bigint NOT NULL,
+          name text NOT NULL,
+          type text,
+          dimensions text,
+          shape text,
+          CONSTRAINT variable_pk PRIMARY KEY (file_id, name),
+          CONSTRAINT variable_file_fk FOREIGN KEY (file_id)
+              REFERENCES indexed_file (id) MATCH SIMPLE
+              ON UPDATE CASCADE ON DELETE CASCADE
+        );
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="variable_attribute_table">
+      <sql>
+        CREATE TABLE variable_attribute 
+        (
+          file_id bigint NOT NULL,
+          container text NOT NULL,
+          name text NOT NULL,
+          type text,
+          value text,
+          CONSTRAINT variable_attribute_pk PRIMARY KEY (file_id, container, name),
+          CONSTRAINT variable_attribute_file_fk FOREIGN KEY (file_id)
+              REFERENCES indexed_file (id) MATCH SIMPLE
+              ON UPDATE CASCADE ON DELETE CASCADE
+        );
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="file_metadata_table">
+      <sql>
+        CREATE TABLE file_metadata 
+        (
+          id bigserial PRIMARY KEY,
+          file_id bigint UNIQUE NOT NULL,
+          feature_type text,
+          file_version text,
+          toolbox_version text,
+          compliance_checker_version text,
+          compliance_checker_last_updated timestamp with time zone,
+          compliance_checks_passed text,
+          site_code text,
+          platform_code text,
+          deployment_code text,
+          instrument text,
+          instrument_serial_number text,
+          instrument_nominal_depth text,
+          geospatial_vertical_min double precision,
+          geospatial_vertical_max double precision,
+          date_created timestamp with time zone,
+          time_coverage_start timestamp with time zone,
+          time_coverage_end timestamp with time zone,
+          time_deployment_start timestamp with time zone,
+          time_deployment_end timestamp with time zone,
+          latitude double precision,
+          longitude double precision,
+          geom geometry(Geometry,4326) CHECK (st_isvalid(geom)),
+          data_category text,
+          variables text,
+          standard_names text,
+          realtime boolean,
+          deleted boolean,
+          CONSTRAINT file_metadata_file_fk FOREIGN KEY (file_id)
+              REFERENCES indexed_file (id) MATCH SIMPLE
+              ON UPDATE CASCADE ON DELETE CASCADE
+        );
+
+        CREATE INDEX file_metadata_gist_idx ON file_metadata USING GIST (geom); 
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="current_files_view" runOnChange="true">
+      <sql>
+        DROP VIEW IF EXISTS current_files_view;
+        CREATE VIEW current_files_view AS
+          SELECT
+            m.*,
+            i.url,
+            i.modified,
+            i.first_indexed,
+            i.last_indexed,
+            i.size
+          FROM indexed_file i JOIN file_metadata m ON m.file_id = i.id
+          WHERE NOT m.deleted
+        ;
+      </sql>
+    </changeSet>
+
+
+</databaseChangeLog>
