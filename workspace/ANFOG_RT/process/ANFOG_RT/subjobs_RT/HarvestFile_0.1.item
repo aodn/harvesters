@@ -1,12 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+<?xml version="1.0"?>
+<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_zyFeYHmXEeO3Y9k88sZyxQ" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_zyFeYHmXEeO3Y9k88sZyxQ" type="id_String" value="null"/>
-    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_ylfIYHmXEeO3Y9k88sZyxQ" type="id_String" value=""/>
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_ylfIYHmXEeO3Y9k88sZyxQ" type="id_String" value=".*/REALTIME/.*FV01.*.nc"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_ylfIYHmXEeO3Y9k88sZyxQ" type="id_String" value="/Users/bpasquer/Documents/TALEND_projects/ANFOG_data"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value=""/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_q7474M3FEeSGhZZ6s5d8RA" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_q7474M3FEeSGhZZ6s5d8RA" type="id_String" value="anfog_rt"/>
@@ -14,6 +11,8 @@
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_q7474M3FEeSGhZZ6s5d8RA" type="id_String" value="anfog_rt"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_q7474M3FEeSGhZZ6s5d8RA" type="id_Password" value="BUt6cG/z3pT096uhdGeE6g=="/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_q7474M3FEeSGhZZ6s5d8RA" type="id_String" value="5432"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_ylfIYHmXEeO3Y9k88sZyxQ" type="id_String" value=""/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_ylfIYHmXEeO3Y9k88sZyxQ" type="id_String" value="/tmp/fileList"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -107,7 +106,7 @@
   </node>
   <node componentName="iNetCDFGlobalAttributes" componentVersion="0.1" offsetLabelX="-9" offsetLabelY="0" posX="512" posY="32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttributes_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -323,7 +322,7 @@
   </node>
   <node componentName="iNetCDFInput" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="512" posY="160">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFInput_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TABLE" name="SCHEMAS">
       <elementValue elementRef="SCHEMA" value="variables"/>
     </elementParameter>
@@ -879,7 +878,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH&#xA;table_1 AS (SELECT file_id, substring(value from '[^ ]*$') AS deployment_name FROM attribute WHERE name='title'  AND file_id = &quot; + context.fileId + &quot;),&#xA;table_2 AS (SELECT file_id,platform_code,platform_id,&#xA;       CASE WHEN platform_id='SG' THEN  'seaglider'&#xA;            ELSE  'slocum glider'       &#xA;       END AS platform_type&#xA;    FROM (select file_id, value as platform_code,&#xA;&#x9;substring(value from '^[A-Z]{2}') as platform_id &#xA;&#x9; FROM attribute WHERE name='platform_code'  &#xA;&#x9;AND  file_id = &quot; + context.fileId + &quot; ) as platform_id),&#xA;table_3 AS (SELECT file_id, substring(value from '[0-9]+') AS title FROM attribute WHERE name='title' AND  file_id = &quot; + context.fileId + &quot;)&#xA;&#xA;&#xA;SELECT table_2.file_id,table_1.deployment_name,table_2.platform_type,table_2.platform_code, CASE WHEN table_2.platform_type='seaglider' THEN title ELSE  ' ' END AS dive_number&#xA;FROM table_3&#xA;JOIN table_2 ON table_3.file_id = table_2.file_id&#xA;JOIN table_1 ON table_3.file_id = table_1.file_id &#xA;&quot;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#10;WITH&#10;table_1 AS (SELECT file_id, substring(value from '[^ ]*$') AS deployment_name FROM attribute WHERE name='title'  AND file_id = &quot; + context.fileId + &quot;),&#10;table_2 AS (SELECT file_id,platform_code,platform_id,&#10;       CASE WHEN platform_id='SG' THEN  'seaglider'&#10;            ELSE  'slocum glider'       &#10;       END AS platform_type&#10;    FROM (select file_id, value as platform_code,&#10;&#9;substring(value from '^[A-Z]{2}') as platform_id &#10;&#9; FROM attribute WHERE name='platform_code'  &#10;&#9;AND  file_id = &quot; + context.fileId + &quot; ) as platform_id),&#10;table_3 AS (SELECT file_id, substring(value from '[0-9]+') AS title FROM attribute WHERE name='title' AND  file_id = &quot; + context.fileId + &quot;)&#10;&#10;&#10;SELECT table_2.file_id,table_1.deployment_name,table_2.platform_type,table_2.platform_code, CASE WHEN table_2.platform_type='seaglider' THEN title ELSE  ' ' END AS dive_number&#10;FROM table_3&#10;JOIN table_2 ON table_3.file_id = table_2.file_id&#10;JOIN table_1 ON table_3.file_id = table_1.file_id &#10;&quot;&#10;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -1002,7 +1001,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from deployments where file_id= &quot; + context.fileId + &quot; ; &quot;+&#xA;&quot;delete from measurements where file_id= &quot; + context.fileId + &quot; ; &quot;+&#xA;&quot;delete from deployment_id where file_id = &quot;+ context.fileId + &quot; ; &quot; +&#xA;&quot;delete from anfog_rt_trajectory_wms where file_id = &quot;+ context.fileId + &quot; ; &quot; &#xA;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from deployments where file_id= &quot; + context.fileId + &quot; ; &quot;+&#10;&quot;delete from measurements where file_id= &quot; + context.fileId + &quot; ; &quot;+&#10;&quot;delete from deployment_id where file_id = &quot;+ context.fileId + &quot; ; &quot; +&#10;&quot;delete from anfog_rt_trajectory_wms where file_id = &quot;+ context.fileId + &quot; ; &quot; &#10;&#10;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -1038,7 +1037,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;SELECT trajectory.file_id,&#xA;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'TIME') AS \&quot;TIME_b\&quot;,&#xA;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'TEMP') AS \&quot;TEMP_b\&quot;,&#xA;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'DEPTH') AS \&quot;DEPTH_b\&quot;, &#xA;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'PSAL') AS \&quot;PSAL_b\&quot;,&#xA;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'FLU2') AS \&quot;FLU2_b\&quot;,&#xA;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'DOXY') AS \&quot;DOXY_b\&quot;,&#xA;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'CDOM') AS \&quot;CDOM_b\&quot;,&#xA;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'PRES') AS \&quot;PRES_b\&quot;,&#xA;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'CNDC') AS \&quot;CNDC_b\&quot;,&#xA;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'VBSC') AS \&quot;VBSC_b\&quot;,&#xA;geom&#xA;FROM (&#xA;    SELECT file_id, ST_SimplifyPreserveTopology(ST_MakeLine(geom ORDER BY \&quot;TIME\&quot;),0.005) AS geom&#xA;      FROM  measurements GROUP BY file_id) as trajectory WHERE file_id = &quot; + context.fileId "/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#10;SELECT trajectory.file_id,&#10;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'TIME') AS \&quot;TIME_b\&quot;,&#10;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'TEMP') AS \&quot;TEMP_b\&quot;,&#10;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'DEPTH') AS \&quot;DEPTH_b\&quot;, &#10;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'PSAL') AS \&quot;PSAL_b\&quot;,&#10;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'FLU2') AS \&quot;FLU2_b\&quot;,&#10;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'DOXY') AS \&quot;DOXY_b\&quot;,&#10;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'CDOM') AS \&quot;CDOM_b\&quot;,&#10;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'PRES') AS \&quot;PRES_b\&quot;,&#10;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'CNDC') AS \&quot;CNDC_b\&quot;,&#10;EXISTS (SELECT true FROM variable WHERE file_id = trajectory.file_id and name = 'VBSC') AS \&quot;VBSC_b\&quot;,&#10;geom&#10;FROM (&#10;    SELECT file_id, ST_SimplifyPreserveTopology(ST_MakeLine(geom ORDER BY \&quot;TIME\&quot;),0.005) AS geom&#10;      FROM  measurements GROUP BY file_id) as trajectory WHERE file_id = &quot; + context.fileId "/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>

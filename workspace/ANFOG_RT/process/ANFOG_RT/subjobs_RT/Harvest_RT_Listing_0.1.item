@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+<?xml version="1.0"?>
+<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value=""/>
@@ -12,9 +12,8 @@
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_zyFeYHmXEeO3Y9k88sZyxQ" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_zyFeYHmXEeO3Y9k88sZyxQ" type="id_String" value="null"/>
     <contextParameter comment="" name="Harvestlisting_RT_File" prompt="Harvestlisting_RT_File?" promptNeeded="false" repositoryContextId="_0QB-QK8DEeOUn_ukNP71Ng" type="id_File" value="/Users/bpasquer/Documents/ANFOG/HarvestdeploymentList.csv"/>
-    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_ylfIYHmXEeO3Y9k88sZyxQ" type="id_String" value=""/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_ylfIYHmXEeO3Y9k88sZyxQ" type="id_String" value=".*/REALTIME/.*FV01.*.nc"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_ylfIYHmXEeO3Y9k88sZyxQ" type="id_String" value="/Users/bpasquer/Documents/TALEND_projects/ANFOG_data"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_ylfIYHmXEeO3Y9k88sZyxQ" type="id_String" value=""/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_ylfIYHmXEeO3Y9k88sZyxQ" type="id_String" value="/tmp/fileList"/>
   </context>
   <context confirmationNeeded="false" name="Deployment">
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
@@ -28,9 +27,8 @@
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_zyFeYHmXEeO3Y9k88sZyxQ" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_zyFeYHmXEeO3Y9k88sZyxQ" type="id_String" value="null"/>
     <contextParameter comment="" name="Harvestlisting_RT_File" prompt="Harvestlisting_RT_File?" promptNeeded="false" repositoryContextId="_0QB-QK8DEeOUn_ukNP71Ng" type="id_File" value="#{node['talend']['data2_ro']}/IMOS/archive/eMII/TALEND_harvester/ANFOG/HarvestdeploymentList.csv"/>
-    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_ylfIYHmXEeO3Y9k88sZyxQ" type="id_String" value=""/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_ylfIYHmXEeO3Y9k88sZyxQ" type="id_String" value=".*/REALTIME/.*FV0.*.nc"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_ylfIYHmXEeO3Y9k88sZyxQ" type="id_String" value="#{node['talend']['data1']}/IMOS/opendap/ANFOG"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_ylfIYHmXEeO3Y9k88sZyxQ" type="id_String" value=""/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_ylfIYHmXEeO3Y9k88sZyxQ" type="id_String" value="/tmp/fileList"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -80,7 +78,7 @@
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/Users/bpasquer/Documents/TALEND_projects/workspace/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;harvList-3&quot;>&#xA;        &lt;sql>&#xA;&#xA;CREATE TABLE harvest_listing&#xA;(&#xA;pkid serial, &#xA;deployment_name character varying(50),&#xA;platform_type character varying(20),&#xA;current boolean, &#xA;completed boolean,&#xA;delayed_mode boolean,&#xA;status character varying(6),&#xA; CONSTRAINT harvest_listing_pkey PRIMARY KEY (pkid )&#xA;)&#xA;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&lt;/databaseChangeLog> "/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;databaseChangeLog &#10;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#10;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#10;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;&gt;&#10;    &#10;    &lt;changeSet author=&quot;talend&quot; id=&quot;harvList-3&quot;&gt;&#10;        &lt;sql&gt;&#10;&#10;CREATE TABLE harvest_listing&#10;(&#10;pkid serial, &#10;deployment_name character varying(50),&#10;platform_type character varying(20),&#10;current boolean, &#10;completed boolean,&#10;delayed_mode boolean,&#10;status character varying(6),&#10; CONSTRAINT harvest_listing_pkey PRIMARY KEY (pkid )&#10;)&#10;&lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&lt;/databaseChangeLog&gt; "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -319,7 +317,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE harvest_listing SET status= (CASE WHEN current='TRUE' THEN 'TRUE'&#xA;&#x9;&#x9;&#x9;ELSE 'FALSE' &#xA;&#x9;&#x9;&#x9;END )&#xA;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE harvest_listing SET status= (CASE WHEN current='TRUE' THEN 'TRUE'&#10;&#9;&#9;&#9;ELSE 'FALSE' &#10;&#9;&#9;&#9;END )&#10;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value="deployment_name"/>
