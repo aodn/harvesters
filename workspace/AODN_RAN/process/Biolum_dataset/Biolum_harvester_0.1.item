@@ -86,7 +86,7 @@
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/media/lbesnard/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/harvesters/workspace/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;secchii_measurements&quot;>&#xA;       &lt;sql>&#xA;&#xA;&#x9;&#xA;CREATE TABLE secchii&#xA;(&#xA;  measurement_id bigserial NOT NULL,&#xA;  &quot;CRUISE&quot; text,&#xA;  &quot;TIME&quot; timestamp without time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; double precision,&#xA;  &quot;WINDIR&quot; double precision,&#xA;  &quot;WINSPD&quot; double precision,&#xA;  &quot;WAVPER&quot; double precision,&#xA;  &quot;WAVHGT&quot; double precision,&#xA;  &quot;SWLDIR&quot; double precision,&#xA;  &quot;SWLPER&quot; double precision,&#xA;  &quot;SWLHGT&quot; double precision,&#xA;  &quot;SST&quot; double precision,&#xA;  &quot;CLDCVR&quot; double precision,&#xA;  &quot;PRSWTH&quot; double precision,&#xA;  &quot;PSTWTH&quot; double precision,&#xA;  &quot;SECDPTH&quot; double precision,&#xA;  &quot;FORULE&quot; text,&#xA;  &quot;SUNANG&quot; double precision,&#xA;  &quot;CMMNT&quot; text,&#xA;  &quot;REJECT&quot; text,&#xA;  geom geometry,&#xA;  CONSTRAINT measurements_secchii_pkey PRIMARY KEY (measurement_id)&#xA;)&#xA;       &lt;/sql>&#xA;&#xA;&#xA;        &lt;sql>&#xA;ALTER TABLE secchii ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326) USING ST_SetSRID(geom,4326);&#xA;ALTER TABLE secchii ADD CHECK (ST_IsValid(geom));&#xA;CREATE INDEX secchii_gist_idx ON secchii USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;aodn_ran_secchii_map&quot; runOnChange = &quot;true&quot;>&#xA;       &lt;sql>&#xA;CREATE OR REPLACE VIEW aodn_ran_secchii_map AS&#xA; SELECT secchii.measurement_id,&#xA;    secchii.&quot;CRUISE&quot;,&#xA;    secchii.&quot;TIME&quot; AT TIME ZONE 'UTC' AS &quot;TIME&quot;,&#xA;    secchii.&quot;LATITUDE&quot;,&#xA;    secchii.&quot;LONGITUDE&quot;,&#xA;    secchii.&quot;DEPTH&quot;,&#xA;    secchii.&quot;WINDIR&quot;,&#xA;    secchii.&quot;WINSPD&quot;,&#xA;    secchii.&quot;WAVPER&quot;,&#xA;    secchii.&quot;WAVHGT&quot;,&#xA;    secchii.&quot;SWLDIR&quot;,&#xA;    secchii.&quot;SWLPER&quot;,&#xA;    secchii.&quot;SWLHGT&quot;,&#xA;    secchii.&quot;SST&quot;,&#xA;    secchii.&quot;CLDCVR&quot;,&#xA;    secchii.&quot;PRSWTH&quot;,&#xA;    secchii.&quot;PSTWTH&quot;,&#xA;    secchii.&quot;SECDPTH&quot;,&#xA;    secchii.&quot;FORULE&quot;,&#xA;    secchii.&quot;SUNANG&quot;,&#xA;    secchii.&quot;CMMNT&quot;,&#xA;    secchii.&quot;REJECT&quot;,&#xA;    secchii.geom&#xA;   FROM aodn_ran.secchii&#xA;  ORDER BY secchii.&quot;CRUISE&quot;, secchii.&quot;TIME&quot;, secchii.&quot;DEPTH&quot;;&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&#xA;&lt;/databaseChangeLog> "/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;biolum_measurements&quot;>&#xA;       &lt;sql>&#xA;&#xA;&#x9;&#xA;CREATE TABLE biolum&#xA;(&#xA;  measurement_id bigserial NOT NULL,&#xA;  &quot;CRUISE&quot; text,&#xA;  &quot;TIME&quot; timestamp without time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; double precision,&#xA;  &quot;WINDIR&quot; double precision,&#xA;  &quot;WINSPD&quot; double precision,&#xA;  &quot;WAVPER&quot; double precision,&#xA;  &quot;WAVHGT&quot; double precision,&#xA;  &quot;SWLDIR&quot; double precision,&#xA;  &quot;SWLPER&quot; double precision,&#xA;  &quot;SWLHGT&quot; double precision,&#xA;  &quot;SST&quot; double precision,&#xA;  &quot;CLDCVR&quot; double precision,&#xA;  &quot;PRSWTR&quot; double precision,&#xA;  &quot;STIM&quot; text,&#xA;  &quot;COLR&quot; text,&#xA;  &quot;KIND&quot; text,&#xA;  &quot;DURAT&quot; text,&#xA;  &quot;EXTNT&quot; text,&#xA;  &quot;CMNTS&quot; text,&#xA;  &quot;REJECT&quot; text,&#xA;  geom geometry,&#xA;  CONSTRAINT measurements_biolum_pkey PRIMARY KEY (measurement_id)&#xA;)&#xA;       &lt;/sql>&#xA;&#xA;&#xA;        &lt;sql>&#xA;ALTER TABLE biolum ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326) USING ST_SetSRID(geom,4326);&#xA;ALTER TABLE biolum ADD CHECK (ST_IsValid(geom));&#xA;CREATE INDEX biolum_gist_idx ON biolum USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;aodn_ran_biolum_map&quot; runOnChange = &quot;true&quot;>&#xA;       &lt;sql>&#xA;CREATE OR REPLACE VIEW aodn_ran_biolum_map AS&#xA; SELECT biolum.measurement_id,&#xA;    biolum.&quot;CRUISE&quot;,&#xA;    biolum.&quot;TIME&quot; AT TIME ZONE 'UTC' AS &quot;TIME&quot;,&#xA;    biolum.&quot;LATITUDE&quot;,&#xA;    biolum.&quot;LONGITUDE&quot;,&#xA;    biolum.&quot;DEPTH&quot;,&#xA;    biolum.&quot;WINDIR&quot;,&#xA;    biolum.&quot;WINSPD&quot;,&#xA;    biolum.&quot;WAVPER&quot;,&#xA;    biolum.&quot;WAVHGT&quot;,&#xA;    biolum.&quot;SWLDIR&quot;,&#xA;    biolum.&quot;SWLPER&quot;,&#xA;    biolum.&quot;SWLHGT&quot;,&#xA;    biolum.&quot;SST&quot;,&#xA;    biolum.&quot;CLDCVR&quot;,&#xA;   biolum.&quot;PRSWTR&quot;,&#xA;   biolum.&quot;STIM&quot;,&#xA;   biolum.&quot;COLR&quot;,&#xA;   biolum.&quot;KIND&quot;,&#xA;   biolum.&quot;DURAT&quot;,&#xA;   biolum.&quot;EXTNT&quot;,&#xA;   biolum.&quot;CMNTS&quot;,&#xA;   biolum.&quot;REJECT&quot;,&#xA;    biolum.geom&#xA;   FROM aodn_ran.biolum&#xA;  ORDER BY biolum.&quot;CRUISE&quot;, biolum.&quot;TIME&quot;, biolum.&quot;DEPTH&quot;;&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&#xA;&lt;/databaseChangeLog> "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -97,9 +97,9 @@
     <elementParameter field="TEXT" name="FORMAT_TYPE" value="WFS"/>
     <elementParameter field="TEXT" name="WFS_URL" value="context.WfsServerURL"/>
     <elementParameter field="CLOSED_LIST" name="WFS_VERSION" value="org.geotools.data.wfs.protocol.wfs.Version.v1_1_0"/>
-    <elementParameter field="TEXT" name="TYPE_NAME" value="&quot;ran:secchi&quot;"/>
+    <elementParameter field="TEXT" name="TYPE_NAME" value="&quot;ran:biolum&quot;"/>
     <elementParameter field="TECHNICAL" name="SCHEMA:SCHEMA_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="SCHEMA:REPOSITORY_SCHEMA_TYPE" value="_1cD28NXdEeWbNbgBCUf8qA - secchii_metadata"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA:REPOSITORY_SCHEMA_TYPE" value="_8CM38NXyEeWcybThq4QYdw - ran_biolum"/>
     <elementParameter field="CHECK" name="FORCE_CRS" value="false"/>
     <elementParameter field="TEXT" name="CRS" value="&quot;EPSG:4326&quot;"/>
     <elementParameter field="TEXT" name="CQL" value="&quot;&quot;"/>
@@ -115,7 +115,7 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="secchii_metadata" name="sWfsInput_1">
+    <metadata connector="FLOW" label="ran_biolum" name="sWfsInput_1">
       <column comment="" key="false" length="0" name="LATITUDE" nullable="true" pattern="" precision="0" type="id_Double"/>
       <column comment="" key="false" length="0" name="LONGITUDE" nullable="true" pattern="" precision="0" type="id_Double"/>
       <column comment="" key="false" length="0" name="COLLECTIONDATE" nullable="true" pattern="" precision="0" type="id_Date"/>
@@ -129,12 +129,13 @@
       <column comment="" key="false" length="0" name="SWLHGT" nullable="true" pattern="" precision="0" type="id_Double"/>
       <column comment="" key="false" length="0" name="SST" nullable="true" pattern="" precision="0" type="id_Double"/>
       <column comment="" key="false" length="0" name="CLDCVR" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="0" name="PRSWTH" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="0" name="PSTWTH" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="0" name="SECDPTH" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="0" name="FORULE" nullable="true" pattern="" precision="0" type="id_String"/>
-      <column comment="" key="false" length="0" name="SUNANG" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="0" name="CMMNT" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="0" name="PRSWTR" nullable="true" pattern="" precision="0" type="id_Double"/>
+      <column comment="" key="false" length="0" name="STIM" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="0" name="COLR" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="0" name="KIND" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="0" name="DURAT" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="0" name="EXTNT" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="0" name="CMNTS" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="0" name="REJECT" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="0" name="CRUISE" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="0" name="SHAPE" nullable="true" pattern="" precision="0" type="id_Geometry"/>
@@ -145,7 +146,7 @@
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
     <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_276ZwNXVEeW4VvteF4KLPw-tMap_1-PREVIEW.bmp"/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_r968ANXyEeWcybThq4QYdw-tMap_1-PREVIEW.bmp"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
     <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
@@ -168,17 +169,18 @@
       <column comment="" key="false" length="0" name="SWLHGT" nullable="true" pattern="" precision="0" type="id_Double"/>
       <column comment="" key="false" length="0" name="SST" nullable="true" pattern="" precision="0" type="id_Double"/>
       <column comment="" key="false" length="0" name="CLDCVR" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="0" name="PRSWTH" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="0" name="PSTWTH" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="0" name="SECDPTH" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="0" name="FORULE" nullable="true" pattern="" precision="0" type="id_String"/>
-      <column comment="" key="false" length="0" name="SUNANG" nullable="true" pattern="" precision="0" type="id_Double"/>
-      <column comment="" key="false" length="0" name="CMMNT" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="0" name="PRSWTR" nullable="true" pattern="" precision="0" type="id_Double"/>
+      <column comment="" key="false" length="0" name="STIM" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="0" name="COLR" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="0" name="KIND" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="0" name="DURAT" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="0" name="EXTNT" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="0" name="CMNTS" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="0" name="REJECT" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" type="id_Geometry"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="secchii">
         <mapperTableEntries name="CRUISE" expression="row1.CRUISE " type="id_String" nullable="true"/>
@@ -195,12 +197,13 @@
         <mapperTableEntries name="SWLHGT" expression="row1.SWLHGT " type="id_Double" nullable="true"/>
         <mapperTableEntries name="SST" expression="row1.SST " type="id_Double" nullable="true"/>
         <mapperTableEntries name="CLDCVR" expression="row1.CLDCVR " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="PRSWTH" expression="row1.PRSWTH " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="PSTWTH" expression="row1.PSTWTH " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="SECDPTH" expression="row1.SECDPTH " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="FORULE" expression="row1.FORULE " type="id_String" nullable="true"/>
-        <mapperTableEntries name="SUNANG" expression="row1.SUNANG " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="CMMNT" expression="row1.CMMNT " type="id_String" nullable="true"/>
+        <mapperTableEntries name="PRSWTR" expression="row1.PRSWTR " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="STIM" expression="row1.STIM " type="id_String" nullable="true"/>
+        <mapperTableEntries name="COLR" expression="row1.COLR " type="id_String" nullable="true"/>
+        <mapperTableEntries name="KIND" expression="row1.KIND " type="id_String" nullable="true"/>
+        <mapperTableEntries name="DURAT" expression="row1.DURAT " type="id_String" nullable="true"/>
+        <mapperTableEntries name="EXTNT" expression="row1.EXTNT " type="id_String" nullable="true"/>
+        <mapperTableEntries name="CMNTS" expression="row1.CMNTS " type="id_String" nullable="true"/>
         <mapperTableEntries name="REJECT" expression="row1.REJECT " type="id_String" nullable="true"/>
         <mapperTableEntries name="geom" expression="row1.SHAPE " type="id_Geometry" nullable="true"/>
       </outputTables>
@@ -218,12 +221,13 @@
         <mapperTableEntries name="SWLHGT" type="id_Double" nullable="true"/>
         <mapperTableEntries name="SST" type="id_Double" nullable="true"/>
         <mapperTableEntries name="CLDCVR" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="PRSWTH" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="PSTWTH" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="SECDPTH" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="FORULE" type="id_String" nullable="true"/>
-        <mapperTableEntries name="SUNANG" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="CMMNT" type="id_String" nullable="true"/>
+        <mapperTableEntries name="PRSWTR" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="STIM" type="id_String" nullable="true"/>
+        <mapperTableEntries name="COLR" type="id_String" nullable="true"/>
+        <mapperTableEntries name="KIND" type="id_String" nullable="true"/>
+        <mapperTableEntries name="DURAT" type="id_String" nullable="true"/>
+        <mapperTableEntries name="EXTNT" type="id_String" nullable="true"/>
+        <mapperTableEntries name="CMNTS" type="id_String" nullable="true"/>
         <mapperTableEntries name="REJECT" type="id_String" nullable="true"/>
         <mapperTableEntries name="CRUISE" type="id_String" nullable="true"/>
         <mapperTableEntries name="SHAPE" type="id_Geometry" nullable="true"/>
@@ -242,7 +246,7 @@
     <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
     <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;secchii&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;biolum&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="TRUNCATE"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
     <elementParameter field="TECHNICAL" name="SCHEMA_REJECT:SCHEMA_TYPE" value="REPOSITORY"/>
@@ -328,32 +332,37 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PRSWTH"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="PRSWTR"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PSTWTH"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="STIM"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SECDPTH"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="COLR"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="FORULE"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="KIND"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="SUNANG"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="DURAT"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="CMMNT"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="EXTNT"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="CMNTS"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -373,7 +382,7 @@
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
     <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="false"/>
     <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
-    <elementParameter field="TEXT" name="LABEL" value="secchii"/>
+    <elementParameter field="TEXT" name="LABEL" value="biolum"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -393,12 +402,13 @@
       <column comment="" key="false" length="0" name="SWLHGT" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="0" name="SST" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="0" name="CLDCVR" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="PRSWTH" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="PSTWTH" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="SECDPTH" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="FORULE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
-      <column comment="" key="false" length="0" name="SUNANG" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="CMMNT" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" length="0" name="PRSWTR" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="0" name="STIM" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" length="0" name="COLR" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" length="0" name="KIND" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" length="0" name="DURAT" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" length="0" name="EXTNT" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" length="0" name="CMNTS" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
       <column comment="" key="false" length="0" name="REJECT" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="GEOMETRY" type="id_Geometry"/>
     </metadata>
@@ -417,12 +427,13 @@
       <column comment="" key="false" length="0" name="SWLHGT" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="0" name="SST" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="0" name="CLDCVR" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="PRSWTH" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="PSTWTH" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="SECDPTH" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="FORULE" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
-      <column comment="" key="false" length="0" name="SUNANG" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="0" name="CMMNT" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" length="0" name="PRSWTR" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="0" name="STIM" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" length="0" name="COLR" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" length="0" name="KIND" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" length="0" name="DURAT" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" length="0" name="EXTNT" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" length="0" name="CMNTS" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
       <column comment="" key="false" length="0" name="REJECT" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="GEOMETRY" type="id_Geometry"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
@@ -641,6 +652,27 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="geom"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="STIM"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="CMNTS"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PRSWTR"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DURAT"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="EXTNT"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="COLR"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="KIND"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
