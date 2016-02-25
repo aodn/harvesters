@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+<?xml version="1.0"?>
+<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="harvest?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="aatams_sattag_nrt"/>
@@ -16,9 +16,9 @@
     <contextParameter comment="" name="Metadata_URL" prompt="Metadata_URL?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="http://localhost:8080/geonetwork"/>
     <contextParameter comment="" name="Metadata_Username" prompt="Metadata_Username?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
     <contextParameter comment="" name="Metadata_UUID" prompt="Metadata_UUID?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="4402cb50-e20a-44ee-93e6-4728259250d2"/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=".*_FV00.nc"/>
     <contextParameter comment="" name="metadata_file" prompt="metadata_file?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/Users/xavierhoenner/Work/R/data-services/AATAMS/aatams_sattag_metadata.csv"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/usr/local/talend/AATAMS_sattag_nrt"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=""/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/tmp/fileList"/>
   </context>
   <context confirmationNeeded="false" name="Deployment">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="harvest?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
@@ -36,9 +36,9 @@
     <contextParameter comment="" name="Metadata_URL" prompt="Metadata_URL?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="http://localhost:8080/geonetwork"/>
     <contextParameter comment="" name="Metadata_Username" prompt="Metadata_Username?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
     <contextParameter comment="" name="Metadata_UUID" prompt="Metadata_UUID?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="4402cb50-e20a-44ee-93e6-4728259250d2"/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=".*.dat.gz"/>
     <contextParameter comment="" name="metadata_file" prompt="metadata_file?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="#{node['talend']['data2_ro']}/IMOS/archive/eMII/TALEND_harvester/AATAMS/metadata/aatams_sattag_metadata.csv"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="#{node['talend']['data2_rw']}/IMOS/archive/eMII/TALEND_harvester/AATAMS/aatams_sattag_nrt/unzipped"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=""/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/tmp/fileList"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms512M -Xmx2048M"/>
@@ -52,7 +52,7 @@
     <elementParameter field="CHECK" name="IMPLICIT_TCONTEXTLOAD" value="true"/>
     <elementParameter field="RADIO" name="FROM_FILE_FLAG_IMPLICIT_CONTEXT" value="true"/>
     <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="context.paramFile"/>
-    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;=>&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;=&gt;&quot;"/>
     <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
     <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
     <elementParameter field="CHECK" name="ON_STATCATCHER_FLAG" value="true"/>
@@ -99,8 +99,8 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_1"/>
   </node>
-  <node componentName="iIndexFiles" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="-32">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_2"/>
+  <node componentName="iUpdateIndex" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="-32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iUpdateIndex_2"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
@@ -111,34 +111,13 @@
     <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="LIST_MODE" value="FILES"/>
-    <elementParameter field="DIRECTORY" name="DIRECTORY" value="context.sourceDir"/>
-    <elementParameter field="CHECK" name="INCLUDSUBDIR" value="true"/>
-    <elementParameter field="CLOSED_LIST" name="CASE_SENSITIVE" value="YES"/>
-    <elementParameter field="CHECK" name="ERROR" value="true"/>
-    <elementParameter field="CHECK" name="GLOBEXPRESSIONS" value="false"/>
-    <elementParameter field="TABLE" name="FILES">
-      <elementValue elementRef="FILEMASK" value="context.include"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="IFEXCLUDE" value="false"/>
-    <elementParameter field="TEXT" name="EXCLUDEFILEMASK" value="context.exclude"/>
-    <elementParameter field="CHECK" name="FORMAT_FILEPATH_TO_SLASH" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_NOTHING" value="true"/>
-    <elementParameter field="RADIO" name="ORDER_BY_FILENAME" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_FILESIZE" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_MODIFIEDDATE" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_ACTION_ASC" value="true"/>
-    <elementParameter field="RADIO" name="ORDER_ACTION_DESC" value="false"/>
     <elementParameter field="TEXT" name="LABEL" value="Indexes nc files with all CTD profiles"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="iIndexFiles_2">
-      <column defaultValue="" key="false" length="255" name="filePath" nullable="true" precision="0" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="0" name="fileLastModified" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" precision="0" sourceType="" type="id_Date"/>
-      <column defaultValue="" key="false" length="0" name="fileSize" nullable="true" precision="0" sourceType="" type="id_Double"/>
-    </metadata>
+    <elementParameter field="FILE" name="MANIFEST_FILENAME" value="context.fileList"/>
+    <elementParameter field="TEXT" name="BASE_PATH" value="context.base"/>
   </node>
   <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="96">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
@@ -153,15 +132,15 @@
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/Users/xavierhoenner/Work/Resources/TOS_DI-r96646-V5.1.3/workspace/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aatams_sattag_nrt_animal_id_table&quot;>&#xA;        &lt;createTable tableName=&quot;aatams_sattag_nrt_animal_id&quot;>&#xA;            &lt;column name=&quot;device_id&quot; type=&quot;TEXT&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;aatams_sattag_nrt_animal_id_pkey&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;colour&quot; type=&quot;TEXT&quot;/>&#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aatams_sattag_nrt_metadata_table&quot;>&#xA;        &lt;createTable tableName=&quot;aatams_sattag_nrt_metadata&quot;>&#xA;            &lt;column name=&quot;sattag_program&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;device_id&quot; type=&quot;TEXT&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;aatams_sattag_nrt_metadata_pkey&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;ptt&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;body&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;tag_type&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;common_name&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;species&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;release_lat&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;release_lon&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;release_site&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;state_country&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;release_date&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/>&#xA;            &lt;column name=&quot;recovery_date&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/>&#xA;            &lt;column name=&quot;age_class&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;sex&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;length&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;girth&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;estimated_mass&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;actual_mass&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;sample&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;comment&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;pi&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;institution&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;abstract_sattag&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;opendap_url&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;metadata&quot; type=&quot;TEXT&quot;/>&#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_measurements_table&quot;>&#xA;        &lt;createTable tableName=&quot;measurements&quot;>&#xA;        &lt;column autoIncrement=&quot;true&quot; name=&quot;measurement_id&quot; type=&quot;bigserial&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;measurements_pkey&quot;/>&#xA;            &lt;/column> &#xA;            &lt;column name=&quot;profile_id&quot; type=&quot;int8&quot;/>&#xA;        &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;>&#xA;                &lt;constraints nullable=&quot;false&quot;/>&#xA;            &lt;/column>&#xA;            &lt;column name=&quot;sattag_program&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;device_id&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;tag_type&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;common_name&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;release_site&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;state_country&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;age_class&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;sex&quot; type=&quot;TEXT&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/>&#xA;            &lt;column name=&quot;lon&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;lat&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;pressure&quot; type=&quot;int4&quot;/>&#xA;            &lt;column name=&quot;temperature&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;salinity&quot; type=&quot;FLOAT8(17)&quot;/>&#xA;            &lt;column name=&quot;geom&quot; type=&quot;GEOMETRY&quot;/>             &#xA;            &lt;column name=&quot;colour&quot; type=&quot;TEXT&quot;/>     &#xA;        &lt;/createTable>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aatams_sattag_nrt_profile_map_table&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE aatams_sattag_nrt.aatams_sattag_nrt_profile_map&#xA;(&#xA;  profile_id bigserial NOT NULL,&#xA;  sattag_program text,&#xA;  device_id text,&#xA;  device_wmo_ref text NOT NULL,&#xA;  tag_type text,&#xA;  common_name text,&#xA;  release_site text,&#xA;  state_country text,&#xA;  age_class text,&#xA;  sex text,&#xA;  &quot;timestamp&quot; timestamp with time zone NOT NULL,&#xA;  min_pressure integer,&#xA;  max_pressure integer,&#xA;  nb_measurements bigint,&#xA;  geom geometry(Geometry,4326),&#xA;  colour text,&#xA;  CONSTRAINT aatams_sattag_nrt_profile_map_pkey PRIMARY KEY (profile_id)&#xA;);&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_file_id_fkey_to_measurements_table&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;addForeignKeyConstraint baseColumnNames=&quot;file_id&quot; baseTableName=&quot;measurements&quot; constraintName=&quot;measurements_file_id_fkey&quot; deferrable=&quot;false&quot; initiallyDeferred=&quot;false&quot; onDelete=&quot;CASCADE&quot; onUpdate=&quot;CASCADE&quot; referencedColumnNames=&quot;id&quot; referencedTableName=&quot;indexed_file&quot; referencesUniqueColumn=&quot;false&quot;/>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;xhoenner&quot; id= &quot;specify_srid_to_tables&quot;>&#xA;    &lt;sql>&#xA;        SELECT UpdateGeometrySRID('measurements','geom',4326);&#xA;    &lt;/sql>&#xA;    &lt;sql>&#xA;        SELECT UpdateGeometrySRID('aatams_sattag_nrt_profile_map','geom',4326);&#xA;    &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;xhoenner&quot; id= &quot;add_st_isvalid_check_on_geom&quot;>&#xA;    &lt;sql>&#xA;        ALTER TABLE measurements ADD CHECK (ST_IsValid(geom))&#xA;    &lt;/sql>&#xA;    &lt;sql>&#xA;        ALTER TABLE aatams_sattag_nrt_profile_map ADD CHECK (ST_IsValid(geom))&#xA;    &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_indexes_to_measurements_table&quot;>&#xA;        &lt;sql>&#xA;CREATE INDEX aatams_sattag_nrt_profile_data_idx&#xA;  ON measurements&#xA;  USING btree&#xA;  (device_id COLLATE pg_catalog.&quot;default&quot;, timezone('UTC'::text, &quot;timestamp&quot;), pressure);&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_indexes_to_aatams_sattag_nrt_profile_map_table&quot;>&#xA;        &lt;createIndex indexName=&quot;aatams_sattag_nrt_profile_map_idx&quot; tableName=&quot;aatams_sattag_nrt_profile_map&quot; unique=&quot;false&quot;>&#xA;            &lt;column name=&quot;profile_id&quot;/>&#xA;&#x9;    &lt;column name=&quot;device_id&quot;/>&#xA;            &lt;column name=&quot;common_name&quot;/>&#xA;            &lt;column name=&quot;timestamp&quot;/>&#xA;        &lt;/createIndex>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;xhoenner&quot; id= &quot;add_gist_index_to_geom&quot;>&#xA;    &lt;sql>&#xA;        CREATE INDEX measurements_gist_idx ON measurements USING GIST (geom);&#xA;    &lt;/sql>&#xA;    &lt;sql>&#xA;        CREATE INDEX aatams_sattag_nrt_profile_map_gist_idx ON aatams_sattag_nrt_profile_map USING GIST (geom);&#xA;    &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aatams_sattag_nrt_profile_data_view&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;&#x9;DROP VIEW IF EXISTS aatams_sattag_nrt_profile_data;&#xA;&#x9;CREATE VIEW aatams_sattag_nrt_profile_data AS&#xA;&#x9;  SELECT measurement_id, &#xA;&#x9;&#x9;profile_id,&#xA;&#x9;&#x9;file_id,&#xA;&#x9;&#x9;sattag_program,&#xA;&#x9;&#x9;device_id,&#xA;&#x9;&#x9;device_wmo_ref,&#xA;&#x9;&#x9;tag_type,&#xA;&#x9;&#x9;common_name,&#xA;&#x9;&#x9;release_site,&#xA;&#x9;&#x9;state_country,&#xA;&#x9;&#x9;age_class,&#xA;&#x9;&#x9;sex,&#xA;&#x9;&#x9;&quot;timestamp&quot; AT TIME ZONE 'UTC' AS &quot;timestamp&quot;,&#xA;&#x9;&#x9;lon,&#xA;&#x9;&#x9;lat,&#xA;&#x9;&#x9;pressure,&#xA;&#x9;&#x9;temperature,&#xA;&#x9;&#x9;salinity,&#xA;&#x9;&#x9;geom,&#xA;&#x9;&#x9;colour&#xA;  FROM measurements&#xA;&#x9;ORDER BY device_id, &quot;timestamp&quot;, pressure;&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_attribute_variable_table&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE attribute&#xA;(&#xA;  file_id bigint,&#xA;  container text,&#xA;  name text,&#xA;  value text,&#xA;  type text,&#xA;  CONSTRAINT attribute_pk PRIMARY KEY (file_id, container, name)&#xA;);&#xA;CREATE TABLE variable&#xA;(&#xA;  file_id bigint,&#xA;  name character varying(255),&#xA;  type character varying(255),&#xA;  dimensions character varying(255),&#xA;  CONSTRAINT variable_pk PRIMARY KEY (file_id, name)&#xA;)&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&lt;/databaseChangeLog> "/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;&gt;&#10;&#10;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aatams_sattag_nrt_animal_id_table&quot;&gt;&#10;        &lt;createTable tableName=&quot;aatams_sattag_nrt_animal_id&quot;&gt;&#10;            &lt;column name=&quot;device_id&quot; type=&quot;TEXT&quot;&gt;&#10;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;aatams_sattag_nrt_animal_id_pkey&quot;/&gt;&#10;            &lt;/column&gt;&#10;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;colour&quot; type=&quot;TEXT&quot;/&gt;&#10;        &lt;/createTable&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aatams_sattag_nrt_metadata_table&quot;&gt;&#10;        &lt;createTable tableName=&quot;aatams_sattag_nrt_metadata&quot;&gt;&#10;            &lt;column name=&quot;sattag_program&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;device_id&quot; type=&quot;TEXT&quot;&gt;&#10;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;aatams_sattag_nrt_metadata_pkey&quot;/&gt;&#10;            &lt;/column&gt;&#10;            &lt;column name=&quot;ptt&quot; type=&quot;int4&quot;/&gt;&#10;            &lt;column name=&quot;body&quot; type=&quot;int4&quot;/&gt;&#10;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;tag_type&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;common_name&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;species&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;release_lat&quot; type=&quot;FLOAT8(17)&quot;/&gt;&#10;            &lt;column name=&quot;release_lon&quot; type=&quot;FLOAT8(17)&quot;/&gt;&#10;            &lt;column name=&quot;release_site&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;state_country&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;release_date&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/&gt;&#10;            &lt;column name=&quot;recovery_date&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/&gt;&#10;            &lt;column name=&quot;age_class&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;sex&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;length&quot; type=&quot;FLOAT8(17)&quot;/&gt;&#10;            &lt;column name=&quot;girth&quot; type=&quot;FLOAT8(17)&quot;/&gt;&#10;            &lt;column name=&quot;estimated_mass&quot; type=&quot;FLOAT8(17)&quot;/&gt;&#10;            &lt;column name=&quot;actual_mass&quot; type=&quot;FLOAT8(17)&quot;/&gt;&#10;            &lt;column name=&quot;sample&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;comment&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;pi&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;institution&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;abstract_sattag&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;opendap_url&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;metadata&quot; type=&quot;TEXT&quot;/&gt;&#10;        &lt;/createTable&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;&lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_measurements_table&quot;&gt;&#10;        &lt;createTable tableName=&quot;measurements&quot;&gt;&#10;        &lt;column autoIncrement=&quot;true&quot; name=&quot;measurement_id&quot; type=&quot;bigserial&quot;&gt;&#10;                &lt;constraints nullable=&quot;false&quot; primaryKey=&quot;true&quot; primaryKeyName=&quot;measurements_pkey&quot;/&gt;&#10;            &lt;/column&gt; &#10;            &lt;column name=&quot;profile_id&quot; type=&quot;int8&quot;/&gt;&#10;        &lt;column name=&quot;file_id&quot; type=&quot;int8&quot;&gt;&#10;                &lt;constraints nullable=&quot;false&quot;/&gt;&#10;            &lt;/column&gt;&#10;            &lt;column name=&quot;sattag_program&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;device_id&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;device_wmo_ref&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;tag_type&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;common_name&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;release_site&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;state_country&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;age_class&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;sex&quot; type=&quot;TEXT&quot;/&gt;&#10;            &lt;column name=&quot;timestamp&quot; type=&quot;TIMESTAMP WITH TIME ZONE&quot;/&gt;&#10;            &lt;column name=&quot;lon&quot; type=&quot;FLOAT8(17)&quot;/&gt;&#10;            &lt;column name=&quot;lat&quot; type=&quot;FLOAT8(17)&quot;/&gt;&#10;            &lt;column name=&quot;pressure&quot; type=&quot;int4&quot;/&gt;&#10;            &lt;column name=&quot;temperature&quot; type=&quot;FLOAT8(17)&quot;/&gt;&#10;            &lt;column name=&quot;salinity&quot; type=&quot;FLOAT8(17)&quot;/&gt;&#10;            &lt;column name=&quot;geom&quot; type=&quot;GEOMETRY&quot;/&gt;             &#10;            &lt;column name=&quot;colour&quot; type=&quot;TEXT&quot;/&gt;     &#10;        &lt;/createTable&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;&lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aatams_sattag_nrt_profile_map_table&quot;&gt;&#10;        &lt;sql&gt;&#10;CREATE TABLE aatams_sattag_nrt.aatams_sattag_nrt_profile_map&#10;(&#10;  profile_id bigserial NOT NULL,&#10;  sattag_program text,&#10;  device_id text,&#10;  device_wmo_ref text NOT NULL,&#10;  tag_type text,&#10;  common_name text,&#10;  release_site text,&#10;  state_country text,&#10;  age_class text,&#10;  sex text,&#10;  &quot;timestamp&quot; timestamp with time zone NOT NULL,&#10;  min_pressure integer,&#10;  max_pressure integer,&#10;  nb_measurements bigint,&#10;  geom geometry(Geometry,4326),&#10;  colour text,&#10;  CONSTRAINT aatams_sattag_nrt_profile_map_pkey PRIMARY KEY (profile_id)&#10;);&#10;        &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_file_id_fkey_to_measurements_table&quot; runOnChange=&quot;true&quot;&gt;&#10;        &lt;addForeignKeyConstraint baseColumnNames=&quot;file_id&quot; baseTableName=&quot;measurements&quot; constraintName=&quot;measurements_file_id_fkey&quot; deferrable=&quot;false&quot; initiallyDeferred=&quot;false&quot; onDelete=&quot;CASCADE&quot; onUpdate=&quot;CASCADE&quot; referencedColumnNames=&quot;id&quot; referencedTableName=&quot;indexed_file&quot; referencesUniqueColumn=&quot;false&quot;/&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;&lt;changeSet author=&quot;xhoenner&quot; id= &quot;specify_srid_to_tables&quot;&gt;&#10;    &lt;sql&gt;&#10;        SELECT UpdateGeometrySRID('measurements','geom',4326);&#10;    &lt;/sql&gt;&#10;    &lt;sql&gt;&#10;        SELECT UpdateGeometrySRID('aatams_sattag_nrt_profile_map','geom',4326);&#10;    &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;&lt;changeSet author=&quot;xhoenner&quot; id= &quot;add_st_isvalid_check_on_geom&quot;&gt;&#10;    &lt;sql&gt;&#10;        ALTER TABLE measurements ADD CHECK (ST_IsValid(geom))&#10;    &lt;/sql&gt;&#10;    &lt;sql&gt;&#10;        ALTER TABLE aatams_sattag_nrt_profile_map ADD CHECK (ST_IsValid(geom))&#10;    &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_indexes_to_measurements_table&quot;&gt;&#10;        &lt;sql&gt;&#10;CREATE INDEX aatams_sattag_nrt_profile_data_idx&#10;  ON measurements&#10;  USING btree&#10;  (device_id COLLATE pg_catalog.&quot;default&quot;, timezone('UTC'::text, &quot;timestamp&quot;), pressure);&#10;        &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;add_indexes_to_aatams_sattag_nrt_profile_map_table&quot;&gt;&#10;        &lt;createIndex indexName=&quot;aatams_sattag_nrt_profile_map_idx&quot; tableName=&quot;aatams_sattag_nrt_profile_map&quot; unique=&quot;false&quot;&gt;&#10;            &lt;column name=&quot;profile_id&quot;/&gt;&#10;&#9;    &lt;column name=&quot;device_id&quot;/&gt;&#10;            &lt;column name=&quot;common_name&quot;/&gt;&#10;            &lt;column name=&quot;timestamp&quot;/&gt;&#10;        &lt;/createIndex&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;&lt;changeSet author=&quot;xhoenner&quot; id= &quot;add_gist_index_to_geom&quot;&gt;&#10;    &lt;sql&gt;&#10;        CREATE INDEX measurements_gist_idx ON measurements USING GIST (geom);&#10;    &lt;/sql&gt;&#10;    &lt;sql&gt;&#10;        CREATE INDEX aatams_sattag_nrt_profile_map_gist_idx ON aatams_sattag_nrt_profile_map USING GIST (geom);&#10;    &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;&lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aatams_sattag_nrt_profile_data_view&quot; runOnChange=&quot;true&quot;&gt;&#10;        &lt;sql&gt;&#10;&#9;DROP VIEW IF EXISTS aatams_sattag_nrt_profile_data;&#10;&#9;CREATE VIEW aatams_sattag_nrt_profile_data AS&#10;&#9;  SELECT measurement_id, &#10;&#9;&#9;profile_id,&#10;&#9;&#9;file_id,&#10;&#9;&#9;sattag_program,&#10;&#9;&#9;device_id,&#10;&#9;&#9;device_wmo_ref,&#10;&#9;&#9;tag_type,&#10;&#9;&#9;common_name,&#10;&#9;&#9;release_site,&#10;&#9;&#9;state_country,&#10;&#9;&#9;age_class,&#10;&#9;&#9;sex,&#10;&#9;&#9;&quot;timestamp&quot; AT TIME ZONE 'UTC' AS &quot;timestamp&quot;,&#10;&#9;&#9;lon,&#10;&#9;&#9;lat,&#10;&#9;&#9;pressure,&#10;&#9;&#9;temperature,&#10;&#9;&#9;salinity,&#10;&#9;&#9;geom,&#10;&#9;&#9;colour&#10;  FROM measurements&#10;&#9;ORDER BY device_id, &quot;timestamp&quot;, pressure;&#10;        &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;&lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_attribute_variable_table&quot; runOnChange=&quot;true&quot;&gt;&#10;        &lt;sql&gt;&#10;CREATE TABLE attribute&#10;(&#10;  file_id bigint,&#10;  container text,&#10;  name text,&#10;  value text,&#10;  type text,&#10;  CONSTRAINT attribute_pk PRIMARY KEY (file_id, container, name)&#10;);&#10;CREATE TABLE variable&#10;(&#10;  file_id bigint,&#10;  name character varying(255),&#10;  type character varying(255),&#10;  dimensions character varying(255),&#10;  CONSTRAINT variable_pk PRIMARY KEY (file_id, name)&#10;)&#10;        &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&lt;/databaseChangeLog&gt; "/>
     <elementParameter field="TEXT" name="LABEL" value="Create Liquibase changesets"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="352" posY="384">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
+  <node componentName="iNewOrModifiedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="352" posY="384">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
@@ -177,11 +156,12 @@
     <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
     <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
-    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#xA;&quot;  from indexed_file &quot; +&#xA;&quot;  join index_job &quot; +&#xA;&quot;    on indexed_file.job_id = index_job.id &quot; +&#xA;&quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#xA;&quot;   and index_job.name = ? &quot; +&#xA;&quot;  left join file_harvest &quot; +&#xA;&quot;    on file_harvest.file_id = indexed_file.id &quot; +&#xA;&quot;   and file_harvest.harvest_type = ? &quot; +&#xA;&quot; where (file_harvest.last_moddate_harvested &lt;> indexed_file.modified &quot; +&#xA;&quot;    or  file_harvest.last_moddate_harvested is null) &quot;;&#xA;      "/>
+    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#10;&quot;  from indexed_file &quot; +&#10;&quot;  join index_job &quot; +&#10;&quot;    on indexed_file.job_id = index_job.id &quot; +&#10;&quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#10;&quot;   and index_job.name = ? &quot; +&#10;&quot;  left join file_harvest &quot; +&#10;&quot;    on file_harvest.file_id = indexed_file.id &quot; +&#10;&quot;   and file_harvest.harvest_type = ? &quot; +&#10;&quot; where (file_harvest.last_moddate_harvested &lt;&gt; indexed_file.modified &quot; +&#10;&quot;    or  file_harvest.last_moddate_harvested is null) &quot;;&#10;      "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
   </node>
   <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="608" posY="352">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_6"/>
@@ -197,9 +177,9 @@
     <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
     <elementParameter field="TABLE" name="CONTEXTPARAMS">
       <elementValue elementRef="PARAM_NAME_COLUMN" value="url"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;iHarvestResources_1_URL&quot;))"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;iNewOrModifiedFileList_1_URL&quot;))"/>
       <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iHarvestResources_1_FILE_ID&quot;))"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iNewOrModifiedFileList_1_FILE_ID&quot;))"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
     <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
@@ -224,9 +204,9 @@
     <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
     <elementParameter field="TABLE" name="CONTEXTPARAMS">
       <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iHarvestResources_1_FILE_ID&quot;))"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iNewOrModifiedFileList_1_FILE_ID&quot;))"/>
       <elementValue elementRef="PARAM_NAME_COLUMN" value="url"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;iHarvestResources_1_URL&quot;))"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;iNewOrModifiedFileList_1_URL&quot;))"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
     <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
@@ -284,12 +264,12 @@
     <elementParameter field="TEXT" name="LABEL" value="Create map table"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="true"/>
-    <elementParameter field="MEMO" name="COMMENT" value="This subjob had to be externalised from the 'Harvest data and create _data table' subjob since each animal's trajectory is made from the geometry of different files, hence this could not be included in our typical file-by-file workflow.&#xA;&#xA;It's also not possible to include information regarding files (i.e. file_id, size) in the _map table as some measurements which belong to a same profile (i.e. same device_id and timestamp) are found in two distinct files."/>
+    <elementParameter field="MEMO" name="COMMENT" value="This subjob had to be externalised from the 'Harvest data and create _data table' subjob since each animal's trajectory is made from the geometry of different files, hence this could not be included in our typical file-by-file workflow.&#10;&#10;It's also not possible to include information regarding files (i.e. file_id, size) in the _map table as some measurements which belong to a same profile (i.e. same device_id and timestamp) are found in two distinct files."/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_5"/>
   </node>
-  <node componentName="iDeletedResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="224">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
+  <node componentName="iDeletedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="224">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedFileList_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_4RboUAhpEeOJn8rDLYzdcg"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
@@ -305,11 +285,12 @@
     <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
     <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
-    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select id, url, modified &quot; +&#xA;&quot;  from deleted_resource &quot; +&#xA;&quot; where job_name = ? &quot; +&#xA;&quot;   and harvest_type = ? &quot;&#xA;      "/>
+    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select id, url, modified &quot; +&#10;&quot;  from deleted_resource &quot; +&#10;&quot; where job_name = ? &quot; +&#10;&quot;   and harvest_type = ? &quot;&#10;      "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
   </node>
   <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="352" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
@@ -328,7 +309,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from measurements where file_id = &quot;+ ((Long)globalMap.get(&quot;iDeletedResources_1_FILE_ID&quot;)) + &quot; ; &quot; +&#xA;&quot;delete from indexed_file where id = &quot;+ ((Long)globalMap.get(&quot;iDeletedResources_1_FILE_ID&quot;)) + &quot; ; &quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from measurements where file_id = &quot;+ ((Long)globalMap.get(&quot;iDeletedFileList_1_FILE_ID&quot;)) + &quot; ; &quot; +&#10;&quot;delete from indexed_file where id = &quot;+ ((Long)globalMap.get(&quot;iDeletedFileList_1_FILE_ID&quot;)) + &quot; ; &quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -369,7 +350,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_4"/>
   </node>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tRunJob_1" target="iHarvestResources_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tRunJob_1" target="iNewOrModifiedFileList_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
   </connection>
@@ -377,21 +358,21 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk6"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_2" offsetLabelX="0" offsetLabelY="0" source="iIndexFiles_2" target="iPostgresqlDbUpdate_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iUpdateIndex_2" offsetLabelX="0" offsetLabelY="0" source="iUpdateIndex_2" target="iPostgresqlDbUpdate_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iDeletedResources_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iDeletedFileList_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk7"/>
   </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="iHarvestResources_1" target="tRunJob_6">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iNewOrModifiedFileList_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="iNewOrModifiedFileList_1" target="tRunJob_6">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate3"/>
   </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="iHarvestResources_1" target="tRunJob_2">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iNewOrModifiedFileList_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="iNewOrModifiedFileList_1" target="tRunJob_2">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
@@ -401,13 +382,13 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk7"/>
   </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="tPostgresqlRow_1">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_1" target="tPostgresqlRow_1">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="tRunJob_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_1" target="tRunJob_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
   </connection>
@@ -421,7 +402,7 @@
   </subjob>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_2"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iUpdateIndex_2"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Indexes nc files with all CTD profiles"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
@@ -435,7 +416,7 @@
   </subjob>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_1"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Harvest data and create _data table"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
@@ -448,7 +429,7 @@
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedFileList_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
