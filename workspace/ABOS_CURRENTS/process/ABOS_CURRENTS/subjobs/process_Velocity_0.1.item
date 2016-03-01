@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+<?xml version="1.0"?>
+<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="abos_currents"/>
@@ -9,6 +9,7 @@
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value="101"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value=""/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -110,7 +111,7 @@
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="-32" posY="288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_1"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#xA;//&#xA;// multiply by 2 the row identifier&#xA;// output_row.id = input_row.id * 2;&#xA;//&#xA;// lowercase the name&#xA;// output_row.name = input_row.name.toLowerCase();&#xA;&#xA;context.url=row5.url;"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#10;//&#10;// multiply by 2 the row identifier&#10;// output_row.id = input_row.id * 2;&#10;//&#10;// lowercase the name&#10;// output_row.name = input_row.name.toLowerCase();&#10;&#10;context.url=row5.url;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -155,7 +156,7 @@
   </node>
   <node componentName="iNetCDFGlobalAttributes" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="192" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttributes_2"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -488,7 +489,7 @@
   </node>
   <node componentName="iNetCDFInput" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="352">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFInput_2"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TABLE" name="SCHEMAS">
       <elementValue elementRef="SCHEMA" value="location"/>
     </elementParameter>
@@ -657,7 +658,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE timeseries&#xA;SET geom = st_geomfromtext('POINT(' || \&quot;LONGITUDE\&quot;::text || ' ' || \&quot;LATITUDE\&quot;::text || ')', 4326)&#xA;WHERE file_id = &quot; + context.file_id + &quot;;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE timeseries&#10;SET geom = st_geomfromtext('POINT(' || \&quot;LONGITUDE\&quot;::text || ' ' || \&quot;LATITUDE\&quot;::text || ')', 4326)&#10;WHERE file_id = &quot; + context.file_id + &quot;;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -691,7 +692,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM timeseries where file_id =  &quot; + context.file_id + &quot; ; &#xA;DELETE FROM attribute where file_id =  &quot; + context.file_id + &quot; ; &#xA;&quot;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM timeseries where file_id =  &quot; + context.file_id + &quot; ; &#10;DELETE FROM attribute where file_id =  &quot; + context.file_id + &quot; ; &#10;&quot;&#10;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>

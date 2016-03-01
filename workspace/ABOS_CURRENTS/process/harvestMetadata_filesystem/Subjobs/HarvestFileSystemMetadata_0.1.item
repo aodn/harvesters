@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+<?xml version="1.0"?>
+<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="http://thredds.aodn.org.au/thredds/dodsC/IMOS/ANMN/QLD/KIM200/Temperature/IMOS_ANMN-QLD_TZ_20120811T041000Z_KIM200_FV01_KIM200-1208-SBE56-93_END-20130124T014600Z_C-20130424T050054Z.nc"/>
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
@@ -10,6 +10,7 @@
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="abos_currents"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="10.11.12.13"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value=""/>
   </context>
   <context confirmationNeeded="false" name="Deployment">
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="http://thredds.aodn.org.au/thredds/dodsC/IMOS/ANMN/QLD/KIM200/Temperature/IMOS_ANMN-QLD_TZ_20120811T041000Z_KIM200_FV01_KIM200-1208-SBE56-93_END-20130124T014600Z_C-20130424T050054Z.nc"/>
@@ -21,6 +22,7 @@
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="abos_currents"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="#{node['talend']['destination_database_server']}"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value=""/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -157,7 +159,7 @@
   </node>
   <node componentName="iNetCDFGlobalAttribute" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttribute_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -283,7 +285,7 @@
   </node>
   <node componentName="iNetCDFVariable" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="256">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFVariable_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -400,7 +402,7 @@
   </node>
   <node componentName="iNetCDFVariableAttribute" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="384">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFVariableAttribute_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TEXT" name="VARIABLE" value=""/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
