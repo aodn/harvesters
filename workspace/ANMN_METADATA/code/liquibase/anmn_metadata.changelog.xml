@@ -115,4 +115,56 @@
     </changeSet>
 
 
+    <changeSet author="talend" id="anmn_all_map" runOnChange="true">
+      <sql>
+        DROP VIEW IF EXISTS anmn_all_map;
+        CREATE VIEW anmn_all_map AS
+          SELECT
+            -- file info
+            m.file_id,
+            i.url,
+            m.date_created,
+            i.first_indexed as date_published,
+            i.last_indexed as date_updated,
+            i.size,
+            m.feature_type,
+            m.file_version,
+            m.toolbox_version,
+            m.compliance_checker_version,
+            m.compliance_checks_passed,
+            m.realtime,
+            -- time/location
+            m.site_code,
+            m.platform_code,
+            m.deployment_code,
+            m.data_category,
+            m.instrument,
+            m.instrument_serial_number,
+            m.instrument_nominal_depth,
+            m.time_deployment_start,
+            m.time_deployment_end,
+            m.time_coverage_start,
+            m.time_coverage_end,
+            m.latitude,
+            m.longitude,
+            -- measured parameters
+            m.standard_names ~ 'sea_[a-z_]*_temperature' AS water_temperature_b,
+            m.standard_names ~ 'air_temperature' AS air_temperature_b,
+            m.standard_names ~ 'sea_[a-z_]*_salinity' AS salinity_b,
+            m.standard_names ~ 'sea_[a-z_]*_pressure' AS water_pressure_b,
+            m.standard_names ~ 'air_pressure' AS air_pressure_b,
+            m.standard_names ~ 'sea_water_velocity' AS sea_water_velocity_b,
+            m.standard_names ~ 'oxygen' AS oxygen_b,
+            m.standard_names ~ 'chlorophyll' AS chlorophyll_b,
+            m.standard_names ~ 'fluorescence' AS fluorescence_b,
+            m.standard_names ~ 'sea_surface_wave' AS wave_parameters_b,
+            -- geometry
+            m.geom
+          FROM indexed_file i JOIN file_metadata m ON m.file_id = i.id
+          WHERE NOT m.deleted
+        ;
+      </sql>
+    </changeSet>
+
+
 </databaseChangeLog>
