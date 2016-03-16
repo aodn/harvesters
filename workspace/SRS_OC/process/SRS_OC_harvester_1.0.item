@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+<?xml version="1.0"?>
+<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="harvest"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="srs_oc"/>
@@ -9,9 +9,8 @@
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_kBZOEFuhEeOppMtV64iEfQ" type="id_String" value="localhost"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_RlVF8FuiEeOppMtV64iEfQ" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_RlVF8FuiEeOppMtV64iEfQ" type="id_String" value="null"/>
-    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value=""/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value=".*\.nc|.*\.nc4"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value="/mnt/opendap/2/SRS/oc"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value=""/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_G8sTUFuiEeOppMtV64iEfQ" type="id_String" value="/tmp/fileList"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -25,7 +24,7 @@
     <elementParameter field="CHECK" name="IMPLICIT_TCONTEXTLOAD" value="true"/>
     <elementParameter field="RADIO" name="FROM_FILE_FLAG_IMPLICIT_CONTEXT" value="true"/>
     <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="context.paramFile"/>
-    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;=>&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;=&gt;&quot;"/>
     <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
     <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
     <elementParameter field="CHECK" name="ON_STATCATCHER_FLAG" value="true"/>
@@ -47,8 +46,8 @@
     <routinesParameter id="_NhR54AuOEeO-v4jR06LTxA" name="TalendDate"/>
     <routinesParameter id="_NhOPgAuOEeO-v4jR06LTxA" name="TalendString"/>
   </parameters>
-  <node componentName="iDeletedResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="320">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
+  <node componentName="iDeletedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="320">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedFileList_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_kXc9oFuhEeOppMtV64iEfQ"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
@@ -64,11 +63,12 @@
     <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
     <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
-    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select id, url, modified &quot; +&#xA;&quot;  from deleted_resource &quot; +&#xA;&quot; where job_name = ? &quot; +&#xA;&quot;   and harvest_type = ? &quot;&#xA;      "/>
+    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select id, url, modified &quot; +&#10;&quot;  from deleted_resource &quot; +&#10;&quot; where job_name = ? &quot; +&#10;&quot;   and harvest_type = ? &quot;&#10;      "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
   </node>
   <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="448" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_5"/>
@@ -84,7 +84,7 @@
     <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
     <elementParameter field="TABLE" name="CONTEXTPARAMS">
       <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iDeletedResources_1_FILE_ID&quot;))"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iDeletedFileList_1_FILE_ID&quot;))"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
     <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
@@ -108,14 +108,14 @@
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/home/mhidas/work/sql/data_harvest/anmn_ts.changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;create_timeseries_table-1&quot;>&#xA;  &lt;sql>&#xA;CREATE TABLE timeseries&#xA;(&#xA;  id bigserial NOT NULL,&#xA;  file_id bigint NOT NULL,&#xA;  time timestamp with time zone,&#xA;  CONSTRAINT timeseries_pk PRIMARY KEY (id ),&#xA;  CONSTRAINT timeseries_file_fk FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;);&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.chl-oc3.1d.aqua&quot; runOnChange = &quot;true&quot;>&#xA;  &lt;sql>&#xA;  DROP VIEW IF EXISTS srs_oc_chl_oc3_1d_aqua_url ;&#xA;  CREATE OR REPLACE VIEW srs_oc_chl_oc3_1d_aqua_url AS &#xA;SELECT &#xA;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#xA;   FROM srs_oc.timeseries t&#xA;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#xA;  WHERE f.url::text like '%/1d/____/%BASE.aust.chl_oc3.nc%'::text&#xA;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.chl-gsm.1d.aqua&quot; runOnChange = &quot;true&quot;>&#xA;  &lt;sql>&#xA;  DROP VIEW IF EXISTS srs_oc_chl_gsm_1d_aqua_url ;&#xA;  CREATE OR REPLACE VIEW srs_oc_chl_gsm_1d_aqua_url AS &#xA; SELECT &#xA;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#xA;   FROM srs_oc.timeseries t&#xA;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#xA;  WHERE f.url::text like '%/1d/____/%BASE.aust.chl_gsm.nc%'::text&#xA;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.sst.1d.aqua&quot; runOnChange = &quot;true&quot;>&#xA;  &lt;sql>&#xA;  DROP VIEW IF EXISTS srs_oc_sst_1d_aqua_url ;&#xA;  CREATE OR REPLACE VIEW srs_oc_sst_1d_aqua_url AS &#xA; SELECT &#xA;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#xA;   FROM srs_oc.timeseries t&#xA;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#xA;  WHERE f.url::text like '%/1d/____/%BASE.aust.sst.nc%'::text&#xA;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.nanop_brewin2012in.pft.1d.aqua&quot; runOnChange = &quot;true&quot;>&#xA;  &lt;sql>&#xA;  DROP VIEW IF EXISTS srs_oc_nanop_brewin2012in_pft_1d_aqua_url ;&#xA;  CREATE OR REPLACE VIEW srs_oc_nanop_brewin2012in_pft_1d_aqua_url AS &#xA; SELECT &#xA;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#xA;   FROM srs_oc.timeseries t&#xA;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#xA;  WHERE f.url::text like '%/1d/____/%BASE.aust.nanop_brewin2012in.nc%'::text&#xA;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.picop_brewin2012in.pft.1d.aqua&quot; runOnChange = &quot;true&quot;>&#xA;  &lt;sql>&#xA;  DROP VIEW IF EXISTS srs_oc_picop_brewin2012in_pft_1d_aqua_url ;&#xA;  CREATE OR REPLACE VIEW srs_oc_picop_brewin2012in_pft_1d_aqua_url AS &#xA; SELECT &#xA;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#xA;   FROM srs_oc.timeseries t&#xA;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#xA;  WHERE f.url::text like '%/1d/____/%BASE.aust.picop_brewin2012in.nc%'::text&#xA;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.nanop_brewin2010at.pft.1d.aqua&quot; runOnChange = &quot;true&quot;>&#xA;  &lt;sql>&#xA;  DROP VIEW IF EXISTS srs_oc_nanop_brewin2010at_pft_1d_aqua_url ;&#xA;  CREATE OR REPLACE VIEW srs_oc_nanop_brewin2010at_pft_1d_aqua_url AS &#xA; SELECT &#xA;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#xA;   FROM srs_oc.timeseries t&#xA;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#xA;  WHERE f.url::text like '%/1d/____/%BASE.aust.nanop_brewin2010at.nc%'::text&#xA;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.picop_brewin2010at.pft.1d.aqua&quot; runOnChange = &quot;true&quot;>&#xA;  &lt;sql>&#xA;  DROP VIEW IF EXISTS srs_oc_picop_brewin2010at_pft_1d_aqua_url ;&#xA;  CREATE OR REPLACE VIEW srs_oc_picop_brewin2010at_pft_1d_aqua_url AS &#xA; SELECT &#xA;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#xA;   FROM srs_oc.timeseries t&#xA;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#xA;  WHERE f.url::text like '%/1d/____/%BASE.aust.picop_brewin2010at.nc%'::text&#xA;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.npp-VgpmEpp.oc3.1d.aqua&quot; runOnChange = &quot;true&quot;>&#xA;  &lt;sql>&#xA;  DROP VIEW IF EXISTS srs_oc_npp_vgpm_epp_oc3_1d_aqua_url ;&#xA;  CREATE OR REPLACE VIEW srs_oc_npp_vgpm_epp_oc3_1d_aqua_url AS &#xA; SELECT &#xA;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#xA;   FROM srs_oc.timeseries t&#xA;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#xA;  WHERE f.url::text like '%/1d/____/%BASE.aust.npp_vgpm_eppley_oc3.nc%'::text&#xA;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.npp-VgpmEpp.gsm.1d.aqua&quot; runOnChange = &quot;true&quot;>&#xA;  &lt;sql>&#xA;  DROP VIEW IF EXISTS srs_oc_npp_vgpm_epp_gsm_1d_aqua_url ;&#xA;  CREATE OR REPLACE VIEW srs_oc_npp_vgpm_epp_gsm_1d_aqua_url AS &#xA; SELECT &#xA;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#xA;   FROM srs_oc.timeseries t&#xA;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#xA;  WHERE f.url::text like '%/1d/____/%BASE.aust.npp_vgpm_eppley_gsm.nc%'::text&#xA;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;oc_so_johnson_chl_8d_aqua&quot; runOnChange = &quot;true&quot;>&#xA;  &lt;sql>&#xA;  DROP VIEW IF EXISTS srs_oc_so_johnson_chl_8d_aqua_url ;&#xA;  CREATE OR REPLACE VIEW srs_oc_so_johnson_chl_8d_aqua_url AS &#xA; SELECT &#xA;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#xA;   FROM srs_oc.timeseries t&#xA;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#xA;  WHERE f.url::text like '%/A%.L3m_8D_SO_Chl_9km.Johnson_SO_Chl.nc%'::text&#xA;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;oc_so_johnson_chl_8d_seawifs&quot; runOnChange = &quot;true&quot;>&#xA;  &lt;sql>&#xA;  DROP VIEW IF EXISTS srs_oc_so_johnson_chl_8d_seawifs_url ;&#xA;  CREATE OR REPLACE VIEW srs_oc_so_johnson_chl_8d_seawifs_url AS &#xA; SELECT &#xA;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#xA;   FROM srs_oc.timeseries t&#xA;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#xA;  WHERE f.url::text like '%/S%.L3m_8D_SO_Chl_9km.Johnson_SO_Chl.nc%'::text&#xA;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;oc_so_johnson_chl_mo_aqua&quot; runOnChange = &quot;true&quot;>&#xA;  &lt;sql>&#xA;  DROP VIEW IF EXISTS srs_oc_so_johnson_chl_mo_aqua_url ;&#xA;  CREATE OR REPLACE VIEW srs_oc_so_johnson_chl_mo_aqua_url AS &#xA; SELECT &#xA;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#xA;   FROM srs_oc.timeseries t&#xA;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#xA;  WHERE f.url::text like '%/A%.L3m_MO_SO_Chl_9km.Johnson_SO_Chl.nc%'::text&#xA;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;oc_so_johnson_chl_mo_seawifs&quot; runOnChange = &quot;true&quot;>&#xA;  &lt;sql>&#xA;  DROP VIEW IF EXISTS srs_oc_so_johnson_chl_mo_seawifs_url ;&#xA;  CREATE OR REPLACE VIEW srs_oc_so_johnson_chl_mo_seawifs_url AS &#xA; SELECT &#xA;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#xA;   FROM srs_oc.timeseries t&#xA;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#xA;  WHERE f.url::text like '%/S%.L3m_MO_SO_Chl_9km.Johnson_SO_Chl.nc%'::text&#xA;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;index_ts&quot; runOnChange = &quot;true&quot;>&#xA;  &lt;sql>&#xA;CREATE INDEX timeseries_file_id_idx&#xA;  ON timeseries&#xA;  USING btree&#xA;  (file_id);&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&#xA;&lt;/databaseChangeLog>"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;&gt;&#10;&#10;&lt;changeSet author=&quot;talend&quot; id=&quot;create_timeseries_table-1&quot;&gt;&#10;  &lt;sql&gt;&#10;CREATE TABLE timeseries&#10;(&#10;  id bigserial NOT NULL,&#10;  file_id bigint NOT NULL,&#10;  time timestamp with time zone,&#10;  CONSTRAINT timeseries_pk PRIMARY KEY (id ),&#10;  CONSTRAINT timeseries_file_fk FOREIGN KEY (file_id)&#10;      REFERENCES indexed_file (id) MATCH SIMPLE&#10;      ON UPDATE CASCADE ON DELETE CASCADE&#10;);&#10;  &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;&#10;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.chl-oc3.1d.aqua&quot; runOnChange = &quot;true&quot;&gt;&#10;  &lt;sql&gt;&#10;  DROP VIEW IF EXISTS srs_oc_chl_oc3_1d_aqua_url ;&#10;  CREATE OR REPLACE VIEW srs_oc_chl_oc3_1d_aqua_url AS &#10;SELECT &#10;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#10;   FROM srs_oc.timeseries t&#10;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#10;  WHERE f.url::text like '%/1d/____/%BASE.aust.chl_oc3.nc%'::text&#10;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#10;  &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.chl-gsm.1d.aqua&quot; runOnChange = &quot;true&quot;&gt;&#10;  &lt;sql&gt;&#10;  DROP VIEW IF EXISTS srs_oc_chl_gsm_1d_aqua_url ;&#10;  CREATE OR REPLACE VIEW srs_oc_chl_gsm_1d_aqua_url AS &#10; SELECT &#10;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#10;   FROM srs_oc.timeseries t&#10;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#10;  WHERE f.url::text like '%/1d/____/%BASE.aust.chl_gsm.nc%'::text&#10;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#10;  &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;&#10;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.sst.1d.aqua&quot; runOnChange = &quot;true&quot;&gt;&#10;  &lt;sql&gt;&#10;  DROP VIEW IF EXISTS srs_oc_sst_1d_aqua_url ;&#10;  CREATE OR REPLACE VIEW srs_oc_sst_1d_aqua_url AS &#10; SELECT &#10;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#10;   FROM srs_oc.timeseries t&#10;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#10;  WHERE f.url::text like '%/1d/____/%BASE.aust.sst.nc%'::text&#10;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#10;  &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.nanop_brewin2012in.pft.1d.aqua&quot; runOnChange = &quot;true&quot;&gt;&#10;  &lt;sql&gt;&#10;  DROP VIEW IF EXISTS srs_oc_nanop_brewin2012in_pft_1d_aqua_url ;&#10;  CREATE OR REPLACE VIEW srs_oc_nanop_brewin2012in_pft_1d_aqua_url AS &#10; SELECT &#10;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#10;   FROM srs_oc.timeseries t&#10;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#10;  WHERE f.url::text like '%/1d/____/%BASE.aust.nanop_brewin2012in.nc%'::text&#10;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#10;  &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.picop_brewin2012in.pft.1d.aqua&quot; runOnChange = &quot;true&quot;&gt;&#10;  &lt;sql&gt;&#10;  DROP VIEW IF EXISTS srs_oc_picop_brewin2012in_pft_1d_aqua_url ;&#10;  CREATE OR REPLACE VIEW srs_oc_picop_brewin2012in_pft_1d_aqua_url AS &#10; SELECT &#10;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#10;   FROM srs_oc.timeseries t&#10;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#10;  WHERE f.url::text like '%/1d/____/%BASE.aust.picop_brewin2012in.nc%'::text&#10;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#10;  &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;&#10;&#10;&#10;&#10;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.nanop_brewin2010at.pft.1d.aqua&quot; runOnChange = &quot;true&quot;&gt;&#10;  &lt;sql&gt;&#10;  DROP VIEW IF EXISTS srs_oc_nanop_brewin2010at_pft_1d_aqua_url ;&#10;  CREATE OR REPLACE VIEW srs_oc_nanop_brewin2010at_pft_1d_aqua_url AS &#10; SELECT &#10;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#10;   FROM srs_oc.timeseries t&#10;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#10;  WHERE f.url::text like '%/1d/____/%BASE.aust.nanop_brewin2010at.nc%'::text&#10;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#10;  &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.picop_brewin2010at.pft.1d.aqua&quot; runOnChange = &quot;true&quot;&gt;&#10;  &lt;sql&gt;&#10;  DROP VIEW IF EXISTS srs_oc_picop_brewin2010at_pft_1d_aqua_url ;&#10;  CREATE OR REPLACE VIEW srs_oc_picop_brewin2010at_pft_1d_aqua_url AS &#10; SELECT &#10;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#10;   FROM srs_oc.timeseries t&#10;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#10;  WHERE f.url::text like '%/1d/____/%BASE.aust.picop_brewin2010at.nc%'::text&#10;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#10;  &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;&#10;&#10;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.npp-VgpmEpp.oc3.1d.aqua&quot; runOnChange = &quot;true&quot;&gt;&#10;  &lt;sql&gt;&#10;  DROP VIEW IF EXISTS srs_oc_npp_vgpm_epp_oc3_1d_aqua_url ;&#10;  CREATE OR REPLACE VIEW srs_oc_npp_vgpm_epp_oc3_1d_aqua_url AS &#10; SELECT &#10;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#10;   FROM srs_oc.timeseries t&#10;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#10;  WHERE f.url::text like '%/1d/____/%BASE.aust.npp_vgpm_eppley_oc3.nc%'::text&#10;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#10;  &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;&lt;changeSet author=&quot;talend&quot; id=&quot;oc.npp-VgpmEpp.gsm.1d.aqua&quot; runOnChange = &quot;true&quot;&gt;&#10;  &lt;sql&gt;&#10;  DROP VIEW IF EXISTS srs_oc_npp_vgpm_epp_gsm_1d_aqua_url ;&#10;  CREATE OR REPLACE VIEW srs_oc_npp_vgpm_epp_gsm_1d_aqua_url AS &#10; SELECT &#10;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#10;   FROM srs_oc.timeseries t&#10;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#10;  WHERE f.url::text like '%/1d/____/%BASE.aust.npp_vgpm_eppley_gsm.nc%'::text&#10;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#10;  &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;&#10;&lt;changeSet author=&quot;talend&quot; id=&quot;oc_so_johnson_chl_8d_aqua&quot; runOnChange = &quot;true&quot;&gt;&#10;  &lt;sql&gt;&#10;  DROP VIEW IF EXISTS srs_oc_so_johnson_chl_8d_aqua_url ;&#10;  CREATE OR REPLACE VIEW srs_oc_so_johnson_chl_8d_aqua_url AS &#10; SELECT &#10;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#10;   FROM srs_oc.timeseries t&#10;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#10;  WHERE f.url::text like '%/A%.L3m_8D_SO_Chl_9km.Johnson_SO_Chl.nc%'::text&#10;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#10;  &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;&#10;&lt;changeSet author=&quot;talend&quot; id=&quot;oc_so_johnson_chl_8d_seawifs&quot; runOnChange = &quot;true&quot;&gt;&#10;  &lt;sql&gt;&#10;  DROP VIEW IF EXISTS srs_oc_so_johnson_chl_8d_seawifs_url ;&#10;  CREATE OR REPLACE VIEW srs_oc_so_johnson_chl_8d_seawifs_url AS &#10; SELECT &#10;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#10;   FROM srs_oc.timeseries t&#10;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#10;  WHERE f.url::text like '%/S%.L3m_8D_SO_Chl_9km.Johnson_SO_Chl.nc%'::text&#10;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#10;  &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;&#10;&lt;changeSet author=&quot;talend&quot; id=&quot;oc_so_johnson_chl_mo_aqua&quot; runOnChange = &quot;true&quot;&gt;&#10;  &lt;sql&gt;&#10;  DROP VIEW IF EXISTS srs_oc_so_johnson_chl_mo_aqua_url ;&#10;  CREATE OR REPLACE VIEW srs_oc_so_johnson_chl_mo_aqua_url AS &#10; SELECT &#10;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#10;   FROM srs_oc.timeseries t&#10;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#10;  WHERE f.url::text like '%/A%.L3m_MO_SO_Chl_9km.Johnson_SO_Chl.nc%'::text&#10;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#10;  &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;&#10;&lt;changeSet author=&quot;talend&quot; id=&quot;oc_so_johnson_chl_mo_seawifs&quot; runOnChange = &quot;true&quot;&gt;&#10;  &lt;sql&gt;&#10;  DROP VIEW IF EXISTS srs_oc_so_johnson_chl_mo_seawifs_url ;&#10;  CREATE OR REPLACE VIEW srs_oc_so_johnson_chl_mo_seawifs_url AS &#10; SELECT &#10;    t.id AS timeseries_id, f.url AS file_url, f.size, timezone('UTC'::text,   t.&quot;time&quot;) AS &quot;time&quot;&#10;   FROM srs_oc.timeseries t&#10;   JOIN srs_oc.indexed_file f ON t.file_id = f.id&#10;  WHERE f.url::text like '%/S%.L3m_MO_SO_Chl_9km.Johnson_SO_Chl.nc%'::text&#10;  ORDER BY timezone('UTC'::text, t.&quot;time&quot;) ;&#10;  &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;&lt;changeSet author=&quot;talend&quot; id=&quot;index_ts&quot; runOnChange = &quot;true&quot;&gt;&#10;  &lt;sql&gt;&#10;CREATE INDEX timeseries_file_id_idx&#10;  ON timeseries&#10;  USING btree&#10;  (file_id);&#10;  &lt;/sql&gt;&#10;&lt;/changeSet&gt;&#10;&#10;&#10;&lt;/databaseChangeLog&gt;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="iIndexFiles" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="64">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_1"/>
+  <node componentName="iUpdateIndex" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iUpdateIndex_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_kXc9oFuhEeOppMtV64iEfQ"/>
@@ -126,36 +126,15 @@
     <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="LIST_MODE" value="FILES"/>
-    <elementParameter field="DIRECTORY" name="DIRECTORY" value="context.sourceDir"/>
-    <elementParameter field="CHECK" name="INCLUDSUBDIR" value="true"/>
-    <elementParameter field="CLOSED_LIST" name="CASE_SENSITIVE" value="YES"/>
-    <elementParameter field="CHECK" name="ERROR" value="true"/>
-    <elementParameter field="CHECK" name="GLOBEXPRESSIONS" value="false"/>
-    <elementParameter field="TABLE" name="FILES">
-      <elementValue elementRef="FILEMASK" value="context.include"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="IFEXCLUDE" value="true"/>
-    <elementParameter field="TEXT" name="EXCLUDEFILEMASK" value="context.exclude"/>
-    <elementParameter field="CHECK" name="FORMAT_FILEPATH_TO_SLASH" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_NOTHING" value="true"/>
-    <elementParameter field="RADIO" name="ORDER_BY_FILENAME" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_FILESIZE" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_BY_MODIFIEDDATE" value="false"/>
-    <elementParameter field="RADIO" name="ORDER_ACTION_ASC" value="true"/>
-    <elementParameter field="RADIO" name="ORDER_ACTION_DESC" value="false"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="iIndexFiles_1">
-      <column defaultValue="" key="false" length="255" name="filePath" nullable="true" precision="0" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="0" name="fileLastModified" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'000Z'&quot;" precision="0" sourceType="" type="id_Date"/>
-      <column defaultValue="" key="false" length="0" name="fileSize" nullable="true" precision="0" sourceType="" type="id_Double"/>
-    </metadata>
+    <elementParameter field="FILE" name="MANIFEST_FILENAME" value="context.fileList"/>
+    <elementParameter field="TEXT" name="BASE_PATH" value="context.base"/>
   </node>
-  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="768">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
+  <node componentName="iNewOrModifiedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="768">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_kXc9oFuhEeOppMtV64iEfQ"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
@@ -171,11 +150,12 @@
     <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
     <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="true"/>
-    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#xA;&quot;  from indexed_file &quot; +&#xA;&quot;  join index_job &quot; +&#xA;&quot;    on indexed_file.job_id = index_job.id &quot; +&#xA;&quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#xA;&quot;   and index_job.name = ? &quot; +&#xA;&quot;  left join file_harvest &quot; +&#xA;&quot;    on file_harvest.file_id = indexed_file.id &quot; +&#xA;&quot;   and file_harvest.harvest_type = ? &quot; +&#xA;&quot; where (file_harvest.last_moddate_harvested &lt;> indexed_file.modified &quot; +&#xA;&quot;    or  file_harvest.last_moddate_harvested is null) &quot; +&#xA;&quot;    and indexed_file.url ~~ '%oc/aqua%' &quot;;"/>
+    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#10;&quot;  from indexed_file &quot; +&#10;&quot;  join index_job &quot; +&#10;&quot;    on indexed_file.job_id = index_job.id &quot; +&#10;&quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#10;&quot;   and index_job.name = ? &quot; +&#10;&quot;  left join file_harvest &quot; +&#10;&quot;    on file_harvest.file_id = indexed_file.id &quot; +&#10;&quot;   and file_harvest.harvest_type = ? &quot; +&#10;&quot; where (file_harvest.last_moddate_harvested &lt;&gt; indexed_file.modified &quot; +&#10;&quot;    or  file_harvest.last_moddate_harvested is null) &quot; +&#10;&quot;    and indexed_file.url ~~ '%oc/aqua%' &quot;;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
   </node>
   <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="448" posY="768">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_3"/>
@@ -191,7 +171,7 @@
     <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
     <elementParameter field="TABLE" name="CONTEXTPARAMS">
       <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iHarvestResources_1_FILE_ID&quot;)).intValue()"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iNewOrModifiedFileList_1_FILE_ID&quot;)).intValue()"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
     <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
@@ -202,8 +182,8 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_3"/>
   </node>
-  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="448">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_2"/>
+  <node componentName="iNewOrModifiedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="448">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_2"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_kXc9oFuhEeOppMtV64iEfQ"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
@@ -219,11 +199,12 @@
     <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
     <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="true"/>
-    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#xA;&quot;  from indexed_file &quot; +&#xA;&quot;  join index_job &quot; +&#xA;&quot;    on indexed_file.job_id = index_job.id &quot; +&#xA;&quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#xA;&quot;   and index_job.name = ? &quot; +&#xA;&quot;  left join file_harvest &quot; +&#xA;&quot;    on file_harvest.file_id = indexed_file.id &quot; +&#xA;&quot;   and file_harvest.harvest_type = ? &quot; +&#xA;&quot; where (file_harvest.last_moddate_harvested &lt;> indexed_file.modified &quot; +&#xA;&quot;    or  file_harvest.last_moddate_harvested is null) &quot; +&#xA;&quot;    and indexed_file.url ~~ '%oc/contributed/SO-Johnson%' &quot;;"/>
+    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#10;&quot;  from indexed_file &quot; +&#10;&quot;  join index_job &quot; +&#10;&quot;    on indexed_file.job_id = index_job.id &quot; +&#10;&quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#10;&quot;   and index_job.name = ? &quot; +&#10;&quot;  left join file_harvest &quot; +&#10;&quot;    on file_harvest.file_id = indexed_file.id &quot; +&#10;&quot;   and file_harvest.harvest_type = ? &quot; +&#10;&quot; where (file_harvest.last_moddate_harvested &lt;&gt; indexed_file.modified &quot; +&#10;&quot;    or  file_harvest.last_moddate_harvested is null) &quot; +&#10;&quot;    and indexed_file.url ~~ '%oc/contributed/SO-Johnson%' &quot;;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
   </node>
   <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="448" posY="448">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_4"/>
@@ -239,7 +220,7 @@
     <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
     <elementParameter field="TABLE" name="CONTEXTPARAMS">
       <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iHarvestResources_2_FILE_ID&quot;)).intValue()"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iNewOrModifiedFileList_2_FILE_ID&quot;)).intValue()"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
     <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
@@ -250,8 +231,8 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_4"/>
   </node>
-  <node componentName="iDeletedResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="640">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_2"/>
+  <node componentName="iDeletedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="640">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedFileList_2"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_kXc9oFuhEeOppMtV64iEfQ"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
@@ -267,11 +248,12 @@
     <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
     <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
-    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select id, url, modified &quot; +&#xA;&quot;  from deleted_resource &quot; +&#xA;&quot; where job_name = ? &quot; +&#xA;&quot;   and harvest_type = ? &quot;&#xA;      "/>
+    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select id, url, modified &quot; +&#10;&quot;  from deleted_resource &quot; +&#10;&quot; where job_name = ? &quot; +&#10;&quot;   and harvest_type = ? &quot;&#10;      "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
   </node>
   <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="448" posY="640">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_6"/>
@@ -287,7 +269,7 @@
     <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
     <elementParameter field="TABLE" name="CONTEXTPARAMS">
       <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iDeletedResources_2_FILE_ID&quot;))"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iDeletedFileList_2_FILE_ID&quot;))"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
     <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
@@ -298,53 +280,53 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_6"/>
   </node>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="tRunJob_5">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_1" target="tRunJob_5">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="iHarvestResources_2">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_1" target="iNewOrModifiedFileList_2">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iDeletedResources_1">
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iDeletedFileList_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk2"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" source="iIndexFiles_1" target="iPostgresqlDbUpdate_1">
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iUpdateIndex_1" offsetLabelX="0" offsetLabelY="0" source="iUpdateIndex_1" target="iPostgresqlDbUpdate_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
   </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tRunJob_3">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iNewOrModifiedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iNewOrModifiedFileList_1" target="tRunJob_3">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate3"/>
   </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_2" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_2" target="tRunJob_4">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iNewOrModifiedFileList_2" offsetLabelX="0" offsetLabelY="0" source="iNewOrModifiedFileList_2" target="tRunJob_4">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate1"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iHarvestResources_2" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_2" target="iDeletedResources_2">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iNewOrModifiedFileList_2" offsetLabelX="0" offsetLabelY="0" source="iNewOrModifiedFileList_2" target="iDeletedFileList_2">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedResources_2" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_2" target="tRunJob_6">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedFileList_2" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_2" target="tRunJob_6">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate4"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedResources_2" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_2" target="iHarvestResources_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedFileList_2" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_2" target="iNewOrModifiedFileList_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
   </connection>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedFileList_1"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Delete metadata and data for deleted resources"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
@@ -358,28 +340,28 @@
   </subjob>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iUpdateIndex_1"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Check file system for new, modified or deleted files"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_1"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Aqua products"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_2"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_2"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Robert Johnson products"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_2"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedFileList_2"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Delete metadata and data for deleted resources"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
