@@ -204,10 +204,10 @@
       <column comment="" key="false" length="500" name="data_centre_email" nullable="true" pattern="" sourceType="" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="distribution_statement" nullable="true" pattern="" sourceType="" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="file_version" nullable="true" pattern="" sourceType="" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="500" name="geospatial_lat_max" nullable="true" pattern="" sourceType="" type="id_Double" originalLength="50"/>
-      <column comment="" key="false" length="500" name="geospatial_lat_min" nullable="true" pattern="" sourceType="" type="id_Double" originalLength="50"/>
-      <column comment="" key="false" length="500" name="geospatial_lon_max" nullable="true" pattern="" sourceType="" type="id_Double" originalLength="50"/>
-      <column comment="" key="false" length="500" name="geospatial_lon_min" nullable="true" pattern="" sourceType="" type="id_Double" originalLength="50"/>
+      <column comment="" key="false" length="500" name="geospatial_lat_max" nullable="false" pattern="" sourceType="" type="id_Double" originalLength="50"/>
+      <column comment="" key="false" length="500" name="geospatial_lat_min" nullable="false" pattern="" sourceType="" type="id_Double" originalLength="50"/>
+      <column comment="" key="false" length="500" name="geospatial_lon_max" nullable="false" pattern="" sourceType="" type="id_Double" originalLength="50"/>
+      <column comment="" key="false" length="500" name="geospatial_lon_min" nullable="false" pattern="" sourceType="" type="id_Double" originalLength="50"/>
       <column comment="" key="false" length="500" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="" type="id_Double" originalLength="50"/>
       <column comment="" key="false" length="500" name="geospatial_vertical_min" nullable="true" pattern="" sourceType="" type="id_Double" originalLength="500"/>
       <column comment="" key="false" length="500" name="geospatial_vertical_positive" nullable="true" pattern="" sourceType="" type="id_String" originalLength="500"/>
@@ -232,10 +232,13 @@
       <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="time_coverage_start" nullable="true" pattern="" sourceType="" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="time_coverage_end" nullable="true" pattern="" sourceType="" type="id_String" originalLength="500"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
-      <varTables sizeState="INTERMEDIATE" name="Var"/>
+      <uiProperties shellMaximized="true"/>
+      <varTables sizeState="INTERMEDIATE" name="Var">
+        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row1.geospatial_lon_max,row1.geospatial_lat_max,&quot;EPSG:4326&quot;)   " type="id_Geometry"/>
+      </varTables>
       <outputTables sizeState="INTERMEDIATE" name="copyOfout1">
         <mapperTableEntries name="file_id" expression="context.file_id" type="id_Integer"/>
         <mapperTableEntries name="_abstract" expression="row1._abstract " type="id_String" nullable="true"/>
@@ -247,10 +250,10 @@
         <mapperTableEntries name="data_centre_email" expression="row1.data_centre_email " type="id_String" nullable="true"/>
         <mapperTableEntries name="distribution_statement" expression="row1.distribution_statement " type="id_String" nullable="true"/>
         <mapperTableEntries name="file_version" expression="row1.file_version " type="id_String" nullable="true"/>
-        <mapperTableEntries name="geospatial_lat_max" expression="row1.geospatial_lat_max " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="geospatial_lat_min" expression="row1.geospatial_lat_min " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="geospatial_lon_max" expression="row1.geospatial_lon_max " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="geospatial_lon_min" expression="row1.geospatial_lon_min " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="geospatial_lat_max" expression="row1.geospatial_lat_max " type="id_Double"/>
+        <mapperTableEntries name="geospatial_lat_min" expression="row1.geospatial_lat_min " type="id_Double"/>
+        <mapperTableEntries name="geospatial_lon_max" expression="row1.geospatial_lon_max " type="id_Double"/>
+        <mapperTableEntries name="geospatial_lon_min" expression="row1.geospatial_lon_min " type="id_Double"/>
         <mapperTableEntries name="geospatial_vertical_max" expression="row1.geospatial_vertical_max " type="id_Double" nullable="true"/>
         <mapperTableEntries name="geospatial_vertical_min" expression="row1.geospatial_vertical_min " type="id_Double" nullable="true"/>
         <mapperTableEntries name="geospatial_vertical_positive" expression="row1.geospatial_vertical_positive " type="id_String" nullable="true"/>
@@ -275,6 +278,7 @@
         <mapperTableEntries name="title" expression="row1.title " type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_start" expression="row1.time_coverage_start " type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_end" expression="row1.time_coverage_end " type="id_String" nullable="true"/>
+        <mapperTableEntries name="geom" expression="Var.geom " type="id_Geometry"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row1" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="Conventions" type="id_String" nullable="true"/>
@@ -534,6 +538,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -555,10 +564,10 @@
       <column comment="" key="false" length="500" name="data_centre_email" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="distribution_statement" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="file_version" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="500" name="geospatial_lat_max" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
-      <column comment="" key="false" length="500" name="geospatial_lat_min" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
-      <column comment="" key="false" length="500" name="geospatial_lon_max" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
-      <column comment="" key="false" length="500" name="geospatial_lon_min" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
+      <column comment="" key="false" length="500" name="geospatial_lat_max" nullable="false" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
+      <column comment="" key="false" length="500" name="geospatial_lat_min" nullable="false" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
+      <column comment="" key="false" length="500" name="geospatial_lon_max" nullable="false" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
+      <column comment="" key="false" length="500" name="geospatial_lon_min" nullable="false" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
       <column comment="" key="false" length="500" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
       <column comment="" key="false" length="500" name="geospatial_vertical_min" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="500"/>
       <column comment="" key="false" length="500" name="geospatial_vertical_positive" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
@@ -583,6 +592,7 @@
       <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="time_coverage_start" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="time_coverage_end" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
@@ -595,10 +605,10 @@
       <column comment="" key="false" length="500" name="data_centre_email" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="distribution_statement" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="file_version" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="500" name="geospatial_lat_max" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
-      <column comment="" key="false" length="500" name="geospatial_lat_min" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
-      <column comment="" key="false" length="500" name="geospatial_lon_max" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
-      <column comment="" key="false" length="500" name="geospatial_lon_min" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
+      <column comment="" key="false" length="500" name="geospatial_lat_max" nullable="false" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
+      <column comment="" key="false" length="500" name="geospatial_lat_min" nullable="false" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
+      <column comment="" key="false" length="500" name="geospatial_lon_max" nullable="false" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
+      <column comment="" key="false" length="500" name="geospatial_lon_min" nullable="false" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
       <column comment="" key="false" length="500" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
       <column comment="" key="false" length="500" name="geospatial_vertical_min" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double" originalLength="500"/>
       <column comment="" key="false" length="500" name="geospatial_vertical_positive" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
@@ -623,6 +633,7 @@
       <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="time_coverage_start" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="time_coverage_end" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -731,7 +742,7 @@
       <column comment="" key="false" length="1" name="TURB_RAW_COUNT_quality_control" nullable="true" pattern="" sourceType="" type="id_String" originalLength="1"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(water_sensors.LONGITUDE,water_sensors.LATITUDE,&quot;EPSG:4326&quot;)  " type="id_Geometry"/>
         <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1950-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,water_sensors.TIME,true)  " type="id_Date"/>
@@ -1560,6 +1571,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geom"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
