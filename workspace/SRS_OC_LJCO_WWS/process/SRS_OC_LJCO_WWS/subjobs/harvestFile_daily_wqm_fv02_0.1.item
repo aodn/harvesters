@@ -216,10 +216,13 @@
       <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="time_coverage_start" nullable="true" pattern="" sourceType="" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="time_coverage_end" nullable="true" pattern="" sourceType="" type="id_String" originalLength="500"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
-      <varTables sizeState="INTERMEDIATE" name="Var"/>
+      <uiProperties shellMaximized="true"/>
+      <varTables sizeState="INTERMEDIATE" name="Var">
+        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row1.geospatial_lon_max,row1.geospatial_lat_max,&quot;EPSG:4326&quot;)   " type="id_Geometry"/>
+      </varTables>
       <outputTables sizeState="INTERMEDIATE" name="copyOfout1">
         <mapperTableEntries name="file_id" expression="context.file_id" type="id_Integer"/>
         <mapperTableEntries name="_abstract" expression="row1._abstract " type="id_String" nullable="true"/>
@@ -259,6 +262,7 @@
         <mapperTableEntries name="title" expression="row1.title " type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_start" expression="row1.time_coverage_start " type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_end" expression="row1.time_coverage_end " type="id_String" nullable="true"/>
+        <mapperTableEntries name="geom" expression="Var.geom " type="id_Geometry"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row1" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="Conventions" type="id_String" nullable="true"/>
@@ -518,6 +522,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -567,6 +576,7 @@
       <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="time_coverage_start" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="time_coverage_end" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
@@ -607,6 +617,7 @@
       <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="time_coverage_start" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="500" name="time_coverage_end" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -801,7 +812,7 @@
       <column comment="" key="false" name="Total_num_obs" nullable="true" pattern="" sourceType="" type="id_Double"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(water_sensors.LONGITUDE,water_sensors.LATITUDE,&quot;EPSG:4326&quot;)  " type="id_Geometry"/>
         <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1950-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,water_sensors.TIME,true)  " type="id_Date"/>
@@ -2016,6 +2027,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geom"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
