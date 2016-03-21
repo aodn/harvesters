@@ -6,21 +6,10 @@
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="ltj4TBtpq0Z9gtjxgG1F2Q=="/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="aus_phyto_db"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="__UkjUFfbEeOI06CSaOCVIQ" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="dataURL" prompt="dataURL?" promptNeeded="false" repositoryContextId="_keR-0ArvEeSHSpYlVevlXQ" type="id_String" value="https://goo.gl/hVGynI"/>
     <contextParameter comment="" name="metadataURL" prompt="metadataURL?" promptNeeded="false" repositoryContextId="_keR-0ArvEeSHSpYlVevlXQ" type="id_String" value="https://goo.gl/bFL5z3"/>
-  </context>
-  <context confirmationNeeded="false" name="Deployment">
-    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
-    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="anmn_nrs_bgc"/>
-    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value=""/>
-    <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
-    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="anmn_nrs_bgc"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="#{node['talend']['destination_database_server']}"/>
-    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="__UkjUFfbEeOI06CSaOCVIQ" type="id_String" value="/tmp"/>
-    <contextParameter comment="" name="dataURL" prompt="dataURL?" promptNeeded="false" repositoryContextId="_keR-0ArvEeSHSpYlVevlXQ" type="id_String" value="null"/>
-    <contextParameter comment="" name="metadataURL" prompt="metadataURL?" promptNeeded="false" repositoryContextId="_keR-0ArvEeSHSpYlVevlXQ" type="id_String" value="null"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -230,7 +219,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="metadata" name="tFileInputDelimited_1">
       <column comment="" key="false" length="5000" name="FID" nullable="true" pattern="" sourceType="" type="id_String" originalLength="500"/>
-      <column comment="" defaultValue="" key="false" length="0" name="PROJECT_ID" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" length="0" name="PROJECT_ID" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="5000" name="PROJECT_DESCRIPTION" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="5000" name="CUSTODIAN_DETAILS" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="5000" name="ACKNOWLEDGEMENT" nullable="true" pattern="" sourceType="" type="id_String" originalLength="5000"/>
@@ -249,7 +238,7 @@
     </metadata>
     <metadata connector="REJECT" label="metadata" name="REJECT">
       <column comment="" key="false" length="5000" name="FID" nullable="true" pattern="" sourceType="" type="id_String" originalLength="500"/>
-      <column comment="" defaultValue="" key="false" length="0" name="PROJECT_ID" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" length="0" name="PROJECT_ID" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="5000" name="PROJECT_DESCRIPTION" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="5000" name="CUSTODIAN_DETAILS" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="5000" name="ACKNOWLEDGEMENT" nullable="true" pattern="" sourceType="" type="id_String" originalLength="5000"/>
@@ -283,7 +272,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="csiro_harvest_pci" name="pci_record">
-      <column comment="" key="false" length="0" name="PROJECT_ID" nullable="true" pattern="" precision="0" type="id_Integer"/>
+      <column comment="" key="false" length="0" name="PROJECT_ID" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="5000" name="PROJECT_DESCRIPTION" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="5000" name="CUSTODIAN_DETAILS" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="5000" name="ACKNOWLEDGEMENT" nullable="true" pattern="" sourceType="" type="id_String" originalLength="5000"/>
@@ -301,10 +290,10 @@
       <column comment="" key="false" length="5000" name="CITATION" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="500"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="pci_record">
-        <mapperTableEntries name="PROJECT_ID" expression="row1.PROJECT_ID " type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="PROJECT_ID" expression="row1.PROJECT_ID " type="id_String" nullable="true"/>
         <mapperTableEntries name="PROJECT_DESCRIPTION" expression="row1.PROJECT_DESCRIPTION " type="id_String" nullable="true"/>
         <mapperTableEntries name="CUSTODIAN_DETAILS" expression="row1.CUSTODIAN_DETAILS " type="id_String" nullable="true"/>
         <mapperTableEntries name="ACKNOWLEDGEMENT" expression="row1.ACKNOWLEDGEMENT " type="id_String" nullable="true"/>
@@ -323,7 +312,7 @@
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row1" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="FID" type="id_String" nullable="true"/>
-        <mapperTableEntries name="PROJECT_ID" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="PROJECT_ID" type="id_String" nullable="true"/>
         <mapperTableEntries name="PROJECT_DESCRIPTION" type="id_String" nullable="true"/>
         <mapperTableEntries name="CUSTODIAN_DETAILS" type="id_String" nullable="true"/>
         <mapperTableEntries name="ACKNOWLEDGEMENT" type="id_String" nullable="true"/>
@@ -353,8 +342,8 @@
     <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;adp_metadata&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="TRUNCATE"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;apd_metadata&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
     <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
     <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
@@ -457,14 +446,14 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="csiro_harvest_pci" name="iPostgresqlOutput_1">
-      <column comment="" key="false" length="0" name="PROJECT_ID" nullable="true" pattern="" precision="0" type="id_Integer"/>
+      <column comment="" key="false" length="50" name="PROJECT_ID" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="5000" name="PROJECT_DESCRIPTION" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="5000" name="CUSTODIAN_DETAILS" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="5000" name="ACKNOWLEDGEMENT" nullable="true" pattern="" sourceType="" type="id_String" originalLength="5000"/>
       <column comment="" key="false" length="5000" name="LOCATION" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="5000" name="DATE_RESOLUTION" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="5000" name="START_DATE" nullable="true" pattern="" precision="0" type="id_String"/>
-      <column comment="" key="false" length="5000" name="END_DATE" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="5000" name="END_DATE" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="0" name="NO_SAMPLES" nullable="true" pattern="" precision="0" type="id_Integer"/>
       <column comment="" key="false" length="0" name="NO_RECORDS" nullable="true" pattern="" precision="0" type="id_Integer"/>
       <column comment="" key="false" length="5000" name="RESOLUTION" nullable="true" pattern="" precision="0" type="id_String"/>
@@ -475,14 +464,14 @@
       <column comment="" key="false" length="5000" name="CITATION" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="500"/>
     </metadata>
     <metadata connector="REJECT" label="csiro_harvest_pci" name="REJECT">
-      <column comment="" key="false" length="0" name="PROJECT_ID" nullable="true" pattern="" precision="0" type="id_Integer"/>
+      <column comment="" key="false" length="50" name="PROJECT_ID" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="5000" name="PROJECT_DESCRIPTION" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="5000" name="CUSTODIAN_DETAILS" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="5000" name="ACKNOWLEDGEMENT" nullable="true" pattern="" sourceType="" type="id_String" originalLength="5000"/>
       <column comment="" key="false" length="5000" name="LOCATION" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="5000" name="DATE_RESOLUTION" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="5000" name="START_DATE" nullable="true" pattern="" precision="0" type="id_String"/>
-      <column comment="" key="false" length="5000" name="END_DATE" nullable="true" pattern="" precision="0" type="id_String"/>
+      <column comment="" key="false" length="5000" name="END_DATE" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="0" name="NO_SAMPLES" nullable="true" pattern="" precision="0" type="id_Integer"/>
       <column comment="" key="false" length="0" name="NO_RECORDS" nullable="true" pattern="" precision="0" type="id_Integer"/>
       <column comment="" key="false" length="5000" name="RESOLUTION" nullable="true" pattern="" precision="0" type="id_String"/>
