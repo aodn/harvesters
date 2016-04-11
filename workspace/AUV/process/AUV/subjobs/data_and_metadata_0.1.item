@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="metadataDb_Password" prompt="metadataDb_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="g/npdA71WNM="/>
-    <contextParameter comment="" name="metadataDb_Server" prompt="metadataDb_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="localhost"/>
-    <contextParameter comment="" name="metadataDb_Schema" prompt="metadataDb_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="auv"/>
-    <contextParameter comment="" name="metadataDb_Database" prompt="metadataDb_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest"/>
-    <contextParameter comment="" name="metadataDb_Login" prompt="metadataDb_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="auv"/>
-    <contextParameter comment="" name="metadataDb_Port" prompt="metadataDb_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
+    <contextParameter comment="" name="fileid" prompt="fileid?" promptNeeded="false" type="id_Integer" value="2"/>
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="IMOS_AUV_B_20150209T213449Z_SIRIUS_FV00.nc"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/home/lbesnard/github_repo/chef/src/PS201502/r20150209_213443_broughton_east_biebg_03_broad/hydro_netcdf"/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/tmp/fileList"/>
+    <contextParameter comment="" name="destination_Login" prompt="destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="auv"/>
+    <contextParameter comment="" name="destination_Server" prompt="destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="10.11.12.13"/>
+    <contextParameter comment="" name="destination_Password" prompt="destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="g/npdA71WNM="/>
+    <contextParameter comment="" name="destination_Database" prompt="destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+    <contextParameter comment="" name="destination_Schema" prompt="destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="auv"/>
+    <contextParameter comment="" name="destination_Port" prompt="destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="352"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="576"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="96"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
     <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
@@ -44,7 +48,7 @@
     <routinesParameter id="_cRn34BQsEeKRFb0vPU_LNg" name="DAPUtils"/>
     <routinesParameter id="_IMfY4Dp8EeKYTu4DLH4cKg" name="NetCDFUtils"/>
   </parameters>
-  <node componentName="iIncludeSdiLibraries" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-288" posY="416">
+  <node componentName="iIncludeSdiLibraries" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-512" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIncludeSdiLibraries_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import org.talend.sdi.geometry.Geometry;"/>
@@ -53,59 +57,30 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="512" posY="416">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-  </node>
-  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="-64" posY="416">
+  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="-320" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
-    <elementParameter field="TEXT" name="HOST" value="context.metadataDb_Server"/>
+    <elementParameter field="TEXT" name="HOST" value="context.destination_Server"/>
     <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="PORT" value="context.metadataDb_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.metadataDb_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.metadataDb_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.metadataDb_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.metadataDb_Password"/>
+    <elementParameter field="TEXT" name="PORT" value="context.destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/media/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-1&quot;>&#xA;       &lt;sql>&#xA;    CREATE TABLE auv.deployments&#xA;(&#xA;  deploy_id bigserial NOT NULL,&#xA;  file_id integer NOT NULL,&#xA;  dive_name character varying(150),&#xA;  campaign_name character varying(50),&#xA;  author_email character varying(50),&#xA;  cdm_data_type character varying(50),&#xA;  local_time_zone character varying(50),&#xA;  geospatial_lat_min character varying(50),&#xA;  time_coverage_end character varying(50),&#xA;  keywords character varying(150),&#xA;  source character varying(50),&#xA;  time_coverage_start character varying(50),&#xA;  geospatial_lat_max character varying(50),&#xA;  netcdf_version character varying(50),&#xA;  data_centre character varying(50),&#xA;  citation character varying(150),&#xA;  date_created character varying(50),&#xA;  author character varying(50),&#xA;  title character varying(50),&#xA;  &quot;references&quot; character varying(50),&#xA;  principal_investigator character varying(50),&#xA;  acknowledgement character varying(400),&#xA;  quality_control_indicator character varying(50),&#xA;  platform_code character varying(50),&#xA;  history character varying(100),&#xA;  quality_control_set character varying(50),&#xA;  institution character varying(50),&#xA;  geospatial_lon_max character varying(50),&#xA;  distribution_statement character varying(400),&#xA;  conventions character varying(50),&#xA;  site_code character varying(50),&#xA;  project character varying(50),&#xA;  geospatial_vertical_min character varying(50),&#xA;  institution_references character varying(50),&#xA;  geospatial_lon_min character varying(50),&#xA;  geospatial_vertical_max character varying(50),&#xA;  naming_authority character varying(50),&#xA;  CONSTRAINT deployments_pkey PRIMARY KEY (deploy_id ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;   &#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-2&quot;>&#xA;       &lt;sql>&#xA; CREATE TABLE auv.measurements_b&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; real,&#xA;  &quot;CDOM&quot; real,&#xA;  &quot;CPHL&quot; real,&#xA;  &quot;OPBS&quot; real,&#xA;  campaign_id character varying(50),&#xA;  dive_name character varying(150), &#xA;  geom geometry,&#xA;  CONSTRAINT measurements_b_pkey PRIMARY KEY (measurement ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;&#xA;)&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-3&quot;>&#xA;       &lt;sql>&#xA; CREATE TABLE auv.measurements_st&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; real,&#xA;  &quot;PSAL&quot; real,&#xA;  &quot;TEMP&quot; real,&#xA;  campaign_id character varying(50),&#xA;  dive_name character varying(150), &#xA;  geom geometry,&#xA; &#xA;  CONSTRAINT measurements_st_pkey PRIMARY KEY (measurement ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-4&quot;>&#xA;      &#xA;      &lt;sql>&#xA;        ALTER TABLE measurements_st&#xA;        ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;        USING ST_SetSRID(geom,4326);&#xA;        CREATE INDEX measurements_st_gist_idx ON measurements_st USING GIST (geom); &#xA;      &lt;/sql>      &#xA;&#xA;&lt;sql>&#xA;        ALTER TABLE measurements_b&#xA;        ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;        USING ST_SetSRID(geom,4326);&#xA;        CREATE INDEX measurements_b_gist_idx ON measurements_b USING GIST (geom); &#xA;      &lt;/sql>      &#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-1&quot;>&#xA;       &lt;sql>&#xA;    CREATE TABLE auv.deployments&#xA;(&#xA;  deploy_id bigserial NOT NULL,&#xA;  file_id integer NOT NULL,&#xA;  dive_name character varying(150),&#xA;  campaign_name character varying(50),&#xA;  author_email character varying(50),&#xA;  cdm_data_type character varying(50),&#xA;  local_time_zone character varying(50),&#xA;  geospatial_lat_min character varying(50),&#xA;  time_coverage_end character varying(50),&#xA;  keywords character varying(150),&#xA;  source character varying(50),&#xA;  time_coverage_start character varying(50),&#xA;  geospatial_lat_max character varying(50),&#xA;  netcdf_version character varying(50),&#xA;  data_centre character varying(50),&#xA;  citation character varying(150),&#xA;  date_created character varying(50),&#xA;  author character varying(50),&#xA;  title character varying(50),&#xA;  &quot;references&quot; character varying(50),&#xA;  principal_investigator character varying(50),&#xA;  acknowledgement character varying(400),&#xA;  quality_control_indicator character varying(50),&#xA;  platform_code character varying(50),&#xA;  history character varying(100),&#xA;  quality_control_set character varying(50),&#xA;  institution character varying(50),&#xA;  geospatial_lon_max character varying(50),&#xA;  distribution_statement character varying(400),&#xA;  conventions character varying(50),&#xA;  site_code character varying(50),&#xA;  project character varying(50),&#xA;  geospatial_vertical_min character varying(50),&#xA;  institution_references character varying(50),&#xA;  geospatial_lon_min character varying(50),&#xA;  geospatial_vertical_max character varying(50),&#xA;  naming_authority character varying(50),&#xA;  CONSTRAINT deployments_pkey PRIMARY KEY (deploy_id ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;   &#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-2&quot;>&#xA;       &lt;sql>&#xA; CREATE TABLE auv.measurements_b&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; real,&#xA;  &quot;CDOM&quot; real,&#xA;  &quot;CPHL&quot; real,&#xA;  &quot;OPBS&quot; real,&#xA;  campaign_id character varying(50),&#xA;  dive_name character varying(150), &#xA;  geom geometry,&#xA;  CONSTRAINT measurements_b_pkey PRIMARY KEY (measurement ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;&#xA;)&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-3&quot;>&#xA;       &lt;sql>&#xA; CREATE TABLE auv.measurements_st&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; real,&#xA;  &quot;PSAL&quot; real,&#xA;  &quot;TEMP&quot; real,&#xA;  campaign_id character varying(50),&#xA;  dive_name character varying(150), &#xA;  geom geometry,&#xA; &#xA;  CONSTRAINT measurements_st_pkey PRIMARY KEY (measurement ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-4&quot;>&#xA;      &#xA;      &lt;sql>&#xA;        ALTER TABLE measurements_st&#xA;        ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;        USING ST_SetSRID(geom,4326);&#xA;        CREATE INDEX measurements_st_gist_idx ON measurements_st USING GIST (geom); &#xA;      &lt;/sql>      &#xA;&#xA;&lt;sql>&#xA;        ALTER TABLE measurements_b&#xA;        ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;        USING ST_SetSRID(geom,4326);&#xA;        CREATE INDEX measurements_b_gist_idx ON measurements_b USING GIST (geom); &#xA;      &lt;/sql>      &#xA;    &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;wms_pkey&quot;>&#xA;      &lt;sql>&#xA; ALTER TABLE visualisation_wms ADD CONSTRAINT visualisation_wms_pkey PRIMARY KEY (dive_name)&#xA;      &lt;/sql>      &#xA;    &lt;/changeSet>&#xA;&lt;/databaseChangeLog>&#xA;"/>
     <elementParameter field="TEXT" name="LABEL" value="liquidBade_createTables"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="160" posY="416">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
-    <elementParameter field="TEXT" name="HOST" value="context.metadataDb_Server"/>
-    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="PORT" value="context.metadataDb_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.metadataDb_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.metadataDb_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.metadataDb_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.metadataDb_Password"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="CHECK" name="USE_SHARED_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="SHARED_CONNECTION_NAME" value=""/>
-    <elementParameter field="CHECK" name="AUTO_COMMIT" value="true"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-  </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="128">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_2"/>
     <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
     <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
@@ -118,7 +93,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT DISTINCT&#xA;        id,&#xA;        url ,&#xA;        substring(url, '/AUV/(\\w+\\d?)/r' ) AS campaign_name ,&#xA;        substring(url, '(r\\d+_.*)/hydro' ) AS dive_name&#xA;from indexed_file where id NOT IN (SELECT DISTINCT  file_id from deployments) order by campaign_name,dive_name ;&#xA;&quot;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT DISTINCT&#xA;        substring(url, '/AUV/(\\w+\\d?)/r' ) AS campaign_name ,&#xA;        substring(url, '(r\\d+_.*)/hydro' ) AS dive_name&#xA;from indexed_file where id = &quot; + context.fileid + &quot;;&quot;&#xA;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -126,10 +101,6 @@
     <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
     <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
     <elementParameter field="TABLE" name="TRIM_COLUMN">
-      <elementValue elementRef="SCHEMA_COLUMN" value="id"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="url"/>
-      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="campaign_name"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="dive_name"/>
@@ -141,13 +112,11 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlInput_1">
-      <column comment="" defaultValue="" key="false" length="10" name="id" nullable="false" pattern="" precision="0" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="50" name="campaign_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="150" name="dive_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="150"/>
     </metadata>
   </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="352" posY="128">
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="288" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_1"/>
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
@@ -161,8 +130,6 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="fileToprocess" name="fileToprocess">
-      <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
-      <column comment="" defaultValue="" key="false" length="10" name="id" nullable="false" pattern="" precision="0" sourceType="" type="id_Integer"/>
       <column comment="" key="false" length="50" name="campaign_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="150" name="dive_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="150"/>
     </metadata>
@@ -170,20 +137,16 @@
       <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="fileToprocess">
-        <mapperTableEntries name="url" expression="row5.url " type="id_String"/>
-        <mapperTableEntries name="id" expression="row5.id " type="id_Integer"/>
         <mapperTableEntries name="campaign_name" expression="row5.campaign_name " type="id_String" nullable="true"/>
         <mapperTableEntries name="dive_name" expression="row5.dive_name " type="id_String" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row5" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
-        <mapperTableEntries name="id" type="id_Integer"/>
-        <mapperTableEntries name="url" type="id_String"/>
         <mapperTableEntries name="campaign_name" type="id_String" nullable="true"/>
         <mapperTableEntries name="dive_name" type="id_String" nullable="true"/>
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tFlowToIterate" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="512" posY="128">
+  <node componentName="tFlowToIterate" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="416" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFlowToIterate_1"/>
     <elementParameter field="CHECK" name="DEFAULT_MAP" value="true"/>
     <elementParameter field="TABLE" name="MAP"/>
@@ -193,9 +156,9 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tFlowToIterate_1"/>
   </node>
-  <node componentName="iNetCDFGlobalAttributes" componentVersion="0.1" offsetLabelX="-50" offsetLabelY="37" posX="576" posY="-32">
+  <node componentName="iNetCDFGlobalAttributes" componentVersion="0.1" offsetLabelX="-50" offsetLabelY="37" posX="512" posY="-32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttributes_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="((String)globalMap.get(&quot;fileToprocess.url&quot;))"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -236,7 +199,7 @@
       <column comment="" key="false" length="50" name="naming_authority" nullable="true" pattern="" sourceType="" type="id_String" originalLength="50"/>
     </metadata>
   </node>
-  <node componentName="tSetGlobalVar" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="768" posY="-32">
+  <node componentName="tSetGlobalVar" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="704" posY="-32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tSetGlobalVar_3"/>
     <elementParameter field="TABLE" name="VARIABLES">
       <elementValue elementRef="KEY" value="&quot;campaign_name&quot;"/>
@@ -284,7 +247,7 @@
       <column comment="" key="false" length="50" name="naming_authority" nullable="true" pattern="" sourceType="" type="id_String" originalLength="50"/>
     </metadata>
   </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="896" posY="-32">
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="832" posY="-32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_2"/>
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
@@ -298,7 +261,6 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="copyOfout1">
-      <column comment="" key="true" name="deploy_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="" type="id_Integer"/>
       <column comment="" key="false" length="150" name="dive_name" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" length="50" name="campaign_name" nullable="true" pattern="" sourceType="" type="id_String"/>
@@ -340,8 +302,7 @@
       <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="copyOfout1">
-        <mapperTableEntries name="deploy_id" expression="Numeric.sequence(&quot;s1&quot;,1,1) " type="id_Integer"/>
-        <mapperTableEntries name="file_id" expression="((Integer)globalMap.get(&quot;fileToprocess.id&quot;))" type="id_Integer"/>
+        <mapperTableEntries name="file_id" expression="context.fileid" type="id_Integer"/>
         <mapperTableEntries name="dive_name" expression="((String)globalMap.get(&quot;dive_name&quot;))" type="id_String" nullable="true"/>
         <mapperTableEntries name="campaign_name" expression="((String)globalMap.get(&quot;campaign_name&quot;))" type="id_String" nullable="true"/>
         <mapperTableEntries name="author_email" expression="row2.author_email " type="id_String" nullable="true"/>
@@ -415,488 +376,10 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="iNetCDFInput" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="736" posY="192">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFInput_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="((String)globalMap.get(&quot;fileToprocess.url&quot;))"/>
-    <elementParameter field="TABLE" name="SCHEMAS">
-      <elementValue elementRef="SCHEMA" value="variables"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
-    <elementParameter field="CHECK" name="SCALE_MISSING" value="true"/>
-    <elementParameter field="CHECK" name="CONVERT_ENUMS" value="true"/>
-    <elementParameter field="CHECK" name="FILLER_MISSING" value="true"/>
-    <elementParameter field="CHECK" name="INVALID_MISSING" value="false"/>
-    <elementParameter field="CHECK" name="MISSING_MISSING" value="true"/>
-    <elementParameter field="CLOSED_LIST" name="MISSING_VALUE_HANDLING" value="NULL_VALUES"/>
-    <elementParameter field="CHECK" name="ONE_BASED_INDEX" value="false"/>
-    <elementParameter field="CHECK" name="TRIM_STRINGS" value="false"/>
-    <elementParameter field="TABLE" name="COLUMN_MAPPINGS"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="variables" name="variables">
-      <column comment="" defaultValue="" key="false" name="TIME" nullable="true" originalDbColumnName="time" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="CDOM" nullable="true" originalDbColumnName="cdom" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="CPHL" nullable="true" originalDbColumnName="cphl" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" originalDbColumnName="depth" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="OPBS" nullable="true" originalDbColumnName="opbs" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" originalDbColumnName="psal" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" originalDbColumnName="temp" pattern="" sourceType="" type="id_Double"/>
-    </metadata>
-  </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="896" posY="192">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_3"/>
-    <elementParameter field="EXTERNAL" name="MAP" value=""/>
-    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
-    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_yj1RwEwUEeO-B4B5V1GkMg-tMap_3-PREVIEW.bmp"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
-    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="B_file">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date" originalLength="19"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" originalDbColumnName="depth" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="CDOM" nullable="true" originalDbColumnName="cdom" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="CPHL" nullable="true" originalDbColumnName="cphl" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="OPBS" nullable="true" originalDbColumnName="opbs" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
-      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="dive_id" nullable="false" pattern="" sourceType="" type="id_String"/>
-    </metadata>
-    <metadata connector="FLOW" name="ST_file">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date" originalLength="19"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" originalDbColumnName="depth" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" originalDbColumnName="psal" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" originalDbColumnName="temp" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
-      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="dive_id" nullable="false" pattern="" sourceType="" type="id_String"/>
-    </metadata>
-    <nodeData xsi:type="MapperData">
-      <uiProperties/>
-      <varTables sizeState="INTERMEDIATE" name="Var">
-        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(variables.LONGITUDE,variables.LATITUDE,&quot;EPSG:4326&quot;)" type="id_Geometry"/>
-        <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1950-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,variables.TIME,true) " type="id_Date"/>
-        <mapperTableEntries name="campaign_id" expression="((String)globalMap.get(&quot;campaign_name&quot;))" type="id_String"/>
-        <mapperTableEntries name="dive_id" expression="((String)globalMap.get(&quot;dive_name&quot;))" type="id_String"/>
-      </varTables>
-      <outputTables sizeState="INTERMEDIATE" name="B_file">
-        <mapperTableEntries name="file_id" expression="((Integer)globalMap.get(&quot;fileToprocess.id&quot;))" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="measurement" expression="Numeric.sequence(&quot;Flow_measurement_B&quot;,1,1)   " type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="TIME" expression="Var.TIME " type="id_Date" nullable="true"/>
-        <mapperTableEntries name="LATITUDE" expression="variables.LATITUDE " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="LONGITUDE" expression="variables.LONGITUDE " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="DEPTH" expression="variables.DEPTH " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="CDOM" expression="variables.CDOM " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="CPHL" expression="variables.CPHL " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="OPBS" expression="variables.OPBS " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="geom" expression="Var.geom " type="id_Geometry"/>
-        <mapperTableEntries name="campaign_id" expression="Var.campaign_id " type="id_String"/>
-        <mapperTableEntries name="dive_id" expression="Var.dive_id " type="id_String"/>
-      </outputTables>
-      <outputTables sizeState="INTERMEDIATE" name="ST_file">
-        <mapperTableEntries name="file_id" expression="((Integer)globalMap.get(&quot;fileToprocess.id&quot;))" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="measurement" expression="Numeric.sequence(&quot;Flow_measurement_ST&quot;,1,1)   " type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="TIME" expression="Var.TIME " type="id_Date" nullable="true"/>
-        <mapperTableEntries name="LATITUDE" expression="variables.LATITUDE " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="LONGITUDE" expression="variables.LONGITUDE " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="DEPTH" expression="variables.DEPTH " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="PSAL" expression="variables.PSAL " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="TEMP" expression="variables.TEMP " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="geom" expression="Var.geom " type="id_Geometry"/>
-        <mapperTableEntries name="campaign_id" expression="Var.campaign_id " type="id_String"/>
-        <mapperTableEntries name="dive_id" expression="Var.dive_id " type="id_String"/>
-      </outputTables>
-      <inputTables sizeState="INTERMEDIATE" name="variables" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
-        <mapperTableEntries name="TIME" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="CDOM" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="CPHL" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="DEPTH" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="LATITUDE" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="LONGITUDE" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="OPBS" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="PSAL" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="TEMP" type="id_Double" nullable="true"/>
-      </inputTables>
-    </nodeData>
-  </node>
-  <node componentName="tFilterRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="128">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFilterRow_1"/>
-    <elementParameter field="CLOSED_LIST" name="LOGICAL_OP" value="||"/>
-    <elementParameter field="TABLE" name="CONDITIONS">
-      <elementValue elementRef="INPUT_COLUMN" value="CDOM"/>
-      <elementValue elementRef="FUNCTION" value=""/>
-      <elementValue elementRef="OPERATOR" value="!="/>
-      <elementValue elementRef="RVALUE" value="null"/>
-      <elementValue elementRef="INPUT_COLUMN" value="CPHL"/>
-      <elementValue elementRef="FUNCTION" value=""/>
-      <elementValue elementRef="OPERATOR" value="!="/>
-      <elementValue elementRef="RVALUE" value="null"/>
-      <elementValue elementRef="INPUT_COLUMN" value="OPBS"/>
-      <elementValue elementRef="FUNCTION" value=""/>
-      <elementValue elementRef="OPERATOR" value="!="/>
-      <elementValue elementRef="RVALUE" value="null"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="USE_ADVANCED" value="false"/>
-    <elementParameter field="MEMO_JAVA" name="ADVANCED_COND" value="// code sample : use input_row to define the condition.&#xA;// input_row.columnName1.equals(&quot;foo&quot;) ||!(input_row.columnName2.equals(&quot;bar&quot;))&#xA;// replace the following expression by your own filter condition &#xA;input_row.columnName1.equals(input_row.columnName2)&#xA;&#x9;&#x9;&#x9;"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tFilterRow_1">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date" originalLength="19"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" originalDbColumnName="depth" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="CDOM" nullable="true" originalDbColumnName="cdom" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="CPHL" nullable="true" originalDbColumnName="cphl" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="OPBS" nullable="true" originalDbColumnName="opbs" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
-      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="dive_id" nullable="false" pattern="" sourceType="" type="id_String"/>
-    </metadata>
-    <metadata connector="FILTER" name="FILTER">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="CDOM" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="CPHL" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="OPBS" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
-      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="dive_id" nullable="false" originalDbColumnName="dive_name" pattern="" sourceType="" type="id_String"/>
-    </metadata>
-    <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date" originalLength="19"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" originalDbColumnName="depth" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="CDOM" nullable="true" originalDbColumnName="cdom" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="CPHL" nullable="true" originalDbColumnName="cphl" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="OPBS" nullable="true" originalDbColumnName="opbs" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
-      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="dive_id" nullable="false" pattern="" sourceType="" type="id_String"/>
-      <column key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
-    </metadata>
-  </node>
-  <node componentName="tFilterRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1056" posY="288">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFilterRow_2"/>
-    <elementParameter field="CLOSED_LIST" name="LOGICAL_OP" value="||"/>
-    <elementParameter field="TABLE" name="CONDITIONS">
-      <elementValue elementRef="INPUT_COLUMN" value="TEMP"/>
-      <elementValue elementRef="FUNCTION" value=""/>
-      <elementValue elementRef="OPERATOR" value="!="/>
-      <elementValue elementRef="RVALUE" value="null"/>
-      <elementValue elementRef="INPUT_COLUMN" value="PSAL"/>
-      <elementValue elementRef="FUNCTION" value=""/>
-      <elementValue elementRef="OPERATOR" value="!="/>
-      <elementValue elementRef="RVALUE" value="null"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="USE_ADVANCED" value="false"/>
-    <elementParameter field="MEMO_JAVA" name="ADVANCED_COND" value="// code sample : use input_row to define the condition.&#xA;// input_row.columnName1.equals(&quot;foo&quot;) ||!(input_row.columnName2.equals(&quot;bar&quot;))&#xA;// replace the following expression by your own filter condition &#xA;input_row.columnName1.equals(input_row.columnName2)&#xA;&#x9;&#x9;&#x9;"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tFilterRow_2">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date" originalLength="19"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" originalDbColumnName="depth" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" originalDbColumnName="psal" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" originalDbColumnName="temp" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
-      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="dive_id" nullable="false" pattern="" sourceType="" type="id_String"/>
-    </metadata>
-    <metadata connector="FILTER" name="FILTER">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
-      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="dive_id" nullable="false" originalDbColumnName="dive_name" pattern="" sourceType="" type="id_String"/>
-    </metadata>
-    <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date" originalLength="19"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" originalDbColumnName="depth" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" originalDbColumnName="psal" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" originalDbColumnName="temp" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
-      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="dive_id" nullable="false" pattern="" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
-    </metadata>
-  </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1248" posY="288">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_2"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;measurements_st&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
-    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
-    <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
-    <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
-    <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
-    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
-    <elementParameter field="TABLE" name="ADD_COLS"/>
-    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
-    <elementParameter field="TABLE" name="FIELD_OPTIONS">
-      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="TIME"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="LATITUDE"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="LONGITUDE"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DEPTH"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="PSAL"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="TEMP"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="campaign_id"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="dive_id"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
-    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
-    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
-    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
-    <elementParameter field="TEXT" name="LABEL" value="measurements_table"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="iPostgresqlOutput_2">
-      <column comment="" defaultValue="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
-      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="dive_id" nullable="false" originalDbColumnName="dive_name" pattern="" sourceType="VARCHAR" type="id_String"/>
-    </metadata>
-    <metadata connector="REJECT" name="REJECT">
-      <column comment="" defaultValue="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
-      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="dive_id" nullable="false" originalDbColumnName="dive_name" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
-    </metadata>
-  </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1248" posY="128">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_3"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;measurements_b&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
-    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
-    <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
-    <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
-    <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
-    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
-    <elementParameter field="TABLE" name="ADD_COLS"/>
-    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
-    <elementParameter field="TABLE" name="FIELD_OPTIONS">
-      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="TIME"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="LATITUDE"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="LONGITUDE"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="DEPTH"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="CDOM"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="CPHL"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="OPBS"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="campaign_id"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="dive_id"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
-    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
-    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
-    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
-    <elementParameter field="TEXT" name="LABEL" value="measurements_table"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="iPostgresqlOutput_3">
-      <column comment="" defaultValue="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="CDOM" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="CPHL" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="OPBS" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
-      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="dive_id" nullable="false" originalDbColumnName="dive_name" pattern="" sourceType="VARCHAR" type="id_String"/>
-    </metadata>
-    <metadata connector="REJECT" name="REJECT">
-      <column comment="" defaultValue="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="CDOM" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="CPHL" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="OPBS" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
-      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="dive_id" nullable="false" originalDbColumnName="dive_name" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
-    </metadata>
-  </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1120" posY="-32">
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1056" posY="-32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_5"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_2"/>
     <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
     <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
@@ -910,7 +393,7 @@
     <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
     <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
     <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -1110,8 +593,8 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_5">
       <column comment="" defaultValue="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="150" name="dive_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="campaign_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="150" name="dive_name" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="campaign_name" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="author_email" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="cdm_data_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="local_time_zone" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -1148,8 +631,8 @@
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" defaultValue="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="150" name="dive_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="campaign_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="150" name="dive_name" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="50" name="campaign_name" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="author_email" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="cdm_data_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="local_time_zone" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -1187,19 +670,610 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
+  <node componentName="iNetCDFInput" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="672" posY="192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFInput_1"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
+    <elementParameter field="TABLE" name="SCHEMAS">
+      <elementValue elementRef="SCHEMA" value="variables"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="SCALE_MISSING" value="true"/>
+    <elementParameter field="CHECK" name="CONVERT_ENUMS" value="true"/>
+    <elementParameter field="CHECK" name="FILLER_MISSING" value="true"/>
+    <elementParameter field="CHECK" name="INVALID_MISSING" value="false"/>
+    <elementParameter field="CHECK" name="MISSING_MISSING" value="true"/>
+    <elementParameter field="CLOSED_LIST" name="MISSING_VALUE_HANDLING" value="NULL_VALUES"/>
+    <elementParameter field="CHECK" name="ONE_BASED_INDEX" value="false"/>
+    <elementParameter field="CHECK" name="TRIM_STRINGS" value="false"/>
+    <elementParameter field="TABLE" name="COLUMN_MAPPINGS"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" label="variables" name="variables">
+      <column comment="" defaultValue="" key="false" name="TIME" nullable="true" originalDbColumnName="time" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="CDOM" nullable="true" originalDbColumnName="cdom" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="CPHL" nullable="true" originalDbColumnName="cphl" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" originalDbColumnName="depth" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="OPBS" nullable="true" originalDbColumnName="opbs" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" originalDbColumnName="psal" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" originalDbColumnName="temp" pattern="" sourceType="" type="id_Double"/>
+    </metadata>
+  </node>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="832" posY="192">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_3"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_yj1RwEwUEeO-B4B5V1GkMg-tMap_3-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="B_file">
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date" originalLength="19"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" originalDbColumnName="depth" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="CDOM" nullable="true" originalDbColumnName="cdom" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="CPHL" nullable="true" originalDbColumnName="cphl" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="OPBS" nullable="true" originalDbColumnName="opbs" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
+      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="dive_id" nullable="false" pattern="" sourceType="" type="id_String"/>
+    </metadata>
+    <metadata connector="FLOW" name="ST_file">
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date" originalLength="19"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" originalDbColumnName="depth" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" originalDbColumnName="psal" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" originalDbColumnName="temp" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
+      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="dive_id" nullable="false" pattern="" sourceType="" type="id_String"/>
+    </metadata>
+    <nodeData xsi:type="MapperData">
+      <uiProperties/>
+      <varTables sizeState="INTERMEDIATE" name="Var">
+        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(variables.LONGITUDE,variables.LATITUDE,&quot;EPSG:4326&quot;)" type="id_Geometry"/>
+        <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1950-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,variables.TIME,true) " type="id_Date"/>
+        <mapperTableEntries name="campaign_id" expression="((String)globalMap.get(&quot;campaign_name&quot;))" type="id_String"/>
+        <mapperTableEntries name="dive_id" expression="((String)globalMap.get(&quot;dive_name&quot;))" type="id_String"/>
+      </varTables>
+      <outputTables sizeState="INTERMEDIATE" name="B_file">
+        <mapperTableEntries name="file_id" expression="context.fileid" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="measurement" expression="Numeric.sequence(&quot;Flow_measurement_B&quot;,1,1)   " type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="TIME" expression="Var.TIME " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="LATITUDE" expression="variables.LATITUDE " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="LONGITUDE" expression="variables.LONGITUDE " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="DEPTH" expression="variables.DEPTH " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="CDOM" expression="variables.CDOM " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="CPHL" expression="variables.CPHL " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="OPBS" expression="variables.OPBS " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="geom" expression="Var.geom " type="id_Geometry"/>
+        <mapperTableEntries name="campaign_id" expression="Var.campaign_id " type="id_String"/>
+        <mapperTableEntries name="dive_id" expression="Var.dive_id " type="id_String"/>
+      </outputTables>
+      <outputTables sizeState="INTERMEDIATE" name="ST_file">
+        <mapperTableEntries name="file_id" expression="context.fileid" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="measurement" expression="Numeric.sequence(&quot;Flow_measurement_ST&quot;,1,1)   " type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="TIME" expression="Var.TIME " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="LATITUDE" expression="variables.LATITUDE " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="LONGITUDE" expression="variables.LONGITUDE " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="DEPTH" expression="variables.DEPTH " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="PSAL" expression="variables.PSAL " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="TEMP" expression="variables.TEMP " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="geom" expression="Var.geom " type="id_Geometry"/>
+        <mapperTableEntries name="campaign_id" expression="Var.campaign_id " type="id_String"/>
+        <mapperTableEntries name="dive_id" expression="Var.dive_id " type="id_String"/>
+      </outputTables>
+      <inputTables sizeState="INTERMEDIATE" name="variables" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
+        <mapperTableEntries name="TIME" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="CDOM" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="CPHL" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="DEPTH" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="LATITUDE" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="LONGITUDE" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="OPBS" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="PSAL" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="TEMP" type="id_Double" nullable="true"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tFilterRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="960" posY="128">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFilterRow_1"/>
+    <elementParameter field="CLOSED_LIST" name="LOGICAL_OP" value="||"/>
+    <elementParameter field="TABLE" name="CONDITIONS">
+      <elementValue elementRef="INPUT_COLUMN" value="CDOM"/>
+      <elementValue elementRef="FUNCTION" value=""/>
+      <elementValue elementRef="OPERATOR" value="!="/>
+      <elementValue elementRef="RVALUE" value="null"/>
+      <elementValue elementRef="INPUT_COLUMN" value="CPHL"/>
+      <elementValue elementRef="FUNCTION" value=""/>
+      <elementValue elementRef="OPERATOR" value="!="/>
+      <elementValue elementRef="RVALUE" value="null"/>
+      <elementValue elementRef="INPUT_COLUMN" value="OPBS"/>
+      <elementValue elementRef="FUNCTION" value=""/>
+      <elementValue elementRef="OPERATOR" value="!="/>
+      <elementValue elementRef="RVALUE" value="null"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="USE_ADVANCED" value="false"/>
+    <elementParameter field="MEMO_JAVA" name="ADVANCED_COND" value="// code sample : use input_row to define the condition.&#xA;// input_row.columnName1.equals(&quot;foo&quot;) ||!(input_row.columnName2.equals(&quot;bar&quot;))&#xA;// replace the following expression by your own filter condition &#xA;input_row.columnName1.equals(input_row.columnName2)&#xA;&#x9;&#x9;&#x9;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tFilterRow_1">
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date" originalLength="19"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" originalDbColumnName="depth" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="CDOM" nullable="true" originalDbColumnName="cdom" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="CPHL" nullable="true" originalDbColumnName="cphl" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="OPBS" nullable="true" originalDbColumnName="opbs" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
+      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="dive_id" nullable="false" pattern="" sourceType="" type="id_String"/>
+    </metadata>
+    <metadata connector="FILTER" name="FILTER">
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="CDOM" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="CPHL" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="OPBS" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
+      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="dive_id" nullable="false" originalDbColumnName="dive_name" pattern="" sourceType="" type="id_String"/>
+    </metadata>
+    <metadata connector="REJECT" name="REJECT">
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date" originalLength="19"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" originalDbColumnName="depth" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="CDOM" nullable="true" originalDbColumnName="cdom" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="CPHL" nullable="true" originalDbColumnName="cphl" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="OPBS" nullable="true" originalDbColumnName="opbs" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
+      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="dive_id" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tFilterRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="992" posY="288">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFilterRow_2"/>
+    <elementParameter field="CLOSED_LIST" name="LOGICAL_OP" value="||"/>
+    <elementParameter field="TABLE" name="CONDITIONS">
+      <elementValue elementRef="INPUT_COLUMN" value="TEMP"/>
+      <elementValue elementRef="FUNCTION" value=""/>
+      <elementValue elementRef="OPERATOR" value="!="/>
+      <elementValue elementRef="RVALUE" value="null"/>
+      <elementValue elementRef="INPUT_COLUMN" value="PSAL"/>
+      <elementValue elementRef="FUNCTION" value=""/>
+      <elementValue elementRef="OPERATOR" value="!="/>
+      <elementValue elementRef="RVALUE" value="null"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="USE_ADVANCED" value="false"/>
+    <elementParameter field="MEMO_JAVA" name="ADVANCED_COND" value="// code sample : use input_row to define the condition.&#xA;// input_row.columnName1.equals(&quot;foo&quot;) ||!(input_row.columnName2.equals(&quot;bar&quot;))&#xA;// replace the following expression by your own filter condition &#xA;input_row.columnName1.equals(input_row.columnName2)&#xA;&#x9;&#x9;&#x9;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tFilterRow_2">
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date" originalLength="19"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" originalDbColumnName="depth" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" originalDbColumnName="psal" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" originalDbColumnName="temp" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
+      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="dive_id" nullable="false" pattern="" sourceType="" type="id_String"/>
+    </metadata>
+    <metadata connector="FILTER" name="FILTER">
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
+      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="dive_id" nullable="false" originalDbColumnName="dive_name" pattern="" sourceType="" type="id_String"/>
+    </metadata>
+    <metadata connector="REJECT" name="REJECT">
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="true" name="measurement" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date" originalLength="19"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" originalDbColumnName="depth" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" originalDbColumnName="psal" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" originalDbColumnName="temp" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="" type="id_Geometry"/>
+      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="dive_id" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1184" posY="288">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_2"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_2"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;measurements_st&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
+    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
+    <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
+    <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
+    <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TABLE" name="ADD_COLS"/>
+    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
+    <elementParameter field="TABLE" name="FIELD_OPTIONS">
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="TIME"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="LATITUDE"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="LONGITUDE"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="DEPTH"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="PSAL"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="TEMP"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="campaign_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="dive_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
+    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
+    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
+    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
+    <elementParameter field="TEXT" name="LABEL" value="measurements_table"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="iPostgresqlOutput_2">
+      <column comment="" defaultValue="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
+      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="dive_id" nullable="false" originalDbColumnName="dive_name" pattern="" sourceType="VARCHAR" type="id_String"/>
+    </metadata>
+    <metadata connector="REJECT" name="REJECT">
+      <column comment="" defaultValue="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="PSAL" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="TEMP" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
+      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="dive_id" nullable="false" originalDbColumnName="dive_name" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1184" posY="128">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_3"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_2"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;measurements_b&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
+    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
+    <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
+    <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
+    <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TABLE" name="ADD_COLS"/>
+    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
+    <elementParameter field="TABLE" name="FIELD_OPTIONS">
+      <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="TIME"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="LATITUDE"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="LONGITUDE"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="DEPTH"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="CDOM"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="CPHL"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OPBS"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="campaign_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="dive_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
+    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
+    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
+    <elementParameter field="TEXT" name="BATCH_SIZE" value="10000"/>
+    <elementParameter field="TEXT" name="LABEL" value="measurements_table"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="iPostgresqlOutput_3">
+      <column comment="" defaultValue="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="CDOM" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="CPHL" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="OPBS" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
+      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="dive_id" nullable="false" originalDbColumnName="dive_name" pattern="" sourceType="VARCHAR" type="id_String"/>
+    </metadata>
+    <metadata connector="REJECT" name="REJECT">
+      <column comment="" defaultValue="" key="false" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="19" name="TIME" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="DEPTH" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="CDOM" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="CPHL" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="OPBS" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" name="geom" nullable="false" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
+      <column comment="" key="false" name="campaign_id" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="dive_id" nullable="false" originalDbColumnName="dive_name" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="928" posY="416" sizeX="64" sizeY="32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_2"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="createWMS"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_aw_e8EwlEeOePP_tiw4hxw"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS"/>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tRunJob_2"/>
+  </node>
+  <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="416" posY="416">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1"/>
+    <elementParameter field="CHECK" name="START" value="true"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tPostgresqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-160" posY="128">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_2"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
+    <elementParameter field="TEXT" name="HOST" value="context.destination_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.destination_Password"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_SHARED_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="SHARED_CONNECTION_NAME" value=""/>
+    <elementParameter field="CHECK" name="AUTO_COMMIT" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="576" posY="416">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_2"/>
+    <elementParameter field="CHECK" name="CLOSE" value="true"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlCommit_1"/>
+  </node>
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="768" posY="416" sizeX="64" sizeY="32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_1"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="mergeMeasurements"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_P6iwQEwZEeOP9fho-7uHMg"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS">
+      <elementValue elementRef="PARAM_NAME_COLUMN" value="dive_name"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;dive_name&quot;))"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tRunJob_1"/>
+  </node>
+  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-160" posY="-32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_2"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;localhost&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM deployments where file_id = &quot; + context.fileid + &quot;;&#xA;DELETE FROM measurements_st where file_id = &quot; + context.fileid + &quot;;&#xA;DELETE FROM measurements_b where file_id = &quot; + context.fileid + &quot;;&#xA;TRUNCATE TABLE  table_master; TRUNCATE TABLE measurements_merged_data;&quot;"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
+    <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
+    <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
+    <elementParameter field="TABLE" name="SET_PREPAREDSTATEMENT_PARAMETERS"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlRow_1"/>
+    <metadata connector="REJECT" name="REJECT">
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIncludeSdiLibraries_1" offsetLabelX="0" offsetLabelY="0" source="iIncludeSdiLibraries_1" target="iPostgresqlDbUpdate_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
   </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="tPostgresqlConnection_1">
-    <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
-    <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="tPostgresqlConnection_2">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate3"/>
-  </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="tPostgresqlInput_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
   </connection>
   <connection connectorName="FLOW" label="row5" lineStyle="0" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tMap_1">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
@@ -1256,10 +1330,6 @@
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2"/>
-  </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tFlowToIterate_1" offsetLabelX="0" offsetLabelY="0" source="tFlowToIterate_1" target="tPostgresqlClose_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk2"/>
   </connection>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="iNetCDFGlobalAttributes_1" offsetLabelX="0" offsetLabelY="0" source="iNetCDFGlobalAttributes_1" target="tSetGlobalVar_3">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
@@ -1839,13 +1909,28 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row4"/>
   </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostjob_1" offsetLabelX="0" offsetLabelY="0" source="tPostjob_1" target="tPostgresqlCommit_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnection_2" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tPostgresqlConnection_2" target="tPostgresqlRow_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnection_2" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tPostgresqlConnection_2" target="tPostgresqlInput_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk6"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlCommit_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlCommit_1" target="tRunJob_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk4"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_1" offsetLabelX="0" offsetLabelY="0" source="tRunJob_1" target="tRunJob_2">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
+  </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIncludeSdiLibraries_1"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
-  <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
@@ -1856,6 +1941,37 @@
   </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_2"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="230;100;0"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="255;220;180"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_2"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
