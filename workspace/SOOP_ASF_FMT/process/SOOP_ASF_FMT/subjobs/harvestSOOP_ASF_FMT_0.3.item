@@ -2,14 +2,14 @@
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest"/>
-    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="soop_asf_mft"/>
-    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="U/lJR2y31NdE9Vg78TUZZA=="/>
+    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="soop_asf_fmt"/>
+    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="U/lJR2y31NfUVVtRmdbokA=="/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
-    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="soop_asf_mft"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="soop_asf_fmt"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value="2"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
-    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value=""/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/home/lbesnard/Downloads"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -1236,7 +1236,7 @@
       <column comment="" key="false" name="data_comment" nullable="true" pattern="" sourceType="" type="id_String"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="copyOfout1">
         <mapperTableEntries name="file_id" expression="context.file_id" type="id_Integer"/>
@@ -1246,7 +1246,7 @@
         <mapperTableEntries name="project" expression="row1.project " type="id_String" nullable="true"/>
         <mapperTableEntries name="platform_code" expression="row1.platform_code " type="id_String" nullable="true"/>
         <mapperTableEntries name="voyage_number" expression="row1.voyage_number " type="id_String" nullable="true"/>
-        <mapperTableEntries name="vessel_name" expression="row6.new_vessel_name" type="id_String" nullable="true"/>
+        <mapperTableEntries name="vessel_name" expression="row6.vessel_name" type="id_String" nullable="true"/>
         <mapperTableEntries name="title" expression="row1.title " type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_start" expression="row1.time_coverage_start " type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_end" expression="row1.time_coverage_end " type="id_String" nullable="true"/>
@@ -1304,8 +1304,8 @@
         <mapperTableEntries name="time_coverage_end" type="id_String" nullable="true"/>
       </inputTables>
       <inputTables sizeState="INTERMEDIATE" name="row6" activateCondensedTool="true" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
-        <mapperTableEntries name="old_vessel_name" expression="row1.site" type="id_String" nullable="true"/>
-        <mapperTableEntries name="new_vessel_name" expression="" type="id_String" nullable="true"/>
+        <mapperTableEntries name="platform_code" expression="row1.platform_code" type="id_String" nullable="true"/>
+        <mapperTableEntries name="vessel_name" type="id_String" nullable="true"/>
       </inputTables>
     </nodeData>
   </node>
@@ -1314,19 +1314,21 @@
     <elementParameter field="TEXT" name="NB_ROWS" value="1"/>
     <elementParameter field="RADIO" name="USE_SINGLEMODE" value="false"/>
     <elementParameter field="TABLE" name="VALUES">
-      <elementValue elementRef="SCHEMA_COLUMN" value="old_vessel_name"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="platform_code"/>
       <elementValue elementRef="VALUE" value=""/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="new_vessel_name"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="vessel_name"/>
       <elementValue elementRef="VALUE" value=""/>
     </elementParameter>
     <elementParameter field="RADIO" name="USE_INTABLE" value="true"/>
     <elementParameter field="TABLE" name="INTABLE">
-      <elementValue elementRef="old_vessel_name" value="&quot;RSV AURORA AUSTRALIS&quot;"/>
-      <elementValue elementRef="new_vessel_name" value="&quot;Aurora Australis&quot;"/>
-      <elementValue elementRef="old_vessel_name" value="&quot;RV SOUTHERN SURVEYOR&quot;"/>
-      <elementValue elementRef="new_vessel_name" value="&quot;Southern Surveyor&quot;"/>
-      <elementValue elementRef="old_vessel_name" value="&quot;RV TANGAROA&quot;"/>
-      <elementValue elementRef="new_vessel_name" value="&quot;Tangaroa&quot;"/>
+      <elementValue elementRef="platform_code" value="&quot;VNAA&quot;"/>
+      <elementValue elementRef="vessel_name" value="&quot;Aurora Australis&quot;"/>
+      <elementValue elementRef="platform_code" value="&quot;VLHJ&quot;"/>
+      <elementValue elementRef="vessel_name" value="&quot;Southern Surveyor&quot;"/>
+      <elementValue elementRef="platform_code" value="&quot;ZMFR&quot;"/>
+      <elementValue elementRef="vessel_name" value="&quot;Tangaroa&quot;"/>
+      <elementValue elementRef="platform_code" value="&quot;VLMJ&quot;"/>
+      <elementValue elementRef="vessel_name" value="&quot;Investigator&quot;"/>
     </elementParameter>
     <elementParameter field="RADIO" name="USE_INLINECONTENT" value="false"/>
     <elementParameter field="TEXT" name="ROWSEPARATOR" value="&quot;\n&quot;"/>
@@ -1337,8 +1339,8 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tFixedFlowInput_5">
-      <column comment="" key="false" name="old_vessel_name" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="new_vessel_name" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="vessel_name" nullable="true" pattern="" sourceType="" type="id_String"/>
     </metadata>
   </node>
   <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="96" posY="448">
@@ -2368,10 +2370,10 @@
   <connection connectorName="FLOW" label="row6" lineStyle="8" metaname="tFixedFlowInput_5" offsetLabelX="0" offsetLabelY="0" source="tFixedFlowInput_5" target="tMap_2">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="new_vessel_name"/>
+      <elementValue elementRef="TRACE_COLUMN" value="vessel_name"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="old_vessel_name"/>
+      <elementValue elementRef="TRACE_COLUMN" value="platform_code"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
