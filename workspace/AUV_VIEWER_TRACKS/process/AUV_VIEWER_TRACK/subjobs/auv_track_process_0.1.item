@@ -11,11 +11,11 @@
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
-    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/mnt/imos-t4/IMOS/public/AUV/auv_viewer_data/thumbnails"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/home/lbesnard/auv_testing/auv_viewer_data/csv_outputs"/>
     <contextParameter comment="" name="foreign_key" prompt="foreign_key?" promptNeeded="false" type="id_Integer" value=""/>
     <contextParameter comment="" name="campaign_code_context" prompt="campaign_code_context?" promptNeeded="false" type="id_String" value="null"/>
     <contextParameter comment="" name="dive_code_context" prompt="dive_code_context?" promptNeeded="false" type="id_String" value="null"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/home/lbesnard/github_repo/chef/src"/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/tmp/fileList"/>
   </context>
   <context confirmationNeeded="false" name="Deployment">
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
@@ -28,11 +28,11 @@
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="#{node['talend']['destination_database_server']}"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
-    <contextParameter comment="" name="exclude" prompt="exclude?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="null"/>
-    <contextParameter comment="" name="sourceDir" prompt="sourceDir?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="#{node['talend']['data1']}/IMOS/opendap/SOOP/SOOP-TRV/"/>
     <contextParameter comment="" name="foreign_key" prompt="foreign_key?" promptNeeded="false" type="id_Integer" value=""/>
     <contextParameter comment="" name="campaign_code_context" prompt="campaign_code_context?" promptNeeded="false" type="id_String" value="null"/>
     <contextParameter comment="" name="dive_code_context" prompt="dive_code_context?" promptNeeded="false" type="id_String" value="null"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value=""/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/tmp/fileList"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -148,7 +148,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileInputDelimited_1"/>
     <elementParameter field="CHECK" name="TSTATCATCHER_STATS" value="true"/>
     <elementParameter field="LABEL" name="FILENAMETEXT" value="&quot;When the input source is a stream or a zip file,footer and random shouldn't be bigger than 0.&quot;"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TEXT" name="ROWSEPARATOR" value="&quot;\n&quot;"/>
     <elementParameter field="OPENED_LIST" name="CSVROWSEPARATOR" value="&quot;\n&quot;"/>
     <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;,&quot;"/>
@@ -676,7 +676,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileInputDelimited_2"/>
     <elementParameter field="CHECK" name="TSTATCATCHER_STATS" value="true"/>
     <elementParameter field="LABEL" name="FILENAMETEXT" value="&quot;When the input source is a stream or a zip file,footer and random shouldn't be bigger than 0.&quot;"/>
-    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TEXT" name="ROWSEPARATOR" value="&quot;\n&quot;"/>
     <elementParameter field="OPENED_LIST" name="CSVROWSEPARATOR" value="&quot;\n&quot;"/>
     <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;,&quot;"/>
@@ -839,13 +839,13 @@
       <column comment="" key="false" length="9" name="depth_sensor" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double"/>
       <column comment="" key="false" length="8" name="altitude_sensor" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double"/>
       <column comment="" key="false" length="9" name="depth" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double"/>
-      <column comment="" key="false" length="9" name="sea_water_temperature" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double"/>
-      <column comment="" key="false" length="9" name="sea_water_salinity" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double"/>
-      <column comment="" key="false" length="8" name="chlorophyll_concentration_in_sea_water" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double"/>
-      <column comment="" key="false" length="8" name="backscattering_ratio" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double"/>
-      <column comment="" key="false" length="8" name="colored_dissolved_organic_matter" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double"/>
+      <column comment="" key="false" length="9" name="sea_water_temperature" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double"/>
+      <column comment="" key="false" length="9" name="sea_water_salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double"/>
+      <column comment="" key="false" length="8" name="chlorophyll_concentration_in_sea_water" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double"/>
+      <column comment="" key="false" length="8" name="backscattering_ratio" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double"/>
+      <column comment="" key="false" length="8" name="colored_dissolved_organic_matter" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double"/>
       <column comment="" key="false" length="16" name="time" nullable="false" pattern="&quot;dd-MM-yyyy hh:mm:ss&quot;" precision="0" type="id_Date"/>
-      <column comment="" key="false" length="1" name="cluster_tag" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Integer"/>
+      <column comment="" key="false" length="1" name="cluster_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Integer"/>
       <column comment="" key="false" length="11" name="up_left_lon" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="8" type="id_Double"/>
       <column comment="" key="false" length="11" name="up_left_lat" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="8" type="id_Double"/>
       <column comment="" key="false" length="11" name="up_right_lon" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="8" type="id_Double"/>
@@ -856,7 +856,7 @@
       <column comment="" key="false" length="11" name="low_left_lat" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="8" type="id_Double"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="out1">
         <mapperTableEntries name="fk_auv_tracks" expression="context.foreign_key" type="id_Integer"/>
@@ -870,13 +870,13 @@
         <mapperTableEntries name="depth_sensor" expression="row3.depth_sensor " type="id_Double"/>
         <mapperTableEntries name="altitude_sensor" expression="row3.altitude_sensor " type="id_Double"/>
         <mapperTableEntries name="depth" expression="row3.depth " type="id_Double"/>
-        <mapperTableEntries name="sea_water_temperature" expression="row3.sea_water_temperature " type="id_Double"/>
-        <mapperTableEntries name="sea_water_salinity" expression="row3.sea_water_salinity " type="id_Double"/>
-        <mapperTableEntries name="chlorophyll_concentration_in_sea_water" expression="row3.chlorophyll_concentration_in_sea_water " type="id_Double"/>
-        <mapperTableEntries name="backscattering_ratio" expression="row3.backscattering_ratio " type="id_Double"/>
-        <mapperTableEntries name="colored_dissolved_organic_matter" expression="row3.colored_dissolved_organic_matter " type="id_Double"/>
+        <mapperTableEntries name="sea_water_temperature" expression="row3.sea_water_temperature " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="sea_water_salinity" expression="row3.sea_water_salinity " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="chlorophyll_concentration_in_sea_water" expression="row3.chlorophyll_concentration_in_sea_water " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="backscattering_ratio" expression="row3.backscattering_ratio " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="colored_dissolved_organic_matter" expression="row3.colored_dissolved_organic_matter " type="id_Double" nullable="true"/>
         <mapperTableEntries name="time" expression="TalendDate.parseDate(&quot;yyyyMMdd'T'HHmmss&quot;,row3.time) " type="id_Date"/>
-        <mapperTableEntries name="cluster_tag" expression="row3.cluster_tag " type="id_Integer"/>
+        <mapperTableEntries name="cluster_tag" expression="row3.cluster_tag " type="id_Integer" nullable="true"/>
         <mapperTableEntries name="up_left_lon" expression="row3.up_left_lon " type="id_Double"/>
         <mapperTableEntries name="up_left_lat" expression="row3.up_left_lat " type="id_Double"/>
         <mapperTableEntries name="up_right_lon" expression="row3.up_right_lon " type="id_Double"/>
@@ -1090,13 +1090,13 @@
       <column comment="" key="false" length="9" name="depth_sensor" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="8" name="altitude_sensor" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="9" name="depth" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="9" name="sea_water_temperature" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="9" name="sea_water_salinity" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="8" name="chlorophyll_concentration_in_sea_water" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="8" name="backscattering_ratio" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="8" name="colored_dissolved_organic_matter" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="9" name="sea_water_temperature" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="9" name="sea_water_salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="8" name="chlorophyll_concentration_in_sea_water" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="8" name="backscattering_ratio" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="8" name="colored_dissolved_organic_matter" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="16" name="time" nullable="false" pattern="&quot;dd-MM-yyyy hh:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="1" name="cluster_tag" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="1" name="cluster_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="11" name="up_left_lon" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="8" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="11" name="up_left_lat" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="8" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="11" name="up_right_lon" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="8" sourceType="FLOAT8" type="id_Double"/>
@@ -1118,13 +1118,13 @@
       <column comment="" key="false" length="9" name="depth_sensor" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="8" name="altitude_sensor" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="9" name="depth" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="9" name="sea_water_temperature" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="9" name="sea_water_salinity" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="8" name="chlorophyll_concentration_in_sea_water" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="8" name="backscattering_ratio" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" length="8" name="colored_dissolved_organic_matter" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="9" name="sea_water_temperature" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="9" name="sea_water_salinity" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="8" name="chlorophyll_concentration_in_sea_water" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="8" name="backscattering_ratio" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="8" name="colored_dissolved_organic_matter" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="16" name="time" nullable="false" pattern="&quot;dd-MM-yyyy hh:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="1" name="cluster_tag" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="1" name="cluster_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="11" name="up_left_lon" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="8" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="11" name="up_left_lat" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="8" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="11" name="up_right_lon" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="8" sourceType="FLOAT8" type="id_Double"/>
@@ -1502,70 +1502,76 @@
   <connection connectorName="FLOW" label="row3" lineStyle="0" metaname="tFileInputDelimited_2" offsetLabelX="0" offsetLabelY="0" source="tFileInputDelimited_2" target="tMap_2">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="dive_number"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="dive_name"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="dive_metadata_uuid"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="facility_code"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="campaign_code"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="dive_code"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="distance_covered_in_m"/>
+      <elementValue elementRef="TRACE_COLUMN" value="image_filename"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="number_of_images"/>
+      <elementValue elementRef="TRACE_COLUMN" value="longitude"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="image_path"/>
+      <elementValue elementRef="TRACE_COLUMN" value="latitude"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="Column9"/>
+      <elementValue elementRef="TRACE_COLUMN" value="image_width"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="platform_code"/>
+      <elementValue elementRef="TRACE_COLUMN" value="depth_sensor"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="pattern"/>
+      <elementValue elementRef="TRACE_COLUMN" value="altitude_sensor"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="dive_report_path"/>
+      <elementValue elementRef="TRACE_COLUMN" value="depth"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="kml_path"/>
+      <elementValue elementRef="TRACE_COLUMN" value="sea_water_temperature"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geospatial_lat_min"/>
+      <elementValue elementRef="TRACE_COLUMN" value="sea_water_salinity"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geospatial_lon_min"/>
+      <elementValue elementRef="TRACE_COLUMN" value="chlorophyll_concentration_in_sea_water"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geospatial_lat_max"/>
+      <elementValue elementRef="TRACE_COLUMN" value="backscattering_ratio"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geospatial_lon_max"/>
+      <elementValue elementRef="TRACE_COLUMN" value="colored_dissolved_organic_matter"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_min"/>
+      <elementValue elementRef="TRACE_COLUMN" value="time"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_max"/>
+      <elementValue elementRef="TRACE_COLUMN" value="cluster_tag"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_start"/>
+      <elementValue elementRef="TRACE_COLUMN" value="up_left_lon"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
+      <elementValue elementRef="TRACE_COLUMN" value="up_left_lat"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="up_right_lon"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="up_right_lat"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="low_right_lon"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="low_right_lat"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="low_left_lon"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="low_left_lat"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
