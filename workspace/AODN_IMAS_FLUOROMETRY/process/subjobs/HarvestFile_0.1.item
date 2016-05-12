@@ -676,7 +676,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from deployments where file_id = &quot;+ context.fileId + &quot; ; &quot;+&#xA;&quot;delete from measurements where file_id=&quot; + context.fileId  +&quot; ; &quot; &#xA;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from deployments where file_id = &quot;+ context.fileId + &quot; ; &quot;+&#xA;&quot;delete from aodn_imas_fluorometry_map where file_id = &quot;+ context.fileId + &quot; ; &quot;+&#xA;&quot;delete from measurements where file_id=&quot; + context.fileId  +&quot; ; &quot; &#xA;&#xA;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value="file_id"/>
@@ -714,7 +714,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT m.file_id,&#xA;MIN(\&quot;TIME\&quot;) AS time_coverage_start,&#xA;MAX(\&quot;TIME\&quot;) AS time_coverage_end,&#xA;d.vessel_name,&#xA;ST_SimplifyPreserveTopology(make_trajectory(geom ORDER BY \&quot;TIME\&quot;),0.005) AS geom,&#xA;'#'::text || upper(lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour&#xA;FROM measurements m&#xA;JOIN deployments d ON d.file_id = m.file_id &#xA;WHERE m.file_id = &quot; + context.fileId + &quot;&#xA;GROUP BY m.file_id, d.vessel_name&#xA;ORDER BY m.file_id;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT m.file_id,&#xA;MIN(\&quot;TIME\&quot;) AS time_coverage_start,&#xA;MAX(\&quot;TIME\&quot;) AS time_coverage_end,&#xA;d.vessel_name,&#xA;ST_SimplifyPreserveTopology(make_trajectory(geom ORDER BY \&quot;TIME\&quot;),0.005) AS geom,&#xA;'#'::text || upper(lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour,&#xA;i.url,&#xA;i.size&#xA;FROM measurements m&#xA;JOIN deployments d ON d.file_id = m.file_id&#xA;JOIN indexed_file i ON i.id = m.file_id&#xA;WHERE m.file_id = &quot; + context.fileId + &quot;&#xA;GROUP BY m.file_id, d.vessel_name&#xA;ORDER BY m.file_id;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -734,6 +734,10 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="colour"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="url"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="size"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -746,6 +750,8 @@
       <column comment="" key="false" length="255" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="LINE" type="id_Object"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="7"/>
+      <column comment="" key="false" name="url" nullable="true" pattern="" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" name="size" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
     </metadata>
   </node>
   <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="320" posY="576">
@@ -803,6 +809,16 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="url"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="size"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -819,6 +835,8 @@
       <column comment="" key="false" length="255" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="LINE" type="id_Object"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="7"/>
+      <column comment="" key="false" name="url" nullable="true" pattern="" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" name="size" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
@@ -827,6 +845,8 @@
       <column comment="" key="false" length="255" name="vessel_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="LINE" type="id_Object"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="7"/>
+      <column comment="" key="false" name="url" nullable="true" pattern="" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" name="size" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1499,6 +1519,12 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="colour"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="url"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="size"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
