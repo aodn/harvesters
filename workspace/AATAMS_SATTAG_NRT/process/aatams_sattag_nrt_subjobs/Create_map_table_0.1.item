@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="harvest?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="aatams_sattag_nrt"/>
@@ -54,7 +54,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH a AS (SELECT device_id, timestamp, COUNT(*) AS nb_measurements FROM measurements GROUP BY device_id,timestamp ORDER BY device_id, timestamp) &#10;SELECT sattag_program,&#10;m.device_id,&#10;device_wmo_ref,&#10;tag_type,&#10;common_name,&#10;release_site,&#10;state_country,&#10;age_class,&#10;sex,&#10;m.timestamp,&#10;min(pressure) AS min_pressure,&#10;max(pressure) AS max_pressure,&#10;nb_measurements,&#10;ST_SIMPLIFY(make_point_or_shortest_line(geom,CASE WHEN lead(geom,1) OVER (PARTITION BY m.device_id ORDER BY m.device_id, m.timestamp) IS NULL THEN geom &#10;ELSE lead(geom,1) OVER (PARTITION BY m.device_id ORDER BY m.device_id, m.timestamp) END),0.1) AS geom,&#10;colour&#10;FROM measurements m&#10;LEFT JOIN a ON a.device_id = m.device_id AND a.timestamp = m.timestamp&#10;GROUP BY sattag_program,m.device_id,device_wmo_ref,tag_type,common_name,release_site,state_country,age_class,sex,m.timestamp, a.nb_measurements,colour,geom&#10;ORDER by device_wmo_ref, timestamp;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH a AS (SELECT device_id, timestamp, COUNT(*) AS nb_measurements FROM measurements GROUP BY device_id,timestamp ORDER BY device_id, timestamp) &#xA;SELECT sattag_program,&#xA;m.device_id,&#xA;device_wmo_ref,&#xA;tag_type,&#xA;common_name,&#xA;release_site,&#xA;state_country,&#xA;age_class,&#xA;sex,&#xA;m.timestamp,&#xA;min(pressure) AS min_pressure,&#xA;max(pressure) AS max_pressure,&#xA;nb_measurements,&#xA;ST_SIMPLIFY(make_point_or_shortest_line(geom,CASE WHEN lead(geom,1) OVER (PARTITION BY m.device_id ORDER BY m.device_id, m.timestamp) IS NULL THEN geom &#xA;ELSE lead(geom,1) OVER (PARTITION BY m.device_id ORDER BY m.device_id, m.timestamp) END),0.1) AS geom,&#xA;colour,&#xA;url,&#xA;size&#xA;FROM measurements m&#xA;LEFT JOIN a ON a.device_id = m.device_id AND a.timestamp = m.timestamp&#xA;JOIN indexed_file i ON i.id = m.file_id&#xA;GROUP BY sattag_program,m.device_id,device_wmo_ref,tag_type,common_name,release_site,state_country,age_class,sex,m.timestamp, a.nb_measurements,colour,geom, url, size&#xA;ORDER by device_wmo_ref, timestamp;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -92,6 +92,10 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="colour"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="url"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="size"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="LABEL" value="tPostgresqlInput_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -114,6 +118,8 @@
       <column comment="" defaultValue="" key="false" length="19" name="nb_measurements" nullable="true" pattern="" precision="0" sourceType="" type="id_Long"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="LINE" type="id_Object"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="url" nullable="true" pattern="" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" name="size" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
     </metadata>
   </node>
   <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="160" posY="256">
@@ -218,6 +224,16 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="url"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="size"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -243,6 +259,8 @@
       <column comment="" defaultValue="" key="false" length="19" name="nb_measurements" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="LINE" type="id_Object"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="url" nullable="true" pattern="" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" name="size" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="false" length="6" name="sattag_program" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -260,6 +278,8 @@
       <column comment="" defaultValue="" key="false" length="19" name="nb_measurements" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="LINE" type="id_Object"/>
       <column comment="" key="false" length="7" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="url" nullable="true" pattern="" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" name="size" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -281,7 +301,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE measurements m&#10;SET profile_id = map.profile_id&#10;FROM aatams_sattag_nrt_profile_map map&#10;WHERE m.device_id = map.device_id AND m.timestamp = map.timestamp;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE measurements m&#xA;SET profile_id = map.profile_id&#xA;FROM aatams_sattag_nrt_profile_map map&#xA;WHERE m.device_id = map.device_id AND m.timestamp = map.timestamp;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -318,7 +338,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM measurements&#10;WHERE measurement_id IN (SELECT measurement_id&#10;FROM (SELECT measurement_id, row_number() OVER (PARTITION BY device_wmo_ref,timestamp, pressure ORDER BY measurement_id) AS rnum FROM measurements) t&#10;WHERE t.rnum &gt; 1);&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM measurements&#xA;WHERE measurement_id IN (SELECT measurement_id&#xA;FROM (SELECT measurement_id, row_number() OVER (PARTITION BY device_wmo_ref,timestamp, pressure ORDER BY measurement_id) AS rnum FROM measurements) t&#xA;WHERE t.rnum > 1);&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -355,7 +375,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE measurements &#10;SET sattag_program = b.sattag_program,&#10;device_id = b.device_id,&#10;device_wmo_ref = b.device_wmo_ref,&#10;tag_type = b.tag_type,&#10;common_name = b.common_name,&#10;release_site = b.release_site,&#10;state_country = b.state_country,&#10;age_class = b.age_class,&#10;sex = b.sex&#10;FROM aatams_sattag_nrt_metadata b&#10;WHERE measurements.device_id = b.device_id;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE measurements &#xA;SET sattag_program = b.sattag_program,&#xA;device_id = b.device_id,&#xA;device_wmo_ref = b.device_wmo_ref,&#xA;tag_type = b.tag_type,&#xA;common_name = b.common_name,&#xA;release_site = b.release_site,&#xA;state_country = b.state_country,&#xA;age_class = b.age_class,&#xA;sex = b.sex&#xA;FROM aatams_sattag_nrt_metadata b&#xA;WHERE measurements.device_id = b.device_id;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -451,6 +471,12 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="nb_measurements"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="url"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="size"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
