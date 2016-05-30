@@ -16,6 +16,7 @@ UPDATE file_metadata m
     feature_type = getglobalattribute(f.id, 'featureType'),
     file_version = substring(f.url, '_FV0([012])'),
     toolbox_version = getglobalattribute(f.id, 'toolbox_version'),
+    toolbox_input_file = getglobalattribute(f.id, 'toolbox_input_file'),
     compliance_checker_version = getglobalattribute(f.id, 'compliance_checker_version'),
     compliance_checker_last_updated = getglobalattributeastimestamp(f.id, 'compliance_checker_last_updated'),
     compliance_checks_passed = 
