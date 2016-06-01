@@ -108,28 +108,22 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="current_files_view" runOnChange="true">
+    <changeSet author="talend" id="add_deployment_number_column">
       <sql>
-        DROP VIEW IF EXISTS current_files_view;
-        CREATE VIEW current_files_view AS
-          SELECT
-            m.*,
-            i.url,
-            i.modified,
-            i.first_indexed,
-            i.last_indexed,
-            i.size
-          FROM indexed_file i JOIN file_metadata m ON m.file_id = i.id
-          WHERE NOT m.deleted
-        ;
+        ALTER TABLE file_metadata
+          ADD COLUMN deployment_number text ;
+
+        UPDATE file_metadata m
+          SET deployment_number = getglobalattribute(file_id, 'deployment_number') ;
       </sql>
     </changeSet>
 
 
-    <changeSet author="talend" id="anmn_all_map" runOnChange="true">
+    <changeSet author="talend" id="moorings_all_map" runOnChange="true">
       <sql>
-        DROP VIEW IF EXISTS anmn_all_map;
-        CREATE VIEW anmn_all_map AS
+        DROP VIEW IF EXISTS current_files_view;
+        DROP VIEW IF EXISTS moorings_all_map;
+        CREATE VIEW moorings_all_map AS
           SELECT
             -- file info
             m.file_id,
@@ -175,6 +169,24 @@
           FROM indexed_file i JOIN file_metadata m ON m.file_id = i.id
           WHERE NOT m.deleted
         ;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="anmn_all_map" runOnChange="true">
+      <sql>
+        DROP VIEW IF EXISTS anmn_all_map;
+        CREATE VIEW anmn_all_map AS
+          SELECT * FROM moorings_all_map WHERE url~'ANMN' ;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="abos_all_map" runOnChange="true">
+      <sql>
+        DROP VIEW IF EXISTS abos_all_map;
+        CREATE VIEW abos_all_map AS
+          SELECT * FROM moorings_all_map WHERE url~'ABOS' ;
       </sql>
     </changeSet>
 
