@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet author="talend" id="cr_timeseries-1">
+       <sql>
+       CREATE TABLE timeseries
+(
+  file_id integer UNIQUE NOT NULL,
+  time_coverage_start timestamp with time zone,
+  time_coverage_end  timestamp with time zone,
+  site_code character varying,
+  longitude double precision,
+  latitude double precision,
+  geospatial_vertical_min double precision,
+  geospatial_vertical_max double precision,
+    geom geometry(Geometry,4326),
+  CONSTRAINT timeseries_pkey PRIMARY KEY (file_id),
+ CONSTRAINT timeseries_geom_check CHECK (st_isvalid(geom)),
+  CONSTRAINT fk_ts_file_id FOREIGN KEY (file_id)
+      REFERENCES indexed_file (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE
+)
+       </sql>
+    </changeSet>
+   
+
+    <changeSet author="talend" id="cr_measurements-1">
+       <sql>
+    CREATE TABLE measurements
+(
+  measurement bigserial NOT NULL,
+  file_id integer NOT NULL,
+  "TIME" timestamp with time zone,
+  "LATITUDE" double precision,
+  "LONGITUDE" double precision,
+  "DEPTH" real,
+  "PSAL" real,
+  "TEMP" real,
+  CONSTRAINT measurements_pkey PRIMARY KEY (measurement),
+  CONSTRAINT fk_ms_file_id FOREIGN KEY (file_id)
+      REFERENCES indexed_file (id) MATCH SIMPLE
+      ON UPDATE CASCADE ON DELETE CASCADE
+)
+       </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="cr_indx-1">
+       <sql>
+CREATE INDEX measurements_file_id_idx ON measurements (file_id ASC NULLS LAST);
+CREATE INDEX measurements_time_dpth_idx ON measurements (file_id,"TIME","DEPTH");
+CREATE INDEX timeseries_gist_idx ON timeseries USING GIST (geom); 
+       </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="anmn_nrs_long_ts_map-1" runOnChange="true">
+      <sql>
+DROP VIEW IF EXISTS anmn_nrs_long_ts_map; 
+CREATE VIEW anmn_nrs_long_ts_map AS
+ SELECT d.file_id,
+  f.url,
+  f.size,
+  site_code,
+  time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+  time_coverage_end  AT TIME ZONE 'UTC' AS time_coverage_end, 
+  longitude,
+  latitude,
+  geospatial_vertical_min, 
+  geospatial_vertical_max ,
+  geom
+  FROM timeseries d
+  JOIN indexed_file f ON d.file_id = f.id 
+      </sql>
+    </changeSet>
+
+    <changeSet author="talend" id="anmn_nrs_long_ts_data-1" runOnChange="true">
+      <sql>
+DROP VIEW IF EXISTS anmn_nrs_long_ts_interpolated_data; 
+CREATE VIEW anmn_nrs_long_ts_interpolated_data AS
+SELECT m.file_id,
+    a.site_code,
+    timezone('UTC'::text, a.time_coverage_start) AS time_coverage_start,
+    timezone('UTC'::text, a.time_coverage_end) AS time_coverage_end,
+    timezone('UTC'::text, m."TIME") AS "TIME",
+    m."LATITUDE",
+    m."LONGITUDE",
+    m."DEPTH",
+    m."TEMP",
+    m."PSAL",
+    a.geom
+   FROM measurements m
+     JOIN timeseries a ON m.file_id = a.file_id
+     JOIN indexed_file f ON a.file_id = f.id
+   where f.url LIKE '%interpolated%'
+  ORDER BY m.file_id, m."TIME", m."DEPTH"
+      </sql>
+
+      <sql>
+DROP VIEW IF EXISTS anmn_nrs_long_ts_original_data; 
+CREATE VIEW anmn_nrs_long_ts_original_data AS
+SELECT m.file_id,
+    a.site_code,
+    timezone('UTC'::text, a.time_coverage_start) AS time_coverage_start,
+    timezone('UTC'::text, a.time_coverage_end) AS time_coverage_end,
+    timezone('UTC'::text, m."TIME") AS "TIME",
+    m."LATITUDE",
+    m."LONGITUDE",
+    m."DEPTH",
+    m."TEMP",
+    m."PSAL",
+    a.geom
+   FROM measurements m
+     JOIN timeseries a ON m.file_id = a.file_id
+     JOIN indexed_file f ON a.file_id = f.id
+   where f.url NOT LIKE '%interpolated%'
+  ORDER BY m.file_id, m."TIME", m."DEPTH"
+      </sql>
+    </changeSet>
+
+
+</databaseChangeLog>
+
