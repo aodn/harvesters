@@ -4,9 +4,9 @@
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="harvest"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="dw_aatams_acoustic"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_Password" value="w4f4Njyz3s/GOv5BOG+06C4Tc2Ozi37q"/>
-    <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="5433"/>
+    <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="dw_aatams_acoustic"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="po.aodn.org.au"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_8qN7YH12EeO8KdXPymp3hg" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_8qN7YH12EeO8KdXPymp3hg" type="id_String" value="null"/>
   </context>
@@ -669,7 +669,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT DISTINCT ON (p.name,i.name, ist.name)&#xA;&#x9;p.name AS project_name,&#xA;&#x9;i.name AS installation_name,&#xA;&#x9;type AS installation_type,&#xA;&#x9;ist.name AS station_name, &#xA;&#x9;COALESCE(dm.model_name || '-' || d.serial_number) AS receiver_name,&#xA;&#x9;rd.deploymentdatetime_timestamp AT TIME ZONE 'UTC' AS deployment_date, &#xA;&#x9;rr.recoverydatetime_timestamp AT TIME ZONE 'UTC' AS recovery_date, &#xA;&#x9;rr.status AS receiver_status,&#xA;&#x9;CASE WHEN rr.status = 'RECOVERED' OR rr.recoverydatetime_timestamp &lt; now() OR rd.deploymentdatetime_timestamp IS NULL THEN 'Inactive' &#xA;&#x9;&#x9;WHEN rd.deploymentdatetime_timestamp &lt; now() AND (rr.recoverydatetime_timestamp IS NULL OR rr.recoverydatetime_timestamp > now()) THEN 'Active' END AS active,&#xA;&#x9;ist.location AS geom&#xA;  FROM installation_station ist&#xA;  LEFT JOIN receiver_deployment rd ON ist.id = rd.station_id&#xA;  LEFT JOIN receiver_recovery rr ON rr.deployment_id = rd.id&#xA;  LEFT JOIN installation i ON i.id = ist.installation_id&#xA;  LEFT JOIN project p ON i.project_id = p.id&#xA;  LEFT JOIN installation_configuration ic ON ic.id = i.configuration_id&#xA;  LEFT JOIN device d ON d.id = rd.receiver_id&#xA;  LEFT JOIN device_model dm ON dm.id = d.model_id&#xA;&#x9;ORDER BY project_name,installation_name, station_name, deploymentdatetime_timestamp DESC;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT DISTINCT ON (p.name,i.name, ist.name)&#xA;&#x9;p.name AS project_name,&#xA;&#x9;i.name AS installation_name,&#xA;&#x9;type AS installation_type,&#xA;&#x9;ist.name AS station_name, &#xA;&#x9;COALESCE(dm.model_name || '-' || d.serial_number) AS receiver_name,&#xA;&#x9;rd.deploymentdatetime_timestamp AT TIME ZONE 'UTC' AS deployment_date, &#xA;&#x9;rr.recoverydatetime_timestamp AT TIME ZONE 'UTC' AS recovery_date, &#xA;&#x9;rr.status AS receiver_status,&#xA;&#x9;CASE WHEN rr.status = 'RECOVERED' OR rr.recoverydatetime_timestamp &lt; now() OR rd.deploymentdatetime_timestamp IS NULL THEN 'Inactive' &#xA;&#x9;&#x9;WHEN rd.deploymentdatetime_timestamp &lt; now() AND (rr.recoverydatetime_timestamp IS NULL OR rr.recoverydatetime_timestamp > now()) THEN 'Active' END AS active,&#xA;&#x9;ist.location AS geom,&#xA;    CASE WHEN substring(project_name, 'AATAMS') = 'AATAMS' THEN TRUE ELSE FALSE END AS imos_b&#xA;  FROM installation_station ist&#xA;  LEFT JOIN receiver_deployment rd ON ist.id = rd.station_id&#xA;  LEFT JOIN receiver_recovery rr ON rr.deployment_id = rd.id&#xA;  LEFT JOIN installation i ON i.id = ist.installation_id&#xA;  LEFT JOIN project p ON i.project_id = p.id&#xA;  LEFT JOIN installation_configuration ic ON ic.id = i.configuration_id&#xA;  LEFT JOIN device d ON d.id = rd.receiver_id&#xA;  LEFT JOIN device_model dm ON dm.id = d.model_id&#xA;&#x9;ORDER BY project_name,installation_name, station_name, deploymentdatetime_timestamp DESC;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -697,6 +697,8 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="imos_b"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -713,6 +715,7 @@
       <column comment="" key="false" length="255" name="receiver_status" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="255" name="active" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
+      <column comment="" key="false" name="imos_b" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
     </metadata>
   </node>
   <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="384">
@@ -790,6 +793,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="imos_b"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -810,6 +818,7 @@
       <column comment="" key="false" length="255" name="receiver_status" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="255" name="active" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
+      <column comment="" key="false" name="imos_b" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="true" length="255" name="project_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -822,6 +831,7 @@
       <column comment="" key="false" length="255" name="receiver_status" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="255" name="active" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
+      <column comment="" key="false" name="imos_b" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1123,6 +1133,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="receiver_name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="imos_b"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
