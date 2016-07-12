@@ -119,6 +119,18 @@
     </changeSet>
 
 
+    <changeSet author="talend" id="update_data_category" runOnChange="true">
+      <sql>
+        UPDATE file_metadata m
+          SET
+            data_category = coalesce(substring(url, '/(Temperature|(CTD|Biogeochem)_(timeseries|profiles)|Velocity|Wave|CO2|Meteorology|Surface_[^/]+|Sub-surface_[^/]+|Sediment_traps|aggregated_products)/'),
+                                     substring(url, '/(Pulse|FluxPulse)/'))
+        FROM indexed_file f
+        WHERE m.file_id = f.id ;
+      </sql>
+    </changeSet>
+
+
     <changeSet author="talend" id="moorings_all_map" runOnChange="true">
       <sql>
         DROP VIEW IF EXISTS current_files_view;
