@@ -63,7 +63,7 @@
     <routinesParameter id="_cRn34BQsEeKRFb0vPU_LNg" name="DAPUtils"/>
     <routinesParameter id="_IMfY4Dp8EeKYTu4DLH4cKg" name="NetCDFUtils"/>
   </parameters>
-  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="192" posY="192">
+  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="192" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_goeyIJNzEeOrg7p9UOD4pA"/>
@@ -204,7 +204,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="192" posY="320">
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="192" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_3"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
@@ -226,9 +226,9 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_3"/>
   </node>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="tRunJob_3">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iNewOrModifiedFileList_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk4"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iNewOrModifiedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iNewOrModifiedFileList_1" target="iDeletedFileList_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
@@ -246,13 +246,13 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iUpdateIndex_2" offsetLabelX="0" offsetLabelY="0" source="iUpdateIndex_2" target="iPostgresqlDbUpdate_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iUpdateIndex_2" offsetLabelX="0" offsetLabelY="0" source="iUpdateIndex_2" target="tRunJob_3">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_3" offsetLabelX="0" offsetLabelY="0" source="tRunJob_3" target="iNewOrModifiedFileList_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_3" offsetLabelX="0" offsetLabelY="0" source="tRunJob_3" target="iPostgresqlDbUpdate_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk4"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
