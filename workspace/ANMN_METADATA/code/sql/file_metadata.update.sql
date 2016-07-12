@@ -19,8 +19,7 @@ UPDATE file_metadata m
     toolbox_input_file = getglobalattribute(f.id, 'toolbox_input_file'),
     compliance_checker_version = getglobalattribute(f.id, 'compliance_checker_version'),
     compliance_checker_imos_version = getglobalattribute(file_id, 'compliance_checker_imos_version'),
-    compliance_checks_passed = 
-        substring(getglobalattribute(f.id, 'history'), 'passed compliance checks: ([^(]*) \\('),
+    compliance_checks_passed = getglobalattribute(f.id, 'compliance_checks_passed'),
     site_code = getglobalattribute(f.id, 'site_code'),
     platform_code = getglobalattribute(f.id, 'platform_code'),
     deployment_code = getglobalattribute(f.id, 'deployment_code'),
