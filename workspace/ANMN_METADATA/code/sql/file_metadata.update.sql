@@ -39,7 +39,7 @@ UPDATE file_metadata m
     data_category = coalesce(substring(url, '/(Temperature|(CTD|Biogeochem)_(timeseries|profiles)|Velocity|Wave|CO2|Meteorology|Surface_[^/]+|Sub-surface_[^/]+|Sediment_traps)/'), substring(url, '/(Pulse|FluxPulse)/')),
     variables = v.variables,
     standard_names = s.standard_names,
-    realtime = (f.url ~ 'realtime|REAL_TIME'),
+    realtime = (f.url ~* 'real[-_]?time'),
     deleted = false
   FROM indexed_file f, std_agg s, var_agg v
   WHERE m.file_id = f.id AND f.id = " + context.fileId
