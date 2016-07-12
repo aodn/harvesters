@@ -119,6 +119,18 @@
     </changeSet>
 
 
+    <changeSet author="talend" id="add_compliance_checker_imos_version_column">
+      <sql>
+        ALTER TABLE file_metadata
+          DROP COLUMN IF EXISTS compliance_checker_last_updated,
+          ADD COLUMN compliance_checker_imos_version text ;
+
+        UPDATE file_metadata m
+          SET compliance_checker_imos_version = getglobalattribute(file_id, 'compliance_checker_imos_version') ;
+      </sql>
+    </changeSet>
+
+
     <changeSet author="talend" id="update_data_category" runOnChange="true">
       <sql>
         UPDATE file_metadata m
@@ -131,10 +143,11 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="moorings_all_map" runOnChange="true">
+    <changeSet author="talend" id="map_views" runOnChange="true">
       <sql>
         DROP VIEW IF EXISTS current_files_view;
-        DROP VIEW IF EXISTS moorings_all_map;
+        DROP VIEW IF EXISTS moorings_all_map CASCADE;
+
         CREATE VIEW moorings_all_map AS
           SELECT
             -- file info
@@ -149,6 +162,7 @@
             m.toolbox_version,
             m.toolbox_input_file,
             m.compliance_checker_version,
+            m.compliance_checker_imos_version,
             m.compliance_checks_passed,
             m.realtime,
             -- time/location
@@ -181,22 +195,10 @@
           FROM indexed_file i JOIN file_metadata m ON m.file_id = i.id
           WHERE NOT m.deleted
         ;
-      </sql>
-    </changeSet>
 
-
-    <changeSet author="talend" id="anmn_all_map" runOnChange="true">
-      <sql>
-        DROP VIEW IF EXISTS anmn_all_map;
         CREATE VIEW anmn_all_map AS
           SELECT * FROM moorings_all_map WHERE url~'ANMN' ;
-      </sql>
-    </changeSet>
 
-
-    <changeSet author="talend" id="abos_all_map" runOnChange="true">
-      <sql>
-        DROP VIEW IF EXISTS abos_all_map;
         CREATE VIEW abos_all_map AS
           SELECT * FROM moorings_all_map WHERE url~'ABOS' ;
       </sql>
