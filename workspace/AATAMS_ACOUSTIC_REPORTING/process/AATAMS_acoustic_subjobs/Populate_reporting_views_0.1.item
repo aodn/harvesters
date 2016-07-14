@@ -56,7 +56,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH a AS (&#xA;  SELECT DISTINCT transmitter_id FROM valid_detection&#xA;  UNION ALL &#xA;  SELECT DISTINCT transmitter_id FROM sensor),&#xA;  sub AS (SELECT DISTINCT transmitter_id FROM a)&#xA;  SELECT DISTINCT sub.transmitter_id, &#xA;&#x9;d.id AS tag_id,&#xA;&#x9;su.release_id,&#xA;&#x9;p.name AS project_name,&#xA;&#x9;sp.common_name,&#xA;&#x9;CASE WHEN d.id IS NULL THEN FALSE ELSE TRUE END AS registered,&#xA;    p.is_protected AS protected,&#xA;&#x9;CASE WHEN capture_location IS NULL AND release_location IS NULL THEN FALSE ELSE TRUE END AS releaselocation_info,&#xA;&#x9;date(ar.embargo_date) AS embargo_date,&#xA;&#x9;COUNT(vd.timestamp) AS no_detections,&#xA;&#x9;date(min(vd.timestamp)) AS first_detection,&#xA;&#x9;date(max(vd.timestamp)) AS last_detection,&#xA;&#x9;round((date_part('days', max(vd.timestamp) - min(vd.timestamp)) + date_part('hours', max(vd.timestamp) - min(vd.timestamp))/24)::numeric, 1) AS coverage_duration&#xA;  FROM sub&#xA;  LEFT JOIN valid_detection vd ON sub.transmitter_id = vd.transmitter_id&#xA;  LEFT JOIN sensor s ON s.transmitter_id = sub.transmitter_id&#xA;  LEFT JOIN surgery su ON s.tag_id = su.tag_id&#xA;  LEFT JOIN device d ON d.id = s.tag_id OR d.id = su.tag_id&#xA;  LEFT JOIN animal_release ar ON ar.id = su.release_id&#xA;  LEFT JOIN project p ON p.id = ar.project_id&#xA;  LEFT JOIN animal a ON a.id = ar.animal_id&#xA;  LEFT JOIN species sp ON sp.id = a.species_id&#xA;&#x9;WHERE sub.transmitter_id != ''&#xA;&#x9;GROUP BY sub.transmitter_id, p.name, d.id, su.release_id, ar.animal_id, sp.common_name, p.is_protected, capturedatetime_timestamp, releasedatetime_timestamp, capture_location, release_location, ar.embargo_date&#xA;&#x9;ORDER BY registered, transmitter_id, common_name, tag_id, release_id;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH a AS (&#xA;  SELECT DISTINCT transmitter_id FROM valid_detection&#xA;  UNION ALL &#xA;  SELECT DISTINCT transmitter_id FROM sensor),&#xA;  sub AS (SELECT DISTINCT transmitter_id FROM a)&#xA;  SELECT DISTINCT sub.transmitter_id,&#xA;&#x9;d.id AS tag_id,&#xA;&#x9;su.release_id,&#xA;&#x9;p.name AS project_name,&#xA;&#x9;CASE WHEN sp.common_name IS NULL THEN sp.name ELSE sp.common_name END AS common_name,&#xA;&#x9;CASE WHEN d.id IS NULL THEN FALSE ELSE TRUE END AS registered,&#xA;&#x9;p.is_protected AS protected,&#xA;&#x9;CASE WHEN capture_location IS NULL AND release_location IS NULL THEN FALSE ELSE TRUE END AS releaselocation_info,&#xA;&#x9;date(ar.embargo_date) AS embargo_date,&#xA;&#x9;COUNT(vd.timestamp) AS no_detections,&#xA;&#x9;date(min(vd.timestamp)) AS first_detection,&#xA;&#x9;date(max(vd.timestamp)) AS last_detection,&#xA;&#x9;round((date_part('days', max(vd.timestamp) - min(vd.timestamp)) + date_part('hours', max(vd.timestamp) - min(vd.timestamp))/24)::numeric, 1) AS coverage_duration,&#xA;&#x9;tt.transmitter_type_name AS transmitter_type&#xA;  FROM sub&#xA;  LEFT JOIN valid_detection vd ON sub.transmitter_id = vd.transmitter_id&#xA;  LEFT JOIN sensor s ON s.transmitter_id = sub.transmitter_id&#xA;  LEFT JOIN transmitter_type tt ON tt.id = s.transmitter_type_id&#xA;  LEFT JOIN surgery su ON s.tag_id = su.tag_id&#xA;  LEFT JOIN device d ON d.id = s.tag_id OR d.id = su.tag_id&#xA;  LEFT JOIN animal_release ar ON ar.id = su.release_id&#xA;  LEFT JOIN project p ON p.id = d.project_id&#xA;  LEFT JOIN animal a ON a.id = ar.animal_id&#xA;  LEFT JOIN species sp ON sp.id = a.species_id&#xA;&#x9;WHERE sub.transmitter_id != ''&#xA;&#x9;GROUP BY sub.transmitter_id, p.name, d.id, su.release_id, ar.animal_id, sp.common_name, sp.name, p.is_protected, capturedatetime_timestamp, releasedatetime_timestamp, capture_location, release_location, ar.embargo_date, tt.transmitter_type_name&#xA;&#x9;ORDER BY registered, transmitter_id, common_name, tag_id, release_id;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -90,6 +90,8 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="coverage_duration"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="transmitter_type"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -109,6 +111,7 @@
       <column comment="" key="false" length="13" name="first_detection" nullable="true" pattern="" precision="0" sourceType="" type="id_Date"/>
       <column comment="" key="false" length="13" name="last_detection" nullable="true" pattern="" precision="0" sourceType="" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="17" name="coverage_duration" nullable="true" pattern="" precision="17" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" length="255" name="transmitter_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
     </metadata>
   </node>
   <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="320" posY="64">
@@ -203,6 +206,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="transmitter_type"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -216,36 +224,38 @@
       <column comment="" key="true" length="255" name="transmitter_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="tag_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" name="release_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="false" length="255" name="project_name" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
-      <column comment="" key="false" length="255" name="common_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="255" name="project_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
+      <column comment="" key="false" length="255" name="common_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="registered" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" key="false" name="is_protected" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" key="false" length="255" name="releaselocation_info" nullable="false" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
-      <column comment="" key="false" length="13" name="embargo_date" nullable="true" pattern="" precision="0" sourceType="" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="19" name="no_detections" nullable="true" pattern="" precision="0" sourceType="" type="id_Long"/>
-      <column comment="" key="false" length="13" name="first_detection" nullable="true" pattern="" precision="0" sourceType="" type="id_Date"/>
-      <column comment="" key="false" length="13" name="last_detection" nullable="true" pattern="" precision="0" sourceType="" type="id_Date"/>
+      <column comment="" key="false" length="13" name="embargo_date" nullable="true" pattern="" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" length="19" name="no_detections" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" length="13" name="first_detection" nullable="true" pattern="" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="13" name="last_detection" nullable="true" pattern="" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="17" name="coverage_duration" nullable="true" pattern="" precision="17" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" length="255" name="transmitter_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="true" length="255" name="transmitter_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="tag_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" name="release_id" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="false" length="255" name="project_name" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
-      <column comment="" key="false" length="255" name="common_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="255" name="project_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
+      <column comment="" key="false" length="255" name="common_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="registered" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" key="false" name="is_protected" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" key="false" length="255" name="releaselocation_info" nullable="false" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
-      <column comment="" key="false" length="13" name="embargo_date" nullable="true" pattern="" precision="0" sourceType="" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="19" name="no_detections" nullable="true" pattern="" precision="0" sourceType="" type="id_Long"/>
-      <column comment="" key="false" length="13" name="first_detection" nullable="true" pattern="" precision="0" sourceType="" type="id_Date"/>
-      <column comment="" key="false" length="13" name="last_detection" nullable="true" pattern="" precision="0" sourceType="" type="id_Date"/>
+      <column comment="" key="false" length="13" name="embargo_date" nullable="true" pattern="" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" defaultValue="" key="false" length="19" name="no_detections" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" length="13" name="first_detection" nullable="true" pattern="" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="13" name="last_detection" nullable="true" pattern="" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="17" name="coverage_duration" nullable="true" pattern="" precision="17" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" length="255" name="transmitter_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="320">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_3"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -261,7 +271,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;  SELECT CASE WHEN registered = FALSE THEN 'Unregistered tags' ELSE 'Registered tags' END AS registered,&#xA;&#x9;CASE WHEN common_name IS NULL AND registered = FALSE THEN 'All unregistered tags' &#xA;&#x9;&#x9;WHEN common_name IS NULL AND registered = TRUE THEN 'All registered tags with no species info'&#xA;&#x9;&#x9;ELSE common_name END AS common_name,&#xA;&#x9;COUNT(transmitter_id) AS no_transmitters,&#xA;&#x9;COUNT(release_id) AS no_releases,&#xA;&#x9;SUM(CASE WHEN releaselocation_info = FALSE THEN 0 ELSE 1 END) AS no_releases_with_location,&#xA;&#x9;SUM(CASE WHEN v.embargo_date > now() THEN 1 ELSE 0 END) AS no_embargo,&#xA;&#x9;SUM(CASE WHEN v.is_protected = FALSE OR v.is_protected IS NULL THEN 0 ELSE 1 END) AS no_protected,&#xA;&#x9;CASE WHEN SUM(CASE WHEN v.embargo_date > now() THEN 1 ELSE 0 END) = 0 THEN NULL ELSE max(v.embargo_date) END AS latest_embargo_date,&#xA;&#x9;SUM(no_detections) AS total_no_detections,&#xA;&#x9;SUM(CASE WHEN v.embargo_date &lt; now() OR v.embargo_date IS NULL THEN no_detections ELSE 0 END) AS no_detections_public,&#xA;&#x9;min(v.first_detection) AS earliest_detection,&#xA;&#x9;max(v.last_detection) AS latest_detection,&#xA;&#x9;round(min(v.coverage_duration), 1) || ' - ' || round(max(v.coverage_duration), 1) AS no_data_days&#xA;  FROM aatams_acoustic_species_all_deployments_view v&#xA;&#x9;GROUP BY v.common_name, registered&#xA;&#x9;ORDER BY registered, common_name;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH a AS (SELECT transmitter_id, &#xA;&#x9;CASE WHEN transmitter_type = 'RANGE TEST' THEN 'All range test tags' ELSE common_name END AS common_name&#xA;&#x9;FROM aatams_acoustic_species_all_deployments_view)&#xA;SELECT CASE WHEN registered = FALSE THEN 'Unregistered tags' ELSE 'Registered tags' END AS registered,&#xA;&#x9;CASE WHEN a.common_name IS NULL AND registered = FALSE THEN 'All unregistered tags' &#xA;&#x9;&#x9;WHEN a.common_name IS NULL AND registered = TRUE THEN 'All registered tags with no species info'&#xA;&#x9;&#x9;ELSE a.common_name END AS common_name,&#xA;&#x9;COUNT(v.transmitter_id) AS no_transmitters,&#xA;&#x9;COUNT(release_id) AS no_releases,&#xA;&#x9;SUM(CASE WHEN releaselocation_info = FALSE THEN 0 ELSE 1 END) AS no_releases_with_location,&#xA;&#x9;SUM(CASE WHEN v.embargo_date > now() THEN 1 ELSE 0 END) AS no_embargo,&#xA;&#x9;SUM(CASE WHEN v.is_protected = FALSE OR v.is_protected IS NULL THEN 0 ELSE 1 END) AS no_protected,&#xA;&#x9;CASE WHEN SUM(CASE WHEN v.embargo_date > now() THEN 1 ELSE 0 END) = 0 THEN NULL ELSE max(v.embargo_date) END AS latest_embargo_date,&#xA;&#x9;SUM(no_detections) AS total_no_detections,&#xA;&#x9;SUM(CASE WHEN v.embargo_date &lt; now() OR v.embargo_date IS NULL THEN no_detections ELSE 0 END) AS no_detections_public,&#xA;&#x9;min(v.first_detection) AS earliest_detection,&#xA;&#x9;max(v.last_detection) AS latest_detection,&#xA;&#x9;round(min(v.coverage_duration), 1) || ' - ' || round(max(v.coverage_duration), 1) AS no_data_days&#xA;  FROM aatams_acoustic_species_all_deployments_view v&#xA;  JOIN a ON v.transmitter_id = a.transmitter_id&#xA;&#x9;GROUP BY a.common_name, registered&#xA;&#x9;ORDER BY registered, common_name;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -316,7 +326,7 @@
       <column comment="" key="false" length="255" name="no_data_days" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="320">
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_2"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -448,7 +458,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="448">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_4"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -504,7 +514,7 @@
       <column comment="" key="false" name="other_1" nullable="true" originalDbColumnName="embargo_3_more" pattern="" sourceType="INT8" type="id_Long"/>
     </metadata>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="448">
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_3"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -601,7 +611,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="576">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="448">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_5"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -693,7 +703,7 @@
       <column comment="" key="false" name="no_transmitters" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
     </metadata>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="576">
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="448">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_4"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -874,7 +884,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="704">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="576">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_6"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -890,7 +900,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH a AS (SELECT project_id, COUNT(DISTINCT ar.id) AS no_releases FROM animal_release ar GROUP BY project_id)&#xA;  SELECT funding_type,&#xA;&#x9;project_name,&#xA;&#x9;COUNT (DISTINCT(installation_name))::numeric AS no_installations,&#xA;&#x9;COUNT (DISTINCT(station_name))::numeric AS no_stations,&#xA;&#x9;SUM(no_deployments)::numeric AS no_deployments,&#xA;&#x9;CASE WHEN a.no_releases IS NULL THEN 0 ELSE a.no_releases END AS no_releases,&#xA;&#x9;SUM(no_detections) AS no_detections,&#xA;&#x9;min(first_deployment_date) AS earliest_deployment_date,&#xA;&#x9;max(last_deployment_date) AS latest_deployment_date,&#xA;&#x9;min(start_date) AS start_date,&#xA;&#x9;max(end_date) AS end_date,&#xA;&#x9;round((date_part('days', max(end_date) - min(start_date)) + date_part('hours', max(end_date) - min(start_date))/24)::numeric/365.25, 1) AS coverage_duration,&#xA;&#x9;min(station_lat) AS min_lat,&#xA;&#x9;max(station_lat) AS max_lat,&#xA;&#x9;min(station_lon) AS min_lon,&#xA;&#x9;max(station_lon) AS max_lon,&#xA;&#x9;min(min_depth) AS min_depth,&#xA;&#x9;max(max_depth) AS max_depth,&#xA;&#x9;is_protected,&#xA;&#x9;SUM(no_transmitters) AS no_transmitters,&#xA;&#x9;SUM(no_unreg_transmitters) AS no_unreg_transmitters,&#xA;&#x9;CASE WHEN SUM(no_transmitters) = 0 THEN NULL ELSE ROUND(SUM(no_unreg_transmitters)/SUM(no_transmitters) * 100, 1) END AS prop_unreg_transmitters,&#xA;&#x9;SUM(no_unreg_detections) AS no_unreg_detections,&#xA;&#x9;CASE WHEN SUM(no_transmitters) = 0 THEN NULL ELSE ROUND(SUM(no_unreg_detections)/SUM(no_detections) * 100, 1) END AS prop_unreg_detections&#xA;  FROM aatams_acoustic_project_all_deployments_view v&#xA;  LEFT JOIN a ON a.project_id = v.project_id&#xA;&#x9;GROUP BY funding_type,project_name, is_protected, a.no_releases&#xA;&#x9;ORDER BY funding_type DESC,project_name;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH a AS (SELECT project_name, COUNT(DISTINCT release_id) AS no_releases, SUM(no_detections) AS no_tag_detections FROM aatams_acoustic_species_all_deployments_view ar GROUP BY project_name)&#xA;  SELECT funding_type,&#xA;&#x9;v.project_name,&#xA;&#x9;COUNT (DISTINCT(installation_name))::numeric AS no_installations,&#xA;&#x9;COUNT (DISTINCT(station_name))::numeric AS no_stations,&#xA;&#x9;SUM(no_deployments)::numeric AS no_deployments,&#xA;&#x9;CASE WHEN a.no_releases IS NULL THEN 0 ELSE a.no_releases END AS no_releases,&#xA;&#x9;SUM(no_detections) AS no_detections,&#xA;&#x9;min(first_deployment_date) AS earliest_deployment_date,&#xA;&#x9;max(last_deployment_date) AS latest_deployment_date,&#xA;&#x9;min(start_date) AS start_date,&#xA;&#x9;max(end_date) AS end_date,&#xA;&#x9;round((date_part('days', max(end_date) - min(start_date)) + date_part('hours', max(end_date) - min(start_date))/24)::numeric/365.25, 1) AS coverage_duration,&#xA;&#x9;min(station_lat) AS min_lat,&#xA;&#x9;max(station_lat) AS max_lat,&#xA;&#x9;min(station_lon) AS min_lon,&#xA;&#x9;max(station_lon) AS max_lon,&#xA;&#x9;min(min_depth) AS min_depth,&#xA;&#x9;max(max_depth) AS max_depth,&#xA;&#x9;is_protected,&#xA;&#x9;SUM(no_transmitters) AS no_transmitters,&#xA;&#x9;SUM(no_unreg_transmitters) AS no_unreg_transmitters,&#xA;&#x9;CASE WHEN SUM(no_transmitters) = 0 THEN NULL ELSE ROUND(SUM(no_unreg_transmitters)/SUM(no_transmitters) * 100, 1) END AS prop_unreg_transmitters,&#xA;&#x9;SUM(no_unreg_detections) AS no_unreg_detections,&#xA;&#x9;CASE WHEN SUM(no_transmitters) = 0 THEN NULL ELSE ROUND(SUM(no_unreg_detections)/SUM(no_detections) * 100, 1) END AS prop_unreg_detections,&#xA;&#x9;CASE WHEN no_tag_detections IS NULL THEN 0 ELSE no_tag_detections END AS no_tag_detections&#xA;  FROM aatams_acoustic_project_all_deployments_view v&#xA;  LEFT JOIN a ON a.project_name = v.project_name&#xA;&#x9;GROUP BY funding_type,v.project_name, is_protected, a.no_releases, a.no_tag_detections&#xA;&#x9;ORDER BY funding_type DESC,project_name;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -946,6 +956,8 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="prop_unreg_detections"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="no_tag_detections"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -976,9 +988,10 @@
       <column comment="" key="false" name="prop_unreg_transmitters" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" name="no_unreg_detections" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" name="prop_unreg_detections" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" name="no_tag_detections" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
     </metadata>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="704">
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="576">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_5"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -1123,6 +1136,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="no_tag_detections"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -1157,6 +1175,7 @@
       <column comment="" key="false" name="prop_unreg_transmitters" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" name="no_unreg_detections" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" name="prop_unreg_detections" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" name="no_tag_detections" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="true" name="funding_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -1183,11 +1202,12 @@
       <column comment="" key="false" name="prop_unreg_transmitters" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" name="no_unreg_detections" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" name="prop_unreg_detections" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" name="no_tag_detections" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="832">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="704">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_7"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -1240,7 +1260,7 @@
       <column comment="" defaultValue="" key="false" length="0" name="no_detections" nullable="true" pattern="" precision="0" sourceType="" type="id_Double"/>
     </metadata>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="832">
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="704">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_6"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -1352,7 +1372,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="960">
+  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="832">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="CHECK" name="CLOSE" value="false"/>
@@ -1362,7 +1382,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlCommit_1"/>
   </node>
-  <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="960">
+  <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="832">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -1370,7 +1390,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="576" posY="960">
+  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="576" posY="832">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -1378,7 +1398,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="448">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_8"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -1422,7 +1442,7 @@
       <column comment="" key="false" name="no_detections" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
     </metadata>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="640" posY="448">
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="640" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_7"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -1491,7 +1511,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="832" posY="448">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="832" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_9"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -1532,7 +1552,7 @@
       <column comment="" key="false" length="255" name="statistics_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="992" posY="448">
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="992" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_8"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -1594,7 +1614,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="832">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="704">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_10"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -1635,7 +1655,7 @@
       <column comment="" key="false" length="255" name="statistics_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="640" posY="832">
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="640" posY="704">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_9"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -1697,40 +1717,6 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="192">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;localhost&quot;"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
-    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE aatams_acoustic_species_all_deployments_view&#xA;SET common_name = 'All sentinel tags'&#xA;WHERE transmitter_id IN ('A69-1303-54479','A69-1303-54488','A69-1303-54490','A69-1303-54480','A69-1303-54486','A69-1303-54489',&#xA;'A69-1303-54483','A69-1303-54481','A69-1303-54482','A69-1303-54485','A69-1303-54487','A69-1601-31224','A69-1303-60940');&quot;"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
-    <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
-    <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
-    <elementParameter field="TABLE" name="SET_PREPAREDSTATEMENT_PARAMETERS"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlRow_1"/>
-    <metadata connector="REJECT" name="REJECT">
-      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
-    </metadata>
-  </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="iPostgresqlOutput_10">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
@@ -1773,6 +1759,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="coverage_duration"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="transmitter_type"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -1783,7 +1772,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tPostgresqlRow_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tPostgresqlInput_3">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
   </connection>
@@ -1999,6 +1988,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="prop_unreg_detections"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="no_tag_detections"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -2330,10 +2322,6 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row9"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlRow_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_1" target="tPostgresqlInput_3">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk8"/>
-  </connection>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
@@ -2415,13 +2403,6 @@
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_10"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Insert into stats_view"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
-  <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Flag sentinel tags"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
