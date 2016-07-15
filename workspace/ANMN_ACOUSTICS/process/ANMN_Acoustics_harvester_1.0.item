@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="harvest"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="anmn_acoustics"/>
@@ -16,7 +16,7 @@
     <contextParameter comment="" name="Metadata_URL" prompt="Metadata_URL?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="http://localhost:8080/geonetwork"/>
     <contextParameter comment="" name="Metadata_Username" prompt="Metadata_Username?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
     <contextParameter comment="" name="Metadata_UUID" prompt="Metadata_UUID?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="e850651b-d65d-495b-8182-5dde35919616"/>
-    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_A9GAoFGXEeOFRtW2h_ugHg" type="id_String" value=""/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_A9GAoFGXEeOFRtW2h_ugHg" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_A9GAoFGXEeOFRtW2h_ugHg" type="id_String" value="/tmp/fileList"/>
   </context>
   <context confirmationNeeded="false" name="Deployment">
@@ -35,7 +35,7 @@
     <contextParameter comment="" name="Metadata_URL" prompt="Metadata_URL?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="http://localhost:8080/geonetwork"/>
     <contextParameter comment="" name="Metadata_Username" prompt="Metadata_Username?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
     <contextParameter comment="" name="Metadata_UUID" prompt="Metadata_UUID?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="e850651b-d65d-495b-8182-5dde35919616"/>
-    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_A9GAoFGXEeOFRtW2h_ugHg" type="id_String" value=""/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_A9GAoFGXEeOFRtW2h_ugHg" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_A9GAoFGXEeOFRtW2h_ugHg" type="id_String" value="/tmp/fileList"/>
   </context>
   <parameters>
@@ -50,7 +50,7 @@
     <elementParameter field="CHECK" name="IMPLICIT_TCONTEXTLOAD" value="true"/>
     <elementParameter field="RADIO" name="FROM_FILE_FLAG_IMPLICIT_CONTEXT" value="true"/>
     <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="context.paramFile"/>
-    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;=&gt;&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;=>&quot;"/>
     <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
     <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
     <elementParameter field="CHECK" name="ON_STATCATCHER_FLAG" value="true"/>
@@ -72,9 +72,8 @@
     <routinesParameter id="_NhR54AuOEeO-v4jR06LTxA" name="TalendDate"/>
     <routinesParameter id="_NhOPgAuOEeO-v4jR06LTxA" name="TalendString"/>
   </parameters>
-  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="224" posY="96">
+  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="448" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
-    <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_yCojcFpdEeO08paGH1Z8mA"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
@@ -86,13 +85,13 @@
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/vagrant/src/harvesters/workspace/ANMN_ACOUSTICS/code/liquibase/generated_changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;&gt;&#10;&#10;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_acoustic_deployments_table&quot;&gt;&#10;      &lt;sql&gt;&#10;&#9;CREATE TABLE acoustic_deployments&#10;&#9;(&#10;          pkid serial NOT NULL,&#10;          curtin_id integer NOT NULL,&#10;          site_code text NOT NULL,&#10;          logger_id text,&#10;          deployment_name text NOT NULL,&#10;          is_primary boolean,&#10;          time_deployment_start timestamp with time zone NOT NULL,&#10;          time_deployment_end timestamp with time zone,&#10;          frequency integer,&#10;          logger_position text,&#10;          set_success text,&#10;          data_volume real,&#10;          data_path text,&#10;          archive_path text,&#10;          lat double precision,&#10;          lon double precision,&#10;          water_depth real,&#10;          receiver_depth real,&#10;          start_first_wet_sample timestamp with time zone,&#10;          start_last_wet_sample timestamp with time zone,&#10;          first_wet_sample integer,&#10;          last_wet_sample integer,&#10;          system_gain_file text,&#10;          hydrophone_serial_number text,&#10;          hydrophone_sensitivity real,&#10;          calibration_noise_level real,&#10;          comments text,&#10;          CONSTRAINT acoustic_deployments_pkey PRIMARY KEY (pkid),&#10;          CONSTRAINT acoustic_deployments_curtin_id_unique UNIQUE (curtin_id)&#10;&#9;);&#10;      &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;&#10;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_acoustic_spectrograms_table&quot;&gt;&#10;      &lt;sql&gt;&#10;        CREATE TABLE acoustic_spectrograms&#10;        (&#10;          pkid serial NOT NULL,&#10;          acoustic_deploy_fk integer NOT NULL,&#10;          filename text NOT NULL,&#10;          width integer NOT NULL,&#10;          time_start timestamp with time zone NOT NULL,&#10;          subdirectory text,&#10;          last_updated timestamp with time zone DEFAULT ('now'::text)::timestamp(0) with time zone,&#10;          CONSTRAINT acoustic_spectrograms_pkey PRIMARY KEY (pkid),&#10;          CONSTRAINT acoustic_spec2dep_fkey FOREIGN KEY (acoustic_deploy_fk)&#10;              REFERENCES acoustic_deployments (pkid) MATCH SIMPLE&#10;              ON UPDATE CASCADE ON DELETE CASCADE&#10;        )&#10;      &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;&#10;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_acoustic_recordings_table&quot;&gt;&#10;      &lt;sql&gt;&#10;        CREATE TABLE acoustic_recordings&#10;        (&#10;          pkid bigserial NOT NULL,&#10;          filename text NOT NULL,    -- could be detailed spec image, wav, mp3 or more&#10;          x_coord integer,           -- The pixel position from the left of the acoustic_spectrogram&#10;          acoustic_spec_fk integer NOT NULL,&#10;          time_recording_start timestamp with time zone NOT NULL,&#10;          CONSTRAINT acoustic_recordings_pkey PRIMARY KEY (pkid),&#10;          CONSTRAINT acoustic_rec2spec_fkey FOREIGN KEY (acoustic_spec_fk)&#10;              REFERENCES acoustic_spectrograms (pkid) MATCH SIMPLE&#10;              ON UPDATE CASCADE ON DELETE CASCADE&#10;        )&#10;      &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;&#10;    &lt;changeSet author=&quot;talend&quot; id=&quot;acoustic_deployments_add_geom&quot;&gt;&#10;      &lt;sql&gt;&#10;        ALTER TABLE acoustic_deployments&#10;          ADD COLUMN geom geometry(Geometry,4326) CHECK (st_isvalid(geom));&#10;&#10;        CREATE INDEX acoustic_deployments_gist_idx ON acoustic_deployments USING GIST (geom);&#10;      &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;&#10;    &lt;changeSet author=&quot;talend&quot; id=&quot;acoustic_deployments_add_last_updated&quot;&gt;&#10;      &lt;sql&gt;&#10;        ALTER TABLE acoustic_deployments&#10;          ADD COLUMN first_added  timestamp with time zone DEFAULT ('now'::text)::timestamp(0) with time zone,&#10;          ADD COLUMN last_updated timestamp with time zone DEFAULT ('now'::text)::timestamp(0) with time zone;&#10;      &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;&#10;    &lt;changeSet author=&quot;talend&quot; id=&quot;anmn_acoustics_map_view&quot; runOnChange=&quot;true&quot;&gt;&#10;      &lt;sql&gt;&#10;        DROP VIEW IF EXISTS anmn_acoustics_map;&#10;&#10;        CREATE VIEW anmn_acoustics_map AS&#10;          SELECT&#10;            curtin_id,&#10;            site_code,&#10;&#9;    substring(deployment_name from '(^\\D*) ') AS site_name,&#10;            deployment_name,&#10;&#9;    substring(deployment_name from '[\\d-]+$') AS deployment_years,&#10;            time_deployment_start AT TIME ZONE 'UTC' AS time_coverage_start,&#10;            time_deployment_end AT TIME ZONE 'UTC' AS time_coverage_end,&#10;            lat,&#10;            lon,&#10;            water_depth,&#10;            receiver_depth,&#10;            set_success,&#10;            comments,&#10;            data_volume AS data_volume_gb,&#10;            data_path,&#10;            geom&#10;          FROM acoustic_deployments&#10;          WHERE is_primary&#10;          ORDER BY site_code, curtin_id&#10;        ;&#10;      &lt;/sql&gt;&#10;    &lt;/changeSet&gt;&#10;&#10;&lt;/databaseChangeLog&gt;&#10;"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_acoustic_deployments_table&quot;>&#xA;      &lt;sql>&#xA;&#x9;CREATE TABLE acoustic_deployments&#xA;&#x9;(&#xA;          pkid serial NOT NULL,&#xA;          curtin_id integer NOT NULL,&#xA;          site_code text NOT NULL,&#xA;          logger_id text,&#xA;          deployment_name text NOT NULL,&#xA;          is_primary boolean,&#xA;          time_deployment_start timestamp with time zone NOT NULL,&#xA;          time_deployment_end timestamp with time zone,&#xA;          frequency integer,&#xA;          logger_position text,&#xA;          set_success text,&#xA;          data_volume real,&#xA;          data_path text,&#xA;          archive_path text,&#xA;          lat double precision,&#xA;          lon double precision,&#xA;          water_depth real,&#xA;          receiver_depth real,&#xA;          start_first_wet_sample timestamp with time zone,&#xA;          start_last_wet_sample timestamp with time zone,&#xA;          first_wet_sample integer,&#xA;          last_wet_sample integer,&#xA;          system_gain_file text,&#xA;          hydrophone_serial_number text,&#xA;          hydrophone_sensitivity real,&#xA;          calibration_noise_level real,&#xA;          comments text,&#xA;          CONSTRAINT acoustic_deployments_pkey PRIMARY KEY (pkid),&#xA;          CONSTRAINT acoustic_deployments_curtin_id_unique UNIQUE (curtin_id)&#xA;&#x9;);&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_acoustic_spectrograms_table&quot;>&#xA;      &lt;sql>&#xA;        CREATE TABLE acoustic_spectrograms&#xA;        (&#xA;          pkid serial NOT NULL,&#xA;          acoustic_deploy_fk integer NOT NULL,&#xA;          filename text NOT NULL,&#xA;          width integer NOT NULL,&#xA;          time_start timestamp with time zone NOT NULL,&#xA;          subdirectory text,&#xA;          last_updated timestamp with time zone DEFAULT ('now'::text)::timestamp(0) with time zone,&#xA;          CONSTRAINT acoustic_spectrograms_pkey PRIMARY KEY (pkid),&#xA;          CONSTRAINT acoustic_spec2dep_fkey FOREIGN KEY (acoustic_deploy_fk)&#xA;              REFERENCES acoustic_deployments (pkid) MATCH SIMPLE&#xA;              ON UPDATE CASCADE ON DELETE CASCADE&#xA;        )&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;create_acoustic_recordings_table&quot;>&#xA;      &lt;sql>&#xA;        CREATE TABLE acoustic_recordings&#xA;        (&#xA;          pkid bigserial NOT NULL,&#xA;          filename text NOT NULL,    -- could be detailed spec image, wav, mp3 or more&#xA;          x_coord integer,           -- The pixel position from the left of the acoustic_spectrogram&#xA;          acoustic_spec_fk integer NOT NULL,&#xA;          time_recording_start timestamp with time zone NOT NULL,&#xA;          CONSTRAINT acoustic_recordings_pkey PRIMARY KEY (pkid),&#xA;          CONSTRAINT acoustic_rec2spec_fkey FOREIGN KEY (acoustic_spec_fk)&#xA;              REFERENCES acoustic_spectrograms (pkid) MATCH SIMPLE&#xA;              ON UPDATE CASCADE ON DELETE CASCADE&#xA;        )&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;acoustic_deployments_add_geom&quot;>&#xA;      &lt;sql>&#xA;        ALTER TABLE acoustic_deployments&#xA;          ADD COLUMN geom geometry(Geometry,4326) CHECK (st_isvalid(geom));&#xA;&#xA;        CREATE INDEX acoustic_deployments_gist_idx ON acoustic_deployments USING GIST (geom);&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;acoustic_deployments_add_last_updated&quot;>&#xA;      &lt;sql>&#xA;        ALTER TABLE acoustic_deployments&#xA;          ADD COLUMN first_added  timestamp with time zone DEFAULT ('now'::text)::timestamp(0) with time zone,&#xA;          ADD COLUMN last_updated timestamp with time zone DEFAULT ('now'::text)::timestamp(0) with time zone;&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;anmn_acoustics_map_view&quot; runOnChange=&quot;true&quot;>&#xA;      &lt;sql>&#xA;        DROP VIEW IF EXISTS anmn_acoustics_map;&#xA;&#xA;        CREATE VIEW anmn_acoustics_map AS&#xA;          SELECT&#xA;            curtin_id,&#xA;            site_code,&#xA;&#x9;    substring(deployment_name from '(^\\D*) ') AS site_name,&#xA;            deployment_name,&#xA;&#x9;    substring(deployment_name from '[\\d-]+$') AS deployment_years,&#xA;            time_deployment_start AT TIME ZONE 'UTC' AS time_coverage_start,&#xA;            time_deployment_end AT TIME ZONE 'UTC' AS time_coverage_end,&#xA;            lat,&#xA;            lon,&#xA;            water_depth,&#xA;            receiver_depth,&#xA;            set_success,&#xA;            comments,&#xA;            data_volume AS data_volume_gb,&#xA;            data_path,&#xA;            geom&#xA;          FROM acoustic_deployments&#xA;          WHERE is_primary&#xA;          ORDER BY site_code, curtin_id&#xA;        ;&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="224" posY="416">
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="448" posY="576">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_1"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
@@ -114,7 +113,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_1"/>
   </node>
-  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="224" posY="256">
+  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="448">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_2"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_yCojcFpdEeO08paGH1Z8mA"/>
@@ -131,7 +130,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE acoustic_deployments&#10;  SET geom = ST_PointFromText('POINT(' || lon::text || ' ' || lat::text || ')', 4326);&#10;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE acoustic_deployments&#xA;  SET geom = ST_PointFromText('POINT(' || lon::text || ' ' || lat::text || ')', 4326);&#xA;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -150,13 +149,96 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="tPostgresqlRow_2">
+  <node componentName="iUpdateIndex" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="448" posY="64">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iUpdateIndex_1"/>
+    <elementParameter field="CHECK" name="START" value="true"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_yCojcFpdEeO08paGH1Z8mA"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
+    <elementParameter field="TEXT" name="BASE_PATH" value="context.base"/>
+    <elementParameter field="FILE" name="MANIFEST_FILENAME" value="context.fileList"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="iNewOrModifiedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="448" posY="320">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_1"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_yCojcFpdEeO08paGH1Z8mA"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
+    <elementParameter field="TEXT" name="HARVEST_TYPE" value="&quot;metadata&quot;"/>
+    <elementParameter field="RADIO" name="USE_DEFAULT" value="true"/>
+    <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
+    <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
+    <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
+    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#xA;&quot;  from indexed_file &quot; +&#xA;&quot;  join index_job &quot; +&#xA;&quot;    on indexed_file.job_id = index_job.id &quot; +&#xA;&quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#xA;&quot;   and index_job.name = ? &quot; +&#xA;&quot;  left join file_harvest &quot; +&#xA;&quot;    on file_harvest.file_id = indexed_file.id &quot; +&#xA;&quot;   and file_harvest.harvest_type = ? &quot; +&#xA;&quot; where (file_harvest.last_moddate_harvested &lt;> indexed_file.modified &quot; +&#xA;&quot;    or  file_harvest.last_moddate_harvested is null) &quot;;&#xA;      "/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="736" posY="320">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_2"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Update_deployments_table"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_770mQEl5EeaUF5DAg7xGqA"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="false"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS">
+      <elementValue elementRef="PARAM_NAME_COLUMN" value="inputFile"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="context.base + &quot;/&quot; + ((String)globalMap.get(&quot;iNewOrModifiedFileList_1_URL&quot;))"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tRunJob_2"/>
+  </node>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iNewOrModifiedFileList_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlRow_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_2" target="tRunJob_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iUpdateIndex_1" offsetLabelX="0" offsetLabelY="0" source="iUpdateIndex_1" target="iPostgresqlDbUpdate_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
+  </connection>
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iNewOrModifiedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iNewOrModifiedFileList_1" target="tRunJob_2">
+    <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
+    <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate1"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iNewOrModifiedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iNewOrModifiedFileList_1" target="tPostgresqlRow_2">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk4"/>
   </connection>
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
@@ -171,7 +253,19 @@
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_2"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Update geometries"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iUpdateIndex_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
