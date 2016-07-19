@@ -9,7 +9,7 @@
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value="1"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
-    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_X28C0FZQEeO1nIjDowevtg" type="id_String" value="/home/lbesnard/github_repo/chef/src/LJCO"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_X28C0FZQEeO1nIjDowevtg" type="id_String" value="/home/lbesnard/github_repo/chef/src/ljco_newfiles/L2_files"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -658,7 +658,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="water_sensors" name="water_sensors">
-      <column comment="" defaultValue="" key="false" name="TIME" nullable="true" originalDbColumnName="time" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" key="false" length="36" name="TIME" nullable="true" originalDbColumnName="time" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="" type="id_Date"/>
       <column comment="" defaultValue="" key="false" name="LATITUDE" nullable="true" originalDbColumnName="latitude" pattern="" sourceType="" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="LONGITUDE" nullable="true" originalDbColumnName="longitude" pattern="" sourceType="" type="id_Double"/>
       <column comment="" defaultValue="" key="false" name="NOMINAL_DEPTH" nullable="true" pattern="" sourceType="" type="id_Double"/>
@@ -742,10 +742,9 @@
       <column comment="" key="false" length="1" name="TURB_RAW_COUNT_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="1"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(water_sensors.LONGITUDE,water_sensors.LATITUDE,&quot;EPSG:4326&quot;)  " type="id_Geometry"/>
-        <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1950-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,water_sensors.TIME,true)  " type="id_Date"/>
         <mapperTableEntries name="CNDC_quality_control" expression="water_sensors.CNDC_quality_control==null?null:water_sensors.CNDC_quality_control.toString() " type="id_String" nullable="true"/>
         <mapperTableEntries name="DENS_quality_control" expression="water_sensors.DENS_quality_control==null?null:water_sensors.DENS_quality_control.toString()" type="id_String" nullable="true"/>
         <mapperTableEntries name="DOX1_1_quality_control" expression="water_sensors.DOX1_1_quality_control==null?null:water_sensors.DOX1_1_quality_control.toString()" type="id_String" nullable="true"/>
@@ -762,7 +761,7 @@
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="copyOfdata">
         <mapperTableEntries name="file_id" expression="context.file_id" type="id_Integer"/>
-        <mapperTableEntries name="TIME" expression="Var.TIME   " type="id_Date"/>
+        <mapperTableEntries name="TIME" expression="water_sensors.TIME   " type="id_Date"/>
         <mapperTableEntries name="LATITUDE" expression="water_sensors.LATITUDE " type="id_Double"/>
         <mapperTableEntries name="LONGITUDE" expression="water_sensors.LONGITUDE " type="id_Double"/>
         <mapperTableEntries name="geom" expression="Var.geom   " type="id_Geometry"/>
@@ -797,7 +796,7 @@
         <mapperTableEntries name="TURB_RAW_COUNT_quality_control" expression="Var.TURB_RAW_COUNT_quality_control " type="id_String" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="water_sensors" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
-        <mapperTableEntries name="TIME" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="TIME" type="id_Date" nullable="true"/>
         <mapperTableEntries name="LATITUDE" type="id_Double" nullable="true"/>
         <mapperTableEntries name="LONGITUDE" type="id_Double" nullable="true"/>
         <mapperTableEntries name="NOMINAL_DEPTH" type="id_Double" nullable="true"/>
