@@ -7,9 +7,9 @@
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="srs_oc_ljco_wws"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="10.11.12.13"/>
-    <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value="3"/>
-    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="IMOS_SRS-OC-LJCO_FZ_20150606T000000Z_SRC_FV02_BB9-daily_C-20160715T003639Z.nc"/>
-    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_X28C0FZQEeO1nIjDowevtg" type="id_String" value="/home/lbesnard/github_repo/chef/src/ljco_newfiles/L2_files"/>
+    <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value=""/>
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value=""/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_X28C0FZQEeO1nIjDowevtg" type="id_String" value="/home/lbesnard/github_repo/chef/src"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -25,8 +25,6 @@
     <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;&quot;"/>
     <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
-    <elementParameter field="CLOSED_LIST" name="LOAD_NEW_VARIABLE" value=""/>
-    <elementParameter field="CLOSED_LIST" name="NOT_LOAD_OLD_VARIABLE" value=""/>
     <elementParameter field="CHECK" name="DISABLE_WARNINGS" value="false"/>
     <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -108,6 +106,11 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlRow_1"/>
+    <metadata connector="REJECT" name="REJECT">
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
   </node>
   <node componentName="iNetCDFGlobalAttributes" componentVersion="0.1" offsetLabelX="-50" offsetLabelY="37" posX="480" posY="256">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttributes_1"/>
@@ -633,9 +636,8 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="608">
+  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="576">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_2"/>
-    <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="CHECK" name="CLOSE" value="false"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -651,9 +653,9 @@
       <column comment="" defaultValue="" key="false" name="NOMINAL_DEPTH" nullable="false" pattern="" sourceType="FLOAT8" type="id_Double"/>
     </metadata>
   </node>
-  <node componentName="iNetCDFInput" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="448" posY="416">
+  <node componentName="iNetCDFInput" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="416">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFInput_2"/>
-    <elementParameter field="FILE" name="FILENAME" value="&quot;/home/lbesnard/github_repo/chef/src/ljco_newfiles/L2_files/IMOS_SRS-OC-LJCO_EFZ_20150606T000000Z_SRC_FV02_HyperOCR-daily_C-20160715T003643Z.nc&quot;"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
     <elementParameter field="TABLE" name="SCHEMAS">
       <elementValue elementRef="SCHEMA" value="var"/>
     </elementParameter>
@@ -677,7 +679,7 @@
       <column comment="" key="false" name="HEIGHT_water_sensor" nullable="true" pattern="" sourceType="" type="id_Double"/>
     </metadata>
   </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="704" posY="416">
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="736" posY="416">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_2"/>
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
@@ -699,7 +701,7 @@
       <column comment="" defaultValue="" key="false" name="HEIGHT_water_sensor" nullable="false" pattern="" sourceType="" type="id_Double"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(var.LONGITUDE,var.LATITUDE,&quot;EPSG:4326&quot;)  " type="id_Geometry"/>
       </varTables>
@@ -719,7 +721,7 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="960" posY="416">
+  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="992" posY="416">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_5"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -811,13 +813,9 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlRow_2" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tPostgresqlRow_2" target="iNetCDFGlobalAttributes_1">
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlRow_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_2" target="iNetCDFGlobalAttributes_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk4"/>
-  </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlRow_2" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tPostgresqlRow_2" target="iNetCDFInput_2">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk3"/>
   </connection>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="iNetCDFGlobalAttributes_1" offsetLabelX="0" offsetLabelY="0" source="iNetCDFGlobalAttributes_1" target="tMap_1">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
@@ -830,6 +828,10 @@
     <elementParameter field="TABLE" name="THRESHLODS"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iNetCDFGlobalAttributes_1" offsetLabelX="0" offsetLabelY="0" source="iNetCDFGlobalAttributes_1" target="iNetCDFInput_2">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
   <connection connectorName="FLOW" label="copyOfout1" lineStyle="0" metaname="copyOfout1" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="iPostgresqlOutput_2">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
@@ -989,6 +991,10 @@
     <elementParameter field="TABLE" name="THRESHLODS"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="var"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iNetCDFInput_2" offsetLabelX="0" offsetLabelY="0" source="iNetCDFInput_2" target="tPostgresqlCommit_2">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
   </connection>
   <connection connectorName="FLOW" label="copyOfdata" lineStyle="0" metaname="copyOfdata" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="iPostgresqlOutput_5">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
