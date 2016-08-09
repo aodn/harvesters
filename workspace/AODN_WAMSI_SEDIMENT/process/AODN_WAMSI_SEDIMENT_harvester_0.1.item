@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_String" value="harvest"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_String" value="aodn_wamsi_sediment"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_Password" value="L36/Gy4UTGeKQAGx0RjFHMZATUBPHWm6"/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_String" value="5432"/>
@@ -23,7 +23,7 @@
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms512M -Xmx2048M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="0"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="128"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
     <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
     <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
@@ -56,7 +56,7 @@
     <routinesParameter id="_cRn34BQsEeKRFb0vPU_LNg" name="DAPUtils"/>
     <routinesParameter id="_IMfY4Dp8EeKYTu4DLH4cKg" name="NetCDFUtils"/>
   </parameters>
-  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="288" posY="64">
+  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="96" posY="64">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_QKA6EAlGEeObitNNn0mU_g"/>
@@ -69,7 +69,7 @@
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/Users/xavierhoenner/Work/Resources/TOS_DI-r96646-V5.1.3/workspace/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aodn_wamsi_sediment_data_table&quot;>&#xA;        &lt;sql>&#xA;&#x9;CREATE TABLE aodn_wamsi_sediment_data&#xA;&#x9;(&#xA;  &#x9;measurement_id serial NOT NULL,&#xA;&#x9;file_id integer NOT NULL,&#xA; &#x9;grab_id character varying(254),&#xA;  &#x9;lab_id character varying(254),&#xA;  &#x9;sampling character varying(254),&#xA;  &#x9;lat numeric,&#xA;  &#x9;lon numeric,&#xA;  &#x9;depth numeric,&#xA;  &#x9;textural_c character varying(254),&#xA;  &#x9;sediment_n character varying(254),&#xA;  &#x9;mode character varying(254),&#xA;  &#x9;mean character varying(254),&#xA;  &#x9;sorting character varying(254),&#xA;  &#x9;skewness character varying(254),&#xA;  &#x9;kurtosis character varying(254),&#xA;  &#x9;mean_1 numeric,&#xA;  &#x9;sorting_1 numeric,&#xA;  &#x9;skewness_1 numeric,&#xA;  &#x9;kurtosis_1 numeric,&#xA;  &#x9;mean_2 numeric,&#xA;  &#x9;sorting_2 numeric,&#xA;  &#x9;skewness_2 numeric,&#xA;  &#x9;kurtosis_2 numeric,&#xA;  &#x9;gravel numeric,&#xA;  &#x9;sand numeric,&#xA;  &#x9;mud numeric,&#xA;  &#x9;v_coarse_s numeric,&#xA;  &#x9;coarse_sand numeric,&#xA;  &#x9;medium_sand numeric,&#xA;  &#x9;fine_sand numeric,&#xA;  &#x9;v_fine_sand numeric,&#xA;  &#x9;geom geometry(Geometry,4326),&#xA;  &#x9;CONSTRAINT aodn_wamsi_sediment_pkey PRIMARY KEY (measurement_id),&#xA;          CONSTRAINT aodn_wamsi_sediment_fkey FOREIGN KEY (file_id)&#xA;              REFERENCES indexed_file (id) MATCH SIMPLE&#xA;              ON UPDATE CASCADE ON DELETE CASCADE&#xA;&#x9;);&#xA;        CREATE INDEX aodn_wamsi_sediment_gist_idx ON aodn_wamsi_sediment_data USING GIST (geom);&#xA;&#x9;ALTER TABLE aodn_wamsi_sediment_data ADD CHECK (ST_ISVALID(geom));&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;xhoenner&quot; id=&quot;create_aodn_wamsi_sediment_data_table&quot;>&#xA;        &lt;sql>&#xA;&#x9;CREATE TABLE aodn_wamsi_sediment_data&#xA;&#x9;(&#xA;  &#x9;measurement_id bigserial NOT NULL,&#xA;&#x9;file_id integer NOT NULL,&#xA; &#x9;grab_id character varying(254),&#xA;  &#x9;lab_id character varying(254),&#xA;  &#x9;sampling character varying(254),&#xA;  &#x9;lat numeric,&#xA;  &#x9;lon numeric,&#xA;  &#x9;depth numeric,&#xA;  &#x9;textural_c character varying(254),&#xA;  &#x9;sediment_n character varying(254),&#xA;  &#x9;mode character varying(254),&#xA;  &#x9;mean character varying(254),&#xA;  &#x9;sorting character varying(254),&#xA;  &#x9;skewness character varying(254),&#xA;  &#x9;kurtosis character varying(254),&#xA;  &#x9;mean_1 numeric,&#xA;  &#x9;sorting_1 numeric,&#xA;  &#x9;skewness_1 numeric,&#xA;  &#x9;kurtosis_1 numeric,&#xA;  &#x9;mean_2 numeric,&#xA;  &#x9;sorting_2 numeric,&#xA;  &#x9;skewness_2 numeric,&#xA;  &#x9;kurtosis_2 numeric,&#xA;  &#x9;gravel numeric,&#xA;  &#x9;sand numeric,&#xA;  &#x9;mud numeric,&#xA;  &#x9;v_coarse_s numeric,&#xA;  &#x9;coarse_sand numeric,&#xA;  &#x9;medium_sand numeric,&#xA;  &#x9;fine_sand numeric,&#xA;  &#x9;v_fine_sand numeric,&#xA;  &#x9;geom geometry(Geometry,4326),&#xA;  &#x9;CONSTRAINT aodn_wamsi_sediment_pkey PRIMARY KEY (measurement_id),&#xA;          CONSTRAINT aodn_wamsi_sediment_fkey FOREIGN KEY (file_id)&#xA;              REFERENCES indexed_file (id) MATCH SIMPLE&#xA;              ON UPDATE CASCADE ON DELETE CASCADE&#xA;&#x9;);&#xA;        CREATE INDEX aodn_wamsi_sediment_gist_idx ON aodn_wamsi_sediment_data USING GIST (geom);&#xA;&#x9;ALTER TABLE aodn_wamsi_sediment_data ADD CHECK (ST_ISVALID(geom));&#xA;        &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -97,7 +97,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_4"/>
   </node>
-  <node componentName="iIndexFiles" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="96" posY="64">
+  <node componentName="iIndexFiles" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="96" posY="-64">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIndexFiles_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
@@ -187,13 +187,13 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_2"/>
   </node>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="iIndexFiles_1" target="iPostgresqlDbUpdate_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iHarvestResources_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk4"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" source="iIndexFiles_1" target="iPostgresqlDbUpdate_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
-  </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIndexFiles_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="iIndexFiles_1" target="iHarvestResources_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk7"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tRunJob_4">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
