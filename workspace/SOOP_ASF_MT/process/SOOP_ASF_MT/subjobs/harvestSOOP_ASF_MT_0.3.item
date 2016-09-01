@@ -199,7 +199,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH &#xA;table_a AS(SELECT  value AS platform_code FROM attribute WHERE  name = 'voyage_number' AND file_id = &quot; + context.file_id + &quot; ),&#xA;table_b AS ( select size,url,  id as file_id from indexed_file WHERE  id = &quot; + context.file_id + &quot; ),&#xA;table_c AS(SELECT  value AS voyage_number FROM attribute WHERE  name = 'voyage_number' AND file_id = &quot; + context.file_id + &quot; ),&#xA;table_d AS(SELECT vessel_name, platform_code,  colour FROM vessel_names where (SELECT  vessel_name FROM deployments WHERE file_id = &quot; + context.file_id +&quot; ) =  vessel_name),&#xA;&#xA;data AS (SELECT  &#xA;min(\&quot;TIME\&quot;)  AS time_start, &#xA;max(\&quot;TIME\&quot;) AS time_end,&#xA;st_makevalid(ST_SimplifyPreserveTopology(make_trajectory(geom ORDER BY \&quot;TIME\&quot;),0.005)) AS geom&#xA;FROM  measurements&#xA;WHERE \&quot;LATITUDE\&quot; != 0 AND \&quot;LONGITUDE\&quot; != 0 AND ((\&quot;LONGITUDE\&quot; > -180 AND \&quot;LONGITUDE\&quot; &lt; 180)  or (\&quot;LATITUDE\&quot; &lt;90  or \&quot;LATITUDE\&quot; >-90)) AND (\&quot;LONGITUDE_quality_control\&quot; = 'Z' AND \&quot;LATITUDE_quality_control\&quot; = 'Z' )AND  file_id = &quot; + context.file_id + &quot; &#xA;)&#xA;&#xA;SELECT DISTINCT file_id,&#xA;url,&#xA;size,&#xA;time_start,&#xA;time_end,&#xA;voyage_number,&#xA;table_d.platform_code,&#xA;table_d.vessel_name,&#xA;table_d.colour,&#xA;geom&#xA;FROM data,table_a,table_b,table_c,table_d&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH &#xA;table_a AS(SELECT  value AS platform_code FROM attribute WHERE  name = 'voyage_number' AND file_id = &quot; + context.file_id + &quot; ),&#xA;table_b AS ( select size,url,  id as file_id from indexed_file WHERE  id = &quot; + context.file_id + &quot; ),&#xA;table_c AS(SELECT  value AS voyage_number FROM attribute WHERE  name = 'voyage_number' AND file_id = &quot; + context.file_id + &quot; ),&#xA;table_d AS(SELECT vessel_name, platform_code,  colour FROM vessel_names where (SELECT  vessel_name FROM deployments WHERE file_id = &quot; + context.file_id +&quot; ) =  vessel_name),&#xA;&#xA;data AS (SELECT  &#xA;min(\&quot;TIME\&quot;)  AS time_coverage_start, &#xA;max(\&quot;TIME\&quot;) AS time_coverage_end,&#xA;st_makevalid(ST_SimplifyPreserveTopology(make_trajectory(geom ORDER BY \&quot;TIME\&quot;),0.005)) AS geom&#xA;FROM  measurements&#xA;WHERE \&quot;LATITUDE\&quot; != 0 AND \&quot;LONGITUDE\&quot; != 0 AND ((\&quot;LONGITUDE\&quot; > -180 AND \&quot;LONGITUDE\&quot; &lt; 180)  or (\&quot;LATITUDE\&quot; &lt;90  or \&quot;LATITUDE\&quot; >-90)) AND (\&quot;LONGITUDE_quality_control\&quot; = 'Z' AND \&quot;LATITUDE_quality_control\&quot; = 'Z' )AND  file_id = &quot; + context.file_id + &quot; &#xA;)&#xA;&#xA;SELECT DISTINCT file_id,&#xA;url,&#xA;size,&#xA;time_coverage_start,&#xA;time_coverage_end,&#xA;voyage_number,&#xA;table_d.platform_code,&#xA;table_d.vessel_name,&#xA;table_d.colour,&#xA;geom&#xA;FROM data,table_a,table_b,table_c,table_d&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -213,9 +213,9 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="size"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_start"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_end"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="voyage_number"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -236,8 +236,8 @@
       <column comment="" defaultValue="" key="false" name="file_id" nullable="false" pattern="" sourceType="" type="id_Integer"/>
       <column comment="" key="false" name="url" nullable="false" pattern="" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" name="size" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" key="false" name="time_start" nullable="true" pattern="" sourceType="" type="id_Date"/>
-      <column comment="" key="false" name="time_end" nullable="true" pattern="" sourceType="" type="id_Date"/>
+      <column comment="" key="false" name="time_coverage_start" nullable="true" pattern="" sourceType="" type="id_Date"/>
+      <column comment="" key="false" name="time_coverage_end" nullable="true" pattern="" sourceType="" type="id_Date"/>
       <column comment="" key="false" name="voyage_number" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="vessel_name" nullable="false" pattern="" sourceType="" type="id_String"/>
@@ -285,12 +285,12 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_start"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_end"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -334,8 +334,8 @@
       <column comment="" defaultValue="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" name="url" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" name="size" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" name="time_start" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="time_end" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="time_coverage_start" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="time_coverage_end" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="voyage_number" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="vessel_name" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -346,8 +346,8 @@
       <column comment="" defaultValue="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" name="url" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" name="size" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" name="time_start" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="time_end" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="time_coverage_start" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="time_coverage_end" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="voyage_number" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="vessel_name" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -1110,7 +1110,7 @@
       <column comment="" key="false" name="source" nullable="true" pattern="" sourceType="" type="id_String"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="copyOfout1">
         <mapperTableEntries name="file_id" expression="context.file_id" type="id_Integer"/>
@@ -1500,10 +1500,10 @@
       <elementValue elementRef="TRACE_COLUMN" value="url"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_start"/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_end"/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="voyage_number"/>
