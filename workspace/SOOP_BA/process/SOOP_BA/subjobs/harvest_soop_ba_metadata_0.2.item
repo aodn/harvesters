@@ -2,7 +2,7 @@
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="0QBca9hfxmU="/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="localhost"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="soop_ba"/>
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="soop_ba"/>
@@ -196,7 +196,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_a AS(SELECT voyage_id,  platform_code FROM deployments where  file_id = &quot; + context.file_id + &quot; ),&#xA;table_c AS ( select size,url,  id as file_id from indexed_file WHERE  id = &quot; + context.file_id + &quot; ),&#xA;table_d AS(SELECT vn.vessel_name, vn.platform_code, vn.colour FROM soop_ba.deployments d LEFT OUTER JOIN soop_ba.vessel_names vn ON vn.vessel_name = d.vessel_name WHERE d.file_id = &quot; + context.file_id +&quot;),&#xA;&#xA;data AS (SELECT &#xA;min(\&quot;TIME\&quot;) AS  time_start, &#xA;max(\&quot;TIME\&quot;)  AS time_end, &#xA;ST_SimplifyPreserveTopology(make_trajectory(geom ORDER BY \&quot;TIME\&quot;),0.005) AS geom&#xA;FROM  measurements&#xA;where file_id = &quot; + context.file_id + &quot; )&#xA;&#xA;SELECT DISTINCT voyage_id,&#xA;file_id,&#xA;url,&#xA;size,&#xA;time_start,&#xA;time_end,&#xA;vessel_name,&#xA;colour, &#xA;geom&#xA;FROM data,table_a,table_c,table_d;&#xA;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_a AS(SELECT voyage_id,  platform_code FROM deployments where  file_id = &quot; + context.file_id + &quot; ),&#xA;table_c AS ( select size,url,  id as file_id from indexed_file WHERE  id = &quot; + context.file_id + &quot; ),&#xA;table_d AS(SELECT vn.vessel_name, vn.platform_code, vn.colour FROM soop_ba.deployments d LEFT OUTER JOIN soop_ba.vessel_names vn ON vn.vessel_name = d.vessel_name WHERE d.file_id = &quot; + context.file_id +&quot;),&#xA;&#xA;data AS (SELECT &#xA;min(\&quot;TIME\&quot;) AS  time_coverage_start, &#xA;max(\&quot;TIME\&quot;)  AS time_coverage_end, &#xA;ST_SimplifyPreserveTopology(make_trajectory(geom ORDER BY \&quot;TIME\&quot;),0.005) AS geom&#xA;FROM  measurements&#xA;where file_id = &quot; + context.file_id + &quot; )&#xA;&#xA;SELECT DISTINCT voyage_id,&#xA;file_id,&#xA;url,&#xA;size,&#xA;time_coverage_start,&#xA;time_coverage_end,&#xA;vessel_name,&#xA;colour, &#xA;geom&#xA;FROM data,table_a,table_c,table_d;&#xA;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -212,9 +212,9 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="size"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_start"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_end"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="vessel_name"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -232,8 +232,8 @@
       <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
       <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="17" name="size" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double" originalLength="17"/>
-      <column comment="" key="false" length="35" name="time_start" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
-      <column comment="" key="false" length="35" name="time_end" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
+      <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
+      <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
       <column comment="" key="false" length="0" name="vessel_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="0" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
@@ -284,12 +284,12 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_start"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_end"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -324,8 +324,8 @@
       <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="17" name="size" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double" originalLength="17"/>
-      <column comment="" key="false" length="35" name="time_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="35" name="time_end" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="0" name="vessel_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
@@ -335,8 +335,8 @@
       <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="17" name="size" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double" originalLength="17"/>
-      <column comment="" key="false" length="35" name="time_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="35" name="time_end" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="0" name="vessel_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
@@ -1166,10 +1166,10 @@
       <elementValue elementRef="TRACE_COLUMN" value="voyage_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_start"/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_scoverage_tart"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_end"/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="vessel_name"/>
@@ -1182,6 +1182,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="size"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
