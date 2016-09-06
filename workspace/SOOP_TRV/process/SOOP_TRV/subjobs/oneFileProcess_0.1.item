@@ -29,7 +29,7 @@
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="192"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="224"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="32"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
     <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
@@ -817,7 +817,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_a AS(SELECT distinct vessel_name,metadata_uuid, platform_code FROM deployments where trip_id = &quot; + context.trip_id + &quot;),&#xA;table_d AS(SELECT vessel_name, platform_code,  colour FROM vessel_names where vessel_name = (SELECT distinct vessel_name FROM soop_trv.deployments where trip_id = &quot; + context.trip_id + &quot;) )&#xA;&#xA;SELECT DISTINCT data.trip_id,&#xA;table_a.metadata_uuid,&#xA;time_start,&#xA;time_end,&#xA;table_a.vessel_name,&#xA;colour, &#xA;\&quot;TURB\&quot; > 0  AS \&quot;TURB_b\&quot;,&#xA;\&quot;TEMP\&quot; > 0  AS \&quot;TEMP_b\&quot;,&#xA;\&quot;CPHL\&quot; > 0  AS \&quot;CPHL_b\&quot;,&#xA;\&quot;PSAL\&quot; > 0  AS \&quot;PSAL_b\&quot;,&#xA;st_simplify(geom,0.01) as geom&#xA;FROM temporary_sub_select_wms data,table_a,table_d where trip_id = &quot; + context.trip_id + &quot;;&#xA;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_a AS(SELECT distinct vessel_name,metadata_uuid, platform_code FROM deployments where trip_id = &quot; + context.trip_id + &quot;),&#xA;table_d AS(SELECT vessel_name, platform_code,  colour FROM vessel_names where vessel_name = (SELECT distinct vessel_name FROM soop_trv.deployments where trip_id = &quot; + context.trip_id + &quot;) )&#xA;&#xA;SELECT DISTINCT data.trip_id,&#xA;table_a.metadata_uuid,&#xA;time_coverage_start,&#xA;time_coverage_end,&#xA;table_a.vessel_name,&#xA;colour, &#xA;\&quot;TURB\&quot; > 0  AS \&quot;TURB_b\&quot;,&#xA;\&quot;TEMP\&quot; > 0  AS \&quot;TEMP_b\&quot;,&#xA;\&quot;CPHL\&quot; > 0  AS \&quot;CPHL_b\&quot;,&#xA;\&quot;PSAL\&quot; > 0  AS \&quot;PSAL_b\&quot;,&#xA;st_simplify(geom,0.01) as geom&#xA;FROM temporary_sub_select_wms data,table_a,table_d where trip_id = &quot; + context.trip_id + &quot;;&#xA;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -829,9 +829,9 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="metadata_uuid"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_start"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_end"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="vessel_name"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -856,8 +856,8 @@
     <metadata connector="FLOW" name="tPostgresqlInput_2">
       <column comment="" defaultValue="" key="false" length="5" name="trip_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="100" name="metadata_uuid" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="29" name="time_start" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="" type="id_Date"/>
-      <column comment="" key="false" length="29" name="time_end" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_start" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_end" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="" type="id_Date"/>
       <column comment="" key="false" length="50" name="vessel_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="1" name="TURB_b" nullable="true" pattern="" precision="0" sourceType="" type="id_Boolean"/>
@@ -902,12 +902,12 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_start"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_end"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -958,10 +958,10 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_7">
-      <column comment="" defaultValue="" key="true" length="5" name="trip_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="5" name="trip_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="100" name="metadata_uuid" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="29" name="time_start" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="29" name="time_end" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_start" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_end" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="50" name="vessel_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="1" name="TURB_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
@@ -971,10 +971,10 @@
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" defaultValue="" key="true" length="5" name="trip_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="5" name="trip_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="100" name="metadata_uuid" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="29" name="time_start" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="29" name="time_end" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_start" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_end" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="50" name="vessel_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="1" name="TURB_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
@@ -1086,7 +1086,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;TRUNCATE TABLE temporary_sub_select_wms;&#xA;INSERT INTO temporary_sub_select_wms&#xA;(SELECT trip_id, &#xA;min(\&quot;TIME\&quot;) AS time_start, &#xA;max(\&quot;TIME\&quot;) AS time_end, &#xA;COUNT(\&quot;TURB\&quot;) AS \&quot;TURB\&quot;,&#xA;COUNT(\&quot;TEMP\&quot;) AS \&quot;TEMP\&quot;,&#xA;COUNT(\&quot;CPHL\&quot;) AS \&quot;CPHL\&quot;,&#xA;COUNT(\&quot;PSAL\&quot;) AS \&quot;PSAL\&quot;,&#xA;ST_SimplifyPreserveTopology(ST_MakeLine(geom ORDER BY \&quot;TIME\&quot;),0.005) AS geom&#xA;FROM  measurements_merged_data where trip_id = &quot; + context.trip_id +&quot; GROUP BY trip_id);&#xA;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;TRUNCATE TABLE temporary_sub_select_wms;&#xA;INSERT INTO temporary_sub_select_wms&#xA;(SELECT trip_id, &#xA;min(\&quot;TIME\&quot;) AS time_coverage_start, &#xA;max(\&quot;TIME\&quot;) AS time_coverage_end, &#xA;COUNT(\&quot;TURB\&quot;) AS \&quot;TURB\&quot;,&#xA;COUNT(\&quot;TEMP\&quot;) AS \&quot;TEMP\&quot;,&#xA;COUNT(\&quot;CPHL\&quot;) AS \&quot;CPHL\&quot;,&#xA;COUNT(\&quot;PSAL\&quot;) AS \&quot;PSAL\&quot;,&#xA;ST_SimplifyPreserveTopology(ST_MakeLine(geom ORDER BY \&quot;TIME\&quot;),0.005) AS geom&#xA;FROM  measurements_merged_data where trip_id = &quot; + context.trip_id +&quot; GROUP BY trip_id);&#xA;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -2582,10 +2582,10 @@
       <elementValue elementRef="TRACE_COLUMN" value="metadata_uuid"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_start"/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_end"/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="vessel_name"/>
