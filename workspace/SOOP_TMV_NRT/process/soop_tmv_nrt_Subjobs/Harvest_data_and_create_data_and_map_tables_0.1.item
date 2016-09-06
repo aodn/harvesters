@@ -87,7 +87,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT trajectory_id AS file_id,&#xA;size,&#xA;COUNT(trajectory_id) AS no_measurements,&#xA;min(\&quot;TIME\&quot;) AS time_start,&#xA;max(\&quot;TIME\&quot;) AS time_end,&#xA;st_simplify(st_makeline(geom ORDER BY \&quot;TIME\&quot;),0.05) AS geom&#xA;FROM measurements&#xA;LEFT JOIN indexed_file ON indexed_file.id = measurements.trajectory_id&#xA;WHERE trajectory_id = &quot; + context.fileId + &quot;&#xA;GROUP BY trajectory_id,size;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT trajectory_id AS file_id,&#xA;size,&#xA;COUNT(trajectory_id) AS no_measurements,&#xA;min(\&quot;TIME\&quot;) AS time_coverage_start,&#xA;max(\&quot;TIME\&quot;) AS time_coverage_end,&#xA;st_simplify(st_makeline(geom ORDER BY \&quot;TIME\&quot;),0.05) AS geom&#xA;FROM measurements&#xA;LEFT JOIN indexed_file ON indexed_file.id = measurements.trajectory_id&#xA;WHERE trajectory_id = &quot; + context.fileId + &quot;&#xA;GROUP BY trajectory_id,size;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -101,9 +101,9 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="no_measurements"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_start"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_end"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -116,8 +116,8 @@
       <column comment="" defaultValue="" key="false" length="19" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT2" type="id_Long"/>
       <column comment="" defaultValue="" key="false" length="17" name="size" nullable="true" pattern="" precision="17" sourceType="FLOAT4" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="19" name="no_measurements" nullable="true" pattern="" precision="0" sourceType="INT2" type="id_Long"/>
-      <column comment="" key="false" length="29" name="time_start" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
-      <column comment="" key="false" length="29" name="time_end" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_start" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_end" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="LINE" type="id_Object"/>
     </metadata>
   </node>
@@ -161,12 +161,12 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_start"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_end"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -189,16 +189,16 @@
       <column comment="" defaultValue="" key="false" length="19" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT2" type="id_Long"/>
       <column comment="" defaultValue="" key="false" length="17" name="size" nullable="true" pattern="" precision="17" sourceType="FLOAT4" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="19" name="no_measurements" nullable="true" pattern="" precision="0" sourceType="INT2" type="id_Long"/>
-      <column comment="" key="false" length="29" name="time_start" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
-      <column comment="" key="false" length="29" name="time_end" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_start" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_end" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="LINE" type="id_Object"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" defaultValue="" key="false" length="19" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT2" type="id_Long"/>
       <column comment="" defaultValue="" key="false" length="17" name="size" nullable="true" pattern="" precision="17" sourceType="FLOAT4" type="id_Double"/>
       <column comment="" defaultValue="" key="false" length="19" name="no_measurements" nullable="true" pattern="" precision="0" sourceType="INT2" type="id_Long"/>
-      <column comment="" key="false" length="29" name="time_start" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
-      <column comment="" key="false" length="29" name="time_end" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_start" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_end" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMPTZ" type="id_Date"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="LINE" type="id_Object"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
@@ -687,10 +687,10 @@
       <elementValue elementRef="TRACE_COLUMN" value="no_measurements"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_start"/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_end"/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="geom"/>
