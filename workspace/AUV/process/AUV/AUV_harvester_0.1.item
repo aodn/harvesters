@@ -9,13 +9,13 @@
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="auv"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="10.11.12.13"/>
-    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/home/lbesnard/github_repo/chef/src/PS201502/r20150209_213443_broughton_east_biebg_03_broad/hydro_netcdf"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/home/lbesnard/github_repo/chef/src/"/>
     <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/tmp/fileList"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="128"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="64"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
     <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
@@ -49,7 +49,7 @@
     <routinesParameter id="_cRn34BQsEeKRFb0vPU_LNg" name="DAPUtils"/>
     <routinesParameter id="_IMfY4Dp8EeKYTu4DLH4cKg" name="NetCDFUtils"/>
   </parameters>
-  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="192" posY="0">
+  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="-64" posY="0">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
@@ -69,7 +69,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="iUpdateIndex" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="192" posY="128">
+  <node componentName="iUpdateIndex" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="96" posY="0">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iUpdateIndex_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
@@ -273,11 +273,71 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_4"/>
   </node>
+  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="256" posY="0">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_2"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;/media/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/changelog.xml&quot;"/>
+    <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-1&quot;>&#xA;       &lt;sql>&#xA;    CREATE TABLE auv.deployments&#xA;(&#xA;  deploy_id bigserial NOT NULL,&#xA;  file_id integer NOT NULL,&#xA;  dive_name character varying(150),&#xA;  campaign_name character varying(50),&#xA;  author_email character varying(50),&#xA;  cdm_data_type character varying(50),&#xA;  local_time_zone character varying(50),&#xA;  geospatial_lat_min character varying(50),&#xA;  time_coverage_end character varying(50),&#xA;  keywords character varying(150),&#xA;  source character varying(50),&#xA;  time_coverage_start character varying(50),&#xA;  geospatial_lat_max character varying(50),&#xA;  netcdf_version character varying(50),&#xA;  data_centre character varying(50),&#xA;  citation character varying(150),&#xA;  date_created character varying(50),&#xA;  author character varying(50),&#xA;  title character varying(50),&#xA;  &quot;references&quot; character varying(50),&#xA;  principal_investigator character varying(50),&#xA;  acknowledgement character varying(400),&#xA;  quality_control_indicator character varying(50),&#xA;  platform_code character varying(50),&#xA;  history character varying(100),&#xA;  quality_control_set character varying(50),&#xA;  institution character varying(50),&#xA;  geospatial_lon_max character varying(50),&#xA;  distribution_statement character varying(400),&#xA;  conventions character varying(50),&#xA;  site_code character varying(50),&#xA;  project character varying(50),&#xA;  geospatial_vertical_min character varying(50),&#xA;  institution_references character varying(50),&#xA;  geospatial_lon_min character varying(50),&#xA;  geospatial_vertical_max character varying(50),&#xA;  naming_authority character varying(50),&#xA;  CONSTRAINT deployments_pkey PRIMARY KEY (deploy_id ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;   &#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-2&quot;>&#xA;       &lt;sql>&#xA; CREATE TABLE auv.measurements_b&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; real,&#xA;  &quot;CDOM&quot; real,&#xA;  &quot;CPHL&quot; real,&#xA;  &quot;OPBS&quot; real,&#xA;  campaign_id character varying(50),&#xA;  dive_name character varying(150), &#xA;  geom geometry,&#xA;  CONSTRAINT measurements_b_pkey PRIMARY KEY (measurement ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;&#xA;)&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-3&quot;>&#xA;       &lt;sql>&#xA; CREATE TABLE auv.measurements_st&#xA;(&#xA;  file_id integer,&#xA;  measurement bigserial,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; real,&#xA;  &quot;PSAL&quot; real,&#xA;  &quot;TEMP&quot; real,&#xA;  campaign_id character varying(50),&#xA;  dive_name character varying(150), &#xA;  geom geometry,&#xA; &#xA;  CONSTRAINT measurements_st_pkey PRIMARY KEY (measurement ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250154-4&quot;>&#xA;      &#xA;      &lt;sql>&#xA;        ALTER TABLE measurements_st&#xA;        ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;        USING ST_SetSRID(geom,4326);&#xA;        CREATE INDEX measurements_st_gist_idx ON measurements_st USING GIST (geom); &#xA;      &lt;/sql>      &#xA;&#xA;&lt;sql>&#xA;        ALTER TABLE measurements_b&#xA;        ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;        USING ST_SetSRID(geom,4326);&#xA;        CREATE INDEX measurements_b_gist_idx ON measurements_b USING GIST (geom); &#xA;      &lt;/sql>      &#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
+    <elementParameter field="TEXT" name="LABEL" value="liquidBade_createTables"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="448" posY="0">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_3"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;/media/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/changelog.xml&quot;"/>
+    <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;       &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250147-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE measurements_merged_data&#xA;(&#xA;  dive_name character varying (150),&#xA;  &quot;TIME&quot; timestamp without time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; real,&#xA;  &quot;CDOM&quot; real,&#xA;  &quot;CPHL&quot; real,&#xA;  &quot;OPBS&quot; real,&#xA;  &quot;PSAL&quot; real,&#xA;  &quot;TEMP&quot; real,&#xA; geom geometry&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;   &#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250147-2&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE table_master&#xA;(&#xA;  dive_name character varying (150),&#xA;  &quot;TIME&quot; timestamp without time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;DEPTH&quot; real,&#xA;  geom geometry&#xA;)&#xA;  ;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;1382580250147-3&quot;>&#xA;        &lt;sql>&#xA;CREATE INDEX measurements_idx&#xA;  ON measurements_merged_data&#xA;  USING btree&#xA;  (&quot;TIME&quot; );&#xA;&#x9;&lt;/sql>&#xA;&#xA; &lt;sql>&#xA;        ALTER TABLE measurements_merged_data&#xA;        ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;        USING ST_SetSRID(geom,4326);&#xA;        CREATE INDEX measurements_merged_data_gist_idx ON measurements_merged_data USING GIST (geom); &#xA;      &lt;/sql>      &#xA;&#xA; &lt;sql>&#xA;        ALTER TABLE table_master&#xA;        ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;        USING ST_SetSRID(geom,4326);&#xA;        CREATE INDEX table_master_gist_idx ON table_master USING GIST (geom); &#xA;      &lt;/sql>      &#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
+    <elementParameter field="TEXT" name="LABEL" value="liquidBade_createTables"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="192" posY="128">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_4"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;/media/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/changelog.xml&quot;"/>
+    <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;       &lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-1&quot;>&#xA;       &lt;sql>&#xA;CREATE TABLE campaign_names&#xA;(&#xA;  campaign_name character varying(50),&#xA;  colour text,&#xA;  CONSTRAINT campaign_name_pkey PRIMARY KEY (campaign_name )&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;   &#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-2&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE visualisation_wms&#xA;(&#xA;  dive_name character varying(150),&#xA;  time_start timestamp without time zone,&#xA;  time_end timestamp without time zone,&#xA;  campaign_name character varying(50),&#xA;  colour text,&#xA;  &quot;CDOM_b&quot; boolean,&#xA;  &quot;CPHL_b&quot; boolean,&#xA;  &quot;OPBS_b&quot; boolean,&#xA;  &quot;PSAL_b&quot; boolean,&#xA;  &quot;TEMP_b&quot; boolean,&#xA;  geom geometry)&#xA;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;rename_wms_time_column&quot;>&#xA;    &lt;sql>&#xA;    ALTER TABLE visualisation_wms RENAME COLUMN time_start TO time_coverage_start;&#xA;    ALTER TABLE visualisation_wms RENAME COLUMN time_end TO time_coverage_end;&#xA;    &lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-3&quot;>&#xA;        &lt;sql>&#xA;ALTER TABLE visualisation_wms&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX visualisation_wms_gist_idx ON visualisation_wms USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-7&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE matchup_dive_url&#xA;(&#xA;  file_id integer,&#xA;  url character varying(512),&#xA;  dive_name character varying(150)&#xA;)&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-10&quot;>&#xA;        &lt;sql>&#xA;CREATE INDEX time_st_index  ON measurements_st  USING btree  (&quot;TIME&quot; );&#xA;CREATE INDEX time_b_index  ON measurements_b  USING btree  (&quot;TIME&quot; );&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-13&quot;>&#xA;        &lt;sql>&#xA;ALTER TABLE matchup_dive_url ADD COLUMN size double precision;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-14&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;DROP VIEW IF EXISTS auv_trajectory_map ; &#xA;CREATE OR REPLACE VIEW auv_trajectory_map AS &#xA;SELECT b.file_id, b.url, b.size,a.campaign_name, a.dive_name, a.time_coverage_start, a.time_coverage_end, a.colour, a.&quot;CDOM_b&quot;, a.&quot;CPHL_b&quot;, a.&quot;OPBS_b&quot;, a.&quot;PSAL_b&quot;, a.&quot;TEMP_b&quot;, st_simplify( a.geom,1000) as geom&#xA;   FROM auv.visualisation_wms a&#xA;      JOIN auv.matchup_dive_url b ON a.dive_name = b.dive_name ORDER BY time_coverage_start;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-15&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;DROP VIEW IF EXISTS auv_trajectory_st_data;&#xA;CREATE OR REPLACE VIEW auv_trajectory_st_data AS &#xA;SELECT measurements_st.file_id, &#xA;measurements_st.campaign_id as campaign_name,&#xA;measurements_st.dive_name,&#xA;measurements_st.&quot;TIME&quot;, &#xA;&#x9;measurements_st.&quot;LATITUDE&quot;, &#xA;&#x9;measurements_st.&quot;LONGITUDE&quot;, &#xA;&#x9;measurements_st.&quot;DEPTH&quot;, &#xA;&#x9;measurements_st.&quot;PSAL&quot;, &#xA;&#x9;measurements_st.&quot;TEMP&quot;, &#xA;&#x9;measurements_st.&quot;PSAL&quot; IS NOT NULL  AS &quot;PSAL_b&quot;,&#xA;&#x9;measurements_st.&quot;TEMP&quot; IS NOT NULL AS &quot;TEMP_b&quot;,&#xA;&#x9;measurements_st.geom&#xA;&#x9;FROM measurements_st&#xA;ORDER BY measurements_st.&quot;TIME&quot;;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-16&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;DROP VIEW IF EXISTS auv_trajectory_b_data;&#xA;CREATE OR REPLACE VIEW auv_trajectory_b_data AS &#xA;SELECT measurements_b.file_id, &#xA;measurements_b.campaign_id as campaign_name,&#xA;measurements_b.dive_name,&#xA;measurements_b.&quot;TIME&quot;, &#xA;measurements_b.&quot;LATITUDE&quot;, &#xA;measurements_b.&quot;LONGITUDE&quot;, &#xA;measurements_b.&quot;DEPTH&quot;, &#xA;measurements_b.&quot;CDOM&quot;, &#xA;measurements_b.&quot;CPHL&quot;, &#xA;measurements_b.&quot;OPBS&quot;, &#xA;measurements_b.&quot;CDOM&quot; IS NOT NULL  AS &quot;CDOM_b&quot;,&#xA;measurements_b.&quot;CPHL&quot; IS NOT NULL  AS &quot;CPHL_b&quot;,&#xA;measurements_b.&quot;OPBS&quot; IS NOT NULL  AS &quot;OPBS_b&quot;,&#xA;measurements_b.geom&#xA;FROM measurements_b &#xA;ORDER BY measurements_b.&quot;TIME&quot;;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;wms_pkey&quot;>&#xA;      &lt;sql>&#xA; ALTER TABLE visualisation_wms ADD CONSTRAINT visualisation_wms_pkey PRIMARY KEY (dive_name)&#xA;      &lt;/sql>      &#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
+    <elementParameter field="TEXT" name="LABEL" value="liquidBade_createTables"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iUpdateIndex_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk4"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iUpdateIndex_1" offsetLabelX="0" offsetLabelY="0" source="iUpdateIndex_1" target="iNewOrModifiedFileList_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iUpdateIndex_1" offsetLabelX="0" offsetLabelY="0" source="iUpdateIndex_1" target="iPostgresqlDbUpdate_2">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
   </connection>
@@ -297,21 +357,33 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate3"/>
   </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="iDeletedFileList_1" target="tRunJob_6">
-    <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
-    <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2"/>
-  </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="iDeletedFileList_1" target="tPostgresqlRow_1">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="iDeletedFileList_1" target="tPostgresqlRow_1">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate4"/>
   </connection>
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="iDeletedFileList_1" target="tRunJob_6">
+    <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
+    <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2"/>
+  </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_1" target="tRunJob_4">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk4"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_2" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_2" target="iPostgresqlDbUpdate_3">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_3" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_3" target="iPostgresqlDbUpdate_4">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk6"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_4" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_4" target="iNewOrModifiedFileList_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk7"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
@@ -335,6 +407,21 @@
   </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_4"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_2"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_3"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_4"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>

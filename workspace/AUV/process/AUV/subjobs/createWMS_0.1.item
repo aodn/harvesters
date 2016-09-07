@@ -138,7 +138,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="iIncludeSdiLibraries" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="160" posY="128">
+  <node componentName="iIncludeSdiLibraries" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIncludeSdiLibraries_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="import org.talend.sdi.geometry.Geometry;"/>
@@ -164,7 +164,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_b AS(SELECT file_id, dive_name,campaign_name FROM deployments),&#xA;table_d AS(SELECT campaign_name,  colour FROM campaign_names),&#xA;&#xA;data AS (SELECT dive_name, &#xA;min(\&quot;TIME\&quot;) AS time_start, &#xA;max(\&quot;TIME\&quot;) AS time_end, &#xA;COUNT(\&quot;CDOM\&quot;) AS \&quot;CDOM\&quot;,&#xA;COUNT(\&quot;CPHL\&quot;) AS \&quot;CPHL\&quot;,&#xA;COUNT(\&quot;OPBS\&quot;) AS \&quot;OPBS\&quot;,&#xA;COUNT(\&quot;PSAL\&quot;) AS \&quot;PSAL\&quot;,&#xA;COUNT(\&quot;TEMP\&quot;) AS \&quot;TEMP\&quot;,&#xA;make_trajectory(geom ORDER BY \&quot;TIME\&quot;) AS geom&#xA;FROM  measurements_merged_data&#xA;GROUP BY dive_name)&#xA;&#xA;SELECT DISTINCT data.dive_name as dive_name ,&#xA;time_start,&#xA;time_end,&#xA;table_d.campaign_name,&#xA;colour, &#xA;\&quot;CDOM\&quot; > 0  AS \&quot;CDOM_b\&quot;,&#xA;\&quot;CPHL\&quot; > 0  AS \&quot;CPHL_b\&quot;,&#xA;\&quot;OPBS\&quot; > 0  AS \&quot;OPBS_b\&quot;,&#xA;\&quot;PSAL\&quot; > 0  AS \&quot;PSAL_b\&quot;,&#xA;\&quot;TEMP\&quot; > 0  AS \&quot;TEMP_b\&quot;,&#xA;geom&#xA;FROM data&#xA;&#xA;LEFT JOIN table_b ON data.dive_name = table_b.dive_name&#xA;LEFT JOIN table_d ON  table_b.campaign_name = table_d.campaign_name&#xA;&#xA;ORDER BY dive_name;&#xA;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_b AS(SELECT file_id, dive_name,campaign_name FROM deployments),&#xA;table_d AS(SELECT campaign_name,  colour FROM campaign_names),&#xA;&#xA;data AS (SELECT dive_name, &#xA;min(\&quot;TIME\&quot;) AS time_coverage_start, &#xA;max(\&quot;TIME\&quot;) AS time_coverage_end, &#xA;COUNT(\&quot;CDOM\&quot;) AS \&quot;CDOM\&quot;,&#xA;COUNT(\&quot;CPHL\&quot;) AS \&quot;CPHL\&quot;,&#xA;COUNT(\&quot;OPBS\&quot;) AS \&quot;OPBS\&quot;,&#xA;COUNT(\&quot;PSAL\&quot;) AS \&quot;PSAL\&quot;,&#xA;COUNT(\&quot;TEMP\&quot;) AS \&quot;TEMP\&quot;,&#xA;make_trajectory(geom ORDER BY \&quot;TIME\&quot;) AS geom&#xA;FROM  measurements_merged_data&#xA;GROUP BY dive_name)&#xA;&#xA;SELECT DISTINCT data.dive_name as dive_name ,&#xA;time_coverage_start,&#xA;time_coverage_end,&#xA;table_d.campaign_name,&#xA;colour, &#xA;\&quot;CDOM\&quot; > 0  AS \&quot;CDOM_b\&quot;,&#xA;\&quot;CPHL\&quot; > 0  AS \&quot;CPHL_b\&quot;,&#xA;\&quot;OPBS\&quot; > 0  AS \&quot;OPBS_b\&quot;,&#xA;\&quot;PSAL\&quot; > 0  AS \&quot;PSAL_b\&quot;,&#xA;\&quot;TEMP\&quot; > 0  AS \&quot;TEMP_b\&quot;,&#xA;geom&#xA;FROM data&#xA;&#xA;LEFT JOIN table_b ON data.dive_name = table_b.dive_name&#xA;LEFT JOIN table_d ON  table_b.campaign_name = table_d.campaign_name&#xA;&#xA;ORDER BY dive_name;&#xA;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -174,9 +174,9 @@
     <elementParameter field="TABLE" name="TRIM_COLUMN">
       <elementValue elementRef="SCHEMA_COLUMN" value="dive_name"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_start"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_end"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="campaign_name"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -200,10 +200,10 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlInput_2">
-      <column comment="" key="false" length="150" name="dive_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="29" name="time_start" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
-      <column comment="" key="false" length="29" name="time_end" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
-      <column comment="" key="false" length="50" name="campaign_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="true" length="150" name="dive_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="29" name="time_coverage_start" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_end" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
+      <column comment="" key="false" length="50" name="campaign_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="0" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="1" name="CDOM_b" nullable="true" pattern="" precision="0" sourceType="" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="1" name="CPHL_b" nullable="true" pattern="" precision="0" sourceType="" type="id_Boolean"/>
@@ -243,12 +243,12 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_start"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_end"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -304,74 +304,33 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_2">
-      <column comment="" key="true" length="150" name="dive_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="29" name="time_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="29" name="time_end" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="50" name="campaign_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="20" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="true" length="150" name="dive_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="29" name="time_coverage_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_end" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="50" name="campaign_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="1" name="CDOM_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="1" name="CPHL_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="1" name="OPBS_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="1" name="PSAL_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="1" name="TEMP_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
-      <column comment="" defaultValue="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
+      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="true" length="150" name="dive_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="29" name="time_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="29" name="time_end" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="50" name="campaign_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="20" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="true" length="150" name="dive_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="29" name="time_coverage_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_end" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="50" name="campaign_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="1" name="CDOM_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="1" name="CPHL_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="1" name="OPBS_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="1" name="PSAL_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="1" name="TEMP_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
-      <column comment="" defaultValue="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
+      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
-  </node>
-  <node componentName="iPostgresqlDbUpdate" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="320" posY="128">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
-    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
-    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
-    <elementParameter field="FILE" name="FILENAME" value="&quot;/media/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/changelog.xml&quot;"/>
-    <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;       &lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-1&quot;>&#xA;       &lt;sql>&#xA;CREATE TABLE campaign_names&#xA;(&#xA;  campaign_name character varying(50),&#xA;  colour text,&#xA;  CONSTRAINT campaign_name_pkey PRIMARY KEY (campaign_name )&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;   &#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-2&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE visualisation_wms&#xA;(&#xA;  dive_name character varying(150),&#xA;  time_start timestamp without time zone,&#xA;  time_end timestamp without time zone,&#xA;  campaign_name character varying(50),&#xA;  colour text,&#xA;  &quot;CDOM_b&quot; boolean,&#xA;  &quot;CPHL_b&quot; boolean,&#xA;  &quot;OPBS_b&quot; boolean,&#xA;  &quot;PSAL_b&quot; boolean,&#xA;  &quot;TEMP_b&quot; boolean,&#xA;  geom geometry)&#xA;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-3&quot;>&#xA;        &lt;sql>&#xA;ALTER TABLE visualisation_wms&#xA;ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)&#xA;USING ST_SetSRID(geom,4326);&#xA;CREATE INDEX visualisation_wms_gist_idx ON visualisation_wms USING GIST (geom); &#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-4&quot;>&#xA;        &lt;sql>&#xA;CREATE OR REPLACE VIEW auv_trajectory_data_st AS &#xA; SELECT measurements_st.file_id, &#xA;&#x9;measurements_st.&quot;TIME&quot;, &#xA;&#x9;measurements_st.&quot;LATITUDE&quot;, &#xA;&#x9;measurements_st.&quot;LONGITUDE&quot;, &#xA;&#x9;measurements_st.&quot;DEPTH&quot;, &#xA;&#x9;measurements_st.&quot;PSAL&quot;, &#xA;&#x9;measurements_st.&quot;TEMP&quot;, &#xA;&#x9;measurements_st.geom&#xA;&#x9;FROM measurements_st&#xA;   JOIN visualisation_wms ON visualisation_wms.dive_name = measurements_st.dive_name&#xA;  ORDER BY measurements_st.&quot;TIME&quot;;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-5&quot;>&#xA;        &lt;sql>&#xA;CREATE OR REPLACE VIEW auv_trajectory_data_b AS &#xA; SELECT measurements_b.file_id, &#xA;&#x9;measurements_b.&quot;TIME&quot;, &#xA;&#x9;measurements_b.&quot;LATITUDE&quot;, &#xA;&#x9;measurements_b.&quot;LONGITUDE&quot;, &#xA;&#x9;measurements_b.&quot;DEPTH&quot;, &#xA;&#x9;measurements_b.&quot;CDOM&quot;, &#xA;&#x9;measurements_b.&quot;CPHL&quot;, &#xA;&#x9;measurements_b.&quot;OPBS&quot;, &#xA;&#x9;measurements_b.geom&#xA;&#x9;FROM measurements_b&#xA;   JOIN visualisation_wms ON visualisation_wms.dive_name = measurements_b.dive_name&#xA;  ORDER BY measurements_b.&quot;TIME&quot;;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-6&quot;>&#xA;        &lt;sql>&#xA;CREATE OR REPLACE VIEW auv_trajectory_map AS &#xA; SELECT a.campaign_name, a.dive_name, a.time_start, a.time_end,a.colour, a.&quot;CDOM_b&quot;, a.&quot;CPHL_b&quot;,a.&quot;OPBS_b&quot;,a.&quot;PSAL_b&quot;,a.&quot;TEMP_b&quot;, a.geom&#xA;   FROM visualisation_wms a;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-7&quot;>&#xA;        &lt;sql>&#xA;CREATE TABLE matchup_dive_url&#xA;(&#xA;  file_id integer,&#xA;  url character varying(512),&#xA;  dive_name character varying(150)&#xA;)&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-8&quot;>&#xA;        &lt;sql>&#xA;ALTER VIEW auv_trajectory_data_b RENAME TO auv_trajectory_b_data;&#xA;ALTER VIEW auv_trajectory_data_st RENAME TO auv_trajectory_st_data;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-9&quot;>&#xA;        &lt;sql>&#xA;DROP VIEW auv_trajectory_map ; &#xA;CREATE OR REPLACE VIEW auv_trajectory_map AS &#xA; SELECT a.campaign_name, a.dive_name, a.time_start, a.time_end, a.colour, a.&quot;CDOM_b&quot;, a.&quot;CPHL_b&quot;, a.&quot;OPBS_b&quot;, a.&quot;PSAL_b&quot;, a.&quot;TEMP_b&quot;, st_simplify( a.geom,1000) as geom&#xA;   FROM visualisation_wms a;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-10&quot;>&#xA;        &lt;sql>&#xA;CREATE INDEX time_st_index  ON measurements_st  USING btree  (&quot;TIME&quot; );&#xA;CREATE INDEX time_b_index  ON measurements_b  USING btree  (&quot;TIME&quot; );&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-11&quot;>&#xA;        &lt;sql>&#xA;DROP VIEW auv_trajectory_b_data;&#xA;CREATE OR REPLACE VIEW auv_trajectory_b_data AS &#xA;SELECT measurements_b.file_id, &#xA;measurements_b.campaign_id as campaign_name,&#xA;measurements_b.dive_name,&#xA;measurements_b.&quot;TIME&quot;, &#xA;measurements_b.&quot;LATITUDE&quot;, &#xA;measurements_b.&quot;LONGITUDE&quot;, &#xA;measurements_b.&quot;DEPTH&quot;, &#xA;measurements_b.&quot;CDOM&quot;, &#xA;measurements_b.&quot;CPHL&quot;, &#xA;measurements_b.&quot;OPBS&quot;, &#xA;measurements_b.geom&#xA;FROM measurements_b &#xA;ORDER BY measurements_b.&quot;TIME&quot;;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-12&quot;>&#xA;        &lt;sql>&#xA;DROP VIEW auv_trajectory_st_data;&#xA;CREATE OR REPLACE VIEW auv_trajectory_st_data AS &#xA;SELECT measurements_st.file_id, &#xA;measurements_st.campaign_id as campaign_name,&#xA;measurements_st.dive_name,&#xA;measurements_st.&quot;TIME&quot;, &#xA;&#x9;measurements_st.&quot;LATITUDE&quot;, &#xA;&#x9;measurements_st.&quot;LONGITUDE&quot;, &#xA;&#x9;measurements_st.&quot;DEPTH&quot;, &#xA;&#x9;measurements_st.&quot;PSAL&quot;, &#xA;&#x9;measurements_st.&quot;TEMP&quot;, &#xA;&#x9;measurements_st.geom&#xA;&#x9;FROM measurements_st&#xA;ORDER BY measurements_st.&quot;TIME&quot;;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-13&quot;>&#xA;        &lt;sql>&#xA;ALTER TABLE matchup_dive_url ADD COLUMN size double precision;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-14&quot;>&#xA;        &lt;sql>&#xA;DROP VIEW auv_trajectory_map ; &#xA;CREATE OR REPLACE VIEW auv_trajectory_map AS &#xA;SELECT b.file_id, b.url, b.size,a.campaign_name, a.dive_name, a.time_start, a.time_end, a.colour, a.&quot;CDOM_b&quot;, a.&quot;CPHL_b&quot;, a.&quot;OPBS_b&quot;, a.&quot;PSAL_b&quot;, a.&quot;TEMP_b&quot;, st_simplify( a.geom,1000) as geom&#xA;   FROM auv.visualisation_wms a&#xA;      JOIN auv.matchup_dive_url b ON a.dive_name = b.dive_name ORDER BY time_start;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-15&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;DROP VIEW IF EXISTS auv_trajectory_st_data;&#xA;CREATE OR REPLACE VIEW auv_trajectory_st_data AS &#xA;SELECT measurements_st.file_id, &#xA;measurements_st.campaign_id as campaign_name,&#xA;measurements_st.dive_name,&#xA;measurements_st.&quot;TIME&quot;, &#xA;&#x9;measurements_st.&quot;LATITUDE&quot;, &#xA;&#x9;measurements_st.&quot;LONGITUDE&quot;, &#xA;&#x9;measurements_st.&quot;DEPTH&quot;, &#xA;&#x9;measurements_st.&quot;PSAL&quot;, &#xA;&#x9;measurements_st.&quot;TEMP&quot;, &#xA;&#x9;measurements_st.&quot;PSAL&quot; IS NOT NULL  AS &quot;PSAL_b&quot;,&#xA;&#x9;measurements_st.&quot;TEMP&quot; IS NOT NULL AS &quot;TEMP_b&quot;,&#xA;&#x9;measurements_st.geom&#xA;&#x9;FROM measurements_st&#xA;ORDER BY measurements_st.&quot;TIME&quot;;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;2382580250144-16&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;DROP VIEW IF EXISTS auv_trajectory_b_data;&#xA;CREATE OR REPLACE VIEW auv_trajectory_b_data AS &#xA;SELECT measurements_b.file_id, &#xA;measurements_b.campaign_id as campaign_name,&#xA;measurements_b.dive_name,&#xA;measurements_b.&quot;TIME&quot;, &#xA;measurements_b.&quot;LATITUDE&quot;, &#xA;measurements_b.&quot;LONGITUDE&quot;, &#xA;measurements_b.&quot;DEPTH&quot;, &#xA;measurements_b.&quot;CDOM&quot;, &#xA;measurements_b.&quot;CPHL&quot;, &#xA;measurements_b.&quot;OPBS&quot;, &#xA;measurements_b.&quot;CDOM&quot; IS NOT NULL  AS &quot;CDOM_b&quot;,&#xA;measurements_b.&quot;CPHL&quot; IS NOT NULL  AS &quot;CPHL_b&quot;,&#xA;measurements_b.&quot;OPBS&quot; IS NOT NULL  AS &quot;OPBS_b&quot;,&#xA;measurements_b.geom&#xA;FROM measurements_b &#xA;ORDER BY measurements_b.&quot;TIME&quot;;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
-    <elementParameter field="TEXT" name="LABEL" value="liquidBade_createTables"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-  </node>
-  <node componentName="tPostgresqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="128">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
-    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
-    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="CHECK" name="USE_SHARED_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="SHARED_CONNECTION_NAME" value=""/>
-    <elementParameter field="CHECK" name="AUTO_COMMIT" value="false"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
   <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_3"/>
@@ -551,6 +510,27 @@
       <column comment="" key="false" length="0" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
+  <node componentName="tPostgresqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="128">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="USE_SHARED_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="SHARED_CONNECTION_NAME" value=""/>
+    <elementParameter field="CHECK" name="AUTO_COMMIT" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
   <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="iPostgresqlOutput_1">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
@@ -570,9 +550,9 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row2"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iIncludeSdiLibraries_1" offsetLabelX="0" offsetLabelY="0" source="iIncludeSdiLibraries_1" target="iPostgresqlDbUpdate_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIncludeSdiLibraries_1" offsetLabelX="0" offsetLabelY="0" source="iIncludeSdiLibraries_1" target="tPostgresqlConnection_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk3"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
   </connection>
   <connection connectorName="FLOW" label="row3" lineStyle="0" metaname="tPostgresqlInput_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_2" target="iPostgresqlOutput_2">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
@@ -580,10 +560,10 @@
       <elementValue elementRef="TRACE_COLUMN" value="dive_name"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_start"/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_end"/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="campaign_name"/>
@@ -619,24 +599,6 @@
     <elementParameter field="TABLE" name="THRESHLODS"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row3"/>
-  </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="tPostgresqlConnection_1">
-    <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
-    <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate1"/>
-  </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tPostgresqlConnection_1" target="tPostgresqlInput_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk2"/>
-  </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tPostgresqlConnection_1" target="tPostgresqlInput_2">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
-  </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" outputId="3" source="tPostgresqlConnection_1" target="tPostgresqlInput_3">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk4"/>
   </connection>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tPostgresqlInput_3" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_3" target="iPostgresqlOutput_3">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
@@ -689,6 +651,18 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk5"/>
   </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tPostgresqlConnection_1" target="tPostgresqlInput_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk2"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tPostgresqlConnection_1" target="tPostgresqlInput_2">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" outputId="3" source="tPostgresqlConnection_1" target="tPostgresqlInput_3">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk4"/>
+  </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
@@ -705,11 +679,6 @@
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
-  <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_3"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
@@ -722,6 +691,11 @@
   </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
