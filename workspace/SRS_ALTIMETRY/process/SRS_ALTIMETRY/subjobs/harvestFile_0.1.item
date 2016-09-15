@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="srs_altimetry"/>
@@ -118,7 +118,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM deployments where file_id =  &quot; + context.file_id + &quot; ;&#10;DELETE FROM measurements where file_id =  &quot; + context.file_id + &quot; ;&#10;DELETE FROM visualisation_wms where file_id =  &quot; + context.file_id + &quot; ; &quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM deployments where file_id =  &quot; + context.file_id + &quot; ;&#xA;DELETE FROM measurements where file_id =  &quot; + context.file_id + &quot; ;&#xA;DELETE FROM visualisation_wms where file_id =  &quot; + context.file_id + &quot; ; &quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -175,7 +175,7 @@
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="224" posY="352">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_1"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#10;//&#10;// multiply by 2 the row identifier&#10;// output_row.id = input_row.id * 2;&#10;//&#10;// lowercase the name&#10;// output_row.name = input_row.name.toLowerCase();&#10;&#10;context.url=row5.url;"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#xA;//&#xA;// multiply by 2 the row identifier&#xA;// output_row.id = input_row.id * 2;&#xA;//&#xA;// lowercase the name&#xA;// output_row.name = input_row.name.toLowerCase();&#xA;&#xA;context.url=row5.url;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -230,7 +230,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT  id,&#10;        url,&#10;        substring(url, '/SRSALT/(\\w+?)/' ) AS site_code,        &#10;        substring(url, '/SRSALT/\\w+?/(.+)/' ) AS instrument&#10;from indexed_file where id = &quot; + context.file_id + &quot; ; &quot;&#10;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT  id,&#xA;        url,&#xA;        substring(url, '/SRSALT/(\\w+?)/' ) AS site_code,        &#xA;        substring(url, '/SRSALT/\\w+?/(.+)/' ) AS instrument&#xA;from indexed_file where id = &quot; + context.file_id + &quot; ; &quot;&#xA;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -848,7 +848,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#10;TRUNCATE TABLE temporary_sub_select_wms;&#10;INSERT INTO temporary_sub_select_wms (&#10;SELECT &quot; + context.file_id  + &quot; as file_id, &#10;min(\&quot;TIME\&quot;) AS time_start, &#10;max(\&quot;TIME\&quot;) AS time_end, &#10;COUNT(\&quot;TEMP\&quot;) AS \&quot;TEMP\&quot;,&#10;COUNT(\&quot;PSAL\&quot;) AS \&quot;PSAL\&quot;,&#10;COUNT(\&quot;PRES\&quot;) AS \&quot;PRES\&quot;,&#10;COUNT(\&quot;CNDC\&quot;) AS \&quot;CNDC\&quot;,&#10;COUNT(\&quot;UCUR\&quot;) AS \&quot;UCUR\&quot;,&#10;COUNT(\&quot;VCUR\&quot;) AS \&quot;VCUR\&quot;,&#10;geom&#10;FROM  measurements where file_id = &quot; + context.file_id + &quot;&#10;GROUP BY geom);&quot;&#10;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;TRUNCATE TABLE temporary_sub_select_wms;&#xA;INSERT INTO temporary_sub_select_wms (&#xA;SELECT &quot; + context.file_id  + &quot; as file_id, &#xA;min(\&quot;TIME\&quot;) AS time_coverage_start, &#xA;max(\&quot;TIME\&quot;) AS time_coverage_end, &#xA;COUNT(\&quot;TEMP\&quot;) AS \&quot;TEMP\&quot;,&#xA;COUNT(\&quot;PSAL\&quot;) AS \&quot;PSAL\&quot;,&#xA;COUNT(\&quot;PRES\&quot;) AS \&quot;PRES\&quot;,&#xA;COUNT(\&quot;CNDC\&quot;) AS \&quot;CNDC\&quot;,&#xA;COUNT(\&quot;UCUR\&quot;) AS \&quot;UCUR\&quot;,&#xA;COUNT(\&quot;VCUR\&quot;) AS \&quot;VCUR\&quot;,&#xA;geom&#xA;FROM  measurements where file_id = &quot; + context.file_id + &quot;&#xA;GROUP BY geom);&quot;&#xA;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value="trip_id"/>
@@ -907,7 +907,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH table_a AS (&#10;         SELECT file_id, &#10;                CASE&#10;                &#9;WHEN site_code ~ 'BAS' THEN 'Bass Strait' &#10;&#9;&#9;&#9;WHEN site_code ~ 'STO' THEN 'Storm Bay' &#10;&#9;&#9;ELSE site_code&#10;                END AS site_name,instrument&#10;           FROM deployments where file_id = &quot; + context.file_id + &quot;&#10;        )&#10;&#10;SELECT data.file_id, table_a.site_name,table_a.instrument,&#10;time_start, &#10;time_end, &#10;\&quot;TEMP\&quot; &gt; 0  AS \&quot;TEMP_b\&quot;,&#10;\&quot;PSAL\&quot; &gt; 0  AS \&quot;PSAL_b\&quot;,&#10;\&quot;PRES\&quot; &gt; 0  AS \&quot;PRES_b\&quot;,&#10;\&quot;CNDC\&quot; &gt; 0  AS \&quot;CNDC_b\&quot;,&#10;\&quot;UCUR\&quot; &gt; 0  AS \&quot;UCUR_b\&quot;,&#10;\&quot;VCUR\&quot; &gt; 0  AS \&quot;VCUR_b\&quot;,&#10;geom&#10;FROM temporary_sub_select_wms data, table_a&#10;ORDER BY time_start;&#10;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH table_a AS (&#xA;         SELECT file_id, &#xA;                CASE&#xA;                &#x9;WHEN site_code ~ 'BAS' THEN 'Bass Strait' &#xA;&#x9;&#x9;&#x9;WHEN site_code ~ 'STO' THEN 'Storm Bay' &#xA;&#x9;&#x9;ELSE site_code&#xA;                END AS site_name,instrument&#xA;           FROM deployments where file_id = &quot; + context.file_id + &quot;&#xA;        )&#xA;&#xA;SELECT data.file_id, table_a.site_name,table_a.instrument,&#xA;time_coverage_start, &#xA;time_coverage_end, &#xA;\&quot;TEMP\&quot; > 0  AS \&quot;TEMP_b\&quot;,&#xA;\&quot;PSAL\&quot; > 0  AS \&quot;PSAL_b\&quot;,&#xA;\&quot;PRES\&quot; > 0  AS \&quot;PRES_b\&quot;,&#xA;\&quot;CNDC\&quot; > 0  AS \&quot;CNDC_b\&quot;,&#xA;\&quot;UCUR\&quot; > 0  AS \&quot;UCUR_b\&quot;,&#xA;\&quot;VCUR\&quot; > 0  AS \&quot;VCUR_b\&quot;,&#xA;geom&#xA;FROM temporary_sub_select_wms data, table_a&#xA;ORDER BY time_coverage_start;&#xA;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -921,9 +921,9 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="instrument"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_start"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_end"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="TEMP_b"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -948,8 +948,8 @@
       <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="" type="id_Integer"/>
       <column comment="" key="false" length="0" name="site_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="150" name="instrument" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="29" name="time_start" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
-      <column comment="" key="false" length="29" name="time_end" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_start" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_end" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="1" name="TEMP_b" nullable="true" pattern="" precision="0" sourceType="" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="1" name="PSAL_b" nullable="true" pattern="" precision="0" sourceType="" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="1" name="PRES_b" nullable="true" pattern="" precision="0" sourceType="" type="id_Boolean"/>
@@ -999,12 +999,12 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_start"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_end"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -1055,11 +1055,11 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_3">
-      <column comment="" defaultValue="" key="true" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="0" name="site_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="150" name="instrument" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="29" name="time_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="29" name="time_end" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_end" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="1" name="TEMP_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="1" name="PSAL_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="1" name="PRES_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
@@ -1069,11 +1069,11 @@
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" defaultValue="" key="true" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
+      <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="0" name="site_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="150" name="instrument" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="29" name="time_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" length="29" name="time_end" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_end" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="1" name="TEMP_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="1" name="PSAL_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" defaultValue="" key="false" length="1" name="PRES_b" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean"/>
@@ -1465,10 +1465,10 @@
       <elementValue elementRef="TRACE_COLUMN" value="metadata_uuid"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_start"/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_end"/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="vessel_name"/>
