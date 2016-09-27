@@ -528,7 +528,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH&#xA;table_b AS(SELECT abstract, \&quot;references\&quot;  as url_marlin_metadata, cruise_id  FROM deployments WHERE file_id = &quot; + context.file_id + &quot;  ),&#xA;table_c AS(SELECT size , &quot; +  context.file_id  + &quot; as file_id FROM indexed_file  WHERE id = &quot; + context.file_id + &quot; ),&#xA;table_d AS(SELECT vessel_name, platform_code,  colour FROM cruise_id where (SELECT  cruise_id FROM deployments WHERE file_id = &quot; + context.file_id +&quot; ) =  cruise_id),&#xA;table_e AS(SELECT  CASE&#xA;&#x9;&#x9;&#x9;WHEN url ~ '/pigment/' THEN 'pigment' &#xA;&#x9;&#x9;&#x9;WHEN url ~ '/absorption/' THEN 'absorption' &#xA;&#x9;&#x9;&#x9;WHEN url ~ '/suspended_matter/' THEN 'suspended matter' &#xA;&#x9;&#x9;&#x9;WHEN url ~ '/backscattering/' THEN 'backscattering'&#xA;&#x9;&#x9;&#x9;ELSE 'unknown' END AS data_type from indexed_file WHERE id = &quot;+ context.file_id +&quot;),&#xA;&#xA;table_f AS (SELECT url as url_nc, regexp_replace (replace (replace( url, '/mnt/imos-t3/', 'http://data.aodn.org.au/') , 'opendap', 'public') ,'_C-.*', '.csv') as url_csv, regexp_replace (replace (replace( url, '/mnt/imos-t3/', 'http://data.aodn.org.au/') , 'opendap', 'public') ,'_C-.*', '.png') as url_plot FROM indexed_file WHERE id = &quot; + context.file_id + &quot; ),&#xA;&#xA;&#xA;data AS (SELECT &#xA;min(\&quot;TIME\&quot;)  AT TIME ZONE 'UTC' AS  time_start, &#xA;max(\&quot;TIME\&quot;)  AT TIME ZONE 'UTC' AS time_end, &#xA;ST_Multi(ST_Union(geom)) AS geom &#xA;FROM  measurements&#xA; WHERE  file_id =&quot;+  context.file_id +&quot;)&#xA;&#xA;SELECT &#xA;file_id,&#xA;abstract,&#xA;url_marlin_metadata,&#xA;cruise_id,&#xA;data_type,&#xA;url_nc,&#xA;url_csv,&#xA;url_plot,&#xA;size,&#xA;time_start,&#xA;time_end,&#xA;vessel_name,&#xA;colour, &#xA;geom&#xA;FROM data,table_b,table_c,table_d,table_e,table_f; &quot;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH&#xA;table_b AS(SELECT abstract, \&quot;references\&quot;  as url_marlin_metadata, cruise_id  FROM deployments WHERE file_id = &quot; + context.file_id + &quot;  ),&#xA;table_c AS(SELECT size , &quot; +  context.file_id  + &quot; as file_id FROM indexed_file  WHERE id = &quot; + context.file_id + &quot; ),&#xA;table_d AS(SELECT vessel_name, platform_code,  colour FROM cruise_id where (SELECT  cruise_id FROM deployments WHERE file_id = &quot; + context.file_id +&quot; ) =  cruise_id),&#xA;table_e AS(SELECT  CASE&#xA;&#x9;&#x9;&#x9;WHEN url ~ '/pigment/' THEN 'pigment' &#xA;&#x9;&#x9;&#x9;WHEN url ~ '/absorption/' THEN 'absorption' &#xA;&#x9;&#x9;&#x9;WHEN url ~ '/suspended_matter/' THEN 'suspended matter' &#xA;&#x9;&#x9;&#x9;WHEN url ~ '/backscattering/' THEN 'backscattering'&#xA;&#x9;&#x9;&#x9;ELSE 'unknown' END AS data_type from indexed_file WHERE id = &quot;+ context.file_id +&quot;),&#xA;&#xA;table_f AS (SELECT url as url_nc, regexp_replace (replace (replace( url, '/mnt/imos-t3/', 'http://data.aodn.org.au/') , 'opendap', 'public') ,'_C-.*', '.csv') as url_csv, regexp_replace (replace (replace( url, '/mnt/imos-t3/', 'http://data.aodn.org.au/') , 'opendap', 'public') ,'_C-.*', '.png') as url_plot FROM indexed_file WHERE id = &quot; + context.file_id + &quot; ),&#xA;&#xA;&#xA;data AS (SELECT &#xA;min(\&quot;TIME\&quot;)  AT TIME ZONE 'UTC' AS  time_coverage_start, &#xA;max(\&quot;TIME\&quot;)  AT TIME ZONE 'UTC' AS time_coverage_end, &#xA;ST_Multi(ST_Union(geom)) AS geom &#xA;FROM  measurements&#xA; WHERE  file_id =&quot;+  context.file_id +&quot;)&#xA;&#xA;SELECT &#xA;file_id,&#xA;abstract,&#xA;url_marlin_metadata,&#xA;cruise_id,&#xA;data_type,&#xA;url_nc,&#xA;url_csv,&#xA;url_plot,&#xA;size,&#xA;time_coverage_start,&#xA;time_coverage_end,&#xA;vessel_name,&#xA;colour, &#xA;geom&#xA;FROM data,table_b,table_c,table_d,table_e,table_f; &quot;&#xA;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -554,9 +554,9 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="size"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_start"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_end"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="vessel_name"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -579,8 +579,8 @@
       <column comment="" key="false" length="0" name="url_csv" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="0" name="url_plot" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" defaultValue="" key="false" length="17" name="size" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
-      <column comment="" key="false" length="35" name="time_start" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
-      <column comment="" key="false" length="35" name="time_end" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
+      <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
+      <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
       <column comment="" key="false" length="0" name="vessel_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="0" name="colour" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
@@ -656,12 +656,12 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_start"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="time_end"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -692,36 +692,36 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_4">
-      <column comment="" defaultValue="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" name="_abstract" nullable="true" originalDbColumnName="abstract" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="url_marlin_metadata" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="cruise_id" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="data_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="url_nc" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="url_csv" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="url_plot" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="size" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" name="time_start" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="time_end" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="vessel_name" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
+      <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="2000" name="_abstract" nullable="true" originalDbColumnName="abstract" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="200" name="url_marlin_metadata" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="500" name="cruise_id" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="data_type" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="512" name="url_nc" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="url_csv" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="url_plot" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="17" name="size" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="0" name="vessel_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" defaultValue="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" name="_abstract" nullable="true" originalDbColumnName="abstract" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="url_marlin_metadata" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="cruise_id" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="data_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="url_nc" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="url_csv" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="url_plot" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="size" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" name="time_start" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="time_end" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="vessel_name" nullable="false" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
+      <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="2000" name="_abstract" nullable="true" originalDbColumnName="abstract" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="200" name="url_marlin_metadata" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="500" name="cruise_id" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="data_type" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="512" name="url_nc" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="url_csv" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="url_plot" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="17" name="size" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="0" name="vessel_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="colour" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1560,10 +1560,10 @@
       <elementValue elementRef="TRACE_COLUMN" value="voyage_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_start"/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_start"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="time_end"/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="vessel_name"/>
