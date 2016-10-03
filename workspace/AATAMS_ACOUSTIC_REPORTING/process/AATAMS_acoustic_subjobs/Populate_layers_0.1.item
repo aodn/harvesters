@@ -11,7 +11,7 @@
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_8qN7YH12EeO8KdXPymp3hg" type="id_String" value="null"/>
   </context>
   <parameters>
-    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xmx4096M"/>
+    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xmx6144M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="true"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="224"/>
@@ -44,7 +44,6 @@
   </parameters>
   <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
@@ -59,53 +58,49 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT DISTINCT vd.id AS detection_id,&#xA;&#x9;p.name AS project_name,&#xA;&#x9;i.name AS installation_name,&#xA;&#x9;ist.name AS station_name,&#xA;&#x9;vd.receiver_name,&#xA;&#x9;rd.bottom_depthm AS bottom_depth,&#xA;&#x9;CASE WHEN sp.common_name IS NULL THEN 'Unknown' &#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) > 0 THEN 'Embargoed'&#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) &lt; 0 OR ar.embargo_date IS NULL THEN sp.common_name END AS common_name,&#xA;&#x9;vd.transmitter_id AS transmitter_id,&#xA;&#x9;CASE WHEN ar.releasedatetime_timestamp AT TIME ZONE 'UTC' IS NULL THEN NULL &#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) > 0 THEN NULL&#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) &lt; 0 OR ar.embargo_date IS NULL THEN ar.releasedatetime_timestamp AT TIME ZONE 'UTC' END AS release_date,&#xA;&#x9;CASE WHEN ar.release_locality IS NULL THEN 'Unknown'&#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) > 0 THEN 'Embargoed'&#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) &lt; 0 OR ar.embargo_date IS NULL THEN ar.release_locality END AS release_locality,&#xA;&#x9;vd.timestamp AT TIME ZONE 'UTC' AS detection_date,&#xA;&#x9;ST_X(ist.location) AS longitude,&#xA;&#x9;ST_Y(ist.location) AS latitude,&#xA;&#x9;CASE WHEN sex.sex IS NULL THEN 'Unknown' &#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) > 0 THEN 'Embargoed'&#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) &lt; 0 OR ar.embargo_date IS NULL THEN sex.sex END AS sex,&#xA;&#x9;CASE WHEN sp.scientific_name IS NULL THEN 'Unknown'&#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) > 0 THEN 'Embargoed'&#xA;&#x9;&#x9;WHEN date_part('day', ar.embargo_date - now()) &lt; 0 OR ar.embargo_date IS NULL THEN sp.scientific_name END AS scientific_name,&#xA;&#x9;ist.location AS geom,&#xA;&#x9;'TRUE' AS detected,&#xA;&#x9;CASE WHEN date_part('day', ar.embargo_date - now()) &lt; 0 OR ar.embargo_date IS NULL THEN 'Public' ELSE 'Embargoed' END AS embargo,&#xA;&#x9;CASE WHEN s.tag_id IS NULL AND d.id IS NULL THEN 'Unregistered' ELSE 'Registered' END AS registered,&#xA;&#x9;ar.embargo_date AT TIME ZONE 'UTC' AS embargo_date&#xA;  FROM valid_detection vd&#xA;  LEFT JOIN receiver_deployment rd ON vd.receiver_deployment_id = rd.id&#xA;  LEFT JOIN installation_station ist ON ist.id = rd.station_id&#xA;  LEFT JOIN installation i ON i.id = ist.installation_id&#xA;  LEFT JOIN project p ON p.id = i.project_id  &#xA;  LEFT JOIN sensor on vd.transmitter_id = sensor.transmitter_id&#xA;  LEFT JOIN device d on sensor.tag_id = d.id&#xA;  LEFT JOIN surgery s ON s.tag_id = d.id&#xA;  LEFT JOIN animal_release ar ON ar.id = s.release_id&#xA;  LEFT JOIN animal a ON a.id = ar.animal_id&#xA;  LEFT JOIN species sp ON sp.id = a.species_id &#xA;  LEFT JOIN sex ON a.sex_id = sex.id&#xA;&#x9;WHERE p.is_protected = FALSE&#xA;&#x9;ORDER BY transmitter_id, detection_date;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH animal_details AS (&#xA;SELECT ar.id AS release_id, &#xA;&#x9;sensor.transmitter_id,&#xA;&#x9;sensor.transmitter_type_id,&#xA;&#x9;p.name AS transmitter_project_name,&#xA;&#x9;p.is_protected,&#xA;&#x9;CASE WHEN sp.common_name IS NULL AND sp.name IS NULL THEN 'Unknown' WHEN sp.common_name IS NULL AND sp.name IS NOT NULL THEN sp.name ELSE sp.common_name END AS common_name,&#xA;&#x9;sp.scientific_name,&#xA;&#x9;ar.releasedatetime_timestamp AT TIME ZONE 'UTC'  AS release_date,&#xA;&#x9;ar.release_locality,&#xA;&#x9;ar.embargo_date,&#xA;&#x9;ST_X(ar.release_location) AS release_longitude,&#xA;&#x9;ST_Y(ar.release_location) AS release_latitude,&#xA;&#x9;sex.sex,&#xA;&#x9;COALESCE(amt.type || ' = ' || am.value || ' ' || mu.unit) AS measurement &#xA;&#x9;FROM sensor&#xA;  LEFT JOIN device d on sensor.tag_id = d.id&#xA;  LEFT JOIN project p ON p.id = d.project_id  &#xA;  LEFT JOIN surgery s ON s.tag_id = d.id&#xA;  LEFT JOIN animal_release ar ON ar.id = s.release_id&#xA;  LEFT JOIN animal a ON a.id = ar.animal_id&#xA;  LEFT JOIN species sp ON sp.id = a.species_id &#xA;  LEFT JOIN sex ON a.sex_id = sex.id&#xA;  LEFT JOIN animal_measurement am ON am.release_id = ar.id&#xA;  LEFT JOIN animal_measurement_type amt ON amt.id = am.type_id&#xA;  LEFT JOIN measurement_unit mu ON mu.id = am.unit_id&#xA;ORDER BY transmitter_id, measurement),&#xA;animal_summary AS (&#xA;&#x9;SELECT release_id, transmitter_id, transmitter_type_id, transmitter_project_name, is_protected, common_name, scientific_name, release_date, release_locality, embargo_date, release_longitude, release_latitude, sex, string_agg(measurement, ', ') AS measurement FROM animal_details&#xA;&#x9;GROUP BY release_id, transmitter_id, transmitter_type_id, transmitter_project_name, is_protected, common_name, scientific_name, release_date, release_locality, embargo_date, release_longitude, release_latitude, sex)&#xA;SELECT DISTINCT vd.id AS detection_id,&#xA;&#x9;i.name AS installation_name,&#xA;&#x9;ist.name AS station_name,&#xA;&#x9;ST_X(ist.location) AS station_longitude,&#xA;&#x9;ST_Y(ist.location) AS station_latitude,&#xA;&#x9;vd.receiver_name,&#xA;&#x9;vd.timestamp AT TIME ZONE 'UTC' AS detection_date,&#xA;&#x9;vd.transmitter_id AS transmitter_id,&#xA;&#x9;asu.transmitter_project_name,&#xA;&#x9;asu.common_name,&#xA;&#x9;asu.scientific_name,&#xA;&#x9;asu.release_date,&#xA;&#x9;asu.release_locality,&#xA;&#x9;asu.release_longitude,&#xA;&#x9;asu.release_latitude,&#xA;&#x9;asu.sex,&#xA;&#x9;asu.measurement AS measurements,&#xA;&#x9;ist.location AS geom&#xA;  FROM valid_detection vd&#xA;  LEFT JOIN receiver_deployment rd ON vd.receiver_deployment_id = rd.id&#xA;  LEFT JOIN installation_station ist ON ist.id = rd.station_id&#xA;  LEFT JOIN installation i ON i.id = ist.installation_id&#xA;  LEFT JOIN animal_summary asu ON asu.transmitter_id = vd.transmitter_id&#xA;&#x9;WHERE (asu.is_protected IS NULL OR asu.is_protected = FALSE) AND (asu.embargo_date IS NULL OR asu.embargo_date &lt; now()) AND (asu.transmitter_type_id IS NULL OR asu.transmitter_type_id != 129582657)&#xA;&#x9;ORDER BY transmitter_id, detection_date;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="CHECK" name="USE_CURSOR" value="true"/>
-    <elementParameter field="TEXT" name="CURSOR_SIZE" value="10000"/>
+    <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
     <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
     <elementParameter field="TABLE" name="TRIM_COLUMN">
       <elementValue elementRef="SCHEMA_COLUMN" value="detection_id"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="project_name"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="installation_name"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="station_name"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="station_longitude"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="station_latitude"/>
+      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="receiver_name"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="bottom_depth"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="detection_date"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="transmitter_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="transmitter_project_name"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="common_name"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="transmitter_id"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="scientific_name"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="release_date"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="release_locality"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="detection_date"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="release_longitude"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="longitude"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="latitude"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="release_latitude"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="sex"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="scientific_name"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="measurements"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="detected"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="embargo"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="registered"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="embargo_date"/>
       <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -114,30 +109,27 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlInput_1">
       <column comment="" defaultValue="" key="true" length="19" name="detection_id" nullable="false" pattern="" precision="0" sourceType="" type="id_Long"/>
-      <column comment="" key="false" length="255" name="project_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="255" name="installation_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="false" length="255" name="station_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="17" name="station_longitude" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" length="17" name="station_latitude" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
       <column comment="" key="false" length="255" name="receiver_name" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
-      <column comment="" defaultValue="" key="false" length="8" name="bottom_depth" nullable="true" pattern="" precision="8" sourceType="" type="id_Float"/>
-      <column comment="" key="false" length="255" name="common_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="29" name="detection_date" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
       <column comment="" key="false" length="255" name="transmitter_id" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="255" name="transmitter_project_name" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="255" name="common_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="255" name="scientific_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
       <column comment="" key="true" length="29" name="release_date" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
       <column comment="" key="false" length="255" name="release_locality" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="29" name="detection_date" nullable="true" pattern="" precision="6" sourceType="" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="17" name="longitude" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="17" name="latitude" nullable="true" pattern="" precision="17" sourceType="" type="id_Double"/>
+      <column comment="" key="false" name="release_longitude" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" name="release_latitude" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="255" name="sex" nullable="false" pattern="" precision="0" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="255" name="scientific_name" nullable="true" pattern="" precision="0" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="measurements" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
-      <column comment="" key="false" name="detected" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
-      <column comment="" key="false" length="255" name="embargo" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="255" name="registered" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="embargo_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
     </metadata>
   </node>
   <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_1"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
@@ -166,11 +158,6 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="project_name"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="installation_name"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -181,12 +168,32 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="station_longitude"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="station_latitude"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="receiver_name"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="bottom_depth"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="detection_date"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="transmitter_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="transmitter_project_name"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -196,7 +203,7 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="transmitter_id"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="scientific_name"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -211,17 +218,12 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="detection_date"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="release_longitude"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="longitude"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="latitude"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="release_latitude"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -231,32 +233,12 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="scientific_name"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="measurements"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="detected"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="embargo"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="registered"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="embargo_date"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -272,47 +254,43 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_1">
       <column comment="" defaultValue="" key="true" length="19" name="detection_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="false" length="255" name="project_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="255" name="installation_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="255" name="station_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="17" name="station_longitude" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" length="17" name="station_latitude" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="255" name="receiver_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
-      <column comment="" defaultValue="" key="false" length="8" name="bottom_depth" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="255" name="common_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="29" name="detection_date" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="255" name="transmitter_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="transmitter_project_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="common_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="scientific_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="true" length="29" name="release_date" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="255" name="release_locality" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="29" name="detection_date" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="17" name="longitude" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="17" name="latitude" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" name="release_longitude" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" name="release_latitude" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="255" name="sex" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="255" name="scientific_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="measurements" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
-      <column comment="" key="false" name="detected" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
-      <column comment="" key="false" length="255" name="embargo" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="255" name="registered" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="embargo_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" defaultValue="" key="true" length="19" name="detection_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="false" length="255" name="project_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="255" name="installation_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="255" name="station_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="17" name="station_longitude" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" defaultValue="" key="false" length="17" name="station_latitude" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="255" name="receiver_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
-      <column comment="" defaultValue="" key="false" length="8" name="bottom_depth" nullable="true" pattern="" precision="8" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="255" name="common_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="29" name="detection_date" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="255" name="transmitter_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="transmitter_project_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="common_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="255" name="scientific_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="true" length="29" name="release_date" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="255" name="release_locality" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="29" name="detection_date" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" defaultValue="" key="false" length="17" name="longitude" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" defaultValue="" key="false" length="17" name="latitude" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" name="release_longitude" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" name="release_latitude" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="255" name="sex" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="255" name="scientific_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="measurements" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
-      <column comment="" key="false" name="detected" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
-      <column comment="" key="false" length="255" name="embargo" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="255" name="registered" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="embargo_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -338,9 +316,8 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="640">
+  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="512">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
-    <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="CHECK" name="CLOSE" value="false"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -349,7 +326,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlCommit_1"/>
   </node>
-  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="576" posY="640">
+  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="576" posY="512">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -357,7 +334,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="640">
+  <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="512">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -367,7 +344,6 @@
   </node>
   <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="256">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_2"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
@@ -382,47 +358,39 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH a AS (&#xA;  SELECT DISTINCT common_name, embargo, registered&#xA;  FROM aatams_acoustic_detections_data),&#xA;  b AS (&#xA;  SELECT a.common_name, a.embargo, a.registered,&#xA;&#x9; COALESCE('#'||''||lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour&#xA;  FROM a),&#xA;  c AS (&#xA;  SELECT station_name, transmitter_id,&#xA;&#x9; COUNT(DISTINCT detection_id) AS no_detections&#xA;  FROM aatams_acoustic_detections_data&#xA;&#x9;GROUP BY station_name, transmitter_id)&#xA;  SELECT project_name,&#xA;&#x9;installation_name,&#xA;&#x9;d.station_name,&#xA;&#x9;d.common_name,&#xA;&#x9;d.transmitter_id,&#xA;&#x9;release_locality,&#xA;&#x9;date(min(detection_date)) AS first_detection_date,&#xA;&#x9;date(max(detection_date)) AS last_detection_date,&#xA;&#x9;sex,&#xA;&#x9;scientific_name,&#xA;&#x9;replace(ST_AsEWKT(ST_SIMPLIFY(ST_MAKELINE(geom),0.01)), 'LINESTRING','MULTIPOINT')::geometry AS geom,&#xA;&#x9;CASE WHEN b.colour IS NULL THEN '#140802' ELSE b.colour END AS colour,&#xA;&#x9;c.no_detections,&#xA;&#x9;bool_or(no_detections > 0) AS detected,&#xA;&#x9;d.embargo,&#xA;&#x9;d.registered,&#xA;&#x9;d.embargo_date&#xA;  FROM aatams_acoustic_detections_data d&#xA;  LEFT JOIN b ON b.common_name = d.common_name AND d.embargo = b.embargo AND d.registered = b.registered&#xA;  LEFT JOIN c ON c.station_name = d.station_name AND c.transmitter_id = d.transmitter_id&#xA;  &#x9;GROUP BY project_name, installation_name, d.station_name, d.common_name, d.embargo, d.registered, d.embargo_date, d.transmitter_id, release_locality, sex, scientific_name, colour, no_detections&#xA;UNION ALL&#xA;  SELECT p.name AS project_name, &#xA;&#x9;i.name AS installation_name, &#xA;&#x9;ist.name AS station_name,&#xA;&#x9;NULL AS common_name,&#xA;&#x9;NULL AS transmitter_id,&#xA;&#x9;NULL AS release_locality,&#xA;&#x9;NULL AS first_detection_date,&#xA;&#x9;NULL AS last_detection_date,&#xA;&#x9;NULL AS sex,&#xA;&#x9;NULL AS scientific_name,&#xA;&#x9;ist.location AS geom,&#xA;&#x9;'#FF0000' AS colour,&#xA;&#x9;0 AS no_detections,&#xA;&#x9;'FALSE' AS detected,&#xA;&#x9;NULL AS embargo,&#xA;&#x9;NULL AS registered,&#xA;&#x9;NULL AS embargo_date&#xA;  FROM installation_station ist&#xA;  LEFT JOIN installation i ON i.id = ist.installation_id&#xA;  LEFT JOIN project p ON p.id = i.project_id &#xA;&#x9;WHERE ist.name NOT IN (SELECT DISTINCT station_name FROM aatams_acoustic_detections_data)&#xA;&#x9;ORDER BY detected, common_name, transmitter_id, first_detection_date;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH a AS (&#xA;  SELECT DISTINCT common_name&#xA;  FROM aatams_acoustic_detections_data),&#xA;  b AS (&#xA;  SELECT a.common_name,&#xA;&#x9; COALESCE('#'||''||lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour&#xA;  FROM a),&#xA;  c AS (&#xA;  SELECT station_name, transmitter_id,&#xA;&#x9; COUNT(DISTINCT detection_id) AS no_detections&#xA;  FROM aatams_acoustic_detections_data&#xA;&#x9;GROUP BY station_name, transmitter_id)&#xA;  SELECT installation_name,&#xA;&#x9;d.station_name,&#xA;&#x9;d.transmitter_id,&#xA;&#x9;c.no_detections AS no_detections_at_station,&#xA;&#x9;transmitter_project_name,&#xA;&#x9;d.common_name,&#xA;&#x9;scientific_name,&#xA;&#x9;release_locality,&#xA;&#x9;sex,&#xA;&#x9;date(min(detection_date)) AS first_detection_date,&#xA;&#x9;date(max(detection_date)) AS last_detection_date,&#xA;&#x9;CASE WHEN b.colour IS NULL THEN '#140802' ELSE b.colour END AS colour,&#xA;&#x9;geom&#xA;  FROM aatams_acoustic_detections_data d&#xA;  LEFT JOIN b ON b.common_name = d.common_name&#xA;  LEFT JOIN c ON c.station_name = d.station_name AND c.transmitter_id = d.transmitter_id&#xA;  &#x9;GROUP BY installation_name, d.station_name, d.transmitter_id, no_detections, transmitter_project_name, d.common_name, scientific_name, release_locality, sex, colour, geom;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="CHECK" name="USE_CURSOR" value="false"/>
+    <elementParameter field="CHECK" name="USE_CURSOR" value="true"/>
     <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
     <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
     <elementParameter field="TABLE" name="TRIM_COLUMN">
-      <elementValue elementRef="SCHEMA_COLUMN" value="project_name"/>
-      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="installation_name"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="station_name"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="common_name"/>
-      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="transmitter_id"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="no_detections_at_station"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="transmitter_project_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="common_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="scientific_name"/>
+      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="release_locality"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="sex"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="first_detection_date"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="last_detection_date"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="sex"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="scientific_name"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
-      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="colour"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="no_detections"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="detected"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="embargo"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="registered"/>
-      <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="embargo_date"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
       <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -430,28 +398,23 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlInput_2">
-      <column comment="" key="true" name="project_name" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="true" name="installation_name" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="true" name="station_name" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="true" name="common_name" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="true" name="transmitter_id" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="no_detections_at_station" nullable="true" pattern="" sourceType="" type="id_Long"/>
+      <column comment="" key="true" name="transmitter_project_name" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="true" name="common_name" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="scientific_name" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="release_locality" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="sex" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="first_detection_date" nullable="true" pattern="" sourceType="" type="id_Date"/>
       <column comment="" key="false" name="last_detection_date" nullable="true" pattern="" sourceType="" type="id_Date"/>
-      <column comment="" key="false" name="sex" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="scientific_name" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
       <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="no_detections" nullable="true" pattern="" sourceType="" type="id_Long"/>
-      <column comment="" key="false" name="detected" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
-      <column comment="" key="false" length="255" name="embargo" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="255" name="registered" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="embargo_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
     </metadata>
   </node>
   <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="256">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_3"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
@@ -475,11 +438,6 @@
     <elementParameter field="TABLE" name="ADD_COLS"/>
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS">
-      <elementValue elementRef="SCHEMA_COLUMN" value="project_name"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="installation_name"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -490,17 +448,37 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="common_name"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="transmitter_id"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="no_detections_at_station"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="transmitter_project_name"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="common_name"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="scientific_name"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="release_locality"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="sex"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -515,47 +493,12 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="sex"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="scientific_name"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="colour"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="no_detections"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="detected"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="embargo"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="registered"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="embargo_date"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -570,42 +513,34 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_3">
-      <column comment="" key="true" name="project_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="true" name="installation_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="true" name="station_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="true" name="common_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="true" name="transmitter_id" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="no_detections_at_station" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="true" name="transmitter_project_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="true" name="common_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="scientific_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="release_locality" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="sex" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="first_detection_date" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="last_detection_date" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="sex" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="scientific_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
       <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="no_detections" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="false" name="detected" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
-      <column comment="" key="false" length="255" name="embargo" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="255" name="registered" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="embargo_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="true" name="project_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="true" name="installation_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="true" name="station_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="true" name="common_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="true" name="transmitter_id" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" name="no_detections_at_station" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="true" name="transmitter_project_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="true" name="common_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="scientific_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="release_locality" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="sex" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="first_detection_date" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="last_detection_date" nullable="true" pattern="" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="sex" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="scientific_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
       <column comment="" key="false" name="colour" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="no_detections" nullable="true" pattern="" sourceType="INT8" type="id_Long"/>
-      <column comment="" key="false" name="detected" nullable="true" pattern="" sourceType="BOOL" type="id_Boolean"/>
-      <column comment="" key="false" length="255" name="embargo" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="255" name="registered" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="embargo_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="POINT" type="id_Object"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -619,44 +554,8 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="512">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;localhost&quot;"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
-    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT UpdateGeometrySRID('aatams_acoustic_detections_data','geom',4326);&#xA;SELECT UpdateGeometrySRID('aatams_acoustic_detections_map','geom',4326);&#xA;SELECT UpdateGeometrySRID('installation_summary','geom',4326);&quot;"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
-    <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
-    <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
-    <elementParameter field="TABLE" name="SET_PREPAREDSTATEMENT_PARAMETERS"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlRow_1"/>
-    <metadata connector="REJECT" name="REJECT">
-      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
-      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
-    </metadata>
-  </node>
   <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="128" posY="384">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_3"/>
-    <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
@@ -840,7 +739,6 @@
   </node>
   <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_2"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="CHECK" name="CLOSE" value="false"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -864,7 +762,7 @@
       <elementValue elementRef="TRACE_COLUMN" value="sex"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="project_name"/>
+      <elementValue elementRef="TRACE_COLUMN" value="transmitter_project_name"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="geom"/>
@@ -900,13 +798,13 @@
       <elementValue elementRef="TRACE_COLUMN" value="release_locality"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="longitude"/>
+      <elementValue elementRef="TRACE_COLUMN" value="station_longitude"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="detection_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="latitude"/>
+      <elementValue elementRef="TRACE_COLUMN" value="station_latitude"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="scientific_name"/>
@@ -927,6 +825,15 @@
       <elementValue elementRef="TRACE_COLUMN" value="embargo_date"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="measurements"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="release_longitude"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="release_latitude"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -934,19 +841,19 @@
     <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
     <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
     <elementParameter field="TABLE" name="THRESHLODS"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tPostgresqlInput_2">
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk6"/>
   </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlOutput_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlOutput_1" target="tPostgresqlCommit_2">
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk2"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="tPostgresqlInput_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
   </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostjob_1" offsetLabelX="0" offsetLabelY="0" source="tPostjob_1" target="tPostgresqlClose_1">
@@ -968,7 +875,7 @@
       <elementValue elementRef="TRACE_COLUMN" value="sex"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="project_name"/>
+      <elementValue elementRef="TRACE_COLUMN" value="transmitter_project_name"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="geom"/>
@@ -1038,20 +945,16 @@
     <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
     <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
     <elementParameter field="TABLE" name="THRESHLODS"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row2"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_2" target="tPostgresqlInput_3">
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iIncludeSdiLibraries_1" offsetLabelX="0" offsetLabelY="0" source="iIncludeSdiLibraries_1" target="tPostgresqlConnection_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
-  </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlRow_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_1" target="tPostgresqlCommit_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk6"/>
   </connection>
   <connection connectorName="FLOW" label="row3" lineStyle="0" metaname="tPostgresqlInput_3" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_3" target="iPostgresqlOutput_4">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
@@ -1150,8 +1053,8 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row3"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_3" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_3" target="tPostgresqlRow_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_3" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_3" target="tPostgresqlCommit_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
   <subjob>
@@ -1191,13 +1094,6 @@
   </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iIncludeSdiLibraries_1"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
-  <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
-    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Update geometry SRID to 4326"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
