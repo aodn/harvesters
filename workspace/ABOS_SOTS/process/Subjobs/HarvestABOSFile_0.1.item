@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value=""/>
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
@@ -170,7 +170,7 @@
       <column comment="" key="false" length="50" name="data_type" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="50"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="timeseries">
         <mapperTableEntries name="file_id" expression="context.fileId" type="id_Long"/>
@@ -178,10 +178,10 @@
         <mapperTableEntries name="platform_code" expression="row1.platform_code" type="id_String"/>
         <mapperTableEntries name="deployment_code" expression="row1.deployment_code" type="id_String"/>
         <mapperTableEntries name="LATITUDE" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="LONGITUDE" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="LONGITUDE" expression="" type="id_Double" nullable="true"/>
         <mapperTableEntries name="geom" type="id_Geometry" nullable="true"/>
-        <mapperTableEntries name="time_coverage_start" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_start,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
-        <mapperTableEntries name="time_coverage_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_end,&quot;Z&quot;,&quot;+0000&quot;))" type="id_Date" nullable="true"/>
+        <mapperTableEntries name="time_coverage_start" expression="(row1.time_coverage_start == null || row1.time_coverage_start.equals(&quot;&quot;)) ? null : TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_start,&quot;Z&quot;,&quot;+0000&quot;))   " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="time_coverage_end" expression="(row1.time_coverage_end == null || row1.time_coverage_end.equals(&quot;&quot;)) ? null : TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_end,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
         <mapperTableEntries name="data_type" expression="row2.data_type " type="id_String" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row1" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
@@ -361,7 +361,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT  id,&#10;        url,&#10;&#9;&#9;substring(url, '/([a-zA-Z0-9.\\-\\_]+)/IMOS_ABOS' ) AS data_type&#10;from indexed_file where id = &quot; + context.fileId + &quot; ; &quot;&#10;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT  id,&#xA;        url,&#xA;&#x9;&#x9;substring(url, '/([a-zA-Z0-9.\\-\\_]+)/IMOS_ABOS' ) AS data_type&#xA;from indexed_file where id = &quot; + context.fileId + &quot; ; &quot;&#xA;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -574,7 +574,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE timeseries&#10;SET geom = st_geomfromtext('POINT(' || \&quot;LONGITUDE\&quot;::text || ' ' || \&quot;LATITUDE\&quot;::text || ')', 4326)&#10;WHERE file_id = &quot; + context.fileId + &quot;;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE timeseries&#xA;SET geom = st_geomfromtext('POINT(' || \&quot;LONGITUDE\&quot;::text || ' ' || \&quot;LATITUDE\&quot;::text || ')', 4326)&#xA;WHERE file_id = &quot; + context.fileId + &quot;;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -647,7 +647,7 @@
   </node>
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="512" posY="-192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_1"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#10;//&#10;// multiply by 2 the row identifier&#10;// output_row.id = input_row.id * 2;&#10;//&#10;// lowercase the name&#10;// output_row.name = input_row.name.toLowerCase();&#10;&#10;context.url=row5.url;"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#xA;//&#xA;// multiply by 2 the row identifier&#xA;// output_row.id = input_row.id * 2;&#xA;//&#xA;// lowercase the name&#xA;// output_row.name = input_row.name.toLowerCase();&#xA;&#xA;context.url=row5.url;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
