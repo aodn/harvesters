@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="srs_altimetry"/>
@@ -7,6 +7,8 @@
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="srs_altimetry"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="10.11.12.13"/>
+    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_qD47cFZQEeO1nIjDowevtg" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_qD47cFZQEeO1nIjDowevtg" type="id_String" value=""/>
     <contextParameter comment="" name="Metadata_Password" prompt="Metadata_Password?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
     <contextParameter comment="" name="Metadata_SpatialColumn" prompt="Metadata_SpatialColumn?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="geom"/>
     <contextParameter comment="" name="Metadata_SpatialResolution" prompt="Metadata_SpatialResolution?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="2"/>
@@ -22,6 +24,8 @@
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="srs_altimetry"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="#{node['talend']['destination_database_server']}"/>
+    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_qD47cFZQEeO1nIjDowevtg" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_qD47cFZQEeO1nIjDowevtg" type="id_String" value=""/>
     <contextParameter comment="" name="Metadata_Password" prompt="Metadata_Password?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
     <contextParameter comment="" name="Metadata_SpatialColumn" prompt="Metadata_SpatialColumn?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="geom"/>
     <contextParameter comment="" name="Metadata_SpatialResolution" prompt="Metadata_SpatialResolution?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="2"/>
@@ -65,16 +69,9 @@
     <routinesParameter id="_cRn34BQsEeKRFb0vPU_LNg" name="DAPUtils"/>
     <routinesParameter id="_IMfY4Dp8EeKYTu4DLH4cKg" name="NetCDFUtils"/>
   </parameters>
-  <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="416" posY="384">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1"/>
-    <elementParameter field="CHECK" name="START" value="true"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-  </node>
   <node componentName="iUpdateSpatialExtent" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="608" posY="384">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iUpdateSpatialExtent_1"/>
+    <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value=""/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
@@ -91,21 +88,15 @@
     <elementParameter field="TEXT" name="GN_USERNAME" value="context.Metadata_Username"/>
     <elementParameter field="TEXT" name="GN_PASSWORD" value="context.Metadata_Password"/>
     <elementParameter field="TEXT" name="UUID" value="context.Metadata_UUID"/>
+    <elementParameter field="RADIO" name="UPDATE_ALWAYS" value="false"/>
+    <elementParameter field="RADIO" name="UPDATE_ON_CHANGE" value="true"/>
+    <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
+    <elementParameter field="TEXT" name="HARVEST_TYPE" value="&quot;harvest&quot;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostjob_1" offsetLabelX="0" offsetLabelY="0" source="tPostjob_1" target="iUpdateSpatialExtent_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
-  </connection>
-  <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="230;100;0"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="255;220;180"/>
-  </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iUpdateSpatialExtent_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
