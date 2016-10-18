@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
+    <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value="2"/>
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="&quot;/home/lbesnard/Downloads/altFiles/IMOS_SRSALT_TCS_20140819T020000Z_BASJASA_FV01_SBE37d41m.nc&quot;"/>
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="srs_altimetry"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="VvCQgd+qTy5wuahPjYmyiQ=="/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="srs_altimetry"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="10.11.12.13"/>
+    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_qD47cFZQEeO1nIjDowevtg" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_qD47cFZQEeO1nIjDowevtg" type="id_String" value=""/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_X28C0FZQEeO1nIjDowevtg" type="id_String" value=""/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_X28C0FZQEeO1nIjDowevtg" type="id_String" value="/tmp/fileList"/>
+    <contextParameter comment="" name="timeVariable" prompt="timeVariable?" promptNeeded="false" repositoryContextId="_X28C0FZQEeO1nIjDowevtg" type="id_String" value="null"/>
+  </context>
+  <context confirmationNeeded="false" name="Deployment">
     <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value="2"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="&quot;/home/lbesnard/Downloads/altFiles/IMOS_SRSALT_TCS_20140819T020000Z_BASJASA_FV01_SBE37d41m.nc&quot;"/>
+    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="srs_altimetry"/>
+    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value=""/>
+    <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
+    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="srs_altimetry"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="#{node['talend']['destination_database_server']}"/>
+    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_qD47cFZQEeO1nIjDowevtg" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_qD47cFZQEeO1nIjDowevtg" type="id_String" value=""/>
     <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_X28C0FZQEeO1nIjDowevtg" type="id_String" value=""/>
-    <contextParameter comment="" name="timeVariable" prompt="timeVariable?" promptNeeded="false" type="id_String" value="TIME"/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_X28C0FZQEeO1nIjDowevtg" type="id_String" value="/tmp/fileList"/>
+    <contextParameter comment="" name="timeVariable" prompt="timeVariable?" promptNeeded="false" repositoryContextId="_X28C0FZQEeO1nIjDowevtg" type="id_String" value="null"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -258,7 +276,7 @@
       <column comment="" key="false" length="50" name="site" nullable="true" pattern="" sourceType="" type="id_String" originalLength="50"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="copyOfout1">
         <mapperTableEntries name="file_id" expression="context.file_id" type="id_Integer"/>
@@ -583,7 +601,7 @@
       <column comment="" defaultValue="" key="false" name="geom" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(variables.LONGITUDE,variables.LATITUDE,&quot;EPSG:4326&quot;)" type="id_Geometry"/>
         <mapperTableEntries name="CNDC_quality_control" expression="variables.CNDC_quality_control==null?null:variables.CNDC_quality_control.toString()" type="id_String"/>
