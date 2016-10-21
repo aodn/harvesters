@@ -2,10 +2,10 @@
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest"/>
-    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="aus_phyto_db"/>
-    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="ltj4TBtpq0Z9gtjxgG1F2Q=="/>
+    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="aus_phyto_db_ongoing"/>
+    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="ltj4TBtpq0Z1Weyva43KOCuz/Bxtx2I7"/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
-    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="aus_phyto_db"/>
+    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="aus_phyto_db_ongoing"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="__UkjUFfbEeOI06CSaOCVIQ" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="__UkjUFfbEeOI06CSaOCVIQ" type="id_String" value="null"/>
@@ -600,7 +600,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#x9;d.\&quot;LOCATION\&quot;, &#xA;&#x9;d.\&quot;SAMPLE_TIME_UTC\&quot;, &#xA;     d.\&quot;FUNCTIONAL_GROUP\&quot;, &#xA;     d.geom,&#xA;     COUNT(*) AS no_unique_species_found,&#xA;&#x9;d.\&quot;PROJECT_DESCRIPTION\&quot;&#xA;  FROM aus_phyto_db_data d&#xA;  WHERE d.\&quot;PRESENCE_ABSENCE\&quot; = 1 AND d.\&quot;SAMPLE_TIME_UTC\&quot; IS NOT NULL AND d.\&quot;FUNCTIONAL_GROUP\&quot; != '' AND geom IS NOT NULL&#xA;  GROUP BY d.\&quot;PROJECT_DESCRIPTION\&quot;, d.\&quot;LOCATION\&quot;, d.\&quot;SAMPLE_TIME_UTC\&quot;, d.\&quot;FUNCTIONAL_GROUP\&quot;, d.geom;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT &#x9;d.\&quot;LOCATION\&quot;, &#xA;&#x9;d.\&quot;SAMPLE_TIME_UTC\&quot;, &#xA;     d.\&quot;FUNCTIONAL_GROUP\&quot;, &#xA;     d.geom,&#xA;     COUNT(*) AS no_unique_species_found,&#xA;&#x9;d.\&quot;PROJECT_DESCRIPTION\&quot;&#xA;  FROM aus_phyto_db_data d&#xA;  WHERE d.\&quot;PRESENCE_ABSENCE\&quot; = '1' AND d.\&quot;SAMPLE_TIME_UTC\&quot; IS NOT NULL AND d.\&quot;FUNCTIONAL_GROUP\&quot; != '' AND geom IS NOT NULL&#xA;  GROUP BY d.\&quot;PROJECT_DESCRIPTION\&quot;, d.\&quot;LOCATION\&quot;, d.\&quot;SAMPLE_TIME_UTC\&quot;, d.\&quot;FUNCTIONAL_GROUP\&quot;, d.geom;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -732,9 +732,9 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="tFileFetch_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="tFileFetch_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk3"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlCommit_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlCommit_1" target="tPostgresqlInput_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
