@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet author="talend" id="survey_metadata_table">
+      <sql>
+        CREATE TABLE survey_metadata
+        (
+          id bigserial PRIMARY KEY,
+          file_id bigint UNIQUE NOT NULL,
+          location text NOT NULL,
+          survey_date date NOT NULL,
+          source text,
+          name text,
+          coll_Name text,
+          authority text,
+          habitat text,
+          comments text,
+          coll_date text,
+          status text,
+          xyz_file text,
+          vessel text,
+          z_datum text,
+          z_app text,
+          z_tech text,
+          geom geometry(Geometry,4326) CHECK (st_isvalid(geom)),
+
+          CONSTRAINT survey_metadata_file_fk FOREIGN KEY (file_id)
+              REFERENCES indexed_file (id) MATCH SIMPLE
+              ON UPDATE CASCADE ON DELETE CASCADE
+        );
+
+        CREATE INDEX survey_metadata_gist_idx ON survey_metadata USING GIST (geom); 
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="aodn_nsw_oeh_map" runOnChange="true">
+      <sql>
+        DROP VIEW IF EXISTS aodn_nsw_oeh_map ;
+
+        CREATE VIEW aodn_nsw_oeh_map AS
+          WITH files AS (
+            SELECT
+              *,
+              substring(url, '/[[:digit:]]+_([[:alnum:]]+)_[^/]+$') AS location,
+              substring(url, '/([[:digit:]]+)_[^/]+$')::date AS survey_date,
+              substring(url, '\\.([^.]+)$') AS extension,
+              substring(url, '_(coverage|metadata|BTY|BKS)') AS file_type
+            FROM indexed_file
+          )
+          SELECT
+            f.url,
+            f.location,
+            f.survey_date,
+            CASE f.file_type
+              WHEN 'BTY' THEN 'bathymetry'
+              WHEN 'BKS' THEN 'backscatter'
+              ELSE f.file_type
+            END AS file_type,
+            f.extension,
+            m.name AS survey_name,
+            m.authority,
+            m.geom
+          FROM files f JOIN survey_metadata m USING (location, survey_date)
+          WHERE NOT f.deleted
+        ;
+      </sql>
+    </changeSet>
+
+</databaseChangeLog>
