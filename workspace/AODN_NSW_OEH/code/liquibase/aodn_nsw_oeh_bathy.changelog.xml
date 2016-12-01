@@ -34,27 +34,32 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="aodn_nsw_oeh_map" runOnChange="true">
+    <changeSet author="talend" id="aodn_nsw_oeh_bathy_map" runOnChange="true">
       <sql>
         DROP VIEW IF EXISTS aodn_nsw_oeh_map ;
+        DROP VIEW IF EXISTS aodn_nsw_oeh_bathy_map ;
 
-        CREATE VIEW aodn_nsw_oeh_map AS
+        CREATE VIEW aodn_nsw_oeh_bathy_map AS
           WITH files AS (
             SELECT
               *,
-              substring(url, '/[[:digit:]]+_([[:alnum:]]+)_[^/]+$') AS location,
-              substring(url, '/([[:digit:]]+)_[^/]+$')::date AS survey_date,
-              substring(url, '\\.([^.]+)$') AS extension,
-              substring(url, '_(coverage|metadata|BTY|BKS)') AS file_type
+              substring(url, '/NSWOEH_[[:digit:]]+_([[:alnum:]]+)_[^/]+$') AS location,
+              substring(url, '/NSWOEH_([[:digit:]]+)_[^/]+$')::date AS survey_date,
+              substring(url, '_(MB)_') AS survey_methods,
+              substring(url, '_(ScientificRigour|SHP|BTY|BKS)') AS file_type,
+              substring(url, '\\.([^.]+)$') AS extension
             FROM indexed_file
+            WHERE NOT deleted
           )
           SELECT
             f.url,
             f.location,
             f.survey_date,
+            f.survey_methods,
             CASE f.file_type
               WHEN 'BTY' THEN 'bathymetry'
               WHEN 'BKS' THEN 'backscatter'
+              WHEN 'SHP' THEN 'coverage shapefile'
               ELSE f.file_type
             END AS file_type,
             f.extension,
@@ -62,7 +67,8 @@
             m.authority,
             m.geom
           FROM files f JOIN survey_metadata m USING (location, survey_date)
-          WHERE NOT f.deleted
+          WHERE f.survey_methods LIKE '%MB%'
+          ORDER BY url
         ;
       </sql>
     </changeSet>
