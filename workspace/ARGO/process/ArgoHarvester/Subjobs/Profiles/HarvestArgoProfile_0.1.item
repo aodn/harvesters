@@ -9,8 +9,8 @@
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="argo"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="10.11.12.13"/>
-    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_uSym4C4NEeK558KNMD8eOQ" type="id_String" value="null"/>
-    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_uSym4C4NEeK558KNMD8eOQ" type="id_String" value="null"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_uSym4C4NEeK558KNMD8eOQ" type="id_String" value="/home/lbesnard/temp"/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_uSym4C4NEeK558KNMD8eOQ" type="id_String" value="/home/lbesnard/temp/filelist"/>
   </context>
   <context confirmationNeeded="false" name="argo_dev">
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Integer" value="7"/>
@@ -21,8 +21,8 @@
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="argo"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="10.11.12.13"/>
-    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_uSym4C4NEeK558KNMD8eOQ" type="id_String" value="null"/>
-    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_uSym4C4NEeK558KNMD8eOQ" type="id_String" value="null"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_uSym4C4NEeK558KNMD8eOQ" type="id_String" value="/home/lbesnard/temp"/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_uSym4C4NEeK558KNMD8eOQ" type="id_String" value="/home/lbesnard/temp/filelist"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -129,6 +129,8 @@
       <column comment="" defaultValue="" key="false" name="PROFILE_DOXY_QC" nullable="true" originalDbColumnName="profile_doxy_qc" pattern="" sourceType="" type="id_Character"/>
       <column comment="" defaultValue="" key="false" name="PROFILE_TEMP_DOXY_QC" nullable="true" originalDbColumnName="profile_temp_doxy_qc" pattern="" sourceType="" type="id_Character"/>
       <column comment="" key="false" name="REFERENCE_DATE_TIME" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="PROFILE_C1PHASE_DOXY_QC" nullable="true" pattern="" sourceType="" type="id_Character"/>
+      <column comment="" key="false" name="PROFILE_C2PHASE_DOXY_QC" nullable="true" pattern="" sourceType="" type="id_Character"/>
     </metadata>
     <metadata connector="FLOW" label="profile_measurements" name="profile_measurements">
       <column comment="" key="true" name="N_PROF" nullable="true" pattern="" sourceType="" type="id_Integer"/>
@@ -158,6 +160,10 @@
       <column comment="" key="false" length="1" name="TEMP_DOXY_QC" nullable="true" originalDbColumnName="temp_doxy_qc" pattern="" sourceType="" type="id_Character"/>
       <column comment="" key="false" length="1" name="TEMP_DOXY_ADJUSTED_QC" nullable="true" originalDbColumnName="temp_doxy_adjusted_qc" pattern="" sourceType="" type="id_Character"/>
       <column comment="" defaultValue="" key="false" name="TEMP_DOXY_ADJUSTED_ERROR" nullable="true" originalDbColumnName="temp_doxy_adjusted_error" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="C1PHASE_DOXY" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" length="1" name="C1PHASE_DOXY_QC" nullable="true" pattern="" sourceType="" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="C2PHASE_DOXY" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" length="1" name="C2PHASE_DOXY_QC" nullable="true" pattern="" sourceType="" type="id_Character" originalLength="1"/>
     </metadata>
     <metadata connector="FLOW" label="profile_params" name="profile_params">
       <column comment="" key="true" name="N_PROF" nullable="true" pattern="" sourceType="" type="id_Integer"/>
@@ -432,6 +438,8 @@
       <column comment="" key="false" name="PROFILE_DOXY_QC" nullable="true" originalDbColumnName="profile_doxy_qc" pattern="" sourceType="" type="id_Character"/>
       <column comment="" key="false" name="PROFILE_TEMP_DOXY_QC" nullable="true" originalDbColumnName="profile_temp_doxy_qc" pattern="" sourceType="" type="id_Character"/>
       <column comment="" key="false" name="position" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
+      <column comment="" key="false" name="PROFILE_C1PHASE_DOXY_QC" nullable="true" originalDbColumnName="profile_c1phase_doxy_qc" pattern="" sourceType="" type="id_Character"/>
+      <column comment="" key="false" name="PROFILE_C2PHASE_DOXY_QC" nullable="true" originalDbColumnName="profile_c2phase_doxy_qc" pattern="" sourceType="" type="id_Character"/>
     </metadata>
     <nodeData xsi:type="MapperData">
       <uiProperties/>
@@ -463,6 +471,8 @@
         <mapperTableEntries name="PROFILE_DOXY_QC" expression="profile_general.PROFILE_DOXY_QC " type="id_Character" nullable="true"/>
         <mapperTableEntries name="PROFILE_TEMP_DOXY_QC" expression="profile_general.PROFILE_TEMP_DOXY_QC " type="id_Character" nullable="true"/>
         <mapperTableEntries name="position" expression="ArgoUtils.makePoint(profile_general.LONGITUDE, profile_general.LATITUDE,&quot;EPSG:4326&quot;)  " type="id_Geometry" nullable="true"/>
+        <mapperTableEntries name="PROFILE_C1PHASE_DOXY_QC" expression="profile_general.PROFILE_C1PHASE_DOXY_QC " type="id_Character" nullable="true"/>
+        <mapperTableEntries name="PROFILE_C2PHASE_DOXY_QC" expression="profile_general.PROFILE_C2PHASE_DOXY_QC " type="id_Character" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="profile_general" matchingMode="ALL_ROWS" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="N_PROF" type="id_Integer" nullable="true"/>
@@ -490,6 +500,8 @@
         <mapperTableEntries name="PROFILE_DOXY_QC" type="id_Character" nullable="true"/>
         <mapperTableEntries name="PROFILE_TEMP_DOXY_QC" type="id_Character" nullable="true"/>
         <mapperTableEntries name="REFERENCE_DATE_TIME" type="id_String" nullable="true"/>
+        <mapperTableEntries name="PROFILE_C1PHASE_DOXY_QC" type="id_Character" nullable="true"/>
+        <mapperTableEntries name="PROFILE_C2PHASE_DOXY_QC" type="id_Character" nullable="true"/>
       </inputTables>
     </nodeData>
   </node>
@@ -738,6 +750,16 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="PROFILE_C1PHASE_DOXY_QC"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="PROFILE_C2PHASE_DOXY_QC"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -748,7 +770,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="profile_general" name="iPostgresqlOutput_2">
-      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
+      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="8" name="PLATFORM_NUMBER" nullable="true" originalDbColumnName="platform_number" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="64" name="PROJECT_NAME" nullable="true" originalDbColumnName="project_name" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -774,9 +796,11 @@
       <column comment="" key="false" name="PROFILE_DOXY_QC" nullable="true" originalDbColumnName="profile_doxy_qc" pattern="" sourceType="CHAR" type="id_Character"/>
       <column comment="" key="false" name="PROFILE_TEMP_DOXY_QC" nullable="true" originalDbColumnName="profile_temp_doxy_qc" pattern="" sourceType="CHAR" type="id_Character"/>
       <column comment="" key="false" name="position" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
+      <column comment="" key="false" name="PROFILE_C1PHASE_DOXY_QC" nullable="true" originalDbColumnName="profile_c1phase_doxy_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" name="PROFILE_C2PHASE_DOXY_QC" nullable="true" originalDbColumnName="profile_c2phase_doxy_qc" pattern="" sourceType="CHAR" type="id_Character"/>
     </metadata>
     <metadata connector="REJECT" label="profile_general" name="REJECT">
-      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
+      <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="true" name="N_PROF" nullable="true" originalDbColumnName="profile_no" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="8" name="PLATFORM_NUMBER" nullable="true" originalDbColumnName="platform_number" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="64" name="PROJECT_NAME" nullable="true" originalDbColumnName="project_name" pattern="" sourceType="VARCHAR" type="id_String"/>
@@ -802,6 +826,8 @@
       <column comment="" key="false" name="PROFILE_DOXY_QC" nullable="true" originalDbColumnName="profile_doxy_qc" pattern="" sourceType="CHAR" type="id_Character"/>
       <column comment="" key="false" name="PROFILE_TEMP_DOXY_QC" nullable="true" originalDbColumnName="profile_temp_doxy_qc" pattern="" sourceType="CHAR" type="id_Character"/>
       <column comment="" key="false" name="position" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
+      <column comment="" key="false" name="PROFILE_C1PHASE_DOXY_QC" nullable="true" originalDbColumnName="profile_c1phase_doxy_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" name="PROFILE_C2PHASE_DOXY_QC" nullable="true" originalDbColumnName="profile_c2phase_doxy_qc" pattern="" sourceType="CHAR" type="id_Character"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1167,6 +1193,10 @@
       <column comment="" defaultValue="" key="false" name="TEMP_DOXY_ADJUSTED" nullable="true" originalDbColumnName="temp_doxy_adjusted" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" defaultValue="" key="false" length="1" name="TEMP_DOXY_ADJUSTED_QC" nullable="true" originalDbColumnName="temp_doxy_adjusted_qc" pattern="" sourceType="CHAR" type="id_Character"/>
       <column comment="" defaultValue="" key="false" name="TEMP_DOXY_ADJUSTED_ERROR" nullable="true" originalDbColumnName="temp_doxy_adjusted_error" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="C1PHASE_DOXY" nullable="true" originalDbColumnName="c1phase_doxy" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" length="1" name="C1PHASE_DOXY_QC" nullable="true" originalDbColumnName="c1phase_doxy_qc" pattern="" sourceType="" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="C2PHASE_DOXY" nullable="true" originalDbColumnName="c2phase_doxy" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" length="1" name="C2PHASE_DOXY_QC" nullable="true" originalDbColumnName="c2phase_doxy_qc" pattern="" sourceType="" type="id_Character" originalLength="1"/>
     </metadata>
     <nodeData xsi:type="MapperData">
       <uiProperties/>
@@ -1200,6 +1230,10 @@
         <mapperTableEntries name="TEMP_DOXY_ADJUSTED" expression="profile_measurements.TEMP_DOXY_ADJUSTED" type="id_Float" nullable="true"/>
         <mapperTableEntries name="TEMP_DOXY_ADJUSTED_QC" expression="profile_measurements.TEMP_DOXY_ADJUSTED_QC" type="id_Character" nullable="true"/>
         <mapperTableEntries name="TEMP_DOXY_ADJUSTED_ERROR" expression="profile_measurements.TEMP_DOXY_ADJUSTED_ERROR" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="C1PHASE_DOXY" expression="profile_measurements.C1PHASE_DOXY " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="C1PHASE_DOXY_QC" expression="profile_measurements.C1PHASE_DOXY_QC " type="id_Character" nullable="true"/>
+        <mapperTableEntries name="C2PHASE_DOXY" expression="profile_measurements.C2PHASE_DOXY " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="C2PHASE_DOXY_QC" expression="profile_measurements.C2PHASE_DOXY_QC " type="id_Character" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="profile_measurements" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="N_PROF" type="id_Integer" nullable="true"/>
@@ -1229,6 +1263,10 @@
         <mapperTableEntries name="TEMP_DOXY_QC" type="id_Character" nullable="true"/>
         <mapperTableEntries name="TEMP_DOXY_ADJUSTED_QC" type="id_Character" nullable="true"/>
         <mapperTableEntries name="TEMP_DOXY_ADJUSTED_ERROR" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="C1PHASE_DOXY" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="C1PHASE_DOXY_QC" type="id_Character" nullable="true"/>
+        <mapperTableEntries name="C2PHASE_DOXY" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="C2PHASE_DOXY_QC" type="id_Character" nullable="true"/>
       </inputTables>
     </nodeData>
   </node>
@@ -1397,6 +1435,26 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="C1PHASE_DOXY"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="C1PHASE_DOXY_QC"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="C2PHASE_DOXY"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="C2PHASE_DOXY_QC"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -1435,6 +1493,10 @@
       <column comment="" defaultValue="" key="false" name="TEMP_DOXY_ADJUSTED" nullable="true" originalDbColumnName="temp_doxy_adjusted" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" defaultValue="" key="false" length="1" name="TEMP_DOXY_ADJUSTED_QC" nullable="true" originalDbColumnName="temp_doxy_adjusted_qc" pattern="" sourceType="CHAR" type="id_Character"/>
       <column comment="" defaultValue="" key="false" name="TEMP_DOXY_ADJUSTED_ERROR" nullable="true" originalDbColumnName="temp_doxy_adjusted_error" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="C1PHASE_DOXY" nullable="true" originalDbColumnName="c1phase_doxy" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="1" name="C1PHASE_DOXY_QC" nullable="true" originalDbColumnName="c1phase_doxy_qc" pattern="" sourceType="CHAR" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="C2PHASE_DOXY" nullable="true" originalDbColumnName="c2phase_doxy" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="1" name="C2PHASE_DOXY_QC" nullable="true" originalDbColumnName="c2phase_doxy_qc" pattern="" sourceType="CHAR" type="id_Character" originalLength="1"/>
     </metadata>
     <metadata connector="REJECT" label="profile_measurements" name="REJECT">
       <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
@@ -1465,6 +1527,10 @@
       <column comment="" defaultValue="" key="false" name="TEMP_DOXY_ADJUSTED" nullable="true" originalDbColumnName="temp_doxy_adjusted" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" defaultValue="" key="false" length="1" name="TEMP_DOXY_ADJUSTED_QC" nullable="true" originalDbColumnName="temp_doxy_adjusted_qc" pattern="" sourceType="CHAR" type="id_Character"/>
       <column comment="" defaultValue="" key="false" name="TEMP_DOXY_ADJUSTED_ERROR" nullable="true" originalDbColumnName="temp_doxy_adjusted_error" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="C1PHASE_DOXY" nullable="true" originalDbColumnName="c1phase_doxy" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="1" name="C1PHASE_DOXY_QC" nullable="true" originalDbColumnName="c1phase_doxy_qc" pattern="" sourceType="CHAR" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="C2PHASE_DOXY" nullable="true" originalDbColumnName="c2phase_doxy" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="1" name="C2PHASE_DOXY_QC" nullable="true" originalDbColumnName="c2phase_doxy_qc" pattern="" sourceType="CHAR" type="id_Character" originalLength="1"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1709,6 +1775,12 @@
       <elementValue elementRef="TRACE_COLUMN" value="REFERENCE_DATE_TIME"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PROFILE_C1PHASE_DOXY_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PROFILE_C2PHASE_DOXY_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -1801,6 +1873,18 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="TEMP_DOXY_ADJUSTED_ERROR"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="C1PHASE_DOXY_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="C2PHASE_DOXY_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="C2PHASE_DOXY"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="C1PHASE_DOXY"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -2172,6 +2256,12 @@
       <elementValue elementRef="TRACE_COLUMN" value="position"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PROFILE_C1PHASE_DOXY_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PROFILE_C2PHASE_DOXY_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -2267,6 +2357,18 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="TEMP_DOXY_ADJUSTED_ERROR"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="C1PHASE_DOXY_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="C2PHASE_DOXY_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="C2PHASE_DOXY"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="C1PHASE_DOXY"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
