@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="maplayers"/>
+    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value=""/>
+    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="harvest"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="anmn_mhlwave"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_Password" value="LKMRo+bjpcAk54iO+HMQwQ=="/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="5432"/>
@@ -9,10 +11,8 @@
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="localhost"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
-    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value="&quot;.*FV01.*nc&quot;"/>
-    <contextParameter comment="" name="Threddscatalog" prompt="Threddscatalog?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value="&quot;http://www.metoc.gov.au/thredds/catalog/MHLWAVE/catalog.xml&quot;"/>
-    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value=""/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value="/"/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value="/vagrant/tmp/fileList"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -64,15 +64,15 @@
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/media/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;cr_deployments-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE deployments&#xA;(&#xA;  file_id integer NOT NULL,&#xA;  time_coverage_start timestamp with time zone,&#xA;  time_coverage_end  timestamp with time zone,&#xA;  platform_code character varying(20),&#xA;  CONSTRAINT deployments_pkey PRIMARY KEY (file_id ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;mhl_wms-1&quot;>&#xA;        &lt;sql>&#xA;&#xA;CREATE TABLE anmn_mhlwave_wms&#xA;(&#xA;file_id integer NOT NULL,&#xA;site_code character varying(20),&#xA;platform_code character varying(20),&#xA;site_name character varying(50),&#xA;time_coverage_start timestamp with time zone,&#xA;time_coverage_end  timestamp with time zone,&#xA;latitude double precision, &#xA;longitude double precision,&#xA;depth integer,&#xA;metadata character varying(650),&#xA;abstract_ftl character varying(2550),&#xA;geom geometry CHECK (ST_IsValid(geom)),&#xA;CONSTRAINT  anmn_mhlwave_wms_pkey PRIMARY KEY (file_id ),&#xA;CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;REFERENCES indexed_file (id) MATCH SIMPLE&#xA; ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr_measurements-1&quot;>&#xA;       &lt;sql>&#xA;    CREATE TABLE measurements&#xA;(&#xA;  measurement_id bigserial,&#xA;  file_id integer NOT NULL,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LATITUDE&quot; real,&#xA;  &quot;LONGITUDE&quot; real,&#xA; &quot;VAVH&quot; real,&#xA; &quot;HMEAN&quot; real,&#xA; &quot;HRMS&quot; real,&#xA; &quot;H10&quot; real,&#xA; &quot;HMAX&quot; real,&#xA; &quot;TCREST&quot; real,&#xA; &quot;VAVT&quot; real,&#xA; &quot;TSIG&quot; real,&#xA; &quot;YRMS&quot; real,&#xA; &quot;TP1&quot; real,&#xA; &quot;TP2&quot; real,&#xA; &quot;M0&quot; real,&#xA; &quot;VDIR&quot; real, &#xA;  CONSTRAINT measurements_pkey PRIMARY KEY (measurement_id),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr_indices_measurments-1&quot;>&#xA;       &lt;sql>&#xA;&#x9;CREATE INDEX measurements_file_id_idx ON measurements (file_id ASC NULLS LAST);&#xA;&#x9;CREATE INDEX measurements_T_idx ON measurements (file_id,&quot;TIME&quot;);&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;anmn_mhlwave_data_view-1&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;&#x9;DROP VIEW IF EXISTS anmn_mhlwave_data;&#xA;&#x9;CREATE VIEW anmn_mhlwave_data AS &#xA;&#x9;SELECT measurements.file_id, &#xA;  &#x9;w.platform_code,&#xA;&#x9;w.site_code,&#xA;&#x9;w.site_name,&#xA;&#x9;w.geom,&#xA;&#x9;measurements.&quot;TIME&quot; AT TIME ZONE 'UTC' AS &quot;TIME&quot;,&#xA;   &#x9;measurements.&quot;LATITUDE&quot;, &#xA;&#x9;measurements.&quot;LONGITUDE&quot;,&#xA;&#x9;measurements.&quot;VAVH&quot;,&#xA;&#x9;measurements.&quot;HMEAN&quot;,&#xA;&#x9;measurements.&quot;HRMS&quot;,&#xA;&#x9;measurements.&quot;H10&quot;,&#xA;&#x9;measurements.&quot;HMAX&quot;,&#xA;&#x9;measurements.&quot;TCREST&quot;,&#xA;&#x9;measurements.&quot;VAVT&quot;,&#xA;&#x9;measurements.&quot;TSIG&quot;,&#xA;&#x9;measurements.&quot;YRMS&quot;,&#xA;&#x9;measurements.&quot;TP1&quot;,&#xA;&#x9;measurements.&quot;TP2&quot;,&#xA;&#x9;measurements.&quot;M0&quot;,&#xA;&#x9;measurements.&quot;VDIR&quot;&#xA;&#x9;FROM measurements &#xA;JOIN anmn_mhlwave_wms w ON  w.file_id =measurements.file_id&#xA;ORDER BY measurements.file_id,measurements.&quot;TIME&quot;;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA; &#xA; &#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;anmn_mhlwave_map_view-1&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;     DROP VIEW IF EXISTS anmn_mhlwave_map;&#xA;     CREATE VIEW anmn_mhlwave_map AS      &#xA;&#x9; SELECT file_id,&#xA;   &#x9; replace(f.url::text, 'dodsC'::text, 'fileServer'::text) AS url,&#xA;  &#x9; f.size,&#xA;  &#x9; time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,&#xA;  &#x9; time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,&#xA;&#x9; platform_code,&#xA;         site_code,&#xA;&#x9; site_name,&#xA;         latitude,&#xA;         longitude,&#xA;         depth,&#xA;         metadata,&#xA;&#x9; abstract_ftl,&#xA;&#x9; geom&#xA;     FROM anmn_mhlwave_wms w&#xA;     JOIN indexed_file f ON w.file_id = f.id&#xA;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&#xA;&lt;/databaseChangeLog>&#xA;&#xA;"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;cr_deployments-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE deployments&#xA;(&#xA;  file_id integer NOT NULL,&#xA;  time_coverage_start timestamp with time zone,&#xA;  time_coverage_end  timestamp with time zone,&#xA;  platform_code character varying(20),&#xA;  CONSTRAINT deployments_pkey PRIMARY KEY (file_id ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;mhl_wms-1&quot;>&#xA;        &lt;sql>&#xA;&#xA;CREATE TABLE anmn_mhlwave_wms&#xA;(&#xA;file_id integer NOT NULL,&#xA;site_code character varying(20),&#xA;platform_code character varying(20),&#xA;site_name character varying(50),&#xA;time_coverage_start timestamp with time zone,&#xA;time_coverage_end  timestamp with time zone,&#xA;latitude double precision, &#xA;longitude double precision,&#xA;depth integer,&#xA;metadata character varying(650),&#xA;abstract_ftl character varying(2550),&#xA;geom geometry CHECK (ST_IsValid(geom)),&#xA;CONSTRAINT  anmn_mhlwave_wms_pkey PRIMARY KEY (file_id ),&#xA;CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;REFERENCES indexed_file (id) MATCH SIMPLE&#xA; ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;&lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr_measurements-1&quot;>&#xA;       &lt;sql>&#xA;    CREATE TABLE measurements&#xA;(&#xA;  measurement_id bigserial,&#xA;  file_id integer NOT NULL,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LATITUDE&quot; real,&#xA;  &quot;LONGITUDE&quot; real,&#xA; &quot;VAVH&quot; real,&#xA; &quot;HMEAN&quot; real,&#xA; &quot;HRMS&quot; real,&#xA; &quot;H10&quot; real,&#xA; &quot;HMAX&quot; real,&#xA; &quot;TCREST&quot; real,&#xA; &quot;VAVT&quot; real,&#xA; &quot;TSIG&quot; real,&#xA; &quot;YRMS&quot; real,&#xA; &quot;TP1&quot; real,&#xA; &quot;TP2&quot; real,&#xA; &quot;M0&quot; real,&#xA; &quot;VDIR&quot; real, &#xA;  CONSTRAINT measurements_pkey PRIMARY KEY (measurement_id),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr_indices_measurments-1&quot;>&#xA;       &lt;sql>&#xA;&#x9;CREATE INDEX measurements_file_id_idx ON measurements (file_id ASC NULLS LAST);&#xA;&#x9;CREATE INDEX measurements_T_idx ON measurements (file_id,&quot;TIME&quot;);&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;upd_measurements_new_files_processing&quot;>&#xA;       &lt;sql>&#xA;&#x9;ALTER TABLE measurements RENAME COLUMN &quot;VAVH&quot; TO &quot;WHTH&quot;;&#xA;        ALTER TABLE measurements RENAME COLUMN &quot;HMEAN&quot; TO &quot;WMSH&quot;;&#xA;        ALTER TABLE measurements RENAME COLUMN &quot;H10&quot; TO &quot;WHTE&quot;;&#xA;        ALTER TABLE measurements RENAME COLUMN &quot;HMAX&quot; TO &quot;WMXH&quot;;&#xA;        ALTER TABLE measurements RENAME COLUMN &quot;TSIG&quot; TO &quot;WPTH&quot;;&#xA;        ALTER TABLE measurements RENAME COLUMN &quot;TP1&quot; TO &quot;WPPE&quot;;&#xA;       &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;anmn_mhlwave_data_view-1&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;&#x9;DROP VIEW IF EXISTS anmn_mhlwave_data;&#xA;&#x9;CREATE VIEW anmn_mhlwave_data AS &#xA;&#x9;SELECT measurements.file_id, &#xA;  &#x9;w.platform_code,&#xA;&#x9;w.site_code,&#xA;&#x9;w.site_name,&#xA;&#x9;w.geom,&#xA;&#x9;measurements.&quot;TIME&quot; AT TIME ZONE 'UTC' AS &quot;TIME&quot;,&#xA;   &#x9;measurements.&quot;LATITUDE&quot;, &#xA;&#x9;measurements.&quot;LONGITUDE&quot;,&#xA;&#x9;measurements.&quot;WHTH&quot;,&#xA;&#x9;measurements.&quot;WMSH&quot;,&#xA;&#x9;measurements.&quot;HRMS&quot;,&#xA;&#x9;measurements.&quot;WHTE&quot;,&#xA;&#x9;measurements.&quot;WMXH&quot;,&#xA;&#x9;measurements.&quot;TCREST&quot;,&#xA;&#x9;measurements.&quot;VAVT&quot;,&#xA;&#x9;measurements.&quot;WPTH&quot;,&#xA;&#x9;measurements.&quot;YRMS&quot;,&#xA;&#x9;measurements.&quot;WPPE&quot;,&#xA;&#x9;measurements.&quot;TP2&quot;,&#xA;&#x9;measurements.&quot;M0&quot;,&#xA;&#x9;measurements.&quot;VDIR&quot;&#xA;&#x9;FROM measurements &#xA;JOIN anmn_mhlwave_wms w ON  w.file_id =measurements.file_id&#xA;ORDER BY measurements.file_id,measurements.&quot;TIME&quot;;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA; &#xA; &#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;anmn_mhlwave_map_view-1&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;     DROP VIEW IF EXISTS anmn_mhlwave_map;&#xA;     CREATE VIEW anmn_mhlwave_map AS      &#xA;&#x9; SELECT file_id,&#xA;   &#x9; f.url,&#xA;  &#x9; f.size,&#xA;  &#x9; time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,&#xA;  &#x9; time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,&#xA;&#x9; platform_code,&#xA;         site_code,&#xA;&#x9; site_name,&#xA;         latitude,&#xA;         longitude,&#xA;         depth,&#xA;         metadata,&#xA;&#x9; abstract_ftl,&#xA;&#x9; geom&#xA;     FROM anmn_mhlwave_wms w&#xA;     JOIN indexed_file f ON w.file_id = f.id&#xA;&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog>"/>
     <elementParameter field="TEXT" name="LABEL" value="liquidBase_createTables"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="iDeletedResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="192">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
+  <node componentName="iNewOrModifiedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="384">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_goeyIJNzEeOrg7p9UOD4pA"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
@@ -88,13 +88,65 @@
     <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
     <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
-    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select id, url, modified &quot; +&#xA;&quot;  from deleted_resource &quot; +&#xA;&quot; where job_name = ? &quot; +&#xA;&quot;   and harvest_type = ? &quot;&#xA;      "/>
+    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&#xA;        &quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#xA;        &quot;  from indexed_file &quot; +&#xA;        &quot;  join index_job &quot; +&#xA;        &quot;    on indexed_file.job_id = index_job.id &quot; +&#xA;        &quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#xA;        &quot;   and index_job.name = ? &quot; +&#xA;        &quot;  left join file_harvest &quot; +&#xA;        &quot;    on file_harvest.file_id = indexed_file.id &quot; +&#xA;        &quot;   and file_harvest.harvest_type = ? &quot; +&#xA;        &quot;   and file_harvest.last_change_type &lt;> 'deleted' &quot; +&#xA;        &quot; where not indexed_file.deleted &quot;&#xA;      "/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="416" posY="192">
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="480" posY="384">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_1"/>
+    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
+    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
+    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="HarvestFile"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_UV7_gI3uEeOsU-4_OrXK2Q"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
+    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
+    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
+    <elementParameter field="TABLE" name="CONTEXTPARAMS">
+      <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iNewOrModifiedFileList_1_FILE_ID&quot;)).intValue()"/>
+      <elementValue elementRef="PARAM_NAME_COLUMN" value="url"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;iNewOrModifiedFileList_1_URL&quot;))"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
+    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
+    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tRunJob_1"/>
+  </node>
+  <node componentName="iDeletedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="224">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedFileList_1"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_goeyIJNzEeOrg7p9UOD4pA"/>
+    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
+    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
+    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
+    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
+    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
+    <elementParameter field="TEXT" name="HARVEST_TYPE" value="&quot;data&quot;"/>
+    <elementParameter field="RADIO" name="USE_DEFAULT" value="true"/>
+    <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
+    <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
+    <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
+    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&#xA;          &quot; select indexed_file.id, indexed_file.url, indexed_file.modified&quot;&#xA;        + &quot;   from indexed_file &quot;&#xA;        + &quot;   join index_job &quot;&#xA;        + &quot;     on indexed_file.job_id = index_job.id &quot;&#xA;        + &quot;    and indexed_file.last_indexed_run = index_job.last_run_no &quot; &#xA;        + &quot;   join file_harvest on (file_harvest.file_id = indexed_file.id)&quot;&#xA;        + &quot; where indexed_file.deleted&quot;&#xA;        + &quot;   and file_harvest.last_change_type &lt;> 'deleted'&quot;&#xA;        + &quot;   and index_job.name = ?&quot;&#xA;        + &quot;   and file_harvest.harvest_type = ?&quot;&#xA;      "/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+  </node>
+  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="384" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_goeyIJNzEeOrg7p9UOD4pA"/>
@@ -111,7 +163,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from deployments where file_id =  &quot; + ((Long)globalMap.get(&quot;iDeletedResources_1_FILE_ID&quot;)) +  &quot;  ;  &quot; +&#xA;&quot;delete from measurements where file_id=&quot; + ((Long)globalMap.get(&quot;iDeletedResources_1_FILE_ID&quot;))  + &quot; ; &quot; &#xA;&#xA;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from deployments where file_id =  &quot; + ((Long)globalMap.get(&quot;iDeletedFileList_1_FILE_ID&quot;)) +  &quot;  ;  &quot; +&#xA;&quot;delete from measurements where file_id=&quot; + ((Long)globalMap.get(&quot;iDeletedFileList_1_FILE_ID&quot;))  + &quot; ; &quot; &#xA;&#xA;&#xA;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -130,75 +182,25 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="iHarvestResources" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="320">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_goeyIJNzEeOrg7p9UOD4pA"/>
-    <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
-    <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
-    <elementParameter field="TEXT" name="PORT" value="context.Destination_Port"/>
-    <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
-    <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
-    <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
-    <elementParameter field="TEXT" name="HARVEST_TYPE" value="&quot;data&quot;"/>
-    <elementParameter field="RADIO" name="USE_DEFAULT" value="true"/>
-    <elementParameter field="RADIO" name="USE_FILTER" value="false"/>
-    <elementParameter field="TEXT" name="FILTER" value="&quot;%&quot;"/>
-    <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
-    <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#xA;&quot;  from indexed_file &quot; +&#xA;&quot;  join index_job &quot; +&#xA;&quot;    on indexed_file.job_id = index_job.id &quot; +&#xA;&quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#xA;&quot;   and index_job.name = ? &quot; +&#xA;&quot;  left join file_harvest &quot; +&#xA;&quot;    on file_harvest.file_id = indexed_file.id &quot; +&#xA;&quot;   and file_harvest.harvest_type = ? &quot; +&#xA;&quot; where (file_harvest.last_moddate_harvested &lt;> indexed_file.modified &quot; +&#xA;&quot;    or  file_harvest.last_moddate_harvested is null) &quot;;&#xA;      "/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-  </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="480" posY="320">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_1"/>
-    <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
-    <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
-    <elementParameter field="PROCESS_TYPE" name="PROCESS" value="HarvestFile"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_UV7_gI3uEeOsU-4_OrXK2Q"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
-    <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
-    <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
-    <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
-    <elementParameter field="TABLE" name="CONTEXTPARAMS">
-      <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iHarvestResources_1_FILE_ID&quot;)).intValue()"/>
-      <elementValue elementRef="PARAM_NAME_COLUMN" value="url"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;iHarvestResources_1_URL&quot;))"/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
-    <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="__PROCESS__"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tRunJob_1"/>
-  </node>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iDeletedResources_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iDeletedFileList_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="tPostgresqlRow_1">
-    <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
-    <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate4"/>
-  </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedResources_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedResources_1" target="iHarvestResources_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
-  </connection>
-  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iHarvestResources_1" offsetLabelX="0" offsetLabelY="0" source="iHarvestResources_1" target="tRunJob_1">
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iNewOrModifiedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iNewOrModifiedFileList_1" target="tRunJob_1">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_1" target="iNewOrModifiedFileList_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
+  </connection>
+  <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_1" target="tPostgresqlRow_1">
+    <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
+    <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate4"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
@@ -206,12 +208,12 @@
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedResources_1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iHarvestResources_1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedFileList_1"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
