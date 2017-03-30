@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
+    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Integer" value="1"/>
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="harvest"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="anmn_mhlwave"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_Password" value="LKMRo+bjpcAk54iO+HMQwQ=="/>
@@ -9,10 +11,22 @@
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="localhost"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
-    <contextParameter comment="" name="include" prompt="include?" promptNeeded="false" type="id_String" value="&quot;.*FV01.*nc&quot;"/>
-    <contextParameter comment="" name="Threddscatalog" prompt="Threddscatalog?" promptNeeded="false" type="id_String" value="&quot;http://www.metoc.gov.au/thredds/catalog/MHLWAVE/catalog.xml&quot;"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value="/"/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value="/vagrant/tmp/fileList"/>
+  </context>
+  <context confirmationNeeded="false" name="Deployment">
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Integer" value="1"/>
+    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="anmn_mhlwave"/>
+    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_Password" value=""/>
+    <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="5432"/>
+    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="anmn_mhlwave"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="#{node['talend']['destination_database_server']}"/>
+    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value="null"/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value="null"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -55,7 +69,7 @@
   </parameters>
   <node componentName="iNetCDFGlobalAttributes" componentVersion="0.1" offsetLabelX="-9" offsetLabelY="0" posX="128" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttributes_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="&quot;/vagrant/tmp/MHL/output/IMOS_ANMN-NSW_W_19760526T110000Z_WAVECOH_FV01_END-19830817T230000Z.nc&quot;"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -172,7 +186,7 @@
   </node>
   <node componentName="iNetCDFInput" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="128" posY="352">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFInput_1"/>
-    <elementParameter field="FILE" name="FILENAME" value="&quot;/vagrant/tmp/MHL/output/IMOS_ANMN-NSW_W_19760526T110000Z_WAVECOH_FV01_END-19830817T230000Z.nc&quot;"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.url"/>
     <elementParameter field="TABLE" name="SCHEMAS">
       <elementValue elementRef="SCHEMA" value="variables"/>
     </elementParameter>
@@ -244,7 +258,7 @@
       <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="measurement">
-        <mapperTableEntries name="file_id" expression="context.fileId.intValue()  " type="id_Integer"/>
+        <mapperTableEntries name="file_id" expression="context.fileId" type="id_Integer"/>
         <mapperTableEntries name="TIME" expression="NetCDFUtils.addDays(&quot;1950-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,variables.TIME,true)      " type="id_Date" nullable="true"/>
         <mapperTableEntries name="LATITUDE" expression="variables.LATITUDE " type="id_Double" nullable="true"/>
         <mapperTableEntries name="LONGITUDE" expression="variables.LONGITUDE " type="id_Double" nullable="true"/>
@@ -728,16 +742,6 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="864" posY="224">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_2"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
-    <elementParameter field="CHECK" name="CLOSE" value="false"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="tPostgresqlCommit_2"/>
-  </node>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="iNetCDFGlobalAttributes_1" offsetLabelX="0" offsetLabelY="0" source="iNetCDFGlobalAttributes_1" target="tMap_1">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
@@ -917,10 +921,6 @@
     <elementParameter field="TABLE" name="THRESHLODS"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="deployment"/>
-  </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlOutput_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlOutput_1" target="tPostgresqlCommit_2">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk5"/>
   </connection>
   <connection connectorName="FLOW" label="variables" lineStyle="0" metaname="variables" offsetLabelX="0" offsetLabelY="0" source="iNetCDFInput_1" target="tMap_2">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
@@ -1478,11 +1478,6 @@
   </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_1"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
-  <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_2"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
