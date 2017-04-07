@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="default">
   <context confirmationNeeded="false" name="default">
-    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Integer" value="7"/>
+    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Integer" value="1420"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="harvest?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_zBQGAFo_EeK1xoAXx1MZbA" type="id_String" value="argo"/>
@@ -131,6 +131,8 @@
       <column comment="" key="false" name="REFERENCE_DATE_TIME" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="PROFILE_C1PHASE_DOXY_QC" nullable="true" pattern="" sourceType="" type="id_Character"/>
       <column comment="" key="false" name="PROFILE_C2PHASE_DOXY_QC" nullable="true" pattern="" sourceType="" type="id_Character"/>
+      <column comment="" key="false" name="PROFILE_NITRATE_QC" nullable="true" pattern="" sourceType="" type="id_Character"/>
+      <column comment="" key="false" name="PROFILE_PH_IN_SITU_TOTAL_QC" nullable="true" pattern="" sourceType="" type="id_Character"/>
     </metadata>
     <metadata connector="FLOW" label="profile_measurements" name="profile_measurements">
       <column comment="" key="true" name="N_PROF" nullable="true" pattern="" sourceType="" type="id_Integer"/>
@@ -164,6 +166,14 @@
       <column comment="" key="false" length="1" name="C1PHASE_DOXY_QC" nullable="true" pattern="" sourceType="" type="id_Character" originalLength="1"/>
       <column comment="" key="false" name="C2PHASE_DOXY" nullable="true" pattern="" sourceType="" type="id_Float"/>
       <column comment="" key="false" length="1" name="C2PHASE_DOXY_QC" nullable="true" pattern="" sourceType="" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="NITRATE" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" length="1" name="NITRATE_QC" nullable="true" pattern="" sourceType="" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="NITRATE_ADJUSTED" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" length="1" name="NITRATE_ADJUSTED_QC" nullable="true" pattern="" sourceType="" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="PH_IN_SITU_TOTAL" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" length="1" name="PH_IN_SITU_TOTAL_QC" nullable="true" pattern="" sourceType="" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="PH_IN_SITU_TOTAL_ADJUSTED" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" length="1" name="PH_IN_SITU_TOTAL_ADJUSTED_QC" nullable="true" pattern="" sourceType="" type="id_Character" originalLength="1"/>
     </metadata>
     <metadata connector="FLOW" label="profile_params" name="profile_params">
       <column comment="" key="true" name="N_PROF" nullable="true" pattern="" sourceType="" type="id_Integer"/>
@@ -440,9 +450,11 @@
       <column comment="" key="false" name="position" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
       <column comment="" key="false" name="PROFILE_C1PHASE_DOXY_QC" nullable="true" originalDbColumnName="profile_c1phase_doxy_qc" pattern="" sourceType="" type="id_Character"/>
       <column comment="" key="false" name="PROFILE_C2PHASE_DOXY_QC" nullable="true" originalDbColumnName="profile_c2phase_doxy_qc" pattern="" sourceType="" type="id_Character"/>
+      <column comment="" key="false" name="PROFILE_NITRATE_QC" nullable="true" originalDbColumnName="profile_nitrate_qc" pattern="" sourceType="" type="id_Character"/>
+      <column comment="" key="false" name="PROFILE_PH_IN_SITU_TOTAL_QC" nullable="true" originalDbColumnName="profile_ph_in_situ_total_qc" pattern="" sourceType="" type="id_Character"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="profile_general_table">
         <mapperTableEntries name="file_id" expression="context.fileId" type="id_Integer" nullable="true"/>
@@ -473,6 +485,8 @@
         <mapperTableEntries name="position" expression="ArgoUtils.makePoint(profile_general.LONGITUDE, profile_general.LATITUDE,&quot;EPSG:4326&quot;)  " type="id_Geometry" nullable="true"/>
         <mapperTableEntries name="PROFILE_C1PHASE_DOXY_QC" expression="profile_general.PROFILE_C1PHASE_DOXY_QC " type="id_Character" nullable="true"/>
         <mapperTableEntries name="PROFILE_C2PHASE_DOXY_QC" expression="profile_general.PROFILE_C2PHASE_DOXY_QC " type="id_Character" nullable="true"/>
+        <mapperTableEntries name="PROFILE_NITRATE_QC" expression="profile_general.PROFILE_NITRATE_QC " type="id_Character" nullable="true"/>
+        <mapperTableEntries name="PROFILE_PH_IN_SITU_TOTAL_QC" expression="profile_general.PROFILE_PH_IN_SITU_TOTAL_QC " type="id_Character" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="profile_general" matchingMode="ALL_ROWS" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="N_PROF" type="id_Integer" nullable="true"/>
@@ -502,6 +516,8 @@
         <mapperTableEntries name="REFERENCE_DATE_TIME" type="id_String" nullable="true"/>
         <mapperTableEntries name="PROFILE_C1PHASE_DOXY_QC" type="id_Character" nullable="true"/>
         <mapperTableEntries name="PROFILE_C2PHASE_DOXY_QC" type="id_Character" nullable="true"/>
+        <mapperTableEntries name="PROFILE_NITRATE_QC" type="id_Character" nullable="true"/>
+        <mapperTableEntries name="PROFILE_PH_IN_SITU_TOTAL_QC" type="id_Character" nullable="true"/>
       </inputTables>
     </nodeData>
   </node>
@@ -760,6 +776,16 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="PROFILE_NITRATE_QC"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="PROFILE_PH_IN_SITU_TOTAL_QC"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -798,6 +824,8 @@
       <column comment="" key="false" name="position" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column comment="" key="false" name="PROFILE_C1PHASE_DOXY_QC" nullable="true" originalDbColumnName="profile_c1phase_doxy_qc" pattern="" sourceType="CHAR" type="id_Character"/>
       <column comment="" key="false" name="PROFILE_C2PHASE_DOXY_QC" nullable="true" originalDbColumnName="profile_c2phase_doxy_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" name="PROFILE_NITRATE_QC" nullable="true" originalDbColumnName="profile_nitrate_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" name="PROFILE_PH_IN_SITU_TOTAL_QC" nullable="true" originalDbColumnName="profile_ph_in_situ_total_qc" pattern="" sourceType="CHAR" type="id_Character"/>
     </metadata>
     <metadata connector="REJECT" label="profile_general" name="REJECT">
       <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
@@ -828,6 +856,8 @@
       <column comment="" key="false" name="position" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column comment="" key="false" name="PROFILE_C1PHASE_DOXY_QC" nullable="true" originalDbColumnName="profile_c1phase_doxy_qc" pattern="" sourceType="CHAR" type="id_Character"/>
       <column comment="" key="false" name="PROFILE_C2PHASE_DOXY_QC" nullable="true" originalDbColumnName="profile_c2phase_doxy_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" name="PROFILE_NITRATE_QC" nullable="true" originalDbColumnName="profile_nitrate_qc" pattern="" sourceType="CHAR" type="id_Character"/>
+      <column comment="" key="false" name="PROFILE_PH_IN_SITU_TOTAL_QC" nullable="true" originalDbColumnName="profile_ph_in_situ_total_qc" pattern="" sourceType="CHAR" type="id_Character"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1197,9 +1227,17 @@
       <column comment="" key="false" length="1" name="C1PHASE_DOXY_QC" nullable="true" originalDbColumnName="c1phase_doxy_qc" pattern="" sourceType="" type="id_Character" originalLength="1"/>
       <column comment="" key="false" name="C2PHASE_DOXY" nullable="true" originalDbColumnName="c2phase_doxy" pattern="" sourceType="" type="id_Float"/>
       <column comment="" key="false" length="1" name="C2PHASE_DOXY_QC" nullable="true" originalDbColumnName="c2phase_doxy_qc" pattern="" sourceType="" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="NITRATE" nullable="true" originalDbColumnName="nitrate" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" length="1" name="NITRATE_QC" nullable="true" originalDbColumnName="nitrate_qc" pattern="" sourceType="" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="NITRATE_ADJUSTED" nullable="true" originalDbColumnName="nitrate_adjusted" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" length="1" name="NITRATE_ADJUSTED_QC" nullable="true" originalDbColumnName="nitrate_adjusted_qc" pattern="" sourceType="" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="PH_IN_SITU_TOTAL" nullable="true" originalDbColumnName="ph_in_situ_total" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" length="1" name="PH_IN_SITU_TOTAL_QC" nullable="true" originalDbColumnName="ph_in_situ_total_qc" pattern="" sourceType="" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="PH_IN_SITU_TOTAL_ADJUSTED" nullable="true" originalDbColumnName="ph_in_situ_total_adjusted" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" length="1" name="PH_IN_SITU_TOTAL_ADJUSTED_QC" nullable="true" originalDbColumnName="ph_in_situ_total_adjusted_qc" pattern="" sourceType="" type="id_Character" originalLength="1"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="profile_measurements_table">
         <mapperTableEntries name="file_id" expression="context.fileId" type="id_Integer" nullable="true"/>
@@ -1234,6 +1272,14 @@
         <mapperTableEntries name="C1PHASE_DOXY_QC" expression="profile_measurements.C1PHASE_DOXY_QC " type="id_Character" nullable="true"/>
         <mapperTableEntries name="C2PHASE_DOXY" expression="profile_measurements.C2PHASE_DOXY " type="id_Float" nullable="true"/>
         <mapperTableEntries name="C2PHASE_DOXY_QC" expression="profile_measurements.C2PHASE_DOXY_QC " type="id_Character" nullable="true"/>
+        <mapperTableEntries name="NITRATE" expression="profile_measurements.NITRATE " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="NITRATE_QC" expression="profile_measurements.NITRATE_QC " type="id_Character" nullable="true"/>
+        <mapperTableEntries name="NITRATE_ADJUSTED" expression="profile_measurements.NITRATE_ADJUSTED " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="NITRATE_ADJUSTED_QC" expression="profile_measurements.NITRATE_ADJUSTED_QC " type="id_Character" nullable="true"/>
+        <mapperTableEntries name="PH_IN_SITU_TOTAL" expression="profile_measurements.PH_IN_SITU_TOTAL " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="PH_IN_SITU_TOTAL_QC" expression="profile_measurements.PH_IN_SITU_TOTAL_QC " type="id_Character" nullable="true"/>
+        <mapperTableEntries name="PH_IN_SITU_TOTAL_ADJUSTED" expression="profile_measurements.PH_IN_SITU_TOTAL_ADJUSTED " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="PH_IN_SITU_TOTAL_ADJUSTED_QC" expression="profile_measurements.PH_IN_SITU_TOTAL_ADJUSTED_QC " type="id_Character" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="profile_measurements" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="N_PROF" type="id_Integer" nullable="true"/>
@@ -1267,6 +1313,14 @@
         <mapperTableEntries name="C1PHASE_DOXY_QC" type="id_Character" nullable="true"/>
         <mapperTableEntries name="C2PHASE_DOXY" type="id_Float" nullable="true"/>
         <mapperTableEntries name="C2PHASE_DOXY_QC" type="id_Character" nullable="true"/>
+        <mapperTableEntries name="NITRATE" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="NITRATE_QC" type="id_Character" nullable="true"/>
+        <mapperTableEntries name="NITRATE_ADJUSTED" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="NITRATE_ADJUSTED_QC" type="id_Character" nullable="true"/>
+        <mapperTableEntries name="PH_IN_SITU_TOTAL" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="PH_IN_SITU_TOTAL_QC" type="id_Character" nullable="true"/>
+        <mapperTableEntries name="PH_IN_SITU_TOTAL_ADJUSTED" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="PH_IN_SITU_TOTAL_ADJUSTED_QC" type="id_Character" nullable="true"/>
       </inputTables>
     </nodeData>
   </node>
@@ -1455,6 +1509,46 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="NITRATE"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="NITRATE_QC"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="NITRATE_ADJUSTED"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="NITRATE_ADJUSTED_QC"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="PH_IN_SITU_TOTAL"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="PH_IN_SITU_TOTAL_QC"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="PH_IN_SITU_TOTAL_ADJUSTED"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="PH_IN_SITU_TOTAL_ADJUSTED_QC"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -1497,6 +1591,14 @@
       <column comment="" key="false" length="1" name="C1PHASE_DOXY_QC" nullable="true" originalDbColumnName="c1phase_doxy_qc" pattern="" sourceType="CHAR" type="id_Character" originalLength="1"/>
       <column comment="" key="false" name="C2PHASE_DOXY" nullable="true" originalDbColumnName="c2phase_doxy" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="1" name="C2PHASE_DOXY_QC" nullable="true" originalDbColumnName="c2phase_doxy_qc" pattern="" sourceType="CHAR" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="NITRATE" nullable="true" originalDbColumnName="nitrate" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="1" name="NITRATE_QC" nullable="true" originalDbColumnName="nitrate_qc" pattern="" sourceType="CHAR" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="NITRATE_ADJUSTED" nullable="true" originalDbColumnName="nitrate_adjusted" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="1" name="NITRATE_ADJUSTED_QC" nullable="true" originalDbColumnName="nitrate_adjusted_qc" pattern="" sourceType="CHAR" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="PH_IN_SITU_TOTAL" nullable="true" originalDbColumnName="ph_in_situ_total" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="1" name="PH_IN_SITU_TOTAL_QC" nullable="true" originalDbColumnName="ph_in_situ_total_qc" pattern="" sourceType="CHAR" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="PH_IN_SITU_TOTAL_ADJUSTED" nullable="true" originalDbColumnName="ph_in_situ_total_adjusted" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="1" name="PH_IN_SITU_TOTAL_ADJUSTED_QC" nullable="true" originalDbColumnName="ph_in_situ_total_adjusted_qc" pattern="" sourceType="CHAR" type="id_Character" originalLength="1"/>
     </metadata>
     <metadata connector="REJECT" label="profile_measurements" name="REJECT">
       <column comment="" key="true" name="file_id" nullable="true" pattern="" sourceType="INT8" type="id_Integer"/>
@@ -1531,6 +1633,14 @@
       <column comment="" key="false" length="1" name="C1PHASE_DOXY_QC" nullable="true" originalDbColumnName="c1phase_doxy_qc" pattern="" sourceType="CHAR" type="id_Character" originalLength="1"/>
       <column comment="" key="false" name="C2PHASE_DOXY" nullable="true" originalDbColumnName="c2phase_doxy" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="1" name="C2PHASE_DOXY_QC" nullable="true" originalDbColumnName="c2phase_doxy_qc" pattern="" sourceType="CHAR" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="NITRATE" nullable="true" originalDbColumnName="nitrate" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="1" name="NITRATE_QC" nullable="true" originalDbColumnName="nitrate_qc" pattern="" sourceType="CHAR" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="NITRATE_ADJUSTED" nullable="true" originalDbColumnName="nitrate_adjusted" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="1" name="NITRATE_ADJUSTED_QC" nullable="true" originalDbColumnName="nitrate_adjusted_qc" pattern="" sourceType="CHAR" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="PH_IN_SITU_TOTAL" nullable="true" originalDbColumnName="ph_in_situ_total" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="1" name="PH_IN_SITU_TOTAL_QC" nullable="true" originalDbColumnName="ph_in_situ_total_qc" pattern="" sourceType="CHAR" type="id_Character" originalLength="1"/>
+      <column comment="" key="false" name="PH_IN_SITU_TOTAL_ADJUSTED" nullable="true" originalDbColumnName="ph_in_situ_total_adjusted" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" length="1" name="PH_IN_SITU_TOTAL_ADJUSTED_QC" nullable="true" originalDbColumnName="ph_in_situ_total_adjusted_qc" pattern="" sourceType="CHAR" type="id_Character" originalLength="1"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1781,6 +1891,12 @@
       <elementValue elementRef="TRACE_COLUMN" value="PROFILE_C2PHASE_DOXY_QC"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PROFILE_NITRATE_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PROFILE_PH_IN_SITU_TOTAL_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -1885,6 +2001,30 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="C1PHASE_DOXY"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PH_IN_SITU_TOTAL_ADJUSTED"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PH_IN_SITU_TOTAL_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="NITRATE_ADJUSTED"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="NITRATE_ADJUSTED_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="NITRATE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PH_IN_SITU_TOTAL"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PH_IN_SITU_TOTAL_ADJUSTED_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="NITRATE_QC"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -2262,6 +2402,12 @@
       <elementValue elementRef="TRACE_COLUMN" value="PROFILE_C2PHASE_DOXY_QC"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PROFILE_NITRATE_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PROFILE_PH_IN_SITU_TOTAL_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -2369,6 +2515,30 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="C1PHASE_DOXY"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PH_IN_SITU_TOTAL_ADJUSTED"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PH_IN_SITU_TOTAL_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="NITRATE_ADJUSTED"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="NITRATE_ADJUSTED_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="NITRATE"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PH_IN_SITU_TOTAL"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="PH_IN_SITU_TOTAL_ADJUSTED_QC"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="NITRATE_QC"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
