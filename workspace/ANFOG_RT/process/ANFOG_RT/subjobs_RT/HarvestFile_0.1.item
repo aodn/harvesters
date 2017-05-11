@@ -142,8 +142,8 @@
     <metadata connector="FLOW" name="deployment">
       <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String" originalLength="500"/>
+      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_Date" originalLength="500"/>
+      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_Date" originalLength="500"/>
       <column comment="" key="false" length="50" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="50" name="cdm_data_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="50" name="geospatial_lon_max" nullable="true" pattern="" sourceType="FLOAT4" type="id_String" originalLength="500"/>
@@ -160,8 +160,8 @@
       <outputTables sizeState="INTERMEDIATE" name="deployment">
         <mapperTableEntries name="file_id" expression="context.fileId.intValue()" type="id_Integer"/>
         <mapperTableEntries name="title" expression="row1.title " type="id_String" nullable="true"/>
-        <mapperTableEntries name="time_coverage_start" expression="row1.time_coverage_start " type="id_String" nullable="true"/>
-        <mapperTableEntries name="time_coverage_end" expression="row1.time_coverage_end " type="id_String" nullable="true"/>
+        <mapperTableEntries name="time_coverage_start" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_start,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="time_coverage_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_end,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
         <mapperTableEntries name="platform_code" expression="row1.platform_code " type="id_String" nullable="true"/>
         <mapperTableEntries name="cdm_data_type" expression="row1.cdm_data_type " type="id_String" nullable="true"/>
         <mapperTableEntries name="geospatial_lon_max" expression="row1.geospatial_lon_max " type="id_String" nullable="true"/>
@@ -290,8 +290,8 @@
     <metadata connector="FLOW" name="iPostgresqlOutput_1">
       <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String" originalLength="500"/>
+      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date" originalLength="500"/>
+      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date" originalLength="500"/>
       <column comment="" key="false" length="50" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="50" name="cdm_data_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="50" name="geospatial_lon_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
@@ -305,8 +305,8 @@
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="500" name="title" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String" originalLength="500"/>
-      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="VARCHAR" type="id_String" originalLength="500"/>
+      <column comment="" key="false" length="50" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date" originalLength="500"/>
+      <column comment="" key="false" length="50" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date" originalLength="500"/>
       <column comment="" key="false" length="50" name="platform_code" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="50" name="cdm_data_type" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
       <column comment="" key="false" length="50" name="geospatial_lon_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="500"/>
