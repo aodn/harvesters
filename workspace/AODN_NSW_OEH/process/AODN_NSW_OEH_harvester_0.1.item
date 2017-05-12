@@ -88,7 +88,7 @@
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/home/craigj/TOS_DI-r96646-V5.1.3/workspace/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;survey_metadata_table&quot;>&#xA;      &lt;sql>&#xA;        CREATE TABLE survey_metadata&#xA;        (&#xA;          id bigserial PRIMARY KEY,&#xA;          file_id bigint UNIQUE NOT NULL,&#xA;          location text NOT NULL,&#xA;          survey_date date NOT NULL,&#xA;          source text,&#xA;          name text,&#xA;          coll_Name text,&#xA;          authority text,&#xA;          habitat text,&#xA;          comments text,&#xA;          coll_date text,&#xA;          status text,&#xA;          xyz_file text,&#xA;          vessel text,&#xA;          z_datum text,&#xA;          z_app text,&#xA;          z_tech text,&#xA;          geom geometry(Geometry,4326) CHECK (st_isvalid(geom)),&#xA;&#xA;          CONSTRAINT survey_metadata_file_fk FOREIGN KEY (file_id)&#xA;              REFERENCES indexed_file (id) MATCH SIMPLE&#xA;              ON UPDATE CASCADE ON DELETE CASCADE&#xA;        );&#xA;&#xA;        CREATE INDEX survey_metadata_gist_idx ON survey_metadata USING GIST (geom); &#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;aodn_nsw_oeh_bathy_map&quot; runOnChange=&quot;true&quot;>&#xA;      &lt;sql>&#xA;        DROP VIEW IF EXISTS aodn_nsw_oeh_map ;&#xA;        DROP VIEW IF EXISTS aodn_nsw_oeh_bathy_map ;&#xA;&#xA;        CREATE VIEW aodn_nsw_oeh_bathy_map AS&#xA;          WITH files AS (&#xA;            SELECT&#xA;              *,&#xA;              substring(url, '/NSWOEH_[[:digit:]]+_([[:alnum:]]+)_[^/]+$') AS location,&#xA;              substring(url, '/NSWOEH_([[:digit:]]+)_[^/]+$')::date AS survey_date,&#xA;              substring(url, '_(MB)_') AS survey_methods,&#xA;              substring(url, '_(ScientificRigour|SHP|BTY|BKS)') AS file_type,&#xA;              substring(url, '\\.([^.]+)$') AS extension&#xA;            FROM indexed_file&#xA;            WHERE NOT deleted&#xA;          )&#xA;          SELECT&#xA;            f.url,&#xA;            f.location,&#xA;            f.survey_date,&#xA;            f.survey_methods,&#xA;            CASE f.file_type&#xA;              WHEN 'BTY' THEN 'bathymetry'&#xA;              WHEN 'BKS' THEN 'backscatter'&#xA;              WHEN 'SHP' THEN 'coverage shapefile'&#xA;              ELSE f.file_type&#xA;            END AS file_type,&#xA;            f.extension,&#xA;            m.name AS survey_name,&#xA;            m.authority,&#xA;            m.geom&#xA;          FROM files f JOIN survey_metadata m USING (location, survey_date)&#xA;          WHERE f.survey_methods LIKE '%MB%'&#xA;          ORDER BY url&#xA;        ;&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;survey_metadata_table&quot;>&#xA;      &lt;sql>&#xA;        CREATE TABLE survey_metadata&#xA;        (&#xA;          id bigserial PRIMARY KEY,&#xA;          file_id bigint UNIQUE NOT NULL,&#xA;          location text NOT NULL,&#xA;          survey_date date NOT NULL,&#xA;          source text,&#xA;          name text,&#xA;          coll_Name text,&#xA;          authority text,&#xA;          habitat text,&#xA;          comments text,&#xA;          coll_date text,&#xA;          status text,&#xA;          xyz_file text,&#xA;          vessel text,&#xA;          z_datum text,&#xA;          z_app text,&#xA;          z_tech text,&#xA;          geom geometry(Geometry,4326) CHECK (st_isvalid(geom)),&#xA;&#xA;          CONSTRAINT survey_metadata_file_fk FOREIGN KEY (file_id)&#xA;              REFERENCES indexed_file (id) MATCH SIMPLE&#xA;              ON UPDATE CASCADE ON DELETE CASCADE&#xA;        );&#xA;&#xA;        CREATE INDEX survey_metadata_gist_idx ON survey_metadata USING GIST (geom); &#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;survey_metadata_update_columns&quot;>&#xA;      &lt;sql>&#xA;        DROP VIEW IF EXISTS aodn_nsw_oeh_bathy_map ;&#xA;&#xA;        ALTER TABLE survey_metadata&#xA;          DROP COLUMN name,&#xA;          DROP COLUMN coll_Name,&#xA;          DROP COLUMN habitat,&#xA;          ADD COLUMN area text,&#xA;          ADD COLUMN areainfo text,&#xA;          ADD COLUMN area_ha double precision,&#xA;          ADD COLUMN xya_file text,&#xA;          ADD COLUMN survey text,&#xA;          ADD COLUMN max_res text,&#xA;          ADD COLUMN process text;&#xA;&#xA;        ALTER TABLE survey_metadata RENAME COLUMN comments TO comment;&#xA;&#xA;        ALTER TABLE survey_metadata RENAME COLUMN z_app TO z_acc;&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;survey_metadata_add_constraints&quot;>&#xA;      &lt;sql>&#xA;        ALTER TABLE survey_metadata&#xA;          ADD CONSTRAINT survey_metadata_location_date_key UNIQUE (location, survey_date),&#xA;          ALTER COLUMN geom SET NOT NULL;&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;    &lt;changeSet author=&quot;talend&quot; id=&quot;aodn_nsw_oeh_bathy_map&quot; runOnChange=&quot;true&quot;>&#xA;      &lt;sql>&#xA;        DROP VIEW IF EXISTS aodn_nsw_oeh_bathy_map ;&#xA;&#xA;        CREATE VIEW aodn_nsw_oeh_bathy_map AS&#xA;          WITH files AS (&#xA;            SELECT&#xA;              *,&#xA;              substring(url, '/NSWOEH_[[:digit:]]+_([[:alnum:]]+)_[^/]+$') AS location,&#xA;              substring(url, '/NSWOEH_([[:digit:]]+)_[^/]+$')::date AS survey_date,&#xA;              substring(url, '_(MB)_') AS survey_methods,&#xA;              substring(url, '_(ScientificRigour|SHP|BTY|BKS)') AS file_type&#xA;            FROM indexed_file&#xA;            WHERE NOT deleted&#xA;          )&#xA;          SELECT&#xA;            f.url,&#xA;            f.location,&#xA;            f.survey_date,&#xA;            f.survey_methods,&#xA;            CASE f.file_type&#xA;              WHEN 'BTY' THEN 'bathymetry'&#xA;              WHEN 'BKS' THEN 'backscatter'&#xA;              WHEN 'SHP' THEN 'coverage shapefile'&#xA;              ELSE f.file_type&#xA;            END AS file_type,&#xA;            m.area,&#xA;            m.areainfo,&#xA;            m.max_res,&#xA;            m.process,&#xA;            to_char(f.survey_date, 'YYYY') as year,&#xA;            to_char(f.survey_date, 'Month') as month,&#xA;            m.comment,&#xA;            m.authority,&#xA;            m.geom&#xA;          FROM files f JOIN survey_metadata m USING (location, survey_date)&#xA;          WHERE f.survey_methods LIKE '%MB%'&#xA;          ORDER BY url&#xA;        ;&#xA;      &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog>&#xA;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -106,10 +106,10 @@
     <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
-    <elementParameter field="TEXT" name="HARVEST_TYPE" value="&quot;harvest&quot;"/>
+    <elementParameter field="TEXT" name="HARVEST_TYPE" value="&quot;MB&quot;"/>
     <elementParameter field="RADIO" name="USE_DEFAULT" value="false"/>
     <elementParameter field="RADIO" name="USE_FILTER" value="true"/>
-    <elementParameter field="TEXT" name="FILTER" value="&quot;%.shp&quot;"/>
+    <elementParameter field="TEXT" name="FILTER" value="&quot;%_MB_SHP.shp&quot;"/>
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
     <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#xA;&quot;  from indexed_file &quot; +&#xA;&quot;  join index_job &quot; +&#xA;&quot;    on indexed_file.job_id = index_job.id &quot; +&#xA;&quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#xA;&quot;   and index_job.name = ? &quot; +&#xA;&quot;  left join file_harvest &quot; +&#xA;&quot;    on file_harvest.file_id = indexed_file.id &quot; +&#xA;&quot;   and file_harvest.harvest_type = ? &quot; +&#xA;&quot; where (file_harvest.last_moddate_harvested &lt;> indexed_file.modified &quot; +&#xA;&quot;    or  file_harvest.last_moddate_harvested is null) &quot;;&#xA;      "/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
@@ -193,7 +193,7 @@
     <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from survey_metadata where file_id = &quot; + ((Long)globalMap.get(&quot;iDeletedFileList_1_FILE_ID&quot;)) + &quot;;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
-    <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value="id"/>
+    <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value="file_id"/>
     <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
     <elementParameter field="TABLE" name="SET_PREPAREDSTATEMENT_PARAMETERS"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
@@ -204,116 +204,50 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="survey_metadata" name="tPostgresqlRow_1">
-      <column comment="" defaultValue="nextval('survey_metadata_id_seq'::regclass)" key="true" length="19" name="id" nullable="false" pattern="" precision="0" sourceType="BIGSERIAL" type="id_Long">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="location" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="13" name="survey_date" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="DATE" type="id_Date">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="source" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="name" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="coll_name" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="authority" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="habitat" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="comments" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="coll_date" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="status" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="xyz_file" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="vessel" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="z_datum" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="z_app" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="z_tech" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="geom" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
+      <column comment="" key="true" length="19" name="file_id" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" length="0" name="location" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="13" name="survey_date" nullable="false" pattern="&quot;yyyy-MM-dd&quot;" precision="0" sourceType="DATE" type="id_Date"/>
+      <column comment="" key="false" length="0" name="source" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="authority" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="comment" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="coll_date" nullable="true" pattern="&quot;yyyy-MM-dd&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="status" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="xyz_file" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="vessel" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="z_datum" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="z_acc" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="z_tech" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="GEOMETRY" type="id_Geometry"/>
+      <column comment="" key="false" length="0" name="area" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="areainfo" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="8" name="area_ha" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="8" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="0" name="xya_file" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="survey" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="max_res" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="process" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" label="survey_metadata" name="REJECT">
-      <column comment="" defaultValue="nextval('survey_metadata_id_seq'::regclass)" key="true" length="19" name="id" nullable="false" pattern="" precision="0" sourceType="BIGSERIAL" type="id_Long">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="location" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="13" name="survey_date" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="DATE" type="id_Date">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="source" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="name" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="coll_name" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="authority" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="habitat" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="comments" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="coll_date" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="status" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="xyz_file" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="vessel" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="z_datum" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="z_app" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="z_tech" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
-      <column comment="" key="false" length="2147483647" name="geom" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String">
-        <additionalField key="Comment" value=""/>
-      </column>
+      <column comment="" key="true" length="19" name="file_id" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="false" length="0" name="location" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="13" name="survey_date" nullable="false" pattern="&quot;yyyy-MM-dd&quot;" precision="0" sourceType="DATE" type="id_Date"/>
+      <column comment="" key="false" length="0" name="source" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="authority" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="comment" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="coll_date" nullable="true" pattern="&quot;yyyy-MM-dd&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="status" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="xyz_file" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="vessel" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="z_datum" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="z_acc" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="z_tech" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="geom" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="GEOMETRY" type="id_Geometry"/>
+      <column comment="" key="false" length="0" name="area" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="areainfo" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="8" name="area_ha" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="8" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="0" name="xya_file" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="survey" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="max_res" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="0" name="process" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>

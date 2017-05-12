@@ -34,9 +34,40 @@
     </changeSet>
 
 
+    <changeSet author="talend" id="survey_metadata_update_columns">
+      <sql>
+        DROP VIEW IF EXISTS aodn_nsw_oeh_bathy_map ;
+
+        ALTER TABLE survey_metadata
+          DROP COLUMN name,
+          DROP COLUMN coll_Name,
+          DROP COLUMN habitat,
+          ADD COLUMN area text,
+          ADD COLUMN areainfo text,
+          ADD COLUMN area_ha double precision,
+          ADD COLUMN xya_file text,
+          ADD COLUMN survey text,
+          ADD COLUMN max_res text,
+          ADD COLUMN process text;
+
+        ALTER TABLE survey_metadata RENAME COLUMN comments TO comment;
+
+        ALTER TABLE survey_metadata RENAME COLUMN z_app TO z_acc;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="survey_metadata_add_constraints">
+      <sql>
+        ALTER TABLE survey_metadata
+          ADD CONSTRAINT survey_metadata_location_date_key UNIQUE (location, survey_date),
+          ALTER COLUMN geom SET NOT NULL;
+      </sql>
+    </changeSet>
+
+
     <changeSet author="talend" id="aodn_nsw_oeh_bathy_map" runOnChange="true">
       <sql>
-        DROP VIEW IF EXISTS aodn_nsw_oeh_map ;
         DROP VIEW IF EXISTS aodn_nsw_oeh_bathy_map ;
 
         CREATE VIEW aodn_nsw_oeh_bathy_map AS
@@ -46,8 +77,7 @@
               substring(url, '/NSWOEH_[[:digit:]]+_([[:alnum:]]+)_[^/]+$') AS location,
               substring(url, '/NSWOEH_([[:digit:]]+)_[^/]+$')::date AS survey_date,
               substring(url, '_(MB)_') AS survey_methods,
-              substring(url, '_(ScientificRigour|SHP|BTY|BKS)') AS file_type,
-              substring(url, '\\.([^.]+)$') AS extension
+              substring(url, '_(ScientificRigour|SHP|BTY|BKS)') AS file_type
             FROM indexed_file
             WHERE NOT deleted
           )
@@ -62,8 +92,13 @@
               WHEN 'SHP' THEN 'coverage shapefile'
               ELSE f.file_type
             END AS file_type,
-            f.extension,
-            m.name AS survey_name,
+            m.area,
+            m.areainfo,
+            m.max_res,
+            m.process,
+            to_char(f.survey_date, 'YYYY') as year,
+            to_char(f.survey_date, 'Month') as month,
+            m.comment,
             m.authority,
             m.geom
           FROM files f JOIN survey_metadata m USING (location, survey_date)
