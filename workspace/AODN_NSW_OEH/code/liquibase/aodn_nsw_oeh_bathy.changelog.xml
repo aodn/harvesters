@@ -34,11 +34,30 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="survey_metadata_update_columns">
+    <changeSet author="talend" id="survey_metadata_rename">
+      <sql>
+        ALTER TABLE survey_metadata RENAME TO multibeam_survey ;
+
+        ALTER TABLE multibeam_survey
+          RENAME CONSTRAINT survey_metadata_pkey TO multibeam_survey_pkey ;
+        ALTER TABLE multibeam_survey
+          RENAME CONSTRAINT survey_metadata_file_id_key TO multibeam_survey_file_id_key ;
+        ALTER TABLE multibeam_survey
+          RENAME CONSTRAINT survey_metadata_file_fk TO multibeam_survey_file_fk ;
+        ALTER TABLE multibeam_survey
+          RENAME CONSTRAINT survey_metadata_geom_check TO multibeam_survey_goem_check ;
+
+        ALTER INDEX survey_metadata_gist_idx RENAME TO multibeam_survey_gist_idx ;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="multibeam_survey_update_columns">
       <sql>
         DROP VIEW IF EXISTS aodn_nsw_oeh_bathy_map ;
+        DROP VIEW IF EXISTS aodn_nsw_oeh_multibeam_map ;
 
-        ALTER TABLE survey_metadata
+        ALTER TABLE multibeam_survey
           DROP COLUMN name,
           DROP COLUMN coll_Name,
           DROP COLUMN habitat,
@@ -50,42 +69,40 @@
           ADD COLUMN max_res text,
           ADD COLUMN process text;
 
-        ALTER TABLE survey_metadata RENAME COLUMN comments TO comment;
+        ALTER TABLE multibeam_survey RENAME COLUMN comments TO comment;
 
-        ALTER TABLE survey_metadata RENAME COLUMN z_app TO z_acc;
+        ALTER TABLE multibeam_survey RENAME COLUMN z_app TO z_acc;
       </sql>
     </changeSet>
 
 
-    <changeSet author="talend" id="survey_metadata_add_constraints">
+    <changeSet author="talend" id="multibeam_survey_add_constraints">
       <sql>
-        ALTER TABLE survey_metadata
-          ADD CONSTRAINT survey_metadata_location_date_key UNIQUE (location, survey_date),
+        ALTER TABLE multibeam_survey
+          ADD CONSTRAINT multibeam_survey_location_date_key UNIQUE (location, survey_date),
           ALTER COLUMN geom SET NOT NULL;
       </sql>
     </changeSet>
 
 
-    <changeSet author="talend" id="aodn_nsw_oeh_bathy_map" runOnChange="true">
+    <changeSet author="talend" id="aodn_nsw_oeh_multibeam_map" runOnChange="true">
       <sql>
-        DROP VIEW IF EXISTS aodn_nsw_oeh_bathy_map ;
+        DROP VIEW IF EXISTS aodn_nsw_oeh_multibeam_map CASCADE ;
 
-        CREATE VIEW aodn_nsw_oeh_bathy_map AS
+        CREATE VIEW aodn_nsw_oeh_multibeam_map AS
           WITH files AS (
             SELECT
               *,
               substring(url, '/NSWOEH_[[:digit:]]+_([[:alnum:]]+)_[^/]+$') AS location,
               substring(url, '/NSWOEH_([[:digit:]]+)_[^/]+$')::date AS survey_date,
-              substring(url, '_(MB)_') AS survey_methods,
               substring(url, '_(ScientificRigour|SHP|BTY|BKS)') AS file_type
             FROM indexed_file
-            WHERE NOT deleted
+            WHERE NOT deleted AND url LIKE '%_MB_%'
           )
           SELECT
             f.url,
             f.location,
             f.survey_date,
-            f.survey_methods,
             CASE f.file_type
               WHEN 'BTY' THEN 'bathymetry'
               WHEN 'BKS' THEN 'backscatter'
@@ -97,13 +114,29 @@
             m.max_res,
             m.process,
             to_char(f.survey_date, 'YYYY') as year,
-            to_char(f.survey_date, 'Month') as month,
+            to_char(f.survey_date, 'MM') as month,
             m.comment,
             m.authority,
             m.geom
-          FROM files f JOIN survey_metadata m USING (location, survey_date)
-          WHERE f.survey_methods LIKE '%MB%'
+          FROM files f JOIN multibeam_survey m USING (location, survey_date)
           ORDER BY url
+        ;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="aodn_nsw_oeh_bathy_map" runOnChange="true">
+      <comment>
+        Keep a copy of this view under the old name for now, so we
+        don't break the layer.  This view and changeset can be removed
+        once the Geoserver config and metadata record have been
+        updated to point to aodn_nsw_oeh_multibeam_map.
+      </comment>
+      <sql>
+        DROP VIEW IF EXISTS aodn_nsw_oeh_bathy_map ;
+
+        CREATE VIEW aodn_nsw_oeh_bathy_map AS
+          SELECT * FROM aodn_nsw_oeh_multibeam_map ;
         ;
       </sql>
     </changeSet>
