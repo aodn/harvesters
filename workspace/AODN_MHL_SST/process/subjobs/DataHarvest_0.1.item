@@ -79,14 +79,14 @@
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/media/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;cr_deployments-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE deployments&#xA;(&#xA;  file_id integer NOT NULL,&#xA;  time_coverage_start timestamp with time zone,&#xA;  time_coverage_end  timestamp with time zone,&#xA;  title character varying(500),&#xA;  platform_code character varying(20),&#xA;  institution character varying(20),&#xA;  latitude character varying(20),&#xA;  longitude character varying(20),&#xA;  CONSTRAINT deployments_pkey PRIMARY KEY (file_id ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;);&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;measurements-1&quot;>&#xA;       &lt;sql>&#xA;    CREATE TABLE measurements&#xA;(&#xA;  measurement_id bigserial,&#xA;  file_id integer NOT NULL,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision, &#xA;  &quot;SST&quot; real,&#xA; geom geometry(GEOMETRY,4326) CHECK (ST_IsValid(geom)),&#xA;  CONSTRAINT measurements_pkey PRIMARY KEY (measurement_id),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr-idx_measurements-1&quot;>&#xA;       &lt;sql>&#xA;&#x9;CREATE INDEX measurements_file_id_idx ON measurements (file_id ASC NULLS LAST);&#xA;&#x9;CREATE INDEX measurements_t_idx ON measurements USING btree (file_id,timezone('UTC'::text, &quot;TIME&quot;));&#xA;        CREATE INDEX measurements_gist_idx ON measurements USING gist(geom);&#xA;        CREATE INDEX deployments_idx ON deployments USING btree(platform_code,timezone('UTC'::text, time_coverage_start));&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;mhl_sst_data_view-1&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;&#x9;DROP VIEW IF EXISTS aodn_mhl_sst_data;&#xA;&#x9;CREATE VIEW aodn_mhl_sst_data AS &#xA;&#x9;SELECT measurements.file_id, &#xA;  &#x9;d.platform_code,&#xA;&#x9;measurements.geom,&#xA;&#x9;measurements.&quot;TIME&quot; AT TIME ZONE 'UTC' AS &quot;TIME&quot;,&#xA;   &#x9;measurements.&quot;LATITUDE&quot;, &#xA;&#x9;measurements.&quot;LONGITUDE&quot;,&#xA;&#x9;measurements.&quot;SST&quot;&#x9;&#xA;&#x9;FROM measurements &#xA;JOIN deployments d ON  d.file_id =measurements.file_id&#xA;ORDER BY measurements.file_id,timezone('UTC'::text, measurements.&quot;TIME&quot;);&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;mhl_sst_map_view-1&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;     DROP VIEW IF EXISTS aodn_mhl_sst_map;&#xA;     CREATE VIEW aodn_mhl_sst_map AS  &#xA;     WITH a AS (&#xA;        SELECT DISTINCT m.file_id,&#xA;             m.&quot;LATITUDE&quot;,&#xA;             m.&quot;LONGITUDE&quot;,&#xA;             m.geom&#xA;          FROM aodn_mhl_sst.measurements m&#xA;         ), &#xA;      b AS (    &#xA;      SELECT d.file_id,&#xA;   &#x9; f.url,&#xA;  &#x9; f.size,&#xA;  &#x9; d.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,&#xA;  &#x9; d.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,&#xA;&#x9; d.platform_code,&#xA;         d.latitude,&#xA;         d.longitude&#xA;      FROM aodn_mhl_sst.deployments d&#xA;      JOIN aodn_mhl_sst.indexed_file f ON d.file_id = f.id)&#xA;&#xA;      SELECT b.file_id,&#xA;         b.url,&#xA;         b.size,&#xA;         b.time_coverage_start,&#xA;         b.time_coverage_end,&#xA;         b.platform_code,&#xA;         a.&quot;LATITUDE&quot;,&#xA;         a.&quot;LONGITUDE&quot;,&#xA;         a.geom&#xA;     FROM b&#xA;     JOIN a ON a.file_id = b.file_id&#xA;    ORDER BY b.platform_code,timezone('UTC'::text, b.time_coverage_start);&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;update_url-1&quot;>&#xA;&lt;sql>&#xA;    UPDATE indexed_file SET url = replace(url,'http://www.metoc.gov.au/thredds/dodsC/MHLSST/','NSW-OEH/Manly_Hydraulics_Laboratory/SST/')&#xA;&lt;/sql>&#xA;&lt;/changeset>&#xA;&#xA;&lt;/databaseChangeLog>&#xA;&#xA;"/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;&#xA; &lt;changeSet author=&quot;talend&quot; id=&quot;cr_deployments-1&quot;>&#xA;       &lt;sql>&#xA;       CREATE TABLE deployments&#xA;(&#xA;  file_id integer NOT NULL,&#xA;  time_coverage_start timestamp with time zone,&#xA;  time_coverage_end  timestamp with time zone,&#xA;  title character varying(500),&#xA;  platform_code character varying(20),&#xA;  institution character varying(20),&#xA;  latitude character varying(20),&#xA;  longitude character varying(20),&#xA;  CONSTRAINT deployments_pkey PRIMARY KEY (file_id ),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;);&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;measurements-1&quot;>&#xA;       &lt;sql>&#xA;    CREATE TABLE measurements&#xA;(&#xA;  measurement_id bigserial,&#xA;  file_id integer NOT NULL,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision, &#xA;  &quot;SST&quot; real,&#xA; geom geometry(GEOMETRY,4326) CHECK (ST_IsValid(geom)),&#xA;  CONSTRAINT measurements_pkey PRIMARY KEY (measurement_id),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr-idx_measurements-1&quot;>&#xA;       &lt;sql>&#xA;&#x9;CREATE INDEX measurements_file_id_idx ON measurements (file_id ASC NULLS LAST);&#xA;&#x9;CREATE INDEX measurements_t_idx ON measurements USING btree (file_id,timezone('UTC'::text, &quot;TIME&quot;));&#xA;        CREATE INDEX measurements_gist_idx ON measurements USING gist(geom);&#xA;        CREATE INDEX deployments_idx ON deployments USING btree(platform_code,timezone('UTC'::text, time_coverage_start));&#xA;       &lt;/sql>&#xA;    &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;mhl_sst_data_view-1&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;&#x9;DROP VIEW IF EXISTS aodn_mhl_sst_data;&#xA;&#x9;CREATE VIEW aodn_mhl_sst_data AS &#xA;&#x9;SELECT measurements.file_id, &#xA;  &#x9;d.platform_code,&#xA;&#x9;measurements.geom,&#xA;&#x9;measurements.&quot;TIME&quot; AT TIME ZONE 'UTC' AS &quot;TIME&quot;,&#xA;   &#x9;measurements.&quot;LATITUDE&quot;, &#xA;&#x9;measurements.&quot;LONGITUDE&quot;,&#xA;&#x9;measurements.&quot;SST&quot;&#x9;&#xA;&#x9;FROM measurements &#xA;JOIN deployments d ON  d.file_id =measurements.file_id&#xA;ORDER BY measurements.file_id,timezone('UTC'::text, measurements.&quot;TIME&quot;);&#xA;&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;mhl_sst_map_view-1&quot; runOnChange=&quot;true&quot;>&#xA;        &lt;sql>&#xA;     DROP VIEW IF EXISTS aodn_mhl_sst_map;&#xA;     CREATE VIEW aodn_mhl_sst_map AS  &#xA;     WITH a AS (&#xA;        SELECT DISTINCT m.file_id,&#xA;             m.&quot;LATITUDE&quot;,&#xA;             m.&quot;LONGITUDE&quot;,&#xA;             m.geom&#xA;          FROM aodn_mhl_sst.measurements m&#xA;         ), &#xA;      b AS (    &#xA;      SELECT d.file_id,&#xA;   &#x9; f.url,&#xA;  &#x9; f.size,&#xA;  &#x9; d.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,&#xA;  &#x9; d.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,&#xA;&#x9; d.platform_code,&#xA;         d.latitude,&#xA;         d.longitude&#xA;      FROM aodn_mhl_sst.deployments d&#xA;      JOIN aodn_mhl_sst.indexed_file f ON d.file_id = f.id)&#xA;&#xA;      SELECT b.file_id,&#xA;         b.url,&#xA;         b.size,&#xA;         b.time_coverage_start,&#xA;         b.time_coverage_end,&#xA;         b.platform_code,&#xA;         a.&quot;LATITUDE&quot;,&#xA;         a.&quot;LONGITUDE&quot;,&#xA;         a.geom&#xA;     FROM b&#xA;     JOIN a ON a.file_id = b.file_id&#xA;    ORDER BY b.platform_code,timezone('UTC'::text, b.time_coverage_start);&#x9;&lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;update_url-1&quot;>&#xA;&lt;sql>&#xA;    UPDATE indexed_file SET url = replace(url,'http://www.metoc.gov.au/thredds/dodsC/MHLSST/','NSW-OEH/Manly_Hydraulics_Laboratory/SST/')&#xA;&lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;alter-deployments-1&quot;>&#xA;&lt;sql>&#xA;ALTER TABLE deployments&#xA;ALTER COLUMN institution TYPE character varying(50); &#xA;&lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog>&#xA;&#xA;"/>
     <elementParameter field="TEXT" name="LABEL" value="liquidBase_createTables"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="iDeletedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="192">
+  <node componentName="iDeletedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="416">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iDeletedFileList_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_pyKBUEQjEeeym69IctINWg"/>
@@ -110,7 +110,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="416" posY="192">
+  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="419">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_pyKBUEQjEeeym69IctINWg"/>
@@ -146,7 +146,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="iNewOrModifiedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="320">
+  <node componentName="iNewOrModifiedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="160" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNewOrModifiedFileList_1"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
     <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_pyKBUEQjEeeym69IctINWg"/>
@@ -170,7 +170,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="480" posY="320">
+  <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="480" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_1"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
@@ -184,7 +184,7 @@
     <elementParameter field="CHECK" name="TRANSMIT_WHOLE_CONTEXT" value="true"/>
     <elementParameter field="TABLE" name="CONTEXTPARAMS">
       <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iNewOrModifiedFileList_1_FILE_ID&quot;))"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iNewOrModifiedFileList_1_FILE_ID&quot;)).intValue()"/>
       <elementValue elementRef="PARAM_NAME_COLUMN" value="url"/>
       <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;iNewOrModifiedFileList_1_URL&quot;))"/>
     </elementParameter>
@@ -197,7 +197,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_1"/>
   </node>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iDeletedFileList_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iPostgresqlDbUpdate_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlDbUpdate_1" target="iNewOrModifiedFileList_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
@@ -207,15 +207,15 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate3"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iDeletedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iDeletedFileList_1" target="iNewOrModifiedFileList_1">
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
-  </connection>
   <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="iNewOrModifiedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iNewOrModifiedFileList_1" target="tRunJob_1">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
     <elementParameter field="TEXT" name="NUMBER_PARALLEL" value="2"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iterate2"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iNewOrModifiedFileList_1" offsetLabelX="0" offsetLabelY="0" source="iNewOrModifiedFileList_1" target="iDeletedFileList_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlDbUpdate_1"/>
