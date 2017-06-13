@@ -587,7 +587,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;with &#xA;table_a AS (SELECT  min(time_coverage_start)as time_coverage_start,&#xA;max(time_coverage_end) as time_coverage_end,&#xA;min(latitude) as latitude_min,&#xA;max(latitude)as latitude_max,&#xA;min(longitude) as longitude_min,&#xA;max(longitude) as longitude_max&#xA;FROM anmn_mhlwave.deployments WHERE ( SELECT platform_code FROM deployments WHERE file_id = &quot;+ context.fileId + &quot; ) = platform_code ),&#xA;table_b AS (SELECT site_code,site_name,platform_code,depth,metadata,abstract_ftl,geom FROM harvest_mhlwave where ( select platform_code from deployments WHERE file_id = &quot;+ context.fileId + &quot; ) = platform_code )&#xA;&#xA;SELECT &quot;+ context.fileId + &quot;  as file_id,&#xA;time_coverage_start,&#xA;time_coverage_end,&#xA;platform_code,&#xA;site_code,&#xA;site_name,&#xA;latitude_min,&#xA;latitude_max,&#xA;longitude_min,&#xA;longitude_max,&#xA;depth,&#xA;metadata,&#xA;abstract_ftl,&#xA;geom&#xA;FROM table_a,table_b&#xA;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;with &#xA;table_a AS (SELECT  min(time_coverage_start)as deployment_start,&#xA;max(time_coverage_end) as deployment_end,&#xA;min(latitude) as latitude_min,&#xA;max(latitude)as latitude_max,&#xA;min(longitude) as longitude_min,&#xA;max(longitude) as longitude_max&#xA;FROM anmn_mhlwave.deployments WHERE ( SELECT platform_code FROM deployments WHERE file_id = &quot;+ context.fileId + &quot; ) = platform_code ),&#xA;table_b AS (SELECT site_code,site_name,platform_code,depth,metadata,abstract_ftl,geom FROM harvest_mhlwave where ( select platform_code from deployments WHERE file_id = &quot;+ context.fileId + &quot; ) = platform_code ),&#xA;table_c AS (SELECT time_coverage_start,time_coverage_end FROM anmn_mhlwave.deployments WHERE file_id = &quot;+ context.fileId + &quot; )&#xA;&#xA;SELECT &quot;+ context.fileId + &quot;  as file_id,&#xA;time_coverage_start,&#xA;time_coverage_end,&#xA;deployment_start,&#xA;deployment_end,&#xA;platform_code,&#xA;site_code,&#xA;site_name,&#xA;latitude_min,&#xA;latitude_max,&#xA;longitude_min,&#xA;longitude_max,&#xA;depth,&#xA;metadata,&#xA;abstract_ftl,&#xA;geom&#xA;FROM table_a,table_b,table_c&#xA;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -623,6 +623,10 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="geom"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="deployment_start"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="deployment_end"/>
+      <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
@@ -632,6 +636,8 @@
       <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="deployment_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="deployment_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="20" name="platform_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="20" name="site_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="site_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -681,6 +687,16 @@
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="time_coverage_end"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="deployment_start"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="deployment_end"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -753,6 +769,8 @@
       <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="deployment_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="deployment_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="20" name="platform_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="20" name="site_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="site_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -769,6 +787,8 @@
       <column comment="" defaultValue="" key="false" length="10" name="file_id" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="deployment_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="deployment_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="20" name="platform_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="20" name="site_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="site_name" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -1473,6 +1493,12 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="latitude_min"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="deployment_end"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="deployment_start"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
