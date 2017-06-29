@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+<?xml version="1.0"?>
+<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="harvest"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="dw_aatams_acoustic"/>
@@ -164,7 +164,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT id, &#xA;animal_id, &#xA;capturedatetime_timestamp, &#xA;capture_locality,&#xA;embargo_date, &#xA;project_id, &#xA;releasedatetime_timestamp,&#xA;release_locality,&#xA; ST_SetSRID(capture_location,4326),&#xA; ST_SetSRID(release_location,4326)&#xA;FROM aatams.animal_release;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT id, &#10;animal_id, &#10;capturedatetime_timestamp, &#10;capture_locality,&#10;embargo_date, &#10;project_id, &#10;releasedatetime_timestamp,&#10;release_locality,&#10; ST_SetSRID(capture_location,4326),&#10; ST_SetSRID(release_location,4326)&#10;FROM aatams.animal_release;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -1001,7 +1001,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT id, &#xA;  installation_id, &#xA;  name, &#xA;  ST_SetSRID(ST_POINT(trunc(ST_X(location)::numeric,2),trunc(ST_Y(location)::numeric,2)), 4326) AS location &#xA;  FROM aatams.installation_station&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT id, &#10;  installation_id, &#10;  name, &#10;  ST_SetSRID(ST_POINT(trunc(ST_X(location)::numeric,2),trunc(ST_Y(location)::numeric,2)), 4326) AS location &#10;  FROM aatams.installation_station&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -1332,7 +1332,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT detection.id, receiver_deployment_id, timestamp, transmitter_id, detection.receiver_name &#xA;FROM aatams.detection&#xA;LEFT JOIN aatams.receiver ON detection.receiver_name::text = receiver.receiver_name&#xA;LEFT JOIN aatams.deployment_and_recovery deployment_and_recovery ON receiver.id = deployment_and_recovery.receiver_id AND detection.timestamp >= deployment_and_recovery.deploymentdatetime_timestamp AND detection.timestamp &lt;= deployment_and_recovery.recoverydatetime_timestamp&#xA;WHERE aatams.invalid_reason(detection.*, receiver.*, deployment_and_recovery.*) IS NULL;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT detection.id, receiver_deployment_id, timestamp, transmitter_id, detection.receiver_name &#10;FROM aatams.detection&#10;LEFT JOIN aatams.receiver ON detection.receiver_name::text = receiver.receiver_name&#10;LEFT JOIN aatams.deployment_and_recovery deployment_and_recovery ON receiver.id = deployment_and_recovery.receiver_id AND detection.timestamp &gt;= deployment_and_recovery.deploymentdatetime_timestamp AND detection.timestamp &lt;= deployment_and_recovery.recoverydatetime_timestamp&#10;WHERE aatams.invalid_reason(detection.*, receiver.*, deployment_and_recovery.*) IS NULL;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
