@@ -85,6 +85,38 @@
     </changeSet>
 
 
+    <changeSet author="talend" id="singlebeam_survey_table">
+      <sql>
+        CREATE TABLE singlebeam_survey
+        (
+          id bigserial PRIMARY KEY,
+          file_id bigint UNIQUE NOT NULL,
+          location text NOT NULL,
+          survey_date date NOT NULL,
+          source text,
+          source_xyz text,
+          area double precision,
+          category text,
+          est_no text,
+          point_num bigint,
+          point_dens double precision,
+          comments text,
+          location_name text,
+          sdate text,
+          geom geometry(Geometry,4326) CHECK (st_isvalid(geom)) NOT NULL,
+
+          CONSTRAINT singlebeam_survey_file_fk FOREIGN KEY (file_id)
+              REFERENCES indexed_file (id) MATCH SIMPLE
+              ON UPDATE CASCADE ON DELETE CASCADE,
+
+          CONSTRAINT singlebeam_survey_location_date_key UNIQUE (location, survey_date)
+        );
+
+        CREATE INDEX singlebeam_survey_gist_idx ON singlebeam_survey USING GIST (geom);
+      </sql>
+    </changeSet>
+
+
     <changeSet author="talend" id="aodn_nsw_oeh_multibeam_map" runOnChange="true">
       <sql>
         DROP VIEW IF EXISTS aodn_nsw_oeh_multibeam_map CASCADE ;
@@ -137,6 +169,48 @@
 
         CREATE VIEW aodn_nsw_oeh_bathy_map AS
           SELECT * FROM aodn_nsw_oeh_multibeam_map ;
+        ;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="aodn_nsw_oeh_singlebeam_map" runOnChange="true">
+      <sql>
+        DROP VIEW IF EXISTS aodn_nsw_oeh_singlebeam_map CASCADE ;
+
+        CREATE VIEW aodn_nsw_oeh_singlebeam_map AS
+          WITH files AS (
+            SELECT
+              *,
+              substring(url, '/NSWOEH_[[:digit:]]+_([[:alnum:]]+)_[^/]+$') AS location,
+              substring(url, '/NSWOEH_([[:digit:]]+)_[^/]+$')::date AS survey_date
+            FROM indexed_file
+            WHERE NOT deleted AND url LIKE '%_STAX_%'
+          )
+          SELECT
+            f.url,
+            f.location,
+            f.survey_date,
+            CASE
+              WHEN f.url like '%_SHP.%' THEN 'coverage shapefile'
+              WHEN f.url like '%.zip'   THEN 'complete dataset'
+              ELSE ''
+            END AS file_type,
+            m.location_name,
+            m.sdate,
+            m.area,
+            m.source,
+            m.source_xyz,
+            m.est_no,
+            m.category,
+            m.point_num,
+            m.point_dens,
+            to_char(f.survey_date, 'YYYY') as year,
+            to_char(f.survey_date, 'MM') as month,
+            m.comments,
+            m.geom
+          FROM files f JOIN singlebeam_survey m USING (location, survey_date)
+          ORDER BY url
         ;
       </sql>
     </changeSet>
