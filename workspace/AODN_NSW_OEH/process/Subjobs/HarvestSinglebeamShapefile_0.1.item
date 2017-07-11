@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Long" value="70"/>
-    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="&quot;NSW-OEH/Multi-beam/2015/NSWOEH_20150615_BoudiiBoudiiHawkesbury_MB/NSWOEH_20150615_BoudiiBoudiiHawkesbury_MB_SHP.shp&quot;"/>
+    <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Long" value="61"/>
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="&quot;NSW-OEH/Single-beam/NSWOEH_20111125_KingscliffBeach_STAX/NSWOEH_20111125_KingscliffBeach_STAX_SHP.shp&quot;"/>
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_String" value="harvest"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_String" value="aodn_nsw_oeh"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_Password" value="1aMYF6oB47jegjvW5OQrxw=="/>
@@ -120,7 +120,7 @@
       <column comment="" key="false" length="2147483647" name="est_no" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="10" name="point_num" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Long">
+      <column comment="" key="false" length="10" name="point_num" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long">
         <additionalField key="Comment" value=""/>
       </column>
       <column comment="" key="false" length="17" name="point_dens" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
@@ -129,9 +129,8 @@
       <column comment="" key="false" length="2147483647" name="comments" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="0" name="location_name" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
-      <column comment="" key="false" length="0" name="sdate" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
-      <column comment="" key="false" length="2147483647" name="geom" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_Geometry">
+      <column comment="" key="false" length="0" name="location_description" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" length="2147483647" name="geom" nullable="false" pattern="" precision="0" sourceType="GEOMETRY" type="id_Geometry">
         <additionalField key="Comment" value=""/>
       </column>
     </metadata>
@@ -150,8 +149,7 @@
         <mapperTableEntries name="point_num" expression="row1.Point_Num" type="id_Long" nullable="true"/>
         <mapperTableEntries name="point_dens" expression="row1.Point_Dens" type="id_Double" nullable="true"/>
         <mapperTableEntries name="comments" expression="row1.COMMENTS" type="id_String" nullable="true"/>
-        <mapperTableEntries name="location_name" expression="row1.Location " type="id_String" nullable="true"/>
-        <mapperTableEntries name="sdate" expression="row1.SDate" type="id_String" nullable="true"/>
+        <mapperTableEntries name="location_description" expression="row1.Location " type="id_String" nullable="true"/>
         <mapperTableEntries name="geom" expression="row1.the_geom " type="id_Geometry"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row1" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
@@ -214,6 +212,8 @@
   </node>
   <node componentName="sProj" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="768" posY="64">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="sProj_2"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA:SCHEMA_TYPE" value="REPOSITORY"/>
+    <elementParameter field="TECHNICAL" name="SCHEMA:REPOSITORY_SCHEMA_TYPE" value="_QKA6EAlGEeObitNNn0mU_g - singlebeam_survey"/>
     <elementParameter field="TEXT" name="SOURCE_CRS" value="&quot;EPSG:32756&quot;"/>
     <elementParameter field="TEXT" name="TARGET_CRS" value="&quot;EPSG:4326&quot;"/>
     <elementParameter field="CHECK" name="CRS_TRANSFORM" value="false"/>
@@ -248,7 +248,7 @@
       <column comment="" key="false" length="2147483647" name="est_no" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="10" name="point_num" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Long">
+      <column comment="" key="false" length="10" name="point_num" nullable="true" pattern="" precision="0" sourceType="INT8" type="id_Long">
         <additionalField key="Comment" value=""/>
       </column>
       <column comment="" key="false" length="17" name="point_dens" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double">
@@ -257,9 +257,8 @@
       <column comment="" key="false" length="2147483647" name="comments" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="0" name="location_name" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
-      <column comment="" key="false" length="0" name="sdate" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
-      <column comment="" key="false" length="2147483647" name="geom" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_Geometry">
+      <column comment="" key="false" length="0" name="location_description" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" length="2147483647" name="geom" nullable="false" pattern="" precision="0" sourceType="GEOMETRY" type="id_Geometry">
         <additionalField key="Comment" value=""/>
       </column>
     </metadata>
@@ -348,12 +347,7 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="location_name"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="sdate"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="location_description"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -404,8 +398,7 @@
       <column comment="" key="false" length="2147483647" name="comments" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="0" name="location_name" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
-      <column comment="" key="false" length="0" name="sdate" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" length="0" name="location_description" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
       <column comment="" key="false" length="2147483647" name="geom" nullable="false" pattern="" precision="0" sourceType="GEOMETRY" type="id_Geometry">
         <additionalField key="Comment" value=""/>
       </column>
@@ -442,8 +435,7 @@
       <column comment="" key="false" length="2147483647" name="comments" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String">
         <additionalField key="Comment" value=""/>
       </column>
-      <column comment="" key="false" length="0" name="location_name" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
-      <column comment="" key="false" length="0" name="sdate" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
+      <column comment="" key="false" length="0" name="location_description" nullable="true" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
       <column comment="" key="false" length="2147483647" name="geom" nullable="false" pattern="" precision="0" sourceType="GEOMETRY" type="id_Geometry">
         <additionalField key="Comment" value=""/>
       </column>
@@ -702,10 +694,7 @@
       <elementValue elementRef="TRACE_COLUMN" value="comments"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="location_name"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="sdate"/>
+      <elementValue elementRef="TRACE_COLUMN" value="location_description"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="geom"/>
@@ -752,19 +741,16 @@
       <elementValue elementRef="TRACE_COLUMN" value="survey_date"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="source"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="source_xyz"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="area"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="perimeter"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="category"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="sourcepath"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="est_no"/>
@@ -776,10 +762,10 @@
       <elementValue elementRef="TRACE_COLUMN" value="point_dens"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="join_table"/>
+      <elementValue elementRef="TRACE_COLUMN" value="comments"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="comments"/>
+      <elementValue elementRef="TRACE_COLUMN" value="location_description"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="geom"/>

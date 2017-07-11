@@ -61,6 +61,7 @@
           DROP COLUMN name,
           DROP COLUMN coll_Name,
           DROP COLUMN habitat,
+          ADD COLUMN location_description text,
           ADD COLUMN area text,
           ADD COLUMN areainfo text,
           ADD COLUMN area_ha double precision,
@@ -101,8 +102,7 @@
           point_num bigint,
           point_dens double precision,
           comments text,
-          location_name text,
-          sdate text,
+          location_description text,
           geom geometry(Geometry,4326) CHECK (st_isvalid(geom)) NOT NULL,
 
           CONSTRAINT singlebeam_survey_file_fk FOREIGN KEY (file_id)
@@ -141,6 +141,7 @@
               WHEN 'SHP' THEN 'coverage shapefile'
               ELSE f.file_type
             END AS file_type,
+            m.location_description,
             m.area,
             m.areainfo,
             m.max_res,
@@ -196,8 +197,7 @@
               WHEN f.url like '%.zip'   THEN 'complete dataset'
               ELSE ''
             END AS file_type,
-            m.location_name,
-            m.sdate,
+            m.location_description,
             m.area,
             m.source,
             m.source_xyz,
