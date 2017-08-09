@@ -34,40 +34,182 @@
     </changeSet>
 
 
-    <changeSet author="talend" id="aodn_nsw_oeh_bathy_map" runOnChange="true">
+    <changeSet author="talend" id="survey_metadata_rename">
       <sql>
-        DROP VIEW IF EXISTS aodn_nsw_oeh_map ;
-        DROP VIEW IF EXISTS aodn_nsw_oeh_bathy_map ;
+        ALTER TABLE survey_metadata RENAME TO multibeam_survey ;
 
-        CREATE VIEW aodn_nsw_oeh_bathy_map AS
+        ALTER TABLE multibeam_survey
+          RENAME CONSTRAINT survey_metadata_pkey TO multibeam_survey_pkey ;
+        ALTER TABLE multibeam_survey
+          RENAME CONSTRAINT survey_metadata_file_id_key TO multibeam_survey_file_id_key ;
+        ALTER TABLE multibeam_survey
+          RENAME CONSTRAINT survey_metadata_file_fk TO multibeam_survey_file_fk ;
+        ALTER TABLE multibeam_survey
+          RENAME CONSTRAINT survey_metadata_geom_check TO multibeam_survey_goem_check ;
+
+        ALTER INDEX survey_metadata_gist_idx RENAME TO multibeam_survey_gist_idx ;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="multibeam_survey_update_columns">
+      <sql>
+        DROP VIEW IF EXISTS aodn_nsw_oeh_bathy_map ;
+        DROP VIEW IF EXISTS aodn_nsw_oeh_multibeam_map ;
+
+        ALTER TABLE multibeam_survey
+          DROP COLUMN name,
+          DROP COLUMN coll_Name,
+          DROP COLUMN habitat,
+          ADD COLUMN location_description text,
+          ADD COLUMN area text,
+          ADD COLUMN areainfo text,
+          ADD COLUMN area_ha double precision,
+          ADD COLUMN xya_file text,
+          ADD COLUMN survey text,
+          ADD COLUMN max_res text,
+          ADD COLUMN process text;
+
+        ALTER TABLE multibeam_survey RENAME COLUMN comments TO comment;
+
+        ALTER TABLE multibeam_survey RENAME COLUMN z_app TO z_acc;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="multibeam_survey_add_constraints">
+      <sql>
+        ALTER TABLE multibeam_survey
+          ADD CONSTRAINT multibeam_survey_location_date_key UNIQUE (location, survey_date),
+          ALTER COLUMN geom SET NOT NULL;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="singlebeam_survey_table">
+      <sql>
+        CREATE TABLE singlebeam_survey
+        (
+          id bigserial PRIMARY KEY,
+          file_id bigint UNIQUE NOT NULL,
+          location text NOT NULL,
+          survey_date date NOT NULL,
+          source text,
+          source_xyz text,
+          area double precision,
+          category text,
+          est_no text,
+          point_num bigint,
+          point_dens double precision,
+          comments text,
+          location_description text,
+          geom geometry(Geometry,4326) CHECK (st_isvalid(geom)) NOT NULL,
+
+          CONSTRAINT singlebeam_survey_file_fk FOREIGN KEY (file_id)
+              REFERENCES indexed_file (id) MATCH SIMPLE
+              ON UPDATE CASCADE ON DELETE CASCADE,
+
+          CONSTRAINT singlebeam_survey_location_date_key UNIQUE (location, survey_date)
+        );
+
+        CREATE INDEX singlebeam_survey_gist_idx ON singlebeam_survey USING GIST (geom);
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="aodn_nsw_oeh_multibeam_map" runOnChange="true">
+      <sql>
+        DROP VIEW IF EXISTS aodn_nsw_oeh_multibeam_map CASCADE ;
+
+        CREATE VIEW aodn_nsw_oeh_multibeam_map AS
           WITH files AS (
             SELECT
               *,
               substring(url, '/NSWOEH_[[:digit:]]+_([[:alnum:]]+)_[^/]+$') AS location,
               substring(url, '/NSWOEH_([[:digit:]]+)_[^/]+$')::date AS survey_date,
-              substring(url, '_(MB)_') AS survey_methods,
-              substring(url, '_(ScientificRigour|SHP|BTY|BKS)') AS file_type,
-              substring(url, '\\.([^.]+)$') AS extension
+              substring(url, '_(ScientificRigour|SHP|BTY|BKS)') AS file_type
             FROM indexed_file
-            WHERE NOT deleted
+            WHERE NOT deleted AND url LIKE '%_MB_%'
           )
           SELECT
             f.url,
             f.location,
             f.survey_date,
-            f.survey_methods,
             CASE f.file_type
               WHEN 'BTY' THEN 'bathymetry'
               WHEN 'BKS' THEN 'backscatter'
               WHEN 'SHP' THEN 'coverage shapefile'
               ELSE f.file_type
             END AS file_type,
-            f.extension,
-            m.name AS survey_name,
+            m.location_description,
+            m.area,
+            m.areainfo,
+            m.max_res,
+            m.process,
+            to_char(f.survey_date, 'YYYY') as year,
+            to_char(f.survey_date, 'MM') as month,
+            m.comment,
             m.authority,
             m.geom
-          FROM files f JOIN survey_metadata m USING (location, survey_date)
-          WHERE f.survey_methods LIKE '%MB%'
+          FROM files f JOIN multibeam_survey m USING (location, survey_date)
+          ORDER BY url
+        ;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="aodn_nsw_oeh_bathy_map" runOnChange="true">
+      <comment>
+        Keep a copy of this view under the old name for now, so we
+        don't break the layer.  This view and changeset can be removed
+        once the Geoserver config and metadata record have been
+        updated to point to aodn_nsw_oeh_multibeam_map.
+      </comment>
+      <sql>
+        DROP VIEW IF EXISTS aodn_nsw_oeh_bathy_map ;
+
+        CREATE VIEW aodn_nsw_oeh_bathy_map AS
+          SELECT * FROM aodn_nsw_oeh_multibeam_map ;
+        ;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="aodn_nsw_oeh_singlebeam_map" runOnChange="true">
+      <sql>
+        DROP VIEW IF EXISTS aodn_nsw_oeh_singlebeam_map CASCADE ;
+
+        CREATE VIEW aodn_nsw_oeh_singlebeam_map AS
+          WITH files AS (
+            SELECT
+              *,
+              substring(url, '/NSWOEH_[[:digit:]]+_([[:alnum:]]+)_[^/]+$') AS location,
+              substring(url, '/NSWOEH_([[:digit:]]+)_[^/]+$')::date AS survey_date
+            FROM indexed_file
+            WHERE NOT deleted AND url LIKE '%_STAX_%'
+          )
+          SELECT
+            f.url,
+            f.location,
+            f.survey_date,
+            CASE
+              WHEN f.url like '%_SHP.%' THEN 'coverage shapefile'
+              WHEN f.url like '%.zip'   THEN 'complete dataset'
+              ELSE ''
+            END AS file_type,
+            m.location_description,
+            m.area,
+            m.source,
+            m.source_xyz,
+            m.est_no,
+            m.category,
+            m.point_num,
+            m.point_dens,
+            to_char(f.survey_date, 'YYYY') as year,
+            to_char(f.survey_date, 'MM') as month,
+            m.comments,
+            m.geom
+          FROM files f JOIN singlebeam_survey m USING (location, survey_date)
           ORDER BY url
         ;
       </sql>
