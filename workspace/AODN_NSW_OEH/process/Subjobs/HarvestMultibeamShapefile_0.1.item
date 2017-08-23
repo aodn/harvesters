@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Long" value="15"/>
-    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="&quot;NSW-OEH/Multi-beam/2015/20151014_ScarboroughWollongong/NSWOEH_20151014_ScarboroughWollongong_MB_SHP.shp&quot;"/>
+    <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Long" value="71"/>
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="&quot;NSW-OEH/Multi-beam/2015/20150303_PortMacquarieArtificialReef/NSWOEH_20150303_PortMacquarieArtificialReef_MB_SHP.shp&quot;"/>
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_String" value="harvest"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_String" value="aodn_nsw_oeh"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_joh0YHZ3EeO62tfLRq3FvA" type="id_Password" value="1aMYF6oB47jegjvW5OQrxw=="/>
@@ -120,7 +120,8 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="multibeam_survey" name="shapefile_output">
-      <column comment="" key="true" length="19" name="file_id" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="true" length="19" name="id" nullable="false" pattern="" sourceType="" type="id_Long" originalLength="19"/>
+      <column comment="" key="false" length="19" name="file_id" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="0" name="location" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="13" name="survey_date" nullable="false" pattern="&quot;yyyy-MM-dd&quot;" precision="0" sourceType="DATE" type="id_Date"/>
       <column comment="" key="false" length="0" name="source" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -144,9 +145,10 @@
       <column comment="" key="false" length="0" name="process" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="shapefile_output">
+        <mapperTableEntries name="id" expression="context.file_id" type="id_Long"/>
         <mapperTableEntries name="file_id" expression="context.file_id" type="id_Long"/>
         <mapperTableEntries name="location" expression="row3.location " type="id_String"/>
         <mapperTableEntries name="survey_date" expression="row3.survey_date " type="id_Date"/>
@@ -238,8 +240,6 @@
   </node>
   <node componentName="sProj" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="768" posY="64">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="sProj_2"/>
-    <elementParameter field="TECHNICAL" name="SCHEMA:SCHEMA_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="SCHEMA:REPOSITORY_SCHEMA_TYPE" value="_QKA6EAlGEeObitNNn0mU_g - multibeam_survey"/>
     <elementParameter field="TEXT" name="SOURCE_CRS" value="&quot;EPSG:32756&quot;"/>
     <elementParameter field="TEXT" name="TARGET_CRS" value="&quot;EPSG:4326&quot;"/>
     <elementParameter field="CHECK" name="CRS_TRANSFORM" value="false"/>
@@ -252,7 +252,8 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="multibeam_survey" name="sProj_2">
-      <column comment="" key="true" length="19" name="file_id" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="true" length="19" name="id" nullable="false" pattern="" sourceType="" type="id_Long" originalLength="19"/>
+      <column comment="" key="false" length="19" name="file_id" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="0" name="location" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="13" name="survey_date" nullable="false" pattern="&quot;yyyy-MM-dd&quot;" precision="0" sourceType="DATE" type="id_Date"/>
       <column comment="" key="false" length="0" name="source" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -305,6 +306,11 @@
     <elementParameter field="TABLE" name="ADD_COLS"/>
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS">
+      <elementValue elementRef="SCHEMA_COLUMN" value="id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="file_id"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -425,7 +431,8 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="multibeam_survey" name="iPostgresqlOutput_1">
-      <column comment="" key="true" length="19" name="file_id" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT8" type="id_Long"/>
+      <column comment="" defaultValue="" key="true" length="19" name="id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long" originalLength="19"/>
+      <column comment="" key="false" length="19" name="file_id" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="0" name="location" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="13" name="survey_date" nullable="false" pattern="&quot;yyyy-MM-dd&quot;" precision="0" sourceType="DATE" type="id_Date"/>
       <column comment="" key="false" length="0" name="source" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -449,7 +456,8 @@
       <column comment="" key="false" length="0" name="process" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" label="multibeam_survey" name="REJECT">
-      <column comment="" key="true" length="19" name="file_id" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT8" type="id_Long"/>
+      <column comment="" key="true" length="19" name="id" nullable="false" pattern="" sourceType="INT8" type="id_Long" originalLength="19"/>
+      <column comment="" key="false" length="19" name="file_id" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT8" type="id_Long"/>
       <column comment="" key="false" length="0" name="location" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="13" name="survey_date" nullable="false" pattern="&quot;yyyy-MM-dd&quot;" precision="0" sourceType="DATE" type="id_Date"/>
       <column comment="" key="false" length="0" name="source" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -786,6 +794,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="process"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
