@@ -208,12 +208,12 @@
     <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;visualisation_wms&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_a AS(SELECT  file_id,value AS platform_code FROM attribute WHERE name = 'platform_code' AND file_id = &quot; + context.file_id +&quot;),&#xA;table_b AS(SELECT vessel_name, platform_code, colour FROM vessel_names where (SELECT  vessel_name FROM deployments WHERE file_id = &quot; + context.file_id +&quot; ) =  vessel_name),&#xA;table_c AS(SELECT url,size from indexed_file where id = &quot; + context.file_id +&quot;),&#xA;table_d AS(SELECT time_coverage_start,time_coverage_end from deployments  where file_id = &quot; + context.file_id +&quot;),&#xA;data AS (SELECT   &#xA;ST_SimplifyPreserveTopology(make_trajectory(geom ORDER BY \&quot;TIME\&quot;),0.005) AS geom&#xA;FROM  measurements&#xA;WHERE \&quot;LATITUDE\&quot; != 0 AND \&quot;LONGITUDE\&quot; != 0&#xA;AND  file_id = &quot; + context.file_id + &quot; )&#xA;&#xA;SELECT DISTINCT &#xA;file_id,&#xA;table_c.url,&#xA;table_c.size,&#xA;table_d.time_coverage_start,&#xA;table_d.time_coverage_end,&#xA;table_b.vessel_name,&#xA;table_b.colour, &#xA;data.geom&#xA;FROM data,table_a,table_b,table_c,table_d;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;table_a AS(SELECT  file_id,value AS platform_code FROM attribute WHERE name = 'platform_code' AND file_id = &quot; + context.file_id +&quot;),&#xA;table_b AS(SELECT vessel_name, platform_code, colour FROM vessel_names where (SELECT  vessel_name FROM deployments WHERE file_id = &quot; + context.file_id +&quot; ) =  vessel_name),&#xA;table_c AS(SELECT url,size from indexed_file where id = &quot; + context.file_id +&quot;),&#xA;table_d AS(SELECT time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end from deployments  where file_id = &quot; + context.file_id +&quot;),&#xA;data AS (SELECT   &#xA;ST_SimplifyPreserveTopology(make_trajectory(geom ORDER BY \&quot;TIME\&quot;),0.005) AS geom&#xA;FROM  measurements&#xA;WHERE \&quot;LATITUDE\&quot; != 0 AND \&quot;LONGITUDE\&quot; != 0&#xA;AND  file_id = &quot; + context.file_id + &quot; )&#xA;&#xA;SELECT DISTINCT &#xA;file_id,&#xA;table_c.url,&#xA;table_c.size,&#xA;table_d.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,&#xA;table_d.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,&#xA;table_b.vessel_name,&#xA;table_b.colour, &#xA;data.geom&#xA;FROM data,table_a,table_b,table_c,table_d;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -246,8 +246,8 @@
       <column comment="" defaultValue="" key="true" length="10" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
       <column comment="" key="false" length="17" name="size" nullable="false" pattern="" precision="17" sourceType="FLOAT8" type="id_Double" originalLength="17"/>
-      <column comment="" key="false" length="29" name="time_coverage_start" nullable="false" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="DATE" type="id_Date"/>
-      <column comment="" key="false" length="29" name="time_coverage_end" nullable="false" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="DATE" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_start" nullable="false" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_end" nullable="false" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="50" name="vessel_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="colour" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
@@ -332,8 +332,8 @@
       <column comment="" defaultValue="" key="true" length="10" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
       <column comment="" key="false" length="17" name="size" nullable="false" pattern="" precision="17" sourceType="FLOAT8" type="id_Double" originalLength="17"/>
-      <column comment="" key="false" length="29" name="time_coverage_start" nullable="false" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="DATE" type="id_Date"/>
-      <column comment="" key="false" length="29" name="time_coverage_end" nullable="false" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="DATE" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_start" nullable="false" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_end" nullable="false" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="50" name="vessel_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="colour" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
@@ -342,8 +342,8 @@
       <column comment="" defaultValue="" key="true" length="10" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="TEXT" type="id_String"/>
       <column comment="" key="false" length="17" name="size" nullable="false" pattern="" precision="17" sourceType="FLOAT8" type="id_Double" originalLength="17"/>
-      <column comment="" key="false" length="29" name="time_coverage_start" nullable="false" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="DATE" type="id_Date"/>
-      <column comment="" key="false" length="29" name="time_coverage_end" nullable="false" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="DATE" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_start" nullable="false" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="29" name="time_coverage_end" nullable="false" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" precision="6" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="50" name="vessel_name" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="colour" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="0" name="geom" nullable="false" pattern="" precision="0" sourceType="POINT" type="id_Object"/>
@@ -375,8 +375,8 @@
       <column comment="" key="false" name="geospatial_lat_max" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="geospatial_lon_min" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="geospatial_lon_max" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="30" name="time_coverage_start" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;" sourceType="" type="id_String"/>
-      <column comment="" key="false" length="30" name="time_coverage_end" nullable="true" pattern="&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="30" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="30" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="" type="id_String"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="672" posY="64">
@@ -400,14 +400,14 @@
       <column comment="" key="false" name="geospatial_lat_max" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="geospatial_lon_min" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="geospatial_lon_max" nullable="true" pattern="" sourceType="" type="id_String"/>
-      <column comment="" key="false" name="time_coverage_start" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date"/>
-      <column comment="" key="false" name="time_coverage_end" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="" type="id_Date"/>
+      <column comment="" key="false" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="" type="id_Date"/>
+      <column comment="" key="false" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="" type="id_Date"/>
     </metadata>
     <nodeData xsi:type="MapperData">
       <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
-        <mapperTableEntries name="time_coverage_start" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;,row1.time_coverage_start) " type="id_Date"/>
-        <mapperTableEntries name="time_coverage_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;,row1.time_coverage_end)" type="id_Date"/>
+        <mapperTableEntries name="time_coverage_start" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_start,&quot;Z&quot;,&quot;+0000&quot;))   " type="id_Date"/>
+        <mapperTableEntries name="time_coverage_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_end,&quot;Z&quot;,&quot;+0000&quot;))   " type="id_Date"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="copyOfout1">
         <mapperTableEntries name="file_id" expression="context.file_id" type="id_Integer"/>
@@ -520,8 +520,8 @@
       <column comment="" key="false" name="geospatial_lat_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="geospatial_lon_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="geospatial_lon_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="time_coverage_start" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="time_coverage_end" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" key="true" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
@@ -531,8 +531,8 @@
       <column comment="" key="false" name="geospatial_lat_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="geospatial_lon_min" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="geospatial_lon_max" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" name="time_coverage_start" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
-      <column comment="" key="false" name="time_coverage_end" nullable="true" pattern="&quot;yyyy-MM-dd HH:mm:ss&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>

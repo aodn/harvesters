@@ -1,24 +1,5 @@
 <?xml version="1.1" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:expression="http:///expression.ecore">
-  <expression:EMFExpression id="null=>Var=>time_coverage_start" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;,row1.time_coverage_start)">
-    <variables name="row1.project" value="null" talendType="id_String" nullable="true"/>
-    <variables name="row1.institution" value="null" talendType="id_String" nullable="true"/>
-    <variables name="row1.title" value="null" talendType="id_String" nullable="true"/>
-    <variables name="row1.date_created" value="null" talendType="id_String" nullable="true"/>
-    <variables name="row1.sourceFilename" value="null" talendType="id_String" nullable="true"/>
-    <variables name="row1.platform_code" value="null" talendType="id_String" nullable="true"/>
-    <variables name="row1.vessel_name" value="null" talendType="id_String" nullable="true"/>
-    <variables name="row1.cdm_data_type" value="null" talendType="id_String" nullable="true"/>
-    <variables name="row1.geospatial_lat_min" value="null" talendType="id_String" nullable="true"/>
-    <variables name="row1.geospatial_lat_max" value="null" talendType="id_String" nullable="true"/>
-    <variables name="row1.geospatial_lon_min" value="null" talendType="id_String" nullable="true"/>
-    <variables name="row1.geospatial_lon_max" value="null" talendType="id_String" nullable="true"/>
-    <variables name="row1.time_coverage_start" value="2017-03-10T00:00:00Z " talendType="id_String" nullable="true"/>
-    <variables name="row1.time_coverage_end" value="null" talendType="id_String" nullable="true"/>
-    <variables name="row1.principal_investigator" value="null" talendType="id_String" nullable="true"/>
-    <variables name="row1.acknowledgment" value="null" talendType="id_String" nullable="true"/>
-    <variables name="row1.disclaimer" value="null" talendType="id_String" nullable="true"/>
-  </expression:EMFExpression>
   <expression:EMFExpression id="null=>out1=>Licor_flow_raw" expression="variables.Licor_flow_raw ">
     <variables name="variables.TIME" value="null" talendType="id_Double" nullable="true"/>
     <variables name="variables.LATITUDE" value="null" talendType="id_Double" nullable="true"/>
@@ -90,5 +71,39 @@
     <variables name="variables.LabMain_sw_flow_raw" value="null" talendType="id_Float" nullable="true"/>
     <variables name="ArgoUtils.makePoint(variables.LONGITUDE,variables.LATITUDE,&quot;EPSG:4326&quot;)   " value="null" talendType="id_Geometry"/>
     <variables name="NetCDFUtils.addDays(&quot;1950-01-01 00:00:00&quot;,&quot;yyyy-MM-dd HH:mm:ss&quot;,variables.TIME,true) " value="null" talendType="id_Date"/>
+  </expression:EMFExpression>
+  <expression:EMFExpression id="null=>Var=>time_coverage_start" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_start,&quot;Z&quot;,&quot;+0000&quot;))  ">
+    <variables name="row1.platform_code" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.vessel_name" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.geospatial_lat_min" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.geospatial_lat_max" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.geospatial_lon_min" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.geospatial_lon_max" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.time_coverage_start" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.time_coverage_end" value="null" talendType="id_String" nullable="true"/>
+    <variables name="TalendDate.parseDate(&quot;yyyy-MM-ddTHH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_start,&quot;Z&quot;,&quot;+0000&quot;))  " value="null" talendType="id_Date"/>
+    <variables name="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;,row1.time_coverage_end)" value="null" talendType="id_Date"/>
+    <variables name="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;,row1.time_coverage_start) " value="null" talendType="id_Date"/>
+    <variables name="row1.project" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.institution" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.title" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.date_created" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.sourceFilename" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.cdm_data_type" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.principal_investigator" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.acknowledgment" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.disclaimer" value="null" talendType="id_String" nullable="true"/>
+  </expression:EMFExpression>
+  <expression:EMFExpression id="null=>Var=>time_coverage_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_end,&quot;Z&quot;,&quot;+0000&quot;))  ">
+    <variables name="row1.platform_code" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.vessel_name" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.geospatial_lat_min" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.geospatial_lat_max" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.geospatial_lon_min" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.geospatial_lon_max" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.time_coverage_start" value="null" talendType="id_String" nullable="true"/>
+    <variables name="row1.time_coverage_end" value="null" talendType="id_String" nullable="true"/>
+    <variables name="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_start,&quot;Z&quot;,&quot;+0000&quot;))   " value="null" talendType="id_Date"/>
+    <variables name="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;,row1.time_coverage_end)" value="null" talendType="id_Date"/>
   </expression:EMFExpression>
 </xmi:XMI>
