@@ -145,7 +145,6 @@
 
     <changeSet author="talend" id="map_views" runOnChange="true">
       <sql>
-        DROP VIEW IF EXISTS current_files_view;
         DROP VIEW IF EXISTS moorings_all_map CASCADE;
 
         CREATE VIEW moorings_all_map AS
@@ -165,6 +164,7 @@
             m.compliance_checker_imos_version,
             m.compliance_checks_passed,
             m.realtime,
+            CASE WHEN realtime THEN 'real-time' ELSE 'delayed' END AS data_mode,
             -- time/location
             m.site_code,
             m.platform_code,
@@ -180,16 +180,16 @@
             m.latitude,
             m.longitude,
             -- measured parameters
-            m.standard_names ~ 'sea_[a-z_]*_temperature' AS water_temperature_b,
-            m.standard_names ~ 'air_temperature' AS air_temperature_b,
-            m.standard_names ~ 'sea_[a-z_]*_salinity' AS salinity_b,
-            m.standard_names ~ 'sea_[a-z_]*_pressure' AS water_pressure_b,
-            m.standard_names ~ 'air_pressure' AS air_pressure_b,
-            m.standard_names ~ 'sea_water_velocity' AS sea_water_velocity_b,
-            m.standard_names ~ 'oxygen' AS oxygen_b,
-            m.standard_names ~ 'chlorophyll' AS chlorophyll_b,
-            m.standard_names ~ 'fluorescence' AS fluorescence_b,
-            m.standard_names ~ 'sea_surface_wave' AS wave_parameters_b,
+            m.standard_names ~ 'sea_[a-z_]*_temperature' AS has_water_temperature,
+            m.standard_names LIKE '%air_temperature%' AS has_air_temperature,
+            m.standard_names ~ 'sea_[a-z_]*_salinity' AS has_salinity,
+            m.standard_names ~ 'sea_[a-z_]*_pressure' AS has_water_pressure,
+            m.standard_names LIKE '%air_pressure%' AS has_air_pressure,
+            m.standard_names LIKE '%sea_water_velocity%' AS has_sea_water_velocity,
+            m.standard_names LIKE '%oxygen%' AS has_oxygen,
+            m.standard_names LIKE '%chlorophyll%' AS has_chlorophyll,
+            m.standard_names LIKE '%fluorescence%' AS has_fluorescence,
+            m.standard_names LIKE '%sea_surface_wave%' AS has_wave_parameters,
             -- geometry
             m.geom
           FROM indexed_file i JOIN file_metadata m ON m.file_id = i.id
@@ -197,10 +197,18 @@
         ;
 
         CREATE VIEW anmn_all_map AS
-          SELECT * FROM moorings_all_map WHERE url~'ANMN' ;
+          SELECT * FROM moorings_all_map WHERE url LIKE 'IMOS/ANMN/%' ;
 
         CREATE VIEW abos_all_map AS
-          SELECT * FROM moorings_all_map WHERE url~'ABOS' ;
+          SELECT * FROM moorings_all_map WHERE url LIKE 'IMOS/ABOS/%' ;
+
+        CREATE VIEW abos_sots_dm_map AS
+          SELECT * FROM moorings_all_map
+          WHERE url LIKE 'IMOS/ABOS/SOTS/%' AND NOT realtime ;
+
+        CREATE VIEW abos_sots_rt_map AS
+          SELECT * FROM moorings_all_map
+          WHERE url LIKE 'IMOS/ABOS/SOTS/%' AND realtime ;
       </sql>
     </changeSet>
 
