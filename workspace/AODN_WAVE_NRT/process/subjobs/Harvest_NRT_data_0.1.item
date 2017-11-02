@@ -413,7 +413,7 @@
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/media/lbesnard/Laurent_emII/TOS_DI-r96646-V5.1.3/workspace_sdi/harvesters/workspace/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;  &lt;changeSet author=&quot;bpasquer&quot; id=&quot;cr-nrt_data&quot;>&#xA;       &lt;sql>&#x9;&#xA;  CREATE TABLE nrt_data&#xA;(&#xA;  &quot;WMO_ID&quot; integer NOT NULL,&#xA;  &quot;TIME&quot; timestamp with time zone NOT NULL,&#xA;  &quot;LATITUDE&quot; double precision,&#xA;  &quot;LONGITUDE&quot; double precision,&#xA;  &quot;SPCC&quot; integer,&#xA;  &quot;BOT_DEPTH&quot; integer,&#xA;  &quot;WHTH&quot; float,&#xA;  &quot;SPWP&quot; float,&#xA;  &quot;WMXH&quot; float,&#xA;  &quot;WPMH&quot; float,&#xA;  &quot;VDIRT&quot; int,&#xA;  &quot;DSDW&quot; float,&#xA;  &quot;SIF&quot; float,&#xA;  &quot;RDUR&quot; int, &#xA;  geom geometry&#xA;)&#xA;   &lt;/sql>&#xA;&lt;/changeSet>   &#xA;&#xA;&lt;changeSet author=&quot;bpasquer&quot; id=&quot;cr-measurements&quot;>&#xA;   &lt;sql>&#x9;&#xA;  CREATE TABLE measurements&#xA;(&#xA;  measurement bigserial NOT NULL,&#xA;  &quot;WMO_ID&quot; integer NOT NULL,&#xA;  &quot;TIME&quot; timestamp with time zone NOT NULL,&#xA;  &quot;SPCC&quot; integer,&#xA;  &quot;WHTH&quot; float,&#xA;  &quot;SPWP&quot; float,&#xA;  &quot;WMXH&quot; float,&#xA;  &quot;WPMH&quot; float,&#xA;  &quot;VDIRT&quot; int,&#xA;  &quot;DSDW&quot; float,&#xA;  &quot;SIF&quot; float,&#xA;  &quot;RDUR&quot; int, &#xA;  CONSTRAINT measurements_pkey PRIMARY KEY(measurement)&#xA;)&#xA;   &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;bpasquer&quot; id=&quot;alt_measurements&quot;>&#xA;   &lt;sql> &#xA;&#xA;  CREATE INDEX time_idx ON measurements USING btree (&quot;TIME&quot;);&#xA;&#xA;  ALTER TABLE nrt_data&#xA;  ALTER COLUMN geom TYPE geometry(Geometry,4326)&#xA;  USING ST_SetSRID(geom,4326);  &#xA;  ALTER TABLE nrt_data ADD CHECK (ST_IsValid(geom)); &#xA;&#x9;&lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&#xA;&lt;changeSet author=&quot;bpasquer&quot; id=&quot;create_wfs_view&quot; runOnChange=&quot;true&quot;>&#xA;&lt;sql>&#xA; DROP VIEW IF EXISTS aodn_wave_nrt_timeseries_data; &#xA; CREATE VIEW aodn_wave_nrt_timeseries_data AS&#xA; SELECT &#xA;  m.&quot;WMO_ID&quot;,&#xA;  b.site_no,&#xA;  b.station_name,&#xA;  b.latitude AS &quot;LATITUDE&quot;,&#xA;  b.longitude AS &quot;LONGITUDE&quot;,&#xA;  timezone('UTC'::text, m.&quot;TIME&quot;) as &quot;TIME&quot;,&#xA;  m.&quot;SPCC&quot;,&#xA;  b.bottom_depth AS &quot;BOT_DEPTH&quot;,&#xA;  m.&quot;WHTH&quot;,&#xA;  m.&quot;SPWP&quot;,&#xA;  m.&quot;WMXH&quot;,&#xA;  m.&quot;WPMH&quot;,&#xA;  m.&quot;VDIRT&quot;,&#xA;  m.&quot;DSDW&quot;,&#xA;  m.&quot;SIF&quot;,&#xA;  m.&quot;RDUR&quot;,&#xA;  b.geom&#xA;FROM measurements m&#xA;JOIN aodn_wave_nrt_timeseries_map b on b.wmo_id = m.&quot;WMO_ID&quot; &#xA;ORDER BY m.&quot;WMO_ID&quot;,m.&quot;TIME&quot;&#xA;&#xA;&lt;/sql>&#xA;&lt;/changeSet>&#xA;&lt;/databaseChangeLog> "/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA; &#xA;  &lt;changeSet author=&quot;bpasquer&quot; id=&quot;cr-nrt_data&quot;>&#xA;       &lt;sql>&#x9;&#xA;  CREATE TABLE nrt_data&#xA;(&#xA;  deploy_no integer, &#xA;  &quot;WMO_ID&quot; integer NOT NULL,&#xA;  &quot;TIME&quot; timestamp with time zone NOT NULL,&#xA;  &quot;LATITUDE&quot; double precision NOT NULL,&#xA;  &quot;LONGITUDE&quot; double precision NOT NULL,&#xA;  &quot;SPCC&quot; integer,&#xA;  &quot;BOT_DEPTH&quot; integer,&#xA;  &quot;WHTH&quot; float,&#xA;  &quot;SPWP&quot; float,&#xA;  &quot;WMXH&quot; float,&#xA;  &quot;WPMH&quot; float,&#xA;  &quot;VDIRT&quot; int,&#xA;  &quot;DSDW&quot; float,&#xA;  &quot;SIF&quot; float,&#xA;  &quot;RDUR&quot; int, &#xA;  geom geometry(Geometry,4326) CHECK (ST_IsValid(geom))&#xA;)&#xA;   &lt;/sql>&#xA;&lt;/changeSet>   &#xA;&#xA;&lt;changeSet author=&quot;bpasquer&quot; id=&quot;cr-deployments&quot;>&#xA;   &lt;sql>&#xA;CREATE TABLE deployments&#xA;(&#xA;  deploy_no serial,&#xA;  wmo_id integer NOT NULL,&#xA;  longitude double precision NOT NULL,&#xA;  latitude double precision NOT NULL,&#xA;  bottom_depth float,&#xA;  time_coverage_start timestamp with time zone,&#xA;  time_coverage_end  timestamp with time zone,&#xA;  geom  geometry(Geometry,4326),&#xA;  CONSTRAINT deployment_pkey PRIMARY KEY(deploy_no)&#xA;)&#xA;   &lt;/sql>&#xA;&lt;/changeSet>&#xA; &#xA;&lt;changeSet author=&quot;bpasquer&quot; id=&quot;cr-measurements&quot;>&#xA;   &lt;sql>&#x9;&#xA;  CREATE TABLE measurements&#xA;(&#xA;  measurement bigserial NOT NULL,&#xA;  deploy_no integer NOT NULL,&#xA;  &quot;WMO_ID&quot; integer NOT NULL,&#xA;  &quot;TIME&quot; timestamp with time zone NOT NULL,&#xA;  &quot;SPCC&quot; integer,&#xA;  &quot;WHTH&quot; float,&#xA;  &quot;SPWP&quot; float,&#xA;  &quot;WMXH&quot; float,&#xA;  &quot;WPMH&quot; float,&#xA;  &quot;VDIRT&quot; int,&#xA;  &quot;DSDW&quot; float,&#xA;  &quot;SIF&quot; float,&#xA;  &quot;RDUR&quot; int,&#xA;  CONSTRAINT measurements_pkey PRIMARY KEY(measurement),&#xA;  CONSTRAINT deployment_key FOREIGN KEY(deploy_no)&#xA;    REFERENCES deployments (deploy_no) MATCH SIMPLE&#xA;    ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;   &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;bpasquer&quot; id=&quot;alt_measurements&quot;>&#xA;   &lt;sql> &#xA;&#xA;  CREATE INDEX time_idx ON measurements USING btree (&quot;TIME&quot;);&#xA;&#xA;    &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;bpasquer&quot; id=&quot;create_wms_view&quot; runOnChange=&quot;true&quot;>&#xA;&lt;sql>&#xA; DROP VIEW IF EXISTS aodn_wave_nrt_timeseries_map; &#xA; CREATE VIEW  aodn_wave_nrt_timeseries_map AS&#xA; SELECT&#xA;  d.wmo_id,&#xA;  d.deploy_no,&#xA;  sm.station_name,&#xA;  sm.instrument,&#xA;  sm.frequence,&#xA;  sm.owner,&#xA;  d.time_coverage_start,&#xA;  d.time_coverage_end,&#xA;  d.longitude,&#xA;  d.latitude,&#xA;  d.bottom_depth,&#xA;  d.geom&#xA;FROM deployments d&#xA;JOIN site_metadata sm ON sm.wmo_id=d.wmo_id&#xA;&lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;bpasquer&quot; id=&quot;create_wfs_view&quot; runOnChange=&quot;true&quot;>&#xA;&lt;sql>&#xA; DROP VIEW IF EXISTS aodn_wave_nrt_timeseries_data; &#xA; CREATE VIEW aodn_wave_nrt_timeseries_data AS&#xA; SELECT &#xA;  m.&quot;WMO_ID&quot;,&#xA;  m.measurement,&#xA;  d.deploy_no,&#xA;  sm.station_name,&#xA;  d.latitude AS &quot;LATITUDE&quot;,&#xA;  d.longitude AS &quot;LONGITUDE&quot;,&#xA;  timezone('UTC'::text, m.&quot;TIME&quot;) as &quot;TIME&quot;,&#xA;  CASE WHEN sm.instrument LIKE 'directional%' THEN 'directional' ELSE 'non-directional' END AS instrument_type,&#xA;  m.&quot;SPCC&quot;,&#xA;  d.bottom_depth AS &quot;BOT_DEPTH&quot;,&#xA;  m.&quot;WHTH&quot;,&#xA;  m.&quot;SPWP&quot;,&#xA;  m.&quot;WMXH&quot;,&#xA;  m.&quot;WPMH&quot;,&#xA;  m.&quot;VDIRT&quot;,&#xA;  m.&quot;DSDW&quot;,&#xA;  m.&quot;SIF&quot;,&#xA;  m.&quot;RDUR&quot;,&#xA;  d.geom&#xA;FROM measurements m&#xA;JOIN deployments d ON d.deploy_no = m.deploy_no&#xA;JOIN site_metadata sm ON sm.wmo_id = m.&quot;WMO_ID&quot;&#xA;ORDER BY m.&quot;WMO_ID&quot;,m.&quot;TIME&quot;&#xA;&#xA;&lt;/sql>&#xA;&lt;/changeSet>&#xA;&lt;/databaseChangeLog> "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -472,7 +472,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH &#xA;msmnt AS (SELECT * from measurements m&#xA;WHERE m.\&quot;TIME\&quot; >= (SELECT min(\&quot;TIME\&quot;) from nrt_data)), &#xA;nrt AS (SELECT * from nrt_data)&#xA;&#xA;SELECT&#xA;nrt.\&quot;WMO_ID\&quot;,&#xA;nrt.\&quot;TIME\&quot;,&#xA;nrt.\&quot;SPCC\&quot;,&#xA;nrt.\&quot;WHTH\&quot;,&#xA;nrt.\&quot;SPWP\&quot;,&#xA;nrt.\&quot;WMXH\&quot;,&#xA;nrt.\&quot;WPMH\&quot;,&#xA;nrt.\&quot;VDIRT\&quot;,&#xA;nrt.\&quot;DSDW\&quot;,&#xA;nrt.\&quot;SIF\&quot;,&#xA;nrt.\&quot;RDUR\&quot;&#xA;FROM nrt&#xA;LEFT JOIN msmnt on nrt.\&quot;WMO_ID\&quot;= msmnt.\&quot;WMO_ID\&quot; AND nrt.\&quot;TIME\&quot;= msmnt.\&quot;TIME\&quot;&#xA;WHERE msmnt.\&quot;TIME\&quot; is NULL &#xA;ORDER by nrt.\&quot;WMO_ID\&quot;,nrt.\&quot;TIME\&quot;;&#xA;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH &#xA;msmnt AS (SELECT * from measurements m&#xA;WHERE m.\&quot;TIME\&quot; >= (SELECT min(\&quot;TIME\&quot;) from nrt_data)), &#xA;nrt AS (SELECT * from nrt_data)&#xA;&#xA;SELECT&#xA;nrt.deploy_no,&#xA;nrt.\&quot;WMO_ID\&quot;,&#xA;nrt.\&quot;TIME\&quot;,&#xA;nrt.\&quot;SPCC\&quot;,&#xA;nrt.\&quot;WHTH\&quot;,&#xA;nrt.\&quot;SPWP\&quot;,&#xA;nrt.\&quot;WMXH\&quot;,&#xA;nrt.\&quot;WPMH\&quot;,&#xA;nrt.\&quot;VDIRT\&quot;,&#xA;nrt.\&quot;DSDW\&quot;,&#xA;nrt.\&quot;SIF\&quot;,&#xA;nrt.\&quot;RDUR\&quot;&#xA;FROM nrt&#xA;LEFT JOIN msmnt on nrt.\&quot;WMO_ID\&quot;= msmnt.\&quot;WMO_ID\&quot; AND nrt.\&quot;TIME\&quot;= msmnt.\&quot;TIME\&quot;&#xA;WHERE msmnt.\&quot;TIME\&quot; is NULL &#xA;ORDER by nrt.\&quot;WMO_ID\&quot;,nrt.\&quot;TIME\&quot;;&#xA;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -480,6 +480,8 @@
     <elementParameter field="TEXT" name="CURSOR_SIZE" value="1000"/>
     <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
     <elementParameter field="TABLE" name="TRIM_COLUMN">
+      <elementValue elementRef="SCHEMA_COLUMN" value="deploy_no"/>
+      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="WMO_ID"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="TIME"/>
@@ -508,6 +510,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlInput_1">
+      <column comment="" key="false" name="deploy_no" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" length="0" name="WMO_ID" nullable="false" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="0" name="TIME" nullable="false" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="0" name="SPCC" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
@@ -546,6 +549,11 @@
     <elementParameter field="TABLE" name="ADD_COLS"/>
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS">
+      <elementValue elementRef="SCHEMA_COLUMN" value="deploy_no"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="WMO_ID"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -612,6 +620,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="iPostgresqlOutput_1">
+      <column comment="" key="false" name="deploy_no" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" length="0" name="WMO_ID" nullable="false" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="0" name="TIME" nullable="false" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="0" name="SPCC" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
@@ -625,6 +634,7 @@
       <column comment="" defaultValue="" key="false" length="0" name="RDUR" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
+      <column comment="" key="false" name="deploy_no" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" length="0" name="WMO_ID" nullable="false" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="0" name="TIME" nullable="false" pattern="&quot;yyyy-MM-dd'T'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" defaultValue="" key="false" length="0" name="SPCC" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer"/>
@@ -650,7 +660,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlCommit_2"/>
   </node>
-  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="832" posY="384">
+  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1152" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_2"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -661,11 +671,11 @@
     <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;deployments&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH tableA AS&#xA;  (SELECT DISTINCT \&quot;WMO_ID\&quot; AS wmo_id,&#xA;                   \&quot;LONGITUDE\&quot; AS longitude,&#xA;                   \&quot;LATITUDE\&quot; AS latitude,&#xA;                   \&quot;BOT_DEPTH\&quot; AS bottom_depth,&#xA;                   ST_SetSRID(ST_MAkePoint(\&quot;LONGITUDE\&quot;,\&quot;LATITUDE\&quot;),4326) AS geom&#xA;   FROM nrt_data&#xA;   WHERE (\&quot;WMO_ID\&quot;,&#xA;          \&quot;LONGITUDE\&quot;,&#xA;          \&quot;LATITUDE\&quot;,&#xA;          \&quot;BOT_DEPTH\&quot;,&#xA;          geom) NOT IN&#xA;       (SELECT wmo_id,&#xA;               longitude,&#xA;               latitude,&#xA;               bottom_depth,&#xA;               geom&#xA;        FROM aodn_wave_nrt_timeseries_map AS buoy)),&#xA;     tableB AS&#xA;  (SELECT wmo_id,&#xA;          station_name,&#xA;          state,&#xA;          OWNER,&#xA;          instrument,&#xA;          frequence&#xA;   FROM aodn_wave_nrt_timeseries_map)&#xA;INSERT INTO aodn_wave_nrt_timeseries_map (wmo_id, station_name, state, owner,instrument,frequence,longitude,latitude, bottom_depth, geom)&#xA;SELECT tableB.wmo_id,&#xA;       station_name,&#xA;       state,&#xA;       owner,&#xA;       instrument,&#xA;       frequence,&#xA;       tableA.longitude,&#xA;       tableA.latitude,&#xA;       tableA.bottom_depth,&#xA;       tableA.geom&#xA;FROM tableB&#xA;JOIN tableA ON tableB.wmo_id = tableA.wmo_id;&#xA;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;INSERT INTO deployments (wmo_id, longitude, latitude, bottom_depth, geom)&#xA;  SELECT DISTINCT \&quot;WMO_ID\&quot; AS wmo_id,&#xA;                   \&quot;LONGITUDE\&quot; AS longitude,&#xA;                   \&quot;LATITUDE\&quot; AS latitude,&#xA;                   \&quot;BOT_DEPTH\&quot; AS bottom_depth,&#xA;                    geom&#xA;   FROM nrt_data&#xA;   WHERE (\&quot;WMO_ID\&quot;,&#xA;          \&quot;LONGITUDE\&quot;,&#xA;          \&quot;LATITUDE\&quot;,&#xA;          \&quot;BOT_DEPTH\&quot;,&#xA;          geom) NOT IN&#xA;       (SELECT wmo_id,&#xA;               longitude,&#xA;               latitude,&#xA;               bottom_depth,&#xA;               geom&#xA;        FROM deployments AS buoy);&#xA;&quot;&#xA;    "/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -700,7 +710,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH nrt AS&#xA;  (SELECT \&quot;WMO_ID\&quot;,&#xA;          \&quot;LONGITUDE\&quot;,&#xA;          \&quot;LATITUDE\&quot;,&#xA;          min(\&quot;TIME\&quot;) as time_coverage_start, max(\&quot;TIME\&quot;) AS time_coverage_end&#xA;   FROM nrt_data&#xA;   GROUP BY \&quot;WMO_ID\&quot;,&#xA;            \&quot;LONGITUDE\&quot;,&#xA;            \&quot;LATITUDE\&quot;)&#xA;UPDATE aodn_wave_nrt_timeseries_map b&#xA;SET time_coverage_start =&#xA;  ( SELECT mytable.value&#xA;   FROM&#xA;     ( SELECT b.wmo_id,&#xA;              b.longitude,&#xA;              b.latitude,&#xA;              CASE&#xA;                  WHEN b.time_coverage_start IS NULL THEN nrt.time_coverage_start&#xA;                  WHEN b.time_coverage_start IS NOT NULL THEN b.time_coverage_start&#xA;              END AS value&#xA;      FROM aodn_wave_nrt_timeseries_map b&#xA;      LEFT JOIN nrt ON nrt.\&quot;WMO_ID\&quot;= b.wmo_id&#xA;      AND nrt.\&quot;LONGITUDE\&quot; = b.longitude&#xA;      AND nrt.\&quot;LATITUDE\&quot; = b.latitude) mytable&#xA;   WHERE mytable.wmo_id = b.wmo_id&#xA;     AND mytable.longitude = b.longitude&#xA;     AND mytable.latitude = b.latitude),&#xA;    time_coverage_end =&#xA;  ( SELECT time_coverage_end&#xA;   FROM nrt&#xA;   WHERE nrt.\&quot;WMO_ID\&quot; = b.wmo_id&#xA;     AND nrt.\&quot;LONGITUDE\&quot; = b.longitude&#xA;     AND nrt.\&quot;LATITUDE\&quot; = b.latitude);&#xA;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;WITH nrt AS&#xA;  (SELECT deploy_no,&#xA;          min(\&quot;TIME\&quot;) AS time_coverage_start,&#xA;          max(\&quot;TIME\&quot;) AS time_coverage_end&#xA;   FROM measurements&#xA;   GROUP BY deploy_no)&#xA;UPDATE deployments d&#xA;SET time_coverage_start =&#xA;  ( SELECT nrt.time_coverage_start&#xA;   FROM nrt&#xA;   WHERE nrt.deploy_no =d.deploy_no),&#xA;    time_coverage_end =&#xA;  ( SELECT nrt.time_coverage_end&#xA;   FROM nrt&#xA;   WHERE nrt.deploy_no =d.deploy_no);&#xA;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -714,6 +724,40 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlRow_3"/>
+    <metadata connector="REJECT" name="REJECT">
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="832" posY="384">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_4"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;localhost&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;5432&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE nrt_data&#xA;SET deploy_no =&#xA;  (SELECT mytable.deploy_no&#xA;   FROM&#xA;     (SELECT d.deploy_no,&#xA;             d.wmo_id,&#xA;             d.longitude,&#xA;             d.latitude&#xA;      FROM deployments d&#xA;      JOIN nrt_data ON nrt_data.\&quot;WMO_ID\&quot;=d.wmo_id&#xA;      AND nrt_data.\&quot;LONGITUDE\&quot;=d.longitude&#xA;      AND nrt_data.\&quot;LATITUDE\&quot;=d.latitude&#xA;      GROUP BY d.deploy_no) mytable&#xA;   WHERE mytable.wmo_id=nrt_data.\&quot;WMO_ID\&quot;&#xA;     AND mytable.longitude=nrt_data.\&quot;LONGITUDE\&quot;&#xA;     AND mytable.latitude=nrt_data.\&quot;LATITUDE\&quot;)&#xA;&quot;"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
+    <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
+    <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
+    <elementParameter field="TABLE" name="SET_PREPAREDSTATEMENT_PARAMETERS"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tPostgresqlRow_4"/>
     <metadata connector="REJECT" name="REJECT">
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
@@ -889,6 +933,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="geom"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="deploy_no"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -903,9 +950,13 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk6"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlOutput_3" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tPostgresqlOutput_3" target="tPostgresqlInput_1">
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlOutput_3" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tPostgresqlOutput_3" target="tPostgresqlRow_4">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk8"/>
+  </connection>
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlOutput_3" offsetLabelX="0" offsetLabelY="0" outputId="3" source="tPostgresqlOutput_3" target="tPostgresqlInput_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk9"/>
   </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iIncludeSdiLibraries_1" offsetLabelX="0" offsetLabelY="0" source="iIncludeSdiLibraries_1" target="tPostgresqlConnection_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
@@ -971,6 +1022,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="geom"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="deploy_no"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -985,9 +1039,9 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk7"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlRow_3" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_3" target="tPostgresqlCommit_2">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlRow_3" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_3" target="tPostgresqlCommit_2">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk8"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="sWfsInput_1"/>
@@ -1043,6 +1097,13 @@
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_3"/>
     <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Update temporal extent of new and existing sites "/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_4"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="SET deploy_no IN NRT_DATA TABLE"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
