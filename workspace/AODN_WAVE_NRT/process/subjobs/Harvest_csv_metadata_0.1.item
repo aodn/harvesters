@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_a0-G8JwgEeeBDqU5_XdJxg" type="id_String" value="harvest"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_a0-G8JwgEeeBDqU5_XdJxg" type="id_String" value="aodn_wave_nrt"/>
@@ -67,17 +67,17 @@
     <elementParameter field="TEXT" name="NB_RANDOM" value="10"/>
     <elementParameter field="CHECK" name="TRIMALL" value="false"/>
     <elementParameter field="TABLE" name="TRIMSELECT">
-      <elementValue elementRef="SCHEMA_COLUMN" value="Name"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="site_name"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="WMO_ID"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="wmo_id"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="Owner"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="owner"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="State"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="state"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="Instrument"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="instrument"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="Frequence"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="frequence"/>
       <elementValue elementRef="TRIM" value="false"/>
     </elementParameter>
     <elementParameter field="CHECK" name="CHECK_FIELDS_NUM" value="false"/>
@@ -91,67 +91,25 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tFileInputDelimited_1">
-      <column comment="" key="false" length="50" name="Name" nullable="false" pattern="" sourceType="" type="id_String" originalLength="50"/>
-      <column comment="" key="false" name="WMO_ID" nullable="false" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" length="255" name="Owner" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
-      <column comment="" key="false" length="50" name="State" nullable="true" pattern="" sourceType="" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="255" name="Instrument" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
-      <column comment="" key="false" length="20" name="Frequence" nullable="true" pattern="" sourceType="" type="id_String" originalLength="20"/>
+      <column comment="" key="false" length="50" name="site_name" nullable="false" pattern="" sourceType="" type="id_String" originalLength="50"/>
+      <column comment="" key="true" name="wmo_id" nullable="false" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" length="255" name="owner" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
+      <column comment="" key="false" length="50" name="state" nullable="true" pattern="" sourceType="" type="id_String" originalLength="50"/>
+      <column comment="" key="false" length="255" name="instrument" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
+      <column comment="" key="false" length="20" name="frequence" nullable="true" pattern="" sourceType="" type="id_String" originalLength="20"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
-      <column comment="" key="false" length="50" name="Name" nullable="false" pattern="" sourceType="" type="id_String" originalLength="50"/>
-      <column comment="" key="false" name="WMO_ID" nullable="false" pattern="" sourceType="" type="id_Integer"/>
-      <column comment="" key="false" length="255" name="Owner" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
-      <column comment="" key="false" length="50" name="State" nullable="true" pattern="" sourceType="" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="255" name="Instrument" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
-      <column comment="" key="false" length="20" name="Frequence" nullable="true" pattern="" sourceType="" type="id_String" originalLength="20"/>
+      <column comment="" key="false" length="50" name="site_name" nullable="false" pattern="" sourceType="" type="id_String" originalLength="50"/>
+      <column comment="" key="false" name="wmo_id" nullable="false" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" length="255" name="owner" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
+      <column comment="" key="false" length="50" name="state" nullable="true" pattern="" sourceType="" type="id_String" originalLength="50"/>
+      <column comment="" key="false" length="255" name="instrument" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
+      <column comment="" key="false" length="20" name="frequence" nullable="true" pattern="" sourceType="" type="id_String" originalLength="20"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="704" posY="224">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_1"/>
-    <elementParameter field="EXTERNAL" name="MAP" value=""/>
-    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
-    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_IktjkKPfEeecF4Qh878nBg-tMap_1-PREVIEW.bmp"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
-    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
-    <elementParameter field="MEMO" name="COMMENT" value=""/>
-    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="buoys_metadata" name="buoy_metadata">
-      <column comment="" key="false" length="50" name="station_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="wmo_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="255" name="owner" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="state" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="255" name="instrument" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="20" name="frequence" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-    </metadata>
-    <nodeData xsi:type="MapperData">
-      <uiProperties/>
-      <varTables sizeState="INTERMEDIATE" name="Var"/>
-      <outputTables sizeState="INTERMEDIATE" name="buoy_metadata">
-        <mapperTableEntries name="station_name" expression="row1.Name" type="id_String" nullable="true"/>
-        <mapperTableEntries name="wmo_id" expression="row1.WMO_ID" type="id_Integer"/>
-        <mapperTableEntries name="owner" expression="row1.Owner" type="id_String" nullable="true"/>
-        <mapperTableEntries name="state" expression="row1.State" type="id_String" nullable="true"/>
-        <mapperTableEntries name="instrument" expression="row1.Instrument" type="id_String" nullable="true"/>
-        <mapperTableEntries name="frequence" expression="row1.Frequence" type="id_String" nullable="true"/>
-      </outputTables>
-      <inputTables sizeState="INTERMEDIATE" name="row1" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
-        <mapperTableEntries name="Name" type="id_String"/>
-        <mapperTableEntries name="WMO_ID" type="id_Integer"/>
-        <mapperTableEntries name="Owner" type="id_String" nullable="true"/>
-        <mapperTableEntries name="State" type="id_String" nullable="true"/>
-        <mapperTableEntries name="Instrument" type="id_String" nullable="true"/>
-        <mapperTableEntries name="Frequence" type="id_String" nullable="true"/>
-      </inputTables>
-    </nodeData>
-  </node>
-  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="960" posY="224">
+  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="864" posY="224">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlOutput_2"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -162,9 +120,9 @@
     <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;site_metadata&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="TRUNCATE"/>
-    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;platform_metadata&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
+    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="UPDATE_OR_INSERT"/>
     <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false"/>
     <elementParameter field="CHECK" name="SPATIAL_INDEX" value="false"/>
     <elementParameter field="CHECK" name="GEOMETRY_COLUMNS" value="false"/>
@@ -176,7 +134,7 @@
     <elementParameter field="TABLE" name="ADD_COLS"/>
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS">
-      <elementValue elementRef="SCHEMA_COLUMN" value="station_name"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="site_name"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -215,21 +173,21 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" label="buoys_metadata" name="tPostgresqlOutput_2">
-      <column comment="" key="false" length="50" name="station_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="wmo_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="255" name="owner" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="state" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="255" name="instrument" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="20" name="frequence" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+    <metadata connector="FLOW" name="tPostgresqlOutput_2">
+      <column comment="" key="false" length="50" name="site_name" nullable="false" pattern="" sourceType="VARCHAR" type="id_String" originalLength="50"/>
+      <column comment="" key="true" name="wmo_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="255" name="owner" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
+      <column comment="" key="false" length="50" name="state" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="50"/>
+      <column comment="" key="false" length="255" name="instrument" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
+      <column comment="" key="false" length="20" name="frequence" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="20"/>
     </metadata>
-    <metadata connector="REJECT" label="buoys_metadata" name="REJECT">
-      <column comment="" key="false" length="50" name="station_name" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" defaultValue="" key="false" name="wmo_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
-      <column comment="" key="false" length="255" name="owner" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="50" name="state" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="255" name="instrument" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
-      <column comment="" key="false" length="20" name="frequence" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+    <metadata connector="REJECT" name="REJECT">
+      <column comment="" key="false" length="50" name="site_name" nullable="false" pattern="" sourceType="VARCHAR" type="id_String" originalLength="50"/>
+      <column comment="" key="true" name="wmo_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" length="255" name="owner" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
+      <column comment="" key="false" length="50" name="state" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="50"/>
+      <column comment="" key="false" length="255" name="instrument" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="255"/>
+      <column comment="" key="false" length="20" name="frequence" nullable="true" pattern="" sourceType="VARCHAR" type="id_String" originalLength="20"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -247,7 +205,7 @@
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
     <elementParameter field="FILE" name="FILENAME" value="&quot;/vagrant/src/harvesters/workspace/changelog.xml&quot;"/>
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
-    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;&lt;changeSet author=&quot;bpasquer&quot; id=&quot;cr-site_metadata_table&quot;>&#xA;      &lt;sql>&#x9;&#xA; CREATE TABLE site_metadata&#xA;(&#xA;   site_no serial,&#xA;   wmo_id integer NOT NULL,  &#xA;   station_name character varying,&#xA;   state character varying,&#xA;   owner character varying,&#xA;   instrument character varying,&#xA;   frequence character varying,  &#xA;   CONSTRAINT site_pkey PRIMARY KEY (site_no)&#xA;)&#xA;&lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
+    <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;databaseChangeLog &#xA;    xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot;&#xA;    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#xA;    xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;    &#xA;&lt;changeSet author=&quot;bpasquer&quot; id=&quot;cr-platform_metadata_table&quot;>&#xA;      &lt;sql>&#x9;&#xA; CREATE TABLE platform_metadata&#xA;(&#xA;   wmo_id integer,  &#xA;   site_name character varying,&#xA;   state character varying,&#xA;   owner character varying,&#xA;   instrument character varying,&#xA;   frequence character varying,  &#xA;   CONSTRAINT platform_pkey PRIMARY KEY (wmo_id)&#xA;)&#xA;&lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog> "/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
@@ -309,50 +267,10 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tFileInputDelimited_1" offsetLabelX="0" offsetLabelY="0" source="tFileInputDelimited_1" target="tMap_1">
+  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tFileInputDelimited_1" offsetLabelX="0" offsetLabelY="0" source="tFileInputDelimited_1" target="tPostgresqlOutput_2">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="Name"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="WMO_ID"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="Owner"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="State"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="Instrument"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="Frequence"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="longitude"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="latitude"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="bottom_depth"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
-    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
-    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
-    <elementParameter field="TABLE" name="THRESHLODS"/>
-    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
-  </connection>
-  <connection connectorName="FLOW" label="buoy_metadata" lineStyle="0" metaname="buoy_metadata" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tPostgresqlOutput_2">
-    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="station_name"/>
+      <elementValue elementRef="TRACE_COLUMN" value="site_name"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="wmo_id"/>
@@ -370,18 +288,6 @@
       <elementValue elementRef="TRACE_COLUMN" value="frequence"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="bottom_depth"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="geom"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="longitude"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="latitude"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -390,7 +296,7 @@
     <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
     <elementParameter field="TABLE" name="THRESHLODS"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="buoy_metadata"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
   </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlOutput_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlOutput_2" target="tPostgresqlCommit_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
