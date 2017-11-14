@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
+    <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value="81"/>
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
+    <contextParameter comment="" name="channel_id" prompt="channel_id?" promptNeeded="false" type="id_Integer" value=""/>
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="anmn_nrs_dar_yon"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="3mxS611BA6rhE80hj+8kRvT3q6F0Z4Tq"/>
@@ -9,13 +12,29 @@
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value=""/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/tmp/fileList"/>
+  </context>
+  <context confirmationNeeded="false" name="Deployment">
     <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Integer" value="81"/>
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
+    <contextParameter comment="" name="channel_id" prompt="channel_id?" promptNeeded="false" type="id_Integer" value=""/>
+    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="anmn_nrs_dar_yon"/>
+    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value=""/>
+    <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
+    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="anmn_nrs_dar_yon"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="#{node['talend']['destination_database_server']}"/>
+    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value=""/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value="/tmp/fileList"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="64"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="64"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="256"/>
     <elementParameter field="TEXT" name="SCHEMA_OPTIONS" value="none"/>
     <elementParameter field="TEXT" name="OEM_CUSTOM_ATTRIBUTE" value=""/>
     <elementParameter field="TEXT" name="HADOOP_APP_PATH" value=""/>
@@ -48,7 +67,7 @@
     <routinesParameter id="_cRn34BQsEeKRFb0vPU_LNg" name="DAPUtils"/>
     <routinesParameter id="_IMfY4Dp8EeKYTu4DLH4cKg" name="NetCDFUtils"/>
   </parameters>
-  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="512" posY="0">
+  <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="576" posY="288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="CHECK" name="CLOSE" value="false"/>
@@ -58,7 +77,7 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tPostgresqlCommit_1"/>
   </node>
-  <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="224">
+  <node componentName="tPostjob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="352" posY="448">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -66,7 +85,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="640" posY="224">
+  <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="576" posY="448">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
@@ -74,7 +93,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="0" posY="0">
+  <node componentName="tPostgresqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="320" posY="-192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_1"/>
     <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="CHECK" name="TSTATCATCHER_STATS" value="true"/>
@@ -97,7 +116,7 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
   </node>
-  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="256" posY="0">
+  <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="320" posY="288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -112,7 +131,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;DELETE FROM timeseries_feature_deployments_varname where channel_id = (SELECT DISTINCT(channel_id) from measurements_noqaqc where file_id = &quot; + context.file_id + &quot;  );&#xA;INSERT INTO timeseries_feature_deployments_varname (&#xA;WITH &#xA;table_a AS (SELECT distinct file_id, channel_id from measurements_noqaqc where file_id = &quot; + context.file_id + &quot;  ),&#xA;table_b AS (SELECT file_id, name AS \&quot;VARNAME\&quot; from variable where  ( variable.name !~ 'LATITUDE' AND  variable.name !~ 'LONGITUDE' AND variable.name !~ 'TIME' AND variable.name !~ 'NOMINAL_DEPTH' AND variable.name !~ '_quality_control') AND file_id = &quot; + context.file_id + &quot; ) ,&#xA;table_c AS (SELECT channel_id as channel_id, min(measurements_noqaqc.\&quot;TIME\&quot;) AS time_coverage_start, max(measurements_noqaqc.\&quot;TIME\&quot;) AS time_coverage_end&#xA;           FROM measurements_noqaqc where channel_id = (select distinct channel_id FROM measurements_noqaqc where file_id = &quot; + context.file_id + &quot; )&#xA;           GROUP BY measurements_noqaqc.channel_id ),&#xA;data as (SELECT   channel_id, \&quot;LATITUDE\&quot; ,  \&quot;LONGITUDE\&quot; ,  \&quot;NOMINAL_DEPTH\&quot; ,  geom ,  site_code from timeseries_feature_deployments  where channel_id = (SELECT DISTINCT(channel_id) from measurements_noqaqc where file_id = &quot; + context.file_id + &quot;  ))&#xA;&#xA;SELECT &#xA;distinct table_a.channel_id , &#xA;table_b.\&quot;VARNAME\&quot;  ,&#xA;\&quot;LATITUDE\&quot; ,  \&quot;LONGITUDE\&quot; , \&quot;NOMINAL_DEPTH\&quot; ,  geom ,  site_code,&#xA;table_c.time_coverage_start,table_c.time_coverage_end &#xA;&#xA;from data&#xA;&#xA;LEFT JOIN table_a  ON data.channel_id = table_a.channel_id&#xA;LEFT JOIN table_b  ON table_a.file_id = table_b.file_id&#xA;LEFT JOIN table_c  ON table_a.channel_id = table_c.channel_id);&#xA;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;DELETE FROM timeseries_feature_deployments_varname where channel_id = &quot; + context.channel_id + &quot;;&#xA;INSERT INTO timeseries_feature_deployments_varname (&#xA;WITH &#xA;table_b AS (SELECT &quot; + context.channel_id + &quot; as channel_id ,file_id, name AS \&quot;VARNAME\&quot; from variable where  ( variable.name !~ 'LATITUDE' AND  variable.name !~ 'LONGITUDE' AND variable.name !~ 'TIME' AND variable.name !~ 'NOMINAL_DEPTH' AND variable.name !~ '_quality_control') AND file_id = &quot; + context.file_id + &quot;) ,&#xA;table_c AS (SELECT channel_id, MIN(\&quot;TIME\&quot;) as time_coverage_start ,MAX(\&quot;TIME\&quot;) as time_coverage_end FROM (&#xA;    SELECT channel_id, \&quot;TIME\&quot; FROM measurements_noqaqc where channel_id = &quot; + context.channel_id + &quot;&#xA;    UNION ALL&#xA;    SELECT channel_id, \&quot;TIME\&quot; FROM measurements_qaqc where channel_id = &quot; + context.channel_id + &quot;) &#xA;    as subQuery GROUP BY channel_id),&#xA;data as (SELECT channel_id, \&quot;LATITUDE\&quot;, \&quot;LONGITUDE\&quot;, \&quot;NOMINAL_DEPTH\&quot;, geom, site_code from timeseries_feature_deployments where channel_id = &quot; + context.channel_id + &quot;)&#xA;&#xA;SELECT &#xA;distinct table_b.channel_id , &#xA;table_b.\&quot;VARNAME\&quot;  ,&#xA;\&quot;LATITUDE\&quot; , \&quot;LONGITUDE\&quot; , \&quot;NOMINAL_DEPTH\&quot; , geom, site_code, table_c.time_coverage_start, table_c.time_coverage_end&#xA;&#xA;from data&#xA;&#xA;LEFT JOIN table_b  ON data.channel_id = table_b.channel_id&#xA;LEFT JOIN table_c  ON data.channel_id = table_c.channel_id&#xA;);&#xA;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -131,17 +150,726 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
   </node>
+  <node componentName="iNetCDFGlobalAttributes" componentVersion="0.1" offsetLabelX="-50" offsetLabelY="37" posX="320" posY="0">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttributes_1"/>
+    <elementParameter field="FILE" name="FILENAME" value="context.base + &quot;/&quot; + context.url"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="iNetCDFGlobalAttributes_1">
+      <column comment="" key="false" name="author_email" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="aims_channel_id" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="quality_control_set" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="keywords" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="source" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="citation" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="author" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="references" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_reference_datum" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="file_version" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_positive" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="institution" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="distribution_statement" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="principal_investigator_email" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="institution_references" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_min" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="local_time_zone" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_units" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="data_centre_email" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="file_version_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="netcdf_version" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="data_centre" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="instrument" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="date_created" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="title" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="acknowledgement" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="principal_investigator" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="metadata_uuid" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="conventions" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="site_code" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="instrument_serial_number" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="project" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="naming_authority" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" length="40" name="time_coverage_start" nullable="true" pattern="" sourceType="" type="id_String" originalLength="40"/>
+      <column comment="" key="false" length="40" name="time_coverage_end" nullable="true" pattern="" sourceType="" type="id_String" originalLength="40"/>
+    </metadata>
+  </node>
+  <node componentName="tConvertType" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="512" posY="0">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tConvertType_1"/>
+    <elementParameter field="CHECK" name="AUTOCAST" value="true"/>
+    <elementParameter field="TABLE" name="MANUALTABLE"/>
+    <elementParameter field="CHECK" name="EMPTYTONULL" value="false"/>
+    <elementParameter field="CHECK" name="DIEONERROR" value="false"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tConvertType_1">
+      <column comment="" key="false" name="author_email" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="aims_channel_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" name="quality_control_set" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="keywords" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="source" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="citation" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="author" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="references" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_reference_datum" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="file_version" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_positive" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="institution" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="distribution_statement" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="principal_investigator_email" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="institution_references" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_min" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" key="false" name="local_time_zone" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_units" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="data_centre_email" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="file_version_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="netcdf_version" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="data_centre" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="instrument" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="date_created" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="title" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="acknowledgement" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="principal_investigator" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="metadata_uuid" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="conventions" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="site_code" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="instrument_serial_number" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="project" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="naming_authority" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="time_coverage_start" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="time_coverage_end" nullable="true" pattern="" sourceType="" type="id_String"/>
+    </metadata>
+    <metadata connector="REJECT" name="REJECT">
+      <column comment="" key="false" name="author_email" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="aims_channel_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" name="quality_control_set" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="keywords" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="source" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="citation" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="author" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="references" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_reference_datum" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="file_version" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_positive" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="institution" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="distribution_statement" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="principal_investigator_email" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="institution_references" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_min" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" key="false" name="local_time_zone" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_units" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="data_centre_email" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="file_version_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="netcdf_version" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="data_centre" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="instrument" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="date_created" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="title" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="acknowledgement" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="principal_investigator" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="metadata_uuid" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="conventions" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="site_code" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="instrument_serial_number" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="project" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="naming_authority" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="672" posY="0">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_1"/>
+    <elementParameter field="EXTERNAL" name="MAP" value=""/>
+    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="LINE"/>
+    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_D9tDwJujEeSbSejQaYnUrg-tMap_1-PREVIEW.bmp"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
+    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="out1">
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" name="author_email" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="aims_channel_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" name="quality_control_set" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="keywords" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="source" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="citation" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="author" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="references" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_reference_datum" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="file_version" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_positive" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="institution" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="distribution_statement" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="principal_investigator_email" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="institution_references" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_min" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" key="false" name="local_time_zone" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_units" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="data_centre_email" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="file_version_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="netcdf_version" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="data_centre" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="instrument" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="date_created" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="title" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="acknowledgement" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="principal_investigator" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="metadata_uuid" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="conventions" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="site_code" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="instrument_serial_number" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="project" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="naming_authority" nullable="true" pattern="" sourceType="" type="id_String"/>
+    </metadata>
+    <metadata connector="FLOW" name="setvar1">
+      <column comment="" key="false" name="aims_channel_id" nullable="false" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" name="geospatial_vertical_min" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" key="false" name="site_code" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="time_coverage_start" nullable="false" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="time_coverage_end" nullable="false" pattern="" sourceType="" type="id_String"/>
+    </metadata>
+    <nodeData xsi:type="MapperData">
+      <uiProperties/>
+      <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
+      <outputTables sizeState="INTERMEDIATE" name="out1">
+        <mapperTableEntries name="file_id" expression="context.fileId" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="author_email" expression="row6.author_email " type="id_String" nullable="true"/>
+        <mapperTableEntries name="aims_channel_id" expression="row6.aims_channel_id " type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="quality_control_set" expression="row6.quality_control_set " type="id_String" nullable="true"/>
+        <mapperTableEntries name="keywords" expression="row6.keywords " type="id_String" nullable="true"/>
+        <mapperTableEntries name="source" expression="row6.source " type="id_String" nullable="true"/>
+        <mapperTableEntries name="citation" expression="row6.citation " type="id_String" nullable="true"/>
+        <mapperTableEntries name="author" expression="row6.author " type="id_String" nullable="true"/>
+        <mapperTableEntries name="references" expression="row6.references " type="id_String" nullable="true"/>
+        <mapperTableEntries name="platform_code" expression="row6.platform_code " type="id_String" nullable="true"/>
+        <mapperTableEntries name="geospatial_vertical_reference_datum" expression="row6.geospatial_vertical_reference_datum " type="id_String" nullable="true"/>
+        <mapperTableEntries name="file_version" expression="row6.file_version " type="id_String" nullable="true"/>
+        <mapperTableEntries name="geospatial_vertical_positive" expression="row6.geospatial_vertical_positive " type="id_String" nullable="true"/>
+        <mapperTableEntries name="institution" expression="row6.institution " type="id_String" nullable="true"/>
+        <mapperTableEntries name="distribution_statement" expression="row6.distribution_statement " type="id_String" nullable="true"/>
+        <mapperTableEntries name="principal_investigator_email" expression="row6.principal_investigator_email " type="id_String" nullable="true"/>
+        <mapperTableEntries name="institution_references" expression="row6.institution_references " type="id_String" nullable="true"/>
+        <mapperTableEntries name="geospatial_vertical_min" expression="row6.geospatial_vertical_min " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="local_time_zone" expression="row6.local_time_zone " type="id_String" nullable="true"/>
+        <mapperTableEntries name="geospatial_vertical_max" expression="row6.geospatial_vertical_max " type="id_String" nullable="true"/>
+        <mapperTableEntries name="geospatial_vertical_units" expression="row6.geospatial_vertical_units " type="id_String" nullable="true"/>
+        <mapperTableEntries name="data_centre_email" expression="row6.data_centre_email " type="id_String" nullable="true"/>
+        <mapperTableEntries name="file_version_quality_control" expression="row6.file_version_quality_control " type="id_String" nullable="true"/>
+        <mapperTableEntries name="netcdf_version" expression="row6.netcdf_version " type="id_String" nullable="true"/>
+        <mapperTableEntries name="data_centre" expression="row6.data_centre " type="id_String" nullable="true"/>
+        <mapperTableEntries name="instrument" expression="row6.instrument " type="id_String" nullable="true"/>
+        <mapperTableEntries name="date_created" expression="row6.date_created " type="id_String" nullable="true"/>
+        <mapperTableEntries name="title" expression="row6.title " type="id_String" nullable="true"/>
+        <mapperTableEntries name="acknowledgement" expression="row6.acknowledgement " type="id_String" nullable="true"/>
+        <mapperTableEntries name="principal_investigator" expression="row6.principal_investigator " type="id_String" nullable="true"/>
+        <mapperTableEntries name="metadata_uuid" expression="row6.metadata_uuid " type="id_String" nullable="true"/>
+        <mapperTableEntries name="conventions" expression="row6.conventions " type="id_String" nullable="true"/>
+        <mapperTableEntries name="site_code" expression="row6.site_code " type="id_String" nullable="true"/>
+        <mapperTableEntries name="instrument_serial_number" expression="row6.instrument_serial_number " type="id_String" nullable="true"/>
+        <mapperTableEntries name="project" expression="row6.project " type="id_String" nullable="true"/>
+        <mapperTableEntries name="naming_authority" expression="row6.naming_authority " type="id_String" nullable="true"/>
+      </outputTables>
+      <outputTables sizeState="INTERMEDIATE" name="setvar1">
+        <mapperTableEntries name="aims_channel_id" expression="row6.aims_channel_id " type="id_Integer"/>
+        <mapperTableEntries name="geospatial_vertical_min" expression="row6.geospatial_vertical_min " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="site_code" expression="row6.site_code " type="id_String"/>
+        <mapperTableEntries name="time_coverage_start" expression="row6.time_coverage_start " type="id_String"/>
+        <mapperTableEntries name="time_coverage_end" expression="row6.time_coverage_end " type="id_String"/>
+      </outputTables>
+      <inputTables sizeState="INTERMEDIATE" name="row6" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
+        <mapperTableEntries name="author_email" type="id_String" nullable="true"/>
+        <mapperTableEntries name="aims_channel_id" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="quality_control_set" type="id_String" nullable="true"/>
+        <mapperTableEntries name="keywords" type="id_String" nullable="true"/>
+        <mapperTableEntries name="source" type="id_String" nullable="true"/>
+        <mapperTableEntries name="citation" type="id_String" nullable="true"/>
+        <mapperTableEntries name="author" type="id_String" nullable="true"/>
+        <mapperTableEntries name="references" type="id_String" nullable="true"/>
+        <mapperTableEntries name="platform_code" type="id_String" nullable="true"/>
+        <mapperTableEntries name="geospatial_vertical_reference_datum" type="id_String" nullable="true"/>
+        <mapperTableEntries name="file_version" type="id_String" nullable="true"/>
+        <mapperTableEntries name="geospatial_vertical_positive" type="id_String" nullable="true"/>
+        <mapperTableEntries name="institution" type="id_String" nullable="true"/>
+        <mapperTableEntries name="distribution_statement" type="id_String" nullable="true"/>
+        <mapperTableEntries name="principal_investigator_email" type="id_String" nullable="true"/>
+        <mapperTableEntries name="institution_references" type="id_String" nullable="true"/>
+        <mapperTableEntries name="geospatial_vertical_min" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="local_time_zone" type="id_String" nullable="true"/>
+        <mapperTableEntries name="geospatial_vertical_max" type="id_String" nullable="true"/>
+        <mapperTableEntries name="geospatial_vertical_units" type="id_String" nullable="true"/>
+        <mapperTableEntries name="data_centre_email" type="id_String" nullable="true"/>
+        <mapperTableEntries name="file_version_quality_control" type="id_String" nullable="true"/>
+        <mapperTableEntries name="netcdf_version" type="id_String" nullable="true"/>
+        <mapperTableEntries name="data_centre" type="id_String" nullable="true"/>
+        <mapperTableEntries name="instrument" type="id_String" nullable="true"/>
+        <mapperTableEntries name="date_created" type="id_String" nullable="true"/>
+        <mapperTableEntries name="title" type="id_String" nullable="true"/>
+        <mapperTableEntries name="acknowledgement" type="id_String" nullable="true"/>
+        <mapperTableEntries name="principal_investigator" type="id_String" nullable="true"/>
+        <mapperTableEntries name="metadata_uuid" type="id_String" nullable="true"/>
+        <mapperTableEntries name="conventions" type="id_String" nullable="true"/>
+        <mapperTableEntries name="site_code" type="id_String" nullable="true"/>
+        <mapperTableEntries name="instrument_serial_number" type="id_String" nullable="true"/>
+        <mapperTableEntries name="project" type="id_String" nullable="true"/>
+        <mapperTableEntries name="naming_authority" type="id_String" nullable="true"/>
+        <mapperTableEntries name="time_coverage_start" type="id_String" nullable="true"/>
+        <mapperTableEntries name="time_coverage_end" type="id_String" nullable="true"/>
+      </inputTables>
+    </nodeData>
+  </node>
+  <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="672" posY="160">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_1"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#xA;//&#xA;// multiply by 2 the row identifier&#xA;// output_row.id = input_row.id * 2;&#xA;//&#xA;// lowercase the name&#xA;// output_row.name = input_row.name.toLowerCase();&#xA;&#xA;context.channel_id = setvar1.aims_channel_id ;"/>
+    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <elementParameter field="CHECK" name="INFORMATION" value="false"/>
+    <elementParameter field="MEMO" name="COMMENT" value=""/>
+    <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <metadata connector="FLOW" name="tJavaRow_1">
+      <column comment="" key="false" name="file_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" name="author_email" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="aims_channel_id" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" name="quality_control_set" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="keywords" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="source" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="citation" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="author" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="references" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="platform_code" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_reference_datum" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="file_version" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_positive" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="institution" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="distribution_statement" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="principal_investigator_email" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="institution_references" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_min" nullable="true" pattern="" sourceType="" type="id_Double"/>
+      <column comment="" key="false" name="local_time_zone" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_max" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="geospatial_vertical_units" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="data_centre_email" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="file_version_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="netcdf_version" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="data_centre" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="instrument" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="date_created" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="title" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="acknowledgement" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="principal_investigator" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="metadata_uuid" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="conventions" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="site_code" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="instrument_serial_number" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="project" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="naming_authority" nullable="true" pattern="" sourceType="" type="id_String"/>
+    </metadata>
+  </node>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostjob_1" offsetLabelX="0" offsetLabelY="0" source="tPostjob_1" target="tPostgresqlClose_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk2"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="tPostgresqlRow_1">
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlConnection_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlConnection_1" target="iNetCDFGlobalAttributes_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk1"/>
   </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlRow_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_1" target="tPostgresqlCommit_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk3"/>
+  </connection>
+  <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="iNetCDFGlobalAttributes_1" offsetLabelX="0" offsetLabelY="0" source="iNetCDFGlobalAttributes_1" target="tConvertType_1">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="author_email"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="aims_channel_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="quality_control_set"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="keywords"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="source"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="citation"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="author"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="references"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="platform_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_reference_datum"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="file_version"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_positive"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="institution"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="distribution_statement"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="principal_investigator_email"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="institution_references"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_min"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="local_time_zone"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_max"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_units"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="data_centre_email"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="file_version_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="netcdf_version"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="data_centre"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="instrument"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="date_created"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="title"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="acknowledgement"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="principal_investigator"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="metadata_uuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="conventions"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="site_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="instrument_serial_number"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="project"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="naming_authority"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_start"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="iNetCDFGlobalAttributes_1" offsetLabelX="0" offsetLabelY="0" source="iNetCDFGlobalAttributes_1" target="tPostgresqlRow_1">
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
+  </connection>
+  <connection connectorName="FLOW" label="row6" lineStyle="0" metaname="tConvertType_1" offsetLabelX="0" offsetLabelY="0" source="tConvertType_1" target="tMap_1">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="author_email"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="aims_channel_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="quality_control_set"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="keywords"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="source"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="citation"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="author"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="references"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="platform_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_reference_datum"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="file_version"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_positive"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="institution"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="distribution_statement"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="principal_investigator_email"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="institution_references"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_min"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="local_time_zone"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_max"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_units"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="data_centre_email"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="file_version_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="netcdf_version"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="data_centre"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="instrument"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="date_created"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="title"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="acknowledgement"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="principal_investigator"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="metadata_uuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="conventions"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="site_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="instrument_serial_number"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="project"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="naming_authority"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_start"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row6"/>
+  </connection>
+  <connection connectorName="FLOW" label="setvar1" lineStyle="0" metaname="setvar1" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tJavaRow_1">
+    <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="file_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="author_email"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="aims_channel_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="quality_control_set"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="keywords"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="source"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="citation"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="author"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="references"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="platform_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_reference_datum"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="file_version"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_positive"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="institution"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="distribution_statement"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="principal_investigator_email"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="institution_references"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_min"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="local_time_zone"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_max"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="geospatial_vertical_units"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="data_centre_email"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="file_version_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="netcdf_version"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="data_centre"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="instrument"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="date_created"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="title"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="acknowledgement"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="principal_investigator"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="metadata_uuid"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="conventions"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="site_code"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="instrument_serial_number"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="project"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="naming_authority"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_end"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="time_coverage_start"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
+    <elementParameter field="TEXT" name="METTERLABEL" value="&quot;MyLabel&quot;"/>
+    <elementParameter field="CLOSED_LIST" name="ABSOLUTE" value="Absolute"/>
+    <elementParameter field="CONNECTION_LIST" name="CONNECTIONS" value=""/>
+    <elementParameter field="TABLE" name="THRESHLODS"/>
+    <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="setvar1"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
@@ -166,6 +894,13 @@
   </subjob>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttributes_1"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="File Attribute"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
