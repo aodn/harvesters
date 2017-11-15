@@ -121,8 +121,6 @@
     <elementParameter field="TABLE" name="TRIMSELECT">
       <elementValue elementRef="SCHEMA_COLUMN" value="FID"/>
       <elementValue elementRef="TRIM" value="false"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="ID"/>
-      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="RECORD_ID"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="PROJECT_ID"/>
@@ -147,6 +145,8 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="SAMPLE_DEPTH"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="DEPTH_COMMENTS"/>
+      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="REPLICATE"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="TOTAL_CHLA_UGL"/>
@@ -166,7 +166,6 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="metadata" name="tFileInputDelimited_1">
       <column comment="" key="false" length="50" name="FID" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="0" name="ID" nullable="true" pattern="" precision="0" type="id_Double"/>
       <column comment="" key="false" length="50" name="RECORD_ID" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="0" name="PROJECT_ID" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="50" name="SAMPLE_ID" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
@@ -179,13 +178,13 @@
       <column comment="" key="false" length="50" name="DAY" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="50" name="DATE_RESOLUTION" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="0" name="SAMPLE_DEPTH" nullable="true" pattern="" precision="0" type="id_Double"/>
+      <column comment="" key="false" length="255" name="DEPTH_COMMENTS" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="50" name="REPLICATE" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="50" name="TOTAL_CHLA_UGL" nullable="true" pattern="" precision="0" type="id_Double" originalLength="50"/>
       <column comment="" key="false" length="50" name="SAMPLING_METHOD" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
     </metadata>
     <metadata connector="REJECT" label="metadata" name="REJECT">
       <column comment="" key="false" length="50" name="FID" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="0" name="ID" nullable="true" pattern="" precision="0" type="id_Double"/>
       <column comment="" key="false" length="50" name="RECORD_ID" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="0" name="PROJECT_ID" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="50" name="SAMPLE_ID" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
@@ -198,6 +197,7 @@
       <column comment="" key="false" length="50" name="DAY" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="50" name="DATE_RESOLUTION" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="0" name="SAMPLE_DEPTH" nullable="true" pattern="" precision="0" type="id_Double"/>
+      <column comment="" key="false" length="255" name="DEPTH_COMMENTS" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="50" name="REPLICATE" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="50" name="TOTAL_CHLA_UGL" nullable="true" pattern="" precision="0" type="id_Double" originalLength="50"/>
       <column comment="" key="false" length="50" name="SAMPLING_METHOD" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
@@ -219,7 +219,6 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="csiro_harvest_pci" name="pci_record">
-      <column comment="" key="false" length="0" name="ID" nullable="true" pattern="" precision="0" type="id_Double"/>
       <column comment="" key="false" length="50" name="RECORD_ID" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="0" name="PROJECT_ID" nullable="true" pattern="" precision="0" type="id_String"/>
       <column comment="" key="false" length="50" name="SAMPLE_ID" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
@@ -232,6 +231,7 @@
       <column comment="" key="false" length="50" name="SAMPLE_DAY" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="50" name="DATE_RESOLUTION" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="0" name="SAMPLE_DEPTH" nullable="true" pattern="" precision="0" type="id_Double"/>
+      <column comment="" key="false" length="255" name="DEPTH_COMMENTS" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="50" name="REPLICATE" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="50" name="TOTAL_CHLA_UGL" nullable="true" pattern="" precision="0" type="id_Double" originalLength="50"/>
       <column comment="" key="false" length="50" name="SAMPLING_METHOD" nullable="true" pattern="" precision="0" type="id_String" originalLength="50"/>
@@ -241,7 +241,6 @@
       <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="pci_record">
-        <mapperTableEntries name="ID" expression="row1.ID " type="id_Double" nullable="true"/>
         <mapperTableEntries name="RECORD_ID" expression="row1.RECORD_ID " type="id_String" nullable="true"/>
         <mapperTableEntries name="PROJECT_ID" expression="row1.PROJECT_ID " type="id_String" nullable="true"/>
         <mapperTableEntries name="SAMPLE_ID" expression="row1.SAMPLE_ID " type="id_String" nullable="true"/>
@@ -254,6 +253,7 @@
         <mapperTableEntries name="SAMPLE_DAY" expression="row1.DAY " type="id_String" nullable="true"/>
         <mapperTableEntries name="DATE_RESOLUTION" expression="row1.DATE_RESOLUTION " type="id_String" nullable="true"/>
         <mapperTableEntries name="SAMPLE_DEPTH" expression="row1.SAMPLE_DEPTH " type="id_Double" nullable="true"/>
+        <mapperTableEntries name="DEPTH_COMMENTS" expression="row1.DEPTH_COMMENTS " type="id_String" nullable="true"/>
         <mapperTableEntries name="REPLICATE" expression="row1.REPLICATE " type="id_String" nullable="true"/>
         <mapperTableEntries name="TOTAL_CHLA_UGL" expression="row1.TOTAL_CHLA_UGL " type="id_Double" nullable="true"/>
         <mapperTableEntries name="SAMPLING_METHOD" expression="row1.SAMPLING_METHOD " type="id_String" nullable="true"/>
@@ -261,7 +261,6 @@
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row1" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="FID" type="id_String" nullable="true"/>
-        <mapperTableEntries name="ID" type="id_Double" nullable="true"/>
         <mapperTableEntries name="RECORD_ID" type="id_String" nullable="true"/>
         <mapperTableEntries name="PROJECT_ID" type="id_String" nullable="true"/>
         <mapperTableEntries name="SAMPLE_ID" type="id_String" nullable="true"/>
@@ -274,6 +273,7 @@
         <mapperTableEntries name="DAY" type="id_String" nullable="true"/>
         <mapperTableEntries name="DATE_RESOLUTION" type="id_String" nullable="true"/>
         <mapperTableEntries name="SAMPLE_DEPTH" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="DEPTH_COMMENTS" type="id_String" nullable="true"/>
         <mapperTableEntries name="REPLICATE" type="id_String" nullable="true"/>
         <mapperTableEntries name="TOTAL_CHLA_UGL" type="id_Double" nullable="true"/>
         <mapperTableEntries name="SAMPLING_METHOD" type="id_String" nullable="true"/>
@@ -305,11 +305,6 @@
     <elementParameter field="TABLE" name="ADD_COLS"/>
     <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
     <elementParameter field="TABLE" name="FIELD_OPTIONS">
-      <elementValue elementRef="SCHEMA_COLUMN" value="ID"/>
-      <elementValue elementRef="UPDATE_KEY" value="false"/>
-      <elementValue elementRef="DELETE_KEY" value="false"/>
-      <elementValue elementRef="UPDATABLE" value="true"/>
-      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="RECORD_ID"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -370,6 +365,11 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="DEPTH_COMMENTS"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="REPLICATE"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -401,7 +401,6 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="csiro_harvest_pci" name="iPostgresqlOutput_2">
-      <column comment="" key="false" length="0" name="ID" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="50" name="RECORD_ID" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="0" name="PROJECT_ID" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="SAMPLE_ID" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
@@ -414,13 +413,13 @@
       <column comment="" key="false" length="50" name="SAMPLE_DAY" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="50" name="DATE_RESOLUTION" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="0" name="SAMPLE_DEPTH" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="255" name="DEPTH_COMMENTS" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="50" name="REPLICATE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="50" name="TOTAL_CHLA_UGL" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
       <column comment="" key="false" length="50" name="SAMPLING_METHOD" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
       <column comment="" defaultValue="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
     </metadata>
     <metadata connector="REJECT" label="csiro_harvest_pci" name="REJECT">
-      <column comment="" key="false" length="0" name="ID" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" length="50" name="RECORD_ID" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="0" name="PROJECT_ID" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="50" name="SAMPLE_ID" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
@@ -433,6 +432,7 @@
       <column comment="" key="false" length="50" name="SAMPLE_DAY" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="50" name="DATE_RESOLUTION" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="0" name="SAMPLE_DEPTH" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double"/>
+      <column comment="" key="false" length="255" name="DEPTH_COMMENTS" nullable="true" pattern="" sourceType="" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="50" name="REPLICATE" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="50" name="TOTAL_CHLA_UGL" nullable="true" pattern="" precision="0" sourceType="FLOAT8" type="id_Double" originalLength="50"/>
       <column comment="" key="false" length="50" name="SAMPLING_METHOD" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
@@ -629,6 +629,9 @@
       <elementValue elementRef="TRACE_COLUMN" value="PT_GEOM"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DEPTH_COMMENTS"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -715,6 +718,9 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="SAMPLING_METHOD"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DEPTH_COMMENTS"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
