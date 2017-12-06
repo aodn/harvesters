@@ -261,4 +261,83 @@
     </changeSet>
 
 
+    <changeSet author="talend" id="duplicate_views" runOnChange="true">
+      <sql>
+        DROP VIEW IF EXISTS anmn_duplicate_timeseries CASCADE;
+
+        CREATE VIEW anmn_duplicate_timeseries AS
+          WITH deployments AS (
+              SELECT
+                m.deployment_code,
+                m.data_category,
+                m.file_version,
+                count(*) AS n_file,
+                count(distinct m.instrument) as n_instr,
+                count(distinct m.instrument_nominal_depth) as n_depth,
+                count(distinct m.instrument_serial_number) as n_sn,
+                count(DISTINCT substring(m.toolbox_input_file, '[^/\\\\]+$')) AS n_infile,
+                min(date(m.date_created)) as first_created,
+                max(date(m.date_created)) as last_created
+              FROM indexed_file i JOIN file_metadata m ON m.file_id = i.id
+              WHERE i.url LIKE 'IMOS/ANMN/%' AND
+                    data_category NOT LIKE '%_profiles' AND
+                    NOT m.deleted AND
+                    NOT m.realtime
+              GROUP BY deployment_code, data_category, file_version
+          )
+          SELECT
+            deployment_code,
+            data_category,
+            file_version,
+            n_file,
+            n_instr,
+            nullif(n_file - n_depth, 0) AS n_depth_dup,
+            nullif(n_file - n_sn, 0) AS n_sn_dup,
+            nullif(n_file - n_infile, 0) AS n_infile_dup,
+            last_created - first_created AS created_span_d,
+            last_created
+          FROM deployments
+          WHERE n_file &gt; 1 AND (n_depth &lt; n_file OR n_sn &lt; n_file)
+          ORDER BY deployment_code, data_category, file_version
+        ;
+
+        DROP VIEW IF EXISTS anmn_duplicate_profiles CASCADE;
+
+        CREATE VIEW anmn_duplicate_profiles AS
+          WITH profiles AS (
+              SELECT
+                m.site_code,
+                m.time_deployment_start,
+                m.file_version,
+                count(*) AS n_file,
+                count(DISTINCT m.instrument) as n_instr,
+                count(DISTINCT m.instrument_serial_number) as n_sn,
+                count(DISTINCT substring(m.toolbox_input_file, '[^/\\\\]+$')) AS n_infile,
+                min(date(m.date_created)) as first_created,
+                max(date(m.date_created)) as last_created
+              FROM indexed_file i JOIN file_metadata m ON m.file_id = i.id
+              WHERE i.url LIKE 'IMOS/ANMN/%' AND
+                    data_category LIKE '%_profiles' AND
+                    NOT m.deleted AND
+                    NOT m.realtime
+              GROUP BY m.site_code, m.time_deployment_start, m.file_version
+          )
+          SELECT
+            site_code,
+            time_deployment_start,
+            file_version,
+            n_file,
+            n_instr,
+            nullif(n_file - n_sn, 0) AS n_sn_dup,
+            nullif(n_file - n_infile, 0) AS n_infile_dup,
+            last_created - first_created AS created_span_d,
+            last_created
+          FROM profiles
+          WHERE n_file > 1
+          ORDER BY site_code, time_deployment_start, file_version
+        ;
+      </sql>
+    </changeSet>
+
+
 </databaseChangeLog>
