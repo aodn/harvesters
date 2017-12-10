@@ -213,4 +213,131 @@
     </changeSet>
 
 
+    <changeSet author="talend" id="moorings_currents_map_view" runOnChange="true">
+      <sql>
+        DROP VIEW IF EXISTS moorings_currents_map CASCADE;
+
+        CREATE VIEW moorings_currents_map AS
+          SELECT
+            -- file info
+            m.file_id,
+            i.url,
+            m.date_created AT TIME ZONE 'UTC' AS date_created,
+            i.first_indexed AT TIME ZONE 'UTC' AS date_published,
+            i.last_indexed AT TIME ZONE 'UTC' AS date_updated,
+            i.size,
+            m.feature_type,
+            m.file_version,
+            m.toolbox_version,
+            m.toolbox_input_file,
+            m.compliance_checker_version,
+            m.compliance_checker_imos_version,
+            m.compliance_checks_passed,
+            m.realtime,
+            CASE WHEN realtime THEN 'real-time' ELSE 'delayed' END AS data_mode,
+            -- time/location
+            m.site_code,
+            m.platform_code,
+            m.deployment_code,
+            m.data_category,
+            m.instrument,
+            m.instrument_serial_number,
+            m.instrument_nominal_depth,
+            m.time_deployment_start AT TIME ZONE 'UTC' AS time_deployment_start,
+            m.time_deployment_end AT TIME ZONE 'UTC' AS time_deployment_end,
+            m.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+            m.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
+            m.latitude,
+            m.longitude,
+            -- geometry
+            m.geom
+          FROM indexed_file i JOIN file_metadata m ON m.file_id = i.id
+          WHERE NOT m.deleted AND (
+                standard_names LIKE '%sea_water_velocity%' OR
+                standard_names LIKE '%sea_water_speed%'
+                )
+        ;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="duplicate_views" runOnChange="true">
+      <sql>
+        DROP VIEW IF EXISTS anmn_duplicate_timeseries CASCADE;
+
+        CREATE VIEW anmn_duplicate_timeseries AS
+          WITH deployments AS (
+              SELECT
+                m.deployment_code,
+                m.data_category,
+                m.file_version,
+                count(*) AS n_file,
+                count(distinct m.instrument) as n_instr,
+                count(distinct m.instrument_nominal_depth) as n_depth,
+                count(distinct m.instrument_serial_number) as n_sn,
+                count(DISTINCT substring(m.toolbox_input_file, '[^/\\\\]+$')) AS n_infile,
+                min(date(m.date_created)) as first_created,
+                max(date(m.date_created)) as last_created
+              FROM indexed_file i JOIN file_metadata m ON m.file_id = i.id
+              WHERE i.url LIKE 'IMOS/ANMN/%' AND
+                    data_category NOT LIKE '%_profiles' AND
+                    NOT m.deleted AND
+                    NOT m.realtime
+              GROUP BY deployment_code, data_category, file_version
+          )
+          SELECT
+            deployment_code,
+            data_category,
+            file_version,
+            n_file,
+            n_instr,
+            nullif(n_file - n_depth, 0) AS n_depth_dup,
+            nullif(n_file - n_sn, 0) AS n_sn_dup,
+            nullif(n_file - n_infile, 0) AS n_infile_dup,
+            last_created - first_created AS created_span_d,
+            last_created
+          FROM deployments
+          WHERE n_file &gt; 1 AND (n_depth &lt; n_file OR n_sn &lt; n_file)
+          ORDER BY deployment_code, data_category, file_version
+        ;
+
+        DROP VIEW IF EXISTS anmn_duplicate_profiles CASCADE;
+
+        CREATE VIEW anmn_duplicate_profiles AS
+          WITH profiles AS (
+              SELECT
+                m.site_code,
+                m.time_deployment_start,
+                m.file_version,
+                count(*) AS n_file,
+                count(DISTINCT m.instrument) as n_instr,
+                count(DISTINCT m.instrument_serial_number) as n_sn,
+                count(DISTINCT substring(m.toolbox_input_file, '[^/\\\\]+$')) AS n_infile,
+                min(date(m.date_created)) as first_created,
+                max(date(m.date_created)) as last_created
+              FROM indexed_file i JOIN file_metadata m ON m.file_id = i.id
+              WHERE i.url LIKE 'IMOS/ANMN/%' AND
+                    data_category LIKE '%_profiles' AND
+                    NOT m.deleted AND
+                    NOT m.realtime
+              GROUP BY m.site_code, m.time_deployment_start, m.file_version
+          )
+          SELECT
+            site_code,
+            time_deployment_start,
+            file_version,
+            n_file,
+            n_instr,
+            nullif(n_file - n_sn, 0) AS n_sn_dup,
+            nullif(n_file - n_infile, 0) AS n_infile_dup,
+            last_created - first_created AS created_span_d,
+            last_created
+          FROM profiles
+          WHERE n_file > 1
+          ORDER BY site_code, time_deployment_start, file_version
+        ;
+      </sql>
+    </changeSet>
+
+
 </databaseChangeLog>
