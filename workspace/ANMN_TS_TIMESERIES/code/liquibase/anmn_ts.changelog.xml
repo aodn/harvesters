@@ -51,6 +51,23 @@
     </changeSet>
 
 
+    <changeSet author="talend" id="create_geometry_index-1">
+      <sql>
+	CREATE INDEX timeseries_gist_idx ON timeseries USING GIST (geom);
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="drop_timeseries_unique_constraints">
+      <sql>
+	ALTER TABLE timeseries
+          DROP CONSTRAINT IF EXISTS timeseries_deployment_instrument_depth_uc,
+          DROP CONSTRAINT IF EXISTS timeseries_deployment_serial_number_uc
+        ;
+      </sql>
+    </changeSet>
+
+
     <changeSet author="talend" id="create_measurement_table-2">
       <sql>
 	CREATE TABLE measurement
@@ -77,13 +94,6 @@
 	      ON UPDATE CASCADE ON DELETE CASCADE
 	);
 	COMMENT ON COLUMN measurement.index IS 'index of measurement in netCDF file';
-      </sql>
-    </changeSet>
-
-
-    <changeSet author="talend" id="create_geometry_index-1">
-      <sql>
-	CREATE INDEX timeseries_gist_idx ON timeseries USING GIST (geom); 
       </sql>
     </changeSet>
 
@@ -168,5 +178,3 @@
 
 
 </databaseChangeLog>
-
-
