@@ -11,10 +11,10 @@
     <contextParameter comment="" name="Metadata_Password" prompt="Metadata_Password?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
     <contextParameter comment="" name="Metadata_SpatialColumn" prompt="Metadata_SpatialColumn?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="geom"/>
     <contextParameter comment="" name="Metadata_SpatialResolution" prompt="Metadata_SpatialResolution?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="1"/>
-    <contextParameter comment="" name="Metadata_SpatialTable_singlebeam" prompt="Metadata_SpatialTable_singlebeam?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="singlebeam_survey"/>
+    <contextParameter comment="" name="Metadata_SpatialTable_beachwatch" prompt="Metadata_SpatialTable_beachwatch?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="beachwatch_measurements"/>
     <contextParameter comment="" name="Metadata_URL" prompt="Metadata_URL?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="http://localhost:8080/geonetwork"/>
     <contextParameter comment="" name="Metadata_Username" prompt="Metadata_Username?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
-    <contextParameter comment="" name="Metadata_UUID_singlebeam" prompt="Metadata_UUID_singlebeam?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="8b2ddb75-2f29-4552-af6c-eac9b02156a6"/>
+    <contextParameter comment="" name="Metadata_UUID_beachwatch" prompt="Metadata_UUID_beachwatch?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="ffcee3c0-a1f1-47ee-ab90-34c618a88ab5"/>
   </context>
   <context confirmationNeeded="false" name="Deployment">
     <contextParameter comment="" name="file_id" prompt="file_id?" promptNeeded="false" type="id_Long" value=""/>
@@ -27,10 +27,10 @@
     <contextParameter comment="" name="Metadata_Password" prompt="Metadata_Password?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
     <contextParameter comment="" name="Metadata_SpatialColumn" prompt="Metadata_SpatialColumn?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="geom"/>
     <contextParameter comment="" name="Metadata_SpatialResolution" prompt="Metadata_SpatialResolution?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="1"/>
-    <contextParameter comment="" name="Metadata_SpatialTable_singlebeam" prompt="Metadata_SpatialTable_singlebeam?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="singlebeam_survey"/>
+    <contextParameter comment="" name="Metadata_SpatialTable_beachwatch" prompt="Metadata_SpatialTable_beachwatch?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="beachwatch_measurements"/>
     <contextParameter comment="" name="Metadata_URL" prompt="Metadata_URL?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="http://localhost:8080/geonetwork"/>
     <contextParameter comment="" name="Metadata_Username" prompt="Metadata_Username?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
-    <contextParameter comment="" name="Metadata_UUID_singlebeam" prompt="Metadata_UUID_singlebeam?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="8b2ddb75-2f29-4552-af6c-eac9b02156a6"/>
+    <contextParameter comment="" name="Metadata_UUID_beachwatch" prompt="Metadata_UUID_beachwatch?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="ffcee3c0-a1f1-47ee-ab90-34c618a88ab5"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -110,7 +110,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from singlebeam_survey where file_id = &quot; + context.file_id + &quot;;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from beachwatch_measurements where file_id = &quot; + context.file_id + &quot;;&quot;"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value="file_id"/>
@@ -207,13 +207,13 @@
     <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL"/>
     <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
     <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="context.Metadata_SpatialTable_singlebeam"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="context.Metadata_SpatialTable_beachwatch"/>
     <elementParameter field="TEXT" name="COLUMN" value="context.Metadata_SpatialColumn"/>
     <elementParameter field="TEXT" name="RESOLUTION" value="context.Metadata_SpatialResolution"/>
     <elementParameter field="TEXT" name="GN_SERVICE_URL" value="context.Metadata_URL"/>
     <elementParameter field="TEXT" name="GN_USERNAME" value="context.Metadata_Username"/>
     <elementParameter field="TEXT" name="GN_PASSWORD" value="context.Metadata_Password"/>
-    <elementParameter field="TEXT" name="UUID" value="context.Metadata_UUID_singlebeam"/>
+    <elementParameter field="TEXT" name="UUID" value="context.Metadata_UUID_beachwatch"/>
     <elementParameter field="RADIO" name="UPDATE_ALWAYS" value="true"/>
     <elementParameter field="RADIO" name="UPDATE_ON_CHANGE" value="false"/>
     <elementParameter field="TEXT" name="JOBNAME" value="&quot;index&quot;"/>
