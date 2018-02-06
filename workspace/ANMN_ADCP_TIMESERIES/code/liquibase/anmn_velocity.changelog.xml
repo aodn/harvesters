@@ -37,6 +37,8 @@
 	);
       </sql>
     </changeSet>
+
+
     <changeSet author="talend" id="update_geometry_column-1">
       <sql>
 	ALTER TABLE timeseries
@@ -45,12 +47,26 @@
 	CREATE INDEX timeseries_gist_idx ON timeseries USING GIST (geom); 
       </sql>
     </changeSet>
+
+
+    <changeSet author="talend" id="drop_timeseries_unique_constraints">
+      <sql>
+	ALTER TABLE timeseries
+          DROP CONSTRAINT IF EXISTS timeseries_deployment_instrument_depth_uc,
+          DROP CONSTRAINT IF EXISTS timeseries_deployment_serial_number_uc
+        ;
+      </sql>
+    </changeSet>
+
+
     <changeSet author="talend" id="drop_map_view-2">
       <preConditions onFail="MARK_RAN">
         <viewExists viewName="anmn_velocity_timeseries_map"/>
       </preConditions>
       <sql>drop view anmn_velocity_timeseries_map</sql>
     </changeSet>
+
+
     <changeSet author="talend" id="create_map_view-3">
       <sql>
 	CREATE OR REPLACE VIEW anmn_velocity_timeseries_map AS 
@@ -75,4 +91,5 @@
 	    FROM timeseries t JOIN indexed_file f ON t.file_id = f.id;
       </sql>
     </changeSet>
+
 </databaseChangeLog>
