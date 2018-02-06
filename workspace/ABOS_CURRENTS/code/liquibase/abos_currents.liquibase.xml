@@ -49,14 +49,14 @@
   </changeSet>
 
 
-    <changeSet author="talend" id="drop_timeseries_unique_constraints">
-      <sql>
+  <changeSet author="talend" id="drop_timeseries_unique_constraints">
+    <sql>
 	ALTER TABLE timeseries
           DROP CONSTRAINT IF EXISTS timeseries_deployment_instrument_depth_uc,
           DROP CONSTRAINT IF EXISTS timeseries_deployment_serial_number_uc
         ;
-      </sql>
-    </changeSet>
+    </sql>
+  </changeSet>
 
 
   <changeSet author="talend" id="drop_map_view-2">
@@ -67,7 +67,7 @@
   </changeSet>
 
 
-  <changeSet author="talend" id="create_map_view-3">
+  <changeSet author="talend" id="create_map_view-3" runOnChange="true">
     <sql>
 	CREATE OR REPLACE VIEW abos_currents_map AS
 	  SELECT
