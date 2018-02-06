@@ -52,6 +52,16 @@
     </changeSet>
 
 
+    <changeSet author="talend" id="timeseries_drop_unique_constraints">
+      <sql>
+	ALTER TABLE timeseries
+          DROP CONSTRAINT IF EXISTS timeseries_deployment_code_unique,
+          DROP CONSTRAINT IF EXISTS timeseries_platform_time_start_unique
+        ;
+      </sql>
+    </changeSet>
+
+
     <changeSet author="talend" id="create_measurement_table-1">
       <sql>
 	CREATE TABLE measurement
