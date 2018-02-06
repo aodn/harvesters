@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet author="talend" id="create_timeseries_table-1">
+      <sql>
+	CREATE TABLE timeseries
+	(
+	  id bigserial NOT NULL,
+	  file_id bigint NOT NULL,
+	  site_code text NOT NULL,
+	  platform_code text NOT NULL,
+	  deployment_code text NOT NULL,
+	  "LATITUDE" double precision,
+	  "LATITUDE_quality_control" character(1),
+	  "LONGITUDE" double precision,
+	  "LONGITUDE_quality_control" character(1),
+	  geom geometry(Geometry,4326),
+	  instrument_nominal_depth real,
+	  site_nominal_depth real,
+	  site_depth_at_deployment real,
+	  instrument text,
+	  instrument_serial_number text,
+	  time_coverage_start timestamp with time zone,
+	  time_coverage_end timestamp with time zone,
+	  time_deployment_start timestamp with time zone,
+	  time_deployment_end timestamp with time zone,
+	  comment text,
+	  history text,
+	  toolbox_version text,
+	  CONSTRAINT timeseries_pk PRIMARY KEY (id ),
+	  CONSTRAINT timeseries_file_fk FOREIGN KEY (file_id)
+	      REFERENCES indexed_file (id) MATCH SIMPLE
+	      ON UPDATE CASCADE ON DELETE CASCADE,
+	  CONSTRAINT timeseries_deployment_instrument_depth_uc UNIQUE (deployment_code, instrument, instrument_nominal_depth),
+	  CONSTRAINT timeseries_deployment_serial_number_uc UNIQUE (deployment_code, instrument_serial_number),
+          CONSTRAINT timeseries_geom_check CHECK (st_isvalid(geom))
+	);
+      </sql>
+    </changeSet>
+    <changeSet author="talend" id="update_geometry_column-1">
+      <sql>
+	ALTER TABLE timeseries
+	  ALTER COLUMN geom TYPE geometry(GEOMETRY, 4326)
+	  USING ST_SetSRID(geom,4326);
+	CREATE INDEX timeseries_gist_idx ON timeseries USING GIST (geom); 
+      </sql>
+    </changeSet>
+    <changeSet author="talend" id="drop_map_view-2">
+      <preConditions onFail="MARK_RAN">
+        <viewExists viewName="anmn_velocity_timeseries_map"/>
+      </preConditions>
+      <sql>drop view anmn_velocity_timeseries_map</sql>
+    </changeSet>
+    <changeSet author="talend" id="create_map_view-3">
+      <sql>
+	CREATE OR REPLACE VIEW anmn_velocity_timeseries_map AS 
+	  SELECT 
+	    t.id AS timeseries_id,
+	    f.url AS file_url,
+	    f.size,
+	    -- date(f.first_indexed AT TIME ZONE 'UTC') AS date_published,
+	    t.site_code,
+	    t.platform_code,
+	    t.deployment_code,
+	    t.geom,
+	    t."LATITUDE",
+	    t."LONGITUDE",
+	    t.instrument_nominal_depth,
+	    t.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+	    t.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
+	    t.time_deployment_start AT TIME ZONE 'UTC' AS time_deployment_start,
+	    t.time_deployment_end AT TIME ZONE 'UTC' AS time_deployment_end,
+	    t.instrument,
+	    t.instrument_serial_number
+	    FROM timeseries t JOIN indexed_file f ON t.file_id = f.id;
+      </sql>
+    </changeSet>
+</databaseChangeLog>
