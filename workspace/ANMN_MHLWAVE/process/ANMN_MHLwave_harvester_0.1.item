@@ -16,7 +16,7 @@
     <contextParameter comment="" name="Metadata_URL" prompt="Metadata_URL?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="http://localhost:8080/geonetwork"/>
     <contextParameter comment="" name="Metadata_Username" prompt="Metadata_Username?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="admin"/>
     <contextParameter comment="" name="Metadata_UUID" prompt="Metadata_UUID?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="bb7e9d82-3b9c-44c6-8e93-1ee9fd30bf21"/>
-    <contextParameter comment="" name="MHLwaveMetadata_File" prompt="MHLwaveMetadata_File?" promptNeeded="false" repositoryContextId="_TI8ikMOREeO5IbL9hkiqnw" type="id_File" value="/Users/bpasquer/Documents/MAPLAYER123/ANMN_MHLwave.csv"/>
+    <contextParameter comment="" name="MHLwaveMetadata_File" prompt="MHLwaveMetadata_File?" promptNeeded="false" repositoryContextId="_TI8ikMOREeO5IbL9hkiqnw" type="id_File" value="/vagrant/tmp/ANMN_MHLwave.csv"/>
     <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value="/"/>
     <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value="/vagrant/tmp/fileList"/>
   </context>
@@ -79,6 +79,7 @@
   </parameters>
   <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="224" posY="64">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tRunJob_1"/>
+    <elementParameter field="CHECK" name="START" value="true"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
@@ -167,6 +168,10 @@
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" name="tRunJob_5"/>
   </node>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tRunJob_1" offsetLabelX="0" offsetLabelY="0" source="tRunJob_1" target="tRunJob_5">
+    <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2"/>
+  </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tRunJob_3" offsetLabelX="0" offsetLabelY="0" source="tRunJob_3" target="tRunJob_4">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk1"/>
