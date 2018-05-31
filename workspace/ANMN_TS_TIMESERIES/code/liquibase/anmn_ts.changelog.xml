@@ -105,6 +105,16 @@
     </changeSet>
 
 
+    <changeSet author="talend" id="replace_time_index_with_utc-1">
+      <sql>
+        DROP INDEX IF EXISTS timeseries_time_idx ;
+
+        CREATE INDEX measurement_utc_time_idx
+          ON measurement (timezone('UTC'::text, "TIME"));
+      </sql>
+    </changeSet>
+
+
     <changeSet author="talend" id="create_map_view-2" runOnChange="true">
       <sql>
 	DROP VIEW IF EXISTS anmn_ts_timeseries_map;
