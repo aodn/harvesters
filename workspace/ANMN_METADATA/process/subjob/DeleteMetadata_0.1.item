@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
-    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="http://thredds.aodn.org.au/thredds/catalog/IMOS/ANFOG/catalog.html"/>
+    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="52"/>
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="IMOS/ANMN/NRS/REAL_TIME/NRSMAI/IMOS_ANMN-NRS_MT_20161109T231108Z_NRSMAI_FV00_NRSMAI-Surface-21-2016-11-MET.nc"/>
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="anmn_metadata"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_Password" value="0jV5hS6qWzGayvDt5YQgzg=="/>
@@ -10,7 +10,7 @@
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="anmn_metadata"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_eUZPoJNzEeOrg7p9UOD4pA" type="id_String" value="localhost"/>
     <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value="/s3/imos-data"/>
-    <contextParameter comment="" name="keepDeletedFiles" prompt="keepDeletedFiles?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_Boolean" value="true"/>
+    <contextParameter comment="Regular expression matched against entire URL to identify real-time files" name="realtimeRegex" prompt="realtimeRegex?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value=".*([Rr]eal-?time|REAL_TIME).*"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -335,15 +335,15 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk4"/>
   </connection>
-  <connection connectorName="RUN_IF" label="no_keep_deleted" lineStyle="6" metaname="tPostgresqlRow_4" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tPostgresqlRow_4" target="tPostgresqlRow_5">
-    <elementParameter field="MEMO_JAVA" name="CONDITION" value="context.keepDeletedFiles.equals(Boolean.FALSE)"/>
+  <connection connectorName="RUN_IF" label="real_time" lineStyle="6" metaname="tPostgresqlRow_4" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tPostgresqlRow_4" target="tPostgresqlRow_5">
+    <elementParameter field="MEMO_JAVA" name="CONDITION" value="context.url.matches(context.realtimeRegex)"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="no_keep_deleted"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="real_time"/>
   </connection>
-  <connection connectorName="RUN_IF" label="keep_deleted" lineStyle="6" metaname="tPostgresqlRow_4" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tPostgresqlRow_4" target="tPostgresqlRow_6">
-    <elementParameter field="MEMO_JAVA" name="CONDITION" value="context.keepDeletedFiles.equals(Boolean.TRUE)"/>
+  <connection connectorName="RUN_IF" label="delayed_mode" lineStyle="6" metaname="tPostgresqlRow_4" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tPostgresqlRow_4" target="tPostgresqlRow_6">
+    <elementParameter field="MEMO_JAVA" name="CONDITION" value="!context.url.matches(context.realtimeRegex)"/>
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="keep_deleted"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="delayed_mode"/>
   </connection>
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlRow_5" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlRow_5" target="tPostgresqlCommit_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
