@@ -85,7 +85,7 @@
       <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="" type="id_String"/>
       <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="" type="id_String"/>
       <column comment="" key="false" length="20" name="site_name" nullable="true" pattern="" sourceType="" type="id_String" originalLength="20"/>
-      <column comment="" key="false" name="depth" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" name="depth" nullable="true" pattern="" sourceType="" type="id_Float"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="704" posY="224">
@@ -110,7 +110,7 @@
       <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="" type="id_Date"/>
       <column comment="" key="false" name="latitude" nullable="true" pattern="" sourceType="" type="id_Double"/>
       <column comment="" key="false" name="longitude" nullable="true" pattern="" sourceType="" type="id_Double"/>
-      <column comment="" key="false" name="depth" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" name="depth" nullable="true" pattern="" sourceType="" type="id_Float"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="" type="id_Geometry"/>
     </metadata>
     <metadata connector="FLOW" label="platform_metadata" name="platform_metadata">
@@ -134,7 +134,7 @@
         <mapperTableEntries name="time_coverage_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row1.time_coverage_end,&quot;Z&quot;,&quot;+0000&quot;))   " type="id_Date" nullable="true"/>
         <mapperTableEntries name="latitude" expression="Var.latitude" type="id_Double" nullable="true"/>
         <mapperTableEntries name="longitude" expression="Var.longitude" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="depth" expression="row1.depth " type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="depth" expression="row1.depth " type="id_Float" nullable="true"/>
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(Var.longitude,Var.latitude,&quot;EPSG:4326&quot;) " type="id_Geometry" nullable="true"/>
       </outputTables>
       <outputTables sizeState="INTERMEDIATE" name="platform_metadata">
@@ -156,7 +156,7 @@
         <mapperTableEntries name="time_coverage_start" type="id_String" nullable="true"/>
         <mapperTableEntries name="time_coverage_end" type="id_String" nullable="true"/>
         <mapperTableEntries name="site_name" type="id_String" nullable="true"/>
-        <mapperTableEntries name="depth" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="depth" type="id_Float" nullable="true"/>
       </inputTables>
     </nodeData>
   </node>
@@ -253,7 +253,7 @@
       <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="latitude" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" name="longitude" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" name="depth" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="depth" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
@@ -265,7 +265,7 @@
       <column comment="" key="false" length="35" name="time_coverage_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" name="latitude" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
       <column comment="" key="false" name="longitude" nullable="true" pattern="" sourceType="FLOAT8" type="id_Double"/>
-      <column comment="" key="false" name="depth" nullable="true" pattern="" sourceType="INT4" type="id_Integer"/>
+      <column comment="" key="false" name="depth" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" name="geom" nullable="true" pattern="" sourceType="GEOMETRY" type="id_Geometry"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
@@ -403,7 +403,7 @@
       <column comment="" key="false" name="WMSH" nullable="true" pattern="" sourceType="" type="id_Float"/>
       <column comment="" key="false" name="WHTE" nullable="true" pattern="" sourceType="" type="id_Float"/>
       <column comment="" key="false" name="WPMH" nullable="true" pattern="" sourceType="" type="id_Float"/>
-      <column comment="" key="false" name="VDIR" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="WPDI" nullable="true" pattern="" sourceType="" type="id_Float"/>
       <column comment="" key="false" name="HRMS" nullable="true" pattern="" sourceType="" type="id_Float"/>
       <column comment="" key="false" name="TCREST" nullable="true" pattern="" sourceType="" type="id_Float"/>
       <column comment="" key="false" name="YRMS" nullable="true" pattern="" sourceType="" type="id_Float"/>
@@ -425,7 +425,7 @@
         <mapperTableEntries name="WMSH" expression="variables.WMSH" type="id_Float" nullable="true"/>
         <mapperTableEntries name="WHTE" expression="variables.WHTE" type="id_Float" nullable="true"/>
         <mapperTableEntries name="WPMH" expression="variables.VAVT " type="id_Float" nullable="true"/>
-        <mapperTableEntries name="VDIR" expression="variables.VDIR " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="WPDI" expression="variables.VDIR " type="id_Float" nullable="true"/>
         <mapperTableEntries name="HRMS" expression="variables.HRMS " type="id_Float" nullable="true"/>
         <mapperTableEntries name="TCREST" expression="variables.TCREST " type="id_Float" nullable="true"/>
         <mapperTableEntries name="YRMS" expression="variables.YRMS " type="id_Float" nullable="true"/>
@@ -532,7 +532,7 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
-      <elementValue elementRef="SCHEMA_COLUMN" value="VDIR"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="WPDI"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
@@ -583,7 +583,7 @@
       <column comment="" key="false" name="WMSH" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" name="WHTE" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" name="WPMH" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="VDIR" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="WPDI" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" name="HRMS" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" name="TCREST" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" name="YRMS" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
@@ -602,7 +602,7 @@
       <column comment="" key="false" name="WMSH" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" name="WHTE" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" name="WPMH" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" name="VDIR" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="WPDI" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" name="HRMS" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" name="TCREST" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" name="YRMS" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
@@ -1454,7 +1454,7 @@
       <elementValue elementRef="TRACE_COLUMN" value="HMAX"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="VDIR"/>
+      <elementValue elementRef="TRACE_COLUMN" value="WPDI"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="WMXH"/>
