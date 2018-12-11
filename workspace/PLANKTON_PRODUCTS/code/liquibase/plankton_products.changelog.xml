@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
-  <changeSet author="talend" id="cpr_phyto_htg_map">
+  <changeSet author="talend" id="table_cpr_phyto_htg">
     <sql>
-      CREATE TABLE cpr_phyto_htg_map (
+      CREATE TABLE cpr_phyto_htg (
         id bigserial PRIMARY KEY,
+        "Route" text NOT NULL,
         "Latitude" double precision NOT NULL,
         "Longitude" double precision NOT NULL,
         "SampleDateUTC" timestamp without time zone NOT NULL,
@@ -24,15 +25,16 @@
         geom geometry(Geometry,4326) CHECK (st_isvalid(geom))
       );
 
-      CREATE INDEX cpr_phyto_htg_map_gist_idx ON cpr_phyto_htg_map USING GIST (geom);
+      CREATE INDEX cpr_phyto_htg_gist_idx ON cpr_phyto_htg USING GIST (geom);
     </sql>
   </changeSet>
 
 
-  <changeSet author="talend" id="cpr_phyto_genus_map">
+  <changeSet author="talend" id="table_cpr_phyto_genus">
     <sql>
-      CREATE TABLE cpr_phyto_genus_map (
+      CREATE TABLE cpr_phyto_genus (
         id bigserial PRIMARY KEY,
+        "Route" text NOT NULL,
         "Latitude" double precision NOT NULL,
         "Longitude" double precision NOT NULL,
         "SampleDateUTC" timestamp without time zone NOT NULL,
@@ -153,15 +155,16 @@
         geom geometry(Geometry,4326) CHECK (st_isvalid(geom))
       );
 
-      CREATE INDEX cpr_phyto_genus_map_gist_idx ON cpr_phyto_genus_map USING GIST (geom);
+      CREATE INDEX cpr_phyto_genus_gist_idx ON cpr_phyto_genus USING GIST (geom);
     </sql>
   </changeSet>
 
 
-  <changeSet author="talend" id="cpr_phyto_species_map">
+  <changeSet author="talend" id="table_cpr_phyto_species">
     <sql>
-      CREATE TABLE cpr_phyto_species_map (
+      CREATE TABLE cpr_phyto_species (
         id bigserial PRIMARY KEY,
+        "Route" text NOT NULL,
         "Latitude" double precision NOT NULL,
         "Longitude" double precision NOT NULL,
         "SampleDateUTC" timestamp without time zone NOT NULL,
@@ -331,14 +334,14 @@
         geom geometry(Geometry,4326) CHECK (st_isvalid(geom))
       );
 
-      CREATE INDEX cpr_phyto_species_map_gist_idx ON cpr_phyto_species_map USING GIST (geom);
+      CREATE INDEX cpr_phyto_species_gist_idx ON cpr_phyto_species USING GIST (geom);
     </sql>
   </changeSet>
 
 
-  <changeSet author="talend" id="cpr_phyto_raw_map">
+  <changeSet author="talend" id="table_cpr_phyto_raw">
     <sql>
-      CREATE TABLE cpr_phyto_raw_map (
+      CREATE TABLE cpr_phyto_raw (
         id bigserial PRIMARY KEY,
         "Route" text NOT NULL,
         "Latitude" double precision NOT NULL,
@@ -699,7 +702,53 @@
         geom geometry(Geometry,4326) CHECK (st_isvalid(geom))
       );
 
-      CREATE INDEX cpr_phyto_raw_map_gist_idx ON cpr_phyto_raw_map USING GIST (geom);
+      CREATE INDEX cpr_phyto_raw_gist_idx ON cpr_phyto_raw USING GIST (geom);
+    </sql>
+  </changeSet>
+
+
+  <changeSet author="talend" id="drop_map_tables">
+    <sql>
+      DROP TABLE IF EXISTS cpr_phyto_htg_map CASCADE ;
+      DROP TABLE IF EXISTS cpr_phyto_genus_map CASCADE ;
+      DROP TABLE IF EXISTS cpr_phyto_species_map CASCADE ;
+      DROP TABLE IF EXISTS cpr_phyto_raw_map CASCADE ;
+    </sql>
+  </changeSet>
+
+
+  <changeSet author="talend" id="view_cpr_phyto_htg_map" runOnChange="true">
+    <sql>
+      DROP VIEW IF EXISTS cpr_phyto_htg_map CASCADE;
+      CREATE VIEW cpr_phyto_htg_map AS
+        SELECT * FROM cpr_phyto_htg ;
+    </sql>
+  </changeSet>
+
+
+  <changeSet author="talend" id="view_cpr_phyto_genus_map" runOnChange="true">
+    <sql>
+      DROP VIEW IF EXISTS cpr_phyto_genus_map CASCADE;
+      CREATE VIEW cpr_phyto_genus_map AS
+        SELECT * FROM cpr_phyto_genus ;
+    </sql>
+  </changeSet>
+
+
+  <changeSet author="talend" id="view_cpr_phyto_species_map" runOnChange="true">
+    <sql>
+      DROP VIEW IF EXISTS cpr_phyto_species_map CASCADE;
+      CREATE VIEW cpr_phyto_species_map AS
+        SELECT * FROM cpr_phyto_species ;
+    </sql>
+  </changeSet>
+
+
+  <changeSet author="talend" id="view_cpr_phyto_raw_map" runOnChange="true">
+    <sql>
+      DROP VIEW IF EXISTS cpr_phyto_raw_map CASCADE;
+      CREATE VIEW cpr_phyto_raw_map AS
+        SELECT * FROM cpr_phyto_raw ;
     </sql>
   </changeSet>
 

@@ -95,7 +95,7 @@ if __name__ == "__main__":
     if not name_match:
         raise ValueError("File name '{name}' doesn't match expected pattern!".format(name=os.path.basename(infile)))
     outfile = name_match.expand("\\1_\\2_\\3.csv")
-    table_name = name_match.expand("\\1_\\2_\\3_map")
+    table_name = name_match.expand("\\1_\\2_\\3")
     df = pd.read_csv(infile)
     df = df.iloc[:20]
 
