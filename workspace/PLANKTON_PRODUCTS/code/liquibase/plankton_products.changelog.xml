@@ -707,6 +707,55 @@
   </changeSet>
 
 
+  <changeSet author="talend" id="table_cpr_phyto_raw_flat">
+    <sql>
+      CREATE TABLE cpr_phyto_raw_flat (
+        id bigserial PRIMARY KEY,
+        "Route" text,
+        start_port text,
+        end_port text,
+        route_frequency text,
+        route_start_date text,
+        vessel_name text,
+        trip_code text,
+        "Longitude" double precision NOT NULL,
+        "Latitude" double precision NOT NULL,
+        "SampleDateUTC" timestamp without time zone NOT NULL,
+        taxon_name text,
+        family text,
+        genus text,
+        species text,
+        taxon_group text,
+        caab_code bigint,
+        taxon_start_date text,
+        taxon_per_m3 real,
+        phyto_comments text,
+        acknowledgements text,
+        geom geometry(Geometry,4326) CHECK (st_isvalid(geom))
+      );
+
+      CREATE INDEX cpr_phyto_raw_flat_gist_idx ON cpr_phyto_raw_flat USING GIST (geom);
+    </sql>
+  </changeSet>
+
+
+  <changeSet author="talend" id="table_cpr_phyto_taxon_changelog">
+    <sql>
+      CREATE TABLE cpr_phyto_taxon_changelog (
+        id bigserial PRIMARY KEY,
+        taxon_name text NOT NULL UNIQUE,
+        taxon_start_date text,
+        first_occurrence text,
+        parent_taxon_name text,
+        training text,
+        comments text
+      );
+
+      CREATE INDEX cpr_phyto_taxon_changelog_taxon_name_idx ON cpr_phyto_taxon_changelog (taxon_name);
+    </sql>
+  </changeSet>
+
+
   <changeSet author="talend" id="drop_map_tables">
     <sql>
       DROP TABLE IF EXISTS cpr_phyto_htg_map CASCADE ;
@@ -749,6 +798,21 @@
       DROP VIEW IF EXISTS cpr_phyto_raw_map CASCADE;
       CREATE VIEW cpr_phyto_raw_map AS
         SELECT * FROM cpr_phyto_raw ;
+    </sql>
+  </changeSet>
+
+
+  <changeSet author="talend" id="view_cpr_phyto_raw_flat_map" runOnChange="true">
+    <sql>
+      DROP VIEW IF EXISTS cpr_phyto_raw_flat_map CASCADE;
+      CREATE VIEW cpr_phyto_raw_flat_map AS
+        SELECT r.*,
+               c.first_occurrence,
+               c.parent_taxon_name,
+               c.training,
+               c.comments
+        FROM cpr_phyto_raw_flat r LEFT JOIN
+             cpr_phyto_taxon_changelog c USING (taxon_name, taxon_start_date) ;
     </sql>
   </changeSet>
 

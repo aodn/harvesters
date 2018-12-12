@@ -10,14 +10,60 @@ from collections import OrderedDict
 import numpy as np
 import pandas as pd
 
-FILENAME_PATTERN = re.compile(r"(cpr|nrs)_(phyto|zoop)_(htg|genus|species|raw|copes|noncopes)(.*).csv")
+FILENAME_PATTERN = re.compile(r"(cpr|nrs)_"
+                              r"(phyto|zoop)_"
+                              r"(htg|genus|species|raw_flat|raw|taxon_changelog|copes|noncopes)"
+                              r"(.*).csv")
 
-TIME_COLS = ('sampledateutc',)
+TEMPLATE_NROW = 100
+
+TIME_COLS = ('sampledateutc', 'time_utc')
 DOUBLE_COLS = ('latitude', 'longitude')
 REAL_TYPES = (np.float16, np.float32, np.float64)
 INT_TYPES = (np.int16, np.int32, np.int64)
 
-METADATA_COLS = ('route', 'latitude', 'longitude', 'sampledateutc', 'year', 'month', 'day', 'time_24hr')
+NOTNULL_COLS = ('latitude', 'longitude', 'sampledateutc', 'year', 'month', 'day', 'time_24hr')
+METADATA_COLS = ('latitude', 'longitude', 'sampledateutc', 'year', 'month', 'day', 'time_24hr',
+                 'route', 'geom', 'start_port', 'end_port', 'route_frequency', 'route_start_date',
+                 'vessel_name', 'trip_code', 'taxon_name', 'family', 'genus', 'species', 'taxon_group',
+                 'taxon_start_date', 'phyto_comments', 'acknowledgements', 'first_occurrence',
+                 'parent_taxon_name', 'training', 'comments'
+                 )
+
+COL_NAME_MAP = {
+    'route': 'Route',
+    'route_code': 'Route',
+    'latitude': 'Latitude',
+    'longitude': 'Longitude',
+    'time_utc': 'SampleDateUTC',
+    'sampledateutc': 'SampleDateUTC',
+    'year': 'Year',
+    'month': 'Month',
+    'day': 'Day',
+    'time_24hr': 'Time_24hr',
+    'start_port': 'start_port',
+    'end_port': 'end_port',
+    'route_frequency': 'route_frequency',
+    'route_start_date': 'route_start_date',
+    'vessel_name': 'vessel_name',
+    'trip_code': 'trip_code',
+    'taxon_name': 'taxon_name',
+    'family': 'family',
+    'genus': 'genus',
+    'species': 'species',
+    'taxon_group': 'taxon_group',
+    'taxon_start_date': 'taxon_start_date',
+    'phyto_comments': 'phyto_comments',
+    'acknowledgements': 'acknowledgements',
+    'first_occurrence': 'first_occurrence',
+    'parent_taxon_name': 'parent_taxon_name',
+    'training': 'training',
+    'comments': 'comments',
+    'caab_code': 'caab_code',
+    'taxon_per_m3': 'taxon_per_m3'
+}
+
+DROP_COLS = ('fid', 'unnamed', 'mid_pt')
 
 VALID_NAME_PATTERN = re.compile(r"^[A-Za-z_][A-Za-z0-9_.-]*$")
 
@@ -34,7 +80,7 @@ RENAME_STRINGS = [
 RENAME_PATTERNS = [(re.compile(p), r) for p, r in RENAME_STRINGS]
 
 HEADER = """
-  <changeSet author="talend" id="{name}">
+  <changeSet author="talend" id="table_{name}">
     <sql>
       CREATE TABLE {name} (
         id bigserial PRIMARY KEY,"""
@@ -82,6 +128,10 @@ def rename_column(colname):
     for pattern, repl in RENAME_PATTERNS:
         newname = pattern.sub(repl, newname)
 
+    mapped_name = COL_NAME_MAP.get(newname.lower())
+    if mapped_name:
+        newname = mapped_name
+
     return newname
 
 
@@ -97,7 +147,7 @@ if __name__ == "__main__":
     outfile = name_match.expand("\\1_\\2_\\3.csv")
     table_name = name_match.expand("\\1_\\2_\\3")
     df = pd.read_csv(infile)
-    df = df.iloc[:20]
+    df = df.iloc[:TEMPLATE_NROW]
 
     all_columns = []
     renamed_columns = OrderedDict()
@@ -106,19 +156,22 @@ if __name__ == "__main__":
     print(HEADER.format(name=table_name))
 
     for col in df.columns:
-        if "unnamed" in col.lower():  # Remove and skip "unnamed" columns
+        if col.lower() in DROP_COLS:
             df.drop(columns=col, inplace=True)
             continue
 
-        if col.lower() in METADATA_COLS:
+        cname = rename_column(col)
+        all_columns.append(cname)
+
+        if cname.lower() in NOTNULL_COLS:
             notnull = " NOT NULL"
         else:
             notnull = ""
+
+        if cname.lower() not in METADATA_COLS:
             df[col] = df[col].astype(np.float64)  # all data columns should be floats
 
         ctype = db_type(df, col)
-        cname = rename_column(col)
-        all_columns.append(cname)
 
         print('        "{cname}" {ctype}{notnull},'.format(cname=cname, ctype=ctype, notnull=notnull))
 
@@ -131,8 +184,8 @@ if __name__ == "__main__":
 
     print(FOOTER.format(name=table_name))
 
-    # for colname, newname in renamed_columns.items():
-    #     print("{:40} => {}".format(colname, newname))
+    for colname, newname in renamed_columns.items():
+        print("{:40} => {}".format(colname, newname))
 
     if warning_columns:
         print("WARNING! Weird named columns not renamed: {warning_columns}".format(warning_columns=warning_columns))
