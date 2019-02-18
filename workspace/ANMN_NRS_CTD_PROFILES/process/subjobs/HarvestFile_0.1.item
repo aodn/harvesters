@@ -11,8 +11,8 @@
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_b2CKgHgOEeOMHsnb02Unfg" type="id_String" value="null"/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value=""/>
-    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value=""/>
-    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value="/tmp/fileList"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value="/s3/imos-data"/>
+    <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_f-6rcHgOEeOMHsnb02Unfg" type="id_String" value="/vagrant/src/tmp/manifest.txt"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -315,6 +315,10 @@
       <column comment="" defaultValue="" key="false" length="1" name="DESC_quality_control" nullable="true" pattern="" sourceType="" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" length="1" name="DENS_quality_control" nullable="true" pattern="" sourceType="" type="id_Integer"/>
       <column comment="" defaultValue="" key="false" length="1" name="PRES_REL_quality_control" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" name="CPHL" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="CPHL_quality_control" nullable="true" pattern="" sourceType="" type="id_Integer"/>
+      <column comment="" key="false" name="CHLU" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="CHLU_quality_control" nullable="true" pattern="" sourceType="" type="id_Integer"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="256" posY="352">
@@ -363,9 +367,13 @@
       <column comment="" key="false" name="DESC_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="DENS_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
       <column comment="" key="false" name="PRES_REL_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="CPHL" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="CPHL_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
+      <column comment="" key="false" name="CHLU" nullable="true" pattern="" sourceType="" type="id_Float"/>
+      <column comment="" key="false" name="CHLU_quality_control" nullable="true" pattern="" sourceType="" type="id_String"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="TIME_quality_control" expression="variables.TIME_quality_control==null?null:variables.TIME_quality_control.toString()   " type="id_String" nullable="true"/>
         <mapperTableEntries name="LATITUDE_quality_control" expression="variables.LATITUDE_quality_control==null?null:variables.LATITUDE_quality_control.toString()   " type="id_String" nullable="true"/>
@@ -416,6 +424,10 @@
         <mapperTableEntries name="DESC_quality_control" expression="Var.DESC_quality_control " type="id_String" nullable="true"/>
         <mapperTableEntries name="DENS_quality_control" expression="Var.DENS_quality_control " type="id_String" nullable="true"/>
         <mapperTableEntries name="PRES_REL_quality_control" expression="Var.PRES_REL_quality_control " type="id_String" nullable="true"/>
+        <mapperTableEntries name="CPHL" expression="variables.CPHL " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="CPHL_quality_control" expression="variables.CPHL_quality_control==null ? null : variables.CPHL_quality_control.toString()  " type="id_String" nullable="true"/>
+        <mapperTableEntries name="CHLU" expression="variables.CHLU " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="CHLU_quality_control" expression="variables.CHLU_quality_control==null ? null : variables.CHLU_quality_control.toString()  " type="id_String" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="variables" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="DEPTH" type="id_Float" nullable="true"/>
@@ -449,6 +461,10 @@
         <mapperTableEntries name="DESC_quality_control" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="DENS_quality_control" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="PRES_REL_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="CPHL" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="CPHL_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="CHLU" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="CHLU_quality_control" type="id_Integer" nullable="true"/>
       </inputTables>
     </nodeData>
   </node>
@@ -637,6 +653,26 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="CPHL"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="CPHL_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="CHLU"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="CHLU_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -679,6 +715,10 @@
       <column comment="" key="false" name="DESC_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="DENS_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="PRES_REL_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="CPHL" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="CPHL_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="CHLU" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="CHLU_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column comment="" defaultValue="" key="false" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer"/>
@@ -713,6 +753,10 @@
       <column comment="" key="false" name="DESC_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="DENS_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" name="PRES_REL_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="CPHL" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="CPHL_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" name="CHLU" nullable="true" pattern="" sourceType="FLOAT4" type="id_Float"/>
+      <column comment="" key="false" name="CHLU_quality_control" nullable="true" pattern="" sourceType="VARCHAR" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -1296,6 +1340,18 @@
       <elementValue elementRef="TRACE_COLUMN" value="CHLF_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="CPHL"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="CHLU_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="CHLU"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="CPHL_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="CHECK" name="USEROWLABEL" value="true"/>
@@ -1674,6 +1730,18 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="CHLF_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="CPHL"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="CHLU_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="CHLU"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="CPHL_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
