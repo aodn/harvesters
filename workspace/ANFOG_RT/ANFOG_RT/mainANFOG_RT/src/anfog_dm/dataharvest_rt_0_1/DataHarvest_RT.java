@@ -439,10 +439,10 @@ public class DataHarvest_RT implements TalendJob {
 		tPostgresqlInput_1_onSubJobError(exception, errorComponent, globalMap);
 	}
 
-	public void iPostgresqlOutput_1_error(java.lang.Exception exception,
+	public void tDBOutput_1_error(java.lang.Exception exception,
 			String errorComponent, final java.util.Map<String, Object> globalMap)
 			throws TalendException {
-		end_Hash.put("iPostgresqlOutput_1", System.currentTimeMillis());
+		end_Hash.put("tDBOutput_1", System.currentTimeMillis());
 
 		status = "failure";
 
@@ -469,10 +469,10 @@ public class DataHarvest_RT implements TalendJob {
 		tPostgresqlInput_1_onSubJobError(exception, errorComponent, globalMap);
 	}
 
-	public void iPostgresqlOutput_2_error(java.lang.Exception exception,
+	public void tDBOutput_2_error(java.lang.Exception exception,
 			String errorComponent, final java.util.Map<String, Object> globalMap)
 			throws TalendException {
-		end_Hash.put("iPostgresqlOutput_2", System.currentTimeMillis());
+		end_Hash.put("tDBOutput_2", System.currentTimeMillis());
 
 		status = "failure";
 
@@ -3542,58 +3542,58 @@ public class DataHarvest_RT implements TalendJob {
 					NB_ITERATE_iNetCDFGlobalAttributes_1++;
 
 					/**
-					 * [iPostgresqlOutput_1 begin ] start
+					 * [tDBOutput_1 begin ] start
 					 */
 
-					ok_Hash.put("iPostgresqlOutput_1", false);
-					start_Hash.put("iPostgresqlOutput_1", System
+					ok_Hash.put("tDBOutput_1", false);
+					start_Hash.put("tDBOutput_1", System
 							.currentTimeMillis());
-					currentComponent = "iPostgresqlOutput_1";
+					currentComponent = "tDBOutput_1";
 
-					int tos_count_iPostgresqlOutput_1 = 0;
+					int tos_count_tDBOutput_1 = 0;
 
-					String dbschema_iPostgresqlOutput_1 = null;
-					dbschema_iPostgresqlOutput_1 = (String) globalMap
+					String dbschema_tDBOutput_1 = null;
+					dbschema_tDBOutput_1 = (String) globalMap
 							.get("schema_" + "tPostgresqlConnection_1");
 
-					String tableName_iPostgresqlOutput_1 = null;
-					if (dbschema_iPostgresqlOutput_1 == null
-							|| dbschema_iPostgresqlOutput_1.trim().length() == 0) {
-						tableName_iPostgresqlOutput_1 = "deployments";
+					String tableName_tDBOutput_1 = null;
+					if (dbschema_tDBOutput_1 == null
+							|| dbschema_tDBOutput_1.trim().length() == 0) {
+						tableName_tDBOutput_1 = "deployments";
 					} else {
-						tableName_iPostgresqlOutput_1 = dbschema_iPostgresqlOutput_1
+						tableName_tDBOutput_1 = dbschema_tDBOutput_1
 								+ "\".\"" + "deployments";
 					}
 
-					int nb_line_iPostgresqlOutput_1 = 0;
-					int nb_line_update_iPostgresqlOutput_1 = 0;
-					int nb_line_inserted_iPostgresqlOutput_1 = 0;
-					int nb_line_deleted_iPostgresqlOutput_1 = 0;
-					int nb_line_rejected_iPostgresqlOutput_1 = 0;
+					int nb_line_tDBOutput_1 = 0;
+					int nb_line_update_tDBOutput_1 = 0;
+					int nb_line_inserted_tDBOutput_1 = 0;
+					int nb_line_deleted_tDBOutput_1 = 0;
+					int nb_line_rejected_tDBOutput_1 = 0;
 
-					int deletedCount_iPostgresqlOutput_1 = 0;
-					int updatedCount_iPostgresqlOutput_1 = 0;
-					int insertedCount_iPostgresqlOutput_1 = 0;
-					int rejectedCount_iPostgresqlOutput_1 = 0;
+					int deletedCount_tDBOutput_1 = 0;
+					int updatedCount_tDBOutput_1 = 0;
+					int insertedCount_tDBOutput_1 = 0;
+					int rejectedCount_tDBOutput_1 = 0;
 
-					boolean whetherReject_iPostgresqlOutput_1 = false;
+					boolean whetherReject_tDBOutput_1 = false;
 
-					java.sql.Connection conn_iPostgresqlOutput_1 = null;
-					conn_iPostgresqlOutput_1 = (java.sql.Connection) globalMap
+					java.sql.Connection conn_tDBOutput_1 = null;
+					conn_tDBOutput_1 = (java.sql.Connection) globalMap
 							.get("conn_tPostgresqlConnection_1");
 
-					int batchSize_iPostgresqlOutput_1 = 10000;
-					int batchSizeCounter_iPostgresqlOutput_1 = 0;
+					int batchSize_tDBOutput_1 = 10000;
+					int batchSizeCounter_tDBOutput_1 = 0;
 
-					int count_iPostgresqlOutput_1 = 0;
-					String insert_iPostgresqlOutput_1 = "INSERT INTO \""
-							+ tableName_iPostgresqlOutput_1
+					int count_tDBOutput_1 = 0;
+					String insert_tDBOutput_1 = "INSERT INTO \""
+							+ tableName_tDBOutput_1
 							+ "\" (\"file_id\",\"title\",\"time_coverage_start\",\"time_coverage_end\",\"platform_code\",\"cdm_data_type\",\"geospatial_lon_max\",\"geospatial_lat_min\",\"geospatial_vertical_min\",\"geospatial_lat_max\",\"geospatial_lon_min\",\"geospatial_vertical_max\",\"quality_control_set\") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-					java.sql.PreparedStatement pstmt_iPostgresqlOutput_1 = conn_iPostgresqlOutput_1
-							.prepareStatement(insert_iPostgresqlOutput_1);
+					java.sql.PreparedStatement pstmt_tDBOutput_1 = conn_tDBOutput_1
+							.prepareStatement(insert_tDBOutput_1);
 
 					/**
-					 * [iPostgresqlOutput_1 begin ] stop
+					 * [tDBOutput_1 begin ] stop
 					 */
 
 					/**
@@ -3802,128 +3802,128 @@ public class DataHarvest_RT implements TalendJob {
 						if (deployment != null) {
 
 							/**
-							 * [iPostgresqlOutput_1 main ] start
+							 * [tDBOutput_1 main ] start
 							 */
 
-							currentComponent = "iPostgresqlOutput_1";
+							currentComponent = "tDBOutput_1";
 
-							whetherReject_iPostgresqlOutput_1 = false;
-							pstmt_iPostgresqlOutput_1.setInt(1,
+							whetherReject_tDBOutput_1 = false;
+							pstmt_tDBOutput_1.setInt(1,
 									deployment.file_id);
 
 							if (deployment.title == null) {
-								pstmt_iPostgresqlOutput_1.setNull(2,
+								pstmt_tDBOutput_1.setNull(2,
 										java.sql.Types.VARCHAR);
 							} else {
-								pstmt_iPostgresqlOutput_1.setString(2,
+								pstmt_tDBOutput_1.setString(2,
 										deployment.title);
 							}
 
 							if (deployment.time_coverage_start == null) {
-								pstmt_iPostgresqlOutput_1.setNull(3,
+								pstmt_tDBOutput_1.setNull(3,
 										java.sql.Types.VARCHAR);
 							} else {
-								pstmt_iPostgresqlOutput_1.setString(3,
+								pstmt_tDBOutput_1.setString(3,
 										deployment.time_coverage_start);
 							}
 
 							if (deployment.time_coverage_end == null) {
-								pstmt_iPostgresqlOutput_1.setNull(4,
+								pstmt_tDBOutput_1.setNull(4,
 										java.sql.Types.VARCHAR);
 							} else {
-								pstmt_iPostgresqlOutput_1.setString(4,
+								pstmt_tDBOutput_1.setString(4,
 										deployment.time_coverage_end);
 							}
 
 							if (deployment.platform_code == null) {
-								pstmt_iPostgresqlOutput_1.setNull(5,
+								pstmt_tDBOutput_1.setNull(5,
 										java.sql.Types.VARCHAR);
 							} else {
-								pstmt_iPostgresqlOutput_1.setString(5,
+								pstmt_tDBOutput_1.setString(5,
 										deployment.platform_code);
 							}
 
 							if (deployment.cdm_data_type == null) {
-								pstmt_iPostgresqlOutput_1.setNull(6,
+								pstmt_tDBOutput_1.setNull(6,
 										java.sql.Types.VARCHAR);
 							} else {
-								pstmt_iPostgresqlOutput_1.setString(6,
+								pstmt_tDBOutput_1.setString(6,
 										deployment.cdm_data_type);
 							}
 
 							if (deployment.geospatial_lon_max == null) {
-								pstmt_iPostgresqlOutput_1.setNull(7,
+								pstmt_tDBOutput_1.setNull(7,
 										java.sql.Types.VARCHAR);
 							} else {
-								pstmt_iPostgresqlOutput_1.setString(7,
+								pstmt_tDBOutput_1.setString(7,
 										deployment.geospatial_lon_max);
 							}
 
 							if (deployment.geospatial_lat_min == null) {
-								pstmt_iPostgresqlOutput_1.setNull(8,
+								pstmt_tDBOutput_1.setNull(8,
 										java.sql.Types.VARCHAR);
 							} else {
-								pstmt_iPostgresqlOutput_1.setString(8,
+								pstmt_tDBOutput_1.setString(8,
 										deployment.geospatial_lat_min);
 							}
 
 							if (deployment.geospatial_vertical_min == null) {
-								pstmt_iPostgresqlOutput_1.setNull(9,
+								pstmt_tDBOutput_1.setNull(9,
 										java.sql.Types.VARCHAR);
 							} else {
-								pstmt_iPostgresqlOutput_1.setString(9,
+								pstmt_tDBOutput_1.setString(9,
 										deployment.geospatial_vertical_min);
 							}
 
 							if (deployment.geospatial_lat_max == null) {
-								pstmt_iPostgresqlOutput_1.setNull(10,
+								pstmt_tDBOutput_1.setNull(10,
 										java.sql.Types.VARCHAR);
 							} else {
-								pstmt_iPostgresqlOutput_1.setString(10,
+								pstmt_tDBOutput_1.setString(10,
 										deployment.geospatial_lat_max);
 							}
 
 							if (deployment.geospatial_lon_min == null) {
-								pstmt_iPostgresqlOutput_1.setNull(11,
+								pstmt_tDBOutput_1.setNull(11,
 										java.sql.Types.VARCHAR);
 							} else {
-								pstmt_iPostgresqlOutput_1.setString(11,
+								pstmt_tDBOutput_1.setString(11,
 										deployment.geospatial_lon_min);
 							}
 
 							if (deployment.geospatial_vertical_max == null) {
-								pstmt_iPostgresqlOutput_1.setNull(12,
+								pstmt_tDBOutput_1.setNull(12,
 										java.sql.Types.VARCHAR);
 							} else {
-								pstmt_iPostgresqlOutput_1.setString(12,
+								pstmt_tDBOutput_1.setString(12,
 										deployment.geospatial_vertical_max);
 							}
 
 							if (deployment.quality_control_set == null) {
-								pstmt_iPostgresqlOutput_1.setNull(13,
+								pstmt_tDBOutput_1.setNull(13,
 										java.sql.Types.VARCHAR);
 							} else {
-								pstmt_iPostgresqlOutput_1.setString(13,
+								pstmt_tDBOutput_1.setString(13,
 										deployment.quality_control_set);
 							}
 
-							pstmt_iPostgresqlOutput_1.addBatch();
-							nb_line_iPostgresqlOutput_1++;
+							pstmt_tDBOutput_1.addBatch();
+							nb_line_tDBOutput_1++;
 
-							batchSizeCounter_iPostgresqlOutput_1++;
+							batchSizeCounter_tDBOutput_1++;
 
-							if (batchSize_iPostgresqlOutput_1 <= batchSizeCounter_iPostgresqlOutput_1) {
+							if (batchSize_tDBOutput_1 <= batchSizeCounter_tDBOutput_1) {
 								try {
-									int countSum_iPostgresqlOutput_1 = 0;
-									for (int countEach_iPostgresqlOutput_1 : pstmt_iPostgresqlOutput_1
+									int countSum_tDBOutput_1 = 0;
+									for (int countEach_tDBOutput_1 : pstmt_tDBOutput_1
 											.executeBatch()) {
-										countSum_iPostgresqlOutput_1 += (countEach_iPostgresqlOutput_1 < 0 ? 0
-												: countEach_iPostgresqlOutput_1);
+										countSum_tDBOutput_1 += (countEach_tDBOutput_1 < 0 ? 0
+												: countEach_tDBOutput_1);
 									}
 
-									insertedCount_iPostgresqlOutput_1 += countSum_iPostgresqlOutput_1;
+									insertedCount_tDBOutput_1 += countSum_tDBOutput_1;
 
-									batchSizeCounter_iPostgresqlOutput_1 = 0;
+									batchSizeCounter_tDBOutput_1 = 0;
 								} catch (java.sql.BatchUpdateException e) {
 
 									System.err
@@ -3953,10 +3953,10 @@ public class DataHarvest_RT implements TalendJob {
 
 							}
 
-							tos_count_iPostgresqlOutput_1++;
+							tos_count_tDBOutput_1++;
 
 							/**
-							 * [iPostgresqlOutput_1 main ] stop
+							 * [tDBOutput_1 main ] stop
 							 */
 
 						} // End of branch "deployment"
@@ -4009,22 +4009,22 @@ public class DataHarvest_RT implements TalendJob {
 					 */
 
 					/**
-					 * [iPostgresqlOutput_1 end ] start
+					 * [tDBOutput_1 end ] start
 					 */
 
-					currentComponent = "iPostgresqlOutput_1";
+					currentComponent = "tDBOutput_1";
 
 					try {
-						int countSum_iPostgresqlOutput_1 = 0;
-						if (pstmt_iPostgresqlOutput_1 != null) {
-							for (int countEach_iPostgresqlOutput_1 : pstmt_iPostgresqlOutput_1
+						int countSum_tDBOutput_1 = 0;
+						if (pstmt_tDBOutput_1 != null) {
+							for (int countEach_tDBOutput_1 : pstmt_tDBOutput_1
 									.executeBatch()) {
-								countSum_iPostgresqlOutput_1 += (countEach_iPostgresqlOutput_1 < 0 ? 0
-										: countEach_iPostgresqlOutput_1);
+								countSum_tDBOutput_1 += (countEach_tDBOutput_1 < 0 ? 0
+										: countEach_tDBOutput_1);
 							}
 						}
 
-						insertedCount_iPostgresqlOutput_1 += countSum_iPostgresqlOutput_1;
+						insertedCount_tDBOutput_1 += countSum_tDBOutput_1;
 
 					} catch (java.sql.BatchUpdateException e) {
 
@@ -4051,95 +4051,95 @@ public class DataHarvest_RT implements TalendJob {
 
 					}
 
-					if (pstmt_iPostgresqlOutput_1 != null) {
+					if (pstmt_tDBOutput_1 != null) {
 
-						pstmt_iPostgresqlOutput_1.close();
+						pstmt_tDBOutput_1.close();
 
 					}
 
-					nb_line_deleted_iPostgresqlOutput_1 = nb_line_deleted_iPostgresqlOutput_1
-							+ deletedCount_iPostgresqlOutput_1;
-					nb_line_update_iPostgresqlOutput_1 = nb_line_update_iPostgresqlOutput_1
-							+ updatedCount_iPostgresqlOutput_1;
-					nb_line_inserted_iPostgresqlOutput_1 = nb_line_inserted_iPostgresqlOutput_1
-							+ insertedCount_iPostgresqlOutput_1;
-					nb_line_rejected_iPostgresqlOutput_1 = nb_line_rejected_iPostgresqlOutput_1
-							+ rejectedCount_iPostgresqlOutput_1;
+					nb_line_deleted_tDBOutput_1 = nb_line_deleted_tDBOutput_1
+							+ deletedCount_tDBOutput_1;
+					nb_line_update_tDBOutput_1 = nb_line_update_tDBOutput_1
+							+ updatedCount_tDBOutput_1;
+					nb_line_inserted_tDBOutput_1 = nb_line_inserted_tDBOutput_1
+							+ insertedCount_tDBOutput_1;
+					nb_line_rejected_tDBOutput_1 = nb_line_rejected_tDBOutput_1
+							+ rejectedCount_tDBOutput_1;
 
-					globalMap.put("iPostgresqlOutput_1_NB_LINE",
-							nb_line_iPostgresqlOutput_1);
-					globalMap.put("iPostgresqlOutput_1_NB_LINE_UPDATED",
-							nb_line_update_iPostgresqlOutput_1);
-					globalMap.put("iPostgresqlOutput_1_NB_LINE_INSERTED",
-							nb_line_inserted_iPostgresqlOutput_1);
-					globalMap.put("iPostgresqlOutput_1_NB_LINE_DELETED",
-							nb_line_deleted_iPostgresqlOutput_1);
-					globalMap.put("iPostgresqlOutput_1_NB_LINE_REJECTED",
-							nb_line_rejected_iPostgresqlOutput_1);
+					globalMap.put("tDBOutput_1_NB_LINE",
+							nb_line_tDBOutput_1);
+					globalMap.put("tDBOutput_1_NB_LINE_UPDATED",
+							nb_line_update_tDBOutput_1);
+					globalMap.put("tDBOutput_1_NB_LINE_INSERTED",
+							nb_line_inserted_tDBOutput_1);
+					globalMap.put("tDBOutput_1_NB_LINE_DELETED",
+							nb_line_deleted_tDBOutput_1);
+					globalMap.put("tDBOutput_1_NB_LINE_REJECTED",
+							nb_line_rejected_tDBOutput_1);
 
-					ok_Hash.put("iPostgresqlOutput_1", true);
-					end_Hash.put("iPostgresqlOutput_1", System
+					ok_Hash.put("tDBOutput_1", true);
+					end_Hash.put("tDBOutput_1", System
 							.currentTimeMillis());
 
 					/**
-					 * [iPostgresqlOutput_1 end ] stop
+					 * [tDBOutput_1 end ] stop
 					 */
 
 					NB_ITERATE_iNetCDFInput_1++;
 
 					/**
-					 * [iPostgresqlOutput_2 begin ] start
+					 * [tDBOutput_2 begin ] start
 					 */
 
-					ok_Hash.put("iPostgresqlOutput_2", false);
-					start_Hash.put("iPostgresqlOutput_2", System
+					ok_Hash.put("tDBOutput_2", false);
+					start_Hash.put("tDBOutput_2", System
 							.currentTimeMillis());
-					currentComponent = "iPostgresqlOutput_2";
+					currentComponent = "tDBOutput_2";
 
-					int tos_count_iPostgresqlOutput_2 = 0;
+					int tos_count_tDBOutput_2 = 0;
 
-					String dbschema_iPostgresqlOutput_2 = null;
-					dbschema_iPostgresqlOutput_2 = (String) globalMap
+					String dbschema_tDBOutput_2 = null;
+					dbschema_tDBOutput_2 = (String) globalMap
 							.get("schema_" + "tPostgresqlConnection_1");
 
-					String tableName_iPostgresqlOutput_2 = null;
-					if (dbschema_iPostgresqlOutput_2 == null
-							|| dbschema_iPostgresqlOutput_2.trim().length() == 0) {
-						tableName_iPostgresqlOutput_2 = "measurements";
+					String tableName_tDBOutput_2 = null;
+					if (dbschema_tDBOutput_2 == null
+							|| dbschema_tDBOutput_2.trim().length() == 0) {
+						tableName_tDBOutput_2 = "measurements";
 					} else {
-						tableName_iPostgresqlOutput_2 = dbschema_iPostgresqlOutput_2
+						tableName_tDBOutput_2 = dbschema_tDBOutput_2
 								+ "\".\"" + "measurements";
 					}
 
-					int nb_line_iPostgresqlOutput_2 = 0;
-					int nb_line_update_iPostgresqlOutput_2 = 0;
-					int nb_line_inserted_iPostgresqlOutput_2 = 0;
-					int nb_line_deleted_iPostgresqlOutput_2 = 0;
-					int nb_line_rejected_iPostgresqlOutput_2 = 0;
+					int nb_line_tDBOutput_2 = 0;
+					int nb_line_update_tDBOutput_2 = 0;
+					int nb_line_inserted_tDBOutput_2 = 0;
+					int nb_line_deleted_tDBOutput_2 = 0;
+					int nb_line_rejected_tDBOutput_2 = 0;
 
-					int deletedCount_iPostgresqlOutput_2 = 0;
-					int updatedCount_iPostgresqlOutput_2 = 0;
-					int insertedCount_iPostgresqlOutput_2 = 0;
-					int rejectedCount_iPostgresqlOutput_2 = 0;
+					int deletedCount_tDBOutput_2 = 0;
+					int updatedCount_tDBOutput_2 = 0;
+					int insertedCount_tDBOutput_2 = 0;
+					int rejectedCount_tDBOutput_2 = 0;
 
-					boolean whetherReject_iPostgresqlOutput_2 = false;
+					boolean whetherReject_tDBOutput_2 = false;
 
-					java.sql.Connection conn_iPostgresqlOutput_2 = null;
-					conn_iPostgresqlOutput_2 = (java.sql.Connection) globalMap
+					java.sql.Connection conn_tDBOutput_2 = null;
+					conn_tDBOutput_2 = (java.sql.Connection) globalMap
 							.get("conn_tPostgresqlConnection_1");
 
-					int batchSize_iPostgresqlOutput_2 = 10000;
-					int batchSizeCounter_iPostgresqlOutput_2 = 0;
+					int batchSize_tDBOutput_2 = 10000;
+					int batchSizeCounter_tDBOutput_2 = 0;
 
-					int count_iPostgresqlOutput_2 = 0;
-					String insert_iPostgresqlOutput_2 = "INSERT INTO \""
-							+ tableName_iPostgresqlOutput_2
+					int count_tDBOutput_2 = 0;
+					String insert_tDBOutput_2 = "INSERT INTO \""
+							+ tableName_tDBOutput_2
 							+ "\" (\"file_id\",\"TIME\",\"geom\",\"LATITUDE\",\"LONGITUDE\",\"FLU2_uncertainty\",\"UCUR_GPS\",\"VCUR_GPS\",\"CDOM_uncertainty\",\"DEPTH\",\"PRES\",\"PSAL\",\"TEMP\",\"DOXY\",\"DOXY_uncertainty\",\"FLU2\",\"HEAD\",\"UCUR\",\"VCUR\",\"CDOM\",\"CNDC\",\"VBSC\",\"VBSC_uncertainty\",\"TIME_quality_control\",\"LATITUDE_quality_control\",\"LONGITUDE_quality_control\",\"DEPTH_quality_control\",\"PRES_quality_control\",\"PSAL_quality_control\",\"TEMP_quality_control\",\"DOXY_quality_control\",\"FLU2_quality_control\",\"HEAD_quality_control\",\"UCUR_quality_control\",\"VCUR_quality_control\",\"CDOM_quality_control\",\"UCUR_GPS_quality_control\",\"VCUR_GPS_quality_control\",\"CNDC_quality_control\",\"VBSC_quality_control\") VALUES (?,?,GeomFromText(?, ?),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-					java.sql.PreparedStatement pstmt_iPostgresqlOutput_2 = conn_iPostgresqlOutput_2
-							.prepareStatement(insert_iPostgresqlOutput_2);
+					java.sql.PreparedStatement pstmt_tDBOutput_2 = conn_tDBOutput_2
+							.prepareStatement(insert_tDBOutput_2);
 
 					/**
-					 * [iPostgresqlOutput_2 begin ] stop
+					 * [tDBOutput_2 begin ] stop
 					 */
 
 					/**
@@ -7071,409 +7071,409 @@ public class DataHarvest_RT implements TalendJob {
 									if (measurement != null) {
 
 										/**
-										 * [iPostgresqlOutput_2 main ] start
+										 * [tDBOutput_2 main ] start
 										 */
 
-										currentComponent = "iPostgresqlOutput_2";
+										currentComponent = "tDBOutput_2";
 
-										whetherReject_iPostgresqlOutput_2 = false;
-										pstmt_iPostgresqlOutput_2.setInt(1,
+										whetherReject_tDBOutput_2 = false;
+										pstmt_tDBOutput_2.setInt(1,
 												measurement.file_id);
 
 										if (measurement.TIME != null) {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setTimestamp(
 															2,
 															new java.sql.Timestamp(
 																	measurement.TIME
 																			.getTime()));
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setNull(
 															2,
 															java.sql.Types.TIMESTAMP);
 										}
 
 										if (measurement.geom != null) {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															3,
 															((org.talend.sdi.geometry.Geometry) (measurement.geom))
 																	.toString());
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setInt(
 															3 + 1,
 															((org.talend.sdi.geometry.Geometry) (measurement.geom))
 																	.getSRID());
 										} else {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													3, java.sql.Types.VARCHAR);
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													3 + 1,
 													java.sql.Types.INTEGER);
 										}
 
 										if (measurement.LATITUDE == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													5, java.sql.Types.DOUBLE);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setDouble(
 															5,
 															measurement.LATITUDE);
 										}
 
 										if (measurement.LONGITUDE == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													6, java.sql.Types.DOUBLE);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setDouble(
 															6,
 															measurement.LONGITUDE);
 										}
 
 										if (measurement.FLU2_uncertainty == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													7, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setFloat(
 															7,
 															measurement.FLU2_uncertainty);
 										}
 
 										if (measurement.UCUR_GPS == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													8, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2.setFloat(
+											pstmt_tDBOutput_2.setFloat(
 													8, measurement.UCUR_GPS);
 										}
 
 										if (measurement.VCUR_GPS == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													9, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2.setFloat(
+											pstmt_tDBOutput_2.setFloat(
 													9, measurement.VCUR_GPS);
 										}
 
 										if (measurement.CDOM_uncertainty == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													10, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setFloat(
 															10,
 															measurement.CDOM_uncertainty);
 										}
 
 										if (measurement.DEPTH == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													11, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2.setFloat(
+											pstmt_tDBOutput_2.setFloat(
 													11, measurement.DEPTH);
 										}
 
 										if (measurement.PRES == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													12, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2.setFloat(
+											pstmt_tDBOutput_2.setFloat(
 													12, measurement.PRES);
 										}
 
 										if (measurement.PSAL == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													13, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2.setFloat(
+											pstmt_tDBOutput_2.setFloat(
 													13, measurement.PSAL);
 										}
 
 										if (measurement.TEMP == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													14, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2.setFloat(
+											pstmt_tDBOutput_2.setFloat(
 													14, measurement.TEMP);
 										}
 
 										if (measurement.DOXY == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													15, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2.setFloat(
+											pstmt_tDBOutput_2.setFloat(
 													15, measurement.DOXY);
 										}
 
 										if (measurement.DOXY_uncertainty == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													16, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setFloat(
 															16,
 															measurement.DOXY_uncertainty);
 										}
 
 										if (measurement.FLU2 == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													17, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2.setFloat(
+											pstmt_tDBOutput_2.setFloat(
 													17, measurement.FLU2);
 										}
 
 										if (measurement.HEAD == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													18, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2.setFloat(
+											pstmt_tDBOutput_2.setFloat(
 													18, measurement.HEAD);
 										}
 
 										if (measurement.UCUR == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													19, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2.setFloat(
+											pstmt_tDBOutput_2.setFloat(
 													19, measurement.UCUR);
 										}
 
 										if (measurement.VCUR == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													20, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2.setFloat(
+											pstmt_tDBOutput_2.setFloat(
 													20, measurement.VCUR);
 										}
 
 										if (measurement.CDOM == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													21, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2.setFloat(
+											pstmt_tDBOutput_2.setFloat(
 													21, measurement.CDOM);
 										}
 
 										if (measurement.CNDC == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													22, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2.setFloat(
+											pstmt_tDBOutput_2.setFloat(
 													22, measurement.CNDC);
 										}
 
 										if (measurement.VBSC == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													23, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2.setFloat(
+											pstmt_tDBOutput_2.setFloat(
 													23, measurement.VBSC);
 										}
 
 										if (measurement.VBSC_uncertainty == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													24, java.sql.Types.FLOAT);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setFloat(
 															24,
 															measurement.VBSC_uncertainty);
 										}
 
 										if (measurement.TIME_quality_control == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													25, java.sql.Types.VARCHAR);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															25,
 															measurement.TIME_quality_control);
 										}
 
 										if (measurement.LATITUDE_quality_control == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													26, java.sql.Types.VARCHAR);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															26,
 															measurement.LATITUDE_quality_control);
 										}
 
 										if (measurement.LONGITUDE_quality_control == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													27, java.sql.Types.VARCHAR);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															27,
 															measurement.LONGITUDE_quality_control);
 										}
 
 										if (measurement.DEPTH_quality_control == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													28, java.sql.Types.VARCHAR);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															28,
 															measurement.DEPTH_quality_control);
 										}
 
 										if (measurement.PRES_quality_control == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													29, java.sql.Types.VARCHAR);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															29,
 															measurement.PRES_quality_control);
 										}
 
 										if (measurement.PSAL_quality_control == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													30, java.sql.Types.VARCHAR);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															30,
 															measurement.PSAL_quality_control);
 										}
 
 										if (measurement.TEMP_quality_control == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													31, java.sql.Types.VARCHAR);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															31,
 															measurement.TEMP_quality_control);
 										}
 
 										if (measurement.DOXY_quality_control == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													32, java.sql.Types.VARCHAR);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															32,
 															measurement.DOXY_quality_control);
 										}
 
 										if (measurement.FLU2_quality_control == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													33, java.sql.Types.VARCHAR);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															33,
 															measurement.FLU2_quality_control);
 										}
 
 										if (measurement.HEAD_quality_control == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													34, java.sql.Types.VARCHAR);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															34,
 															measurement.HEAD_quality_control);
 										}
 
 										if (measurement.UCUR_quality_control == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													35, java.sql.Types.VARCHAR);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															35,
 															measurement.UCUR_quality_control);
 										}
 
 										if (measurement.VCUR_quality_control == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													36, java.sql.Types.VARCHAR);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															36,
 															measurement.VCUR_quality_control);
 										}
 
 										if (measurement.CDOM_quality_control == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													37, java.sql.Types.VARCHAR);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															37,
 															measurement.CDOM_quality_control);
 										}
 
 										if (measurement.UCUR_GPS_quality_control == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													38, java.sql.Types.VARCHAR);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															38,
 															measurement.UCUR_GPS_quality_control);
 										}
 
 										if (measurement.VCUR_GPS_quality_control == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													39, java.sql.Types.VARCHAR);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															39,
 															measurement.VCUR_GPS_quality_control);
 										}
 
 										if (measurement.CNDC_quality_control == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													40, java.sql.Types.VARCHAR);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															40,
 															measurement.CNDC_quality_control);
 										}
 
 										if (measurement.VBSC_quality_control == null) {
-											pstmt_iPostgresqlOutput_2.setNull(
+											pstmt_tDBOutput_2.setNull(
 													41, java.sql.Types.VARCHAR);
 										} else {
-											pstmt_iPostgresqlOutput_2
+											pstmt_tDBOutput_2
 													.setString(
 															41,
 															measurement.VBSC_quality_control);
 										}
 
-										pstmt_iPostgresqlOutput_2.addBatch();
-										nb_line_iPostgresqlOutput_2++;
+										pstmt_tDBOutput_2.addBatch();
+										nb_line_tDBOutput_2++;
 
-										batchSizeCounter_iPostgresqlOutput_2++;
+										batchSizeCounter_tDBOutput_2++;
 
-										if (!whetherReject_iPostgresqlOutput_2) {
+										if (!whetherReject_tDBOutput_2) {
 										}
-										if (batchSize_iPostgresqlOutput_2 <= batchSizeCounter_iPostgresqlOutput_2) {
+										if (batchSize_tDBOutput_2 <= batchSizeCounter_tDBOutput_2) {
 											try {
-												int countSum_iPostgresqlOutput_2 = 0;
-												for (int countEach_iPostgresqlOutput_2 : pstmt_iPostgresqlOutput_2
+												int countSum_tDBOutput_2 = 0;
+												for (int countEach_tDBOutput_2 : pstmt_tDBOutput_2
 														.executeBatch()) {
-													countSum_iPostgresqlOutput_2 += (countEach_iPostgresqlOutput_2 < 0 ? 0
-															: countEach_iPostgresqlOutput_2);
+													countSum_tDBOutput_2 += (countEach_tDBOutput_2 < 0 ? 0
+															: countEach_tDBOutput_2);
 												}
 
-												insertedCount_iPostgresqlOutput_2 += countSum_iPostgresqlOutput_2;
+												insertedCount_tDBOutput_2 += countSum_tDBOutput_2;
 
-												batchSizeCounter_iPostgresqlOutput_2 = 0;
+												batchSizeCounter_tDBOutput_2 = 0;
 											} catch (java.sql.BatchUpdateException e) {
 
 												System.err
@@ -7512,10 +7512,10 @@ public class DataHarvest_RT implements TalendJob {
 
 										}
 
-										tos_count_iPostgresqlOutput_2++;
+										tos_count_tDBOutput_2++;
 
 										/**
-										 * [iPostgresqlOutput_2 main ] stop
+										 * [tDBOutput_2 main ] stop
 										 */
 
 									} // End of branch "measurement"
@@ -7581,22 +7581,22 @@ public class DataHarvest_RT implements TalendJob {
 					 */
 
 					/**
-					 * [iPostgresqlOutput_2 end ] start
+					 * [tDBOutput_2 end ] start
 					 */
 
-					currentComponent = "iPostgresqlOutput_2";
+					currentComponent = "tDBOutput_2";
 
 					try {
-						int countSum_iPostgresqlOutput_2 = 0;
-						if (pstmt_iPostgresqlOutput_2 != null) {
-							for (int countEach_iPostgresqlOutput_2 : pstmt_iPostgresqlOutput_2
+						int countSum_tDBOutput_2 = 0;
+						if (pstmt_tDBOutput_2 != null) {
+							for (int countEach_tDBOutput_2 : pstmt_tDBOutput_2
 									.executeBatch()) {
-								countSum_iPostgresqlOutput_2 += (countEach_iPostgresqlOutput_2 < 0 ? 0
-										: countEach_iPostgresqlOutput_2);
+								countSum_tDBOutput_2 += (countEach_tDBOutput_2 < 0 ? 0
+										: countEach_tDBOutput_2);
 							}
 						}
 
-						insertedCount_iPostgresqlOutput_2 += countSum_iPostgresqlOutput_2;
+						insertedCount_tDBOutput_2 += countSum_tDBOutput_2;
 
 					} catch (java.sql.BatchUpdateException e) {
 
@@ -7623,40 +7623,40 @@ public class DataHarvest_RT implements TalendJob {
 
 					}
 
-					if (pstmt_iPostgresqlOutput_2 != null) {
+					if (pstmt_tDBOutput_2 != null) {
 
-						pstmt_iPostgresqlOutput_2.close();
+						pstmt_tDBOutput_2.close();
 
 					}
 
-					nb_line_deleted_iPostgresqlOutput_2 = nb_line_deleted_iPostgresqlOutput_2
-							+ deletedCount_iPostgresqlOutput_2;
-					nb_line_update_iPostgresqlOutput_2 = nb_line_update_iPostgresqlOutput_2
-							+ updatedCount_iPostgresqlOutput_2;
-					nb_line_inserted_iPostgresqlOutput_2 = nb_line_inserted_iPostgresqlOutput_2
-							+ insertedCount_iPostgresqlOutput_2;
-					nb_line_rejected_iPostgresqlOutput_2 = nb_line_rejected_iPostgresqlOutput_2
-							+ rejectedCount_iPostgresqlOutput_2;
+					nb_line_deleted_tDBOutput_2 = nb_line_deleted_tDBOutput_2
+							+ deletedCount_tDBOutput_2;
+					nb_line_update_tDBOutput_2 = nb_line_update_tDBOutput_2
+							+ updatedCount_tDBOutput_2;
+					nb_line_inserted_tDBOutput_2 = nb_line_inserted_tDBOutput_2
+							+ insertedCount_tDBOutput_2;
+					nb_line_rejected_tDBOutput_2 = nb_line_rejected_tDBOutput_2
+							+ rejectedCount_tDBOutput_2;
 
-					globalMap.put("iPostgresqlOutput_2_NB_LINE",
-							nb_line_iPostgresqlOutput_2);
-					globalMap.put("iPostgresqlOutput_2_NB_LINE_UPDATED",
-							nb_line_update_iPostgresqlOutput_2);
-					globalMap.put("iPostgresqlOutput_2_NB_LINE_INSERTED",
-							nb_line_inserted_iPostgresqlOutput_2);
-					globalMap.put("iPostgresqlOutput_2_NB_LINE_DELETED",
-							nb_line_deleted_iPostgresqlOutput_2);
-					globalMap.put("iPostgresqlOutput_2_NB_LINE_REJECTED",
-							nb_line_rejected_iPostgresqlOutput_2);
+					globalMap.put("tDBOutput_2_NB_LINE",
+							nb_line_tDBOutput_2);
+					globalMap.put("tDBOutput_2_NB_LINE_UPDATED",
+							nb_line_update_tDBOutput_2);
+					globalMap.put("tDBOutput_2_NB_LINE_INSERTED",
+							nb_line_inserted_tDBOutput_2);
+					globalMap.put("tDBOutput_2_NB_LINE_DELETED",
+							nb_line_deleted_tDBOutput_2);
+					globalMap.put("tDBOutput_2_NB_LINE_REJECTED",
+							nb_line_rejected_tDBOutput_2);
 
-					ok_Hash.put("iPostgresqlOutput_2", true);
-					end_Hash.put("iPostgresqlOutput_2", System
+					ok_Hash.put("tDBOutput_2", true);
+					end_Hash.put("tDBOutput_2", System
 							.currentTimeMillis());
 
 					tPostgresqlCommit_1Process(globalMap);
 
 					/**
-					 * [iPostgresqlOutput_2 end ] stop
+					 * [tDBOutput_2 end ] stop
 					 */
 
 					/**

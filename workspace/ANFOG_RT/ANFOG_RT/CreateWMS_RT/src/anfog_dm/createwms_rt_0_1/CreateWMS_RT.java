@@ -486,10 +486,10 @@ public class CreateWMS_RT implements TalendJob {
 		tPostgresqlInput_1_onSubJobError(exception, errorComponent, globalMap);
 	}
 
-	public void iPostgresqlOutput_1_error(java.lang.Exception exception,
+	public void tDBOutput_1_error(java.lang.Exception exception,
 			String errorComponent, final java.util.Map<String, Object> globalMap)
 			throws TalendException {
-		end_Hash.put("iPostgresqlOutput_1", System.currentTimeMillis());
+		end_Hash.put("tDBOutput_1", System.currentTimeMillis());
 
 		status = "failure";
 
@@ -506,10 +506,10 @@ public class CreateWMS_RT implements TalendJob {
 		tPostgresqlInput_2_onSubJobError(exception, errorComponent, globalMap);
 	}
 
-	public void iPostgresqlOutput_2_error(java.lang.Exception exception,
+	public void tDBOutput_2_error(java.lang.Exception exception,
 			String errorComponent, final java.util.Map<String, Object> globalMap)
 			throws TalendException {
-		end_Hash.put("iPostgresqlOutput_2", System.currentTimeMillis());
+		end_Hash.put("tDBOutput_2", System.currentTimeMillis());
 
 		status = "failure";
 
@@ -1314,72 +1314,72 @@ public class CreateWMS_RT implements TalendJob {
 				row2Struct row2 = new row2Struct();
 
 				/**
-				 * [iPostgresqlOutput_1 begin ] start
+				 * [tDBOutput_1 begin ] start
 				 */
 
-				ok_Hash.put("iPostgresqlOutput_1", false);
-				start_Hash.put("iPostgresqlOutput_1", System
+				ok_Hash.put("tDBOutput_1", false);
+				start_Hash.put("tDBOutput_1", System
 						.currentTimeMillis());
-				currentComponent = "iPostgresqlOutput_1";
+				currentComponent = "tDBOutput_1";
 
-				int tos_count_iPostgresqlOutput_1 = 0;
+				int tos_count_tDBOutput_1 = 0;
 
-				String dbschema_iPostgresqlOutput_1 = null;
-				dbschema_iPostgresqlOutput_1 = (String) globalMap.get("schema_"
+				String dbschema_tDBOutput_1 = null;
+				dbschema_tDBOutput_1 = (String) globalMap.get("schema_"
 						+ "tPostgresqlConnection_1");
 
-				String tableName_iPostgresqlOutput_1 = null;
-				if (dbschema_iPostgresqlOutput_1 == null
-						|| dbschema_iPostgresqlOutput_1.trim().length() == 0) {
-					tableName_iPostgresqlOutput_1 = "deployment_id";
+				String tableName_tDBOutput_1 = null;
+				if (dbschema_tDBOutput_1 == null
+						|| dbschema_tDBOutput_1.trim().length() == 0) {
+					tableName_tDBOutput_1 = "deployment_id";
 				} else {
-					tableName_iPostgresqlOutput_1 = dbschema_iPostgresqlOutput_1
+					tableName_tDBOutput_1 = dbschema_tDBOutput_1
 							+ "\".\"" + "deployment_id";
 				}
 
-				int updateKeyCount_iPostgresqlOutput_1 = 1;
-				if (updateKeyCount_iPostgresqlOutput_1 < 1) {
+				int updateKeyCount_tDBOutput_1 = 1;
+				if (updateKeyCount_tDBOutput_1 < 1) {
 					throw new RuntimeException(
 							"For update, Schema must have a key");
 				}
-				int nb_line_iPostgresqlOutput_1 = 0;
-				int nb_line_update_iPostgresqlOutput_1 = 0;
-				int nb_line_inserted_iPostgresqlOutput_1 = 0;
-				int nb_line_deleted_iPostgresqlOutput_1 = 0;
-				int nb_line_rejected_iPostgresqlOutput_1 = 0;
+				int nb_line_tDBOutput_1 = 0;
+				int nb_line_update_tDBOutput_1 = 0;
+				int nb_line_inserted_tDBOutput_1 = 0;
+				int nb_line_deleted_tDBOutput_1 = 0;
+				int nb_line_rejected_tDBOutput_1 = 0;
 
-				int deletedCount_iPostgresqlOutput_1 = 0;
-				int updatedCount_iPostgresqlOutput_1 = 0;
-				int insertedCount_iPostgresqlOutput_1 = 0;
-				int rejectedCount_iPostgresqlOutput_1 = 0;
+				int deletedCount_tDBOutput_1 = 0;
+				int updatedCount_tDBOutput_1 = 0;
+				int insertedCount_tDBOutput_1 = 0;
+				int rejectedCount_tDBOutput_1 = 0;
 
-				boolean whetherReject_iPostgresqlOutput_1 = false;
+				boolean whetherReject_tDBOutput_1 = false;
 
-				java.sql.Connection conn_iPostgresqlOutput_1 = null;
-				conn_iPostgresqlOutput_1 = (java.sql.Connection) globalMap
+				java.sql.Connection conn_tDBOutput_1 = null;
+				conn_tDBOutput_1 = (java.sql.Connection) globalMap
 						.get("conn_tPostgresqlConnection_1");
 
-				int batchSize_iPostgresqlOutput_1 = 10000;
-				int batchSizeCounter_iPostgresqlOutput_1 = 0;
+				int batchSize_tDBOutput_1 = 10000;
+				int batchSizeCounter_tDBOutput_1 = 0;
 
-				int count_iPostgresqlOutput_1 = 0;
-				java.sql.PreparedStatement pstmt_iPostgresqlOutput_1 = conn_iPostgresqlOutput_1
+				int count_tDBOutput_1 = 0;
+				java.sql.PreparedStatement pstmt_tDBOutput_1 = conn_tDBOutput_1
 						.prepareStatement("SELECT COUNT(1) FROM \""
-								+ tableName_iPostgresqlOutput_1
+								+ tableName_tDBOutput_1
 								+ "\" WHERE \"file_id\" = ?");
-				String insert_iPostgresqlOutput_1 = "INSERT INTO \""
-						+ tableName_iPostgresqlOutput_1
+				String insert_tDBOutput_1 = "INSERT INTO \""
+						+ tableName_tDBOutput_1
 						+ "\" (\"file_id\",\"deployment_name\",\"platform_type\",\"platform_code\",\"dive_number\") VALUES (?,?,?,?,?)";
-				java.sql.PreparedStatement pstmtInsert_iPostgresqlOutput_1 = conn_iPostgresqlOutput_1
-						.prepareStatement(insert_iPostgresqlOutput_1);
-				String update_iPostgresqlOutput_1 = "UPDATE \""
-						+ tableName_iPostgresqlOutput_1
+				java.sql.PreparedStatement pstmtInsert_tDBOutput_1 = conn_tDBOutput_1
+						.prepareStatement(insert_tDBOutput_1);
+				String update_tDBOutput_1 = "UPDATE \""
+						+ tableName_tDBOutput_1
 						+ "\" SET \"deployment_name\" = ?,\"platform_type\" = ?,\"platform_code\" = ?,\"dive_number\" = ? WHERE \"file_id\" = ?";
-				java.sql.PreparedStatement pstmtUpdate_iPostgresqlOutput_1 = conn_iPostgresqlOutput_1
-						.prepareStatement(update_iPostgresqlOutput_1);
+				java.sql.PreparedStatement pstmtUpdate_tDBOutput_1 = conn_tDBOutput_1
+						.prepareStatement(update_tDBOutput_1);
 
 				/**
-				 * [iPostgresqlOutput_1 begin ] stop
+				 * [tDBOutput_1 begin ] stop
 				 */
 
 				/**
@@ -1498,119 +1498,119 @@ public class CreateWMS_RT implements TalendJob {
 					 */
 
 					/**
-					 * [iPostgresqlOutput_1 main ] start
+					 * [tDBOutput_1 main ] start
 					 */
 
-					currentComponent = "iPostgresqlOutput_1";
+					currentComponent = "tDBOutput_1";
 
-					whetherReject_iPostgresqlOutput_1 = false;
+					whetherReject_tDBOutput_1 = false;
 
-					pstmt_iPostgresqlOutput_1.setInt(1, row2.file_id);
+					pstmt_tDBOutput_1.setInt(1, row2.file_id);
 
-					java.sql.ResultSet rs_iPostgresqlOutput_1 = pstmt_iPostgresqlOutput_1
+					java.sql.ResultSet rs_tDBOutput_1 = pstmt_tDBOutput_1
 							.executeQuery();
-					int checkCount_iPostgresqlOutput_1 = -1;
-					while (rs_iPostgresqlOutput_1.next()) {
-						checkCount_iPostgresqlOutput_1 = rs_iPostgresqlOutput_1
+					int checkCount_tDBOutput_1 = -1;
+					while (rs_tDBOutput_1.next()) {
+						checkCount_tDBOutput_1 = rs_tDBOutput_1
 								.getInt(1);
 					}
-					if (checkCount_iPostgresqlOutput_1 > 0) {
+					if (checkCount_tDBOutput_1 > 0) {
 						if (row2.deployment_name == null) {
-							pstmtUpdate_iPostgresqlOutput_1.setNull(1,
+							pstmtUpdate_tDBOutput_1.setNull(1,
 									java.sql.Types.VARCHAR);
 						} else {
-							pstmtUpdate_iPostgresqlOutput_1.setString(1,
+							pstmtUpdate_tDBOutput_1.setString(1,
 									row2.deployment_name);
 						}
 
 						if (row2.platform_type == null) {
-							pstmtUpdate_iPostgresqlOutput_1.setNull(2,
+							pstmtUpdate_tDBOutput_1.setNull(2,
 									java.sql.Types.VARCHAR);
 						} else {
-							pstmtUpdate_iPostgresqlOutput_1.setString(2,
+							pstmtUpdate_tDBOutput_1.setString(2,
 									row2.platform_type);
 						}
 
 						if (row2.platform_code == null) {
-							pstmtUpdate_iPostgresqlOutput_1.setNull(3,
+							pstmtUpdate_tDBOutput_1.setNull(3,
 									java.sql.Types.VARCHAR);
 						} else {
-							pstmtUpdate_iPostgresqlOutput_1.setString(3,
+							pstmtUpdate_tDBOutput_1.setString(3,
 									row2.platform_code);
 						}
 
 						if (row2.dive_number == null) {
-							pstmtUpdate_iPostgresqlOutput_1.setNull(4,
+							pstmtUpdate_tDBOutput_1.setNull(4,
 									java.sql.Types.VARCHAR);
 						} else {
-							pstmtUpdate_iPostgresqlOutput_1.setString(4,
+							pstmtUpdate_tDBOutput_1.setString(4,
 									row2.dive_number);
 						}
 
-						pstmtUpdate_iPostgresqlOutput_1.setInt(
-								5 + count_iPostgresqlOutput_1, row2.file_id);
+						pstmtUpdate_tDBOutput_1.setInt(
+								5 + count_tDBOutput_1, row2.file_id);
 
 						try {
-							updatedCount_iPostgresqlOutput_1 = updatedCount_iPostgresqlOutput_1
-									+ pstmtUpdate_iPostgresqlOutput_1
+							updatedCount_tDBOutput_1 = updatedCount_tDBOutput_1
+									+ pstmtUpdate_tDBOutput_1
 											.executeUpdate();
 						} catch (java.lang.Exception e) {
-							whetherReject_iPostgresqlOutput_1 = true;
+							whetherReject_tDBOutput_1 = true;
 							throw (e);
 						}
 					} else {
-						pstmtInsert_iPostgresqlOutput_1.setInt(1, row2.file_id);
+						pstmtInsert_tDBOutput_1.setInt(1, row2.file_id);
 
 						if (row2.deployment_name == null) {
-							pstmtInsert_iPostgresqlOutput_1.setNull(2,
+							pstmtInsert_tDBOutput_1.setNull(2,
 									java.sql.Types.VARCHAR);
 						} else {
-							pstmtInsert_iPostgresqlOutput_1.setString(2,
+							pstmtInsert_tDBOutput_1.setString(2,
 									row2.deployment_name);
 						}
 
 						if (row2.platform_type == null) {
-							pstmtInsert_iPostgresqlOutput_1.setNull(3,
+							pstmtInsert_tDBOutput_1.setNull(3,
 									java.sql.Types.VARCHAR);
 						} else {
-							pstmtInsert_iPostgresqlOutput_1.setString(3,
+							pstmtInsert_tDBOutput_1.setString(3,
 									row2.platform_type);
 						}
 
 						if (row2.platform_code == null) {
-							pstmtInsert_iPostgresqlOutput_1.setNull(4,
+							pstmtInsert_tDBOutput_1.setNull(4,
 									java.sql.Types.VARCHAR);
 						} else {
-							pstmtInsert_iPostgresqlOutput_1.setString(4,
+							pstmtInsert_tDBOutput_1.setString(4,
 									row2.platform_code);
 						}
 
 						if (row2.dive_number == null) {
-							pstmtInsert_iPostgresqlOutput_1.setNull(5,
+							pstmtInsert_tDBOutput_1.setNull(5,
 									java.sql.Types.VARCHAR);
 						} else {
-							pstmtInsert_iPostgresqlOutput_1.setString(5,
+							pstmtInsert_tDBOutput_1.setString(5,
 									row2.dive_number);
 						}
 
 						try {
-							insertedCount_iPostgresqlOutput_1 = insertedCount_iPostgresqlOutput_1
-									+ pstmtInsert_iPostgresqlOutput_1
+							insertedCount_tDBOutput_1 = insertedCount_tDBOutput_1
+									+ pstmtInsert_tDBOutput_1
 											.executeUpdate();
 						} catch (java.lang.Exception e) {
-							whetherReject_iPostgresqlOutput_1 = true;
+							whetherReject_tDBOutput_1 = true;
 							throw (e);
 						}
 					}
-					nb_line_iPostgresqlOutput_1++;
-					if (batchSize_iPostgresqlOutput_1 <= batchSizeCounter_iPostgresqlOutput_1) {
+					nb_line_tDBOutput_1++;
+					if (batchSize_tDBOutput_1 <= batchSizeCounter_tDBOutput_1) {
 
 					}
 
-					tos_count_iPostgresqlOutput_1++;
+					tos_count_tDBOutput_1++;
 
 					/**
-					 * [iPostgresqlOutput_1 main ] stop
+					 * [tDBOutput_1 main ] stop
 					 */
 
 					/**
@@ -1633,52 +1633,52 @@ public class CreateWMS_RT implements TalendJob {
 				 */
 
 				/**
-				 * [iPostgresqlOutput_1 end ] start
+				 * [tDBOutput_1 end ] start
 				 */
 
-				currentComponent = "iPostgresqlOutput_1";
+				currentComponent = "tDBOutput_1";
 
-				if (pstmtUpdate_iPostgresqlOutput_1 != null) {
+				if (pstmtUpdate_tDBOutput_1 != null) {
 
-					pstmtUpdate_iPostgresqlOutput_1.close();
-
-				}
-				if (pstmtInsert_iPostgresqlOutput_1 != null) {
-
-					pstmtInsert_iPostgresqlOutput_1.close();
+					pstmtUpdate_tDBOutput_1.close();
 
 				}
-				if (pstmt_iPostgresqlOutput_1 != null) {
+				if (pstmtInsert_tDBOutput_1 != null) {
 
-					pstmt_iPostgresqlOutput_1.close();
+					pstmtInsert_tDBOutput_1.close();
+
+				}
+				if (pstmt_tDBOutput_1 != null) {
+
+					pstmt_tDBOutput_1.close();
 
 				}
 
-				nb_line_deleted_iPostgresqlOutput_1 = nb_line_deleted_iPostgresqlOutput_1
-						+ deletedCount_iPostgresqlOutput_1;
-				nb_line_update_iPostgresqlOutput_1 = nb_line_update_iPostgresqlOutput_1
-						+ updatedCount_iPostgresqlOutput_1;
-				nb_line_inserted_iPostgresqlOutput_1 = nb_line_inserted_iPostgresqlOutput_1
-						+ insertedCount_iPostgresqlOutput_1;
-				nb_line_rejected_iPostgresqlOutput_1 = nb_line_rejected_iPostgresqlOutput_1
-						+ rejectedCount_iPostgresqlOutput_1;
+				nb_line_deleted_tDBOutput_1 = nb_line_deleted_tDBOutput_1
+						+ deletedCount_tDBOutput_1;
+				nb_line_update_tDBOutput_1 = nb_line_update_tDBOutput_1
+						+ updatedCount_tDBOutput_1;
+				nb_line_inserted_tDBOutput_1 = nb_line_inserted_tDBOutput_1
+						+ insertedCount_tDBOutput_1;
+				nb_line_rejected_tDBOutput_1 = nb_line_rejected_tDBOutput_1
+						+ rejectedCount_tDBOutput_1;
 
-				globalMap.put("iPostgresqlOutput_1_NB_LINE",
-						nb_line_iPostgresqlOutput_1);
-				globalMap.put("iPostgresqlOutput_1_NB_LINE_UPDATED",
-						nb_line_update_iPostgresqlOutput_1);
-				globalMap.put("iPostgresqlOutput_1_NB_LINE_INSERTED",
-						nb_line_inserted_iPostgresqlOutput_1);
-				globalMap.put("iPostgresqlOutput_1_NB_LINE_DELETED",
-						nb_line_deleted_iPostgresqlOutput_1);
-				globalMap.put("iPostgresqlOutput_1_NB_LINE_REJECTED",
-						nb_line_rejected_iPostgresqlOutput_1);
+				globalMap.put("tDBOutput_1_NB_LINE",
+						nb_line_tDBOutput_1);
+				globalMap.put("tDBOutput_1_NB_LINE_UPDATED",
+						nb_line_update_tDBOutput_1);
+				globalMap.put("tDBOutput_1_NB_LINE_INSERTED",
+						nb_line_inserted_tDBOutput_1);
+				globalMap.put("tDBOutput_1_NB_LINE_DELETED",
+						nb_line_deleted_tDBOutput_1);
+				globalMap.put("tDBOutput_1_NB_LINE_REJECTED",
+						nb_line_rejected_tDBOutput_1);
 
-				ok_Hash.put("iPostgresqlOutput_1", true);
-				end_Hash.put("iPostgresqlOutput_1", System.currentTimeMillis());
+				ok_Hash.put("tDBOutput_1", true);
+				end_Hash.put("tDBOutput_1", System.currentTimeMillis());
 
 				/**
-				 * [iPostgresqlOutput_1 end ] stop
+				 * [tDBOutput_1 end ] stop
 				 */
 
 			}// end the resume
@@ -2282,58 +2282,58 @@ public class CreateWMS_RT implements TalendJob {
 				row1Struct row1 = new row1Struct();
 
 				/**
-				 * [iPostgresqlOutput_2 begin ] start
+				 * [tDBOutput_2 begin ] start
 				 */
 
-				ok_Hash.put("iPostgresqlOutput_2", false);
-				start_Hash.put("iPostgresqlOutput_2", System
+				ok_Hash.put("tDBOutput_2", false);
+				start_Hash.put("tDBOutput_2", System
 						.currentTimeMillis());
-				currentComponent = "iPostgresqlOutput_2";
+				currentComponent = "tDBOutput_2";
 
-				int tos_count_iPostgresqlOutput_2 = 0;
+				int tos_count_tDBOutput_2 = 0;
 
-				String dbschema_iPostgresqlOutput_2 = null;
-				dbschema_iPostgresqlOutput_2 = (String) globalMap.get("schema_"
+				String dbschema_tDBOutput_2 = null;
+				dbschema_tDBOutput_2 = (String) globalMap.get("schema_"
 						+ "tPostgresqlConnection_1");
 
-				String tableName_iPostgresqlOutput_2 = null;
-				if (dbschema_iPostgresqlOutput_2 == null
-						|| dbschema_iPostgresqlOutput_2.trim().length() == 0) {
-					tableName_iPostgresqlOutput_2 = "anfog_rt_trajectory_wms";
+				String tableName_tDBOutput_2 = null;
+				if (dbschema_tDBOutput_2 == null
+						|| dbschema_tDBOutput_2.trim().length() == 0) {
+					tableName_tDBOutput_2 = "anfog_rt_trajectory_wms";
 				} else {
-					tableName_iPostgresqlOutput_2 = dbschema_iPostgresqlOutput_2
+					tableName_tDBOutput_2 = dbschema_tDBOutput_2
 							+ "\".\"" + "anfog_rt_trajectory_wms";
 				}
 
-				int nb_line_iPostgresqlOutput_2 = 0;
-				int nb_line_update_iPostgresqlOutput_2 = 0;
-				int nb_line_inserted_iPostgresqlOutput_2 = 0;
-				int nb_line_deleted_iPostgresqlOutput_2 = 0;
-				int nb_line_rejected_iPostgresqlOutput_2 = 0;
+				int nb_line_tDBOutput_2 = 0;
+				int nb_line_update_tDBOutput_2 = 0;
+				int nb_line_inserted_tDBOutput_2 = 0;
+				int nb_line_deleted_tDBOutput_2 = 0;
+				int nb_line_rejected_tDBOutput_2 = 0;
 
-				int deletedCount_iPostgresqlOutput_2 = 0;
-				int updatedCount_iPostgresqlOutput_2 = 0;
-				int insertedCount_iPostgresqlOutput_2 = 0;
-				int rejectedCount_iPostgresqlOutput_2 = 0;
+				int deletedCount_tDBOutput_2 = 0;
+				int updatedCount_tDBOutput_2 = 0;
+				int insertedCount_tDBOutput_2 = 0;
+				int rejectedCount_tDBOutput_2 = 0;
 
-				boolean whetherReject_iPostgresqlOutput_2 = false;
+				boolean whetherReject_tDBOutput_2 = false;
 
-				java.sql.Connection conn_iPostgresqlOutput_2 = null;
-				conn_iPostgresqlOutput_2 = (java.sql.Connection) globalMap
+				java.sql.Connection conn_tDBOutput_2 = null;
+				conn_tDBOutput_2 = (java.sql.Connection) globalMap
 						.get("conn_tPostgresqlConnection_1");
 
-				int batchSize_iPostgresqlOutput_2 = 10000;
-				int batchSizeCounter_iPostgresqlOutput_2 = 0;
+				int batchSize_tDBOutput_2 = 10000;
+				int batchSizeCounter_tDBOutput_2 = 0;
 
-				int count_iPostgresqlOutput_2 = 0;
-				String insert_iPostgresqlOutput_2 = "INSERT INTO \""
-						+ tableName_iPostgresqlOutput_2
+				int count_tDBOutput_2 = 0;
+				String insert_tDBOutput_2 = "INSERT INTO \""
+						+ tableName_tDBOutput_2
 						+ "\" (\"file_id\",\"deployment_name\",\"platform_type\",\"platform_code\",\"dive_number\",\"time_coverage_start\",\"time_coverage_end\",\"geospatial_vertical_min\",\"geospatial_vertical_max\",\"TEMP_b\",\"PSAL_b\",\"FLU2_b\",\"DOXY_b\",\"CDOM_b\",\"UCUR_b\",\"VCUR_b\",\"DEPTH_b\",\"PRES_b\",\"CNDC_b\",\"HEAD_b\",\"UCUR_GPS_b\",\"VCUR_GPS_b\",\"VBSC_b\",\"geom\") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-				java.sql.PreparedStatement pstmt_iPostgresqlOutput_2 = conn_iPostgresqlOutput_2
-						.prepareStatement(insert_iPostgresqlOutput_2);
+				java.sql.PreparedStatement pstmt_tDBOutput_2 = conn_tDBOutput_2
+						.prepareStatement(insert_tDBOutput_2);
 
 				/**
-				 * [iPostgresqlOutput_2 begin ] stop
+				 * [tDBOutput_2 begin ] stop
 				 */
 
 				/**
@@ -2671,204 +2671,204 @@ public class CreateWMS_RT implements TalendJob {
 					 */
 
 					/**
-					 * [iPostgresqlOutput_2 main ] start
+					 * [tDBOutput_2 main ] start
 					 */
 
-					currentComponent = "iPostgresqlOutput_2";
+					currentComponent = "tDBOutput_2";
 
-					whetherReject_iPostgresqlOutput_2 = false;
-					pstmt_iPostgresqlOutput_2.setInt(1, row1.file_id);
+					whetherReject_tDBOutput_2 = false;
+					pstmt_tDBOutput_2.setInt(1, row1.file_id);
 
 					if (row1.deployment_name == null) {
-						pstmt_iPostgresqlOutput_2.setNull(2,
+						pstmt_tDBOutput_2.setNull(2,
 								java.sql.Types.VARCHAR);
 					} else {
-						pstmt_iPostgresqlOutput_2.setString(2,
+						pstmt_tDBOutput_2.setString(2,
 								row1.deployment_name);
 					}
 
 					if (row1.platform_type == null) {
-						pstmt_iPostgresqlOutput_2.setNull(3,
+						pstmt_tDBOutput_2.setNull(3,
 								java.sql.Types.VARCHAR);
 					} else {
-						pstmt_iPostgresqlOutput_2.setString(3,
+						pstmt_tDBOutput_2.setString(3,
 								row1.platform_type);
 					}
 
 					if (row1.platform_code == null) {
-						pstmt_iPostgresqlOutput_2.setNull(4,
+						pstmt_tDBOutput_2.setNull(4,
 								java.sql.Types.VARCHAR);
 					} else {
-						pstmt_iPostgresqlOutput_2.setString(4,
+						pstmt_tDBOutput_2.setString(4,
 								row1.platform_code);
 					}
 
 					if (row1.dive_number == null) {
-						pstmt_iPostgresqlOutput_2.setNull(5,
+						pstmt_tDBOutput_2.setNull(5,
 								java.sql.Types.VARCHAR);
 					} else {
-						pstmt_iPostgresqlOutput_2
+						pstmt_tDBOutput_2
 								.setString(5, row1.dive_number);
 					}
 
 					if (row1.time_coverage_start == null) {
-						pstmt_iPostgresqlOutput_2.setNull(6,
+						pstmt_tDBOutput_2.setNull(6,
 								java.sql.Types.VARCHAR);
 					} else {
-						pstmt_iPostgresqlOutput_2.setString(6,
+						pstmt_tDBOutput_2.setString(6,
 								row1.time_coverage_start);
 					}
 
 					if (row1.time_coverage_end == null) {
-						pstmt_iPostgresqlOutput_2.setNull(7,
+						pstmt_tDBOutput_2.setNull(7,
 								java.sql.Types.VARCHAR);
 					} else {
-						pstmt_iPostgresqlOutput_2.setString(7,
+						pstmt_tDBOutput_2.setString(7,
 								row1.time_coverage_end);
 					}
 
 					if (row1.geospatial_vertical_min == null) {
-						pstmt_iPostgresqlOutput_2.setNull(8,
+						pstmt_tDBOutput_2.setNull(8,
 								java.sql.Types.VARCHAR);
 					} else {
-						pstmt_iPostgresqlOutput_2.setString(8,
+						pstmt_tDBOutput_2.setString(8,
 								row1.geospatial_vertical_min);
 					}
 
 					if (row1.geospatial_vertical_max == null) {
-						pstmt_iPostgresqlOutput_2.setNull(9,
+						pstmt_tDBOutput_2.setNull(9,
 								java.sql.Types.VARCHAR);
 					} else {
-						pstmt_iPostgresqlOutput_2.setString(9,
+						pstmt_tDBOutput_2.setString(9,
 								row1.geospatial_vertical_max);
 					}
 
 					if (row1.TEMP_b == null) {
-						pstmt_iPostgresqlOutput_2.setNull(10,
+						pstmt_tDBOutput_2.setNull(10,
 								java.sql.Types.BOOLEAN);
 					} else {
-						pstmt_iPostgresqlOutput_2.setBoolean(10, row1.TEMP_b);
+						pstmt_tDBOutput_2.setBoolean(10, row1.TEMP_b);
 					}
 
 					if (row1.PSAL_b == null) {
-						pstmt_iPostgresqlOutput_2.setNull(11,
+						pstmt_tDBOutput_2.setNull(11,
 								java.sql.Types.BOOLEAN);
 					} else {
-						pstmt_iPostgresqlOutput_2.setBoolean(11, row1.PSAL_b);
+						pstmt_tDBOutput_2.setBoolean(11, row1.PSAL_b);
 					}
 
 					if (row1.FLU2_b == null) {
-						pstmt_iPostgresqlOutput_2.setNull(12,
+						pstmt_tDBOutput_2.setNull(12,
 								java.sql.Types.BOOLEAN);
 					} else {
-						pstmt_iPostgresqlOutput_2.setBoolean(12, row1.FLU2_b);
+						pstmt_tDBOutput_2.setBoolean(12, row1.FLU2_b);
 					}
 
 					if (row1.DOXY_b == null) {
-						pstmt_iPostgresqlOutput_2.setNull(13,
+						pstmt_tDBOutput_2.setNull(13,
 								java.sql.Types.BOOLEAN);
 					} else {
-						pstmt_iPostgresqlOutput_2.setBoolean(13, row1.DOXY_b);
+						pstmt_tDBOutput_2.setBoolean(13, row1.DOXY_b);
 					}
 
 					if (row1.CDOM_b == null) {
-						pstmt_iPostgresqlOutput_2.setNull(14,
+						pstmt_tDBOutput_2.setNull(14,
 								java.sql.Types.BOOLEAN);
 					} else {
-						pstmt_iPostgresqlOutput_2.setBoolean(14, row1.CDOM_b);
+						pstmt_tDBOutput_2.setBoolean(14, row1.CDOM_b);
 					}
 
 					if (row1.UCUR_b == null) {
-						pstmt_iPostgresqlOutput_2.setNull(15,
+						pstmt_tDBOutput_2.setNull(15,
 								java.sql.Types.BOOLEAN);
 					} else {
-						pstmt_iPostgresqlOutput_2.setBoolean(15, row1.UCUR_b);
+						pstmt_tDBOutput_2.setBoolean(15, row1.UCUR_b);
 					}
 
 					if (row1.VCUR_b == null) {
-						pstmt_iPostgresqlOutput_2.setNull(16,
+						pstmt_tDBOutput_2.setNull(16,
 								java.sql.Types.BOOLEAN);
 					} else {
-						pstmt_iPostgresqlOutput_2.setBoolean(16, row1.VCUR_b);
+						pstmt_tDBOutput_2.setBoolean(16, row1.VCUR_b);
 					}
 
 					if (row1.DEPTH_b == null) {
-						pstmt_iPostgresqlOutput_2.setNull(17,
+						pstmt_tDBOutput_2.setNull(17,
 								java.sql.Types.BOOLEAN);
 					} else {
-						pstmt_iPostgresqlOutput_2.setBoolean(17, row1.DEPTH_b);
+						pstmt_tDBOutput_2.setBoolean(17, row1.DEPTH_b);
 					}
 
 					if (row1.PRES_b == null) {
-						pstmt_iPostgresqlOutput_2.setNull(18,
+						pstmt_tDBOutput_2.setNull(18,
 								java.sql.Types.BOOLEAN);
 					} else {
-						pstmt_iPostgresqlOutput_2.setBoolean(18, row1.PRES_b);
+						pstmt_tDBOutput_2.setBoolean(18, row1.PRES_b);
 					}
 
 					if (row1.CNDC_b == null) {
-						pstmt_iPostgresqlOutput_2.setNull(19,
+						pstmt_tDBOutput_2.setNull(19,
 								java.sql.Types.BOOLEAN);
 					} else {
-						pstmt_iPostgresqlOutput_2.setBoolean(19, row1.CNDC_b);
+						pstmt_tDBOutput_2.setBoolean(19, row1.CNDC_b);
 					}
 
 					if (row1.HEAD_b == null) {
-						pstmt_iPostgresqlOutput_2.setNull(20,
+						pstmt_tDBOutput_2.setNull(20,
 								java.sql.Types.BOOLEAN);
 					} else {
-						pstmt_iPostgresqlOutput_2.setBoolean(20, row1.HEAD_b);
+						pstmt_tDBOutput_2.setBoolean(20, row1.HEAD_b);
 					}
 
 					if (row1.UCUR_GPS_b == null) {
-						pstmt_iPostgresqlOutput_2.setNull(21,
+						pstmt_tDBOutput_2.setNull(21,
 								java.sql.Types.BOOLEAN);
 					} else {
-						pstmt_iPostgresqlOutput_2.setBoolean(21,
+						pstmt_tDBOutput_2.setBoolean(21,
 								row1.UCUR_GPS_b);
 					}
 
 					if (row1.VCUR_GPS_b == null) {
-						pstmt_iPostgresqlOutput_2.setNull(22,
+						pstmt_tDBOutput_2.setNull(22,
 								java.sql.Types.BOOLEAN);
 					} else {
-						pstmt_iPostgresqlOutput_2.setBoolean(22,
+						pstmt_tDBOutput_2.setBoolean(22,
 								row1.VCUR_GPS_b);
 					}
 
 					if (row1.VBSC_b == null) {
-						pstmt_iPostgresqlOutput_2.setNull(23,
+						pstmt_tDBOutput_2.setNull(23,
 								java.sql.Types.BOOLEAN);
 					} else {
-						pstmt_iPostgresqlOutput_2.setBoolean(23, row1.VBSC_b);
+						pstmt_tDBOutput_2.setBoolean(23, row1.VBSC_b);
 					}
 
 					if (row1.geom == null) {
-						pstmt_iPostgresqlOutput_2.setNull(24,
+						pstmt_tDBOutput_2.setNull(24,
 								java.sql.Types.OTHER);
 					} else {
-						pstmt_iPostgresqlOutput_2.setObject(24, row1.geom);
+						pstmt_tDBOutput_2.setObject(24, row1.geom);
 					}
 
-					pstmt_iPostgresqlOutput_2.addBatch();
-					nb_line_iPostgresqlOutput_2++;
+					pstmt_tDBOutput_2.addBatch();
+					nb_line_tDBOutput_2++;
 
-					batchSizeCounter_iPostgresqlOutput_2++;
+					batchSizeCounter_tDBOutput_2++;
 
-					if (!whetherReject_iPostgresqlOutput_2) {
+					if (!whetherReject_tDBOutput_2) {
 					}
-					if (batchSize_iPostgresqlOutput_2 <= batchSizeCounter_iPostgresqlOutput_2) {
+					if (batchSize_tDBOutput_2 <= batchSizeCounter_tDBOutput_2) {
 						try {
-							int countSum_iPostgresqlOutput_2 = 0;
-							for (int countEach_iPostgresqlOutput_2 : pstmt_iPostgresqlOutput_2
+							int countSum_tDBOutput_2 = 0;
+							for (int countEach_tDBOutput_2 : pstmt_tDBOutput_2
 									.executeBatch()) {
-								countSum_iPostgresqlOutput_2 += (countEach_iPostgresqlOutput_2 < 0 ? 0
-										: countEach_iPostgresqlOutput_2);
+								countSum_tDBOutput_2 += (countEach_tDBOutput_2 < 0 ? 0
+										: countEach_tDBOutput_2);
 							}
 
-							insertedCount_iPostgresqlOutput_2 += countSum_iPostgresqlOutput_2;
+							insertedCount_tDBOutput_2 += countSum_tDBOutput_2;
 
-							batchSizeCounter_iPostgresqlOutput_2 = 0;
+							batchSizeCounter_tDBOutput_2 = 0;
 						} catch (java.sql.BatchUpdateException e) {
 
 							System.err
@@ -2898,10 +2898,10 @@ public class CreateWMS_RT implements TalendJob {
 
 					}
 
-					tos_count_iPostgresqlOutput_2++;
+					tos_count_tDBOutput_2++;
 
 					/**
-					 * [iPostgresqlOutput_2 main ] stop
+					 * [tDBOutput_2 main ] stop
 					 */
 
 					/**
@@ -2924,22 +2924,22 @@ public class CreateWMS_RT implements TalendJob {
 				 */
 
 				/**
-				 * [iPostgresqlOutput_2 end ] start
+				 * [tDBOutput_2 end ] start
 				 */
 
-				currentComponent = "iPostgresqlOutput_2";
+				currentComponent = "tDBOutput_2";
 
 				try {
-					int countSum_iPostgresqlOutput_2 = 0;
-					if (pstmt_iPostgresqlOutput_2 != null) {
-						for (int countEach_iPostgresqlOutput_2 : pstmt_iPostgresqlOutput_2
+					int countSum_tDBOutput_2 = 0;
+					if (pstmt_tDBOutput_2 != null) {
+						for (int countEach_tDBOutput_2 : pstmt_tDBOutput_2
 								.executeBatch()) {
-							countSum_iPostgresqlOutput_2 += (countEach_iPostgresqlOutput_2 < 0 ? 0
-									: countEach_iPostgresqlOutput_2);
+							countSum_tDBOutput_2 += (countEach_tDBOutput_2 < 0 ? 0
+									: countEach_tDBOutput_2);
 						}
 					}
 
-					insertedCount_iPostgresqlOutput_2 += countSum_iPostgresqlOutput_2;
+					insertedCount_tDBOutput_2 += countSum_tDBOutput_2;
 
 				} catch (java.sql.BatchUpdateException e) {
 
@@ -2964,39 +2964,39 @@ public class CreateWMS_RT implements TalendJob {
 
 				}
 
-				if (pstmt_iPostgresqlOutput_2 != null) {
+				if (pstmt_tDBOutput_2 != null) {
 
-					pstmt_iPostgresqlOutput_2.close();
+					pstmt_tDBOutput_2.close();
 
 				}
 
-				nb_line_deleted_iPostgresqlOutput_2 = nb_line_deleted_iPostgresqlOutput_2
-						+ deletedCount_iPostgresqlOutput_2;
-				nb_line_update_iPostgresqlOutput_2 = nb_line_update_iPostgresqlOutput_2
-						+ updatedCount_iPostgresqlOutput_2;
-				nb_line_inserted_iPostgresqlOutput_2 = nb_line_inserted_iPostgresqlOutput_2
-						+ insertedCount_iPostgresqlOutput_2;
-				nb_line_rejected_iPostgresqlOutput_2 = nb_line_rejected_iPostgresqlOutput_2
-						+ rejectedCount_iPostgresqlOutput_2;
+				nb_line_deleted_tDBOutput_2 = nb_line_deleted_tDBOutput_2
+						+ deletedCount_tDBOutput_2;
+				nb_line_update_tDBOutput_2 = nb_line_update_tDBOutput_2
+						+ updatedCount_tDBOutput_2;
+				nb_line_inserted_tDBOutput_2 = nb_line_inserted_tDBOutput_2
+						+ insertedCount_tDBOutput_2;
+				nb_line_rejected_tDBOutput_2 = nb_line_rejected_tDBOutput_2
+						+ rejectedCount_tDBOutput_2;
 
-				globalMap.put("iPostgresqlOutput_2_NB_LINE",
-						nb_line_iPostgresqlOutput_2);
-				globalMap.put("iPostgresqlOutput_2_NB_LINE_UPDATED",
-						nb_line_update_iPostgresqlOutput_2);
-				globalMap.put("iPostgresqlOutput_2_NB_LINE_INSERTED",
-						nb_line_inserted_iPostgresqlOutput_2);
-				globalMap.put("iPostgresqlOutput_2_NB_LINE_DELETED",
-						nb_line_deleted_iPostgresqlOutput_2);
-				globalMap.put("iPostgresqlOutput_2_NB_LINE_REJECTED",
-						nb_line_rejected_iPostgresqlOutput_2);
+				globalMap.put("tDBOutput_2_NB_LINE",
+						nb_line_tDBOutput_2);
+				globalMap.put("tDBOutput_2_NB_LINE_UPDATED",
+						nb_line_update_tDBOutput_2);
+				globalMap.put("tDBOutput_2_NB_LINE_INSERTED",
+						nb_line_inserted_tDBOutput_2);
+				globalMap.put("tDBOutput_2_NB_LINE_DELETED",
+						nb_line_deleted_tDBOutput_2);
+				globalMap.put("tDBOutput_2_NB_LINE_REJECTED",
+						nb_line_rejected_tDBOutput_2);
 
-				ok_Hash.put("iPostgresqlOutput_2", true);
-				end_Hash.put("iPostgresqlOutput_2", System.currentTimeMillis());
+				ok_Hash.put("tDBOutput_2", true);
+				end_Hash.put("tDBOutput_2", System.currentTimeMillis());
 
 				tPostgresqlCommit_1Process(globalMap);
 
 				/**
-				 * [iPostgresqlOutput_2 end ] stop
+				 * [tDBOutput_2 end ] stop
 				 */
 
 			}// end the resume
