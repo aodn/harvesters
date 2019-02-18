@@ -85,6 +85,17 @@ CREATE INDEX deployments_gist_idx ON deployments USING GIST (geom);
     </changeSet>
 
 
+    <changeSet author="talend" id="measurements_add_cphl_chlu">
+      <sql>
+        ALTER TABLE measurements
+          ADD COLUMN "CPHL" real,
+          ADD COLUMN "CPHL_quality_control" character varying(1),
+          ADD COLUMN "CHLU" real,
+          ADD COLUMN "CHLU_quality_control" character varying(1);
+      </sql>
+    </changeSet>
+
+
     <changeSet author="talend" id="alter_deployments_table-1">
        <sql>
 -- Drop views that depend on columns to be changed
@@ -154,6 +165,10 @@ CREATE VIEW anmn_nrs_ctd_profiles_data AS
 	"TURB_quality_control",
 	"CHLF", 
 	"CHLF_quality_control",
+	"CHLU",
+	"CHLU_quality_control",
+	"CPHL",
+	"CPHL_quality_control",
 	"CNDC" ,
 	"CNDC_quality_control",
 	"DESC" , 
