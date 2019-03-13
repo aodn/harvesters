@@ -371,8 +371,8 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="32">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_1"/>
+  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlOutput_1"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
@@ -520,7 +520,7 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="iPostgresqlOutput_1">
+    <metadata connector="FLOW" name="tPostgresqlOutput_1">
       <column comment="" key="false" length="20" name="file_id" nullable="true" pattern="" sourceType="INT4" type="id_Integer" originalLength="20"/>
       <column comment="" key="false" length="2" name="dive_number" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="24" name="dive_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -914,8 +914,8 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="416">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_2"/>
+  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="416">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlOutput_2"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
@@ -1078,7 +1078,7 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="iPostgresqlOutput_2">
+    <metadata connector="FLOW" name="tPostgresqlOutput_2">
       <column comment="" key="false" length="10" name="fk_auv_tracks" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer"/>
       <column comment="" key="false" length="20" name="file_id" nullable="false" pattern="" sourceType="INT4" type="id_Integer" originalLength="20"/>
       <column comment="" key="false" length="15" name="campaign_code" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -1379,7 +1379,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
   </connection>
-  <connection connectorName="FLOW" label="track" lineStyle="0" metaname="track" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="iPostgresqlOutput_1">
+  <connection connectorName="FLOW" label="track" lineStyle="0" metaname="track" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tPostgresqlOutput_1">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="file_id"/>
@@ -1461,7 +1461,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="track"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlOutput_1" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlOutput_1" target="tPostgresqlInput_3">
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlOutput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlOutput_1" target="tPostgresqlInput_3">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk10"/>
   </connection>
@@ -1584,7 +1584,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row3"/>
   </connection>
-  <connection connectorName="FLOW" label="out1" lineStyle="0" metaname="out1" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="iPostgresqlOutput_2">
+  <connection connectorName="FLOW" label="out1" lineStyle="0" metaname="out1" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="tPostgresqlOutput_2">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="fk_auv_tracks"/>
@@ -1675,7 +1675,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="out1"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlOutput_2" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlOutput_2" target="tPostgresqlRow_2">
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlOutput_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlOutput_2" target="tPostgresqlRow_2">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk7"/>
   </connection>
