@@ -1,19 +1,21 @@
-<?xml version="1.0"?>
-<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
+    <contextParameter comment="" name="archived_folder" prompt="archived_folder?" promptNeeded="false" type="id_String" value="/usr/local/talend/aatams_sattag_nrt/zipped"/>
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="harvest?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="aatams_sattag_nrt"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_Password" value="y/rKQmSqKmcy5ZysFF96DC8Bm1mg9U1j"/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="aatams_sattag_nrt"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="10.11.12.13"/>
-    <contextParameter comment="" name="archived_folder" prompt="archived_folder?" promptNeeded="false" type="id_String" value="/usr/local/talend/aatams_sattag_nrt/zipped"/>
-    <contextParameter comment="" name="metadata_file" prompt="metadata_file?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/Users/xavierhoenner/Work/R/data-services/AATAMS/aatams_sattag_metadata.csv"/>
+    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_VdH-wBEjEeOEF5U-6QRQFw" type="id_String" value="/tmp/aatams_sattag_nrt"/>
+    <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_VdH-wBEjEeOEF5U-6QRQFw" type="id_String" value="null"/>
     <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=""/>
     <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/tmp/fileList"/>
+    <contextParameter comment="" name="metadata_file" prompt="metadata_file?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/Users/xavierhoenner/Work/R/data-services/AATAMS/aatams_sattag_metadata.csv"/>
   </context>
   <parameters>
-    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
+    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms512M -Xmx2048M"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="0"/>
@@ -23,11 +25,16 @@
     <elementParameter field="TEXT" name="JOBID_FOR_OOZIE" value=""/>
     <elementParameter field="CHECK" name="IMPLICITCONTEXT_USE_PROJECT_SETTINGS" value="true"/>
     <elementParameter field="CHECK" name="STATANDLOG_USE_PROJECT_SETTINGS" value="true"/>
-    <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;&quot;"/>
+    <elementParameter field="CHECK" name="IMPLICIT_TCONTEXTLOAD" value="true"/>
+    <elementParameter field="RADIO" name="FROM_FILE_FLAG_IMPLICIT_CONTEXT" value="true"/>
+    <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="context.paramFile"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;=>&quot;"/>
     <elementParameter field="CLOSED_LIST" name="DB_VERSION_IMPLICIT_CONTEXT" value=""/>
-    <elementParameter field="CHECK" name="DISABLE_WARNINGS" value="false"/>
     <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
+    <elementParameter field="CHECK" name="ON_STATCATCHER_FLAG" value="true"/>
+    <elementParameter field="CHECK" name="ON_LOGCATCHER_FLAG" value="true"/>
+    <elementParameter field="CHECK" name="ON_FILES_FLAG" value="true"/>
+    <elementParameter field="DIRECTORY" name="FILE_PATH" value="context.logDir"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="ojdbc14-10g.jar"/>
     <routinesParameter id="_EMUjIOKxEeKLIPyZ_wh4zg" name="DataOperation"/>
@@ -480,62 +487,62 @@
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
     <metadata connector="FLOW" label="metadata" name="tPostgresqlOutput_1">
-      <column comment="" key="false" length="6" name="sattag_program" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="6"/>
-      <column comment="" key="true" length="16" name="device_id" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
-      <column comment="" defaultValue="" key="false" length="7" name="ptt" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Integer"/>
-      <column comment="" key="false" length="5" name="body" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Integer"/>
-      <column comment="" key="false" length="8" name="device_wmo_ref" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
-      <column comment="" key="false" length="40" name="tag_type" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="25"/>
-      <column comment="" key="false" length="40" name="common_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="30"/>
-      <column comment="" key="false" length="40" name="species" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="30"/>
-      <column comment="" defaultValue="" key="false" length="8" name="release_lat" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double" originalLength="15"/>
-      <column comment="" defaultValue="" key="false" length="8" name="release_lon" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double" originalLength="15"/>
-      <column comment="" key="false" length="30" name="release_site" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="30"/>
-      <column comment="" key="false" length="29" name="state_country" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
-      <column comment="" key="false" length="15" name="release_date" nullable="true" pattern="&quot;dd/MM/yy&quot;" precision="0" type="id_Date"/>
-      <column comment="" key="false" length="8" name="recovery_date" nullable="true" pattern="&quot;dd/MM/yy&quot;" precision="0" type="id_Date"/>
-      <column comment="" key="false" length="8" name="age_class" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
-      <column comment="" key="false" length="6" name="sex" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
-      <column comment="" key="false" length="8" name="length" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double" originalLength="10"/>
-      <column comment="" key="false" length="8" name="girth" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double" originalLength="10"/>
-      <column comment="" key="false" length="8" name="estimated_mass" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double" originalLength="10"/>
-      <column comment="" key="false" length="8" name="actual_mass" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double" originalLength="10"/>
-      <column comment="" key="false" length="50" name="sample" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="200" name="comment" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="200"/>
-      <column comment="" key="false" length="40" name="pi" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="40"/>
-      <column comment="" key="false" length="20" name="institution" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
-      <column comment="" key="false" length="400" name="abstract_sattag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="400"/>
-      <column comment="" key="false" length="256" name="opendap_url" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
-      <column comment="" key="false" length="256" name="metadata" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
+      <column comment="" key="false" length="6" name="sattag_program" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="6"/>
+      <column comment="" key="true" length="16" name="device_id" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="7" name="ptt" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT8" type="id_Integer"/>
+      <column comment="" key="false" length="5" name="body" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT8" type="id_Integer"/>
+      <column comment="" key="false" length="8" name="device_wmo_ref" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="40" name="tag_type" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="25"/>
+      <column comment="" key="false" length="40" name="common_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="30"/>
+      <column comment="" key="false" length="40" name="species" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="30"/>
+      <column comment="" defaultValue="" key="false" length="8" name="release_lat" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double" originalLength="15"/>
+      <column comment="" defaultValue="" key="false" length="8" name="release_lon" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double" originalLength="15"/>
+      <column comment="" key="false" length="30" name="release_site" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="30"/>
+      <column comment="" key="false" length="29" name="state_country" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="15" name="release_date" nullable="true" pattern="&quot;dd/MM/yy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="8" name="recovery_date" nullable="true" pattern="&quot;dd/MM/yy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="8" name="age_class" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="6" name="sex" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="8" name="length" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double" originalLength="10"/>
+      <column comment="" key="false" length="8" name="girth" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double" originalLength="10"/>
+      <column comment="" key="false" length="8" name="estimated_mass" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double" originalLength="10"/>
+      <column comment="" key="false" length="8" name="actual_mass" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double" originalLength="10"/>
+      <column comment="" key="false" length="50" name="sample" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
+      <column comment="" key="false" length="200" name="comment" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="200"/>
+      <column comment="" key="false" length="40" name="pi" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="40"/>
+      <column comment="" key="false" length="20" name="institution" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="400" name="abstract_sattag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="400"/>
+      <column comment="" key="false" length="256" name="opendap_url" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="256" name="metadata" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
     </metadata>
     <metadata connector="REJECT" label="metadata" name="REJECT">
-      <column comment="" key="false" length="6" name="sattag_program" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="6"/>
-      <column comment="" key="true" length="16" name="device_id" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
-      <column comment="" defaultValue="" key="false" length="7" name="ptt" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Integer"/>
-      <column comment="" key="false" length="5" name="body" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Integer"/>
-      <column comment="" key="false" length="8" name="device_wmo_ref" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
-      <column comment="" key="false" length="40" name="tag_type" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="25"/>
-      <column comment="" key="false" length="40" name="common_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="30"/>
-      <column comment="" key="false" length="40" name="species" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="30"/>
-      <column comment="" defaultValue="" key="false" length="8" name="release_lat" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double" originalLength="15"/>
-      <column comment="" defaultValue="" key="false" length="8" name="release_lon" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double" originalLength="15"/>
-      <column comment="" key="false" length="30" name="release_site" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="30"/>
-      <column comment="" key="false" length="29" name="state_country" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
-      <column comment="" key="false" length="15" name="release_date" nullable="true" pattern="&quot;dd/MM/yy&quot;" precision="0" type="id_Date"/>
-      <column comment="" key="false" length="8" name="recovery_date" nullable="true" pattern="&quot;dd/MM/yy&quot;" precision="0" type="id_Date"/>
-      <column comment="" key="false" length="8" name="age_class" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
-      <column comment="" key="false" length="6" name="sex" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
-      <column comment="" key="false" length="8" name="length" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double" originalLength="10"/>
-      <column comment="" key="false" length="8" name="girth" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double" originalLength="10"/>
-      <column comment="" key="false" length="8" name="estimated_mass" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double" originalLength="10"/>
-      <column comment="" key="false" length="8" name="actual_mass" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Double" originalLength="10"/>
-      <column comment="" key="false" length="50" name="sample" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="50"/>
-      <column comment="" key="false" length="200" name="comment" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="200"/>
-      <column comment="" key="false" length="40" name="pi" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="40"/>
-      <column comment="" key="false" length="20" name="institution" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
-      <column comment="" key="false" length="400" name="abstract_sattag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="400"/>
-      <column comment="" key="false" length="256" name="opendap_url" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
-      <column comment="" key="false" length="256" name="metadata" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
+      <column comment="" key="false" length="6" name="sattag_program" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="6"/>
+      <column comment="" key="true" length="16" name="device_id" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" defaultValue="" key="false" length="7" name="ptt" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT8" type="id_Integer"/>
+      <column comment="" key="false" length="5" name="body" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT8" type="id_Integer"/>
+      <column comment="" key="false" length="8" name="device_wmo_ref" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="40" name="tag_type" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="25"/>
+      <column comment="" key="false" length="40" name="common_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="30"/>
+      <column comment="" key="false" length="40" name="species" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="30"/>
+      <column comment="" defaultValue="" key="false" length="8" name="release_lat" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double" originalLength="15"/>
+      <column comment="" defaultValue="" key="false" length="8" name="release_lon" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double" originalLength="15"/>
+      <column comment="" key="false" length="30" name="release_site" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="30"/>
+      <column comment="" key="false" length="29" name="state_country" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="15" name="release_date" nullable="true" pattern="&quot;dd/MM/yy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="8" name="recovery_date" nullable="true" pattern="&quot;dd/MM/yy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="8" name="age_class" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="6" name="sex" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="8" name="length" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double" originalLength="10"/>
+      <column comment="" key="false" length="8" name="girth" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double" originalLength="10"/>
+      <column comment="" key="false" length="8" name="estimated_mass" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double" originalLength="10"/>
+      <column comment="" key="false" length="8" name="actual_mass" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT8" type="id_Double" originalLength="10"/>
+      <column comment="" key="false" length="50" name="sample" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
+      <column comment="" key="false" length="200" name="comment" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="200"/>
+      <column comment="" key="false" length="40" name="pi" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="40"/>
+      <column comment="" key="false" length="20" name="institution" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="400" name="abstract_sattag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="400"/>
+      <column comment="" key="false" length="256" name="opendap_url" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
+      <column comment="" key="false" length="256" name="metadata" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String"/>
     </metadata>
@@ -558,7 +565,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT aatams_sattag_nrt_metadata.device_id, &#10;aatams_sattag_nrt_metadata.device_wmo_ref,&#10;'#'::text || upper(lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour&#10;FROM aatams_sattag_nrt_metadata&#10;LEFT JOIN aatams_sattag_nrt_animal_id ON aatams_sattag_nrt_metadata.device_id = aatams_sattag_nrt_animal_id.device_id&#10;WHERE aatams_sattag_nrt_metadata.device_id NOT IN (SELECT device_id FROM aatams_sattag_nrt_animal_id)&#10;ORDER BY device_id;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT aatams_sattag_nrt_metadata.device_id, &#xA;aatams_sattag_nrt_metadata.device_wmo_ref,&#xA;'#'::text || upper(lpad(to_hex(trunc(random() * 16777215)::integer),6,'0')) AS colour&#xA;FROM aatams_sattag_nrt_metadata&#xA;LEFT JOIN aatams_sattag_nrt_animal_id ON aatams_sattag_nrt_metadata.device_id = aatams_sattag_nrt_animal_id.device_id&#xA;WHERE aatams_sattag_nrt_metadata.device_id NOT IN (SELECT device_id FROM aatams_sattag_nrt_animal_id)&#xA;ORDER BY device_id;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>

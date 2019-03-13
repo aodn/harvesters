@@ -1,17 +1,19 @@
-<?xml version="1.0"?>
-<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
+    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="harvest?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="aatams_sattag_nrt"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_Password" value="y/rKQmSqKmcy5ZysFF96DC8Bm1mg9U1j"/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="aatams_sattag_nrt"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_313tsAhpEeOJn8rDLYzdcg" type="id_String" value="10.11.12.13"/>
-    <contextParameter comment="" name="metadata_file" prompt="metadata_file?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/Users/xavierhoenner/Work/R/data-services/AATAMS/aatams_sattag_metadata.csv"/>
-    <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
-    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
+    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_VdH-wBEjEeOEF5U-6QRQFw" type="id_String" value="/tmp/aatams_sattag_nrt"/>
+    <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_VdH-wBEjEeOEF5U-6QRQFw" type="id_String" value="null"/>
     <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value=""/>
     <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/tmp/fileList"/>
+    <contextParameter comment="" name="metadata_file" prompt="metadata_file?" promptNeeded="false" repositoryContextId="_DepiIAh_EeO-m4WFJQNDNA" type="id_String" value="/Users/xavierhoenner/Work/R/data-services/AATAMS/aatams_sattag_metadata.csv"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
@@ -252,7 +254,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT sattag_program,&#10;aatams_sattag_nrt_metadata.device_id,&#10;aatams_sattag_nrt_metadata.device_wmo_ref,&#10;tag_type,&#10;common_name,&#10;release_site,&#10;state_country,&#10;age_class,&#10;sex,&#10;colour&#10;FROM aatams_sattag_nrt_metadata&#10;LEFT JOIN aatams_sattag_nrt_animal_id ON aatams_sattag_nrt_animal_id.device_id = aatams_sattag_nrt_metadata.device_id&#10;WHERE aatams_sattag_nrt_metadata.device_wmo_ref != ''&#10;ORDER BY device_id;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;SELECT sattag_program,&#xA;aatams_sattag_nrt_metadata.device_id,&#xA;aatams_sattag_nrt_metadata.device_wmo_ref,&#xA;tag_type,&#xA;common_name,&#xA;release_site,&#xA;state_country,&#xA;age_class,&#xA;sex,&#xA;colour&#xA;FROM aatams_sattag_nrt_metadata&#xA;LEFT JOIN aatams_sattag_nrt_animal_id ON aatams_sattag_nrt_animal_id.device_id = aatams_sattag_nrt_metadata.device_id&#xA;WHERE aatams_sattag_nrt_metadata.device_wmo_ref != ''&#xA;ORDER BY device_id;&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="postgres_id"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
@@ -308,7 +310,7 @@
       <elementValue elementRef="RVALUE" value="-32.0"/>
     </elementParameter>
     <elementParameter field="CHECK" name="USE_ADVANCED" value="false"/>
-    <elementParameter field="MEMO_JAVA" name="ADVANCED_COND" value="// code sample : use input_row to define the condition.&#10;// input_row.columnName1.equals(&quot;foo&quot;) ||!(input_row.columnName2.equals(&quot;bar&quot;))&#10;// replace the following expression by your own filter condition &#10;input_row.columnName1.equals(input_row.columnName2)&#10;&#9;&#9;&#9;"/>
+    <elementParameter field="MEMO_JAVA" name="ADVANCED_COND" value="// code sample : use input_row to define the condition.&#xA;// input_row.columnName1.equals(&quot;foo&quot;) ||!(input_row.columnName2.equals(&quot;bar&quot;))&#xA;// replace the following expression by your own filter condition &#xA;input_row.columnName1.equals(input_row.columnName2)&#xA;&#x9;&#x9;&#x9;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
