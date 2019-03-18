@@ -27,7 +27,8 @@ METADATA_COLS = ('latitude', 'longitude', 'sampledateutc', 'year', 'month', 'day
                  'route', 'geom', 'start_port', 'end_port', 'route_frequency', 'route_start_date',
                  'vessel_name', 'trip_code', 'taxon_name', 'family', 'genus', 'species', 'taxon_group',
                  'taxon_start_date', 'phyto_comments', 'acknowledgements', 'first_occurrence',
-                 'parent_taxon_name', 'training', 'comments'
+                 'parent_taxon_name', 'training', 'comments', 'sex', 'life_stage', 'taxon_eco_group', 'aphiaid',
+                 'zoop_comments'
                  )
 
 COL_NAME_MAP = {
@@ -40,27 +41,10 @@ COL_NAME_MAP = {
     'year': 'Year',
     'month': 'Month',
     'day': 'Day',
+    'time': 'Time_24hr',
     'time_24hr': 'Time_24hr',
-    'start_port': 'start_port',
-    'end_port': 'end_port',
-    'route_frequency': 'route_frequency',
-    'route_start_date': 'route_start_date',
-    'vessel_name': 'vessel_name',
-    'trip_code': 'trip_code',
-    'taxon_name': 'taxon_name',
-    'family': 'family',
-    'genus': 'genus',
-    'species': 'species',
-    'taxon_group': 'taxon_group',
-    'taxon_start_date': 'taxon_start_date',
-    'phyto_comments': 'phyto_comments',
-    'acknowledgements': 'acknowledgements',
-    'first_occurrence': 'first_occurrence',
-    'parent_taxon_name': 'parent_taxon_name',
-    'training': 'training',
-    'comments': 'comments',
-    'caab_code': 'caab_code',
-    'taxon_per_m3': 'taxon_per_m3'
+    'taxonname': 'taxon_name',
+    'abundance_m3': 'taxon_per_m3'
 }
 
 DROP_COLS = ('fid', 'unnamed', 'mid_pt')
@@ -122,11 +106,16 @@ def rename_column(colname):
      * Element names cannot start with the letters xml (or XML, or Xml, etc)
      * Element names can contain letters, digits, hyphens, underscores, and periods
      * Element names cannot contain spaces
+     For metadata columns, also convert name to all lower-case letters, unless otherwise specified
+     in COL_NAME_MAP.
     """
     newname = colname
 
     for pattern, repl in RENAME_PATTERNS:
         newname = pattern.sub(repl, newname)
+
+    if newname.lower() in METADATA_COLS:
+        newname = newname.lower()
 
     mapped_name = COL_NAME_MAP.get(newname.lower())
     if mapped_name:

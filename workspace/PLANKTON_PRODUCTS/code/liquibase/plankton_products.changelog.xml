@@ -2388,6 +2388,55 @@
   </changeSet>
 
 
+  <changeSet author="talend" id="table_cpr_zoop_raw_flat">
+    <sql>
+      CREATE TABLE cpr_zoop_raw_flat (
+        id bigserial PRIMARY KEY,
+        "Route" text,
+        start_port text,
+        end_port text,
+        route_frequency text,
+        route_start_date text,
+        vessel_name text,
+        trip_code text,
+        "Longitude" double precision NOT NULL,
+        "Latitude" double precision NOT NULL,
+        "SampleDateUTC" timestamp without time zone NOT NULL,
+        taxon_name text,
+        family text,
+        genus text,
+        species text,
+        sex text,
+        life_stage text,
+        taxon_group text,
+        taxon_eco_group text,
+        aphiaid bigint,
+        taxon_start_date text,
+        taxon_per_m3 real,
+        zoop_comments text,
+        acknowledgements text,
+        geom geometry(Geometry,4326) CHECK (st_isvalid(geom))
+      );
+
+      CREATE INDEX cpr_zoop_raw_flat_gist_idx ON cpr_zoop_raw_flat USING GIST (geom);
+    </sql>
+  </changeSet>
+
+
+   <changeSet author="talend" id="table_cpr_zoop_taxon_changelog">
+    <sql>
+      CREATE TABLE cpr_zoop_taxon_changelog (
+        taxon_name text PRIMARY KEY,
+        taxon_start_date text,
+        first_occurrence text,
+        parent_taxon_name text,
+        training text,
+        comments text
+      );
+    </sql>
+  </changeSet>
+
+
   <changeSet author="talend" id="view_cpr_zoop_htg_map" runOnChange="true">
     <sql>
       DROP VIEW IF EXISTS cpr_zoop_htg_map CASCADE;
@@ -2429,6 +2478,50 @@
       DROP VIEW IF EXISTS cpr_zoop_raw_map CASCADE;
       CREATE VIEW cpr_zoop_raw_map AS
         SELECT * FROM cpr_zoop_raw ;
+    </sql>
+  </changeSet>
+
+
+  <changeSet author="talend" id="view_cpr_zoop_raw_flat_map" runOnChange="true">
+    <sql>
+      DROP VIEW IF EXISTS cpr_zoop_raw_flat_map CASCADE;
+      CREATE VIEW cpr_zoop_raw_flat_map AS
+        SELECT
+          r.id,
+          r."Route",
+          r.start_port,
+          r.end_port,
+          r.route_frequency,
+          r.route_start_date,
+          r.vessel_name,
+          r.trip_code,
+          r."Longitude",
+          r."Latitude",
+          r."SampleDateUTC",
+          to_char(r."SampleDateUTC", 'YYYY') AS "Year",
+          to_char(r."SampleDateUTC", 'MM') AS "Month",
+          to_char(r."SampleDateUTC", 'DD') AS "Day",
+          to_char(r."SampleDateUTC", 'HH24:MI:SS') AS "Time_24hr",
+          r.taxon_name,
+          r.family,
+          r.genus,
+          r.species,
+          r.sex,
+          r.life_stage,
+          r.taxon_group,
+          r.taxon_eco_group,
+          r.aphiaid,
+          r.taxon_start_date,
+          r.taxon_per_m3,
+          r.zoop_comments,
+          r.acknowledgements,
+          c.first_occurrence,
+          c.parent_taxon_name,
+          c.training,
+          c.comments,
+          r.geom
+        FROM cpr_zoop_raw_flat r LEFT JOIN
+             cpr_zoop_taxon_changelog c USING (taxon_name, taxon_start_date) ;
     </sql>
   </changeSet>
 
