@@ -17,27 +17,31 @@ FILENAME_PATTERN = re.compile(r"(cpr|nrs)_"
 
 TEMPLATE_NROW = 100
 
-TIME_COLS = ('sampledateutc', 'time_utc')
+TIME_COLS = ('sampledateutc', 'sampledatelocal', 'time_utc')
 DOUBLE_COLS = ('latitude', 'longitude')
 REAL_TYPES = (np.float16, np.float32, np.float64)
 INT_TYPES = (np.int16, np.int32, np.int64)
 
-NOTNULL_COLS = ('latitude', 'longitude', 'sampledateutc', 'year', 'month', 'day', 'time_24hr')
+NOTNULL_COLS = ('latitude', 'longitude', 'sampledateutc', 'sampledatelocal', 'year', 'month', 'day', 'time_24hr',
+                'station'
+                )
 METADATA_COLS = ('latitude', 'longitude', 'sampledateutc', 'year', 'month', 'day', 'time_24hr',
                  'route', 'geom', 'start_port', 'end_port', 'route_frequency', 'route_start_date',
                  'vessel_name', 'trip_code', 'taxon_name', 'family', 'genus', 'species', 'taxon_group',
                  'taxon_start_date', 'phyto_comments', 'acknowledgements', 'first_occurrence',
                  'parent_taxon_name', 'training', 'comments', 'sex', 'life_stage', 'taxon_eco_group', 'aphiaid',
-                 'zoop_comments'
+                 'zoop_comments', 'station', 'sampledatelocal'
                  )
 
 COL_NAME_MAP = {
+    'station': 'Station',
     'route': 'Route',
     'route_code': 'Route',
     'latitude': 'Latitude',
     'longitude': 'Longitude',
     'time_utc': 'SampleDateUTC',
     'sampledateutc': 'SampleDateUTC',
+    'sampledatelocal': 'SampleDateLocal',
     'year': 'Year',
     'month': 'Month',
     'day': 'Day',
@@ -58,6 +62,7 @@ RENAME_STRINGS = [
     (r" *<= *", "_le_"),  # less than or equal to
     (r" *< *",  "_lt_"),  # less than
     (r" *> *",  "_gt_"),  # greater than
+    (r"~ *", "approx_"),  # approximately
     (r"[()]", ""),  # strings to delete
     (r" ", "_"),  # space to underscore
 ]
