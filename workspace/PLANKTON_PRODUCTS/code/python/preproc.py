@@ -62,9 +62,8 @@ RENAME_STRINGS = [
     (r" *<= *", "_le_"),  # less than or equal to
     (r" *< *",  "_lt_"),  # less than
     (r" *> *",  "_gt_"),  # greater than
-    (r"~ *", "approx_"),  # approximately
-    (r"[()]", ""),  # strings to delete
-    (r" ", "_"),  # space to underscore
+    (r"[()~]", ""),  # characters to delete
+    (r" +", "_"),  # space to underscore
 ]
 RENAME_PATTERNS = [(re.compile(p), r) for p, r in RENAME_STRINGS]
 
