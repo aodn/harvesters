@@ -143,6 +143,14 @@
     </changeSet>
 
 
+    <changeSet author="talend" id="add_long_names_column">
+      <sql>
+        ALTER TABLE file_metadata
+          ADD COLUMN long_names text ;
+      </sql>
+    </changeSet>
+
+
     <changeSet author="talend" id="map_views" runOnChange="true">
       <sql>
         DROP VIEW IF EXISTS moorings_all_map CASCADE;
@@ -190,6 +198,9 @@
             m.standard_names LIKE '%chlorophyll%' AS has_chlorophyll,
             m.standard_names LIKE '%fluorescence%' AS has_fluorescence,
             m.standard_names LIKE '%sea_surface_wave%' AS has_wave_parameters,
+            m.variables,
+            m.standard_names,
+            m.long_names,
             -- geometry
             m.geom
           FROM indexed_file i JOIN file_metadata m ON m.file_id = i.id
