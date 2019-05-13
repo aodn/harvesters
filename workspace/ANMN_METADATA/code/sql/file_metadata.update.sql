@@ -1,9 +1,15 @@
 "
 WITH std_agg AS ( 
-       SELECT string_agg(value, ', ') AS standard_names
+       SELECT string_agg(distinct value, ', ') AS standard_names
        FROM variable_attribute 
        WHERE file_id = " + context.fileId + " AND 
              name='standard_name' AND
+             value !~ 'flag$'
+     ), long_agg AS (
+       SELECT string_agg(distinct value, ', ') AS long_names
+       FROM variable_attribute
+       WHERE file_id = " + context.fileId + " AND
+             name='long_name' AND
              value !~ 'flag$'
      ), var_agg AS (
        SELECT string_agg(name, ', ') AS variables
@@ -39,7 +45,8 @@ UPDATE file_metadata m
                              substring(url, '/(Pulse|FluxPulse)/')),
     variables = v.variables,
     standard_names = s.standard_names,
+    long_names = l.long_names,
     realtime = (f.url ~* 'real[-_]?time'),
     deleted = false
-  FROM indexed_file f, std_agg s, var_agg v
+  FROM indexed_file f, std_agg s, var_agg v, long_agg l
   WHERE m.file_id = f.id AND f.id = " + context.fileId
