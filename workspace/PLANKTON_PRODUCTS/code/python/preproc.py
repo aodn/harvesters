@@ -14,6 +14,7 @@ FILENAME_PATTERN = re.compile(r"(cpr|nrs)_"
                               r"(phyto|zoop)_"
                               r"(htg|genus|species|raw_flat|raw|taxon_changelog|copes|noncopes)"
                               r"(.*).csv")
+INDEX_FILE_PATTERN = re.compile(r"(cpr|nrs)_ind\.csv")
 
 TEMPLATE_NROW = 100
 
@@ -30,7 +31,7 @@ METADATA_COLS = ('latitude', 'longitude', 'sampledateutc', 'year', 'month', 'day
                  'vessel_name', 'trip_code', 'taxon_name', 'family', 'genus', 'species', 'taxon_group',
                  'taxon_start_date', 'phyto_comments', 'acknowledgements', 'first_occurrence',
                  'parent_taxon_name', 'training', 'comments', 'sex', 'life_stage', 'taxon_eco_group', 'aphiaid',
-                 'zoop_comments', 'station', 'sampledatelocal'
+                 'zoop_comments', 'station', 'sampledatelocal', 'region', 'nrscode'
                  )
 
 COL_NAME_MAP = {
@@ -41,6 +42,7 @@ COL_NAME_MAP = {
     'longitude': 'Longitude',
     'time_utc': 'SampleDateUTC',
     'sampledateutc': 'SampleDateUTC',
+    'sampledate_utc': 'SampleDateUTC',
     'sampledatelocal': 'SampleDateLocal',
     'year': 'Year',
     'month': 'Month',
@@ -48,7 +50,9 @@ COL_NAME_MAP = {
     'time': 'Time_24hr',
     'time_24hr': 'Time_24hr',
     'taxonname': 'taxon_name',
-    'abundance_m3': 'taxon_per_m3'
+    'abundance_m3': 'taxon_per_m3',
+    'region': 'Region',
+    'nrscode': 'NRScode'
 }
 
 DROP_COLS = ('fid', 'unnamed', 'mid_pt')
@@ -134,11 +138,19 @@ if __name__ == "__main__":
         exit(1)
 
     infile = sys.argv[1]
-    name_match = FILENAME_PATTERN.match(os.path.basename(infile))
-    if not name_match:
-        raise ValueError("File name '{name}' doesn't match expected pattern!".format(name=os.path.basename(infile)))
-    outfile = name_match.expand("\\1_\\2_\\3.csv")
-    table_name = name_match.expand("\\1_\\2_\\3")
+    infile_basename = os.path.basename(infile)
+    name_match = FILENAME_PATTERN.match(infile_basename)
+    if name_match:
+        outfile = name_match.expand("\\1_\\2_\\3.csv")
+        table_name = name_match.expand("\\1_\\2_\\3")
+        index_file = False
+    elif INDEX_FILE_PATTERN.match(infile_basename):
+        outfile = infile_basename
+        table_name = infile_basename.replace('.csv', '')
+        index_file = True
+    else:
+        raise ValueError("File name '{name}' doesn't match expected pattern!".format(name=infile_basename))
+
     df = pd.read_csv(infile)
     df = df.iloc[:TEMPLATE_NROW]
 
@@ -162,6 +174,9 @@ if __name__ == "__main__":
             notnull = ""
 
         if cname.lower() not in METADATA_COLS:
+            # Convert '(null)' string entries to proper nulls
+            if df[col].dtype == object:
+                df[col].replace('(null)', np.nan, inplace=True)
             df[col] = df[col].astype(np.float64)  # all data columns should be floats
 
         ctype = db_type(df, col)
