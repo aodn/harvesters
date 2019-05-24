@@ -2526,6 +2526,65 @@
   </changeSet>
 
 
+<!--CPR indices *********************************************************************** -->
+
+  <changeSet author="talend" id="table_cpr_ind">
+    <sql>
+      CREATE TABLE cpr_ind (
+        id bigserial PRIMARY KEY,
+        "Latitude" double precision NOT NULL,
+        "Longitude" double precision NOT NULL,
+        "SampleDateUTC" timestamp without time zone NOT NULL,
+        "Year" integer NOT NULL,
+        "Month" integer NOT NULL,
+        "Day" integer NOT NULL,
+        "Time_24hr" text NOT NULL,
+        "Region" text,
+        "WaterDepth_m" real,
+        "SST_C" real,
+        "ChlorophyllClimatology_mgm-3" real,
+        "ChlorophyllMODIS" real,
+        "CopepodAbundance_m3" real,
+        "ZoopAbundance_m3" real,
+        "AvgTotalLengthCopepod_mm" real,
+        "NoCopepodSpecies_sample" real,
+        "ShannonCopepodDiversity" real,
+        "CopepodEvennessCopepod" real,
+        "CopepodHerbivoreCarnivoreRatio" real,
+        "TotalSalps_m3" real,
+        "TotalLarvacean_m3" real,
+        "TotalCladoceran_m3" real,
+        "Carbon_mg_m3" real,
+        "TotalPhytoplankton" real,
+        "TotalPhytoplanktonCarbon_pgL" real,
+        "DiatomDinoRatio" real,
+        "MeanBiovolumeCell_um" real,
+        "NumberPhytoplanktonSpecies_sample" real,
+        "ShannonPhytoplanktonDiversity" real,
+        "PhytoplanktonEveness" real,
+        "NoDiatoms" real,
+        "ShannonDiatomDiversity" real,
+        "EvennessDiatom" real,
+        "NoDinoflagellate" real,
+        "ShannonDinoflagellateDiversity" real,
+        "EvennessDinoflagellate" real,
+        geom geometry(Geometry,4326) CHECK (st_isvalid(geom))
+      );
+
+      CREATE INDEX cpr_ind_gist_idx ON cpr_ind USING GIST (geom);
+    </sql>
+  </changeSet>
+
+
+  <changeSet author="talend" id="view_cpr_ind_map" runOnChange="true">
+    <sql>
+      DROP VIEW IF EXISTS cpr_ind_map CASCADE;
+      CREATE VIEW cpr_ind_map AS
+        SELECT * FROM cpr_ind ;
+    </sql>
+  </changeSet>
+
+
 <!--NRS Phytoplankton *********************************************************************** -->
 
   <changeSet author="talend" id="table_nrs_phyto_htg">
@@ -4908,5 +4967,61 @@
         SELECT * FROM nrs_zoop_raw ;
     </sql>
   </changeSet>
+
+
+<!--NRS indices *********************************************************************** -->
+
+<changeSet author="talend" id="table_nrs_ind">
+    <sql>
+      CREATE TABLE nrs_ind (
+        id bigserial PRIMARY KEY,
+        "NRScode" text,
+        "Station" text NOT NULL,
+        "SampleDateLocal" timestamp without time zone NOT NULL,
+        "SST_oC" real,
+        "ChlorophyllClimatology_mg_m3" real,
+        "ChlorophyllModis_mg_m3" real,
+        "TotalAbundanceZoo_m3" real,
+        "TotalAbundanceCopepods_m3" real,
+        "AverageCopepodTotalLength_mm" real,
+        "HerbivoreToCarnivoreCopepodRatio" real,
+        "NumberCopepods_Sample" real,
+        "ShannonCopepodDiversity" real,
+        "ShannonCopepodEveness" real,
+        "ZooBiomass_mgCarbon_m3" real,
+        "Salinity_psu" real,
+        "Silicate_umol_L" real,
+        "Nitrate_umol_L" real,
+        "Ammonium_umol_L" real,
+        "Phosphate_umol_L" real,
+        "TotalCarbon_umol_kg" real,
+        "TotalAlkalinity_umol_kg" real,
+        "Oxygen_umol_L" real,
+        "PhytoBiomass_Carbon_pg_L" real,
+        "TotalAbundancePhyto_cells_L" real,
+        "DiatomDinoflagellateRatio" real,
+        "AverageCellSize_um3" real,
+        "NumberPhytoSpecies_Sample" real,
+        "ShannonPhytoDiversity" real,
+        "ShannonPhytoEveness" real,
+        "NumberDiatomSpecies_Sample" real,
+        "ShannonDiatomDiversity" real,
+        "ShannonDiatomEveness" real,
+        "NumberDinoSpecies_Sample" real,
+        "ShannonDinoDiversity" real,
+        "ShannonDinoEveness" real
+      );
+    </sql>
+  </changeSet>
+
+
+  <changeSet author="talend" id="view_nrs_ind_map" runOnChange="true">
+    <sql>
+      DROP VIEW IF EXISTS nrs_ind_map CASCADE;
+      CREATE VIEW nrs_ind_map AS
+        SELECT * FROM nrs_ind ;
+    </sql>
+  </changeSet>
+
 
 </databaseChangeLog>
