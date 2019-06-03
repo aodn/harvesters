@@ -55,15 +55,14 @@ add_build_properties() {
 	local temp_dir=`mktemp -d` && trap "rm -rf $temp_dir" EXIT
 
 	local zip_file=`find $TALEND_BUILD -name "$job_name*.zip"`
-	local zipped_dir=${job_name}_Latest
 
-	mkdir $temp_dir/$zipped_dir
+	mkdir $temp_dir
 
 	local git_commit=`cd $TALEND_REPO && git rev-parse HEAD`
-	echo GIT_COMMIT=$git_commit > $temp_dir/$zipped_dir/build.properties
-	env | grep BUILD_ >> $temp_dir/$zipped_dir/build.properties
+	echo GIT_COMMIT=$git_commit > $temp_dir/build.properties
+	env | grep BUILD_ >> $temp_dir/build.properties
 
-	(cd $temp_dir && zip $zip_file $zipped_dir/build.properties)
+	(cd $temp_dir && zip $zip_file build.properties)
 }
 
 # pull down and unpack latest version of components
