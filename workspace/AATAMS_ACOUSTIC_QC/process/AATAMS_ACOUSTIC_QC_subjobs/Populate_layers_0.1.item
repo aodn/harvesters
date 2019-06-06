@@ -4,16 +4,16 @@
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value=""/>
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="null"/>
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="harvest"/>
-    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="aatams_acoustic_qc"/>
-    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_Password" value="yhqxplJv1O9SHKDQ0gAM9g02TUWdk9XW"/>
+    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="aatams_biologging_shearwater"/>
+    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_Password" value="eefaxia7T8pqp0WthCiHh4AVSqbPVrDJCzil+kT2z/8="/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="5432"/>
-    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="aatams_acoustic_qc"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="po.aodn.org.au"/>
+    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="aatams_biologging_shearwater"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_BDs4YPKMEeOzcoSVTh1lXQ" type="id_String" value="10.11.12.13"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_8qN7YH12EeO8KdXPymp3hg" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_8qN7YH12EeO8KdXPymp3hg" type="id_String" value="null"/>
     <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_2gcaoHzPEeO8pJt-3ARPWA" type="id_String" value=""/>
     <contextParameter comment="" name="fileList" prompt="fileList?" promptNeeded="false" repositoryContextId="_2gcaoHzPEeO8pJt-3ARPWA" type="id_String" value="/tmp/fileList"/>
-    <contextParameter comment="" name="metadata_file" prompt="metadata_file?" promptNeeded="false" repositoryContextId="_2gcaoHzPEeO8pJt-3ARPWA" type="id_String" value="/mnt/ebs/wip/acoustic_tagging/TagMetadata.txt"/>
+    <contextParameter comment="" name="metadata_file" prompt="metadata_file?" promptNeeded="false" repositoryContextId="_2gcaoHzPEeO8pJt-3ARPWA" type="id_String" value="/tmp/TagMetadata.txt"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xmx6144M"/>
@@ -210,9 +210,9 @@
     <elementParameter field="CHECK" name="USE_DYNAMIC_JOB" value="false"/>
     <elementParameter field="TEXT" name="CONTEXT_JOB" value=""/>
     <elementParameter field="PROCESS_TYPE" name="PROCESS" value="Harvest_data"/>
+    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
     <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_PROCESS" value="_j_DKkHykEeOBc4eP00PLRQ"/>
     <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_VERSION" value="Latest"/>
-    <elementParameter field="TECHNICAL" name="PROCESS:PROCESS_TYPE_CONTEXT" value="Default"/>
     <elementParameter field="TEXT" name="CONTEXT_NAME" value="Default"/>
     <elementParameter field="CHECK" name="USE_INDEPENDENT_PROCESS" value="false"/>
     <elementParameter field="CHECK" name="DIE_ON_CHILD_ERROR" value="true"/>
@@ -333,7 +333,7 @@
       <column comment="" key="false" length="50" name="sensor_type" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="50" name="sensor_unit" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="10" name="tag_model_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="10"/>
-      <column comment="" defaultValue="" key="false" length="20" name="tag_serial_number" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="20"/>
+      <column comment="" key="false" length="20" name="tag_serial_number" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="20"/>
       <column comment="" key="false" length="5" name="tag_expected_life_time_days" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="5"/>
       <column comment="" key="false" length="50" name="tag_status" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="50"/>
       <column comment="" key="false" length="7" name="sex" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String"/>
@@ -387,11 +387,11 @@
       <column comment="" key="false" length="255" name="tag_project_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="255" name="scientific_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="255" name="common_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="255"/>
-      <column comment="" key="false" length="19" name="embargo_date" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" type="id_Date"/>
+      <column comment="" key="false" length="20" name="embargo_date" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ssZ&quot;" precision="0" type="id_Date"/>
       <column comment="" key="false" length="5" name="is_protected" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Boolean"/>
       <column comment="" key="false" length="8" name="release_longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Float"/>
       <column comment="" defaultValue="" key="false" length="8" name="release_latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" type="id_Float"/>
-      <column comment="" key="false" length="19" name="ReleaseDate" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" type="id_Date"/>
+      <column comment="" key="false" length="19" name="ReleaseDate" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ssZ&quot;" precision="0" type="id_Date"/>
       <column comment="" key="false" length="20" name="sensor_slope" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Float"/>
       <column comment="" key="false" length="20" name="sensor_intercept" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Float"/>
       <column comment="" key="false" length="50" name="sensor_type" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="50"/>
@@ -405,7 +405,7 @@
       <column comment="" key="false" length="5" name="dual_sensor_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_Boolean"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="out">
         <mapperTableEntries name="transmitter_id" expression="row4.transmitter_id " type="id_String" nullable="true"/>
@@ -414,11 +414,11 @@
         <mapperTableEntries name="tag_project_name" expression="row4.tag_project_name " type="id_String" nullable="true"/>
         <mapperTableEntries name="scientific_name" expression="row4.scientific_name " type="id_String" nullable="true"/>
         <mapperTableEntries name="common_name" expression="row4.common_name " type="id_String" nullable="true"/>
-        <mapperTableEntries name="embargo_date" expression="row4.embargo_date.equals(&quot;NA&quot;)?null:TalendDate.parseDate(&quot;yyyy-MM-dd&quot;,row4.embargo_date) " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="embargo_date" expression="row4.embargo_date.equals(&quot;NA&quot;)?null:TalendDate.parseDate(&quot;yyyy-MM-dd HH:mm:ssZ&quot;,row4.embargo_date + &quot;+0000&quot;)     " type="id_Date" nullable="true"/>
         <mapperTableEntries name="is_protected" expression="row4.is_protected " type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="release_longitude" expression="row4.release_longitude " type="id_Float" nullable="true"/>
         <mapperTableEntries name="release_latitude" expression="row4.release_latitude " type="id_Float" nullable="true"/>
-        <mapperTableEntries name="ReleaseDate" expression="TalendDate.parseDate(&quot;yyyy-MM-dd' 'HH:mm:ss&quot;,row4.ReleaseDate) " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="ReleaseDate" expression="TalendDate.parseDate(&quot;yyyy-MM-dd' 'HH:mm:ssZ&quot;, row4.ReleaseDate  + &quot;+0000&quot;)    " type="id_Date" nullable="true"/>
         <mapperTableEntries name="sensor_slope" expression="row4.sensor_slope.equals(&quot;NA&quot;)?null:Float.parseFloat(row4.sensor_slope)  " type="id_Float" nullable="true"/>
         <mapperTableEntries name="sensor_intercept" expression="row4.sensor_intercept.equals(&quot;NA&quot;)?null:Float.parseFloat(row4.sensor_intercept)   " type="id_Float" nullable="true"/>
         <mapperTableEntries name="sensor_type" expression="row4.sensor_type " type="id_String" nullable="true"/>
@@ -608,11 +608,11 @@
       <column comment="" key="false" length="255" name="tag_project_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="255" name="scientific_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="255" name="common_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="255"/>
-      <column comment="" key="false" length="19" name="embargo_date" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="20" name="embargo_date" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ssZ&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="5" name="is_protected" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" key="false" length="8" name="release_longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" defaultValue="" key="false" length="8" name="release_latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="19" name="ReleaseDate" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="19" name="ReleaseDate" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ssZ&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="20" name="sensor_slope" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="20" name="sensor_intercept" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="50" name="sensor_type" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
@@ -632,11 +632,11 @@
       <column comment="" key="false" length="255" name="tag_project_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="255" name="scientific_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="255"/>
       <column comment="" key="false" length="255" name="common_name" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="255"/>
-      <column comment="" key="false" length="19" name="embargo_date" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="20" name="embargo_date" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ssZ&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="5" name="is_protected" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="BOOL" type="id_Boolean"/>
       <column comment="" key="false" length="8" name="release_longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" defaultValue="" key="false" length="8" name="release_latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="5" sourceType="FLOAT4" type="id_Float"/>
-      <column comment="" key="false" length="19" name="ReleaseDate" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ss&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
+      <column comment="" key="false" length="19" name="ReleaseDate" nullable="true" pattern="&quot;yyyy-MM-dd' 'HH:mm:ssZ&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date"/>
       <column comment="" key="false" length="20" name="sensor_slope" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="20" name="sensor_intercept" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="FLOAT4" type="id_Float"/>
       <column comment="" key="false" length="50" name="sensor_type" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String" originalLength="50"/>
