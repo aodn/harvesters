@@ -48,21 +48,52 @@ _unlock() {
 	rmdir $TALEND_LOCK
 }
 
+# return whether supplied zip file was built with TOS 7
+# $1 - zip file
+built_with_tos7() {
+	local zip_file=$1; shift
+
+	if (unzip -l $zip_file | grep -q jobInfo.properties) ; then
+		 # TOS 7 adds a jobInfo.properties file to the zip
+		 return 0    # true
+	else
+		 # TOS 5 doesn't
+		 return 1    # false
+	fi
+}
+
+# determine directory in which build_properties file should be placed
+# in zip file - TOS 5 adds a redundant top level directory which is
+# removed when deployed - TOS 7 doesn't
+get_properties_dir() {
+	local zip_file=$1; shift
+
+	if built_with_tos7 $zip_file ; then
+		 echo "."
+	else
+		 echo ${job_name}_Latest
+	fi
+}
+
 # add git commit and any build properties present in the environment to the zip file
 # $1 - job name
 add_build_properties() {
 	local job_name=$1; shift
-	local temp_dir=`mktemp -d` && trap "rm -rf $temp_dir" EXIT
+	local working_dir=`mktemp -d` && trap "rm -rf $working_dir" EXIT
 
 	local zip_file=`find $TALEND_BUILD -name "$job_name*.zip"`
 
-	mkdir $temp_dir
+	local properties_dir=$(get_properties_dir $zip_file)
+	local properties_file=$properties_dir/build.properties
 
 	local git_commit=`cd $TALEND_REPO && git rev-parse HEAD`
-	echo GIT_COMMIT=$git_commit > $temp_dir/build.properties
-	env | grep BUILD_ >> $temp_dir/build.properties
 
-	(cd $temp_dir && zip $zip_file build.properties)
+	mkdir -p $working_dir/$properties_dir
+
+	echo GIT_COMMIT=$git_commit > $working_dir/$properties_file
+	env | grep BUILD_ >> $working_dir/$properties_file
+
+	(cd $working_dir && zip $zip_file $properties_file)
 }
 
 # pull down and unpack latest version of components
