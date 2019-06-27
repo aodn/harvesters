@@ -328,8 +328,8 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="iPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="32">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="iPostgresqlOutput_2"/>
+  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1024" posY="32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlOutput_2"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
     <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
@@ -447,7 +447,7 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
-    <metadata connector="FLOW" name="iPostgresqlOutput_2">
+    <metadata connector="FLOW" name="tPostgresqlOutput_2">
       <column comment="" key="false" length="8" name="campaign_code" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="4" name="campaign_metadata_uuid" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
       <column comment="" key="false" length="41" name="dive_code" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="VARCHAR" type="id_String"/>
@@ -621,7 +621,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1"/>
   </connection>
-  <connection connectorName="FLOW" label="track" lineStyle="0" metaname="track" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="iPostgresqlOutput_2">
+  <connection connectorName="FLOW" label="track" lineStyle="0" metaname="track" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tPostgresqlOutput_2">
     <elementParameter field="CHECK" name="TRACES_CONNECTION_ENABLE" value="true"/>
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="campaign_code"/>
@@ -685,7 +685,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="track"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="iPostgresqlOutput_2" offsetLabelX="0" offsetLabelY="0" source="iPostgresqlOutput_2" target="tPostgresqlCommit_1">
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlOutput_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlOutput_2" target="tPostgresqlCommit_1">
     <elementParameter field="CHECK" name="ACTIVATE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk5"/>
   </connection>
