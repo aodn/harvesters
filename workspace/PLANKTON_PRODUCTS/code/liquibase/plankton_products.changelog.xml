@@ -2528,8 +2528,10 @@
 
 <!--CPR indices *********************************************************************** -->
 
-  <changeSet author="talend" id="table_cpr_ind">
+  <changeSet author="talend" id="table_cpr_ind_v2">
     <sql>
+      DROP TABLE cpr_ind CASCADE ;
+
       CREATE TABLE cpr_ind (
         id bigserial PRIMARY KEY,
         "Latitude" double precision NOT NULL,
@@ -2540,34 +2542,35 @@
         "Day" integer NOT NULL,
         "Time_24hr" text NOT NULL,
         "Region" text,
+        "Route" text,
         "WaterDepth_m" real,
         "SST_C" real,
-        "ChlorophyllClimatology_mgm-3" real,
-        "ChlorophyllMODIS" real,
+        "ChlorophyllMonthlyClimatology_mg_m3" real,
+        "ChlorophyllSatellite_mg_m3" real,
         "CopepodAbundance_m3" real,
         "ZoopAbundance_m3" real,
         "AvgTotalLengthCopepod_mm" real,
         "NoCopepodSpecies_sample" real,
         "ShannonCopepodDiversity" real,
-        "CopepodEvennessCopepod" real,
-        "CopepodHerbivoreCarnivoreRatio" real,
+        "CopepodEvenness" real,
+        "HerbivoreCarnivoreCopepodRatio" real,
         "TotalSalps_m3" real,
         "TotalLarvacean_m3" real,
         "TotalCladoceran_m3" real,
-        "Carbon_mg_m3" real,
-        "TotalPhytoplankton" real,
-        "TotalPhytoplanktonCarbon_pgL" real,
-        "DiatomDinoRatio" real,
-        "MeanBiovolumeCell_um" real,
-        "NumberPhytoplanktonSpecies_sample" real,
-        "ShannonPhytoplanktonDiversity" real,
-        "PhytoplanktonEveness" real,
-        "NoDiatoms" real,
+        "Biomass_mgCarbon_m3" real,
+        "AbundancePhyto_cells_m3" real,
+        "PhytoBiomass_Carbon_pg_L" real,
+        "DiatomDinoflagellateRatio" real,
+        "AvgCellVolume_um3" real,
+        "NoPhytoSpecies_sample" real,
+        "ShannonPhytoDiversity" real,
+        "PhytoEveness" real,
+        "NoDiatomSpecies_sample" real,
         "ShannonDiatomDiversity" real,
-        "EvennessDiatom" real,
-        "NoDinoflagellate" real,
-        "ShannonDinoflagellateDiversity" real,
-        "EvennessDinoflagellate" real,
+        "DiatomEvenness" real,
+        "NoDinoSpecies_sample" real,
+        "ShannonDinoDiversity" real,
+        "DinoflagellateEvenness" real,
         geom geometry(Geometry,4326) CHECK (st_isvalid(geom))
       );
 
@@ -4971,23 +4974,31 @@
 
 <!--NRS indices *********************************************************************** -->
 
-<changeSet author="talend" id="table_nrs_ind">
+  <changeSet author="talend" id="table_nrs_ind_v2">
     <sql>
+      DROP TABLE nrs_ind CASCADE ;
+
       CREATE TABLE nrs_ind (
         id bigserial PRIMARY KEY,
         "NRScode" text,
         "Station" text NOT NULL,
+        "Latitude" double precision NOT NULL,
+        "Longitude" double precision NOT NULL,
         "SampleDateLocal" timestamp without time zone NOT NULL,
-        "SST_oC" real,
-        "ChlorophyllClimatology_mg_m3" real,
-        "ChlorophyllModis_mg_m3" real,
-        "TotalAbundanceZoo_m3" real,
-        "TotalAbundanceCopepods_m3" real,
-        "AverageCopepodTotalLength_mm" real,
-        "HerbivoreToCarnivoreCopepodRatio" real,
-        "NumberCopepods_Sample" real,
+        "Year" integer NOT NULL,
+        "Month" integer NOT NULL,
+        "Day" integer NOT NULL,
+        "Time_24hr" text NOT NULL,
+        "SST_C" real,
+        "ChlorophyllMonthlyClimatology_mg_m3" real,
+        "ChlorophyllSatellite_mg_m3" real,
+        "ZoopAbundance_m3" real,
+        "CopepodAbundance_m3" real,
+        "AvgTotalLengthCopepod_mm" real,
+        "HerbivoreCarnivoreCopepodRatio" real,
+        "NoCopepodSpecies_Sample" real,
         "ShannonCopepodDiversity" real,
-        "ShannonCopepodEveness" real,
+        "CopepodEvenness" real,
         "ZooBiomass_mgCarbon_m3" real,
         "Salinity_psu" real,
         "Silicate_umol_L" real,
@@ -4998,19 +5009,22 @@
         "TotalAlkalinity_umol_kg" real,
         "Oxygen_umol_L" real,
         "PhytoBiomass_Carbon_pg_L" real,
-        "TotalAbundancePhyto_cells_L" real,
+        "AbundancePhyto_cells_L" real,
         "DiatomDinoflagellateRatio" real,
-        "AverageCellSize_um3" real,
-        "NumberPhytoSpecies_Sample" real,
+        "AvgCellVolume_um3" real,
+        "NoPhytoSpecies_Sample" real,
         "ShannonPhytoDiversity" real,
-        "ShannonPhytoEveness" real,
-        "NumberDiatomSpecies_Sample" real,
+        "PhytoEvenness" real,
+        "NoDiatomSpecies_Sample" real,
         "ShannonDiatomDiversity" real,
-        "ShannonDiatomEveness" real,
-        "NumberDinoSpecies_Sample" real,
+        "DiatomEvenness" real,
+        "NoDinoSpecies_Sample" real,
         "ShannonDinoDiversity" real,
-        "ShannonDinoEveness" real
+        "DinoflagellateEvenness" real,
+        geom geometry(Geometry,4326) CHECK (st_isvalid(geom))
       );
+
+      CREATE INDEX nrs_ind_gist_idx ON nrs_ind USING GIST (geom);
     </sql>
   </changeSet>
 
