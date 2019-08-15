@@ -3,13 +3,13 @@
 # most likely you'll need to setup the following variables:
 # TALEND_DIR                     - talend directory
 # TALEND_CUSTOM_COMPONENTS       - talend custom components directory
-# TALEND_COMPONENTS_DOWNLOAD_URL - talend custom components download url 
+# TALEND_COMPONENTS_DOWNLOAD_URL - talend custom components download url
 # TALEND_EXEC                    - talend executable
 # TALEND_BUILD                   - where to export the jobs to
 # TALEND_WORKSPACE               - talend workspace
 # TALEND_REPO                    - location of the talend repository to build
 #
-# Any environment variables of the form BUILD_xxxx will be added to a build.properties file along with the 
+# Any environment variables of the form BUILD_xxxx will be added to a build.properties file along with the
 # git commit from which the harvester is built
 #
 # for jenkins for instance, you can have:
@@ -129,9 +129,17 @@ export_job() {
 		-projectDir $TALEND_REPO/$TALEND_PROJECT_NAME \
 		-targetDir $TALEND_BUILD
 
-	add_build_properties $job_name	
+	local result=$?
 
 	_unlock
+
+	if [ $result -ne 0 ]; then
+		echo "$job_name failed to export"
+		return $result
+	fi
+
+	add_build_properties $job_name
+
 }
 
 # main
