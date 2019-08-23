@@ -28,31 +28,26 @@ pipeline {
         stage('container') {
             agent {
                 dockerfile {
-                    additionalBuildArgs '--build-arg BUILDER_UID=${JENKINS_UID:-9999}'
+                    additionalBuildArgs '--build-arg BUILDER_UID=${JENKINS_UID:-498}'
                 }
             }
             environment {
-                TALEND_DIR = "/opt/TOS_DI-20181026_1147-V7.1.1"
-                TALEND_CUSTOM_COMPONENTS = "${TALEND_DIR}/talend-components"
-                TALEND_EXEC = "${TALEND_DIR}/TOS_DI-linux-gtk-x86_64"
-                TALEND_WORKSPACE = "/tmp/.talend7-workspace"
                 TALEND_PROJECT_DIR = "${WORKSPACE}/workspace/AUV"
                 TALEND_BUILD = "${WORKSPACE}/target"
                 TALEND_JOB_NAME = "AUV_harvester"
-                BUILD_JOB_NAME = "${JOB_NAME}"
             }
             stages {
                 stage('build') {
                     steps {
-                        sh "xvfb-run -a $TALEND_EXEC \
+                        sh 'xvfb-run -a $TALEND_EXEC \
                             --clean_component_cache --disableShellInput -nosplash \
                             -consoleLog --launcher.suppressErrors \
-                            -data ${TALEND_WORKSPACE} \
-                            -componentDir ${TALEND_CUSTOM_COMPONENTS} \
+                            -data $TALEND_WORKSPACE \
+                            -componentDir $TALEND_CUSTOM_COMPONENTS \
                             -application au.org.emii.talend.codegen.Generator \
                             -jobName ${TALEND_JOB_NAME} \
                             -projectDir ${TALEND_PROJECT_DIR} \
-                            -targetDir ${TALEND_BUILD}"
+                            -targetDir ${TALEND_BUILD}'
                     }
                 }
             }
