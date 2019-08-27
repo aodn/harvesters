@@ -1,11 +1,11 @@
-<?xml version="1.0"?>
-<talendfile:ProcessType xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:version="2.0" defaultContext="Default">
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TalendMapper="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="/mnt/opendap/1/IMOS/opendap/ANMN/AM/NRSKAI/CO2/delayed/IMOS_ANMN-AM_GST_20120208T030000Z_NRSKAI_FV01_NRSKAI-CO2-1202-delayed_END_20121126T210000Z_C-20140801T132113Z.nc"/>
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="harvest"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="anmn_am_dm"/>
-    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_Password" value="OyAtbi7asmdQLQu0kUG4SQ=="/>
+    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_Password" value="yGvraLLC2ec6SJh53pgNpg=="/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="anmn_am_dm"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="localhost"/>
@@ -14,7 +14,7 @@
     <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_A9GAoFGXEeOFRtW2h_ugHg" type="id_String" value=""/>
   </context>
   <parameters>
-    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value=" -Xms256M -Xmx1024M"/>
+    <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value="{&quot;JOB_RUN_VM_ARGUMENTS&quot;:[&quot;-Xms256M&quot;,&quot;-Xmx1024M&quot;]}"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="false"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="384"/>
@@ -32,7 +32,7 @@
     <elementParameter field="CHECK" name="ON_FILES_FLAG" value="true"/>
     <elementParameter field="DIRECTORY" name="FILE_PATH" value="context.logDir"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="ojdbc14-10g.jar"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="ORACLE_10"/>
     <routinesParameter id="_NhIv8AuOEeO-v4jR06LTxA" name="DataOperation"/>
     <routinesParameter id="_NhFsoAuOEeO-v4jR06LTxA" name="GeoOperation"/>
     <routinesParameter id="_NhDQYAuOEeO-v4jR06LTxA" name="GeometryOperation"/>
@@ -57,12 +57,12 @@
     <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from timeseries where file_id = &quot; + context.fileId + &quot; ; &quot;+&#10;&quot;delete from measurements where file_id=&quot; + context.fileId  +&quot; ; &quot; "/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;delete from timeseries where file_id = &quot; + context.fileId + &quot; ; &quot;+&#xA;&quot;delete from measurements where file_id=&quot; + context.fileId  +&quot; ; &quot; "/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
@@ -91,7 +91,7 @@
     <elementParameter field="TEXT" name="DBNAME" value="context.Destination_Database"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" value="context.Destination_Schema"/>
     <elementParameter field="TEXT" name="USER" value="context.Destination_Login"/>
-    <elementParameter field="TEXT" name="PASS" value="context.Destination_Password"/>
+    <elementParameter field="PASSWORD" name="PASS" value="8pW6Nmy2kuc8D4KM9GKIHFjfbxE3isCHr24cFevwCvw="/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="CHECK" name="USE_SHARED_CONNECTION" value="false"/>
@@ -101,6 +101,7 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="PRIOR_TO_V9"/>
   </node>
   <node componentName="tPostgresqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="160" posY="544">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlCommit_1"/>
@@ -140,6 +141,7 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="false"/>
     <metadata connector="FLOW" label="timeseries" name="timeseries">
       <column comment="" key="true" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long">
         <additionalField key="Comment" value=""/>
@@ -163,7 +165,7 @@
         <additionalField key="Comment" value=""/>
       </column>
     </metadata>
-    <nodeData xsi:type="MapperData">
+    <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="timeseries">
@@ -194,7 +196,7 @@
     <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;timeseries&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
@@ -391,6 +393,7 @@
     <elementParameter field="CHECK" name="INFORMATION" value="false"/>
     <elementParameter field="MEMO" name="COMMENT" value=""/>
     <elementParameter field="CHECK" name="VALIDATION_RULES" value="false"/>
+    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="false"/>
     <metadata connector="FLOW" label="measurement" name="measurement">
       <column comment="" key="true" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long">
         <additionalField key="Comment" value=""/>
@@ -424,7 +427,7 @@
       <column comment="" key="false" length="1" name="fCO2SW_UATM_quality_control" nullable="true" pattern="" sourceType="" type="id_String" originalLength="1"/>
       <column comment="" key="false" length="1" name="DOX1_quality_control" nullable="true" pattern="" sourceType="" type="id_String" originalLength="1"/>
     </metadata>
-    <nodeData xsi:type="MapperData">
+    <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="TIME_quality_control" expression="data.TIME_quality_control==null?null:data.TIME_quality_control.toString() " type="id_String" nullable="true"/>
@@ -497,7 +500,7 @@
     <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;measurements&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
@@ -715,12 +718,12 @@
     <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="TYPE" value="PostgreSQL"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="PASS" value="&quot;&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
     <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#10;WITH summary AS (&#10;  SELECT  &#10;   \&quot;LATITUDE\&quot; AS latitude,&#10;    \&quot;LONGITUDE\&quot; AS longitude,&#10;    st_geomfromtext('POINT(' || (\&quot;LONGITUDE\&quot;)::text || ' ' || (\&quot;LATITUDE\&quot;)::text || ')', 4326) AS geom,&#10;    count(\&quot;TEMP\&quot;) &gt; 0 AS \&quot;TEMP_b\&quot;,&#10;    count(\&quot;PSAL\&quot;) &gt; 0 AS \&quot;PSAL_b\&quot;,&#10;  count(\&quot;Press_ATM\&quot;) &gt; 0 AS \&quot;Press_ATM_b\&quot;,&#10;  count(\&quot;xCO2EQ_PPM\&quot;) &gt; 0 AS \&quot;xCO2EQ_PPM_b\&quot;,&#10;  count(\&quot;xCO2ATM_PPM\&quot;) &gt; 0 AS  \&quot;xCO2ATM_PPM_b\&quot;,&#10;  count(\&quot;fCO2SW_UATM\&quot;) &gt; 0 AS \&quot;fCO2SW_UATM_b\&quot;,&#10;  count(\&quot;DfCO2\&quot;) &gt; 0 AS \&quot;DfCO2_b\&quot;,&#10;  count(\&quot;DOX1\&quot;) &gt; 0 AS \&quot;DOX1_b\&quot;&#10;from anmn_am_dm.measurements &#10;WHERE  file_id = &quot; + context.fileId + &quot;&#10;GROUP BY \&quot;LATITUDE\&quot;, \&quot;LONGITUDE\&quot;&#10;)&#10;UPDATE timeseries&#10;  SET &#10;&#9;  latitude = s.latitude,&#10;      longitude = s.longitude,&#10;      geom = s.geom,&#10;       \&quot;TEMP_b\&quot; = s.\&quot;TEMP_b\&quot;,&#10;       \&quot;PSAL_b\&quot; =s.\&quot;PSAL_b\&quot; ,&#10;       \&quot;Press_ATM_b\&quot;= s.\&quot;Press_ATM_b\&quot;,&#10;&#9;&#9;\&quot;xCO2EQ_PPM_b\&quot; =s.\&quot;xCO2EQ_PPM_b\&quot; ,&#10;   &#9;&#9;\&quot;xCO2ATM_PPM_b\&quot; = s.\&quot;xCO2ATM_PPM_b\&quot; ,&#10; &#9;&#9;\&quot;fCO2SW_UATM_b\&quot; = s.\&quot;fCO2SW_UATM_b\&quot;,&#10;&#9; &#9;\&quot;DfCO2_b\&quot; = s.\&quot;DfCO2_b\&quot;,&#10;&#9; &#9;\&quot;DOX1_b\&quot; = s.\&quot;DOX1_b\&quot;&#10;  FROM summary s&#10;  WHERE file_id = &quot; + context.fileId + &quot;;&quot;&#10;&#10;&#10; "/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH summary AS (&#xA;  SELECT  &#xA;   \&quot;LATITUDE\&quot; AS latitude,&#xA;    \&quot;LONGITUDE\&quot; AS longitude,&#xA;    st_geomfromtext('POINT(' || (\&quot;LONGITUDE\&quot;)::text || ' ' || (\&quot;LATITUDE\&quot;)::text || ')', 4326) AS geom,&#xA;    count(\&quot;TEMP\&quot;) > 0 AS \&quot;TEMP_b\&quot;,&#xA;    count(\&quot;PSAL\&quot;) > 0 AS \&quot;PSAL_b\&quot;,&#xA;  count(\&quot;Press_ATM\&quot;) > 0 AS \&quot;Press_ATM_b\&quot;,&#xA;  count(\&quot;xCO2EQ_PPM\&quot;) > 0 AS \&quot;xCO2EQ_PPM_b\&quot;,&#xA;  count(\&quot;xCO2ATM_PPM\&quot;) > 0 AS  \&quot;xCO2ATM_PPM_b\&quot;,&#xA;  count(\&quot;fCO2SW_UATM\&quot;) > 0 AS \&quot;fCO2SW_UATM_b\&quot;,&#xA;  count(\&quot;DfCO2\&quot;) > 0 AS \&quot;DfCO2_b\&quot;,&#xA;  count(\&quot;DOX1\&quot;) > 0 AS \&quot;DOX1_b\&quot;&#xA;from anmn_am_dm.measurements &#xA;WHERE  file_id = &quot; + context.fileId + &quot;&#xA;GROUP BY \&quot;LATITUDE\&quot;, \&quot;LONGITUDE\&quot;&#xA;)&#xA;UPDATE timeseries&#xA;  SET &#xA;&#x9;  latitude = s.latitude,&#xA;      longitude = s.longitude,&#xA;      geom = s.geom,&#xA;       \&quot;TEMP_b\&quot; = s.\&quot;TEMP_b\&quot;,&#xA;       \&quot;PSAL_b\&quot; =s.\&quot;PSAL_b\&quot; ,&#xA;       \&quot;Press_ATM_b\&quot;= s.\&quot;Press_ATM_b\&quot;,&#xA;&#x9;&#x9;\&quot;xCO2EQ_PPM_b\&quot; =s.\&quot;xCO2EQ_PPM_b\&quot; ,&#xA;   &#x9;&#x9;\&quot;xCO2ATM_PPM_b\&quot; = s.\&quot;xCO2ATM_PPM_b\&quot; ,&#xA; &#x9;&#x9;\&quot;fCO2SW_UATM_b\&quot; = s.\&quot;fCO2SW_UATM_b\&quot;,&#xA;&#x9; &#x9;\&quot;DfCO2_b\&quot; = s.\&quot;DfCO2_b\&quot;,&#xA;&#x9; &#x9;\&quot;DOX1_b\&quot; = s.\&quot;DOX1_b\&quot;&#xA;  FROM summary s&#xA;  WHERE file_id = &quot; + context.fileId + &quot;;&quot;&#xA;&#xA;&#xA; "/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
     <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
