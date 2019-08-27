@@ -3,15 +3,15 @@
 pipeline {
     agent none
     environment {
-        JOB_WORKSPACE = 'workspace/[WORKSPACE_NAME]'
-        JOB_NAME = '[WORKSPACE_NAME]_harvester'
+        JOB_WORKSPACE = 'workspace/ABOS_SOFS_SURFACE_FLUXES'
+        JOB_NAME = 'ABOS_SOFS_SURFACE_FLUXES'
     }
     stages {
         stage('validation') {
             agent { label 'master' }
             steps {
                 //Moving in to the directory to execute the commands
-                dir(${params.workspace}) {
+                dir(${JOB_WORKSPACE}) {
                     script {
                         if (env.GIT_PREVIOUS_SUCCESSFUL_COMMIT == null) {
                             echo "No previous successful runs found, building"
@@ -36,7 +36,7 @@ pipeline {
                 }
             }
             environment {
-                TALEND_PROJECT_DIR = "${WORKSPACE}/${params.workspace}"
+                TALEND_PROJECT_DIR = "${WORKSPACE}/${JOB_WORKSPACE}"
                 TALEND_BUILD = "${WORKSPACE}/target"
                 TALEND_JOB_NAME = "${JOB_NAME}_harvester"
             }
