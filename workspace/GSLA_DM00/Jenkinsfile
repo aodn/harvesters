@@ -11,7 +11,7 @@ pipeline {
             agent { label 'master' }
             steps {
                 //Moving in to the directory to execute the commands
-                dir(${JOB_WORKSPACE}) {
+                dir(env.JOB_WORKSPACE) {
                     script {
                         if (env.GIT_PREVIOUS_SUCCESSFUL_COMMIT == null) {
                             echo "No previous successful runs found, building"
@@ -36,9 +36,9 @@ pipeline {
                 }
             }
             environment {
-                TALEND_PROJECT_DIR = "${WORKSPACE}/${JOB_WORKSPACE}"
+                TALEND_PROJECT_DIR = "${WORKSPACE}/${env.JOB_WORKSPACE}"
                 TALEND_BUILD = "${WORKSPACE}/target"
-                TALEND_JOB_NAME = "${JOB_NAME}_harvester"
+                TALEND_JOB_NAME = "${env.JOB_NAME}_harvester"
             }
             stages {
                 stage('build') {
