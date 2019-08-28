@@ -4,7 +4,7 @@ pipeline {
     agent none
     environment {
         JOB_WORKSPACE = 'workspace/ANFOG_RT'
-        JOB_NAME = 'ANFOG_RT'
+        JOB_NAME = 'mainANFOG_RT'
     }
     stages {
         stage('validation') {
@@ -38,7 +38,7 @@ pipeline {
             environment {
                 TALEND_PROJECT_DIR = "${WORKSPACE}/${env.JOB_WORKSPACE}"
                 TALEND_BUILD = "${WORKSPACE}/target"
-                TALEND_JOB_NAME = "${env.JOB_NAME}_harvester"
+                TALEND_JOB_NAME = "${env.JOB_NAME}"
             }
             stages {
                 stage('build') {
