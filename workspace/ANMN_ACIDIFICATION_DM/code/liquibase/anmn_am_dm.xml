@@ -38,6 +38,12 @@
       </sql>
     </changeSet>
 
+    <changeSet author="talend" id="add_realtime_column">
+      <sql>
+	ALTER TABLE timeseries ADD COLUMN realtime_b boolean;
+      </sql>
+    </changeSet>
+
 
     <changeSet author="talend" id="create_measurements_table-1">
       <sql>
@@ -100,6 +106,7 @@
 	    f.size
 	    FROM timeseries t 
             JOIN indexed_file f ON t.file_id = f.id
+	    WHERE NOT t.realtime_b
 	    ORDER BY deployment_code;
       </sql>
     </changeSet>
@@ -138,11 +145,81 @@
 	    t.geom
 	    FROM  measurements m 
             JOIN  timeseries t ON m.file_id =t.file_id
-	   ORDER BY (m.file_id, "TIME");
+	    WHERE NOT t.realtime_b
+	    ORDER BY (m.file_id, "TIME");
       </sql>
 
     </changeSet>
 
+    <changeSet author="talend" id="create_nrt_map_view-1" runOnChange="true">
+      <sql>
+        DROP VIEW IF EXISTS anmn_am_nrt_map;
+        CREATE VIEW anmn_am_nrt_map AS
+          SELECT
+            t.file_id,
+            t.site_code,
+            t.platform_code,
+            t.deployment_code,
+            t.latitude,
+            t.longitude,
+            t.geom,
+            t.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+            t.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
+            t."TEMP_b",
+            t."PSAL_b",
+            t."Press_ATM_b",
+            t."xCO2EQ_PPM_b",
+            t."xCO2ATM_PPM_b",
+            t."fCO2SW_UATM_b",
+            t."DfCO2_b",
+            t."DOX1_b",
+            f.url,
+            f.size
+            FROM timeseries t
+            JOIN indexed_file f ON t.file_id = f.id
+            WHERE t.realtime_b
+            ORDER BY deployment_code;
+      </sql>
+    </changeSet>
+
+    <changeSet author="talend" id="create_nrt_data_view-1" runOnChange="true">
+      <sql>
+        DROP VIEW IF EXISTS anmn_am_nrt_data;
+        CREATE VIEW anmn_am_nrt_data AS
+          SELECT
+            t.site_code,
+            t.deployment_code,
+            m.file_id,
+            m.measurement_id,
+            m."TIME" AT TIME ZONE 'UTC' AS "TIME",
+            m."LATITUDE",
+            m."LONGITUDE",
+            m."TEMP" ,
+            m."PSAL",
+            m."Press_ATM" ,
+            m."xCO2EQ_PPM",
+            m."xCO2ATM_PPM",
+            m."fCO2SW_UATM",
+            m."DfCO2",
+            m."DOX1",
+            m."SUBFLAG",
+            m."TIME_quality_control",
+            m."TEMP_quality_control",
+            m."PSAL_quality_control",
+            m."Press_ATM_quality_control",
+            m."xCO2EQ_PPM_quality_control",
+            m."xCO2ATM_PPM_quality_control",
+            m."fCO2SW_UATM_quality_control",
+            m."DfCO2_quality_control" ,
+            m."DOX1_quality_control" ,
+            t.geom
+            FROM  measurements m
+            JOIN  timeseries t ON m.file_id =t.file_id
+            WHERE t.realtime_b
+            ORDER BY (m.file_id, "TIME");
+      </sql>
+
+    </changeSet>
 
 </databaseChangeLog>
 
