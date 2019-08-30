@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  dev:
+    image: harvesters-build
+    build:
+      context: .
+      args:
+        BUILDER_UID: 1000
+    environment:
+      - PATH=/app/bin:/home/builder/.local/bin:$PATH
+      - TALEND_BUILD=/app/target
+      - TALEND_PROJECT_DIR=/app/workspace/ARGO
+      - TALEND_JOB_NAME=Argo_harvester
+    stdin_open: true
+    tty: true
+    working_dir: /app
+    volumes:
+      - './:/app'
