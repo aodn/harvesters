@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet author="talend" id="create_timeseries_table-1">
+      <sql>
+	CREATE TABLE timeseries
+	(
+	  file_id bigint NOT NULL,
+	  site_code text NOT NULL,
+	  platform_code text NOT NULL,
+	  deployment_code text NOT NULL,
+          latitude double precision,
+          longitude double precision,
+	  geom geometry(Geometry,4326),
+	  time_coverage_start timestamp with time zone,
+	  time_coverage_end timestamp with time zone,
+	   "TEMP_b" boolean,
+	  "PSAL_b" boolean,
+	  "Press_ATM_b" boolean,
+	  "xCO2EQ_PPM_b" boolean,
+	  "xCO2ATM_PPM_b" boolean,
+	  "fCO2SW_UATM_b" boolean,
+          "DfCO2_b" boolean,
+	  "DOX1_b" boolean,
+	  CONSTRAINT timeseries_pk PRIMARY KEY (file_id),
+	  CONSTRAINT timeseries_file_fk FOREIGN KEY (file_id)
+	      REFERENCES indexed_file (id) MATCH SIMPLE
+	      ON UPDATE CASCADE ON DELETE CASCADE,
+	  CONSTRAINT timeseries_geom_check CHECK (st_isvalid(geom))
+	);
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_geometry_index-1">
+      <sql>
+	CREATE INDEX timeseries_gist_idx ON timeseries USING GIST (geom); 
+      </sql>
+    </changeSet>
+
+    <changeSet author="talend" id="add_realtime_column">
+      <sql>
+	ALTER TABLE timeseries ADD COLUMN realtime_b boolean;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_measurements_table-1">
+      <sql>
+	CREATE TABLE measurements
+	(
+	  file_id bigint NOT NULL,
+           measurement_id bigint NOT NULL, 
+	  "TIME" timestamp with time zone NOT NULL,
+	  "LATITUDE" double precision,
+	  "LONGITUDE" double precision,
+	  "TEMP" real,
+	  "PSAL" real,
+	  "Press_ATM" real,
+	  "xCO2EQ_PPM" real,
+	  "xCO2ATM_PPM" real,
+	  "fCO2SW_UATM" real,
+	  "DfCO2" real,
+	  "DOX1" real,
+	  "SUBFLAG" real,
+	  "TIME_quality_control" character(1),
+ 	  "TEMP_quality_control" character(1),
+	  "PSAL_quality_control" character(1),
+	  "Press_ATM_quality_control" character(1),
+  	  "xCO2EQ_PPM_quality_control" character(1),
+	  "xCO2ATM_PPM_quality_control" character(1),
+	  "fCO2SW_UATM_quality_control" character(1),
+ 	  "DfCO2_quality_control" character(1),
+	  "DOX1_quality_control" character(1),
+	  CONSTRAINT measurements_pk PRIMARY KEY (file_id , measurement_id),
+	  CONSTRAINT measurements_timeseries_fk FOREIGN KEY (file_id)
+	      REFERENCES timeseries (file_id) MATCH SIMPLE
+	      ON UPDATE CASCADE ON DELETE CASCADE
+	);	
+      </sql>
+    </changeSet>
+
+    <changeSet author="talend" id="create_map_view-1" runOnChange="true">
+      <sql>
+	DROP VIEW IF EXISTS anmn_am_dm_map;
+	CREATE VIEW anmn_am_dm_map AS 
+	  SELECT
+	    t.file_id,
+	    t.site_code,
+	    t.platform_code,
+	    t.deployment_code,
+	    t.latitude,
+	    t.longitude,
+	    t.geom,
+	    t.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+	    t.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
+	    t."TEMP_b",
+	    t."PSAL_b",
+	    t."Press_ATM_b",
+	    t."xCO2EQ_PPM_b",
+	    t."xCO2ATM_PPM_b",
+	    t."fCO2SW_UATM_b",
+	    t."DfCO2_b",
+	    t."DOX1_b",
+	    f.url,
+	    f.size
+	    FROM timeseries t 
+            JOIN indexed_file f ON t.file_id = f.id
+	    WHERE NOT t.realtime_b
+	    ORDER BY deployment_code;
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="create_data_view-1" runOnChange="true">
+      <sql>
+	DROP VIEW IF EXISTS anmn_am_dm_data;
+	CREATE VIEW anmn_am_dm_data AS 
+	  SELECT 
+	    t.site_code,
+	    t.deployment_code,
+	    m.file_id,
+	    m.measurement_id,
+	    m."TIME" AT TIME ZONE 'UTC' AS "TIME",
+	    m."LATITUDE",
+	    m."LONGITUDE",
+	    m."TEMP" ,
+	    m."PSAL",
+	    m."Press_ATM" ,
+	    m."xCO2EQ_PPM",
+	    m."xCO2ATM_PPM",
+	    m."fCO2SW_UATM",
+	    m."DfCO2",
+	    m."DOX1",
+	    m."SUBFLAG",
+	    m."TIME_quality_control",
+ 	    m."TEMP_quality_control",
+	    m."PSAL_quality_control",
+	    m."Press_ATM_quality_control",
+  	    m."xCO2EQ_PPM_quality_control",
+	    m."xCO2ATM_PPM_quality_control",
+	    m."fCO2SW_UATM_quality_control",
+ 	    m."DfCO2_quality_control" ,
+ 	    m."DOX1_quality_control" ,
+	    t.geom
+	    FROM  measurements m 
+            JOIN  timeseries t ON m.file_id =t.file_id
+	    WHERE NOT t.realtime_b
+	    ORDER BY (m.file_id, "TIME");
+      </sql>
+
+    </changeSet>
+
+    <changeSet author="talend" id="create_nrt_map_view-1" runOnChange="true">
+      <sql>
+        DROP VIEW IF EXISTS anmn_am_nrt_map;
+        CREATE VIEW anmn_am_nrt_map AS
+          SELECT
+            t.file_id,
+            t.site_code,
+            t.platform_code,
+            t.deployment_code,
+            t.latitude,
+            t.longitude,
+            t.geom,
+            t.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+            t.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
+            t."TEMP_b",
+            t."PSAL_b",
+            t."Press_ATM_b",
+            t."xCO2EQ_PPM_b",
+            t."xCO2ATM_PPM_b",
+            t."fCO2SW_UATM_b",
+            t."DfCO2_b",
+            t."DOX1_b",
+            f.url,
+            f.size
+            FROM timeseries t
+            JOIN indexed_file f ON t.file_id = f.id
+            WHERE t.realtime_b
+            ORDER BY deployment_code;
+      </sql>
+    </changeSet>
+
+    <changeSet author="talend" id="create_nrt_data_view-1" runOnChange="true">
+      <sql>
+        DROP VIEW IF EXISTS anmn_am_nrt_data;
+        CREATE VIEW anmn_am_nrt_data AS
+          SELECT
+            t.site_code,
+            t.deployment_code,
+            m.file_id,
+            m.measurement_id,
+            m."TIME" AT TIME ZONE 'UTC' AS "TIME",
+            m."LATITUDE",
+            m."LONGITUDE",
+            m."TEMP" ,
+            m."PSAL",
+            m."Press_ATM" ,
+            m."xCO2EQ_PPM",
+            m."xCO2ATM_PPM",
+            m."fCO2SW_UATM",
+            m."DfCO2",
+            m."DOX1",
+            m."SUBFLAG",
+            m."TIME_quality_control",
+            m."TEMP_quality_control",
+            m."PSAL_quality_control",
+            m."Press_ATM_quality_control",
+            m."xCO2EQ_PPM_quality_control",
+            m."xCO2ATM_PPM_quality_control",
+            m."fCO2SW_UATM_quality_control",
+            m."DfCO2_quality_control" ,
+            m."DOX1_quality_control" ,
+            t.geom
+            FROM  measurements m
+            JOIN  timeseries t ON m.file_id =t.file_id
+            WHERE t.realtime_b
+            ORDER BY (m.file_id, "TIME");
+      </sql>
+
+    </changeSet>
+
+</databaseChangeLog>
+
