@@ -7,28 +7,6 @@ pipeline {
         JOB_NAME = 'SOOP_ASF_FMT'
     }
     stages {
-        stage('validation') {
-            agent { label 'master' }
-            steps {
-                //Moving in to the directory to execute the commands
-                dir(env.JOB_WORKSPACE) {
-                    script {
-                        if (env.GIT_PREVIOUS_SUCCESSFUL_COMMIT == null) {
-                            echo "No previous successful runs found, building"
-                        } else {
-                            def strCount = sh(returnStdout: true, script: "git diff --name-only ${env.GIT_COMMIT} ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} | grep servicelayer | wc -l").trim()
-                            if (strCount == "0") {
-                                echo "Skipping build since no files updated"
-                                currentBuild.result = "NOT_BUILT"
-                                CONTINUE_BUILD = false
-                            } else {
-                                echo "Changes found in the servicelayer module"
-                            }
-                        }
-                    }
-                }
-            }
-        }
         stage('container') {
             agent {
                 dockerfile {
@@ -41,6 +19,27 @@ pipeline {
                 TALEND_JOB_NAME = "${env.JOB_NAME}_harvester"
             }
             stages {
+                stage('validation') {
+                    steps {
+                        //Moving in to the directory to execute the commands
+                        dir(env.JOB_WORKSPACE) {
+                            script {
+                                if (env.GIT_PREVIOUS_SUCCESSFUL_COMMIT == null) {
+                                    echo "No previous successful runs found, building"
+                                } else {
+                                    def strCount = sh(returnStdout: true, script: "git diff --name-only ${env.GIT_COMMIT} ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} | grep servicelayer | wc -l").trim()
+                                    if (strCount == "0") {
+                                        echo "Skipping build since no files updated"
+                                        currentBuild.result = "NOT_BUILT"
+                                        CONTINUE_BUILD = false
+                                    } else {
+                                        echo "Changes found in the servicelayer module"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 stage('build') {
                     steps {
                         sh 'xvfb-run -a $TALEND_EXEC \
