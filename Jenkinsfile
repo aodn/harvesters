@@ -14,7 +14,7 @@ pipeline {
                     
                     projects = sh(returnStdout: true, script: "git diff --name-only ${base } ${GIT_COMMIT} | awk -F '/' '{print \$2}' | uniq").trim().split()
                     for(project in projects) {
-                        echo project
+                        echo "Found changes in project ${project}"
                     }
                     
                 }
