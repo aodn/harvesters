@@ -26,10 +26,8 @@ pipeline {
                 script {
                     for(project in projects) {
                         projects_directory = "workspace"
-                        harvester_job_name=sh(returnStdout: true, script: 
-                        "find $projects_directory/$project/process -regex '.*_harvester_[0-9]+\\.[0-9]+\\.item' | sed -e 's/.*\\///g' -e 's/_[0-9]\\+\\.[0-9]\\+\\.item//g' | head -n 1").trim()
-                            
-                        echo(harvester_job_name)
+                        harvester_job_name = harvesterHelper.getHarvesterJobName("${WORKSPACE}/${projects_directory}/${project}/process/")
+                        
                         if (!harvester_job_name) {
                             echo "Skipping $project. No job with '_harvester' suffix found"
                             continue
