@@ -41,7 +41,7 @@ UPDATE file_metadata m
     time_deployment_start = getglobalattributeastimestamp(f.id, 'time_deployment_start'),
     time_deployment_end = getglobalattributeastimestamp(f.id, 'time_deployment_end'),
     geom = st_geomfromtext('POINT(' || longitude::text || ' ' || latitude::text || ')', 4326),
-    data_category = coalesce(substring(url, '/(Temperature|(CTD|Biogeochem)_(timeseries|profiles)|Velocity|Wave|CO2|Meteorology|Surface_[^/]+|Sub-surface_[^/]+|Sediment_traps|aggregated_products)/'),
+    data_category = coalesce(substring(url, '/(Temperature|(CTD|Biogeochem)_(timeseries|profiles)|Velocity|Wave|CO2|Meteorology|Surface_[^/]+|Sub-surface_[^/]+|Sediment_traps|aggregated_products|aggregated_timeseries|hourly_timeseries|gridded_timeseries/)'),
                              substring(url, '/(Pulse|FluxPulse)/')),
     variables = v.variables,
     standard_names = s.standard_names,
