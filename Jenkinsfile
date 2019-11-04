@@ -37,7 +37,8 @@ pipeline {
                         try {
                             build job: childJobName, parameters: [
                                 string(name: 'BRANCH_NAME', value: env.BRANCH_NAME),
-                                string(name: 'TALEND_JOB_NAME', value: harvester_job_name)
+                                string(name: 'HARVESTER_NAME', value: harvester_job_name),
+                                string(name: 'PROJECT_NAME', value: project)
                             ],
                             wait: false
                         } catch (Exception e) {
