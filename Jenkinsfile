@@ -36,7 +36,7 @@ pipeline {
                         childJobName = "harvester_${project}_build"
                         try {
                             build job: childJobName, parameters: [
-                                string(name: 'BRANCH_NAME', value: env.BRANCH_NAME),
+                                string(name: 'GIT_REVISION', value: env.GIT_COMMIT),
                                 string(name: 'HARVESTER_NAME', value: harvester_job_name),
                                 string(name: 'PROJECT_NAME', value: project)
                             ],
