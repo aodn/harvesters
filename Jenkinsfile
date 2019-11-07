@@ -20,24 +20,16 @@ pipeline {
                 }
             }
         }
-        stage('build') {
+        stage('trigger_builds') {
             agent any
             steps {
                 script {
                     for(project in projects) {
-                        projects_directory = "workspace"
-                        harvester_job_name = harvesterHelper.getHarvesterJobName("${WORKSPACE}/${projects_directory}/${project}/process/")
-                        
-                        if (!harvester_job_name) {
-                            echo "Skipping $project. No job with '_harvester' suffix found"
-                            continue
-                        }
-                    
                         childJobName = "harvester_${project}_build"
                         try {
                             build job: childJobName, parameters: [
-                                string(name: 'GIT_REVISION', value: env.GIT_COMMIT),
-                                string(name: 'HARVESTER_NAME', value: harvester_job_name),
+                                string(name: 'GIT_BRANCH', value: env.GIT_BRANCH),
+                                string(name: 'GIT_COMMIT', value: env.GIT_COMMIT),
                                 string(name: 'PROJECT_NAME', value: project)
                             ],
                             wait: false
