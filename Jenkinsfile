@@ -51,8 +51,7 @@ node {
             try {
                 build job: childJobName, parameters: [
                     string(name: 'GIT_BRANCH', value: env.BRANCH_NAME),
-                    string(name: 'GIT_COMMIT', value: scmVars.GIT_COMMIT),
-                    string(name: 'PROJECT_NAME', value: project)
+                    string(name: 'GIT_COMMIT', value: scmVars.GIT_COMMIT)
                 ],
                 wait: false
             } catch (Exception e) {
