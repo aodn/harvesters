@@ -37,7 +37,7 @@ node {
             if (scmVars.GIT_PREVIOUS_COMMIT == null) {
                 // if the previous commit cannot be determined, compare this commit to the master branch to detect changes
                 sh(returnStdout: true, script: "git fetch --no-tags --depth 1 origin master")
-                base = sh(returnStdout: true, script: "git merge-base master HEAD").trim()
+                base = sh(returnStdout: true, script: "git merge-base origin/master HEAD").trim()
             } else {
                 base = scmVars.GIT_PREVIOUS_COMMIT
             }
