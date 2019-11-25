@@ -52,12 +52,13 @@ RUN wget -q https://s3-ap-southeast-2.amazonaws.com/imos-binary/static/talend/TO
   && rm ./TOS-Spatial-7.1.1.zip
 
 # Download and install code generator plugin
-RUN wget -q https://s3-ap-southeast-2.amazonaws.com/imos-binary/static/talend/au.org.emii.talend.codegen-7.1.1.jar \
+ARG TALEND_CODEGEN_STAGE=production
+RUN wget -q https://s3-ap-southeast-2.amazonaws.com/imos-artifacts/promoted/talend-codegen/$TALEND_CODEGEN_STAGE/au.org.emii.talend.codegen-7.1.1.jar \
     -O $TALEND_DIR/plugins/au.org.emii.talend.codegen-7.1.1.jar
 
 # Download and install components
-### HARD CODED VERSION: NEED TO SET UP A BUILD JOB FOR COMPONENTS SO WE CAN GET THE LATEST
-RUN wget -q https://s3-ap-southeast-2.amazonaws.com/imos-binary/jobs/talend7_components_edge/2/components-1.0.0-SNAPSHOT.zip \
+ARG TALEND_COMPONENTS_STAGE=production
+RUN wget -q https://s3-ap-southeast-2.amazonaws.com/imos-artifacts/promoted/talend-components/$TALEND_COMPONENTS_STAGE/components-1.0.0-SNAPSHOT.zip \
   && unzip -q -d $TALEND_DIR/talend-components ./components-1.0.0-SNAPSHOT.zip \
   && rm ./components-1.0.0-SNAPSHOT.zip
 
