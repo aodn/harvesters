@@ -13,7 +13,7 @@ node {
                 [
                     $class: 'CloneOption',
                     reference: '/var/lib/jenkins/reference_repos/aodn/harvesters.git',
-                    shallow: true,
+                    shallow: false,  // must be a deep clone in order for `git merge-base` to determine where branch was forked from
                     noTags: true,
                     honorRefspec: true
                 ],
@@ -36,7 +36,6 @@ node {
         } else {
             if (scmVars.GIT_PREVIOUS_COMMIT == null) {
                 // if the previous commit cannot be determined, compare this commit to the master branch to detect changes
-                sh(returnStdout: true, script: "git fetch --no-tags --depth 1 origin master")
                 base = sh(returnStdout: true, script: "git merge-base origin/master HEAD").trim()
             } else {
                 base = scmVars.GIT_PREVIOUS_COMMIT
