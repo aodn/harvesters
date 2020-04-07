@@ -1122,13 +1122,13 @@
       <column comment="" key="false" length="-1" name="max_divetime" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="out">
         <mapperTableEntries name="file_id" expression="context.fileId" type="id_Long" nullable="true"/>
         <mapperTableEntries name="device_id" expression="row2.ref" type="id_String"/>
-        <mapperTableEntries name="timestamp_start" expression="TalendDate.parseDate(&quot;dd/mm/yy HH:mm:ss&quot;,row2.s_date + &quot;+0000&quot;) " type="id_Date" nullable="true"/>
-        <mapperTableEntries name="timestamp_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ss&quot;,StringHandling.EREPLACE(row2.e_date,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="timestamp_start" expression="TalendDate.parseDate(&quot;dd/MM/yy HH:mm:ssZ&quot;,row2.s_date + &quot;+0000&quot;) " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="timestamp_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row2.e_date,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
         <mapperTableEntries name="lat" expression="row2.ssm_lat " type="id_String" nullable="true"/>
         <mapperTableEntries name="lon" expression="row2.ssm_lon " type="id_String" nullable="true"/>
         <mapperTableEntries name="surface_time" expression="row2.surf_tm " type="id_String" nullable="true"/>
