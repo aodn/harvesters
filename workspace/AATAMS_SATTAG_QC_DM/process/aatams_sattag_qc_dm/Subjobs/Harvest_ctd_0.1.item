@@ -780,6 +780,7 @@
       <column comment="" key="false" length="-1" name="ssm_y" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="ssm_x_se" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="ssm_y_se" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="400" name="fluoro_dbar" nullable="true" pattern="" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="896" posY="352">
@@ -808,7 +809,7 @@
       <column comment="" key="false" length="-1" name="qc_ssm_y" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="qc_ssm_x_se" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="qc_ssm_y_se" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
-      <column comment="" key="false" length="7" name="temp_dbar" nullable="true" pattern="" precision="1" sourceType="FLOAT4" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="pressure" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="qc_profile" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="400" name="temp_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="400" usefulColumn="true"/>
       <column comment="" key="false" length="200" name="qc_temp" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -821,7 +822,9 @@
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
-      <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
+      <varTables sizeState="INTERMEDIATE" name="Var">
+        <mapperTableEntries name="var1" expression="(row2.temp_dbar==null)||(row2.temp_dbar.equals(&quot;&quot;))? row2.fluoro_dbar:row2.temp_dbar " type="id_String" nullable="true"/>
+      </varTables>
       <outputTables sizeState="INTERMEDIATE" name="out">
         <mapperTableEntries name="file_id" expression="context.fileId" type="id_Long" nullable="true"/>
         <mapperTableEntries name="device_id" expression="row2.device_id" type="id_String"/>
@@ -834,7 +837,7 @@
         <mapperTableEntries name="qc_ssm_y" expression="row2.ssm_y " type="id_String" nullable="true"/>
         <mapperTableEntries name="qc_ssm_x_se" expression="row2.ssm_x_se " type="id_String" nullable="true"/>
         <mapperTableEntries name="qc_ssm_y_se" expression="row2.ssm_y_se " type="id_String" nullable="true"/>
-        <mapperTableEntries name="temp_dbar" expression="row2.temp_dbar " type="id_String" nullable="true"/>
+        <mapperTableEntries name="pressure" expression="Var.var1" type="id_String" nullable="true"/>
         <mapperTableEntries name="qc_profile" expression="row2.qc_profile " type="id_String" nullable="true"/>
         <mapperTableEntries name="temp_vals" expression="row2.temp_vals " type="id_String" nullable="true"/>
         <mapperTableEntries name="qc_temp" expression="row2.qc_temp " type="id_String" nullable="true"/>
@@ -868,13 +871,13 @@
         <mapperTableEntries name="ssm_y" type="id_String" nullable="true"/>
         <mapperTableEntries name="ssm_x_se" type="id_String" nullable="true"/>
         <mapperTableEntries name="ssm_y_se" type="id_String" nullable="true"/>
+        <mapperTableEntries name="fluoro_dbar" type="id_String" nullable="true"/>
       </inputTables>
     </nodeData>
   </node>
   <node componentName="iNormalize" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1056" posY="352">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNormalize_1" show="false"/>
     <elementParameter field="TABLE" name="NORMALIZE_COLUMNS">
-      <elementValue elementRef="NORMALIZE_COLUMN" value="temp_dbar"/>
       <elementValue elementRef="NORMALIZE_COLUMN" value="temp_vals"/>
       <elementValue elementRef="NORMALIZE_COLUMN" value="qc_temp"/>
       <elementValue elementRef="NORMALIZE_COLUMN" value="sal_vals"/>
@@ -883,6 +886,7 @@
       <elementValue elementRef="NORMALIZE_COLUMN" value="fluoro_vals"/>
       <elementValue elementRef="NORMALIZE_COLUMN" value="oxy_vals"/>
       <elementValue elementRef="NORMALIZE_COLUMN" value="cond_vals"/>
+      <elementValue elementRef="NORMALIZE_COLUMN" value="pressure"/>
     </elementParameter>
     <elementParameter field="TEXT" name="ITEMSEPARATOR" value="&quot;,&quot;"/>
     <elementParameter field="CHECK" name="DEDUPLICATE" value="false"/>
@@ -892,19 +896,19 @@
     <elementParameter field="CHECK" name="DISCARD_TRAILING_EMPTY_STR" value="false"/>
     <elementParameter field="CHECK" name="TRIM" value="false"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="iNormalize_1">
-      <column comment="" defaultValue="" key="false" length="-1" name="file_id" nullable="true" pattern="" precision="-1" sourceType="INT8" type="id_Long" usefulColumn="true"/>
+    <metadata connector="FLOW" label="out" name="iNormalize_1">
+      <column comment="" defaultValue="" key="false" length="-1" name="file_id" nullable="true" pattern="" precision="-1" sourceType="" type="id_Long" usefulColumn="true"/>
       <column comment="" key="true" length="20" name="device_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="19" name="end_date" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true"/>
       <column comment="" key="false" length="16" name="lat" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="16" name="lon" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_String" usefulColumn="true"/>
-      <column comment="" key="false" length="16" name="qc_ssm_lat" nullable="true" pattern="" precision="16" sourceType="" type="id_String" originalLength="16" usefulColumn="true"/>
-      <column comment="" key="false" length="16" name="qc_ssm_lon" nullable="true" pattern="" precision="16" sourceType="" type="id_String" originalLength="16" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="qc_ssm_x" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="16" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="qc_ssm_y" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="16" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="qc_ssm_x_se" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="16" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="qc_ssm_y_se" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="16" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="temp_dbar" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_String" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="qc_ssm_lat" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="16" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="qc_ssm_lon" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="16" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="qc_ssm_x" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="qc_ssm_y" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="qc_ssm_x_se" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="qc_ssm_y_se" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="pressure" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="qc_profile" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="400" name="temp_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="400" usefulColumn="true"/>
       <column comment="" key="false" length="200" name="qc_temp" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -912,8 +916,8 @@
       <column comment="" key="false" length="400" name="sal_corrected_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="400" usefulColumn="true"/>
       <column comment="" key="false" length="200" name="qc_sal" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="400" name="fluoro_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="400" usefulColumn="true"/>
-      <column comment="" key="false" length="400" name="oxy_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="200" usefulColumn="true"/>
-      <column comment="" key="false" length="400" name="cond_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="400" usefulColumn="true"/>
+      <column comment="" key="false" length="400" name="oxy_vals" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="200" usefulColumn="true"/>
+      <column comment="" key="false" length="400" name="cond_vals" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="400" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tConvertType" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1248" posY="352">
@@ -923,7 +927,7 @@
       <elementValue elementRef="INPUT_COLUMN" value="file_id"/>
       <elementValue elementRef="OUTPUT_COLUMN" value="file_id"/>
       <elementValue elementRef="INPUT_COLUMN" value="temp_dbar"/>
-      <elementValue elementRef="OUTPUT_COLUMN" value="temp_dbar"/>
+      <elementValue elementRef="OUTPUT_COLUMN" value="pressure"/>
     </elementParameter>
     <elementParameter field="CHECK" name="EMPTYTONULL" value="true"/>
     <elementParameter field="CHECK" name="DIEONERROR" value="true"/>
@@ -940,7 +944,7 @@
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_y" nullable="true" pattern="" precision="16" sourceType="" type="id_Double" originalLength="16" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_x_se" nullable="true" pattern="" precision="16" sourceType="" type="id_Double" originalLength="16" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_y_se" nullable="true" pattern="" precision="16" sourceType="" type="id_Double" originalLength="16" usefulColumn="true"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="temp_dbar" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Integer" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="pressure" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="2" name="qc_profile" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="400" name="temp_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float" originalLength="400" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="200" name="qc_temp" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Integer" usefulColumn="true"/>
@@ -963,7 +967,7 @@
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_y" nullable="true" pattern="" precision="16" sourceType="" type="id_Double" originalLength="16" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_x_se" nullable="true" pattern="" precision="16" sourceType="" type="id_Double" originalLength="16" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_y_se" nullable="true" pattern="" precision="16" sourceType="" type="id_Double" originalLength="16" usefulColumn="true"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="temp_dbar" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Integer" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="pressure" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="2" name="qc_profile" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="400" name="temp_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float" originalLength="400" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="200" name="qc_temp" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Integer" usefulColumn="true"/>
@@ -1005,7 +1009,7 @@
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_y" nullable="true" pattern="" precision="16" sourceType="" type="id_Double" originalLength="16" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_x_se" nullable="true" pattern="" precision="16" sourceType="" type="id_Double" originalLength="16" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_y_se" nullable="true" pattern="" precision="16" sourceType="" type="id_Double" originalLength="16" usefulColumn="true"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="temp_dbar" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Integer" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="pressure" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="2" name="qc_profile" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="400" name="temp_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float" originalLength="400" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="200" name="qc_temp" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Integer" usefulColumn="true"/>
@@ -1028,7 +1032,7 @@
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_y" nullable="true" pattern="" precision="16" sourceType="" type="id_Double" originalLength="16" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_x_se" nullable="true" pattern="" precision="16" sourceType="" type="id_Double" originalLength="16" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_y_se" nullable="true" pattern="" precision="16" sourceType="" type="id_Double" originalLength="16" usefulColumn="true"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="temp_dbar" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Integer" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="pressure" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="2" name="qc_profile" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="400" name="temp_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float" originalLength="400" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="200" name="qc_temp" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Integer" usefulColumn="true"/>
@@ -1051,7 +1055,7 @@
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_y" nullable="true" pattern="" precision="16" sourceType="" type="id_Double" originalLength="16" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_x_se" nullable="true" pattern="" precision="16" sourceType="" type="id_Double" originalLength="16" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_y_se" nullable="true" pattern="" precision="16" sourceType="" type="id_Double" originalLength="16" usefulColumn="true"/>
-      <column comment="" defaultValue="" key="false" length="-1" name="temp_dbar" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Integer" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="pressure" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="2" name="qc_profile" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="400" name="temp_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float" originalLength="400" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="200" name="qc_temp" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Integer" usefulColumn="true"/>
@@ -1090,7 +1094,7 @@
       <column comment="" defaultValue="" key="false" length="-1" name="qc_ssm_y" nullable="true" pattern="" precision="-1" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="-1" name="qc_ssm_x_se" nullable="true" pattern="" precision="-1" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="-1" name="qc_ssm_y_se" nullable="true" pattern="" precision="-1" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
-      <column comment="" defaultValue="" key="false" length="400" name="pressure" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Integer" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="400" name="pressure" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="400" name="temp_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float" originalLength="400" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="400" name="sal_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float" originalLength="400" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="400" name="sal_corrected_vals" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_Float" originalLength="400" usefulColumn="true"/>
@@ -1113,7 +1117,7 @@
         <mapperTableEntries name="qc_ssm_y" expression="row5.qc_ssm_y " type="id_Double" nullable="true"/>
         <mapperTableEntries name="qc_ssm_x_se" expression="row5.qc_ssm_x_se " type="id_Double" nullable="true"/>
         <mapperTableEntries name="qc_ssm_y_se" expression="row5.qc_ssm_y_se " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="pressure" expression="row5.temp_dbar " type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="pressure" expression="row5.pressure " type="id_Float" nullable="true"/>
         <mapperTableEntries name="temp_vals" expression="row5.temp_vals " type="id_Float" nullable="true"/>
         <mapperTableEntries name="sal_vals" expression="row5.sal_vals " type="id_Float" nullable="true"/>
         <mapperTableEntries name="sal_corrected_vals" expression="row5.sal_corrected_vals " type="id_Float" nullable="true"/>
@@ -1133,7 +1137,7 @@
         <mapperTableEntries name="qc_ssm_y" type="id_Double" nullable="true"/>
         <mapperTableEntries name="qc_ssm_x_se" type="id_Double" nullable="true"/>
         <mapperTableEntries name="qc_ssm_y_se" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="temp_dbar" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="pressure" type="id_Float" nullable="true"/>
         <mapperTableEntries name="qc_profile" type="id_Float" nullable="true"/>
         <mapperTableEntries name="temp_vals" type="id_Float" nullable="true"/>
         <mapperTableEntries name="qc_temp" type="id_Integer" nullable="true"/>
@@ -1286,7 +1290,7 @@
       <column comment="" defaultValue="" key="false" length="-1" name="qc_ssm_y" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="-1" name="qc_ssm_x_se" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="-1" name="qc_ssm_y_se" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double" originalLength="-1" usefulColumn="true"/>
-      <column comment="" defaultValue="" key="false" length="400" name="pressure" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="400" name="pressure" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="400" name="temp_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="400" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="400" name="sal_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="400" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="400" name="sal_corrected_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="400" usefulColumn="true"/>
@@ -1306,7 +1310,7 @@
       <column comment="" defaultValue="" key="false" length="-1" name="qc_ssm_y" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="-1" name="qc_ssm_x_se" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="-1" name="qc_ssm_y_se" nullable="true" pattern="" precision="-1" sourceType="FLOAT8" type="id_Double" originalLength="-1" usefulColumn="true"/>
-      <column comment="" defaultValue="" key="false" length="400" name="pressure" nullable="true" pattern="" precision="0" sourceType="INT4" type="id_Integer" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="400" name="pressure" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="400" name="temp_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="400" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="400" name="sal_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="400" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="400" name="sal_corrected_vals" nullable="true" pattern="" precision="0" sourceType="FLOAT4" type="id_Float" originalLength="400" usefulColumn="true"/>
@@ -1628,6 +1632,11 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1" show="false"/>
   </connection>
   <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tReplace_1" offsetLabelX="0" offsetLabelY="0" source="tReplace_1" target="tMap_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="fluoro_dbar"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row2" show="false"/>
   </connection>
