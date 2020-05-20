@@ -2,10 +2,10 @@
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TalendMapper="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default" jobType="Standard">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
-    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="aatams_sattag_qc_dm"/>
-    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_Password" value="PvDktF0rj0sm7SrDjDaBRVEb7QRInAcn"/>
+    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="aatams_sattag_qc"/>
+    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_Password" value="PvDktF0rj0sm7SrDjDaBRd7KGeZ++L/s"/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="5432"/>
-    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="aatams_sattag_qc_dm"/>
+    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="aatams_sattag_qc"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="harvest-db-aodnstack-lbesnard.dev.aodn.org.au"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_brvNgFGXEeOFRtW2h_ugHg" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_brvNgFGXEeOFRtW2h_ugHg" type="id_String" value="null"/>
@@ -178,7 +178,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM measurements WHERE file_id = &quot; + context.fileId + &quot; ; &quot; +&#xA;&quot;DELETE FROM aatams_sattag_qc_dm_profile_map WHERE file_id = &quot; + context.fileId + &quot; ; &quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;DELETE FROM measurements WHERE file_id = &quot; + context.fileId + &quot; ; &quot; +&#xA;&quot;DELETE FROM aatams_sattag_qc_profile_map WHERE file_id = &quot; + context.fileId + &quot; ; &quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime" show="false"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false" show="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" value="&quot;&quot;" show="false"/>
@@ -821,7 +821,7 @@
       <column comment="" key="false" length="400" name="cond_vals" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="400" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="var1" expression="(row2.temp_dbar==null)||(row2.temp_dbar.equals(&quot;&quot;))? row2.fluoro_dbar:row2.temp_dbar " type="id_String" nullable="true"/>
       </varTables>
@@ -1103,7 +1103,7 @@
       <column comment="" defaultValue="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="" type="id_Geometry" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="out2">
         <mapperTableEntries name="file_id" expression="row5.file_id " type="id_Long" nullable="true"/>
@@ -1414,7 +1414,7 @@
     <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;public&quot;" show="false"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;" show="false"/>
     <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE=" show="false"/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;aatams_sattag_qc_dm_profile_map&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;aatams_sattag_qc_profile_map&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
     <elementParameter field="CHECK" name="USE_SPATIAL_OPTIONS" value="false" show="false"/>
@@ -1580,7 +1580,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE measurements m&#xA;SET profile_id = map.profile_id&#xA;FROM aatams_sattag_qc_dm_profile_map map&#xA;WHERE map.file_id = &quot; + context.fileId + &quot; AND m.device_id = map.device_id AND m.timestamp = map.timestamp;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;UPDATE measurements m&#xA;SET profile_id = map.profile_id&#xA;FROM aatams_sattag_qc_profile_map map&#xA;WHERE map.file_id = &quot; + context.fileId + &quot; AND m.device_id = map.device_id AND m.timestamp = map.timestamp;&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime" show="false"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false" show="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" value="&quot;&quot;" show="false"/>
