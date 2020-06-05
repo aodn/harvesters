@@ -51,15 +51,4 @@ RUN wget -q https://s3-ap-southeast-2.amazonaws.com/imos-binary/static/talend/TO
   && cp -r ./TOS-Spatial-7.1.1/plugins/* $TALEND_DIR/plugins \
   && rm ./TOS-Spatial-7.1.1.zip
 
-# Download and install code generator plugin
-ARG TALEND_CODEGEN_STAGE=production
-RUN wget -q https://s3-ap-southeast-2.amazonaws.com/imos-artifacts/promoted/talend-codegen/$TALEND_CODEGEN_STAGE/au.org.emii.talend.codegen-7.1.1.jar \
-    -O $TALEND_DIR/plugins/au.org.emii.talend.codegen-7.1.1.jar
-
-# Download and install components
-ARG TALEND_COMPONENTS_STAGE=production
-RUN wget -q https://s3-ap-southeast-2.amazonaws.com/imos-artifacts/promoted/talend-components/$TALEND_COMPONENTS_STAGE/components-1.0.0-SNAPSHOT.zip \
-  && unzip -q -d $TALEND_DIR/talend-components ./components-1.0.0-SNAPSHOT.zip \
-  && rm ./components-1.0.0-SNAPSHOT.zip
-
 WORKDIR /home/builder
