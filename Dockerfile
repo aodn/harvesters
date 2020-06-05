@@ -14,6 +14,8 @@ ENV PATH $JAVA_HOME/bin:$PATH
 # Add custom talend env variables for use in this file and jenkins
 ENV TALEND_VERSION TOS_DI-20181026_1147-V7.1.1
 ENV TALEND_DIR /opt/$TALEND_VERSION
+ENV TALEND_M2_DIR $TALEND_DIR/configuration/.m2
+ENV TALEND_PLUGIN_DIR $TALEND_DIR/plugins
 ENV TALEND_CUSTOM_COMPONENTS $TALEND_DIR/talend-components
 ENV TALEND_EXEC $TALEND_DIR/TOS_DI-linux-gtk-x86_64
 ENV TALEND_WORKSPACE /home/builder
@@ -41,14 +43,14 @@ RUN wget -q https://s3-ap-southeast-2.amazonaws.com/imos-binary/static/talend/$T
 
 # Download and install talend maven repo
 RUN wget -q https://s3-ap-southeast-2.amazonaws.com/imos-binary/static/talend/talend-maven-repo-1.0.zip \
-  && mkdir -p $TALEND_DIR/configuration/.m2 \
-  && unzip -q -d $TALEND_DIR/configuration/.m2 ./talend-maven-repo-1.0.zip \
+  && mkdir -p $TALEND_M2_DIR \
+  && unzip -q -d $TALEND_M2_DIR ./talend-maven-repo-1.0.zip \
   && rm ./talend-maven-repo-1.0.zip
 
 # Download and install TOS SDI
 RUN wget -q https://s3-ap-southeast-2.amazonaws.com/imos-binary/static/talend/TOS-Spatial-7.1.1.zip \
   && unzip -q -d . ./TOS-Spatial-7.1.1.zip \
-  && cp -r ./TOS-Spatial-7.1.1/plugins/* $TALEND_DIR/plugins \
+  && cp -r ./TOS-Spatial-7.1.1/plugins/* $TALEND_PLUGIN_DIR \
   && rm ./TOS-Spatial-7.1.1.zip
 
 WORKDIR /home/builder
