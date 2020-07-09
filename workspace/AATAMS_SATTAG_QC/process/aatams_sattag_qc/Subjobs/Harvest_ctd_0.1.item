@@ -6,7 +6,7 @@
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_Password" value="PvDktF0rj0sm7SrDjDaBRd7KGeZ++L/s"/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="aatams_sattag_qc"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="harvest-db-aodnstack-lbesnard.dev.aodn.org.au"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="harvest-db-aodnstack-ecougnon.dev.aodn.org.au"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_brvNgFGXEeOFRtW2h_ugHg" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_brvNgFGXEeOFRtW2h_ugHg" type="id_String" value="null"/>
     <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_A9GAoFGXEeOFRtW2h_ugHg" type="id_String" value=""/>
@@ -1123,7 +1123,7 @@
         <mapperTableEntries name="sal_corrected_vals" expression="row5.sal_corrected_vals " type="id_Float" nullable="true"/>
         <mapperTableEntries name="fluoro_vals" expression="row5.fluoro_vals " type="id_Float" nullable="true"/>
         <mapperTableEntries name="cond_vals" expression="row5.cond_vals " type="id_Float" nullable="true"/>
-        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row5.lon,row5.lat,&quot;EPSG:4326&quot;)" type="id_Geometry" nullable="true"/>
+        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row5.qc_ssm_lon,row5.qc_ssm_lat,&quot;EPSG:4326&quot;) " type="id_Geometry" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row5" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="file_id" type="id_Long" nullable="true"/>
@@ -1723,7 +1723,7 @@
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
   <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true" show="false"/>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1" show="false"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="230;100;0"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="255;220;180"/>
