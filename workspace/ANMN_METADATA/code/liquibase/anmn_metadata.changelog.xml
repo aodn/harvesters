@@ -220,6 +220,17 @@
         CREATE VIEW abos_sots_rt_map AS
           SELECT * FROM moorings_all_map
           WHERE url LIKE 'IMOS/ABOS/SOTS/%' AND realtime ;
+
+	CREATE VIEW dwm_all_map AS
+          SELECT * FROM moorings_all_map WHERE url LIKE 'IMOS/DWM/%' ;
+
+        CREATE VIEW dwm_sots_dm_map AS
+          SELECT * FROM moorings_all_map
+          WHERE url LIKE 'IMOS/DWM/SOTS/%' AND NOT realtime ;
+
+        CREATE VIEW dwm_sots_rt_map AS
+          SELECT * FROM moorings_all_map
+          WHERE url LIKE 'IMOS/DWM/SOTS/%' AND realtime ;
       </sql>
     </changeSet>
 
@@ -268,6 +279,14 @@
                 standard_names LIKE '%sea_water_speed%'
                 )
         ;
+
+	CREATE VIEW dwm_currents_map AS
+          SELECT * FROM moorings_currents_map
+          WHERE url LIKE 'IMOS/DWM/%' ;
+
+	CREATE VIEW anmn_currents_map AS
+          SELECT * FROM moorings_currents_map
+          WHERE url LIKE 'IMOS/ANMN/%' ;
       </sql>
     </changeSet>
 
