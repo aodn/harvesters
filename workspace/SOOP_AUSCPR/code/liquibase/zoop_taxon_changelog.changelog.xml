@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog 
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    
+    <changeSet author="talend" id="zoop_taxon_changelog-1">
+       <sql>
+
+	
+CREATE TABLE zoop_taxon_changelog
+(
+  measurement bigserial NOT NULL,
+  taxon_name text,
+  taxon_start_date date,
+  first_occurrence date,
+  parent_taxon_name text,
+  training text,
+  comments text,
+  CONSTRAINT measurements_zoop_taxon_changelog_pkey PRIMARY KEY (measurement))
+       </sql>
+</changeSet>
+
+    <changeSet author="talend" id="soop_auscpr_zoop_vw_trajectory_map" runOnChange = "true">
+       <sql>
+CREATE OR REPLACE VIEW soop_auscpr_zoop_trajectory_map AS
+SELECT 
+	zoop.* ,	
+	zoop_taxon_changelog.first_occurrence,
+	zoop_taxon_changelog.parent_taxon_name,
+	zoop_taxon_changelog.training,
+	zoop_taxon_changelog.comments
+
+from zoop
+LEFT JOIN zoop_taxon_changelog
+ON
+ zoop.taxon_name = zoop_taxon_changelog.taxon_name
+order by  trip_code,"TIME", measurement
+  </sql>
+</changeSet>
+</databaseChangeLog>
