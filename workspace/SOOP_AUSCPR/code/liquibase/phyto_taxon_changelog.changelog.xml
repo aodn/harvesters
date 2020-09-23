@@ -4,10 +4,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
     
-    <changeSet author="talend" id="phyto_taxon_changelog-1">
-       <sql>
-
-	
+  <changeSet author="talend" id="phyto_taxon_changelog-1">
+    <sql>	
 CREATE TABLE phyto_taxon_changelog
 (
   measurement bigserial NOT NULL,
@@ -18,11 +16,11 @@ CREATE TABLE phyto_taxon_changelog
   training text,
   comments text,
   CONSTRAINT measurements_phyto_taxon_changelog_pkey PRIMARY KEY (measurement))
-       </sql>
-</changeSet>
+    </sql>
+  </changeSet>
 
-    <changeSet author="talend" id="soop_auscpr_phyto_trajectory_map" runOnChange = "true">
-       <sql>
+  <changeSet author="talend" id="soop_auscpr_phyto_trajectory_map" runOnChange = "true">
+    <sql>
 CREATE OR REPLACE VIEW soop_auscpr_phyto_trajectory_map AS
 SELECT 
 	phyto.* ,	
@@ -36,6 +34,43 @@ LEFT JOIN phyto_taxon_changelog
 ON
  phyto.taxon_name = phyto_taxon_changelog.taxon_name
 order by  trip_code,"TIME", measurement
-  </sql>
-</changeSet>
+    </sql>
+  </changeSet>
+
+  <changeSet author="talend" id="soop_auscpr_phyto_flat_map" runOnChange = "true">
+    <sql>
+      DROP VIEW IF EXISTS soop_auscpr.soop_auscpr_phyto_flat_map ;
+
+      CREATE VIEW soop_auscpr.soop_auscpr_phyto_flat_map AS
+        SELECT
+          p.measurement AS id,
+          p.route_code AS "Route",
+          p.latitude AS "Latitude",
+          p.longitude AS "Longitude",
+          p."TIME" AT TIME ZONE 'UTC' AS "SampleDateUTC",
+          date_part('year', p."TIME" AT TIME ZONE 'UTC') AS "Year",
+          date_part('month', p."TIME" AT TIME ZONE 'UTC') AS "Month",
+          date_part('day', p."TIME" AT TIME ZONE 'UTC') AS "Day",
+          to_char(p."TIME" AT TIME ZONE 'UTC', 'HH24:MI:SS') AS "Time_24hr",
+          p.taxon_name,
+          p.family,
+          p.genus,
+          p.species,
+          p.taxon_group,
+          p.caab_code,
+          p.taxon_start_date,
+          p.taxon_per_m3,
+          p.phyto_comments,
+          p.acknowledgements,
+          cl.first_occurrence,
+          cl.parent_taxon_name,
+          cl.training,
+          cl.comments,
+          p.geom
+        FROM soop_auscpr.phyto p LEFT JOIN soop_auscpr.phyto_taxon_changelog cl USING (taxon_name)
+        ORDER BY p.trip_code, p."TIME"
+      ;
+    </sql>
+  </changeSet>
+
 </databaseChangeLog> 
