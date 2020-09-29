@@ -301,10 +301,10 @@
       <column comment="" key="false" length="8" name="latitude" nullable="true" pattern="" precision="5" type="id_Double" originalLength="8" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="var1" expression="ArgoUtils.makePoint(row2.LONGITUDE,row2.LATITUDE,&quot;EPSG:4326&quot;)   " type="id_Geometry"/>
-        <mapperTableEntries name="var2" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;, row2.TIME_UTC) &#xA;   " type="id_Date"/>
+        <mapperTableEntries name="var2" expression="TalendDate.parseDateInUTC(&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;, row2.TIME_UTC) " type="id_Date"/>
         <mapperTableEntries name="var4" expression="row2.ROUTE_START_DATE == null ? null : TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, row2.ROUTE_START_DATE) " type="id_Date" nullable="true"/>
         <mapperTableEntries name="var5" expression="row2.TAXON_PER_M3.floatValue()" type="id_Float"/>
         <mapperTableEntries name="var3" expression="row2.CAAB_CODE == null ? null : row2.CAAB_CODE.longValueExact()       " type="id_Long" nullable="true"/>

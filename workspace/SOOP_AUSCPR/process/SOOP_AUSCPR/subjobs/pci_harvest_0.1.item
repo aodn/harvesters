@@ -76,6 +76,25 @@
     <contextParameter comment="" name="WfsServerURL" prompt="WfsServerURL?" promptNeeded="false" repositoryContextId="_DK4xgBbiEeSUt7QBdAE9mA" type="id_String" value="https://www.cmar.csiro.au/geoserver/wfs"/>
     <contextParameter comment="" name="WfsTimeout" prompt="WfsTimeout?" promptNeeded="false" repositoryContextId="_DK4xgBbiEeSUt7QBdAE9mA" type="id_String" value="60000"/>
   </context>
+  <context confirmationNeeded="false" name="Phyto">
+    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="soop_auscpr"/>
+    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_Password" value="Zfg+cvDsz5abJ/QutXe6hA=="/>
+    <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="5432"/>
+    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="soop_auscpr"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest-db-aodnstack-mhidas.dev.aodn.org.au"/>
+    <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="__UkjUFfbEeOI06CSaOCVIQ" type="id_String" value="/tmp"/>
+    <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="__UkjUFfbEeOI06CSaOCVIQ" type="id_String" value="null"/>
+    <contextParameter comment="" name="Metadata_SpatialColumn_pci" prompt="Metadata_SpatialColumn_pci?" promptNeeded="false" repositoryContextId="_VOYisE6GEeS6yYXu-FBqqQ" type="id_String" value="geom"/>
+    <contextParameter comment="" name="Metadata_SpatialResolution_pci" prompt="Metadata_SpatialResolution_pci?" promptNeeded="false" repositoryContextId="_VOYisE6GEeS6yYXu-FBqqQ" type="id_String" value="5"/>
+    <contextParameter comment="" name="Metadata_SpatialTable_pci" prompt="Metadata_SpatialTable_pci?" promptNeeded="false" repositoryContextId="_VOYisE6GEeS6yYXu-FBqqQ" type="id_String" value="pci"/>
+    <contextParameter comment="" name="Metadata_UUID_pci" prompt="Metadata_UUID_pci?" promptNeeded="false" repositoryContextId="_VOYisE6GEeS6yYXu-FBqqQ" type="id_String" value="e210cb45-910a-79c2-e043-08114f8c7800"/>
+    <contextParameter comment="" name="WfsServerURL" prompt="WfsServerURL?" promptNeeded="false" repositoryContextId="_DK4xgBbiEeSUt7QBdAE9mA" type="id_String" value="https://www.cmar.csiro.au/geoserver/wfs"/>
+    <contextParameter comment="" name="WfsTimeout" prompt="WfsTimeout?" promptNeeded="false" repositoryContextId="_DK4xgBbiEeSUt7QBdAE9mA" type="id_String" value="60000"/>
+    <contextParameter comment="" name="Metadata_URL" prompt="Metadata_URL?" promptNeeded="false" repositoryContextId="_rmLLsAAdEeWQSdTPgwc4lw" type="id_String" value="http://localhost:8080/geonetwork"/>
+    <contextParameter comment="" name="Metadata_Username" prompt="Metadata_Username?" promptNeeded="false" repositoryContextId="_rmLLsAAdEeWQSdTPgwc4lw" type="id_String" value="admin"/>
+    <contextParameter comment="" name="Metadata_Password" prompt="Metadata_Password?" promptNeeded="false" repositoryContextId="_rmLLsAAdEeWQSdTPgwc4lw" type="id_String" value="admin"/>
+  </context>
   <parameters>
     <elementParameter field="TEXT" name="JOB_RUN_VM_ARGUMENTS" value="{&quot;JOB_RUN_VM_ARGUMENTS&quot;:[&quot;-Xms256M&quot;,&quot;-Xmx2G&quot;]}" show="false"/>
     <elementParameter field="CHECK" name="JOB_RUN_VM_ARGUMENTS_OPTION" value="true" show="false"/>
@@ -296,10 +315,10 @@
       <column comment="" key="false" length="8" name="longitude" nullable="true" pattern="" precision="5" type="id_Double" originalLength="8" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="var1" expression="ArgoUtils.makePoint(row2.LONGITUDE,row2.LATITUDE,&quot;EPSG:4326&quot;)   " type="id_Geometry"/>
-        <mapperTableEntries name="var2" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;, row2.TIME_UTC)" type="id_Date"/>
+        <mapperTableEntries name="var2" expression="TalendDate.parseDateInUTC(&quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;, row2.TIME_UTC)" type="id_Date"/>
         <mapperTableEntries name="var3" expression="row2.COLOUR_INDEX.shortValueExact()" type="id_Short"/>
         <mapperTableEntries name="var4" expression="row2.ROUTE_START_DATE == null ? null : TalendDate.parseDate(&quot;yyyy-MM-dd&quot;, row1.ROUTE_START_DATE) " type="id_Date"/>
       </varTables>
@@ -515,8 +534,6 @@
   </node>
   <node componentName="tPostgresqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="256" posY="128">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_1" show="false"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:PROPERTY_TYPE" value="REPOSITORY"/>
-    <elementParameter field="TECHNICAL" name="PROPERTY:REPOSITORY_PROPERTY_TYPE" value="_-CdwkAuPEeO-v4jR06LTxA" show="false"/>
     <elementParameter field="CLOSED_LIST" name="DB_VERSION" value="PRIOR_TO_V9"/>
     <elementParameter field="TEXT" name="HOST" value="context.Destination_Server"/>
     <elementParameter field="TEXT" name="TYPE" value="POSTGRESQL" show="false"/>
@@ -766,7 +783,7 @@
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true" show="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1" show="false"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="230;100;0"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="255;220;180"/>
