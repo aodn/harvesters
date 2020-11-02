@@ -278,15 +278,16 @@
                 standard_names LIKE '%sea_water_velocity%' OR
                 standard_names LIKE '%sea_water_speed%'
                 )
+                AND file_version='1' AND not realtime
         ;
 
 	CREATE VIEW dwm_currents_map AS
           SELECT * FROM moorings_currents_map
-          WHERE url LIKE 'IMOS/DWM/%' AND file_version='1' AND not realtime ;
+          WHERE url LIKE 'IMOS/DWM/%' ;
 
 	CREATE VIEW anmn_currents_map AS
           SELECT * FROM moorings_currents_map
-          WHERE url LIKE 'IMOS/ANMN/%' AND file_version='1' AND not realtime ;
+          WHERE url LIKE 'IMOS/ANMN/%' ;
       </sql>
     </changeSet>
 
