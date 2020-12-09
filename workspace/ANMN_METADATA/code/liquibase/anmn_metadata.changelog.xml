@@ -210,17 +210,6 @@
         CREATE VIEW anmn_all_map AS
           SELECT * FROM moorings_all_map WHERE url LIKE 'IMOS/ANMN/%' ;
 
-        CREATE VIEW abos_all_map AS
-          SELECT * FROM moorings_all_map WHERE url LIKE 'IMOS/ABOS/%' ;
-
-        CREATE VIEW abos_sots_dm_map AS
-          SELECT * FROM moorings_all_map
-          WHERE url LIKE 'IMOS/ABOS/SOTS/%' AND NOT realtime ;
-
-        CREATE VIEW abos_sots_rt_map AS
-          SELECT * FROM moorings_all_map
-          WHERE url LIKE 'IMOS/ABOS/SOTS/%' AND realtime ;
-
 	CREATE VIEW dwm_all_map AS
           SELECT * FROM moorings_all_map WHERE url LIKE 'IMOS/DWM/%' ;
 
@@ -449,6 +438,15 @@
                 FROM indexed_file i JOIN file_metadata m ON m.file_id = i.id
                 WHERE m.data_category = 'gridded_timeseries' AND NOT m.deleted
                 ORDER BY m.site_code, m.variables
+           ;
+        </sql>
+    </changeSet>
+
+    <changeSet author="anaberger" id="drop_ABOS_views" runOnChange="true">
+        <sql>
+            DROP VIEW IF EXISTS abos_all_map CASCADE; 
+            DROP VIEW IF EXISTS abos_sots_dm_map CASCADE; 
+            DROP VIEW IF EXISTS abos_sots_rt_map
            ;
         </sql>
     </changeSet>
