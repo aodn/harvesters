@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 """Pre-process a CPR/NRS plankton product file to prepare for harvesting."""
 
