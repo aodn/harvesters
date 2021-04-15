@@ -44,6 +44,13 @@
       </sql>
     </changeSet>
 
+    <changeSet author="talend" id="add_pht_omega_doxs">
+      <sql>
+        ALTER TABLE timeseries ADD COLUMN "pHt_b" boolean;
+        ALTER TABLE timeseries ADD COLUMN "OMEGA_A_b" boolean;
+        ALTER TABLE timeseries ADD COLUMN "DOXS_b" boolean;
+      </sql>
+    </changeSet>
 
     <changeSet author="talend" id="create_measurements_table-1">
       <sql>
@@ -79,6 +86,17 @@
 	);	
       </sql>
     </changeSet>
+    
+    <changeSet author="talend" id="add_pht_omega_doxs_measurements">
+      <sql>
+        ALTER TABLE measurements ADD COLUMN "pHt" real;
+        ALTER TABLE measurements ADD COLUMN "OMEGA_A" real;
+        ALTER TABLE measurements ADD COLUMN "DOXS" real;
+        ALTER TABLE measurements ADD COLUMN "pHt_quality_control" character(1);
+        ALTER TABLE measurements ADD COLUMN "OMEGA_A_quality_control" character(1);
+        ALTER TABLE measurements ADD COLUMN "DOXS_quality_control" character(1);
+      </sql>
+    </changeSet>	
 
     <changeSet author="talend" id="create_map_view-1" runOnChange="true">
       <sql>
@@ -102,6 +120,9 @@
 	    t."fCO2SW_UATM_b",
 	    t."DfCO2_b",
 	    t."DOX1_b",
+	    t."pHt_b",
+	    t."OMEGA_A_b",
+	    t."DOXS_b",
 	    f.url,
 	    f.size
 	    FROM timeseries t 
@@ -132,6 +153,9 @@
 	    m."fCO2SW_UATM",
 	    m."DfCO2",
 	    m."DOX1",
+	    m."pHt",
+	    m."OMEGA_A",
+	    m."DOXS",
 	    m."SUBFLAG",
 	    m."TIME_quality_control",
  	    m."TEMP_quality_control",
@@ -140,15 +164,17 @@
   	    m."xCO2EQ_PPM_quality_control",
 	    m."xCO2ATM_PPM_quality_control",
 	    m."fCO2SW_UATM_quality_control",
- 	    m."DfCO2_quality_control" ,
- 	    m."DOX1_quality_control" ,
+ 	    m."DfCO2_quality_control",
+ 	    m."DOX1_quality_control",
+ 	    m."pHt_quality_control",
+	    m."OMEGA_A_quality_control",
+	    m."DOXS_quality_control",
 	    t.geom
 	    FROM  measurements m 
             JOIN  timeseries t ON m.file_id =t.file_id
 	    WHERE NOT t.realtime_b
 	    ORDER BY (m.file_id, "TIME");
       </sql>
-
     </changeSet>
 
     <changeSet author="talend" id="create_nrt_map_view-1" runOnChange="true">
@@ -173,6 +199,9 @@
             t."fCO2SW_UATM_b",
             t."DfCO2_b",
             t."DOX1_b",
+            t."pHt_b",
+            t."OMEGA_A_b",
+            t."DOXS_b",
             f.url,
             f.size
             FROM timeseries t
@@ -202,6 +231,9 @@
             m."fCO2SW_UATM",
             m."DfCO2",
             m."DOX1",
+            m."pHt",
+            m."OMEGA_A",
+            m."DOXS",
             m."SUBFLAG",
             m."TIME_quality_control",
             m."TEMP_quality_control",
@@ -210,16 +242,17 @@
             m."xCO2EQ_PPM_quality_control",
             m."xCO2ATM_PPM_quality_control",
             m."fCO2SW_UATM_quality_control",
-            m."DfCO2_quality_control" ,
-            m."DOX1_quality_control" ,
+            m."DfCO2_quality_control",
+            m."DOX1_quality_control",
+            m."pHt_quality_control",
+            m."OMEGA_A_quality_control",
+            m."DOXS_quality_control",
             t.geom
             FROM  measurements m
             JOIN  timeseries t ON m.file_id =t.file_id
             WHERE t.realtime_b
             ORDER BY (m.file_id, "TIME");
       </sql>
-
     </changeSet>
 
 </databaseChangeLog>
-

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TalendMapper="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default" jobType="Standard">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="/mnt/opendap/1/IMOS/opendap/ANMN/AM/NRSKAI/CO2/delayed/IMOS_ANMN-AM_GST_20120208T030000Z_NRSKAI_FV01_NRSKAI-CO2-1202-delayed_END_20121126T210000Z_C-20140801T132113Z.nc"/>
+    <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="/vagrant/src/tmp/IMOS_ANMN-AM_GST_20200522T060000Z_NRSMAI_FV01_NRSMAI-CO2-2005-delayed_END_20201118T220000Z_C-20210301T114900Z.nc"/>
     <contextParameter comment="" name="fileId" prompt="fileId?" promptNeeded="false" type="id_Long" value="1"/>
-    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="harvest"/>
+    <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
     <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="anmn_am_dm"/>
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_Password" value="yGvraLLC2ec6SJh53pgNpg=="/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="anmn_am_dm"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="harvest-db-aodnstack-ecougnon.dev.aodn.org.au"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="harvest-db-aodnstack-apberger.dev.aodn.org.au"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_brvNgFGXEeOFRtW2h_ugHg" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_brvNgFGXEeOFRtW2h_ugHg" type="id_String" value="null"/>
-    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_A9GAoFGXEeOFRtW2h_ugHg" type="id_String" value="/s3"/>
+    <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_A9GAoFGXEeOFRtW2h_ugHg" type="id_String" value=""/>
   </context>
   <context confirmationNeeded="false" name="Deployment">
     <contextParameter comment="" name="url" prompt="url?" promptNeeded="false" type="id_String" value="/mnt/opendap/1/IMOS/opendap/ANMN/AM/NRSKAI/CO2/delayed/IMOS_ANMN-AM_GST_20120208T030000Z_NRSKAI_FV01_NRSKAI-CO2-1202-delayed_END_20121126T210000Z_C-20140801T132113Z.nc"/>
@@ -437,6 +437,9 @@
       <column comment="" key="false" length="-1" name="fCO2SW_UATM" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="DfCO2" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="DOX1" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="TPH" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="OMEGA_A" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="DOXS" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="SUBFLAG" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="TIME_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="TEMP_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
@@ -445,8 +448,11 @@
       <column comment="" key="false" length="-1" name="xCO2EQ_PPM_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="xCO2ATM_PPM_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="DfCO2_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="fCO2SW_UATM_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="-1" name="fCO2SW_UATM_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="DOX1_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="TPH_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="OMEGA_A_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="DOXS_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_Integer" originalLength="-1" usefulColumn="true"/>
     </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="416" posY="288">
@@ -486,6 +492,9 @@
       <column comment="" key="false" length="-1" name="DfCO2" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="SUBFLAG" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="DOX1" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="pHt" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="OMEGA_A" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="DOXS" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="1" name="TIME_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="1" usefulColumn="true"/>
       <column comment="" key="false" length="1" name="TEMP_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="1" usefulColumn="true"/>
       <column comment="" key="false" length="1" name="PSAL_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="1" usefulColumn="true"/>
@@ -495,9 +504,12 @@
       <column comment="" key="false" length="1" name="DfCO2_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="1" usefulColumn="true"/>
       <column comment="" key="false" length="1" name="fCO2SW_UATM_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="1" usefulColumn="true"/>
       <column comment="" key="false" length="1" name="DOX1_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="1" usefulColumn="true"/>
+      <column comment="" key="false" length="1" name="pHt_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="1" usefulColumn="true"/>
+      <column comment="" key="false" length="1" name="OMEGA_A_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="1" usefulColumn="true"/>
+      <column comment="" key="false" length="1" name="DOXS_quality_control" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="TIME_quality_control" expression="data.TIME_quality_control==null?null:data.TIME_quality_control.toString() " type="id_String" nullable="true"/>
         <mapperTableEntries name="TEMP_quality_control" expression="data.TEMP_quality_control==null?null:data.TEMP_quality_control.toString() " type="id_String" nullable="true"/>
@@ -508,6 +520,9 @@
         <mapperTableEntries name="DfCO2_quality_control" expression="data.DfCO2_quality_control==null?null:data.DfCO2_quality_control.toString() " type="id_String" nullable="true"/>
         <mapperTableEntries name="fCO2SW_UATM_quality_control" expression="data.fCO2SW_UATM_quality_control==null?null:data.fCO2SW_UATM_quality_control.toString()  " type="id_String" nullable="true"/>
         <mapperTableEntries name="DOX1_quality_control" expression="data.DOX1_quality_control==null?null:data.DOX1_quality_control.toString()  " type="id_String" nullable="true"/>
+        <mapperTableEntries name="pHt_quality_control" expression="data.TPH_quality_control==null?null:data.TPH_quality_control.toString() " type="id_String" nullable="true"/>
+        <mapperTableEntries name="OMEGA_A_quality_control" expression="data.OMEGA_A_quality_control==null?null:data.OMEGA_A_quality_control.toString() " type="id_String" nullable="true"/>
+        <mapperTableEntries name="DOXS_quality_control" expression="data.DOXS_quality_control==null?null:data.DOXS_quality_control.toString() " type="id_String" nullable="true"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="measurement">
         <mapperTableEntries name="file_id" expression="context.fileId" type="id_Long"/>
@@ -523,7 +538,10 @@
         <mapperTableEntries name="fCO2SW_UATM" expression="data.fCO2SW_UATM " type="id_Float" nullable="true"/>
         <mapperTableEntries name="DfCO2" expression="data.DfCO2 " type="id_Float" nullable="true"/>
         <mapperTableEntries name="SUBFLAG" expression="data.SUBFLAG " type="id_Float" nullable="true"/>
-        <mapperTableEntries name="DOX1" expression="data.DOX1 " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="DOX1" expression="data.DOX1" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="pHt" expression="data.TPH " type="id_Float" nullable="true"/>
+        <mapperTableEntries name="OMEGA_A" expression="data.OMEGA_A" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="DOXS" expression="data.DOXS" type="id_Float" nullable="true"/>
         <mapperTableEntries name="TIME_quality_control" expression="Var.TIME_quality_control " type="id_String" nullable="true"/>
         <mapperTableEntries name="TEMP_quality_control" expression="Var.TEMP_quality_control " type="id_String" nullable="true"/>
         <mapperTableEntries name="PSAL_quality_control" expression="Var.PSAL_quality_control " type="id_String" nullable="true"/>
@@ -533,6 +551,9 @@
         <mapperTableEntries name="DfCO2_quality_control" expression="Var.DfCO2_quality_control " type="id_String" nullable="true"/>
         <mapperTableEntries name="fCO2SW_UATM_quality_control" expression="Var.fCO2SW_UATM_quality_control " type="id_String" nullable="true"/>
         <mapperTableEntries name="DOX1_quality_control" expression="Var.DOX1_quality_control " type="id_String" nullable="true"/>
+        <mapperTableEntries name="pHt_quality_control" expression="Var.pHt_quality_control " type="id_String" nullable="true"/>
+        <mapperTableEntries name="OMEGA_A_quality_control" expression="Var.OMEGA_A_quality_control " type="id_String" nullable="true"/>
+        <mapperTableEntries name="DOXS_quality_control" expression="Var.DOXS_quality_control" type="id_String" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="data" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="TIME" type="id_Double"/>
@@ -546,6 +567,9 @@
         <mapperTableEntries name="fCO2SW_UATM" type="id_Float" nullable="true"/>
         <mapperTableEntries name="DfCO2" type="id_Float" nullable="true"/>
         <mapperTableEntries name="DOX1" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="TPH" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="OMEGA_A" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="DOXS" type="id_Float" nullable="true"/>
         <mapperTableEntries name="SUBFLAG" type="id_Float" nullable="true"/>
         <mapperTableEntries name="TIME_quality_control" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="TEMP_quality_control" type="id_Integer" nullable="true"/>
@@ -556,6 +580,9 @@
         <mapperTableEntries name="DfCO2_quality_control" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="fCO2SW_UATM_quality_control" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="DOX1_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="TPH_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="OMEGA_A_quality_control" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="DOXS_quality_control" type="id_Integer" nullable="true"/>
       </inputTables>
     </nodeData>
   </node>
@@ -659,6 +686,21 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="pHt"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OMEGA_A"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="DOXS"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="TIME_quality_control"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -704,6 +746,21 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="pHt_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="OMEGA_A_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="DOXS_quality_control"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -733,6 +790,9 @@
       <column comment="" key="false" length="-1" name="DfCO2" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="SUBFLAG" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="DOX1" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="pHt" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="OMEGA_A" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="DOXS" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="1" name="TIME_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
       <column comment="" key="false" length="1" name="TEMP_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
       <column comment="" key="false" length="1" name="PSAL_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
@@ -742,6 +802,9 @@
       <column comment="" key="false" length="1" name="DfCO2_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
       <column comment="" key="false" length="1" name="fCO2SW_UATM_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
       <column comment="" key="false" length="1" name="DOX1_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
+      <column comment="" key="false" length="1" name="pHt_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
+      <column comment="" key="false" length="1" name="OMEGA_A_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
+      <column comment="" key="false" length="1" name="DOXS_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
     </metadata>
     <metadata connector="REJECT" label="measurement" name="REJECT">
       <column comment="" key="true" length="19" name="file_id" nullable="false" pattern="" precision="0" sourceType="INT8" type="id_Long" usefulColumn="true">
@@ -766,6 +829,9 @@
       <column comment="" key="false" length="-1" name="DfCO2" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="SUBFLAG" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="DOX1" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="pHt" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="OMEGA_A" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="DOXS" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="1" name="TIME_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
       <column comment="" key="false" length="1" name="TEMP_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
       <column comment="" key="false" length="1" name="PSAL_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
@@ -775,6 +841,9 @@
       <column comment="" key="false" length="1" name="DfCO2_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
       <column comment="" key="false" length="1" name="fCO2SW_UATM_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
       <column comment="" key="false" length="1" name="DOX1_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
+      <column comment="" key="false" length="1" name="pHt_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
+      <column comment="" key="false" length="1" name="OMEGA_A_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
+      <column comment="" key="false" length="1" name="DOXS_quality_control" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="1" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
@@ -795,7 +864,7 @@
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH summary AS (&#xA;  SELECT  &#xA;   \&quot;LATITUDE\&quot; AS latitude,&#xA;    \&quot;LONGITUDE\&quot; AS longitude,&#xA;    st_geomfromtext('POINT(' || (\&quot;LONGITUDE\&quot;)::text || ' ' || (\&quot;LATITUDE\&quot;)::text || ')', 4326) AS geom,&#xA;    count(\&quot;TEMP\&quot;) > 0 AS \&quot;TEMP_b\&quot;,&#xA;    count(\&quot;PSAL\&quot;) > 0 AS \&quot;PSAL_b\&quot;,&#xA;  count(\&quot;Press_ATM\&quot;) > 0 AS \&quot;Press_ATM_b\&quot;,&#xA;  count(\&quot;xCO2EQ_PPM\&quot;) > 0 AS \&quot;xCO2EQ_PPM_b\&quot;,&#xA;  count(\&quot;xCO2ATM_PPM\&quot;) > 0 AS  \&quot;xCO2ATM_PPM_b\&quot;,&#xA;  count(\&quot;fCO2SW_UATM\&quot;) > 0 AS \&quot;fCO2SW_UATM_b\&quot;,&#xA;  count(\&quot;DfCO2\&quot;) > 0 AS \&quot;DfCO2_b\&quot;,&#xA;  count(\&quot;DOX1\&quot;) > 0 AS \&quot;DOX1_b\&quot;&#xA;from measurements &#xA;WHERE  file_id = &quot; + context.fileId + &quot;&#xA;GROUP BY \&quot;LATITUDE\&quot;, \&quot;LONGITUDE\&quot;&#xA;)&#xA;UPDATE timeseries&#xA;  SET &#xA;&#x9;  latitude = s.latitude,&#xA;      longitude = s.longitude,&#xA;      geom = s.geom,&#xA;       \&quot;TEMP_b\&quot; = s.\&quot;TEMP_b\&quot;,&#xA;       \&quot;PSAL_b\&quot; =s.\&quot;PSAL_b\&quot; ,&#xA;       \&quot;Press_ATM_b\&quot;= s.\&quot;Press_ATM_b\&quot;,&#xA;&#x9;&#x9;\&quot;xCO2EQ_PPM_b\&quot; =s.\&quot;xCO2EQ_PPM_b\&quot; ,&#xA;   &#x9;&#x9;\&quot;xCO2ATM_PPM_b\&quot; = s.\&quot;xCO2ATM_PPM_b\&quot; ,&#xA; &#x9;&#x9;\&quot;fCO2SW_UATM_b\&quot; = s.\&quot;fCO2SW_UATM_b\&quot;,&#xA;&#x9; &#x9;\&quot;DfCO2_b\&quot; = s.\&quot;DfCO2_b\&quot;,&#xA;&#x9; &#x9;\&quot;DOX1_b\&quot; = s.\&quot;DOX1_b\&quot;,&#xA;        realtime_b = (SELECT url LIKE '%realtime%'  FROM indexed_file  WHERE id = file_id)&#xA;  FROM summary s&#xA;  WHERE file_id = &quot; + context.fileId + &quot;;&quot;&#xA;&#xA;&#xA; "/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH summary AS (&#xA;  SELECT  &#xA;   \&quot;LATITUDE\&quot; AS latitude,&#xA;    \&quot;LONGITUDE\&quot; AS longitude,&#xA;    st_geomfromtext('POINT(' || (\&quot;LONGITUDE\&quot;)::text || ' ' || (\&quot;LATITUDE\&quot;)::text || ')', 4326) AS geom,&#xA;    count(\&quot;TEMP\&quot;) > 0 AS \&quot;TEMP_b\&quot;,&#xA;    count(\&quot;PSAL\&quot;) > 0 AS \&quot;PSAL_b\&quot;,&#xA;  count(\&quot;Press_ATM\&quot;) > 0 AS \&quot;Press_ATM_b\&quot;,&#xA;  count(\&quot;xCO2EQ_PPM\&quot;) > 0 AS \&quot;xCO2EQ_PPM_b\&quot;,&#xA;  count(\&quot;xCO2ATM_PPM\&quot;) > 0 AS  \&quot;xCO2ATM_PPM_b\&quot;,&#xA;  count(\&quot;fCO2SW_UATM\&quot;) > 0 AS \&quot;fCO2SW_UATM_b\&quot;,&#xA;  count(\&quot;DfCO2\&quot;) > 0 AS \&quot;DfCO2_b\&quot;,&#xA;  count(\&quot;DOX1\&quot;) > 0 AS \&quot;DOX1_b\&quot;,&#xA;  count(\&quot;pHt\&quot;) > 0 AS \&quot;pHt_b\&quot;,&#xA;  count(\&quot;OMEGA_A\&quot;) > 0 AS \&quot;OMEGA_A_b\&quot;,&#xA;  count(\&quot;DOXS\&quot;) > 0 AS \&quot;DOXS_b\&quot;&#xA;from measurements &#xA;WHERE  file_id = &quot; + context.fileId + &quot;&#xA;GROUP BY \&quot;LATITUDE\&quot;, \&quot;LONGITUDE\&quot;&#xA;)&#xA;UPDATE timeseries&#xA;  SET &#xA;&#x9;  latitude = s.latitude,&#xA;      longitude = s.longitude,&#xA;      geom = s.geom,&#xA;       \&quot;TEMP_b\&quot; = s.\&quot;TEMP_b\&quot;,&#xA;       \&quot;PSAL_b\&quot; =s.\&quot;PSAL_b\&quot; ,&#xA;       \&quot;Press_ATM_b\&quot;= s.\&quot;Press_ATM_b\&quot;,&#xA;&#x9;&#x9;\&quot;xCO2EQ_PPM_b\&quot; =s.\&quot;xCO2EQ_PPM_b\&quot; ,&#xA;   &#x9;&#x9;\&quot;xCO2ATM_PPM_b\&quot; = s.\&quot;xCO2ATM_PPM_b\&quot; ,&#xA; &#x9;&#x9;\&quot;fCO2SW_UATM_b\&quot; = s.\&quot;fCO2SW_UATM_b\&quot;,&#xA;&#x9; &#x9;\&quot;DfCO2_b\&quot; = s.\&quot;DfCO2_b\&quot;,&#xA;&#x9; &#x9;\&quot;DOX1_b\&quot; = s.\&quot;DOX1_b\&quot;,&#xA;&#x9; &#x9;\&quot;pHt_b\&quot; = s.\&quot;pHt_b\&quot;,&#xA;&#x9; &#x9;\&quot;OMEGA_A_b\&quot; = s.\&quot;OMEGA_A_b\&quot;,&#xA;&#x9; &#x9;\&quot;DOXS_b\&quot; = s.\&quot;DOXS_b\&quot;,&#xA;        realtime_b = (SELECT url LIKE '%realtime%'  FROM indexed_file  WHERE id = file_id)&#xA;  FROM summary s&#xA;  WHERE file_id = &quot; + context.fileId + &quot;;&quot;&#xA;&#xA;&#xA; "/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime" show="false"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false" show="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" value="&quot;&quot;" show="false"/>
@@ -1116,6 +1185,27 @@
       <elementValue elementRef="TRACE_COLUMN" value="DOX1_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TPH_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DOXS"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DOXS_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OMEGA_A"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="pHt"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OMEGA_A_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="TPH"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="data" show="false"/>
@@ -1242,6 +1332,24 @@
       <elementValue elementRef="TRACE_COLUMN" value="DOX1_quality_control"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="pHt_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DOXS"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="DOXS_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OMEGA_A"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="pHt"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="OMEGA_A_quality_control"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="measurement" show="false"/>
@@ -1283,7 +1391,7 @@
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true" show="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1" show="false"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="230;100;0"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="255;220;180"/>
