@@ -21,7 +21,7 @@
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_i5o8cH16EeOTGfN6m9kVCA" type="id_String" value="harvest-db-aodnstack-apberger.dev.aodn.org.au"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_OFNrQH16EeOTGfN6m9kVCA" type="id_String" value="/vagrant/src/tmp/NRMN/"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_OFNrQH16EeOTGfN6m9kVCA" type="id_String" value="null"/>
-    <contextParameter comment="" name="Metadata_Password" prompt="Metadata_Password?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="geonetwork_admin"/>
+    <contextParameter comment="" name="Metadata_Password" prompt="Metadata_Password?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="Geonetwork_admin1!"/>
     <contextParameter comment="" name="Metadata_SpatialColumn" prompt="Metadata_SpatialColumn?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="geom"/>
     <contextParameter comment="" name="Metadata_SpatialResolution" prompt="Metadata_SpatialResolution?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="1"/>
     <contextParameter comment="" name="Metadata_SpatialTable_ep_m0_off_transect_sighting" prompt="Metadata_SpatialTable_ep_m0_off_transect_sighting?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="ep_m0_off_transect_sighting_public_map"/>
@@ -75,7 +75,7 @@
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_i5o8cH16EeOTGfN6m9kVCA" type="id_String" value="#{node['talend']['destination_database_server']}"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_OFNrQH16EeOTGfN6m9kVCA" type="id_String" value="/vagrant/src/tmp/NRMN/"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_OFNrQH16EeOTGfN6m9kVCA" type="id_String" value="null"/>
-    <contextParameter comment="" name="Metadata_Password" prompt="Metadata_Password?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="geonetwork_admin"/>
+    <contextParameter comment="" name="Metadata_Password" prompt="Metadata_Password?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="Geonetwork_admin1!"/>
     <contextParameter comment="" name="Metadata_SpatialColumn" prompt="Metadata_SpatialColumn?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="geom"/>
     <contextParameter comment="" name="Metadata_SpatialResolution" prompt="Metadata_SpatialResolution?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="1"/>
     <contextParameter comment="" name="Metadata_SpatialTable_ep_m0_off_transect_sighting" prompt="Metadata_SpatialTable_ep_m0_off_transect_sighting?" promptNeeded="false" repositoryContextId="_oFoF8AV-EeSJgc0tceHsgg" type="id_String" value="ep_m0_off_transect_sighting_public_map"/>
@@ -601,9 +601,9 @@
       <column comment="" key="false" length="-1" name="geom" nullable="true" pattern="" precision="-1" sourceType="" type="id_Geometry" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
-        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row2.survey_longitude,row2.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
+        <mapperTableEntries name="geom" expression="row2.survey_longitude==null?ArgoUtils.makePoint((double)row2.longitude,(double)row2.latitude,&quot;EPSG:4326&quot;):ArgoUtils.makePoint(row2.survey_longitude,row2.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="m2_inverts">
         <mapperTableEntries name="survey_id" expression="row2.survey_id" type="id_Integer"/>
@@ -1349,7 +1349,7 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
-        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row4.survey_longitude,row4.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
+        <mapperTableEntries name="geom" expression="row4.survey_longitude==null?ArgoUtils.makePoint((double)row4.longitude,(double)row4.latitude,&quot;EPSG:4326&quot;):ArgoUtils.makePoint(row4.survey_longitude,row4.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="m3_isq">
         <mapperTableEntries name="survey_id" expression="row4.survey_id" type="id_Integer"/>
@@ -2093,9 +2093,9 @@
       <column comment="" key="false" length="-1" name="geom" nullable="true" pattern="" precision="-1" sourceType="GEOMETRY" type="id_Geometry" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
-        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row15.survey_longitude,row15.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
+        <mapperTableEntries name="geom" expression="row5.survey_longitude==null?ArgoUtils.makePoint((double)row5.longitude,(double)row5.latitude,&quot;EPSG:4326&quot;):ArgoUtils.makePoint(row5.survey_longitude,row5.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="m2_c">
         <mapperTableEntries name="survey_id" expression="row15.survey_id" type="id_Integer"/>
@@ -2832,7 +2832,7 @@
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
-        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row6.survey_longitude,row6.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
+        <mapperTableEntries name="geom" expression="row6.survey_longitude==null?ArgoUtils.makePoint((double)row6.longitude,(double)row6.latitude,&quot;EPSG:4326&quot;):ArgoUtils.makePoint(row6.survey_longitude,row6.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="m4_macrocystis_count">
         <mapperTableEntries name="survey_id" expression="row6.survey_id" type="id_Integer"/>
@@ -3531,9 +3531,9 @@
       <column comment="" key="false" length="-1" name="geom" nullable="true" pattern="" precision="-1" sourceType="" type="id_Geometry" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
-        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(Main11.survey_longitude,Main11.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
+        <mapperTableEntries name="geom" expression="Main11.survey_longitude==null?ArgoUtils.makePoint((double)Main11.longitude,(double)Main11.latitude,&quot;EPSG:4326&quot;):ArgoUtils.makePoint(Main11.survey_longitude,Main11.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="m5_limpet_quadrats">
         <mapperTableEntries name="survey_id" expression="Main11.survey_id" type="id_Integer"/>
@@ -4535,9 +4535,9 @@
       <column comment="" key="false" length="-1" name="geom" nullable="true" pattern="" precision="-1" sourceType="" type="id_Geometry" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
-        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row9.longitude,row9.latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
+        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint((double)row9.longitude,(double)row9.latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="site_list">
         <mapperTableEntries name="country" expression="row9.country" type="id_String" nullable="true"/>
@@ -5149,9 +5149,9 @@
       <column comment="" key="false" length="-1" name="geom" nullable="true" pattern="" precision="-1" sourceType="" type="id_Geometry" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
-        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row10.survey_longitude,row10.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
+        <mapperTableEntries name="geom" expression="row10.survey_longitude==null?ArgoUtils.makePoint((double)row10.longitude,(double)row10.latitude,&quot;EPSG:4326&quot;):ArgoUtils.makePoint(row10.survey_longitude,row10.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="m13_pq_scores">
         <mapperTableEntries name="survey_id" expression="row10.survey_id" type="id_Integer"/>
@@ -5832,9 +5832,9 @@
       <column comment="" key="false" length="-1" name="geom" nullable="true" pattern="" precision="-1" sourceType="" type="id_Geometry" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
-        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row11.survey_longitude,row11.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
+        <mapperTableEntries name="geom" expression="row11.survey_longitude==null?ArgoUtils.makePoint((double)row11.longitude,(double)row11.latitude,&quot;EPSG:4326&quot;):ArgoUtils.makePoint(row11.survey_longitude,row11.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="m11_off_transect_sighting">
         <mapperTableEntries name="survey_id" expression="row11.survey_id" type="id_Integer"/>
@@ -6578,9 +6578,9 @@
       <column comment="" key="false" length="-1" name="geom" nullable="true" pattern="" precision="-1" sourceType="" type="id_Geometry" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
-        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row12.survey_longitude,row12.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
+        <mapperTableEntries name="geom" expression="row12.survey_longitude==null?ArgoUtils.makePoint((double)row12.longitude,(double)row12.latitude,&quot;EPSG:4326&quot;):ArgoUtils.makePoint(row12.survey_longitude,row12.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="survey_list">
         <mapperTableEntries name="survey_id" expression="row12.survey_id" type="id_Integer"/>
@@ -7333,9 +7333,9 @@
       <column comment="" key="false" length="-1" name="geom" nullable="true" pattern="" precision="-1" sourceType="GEOMETRY" type="id_Geometry" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
-        <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row1.survey_longitude,row1.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
+        <mapperTableEntries name="geom" expression="row1.survey_longitude==null?ArgoUtils.makePoint((double)row1.longitude,(double)row1.latitude,&quot;EPSG:4326&quot;):ArgoUtils.makePoint(row1.survey_longitude,row1.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="m0">
         <mapperTableEntries name="survey_id" expression="row7.survey_id" type="id_Integer"/>
@@ -8073,7 +8073,7 @@
       <column comment="" key="false" length="-1" name="biomass" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="geom" nullable="true" pattern="" precision="-1" sourceType="GEOMETRY" type="id_Geometry" originalLength="-1" usefulColumn="true"/>
     </metadata>
-    <metadata connector="FLOW" name="out2">
+    <metadata connector="FLOW" name="m1_map">
       <column comment="" key="false" length="10" name="site_code" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="10" usefulColumn="true"/>
       <column comment="" key="false" length="100" name="site_name" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="100" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="latitude" nullable="true" pattern="" precision="-1" sourceType="FLOAT4" type="id_Float" originalLength="-1" usefulColumn="true"/>
@@ -8084,48 +8084,50 @@
       <column comment="" key="false" length="-1" name="geom" nullable="true" pattern="" precision="-1" sourceType="GEOMETRY" type="id_Geometry" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
-      <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
+      <uiProperties shellMaximized="true"/>
+      <varTables sizeState="INTERMEDIATE" name="Var">
+        <mapperTableEntries name="geom" expression="row3.survey_longitude==null?ArgoUtils.makePoint((double)row3.longitude,(double)row3.latitude,&quot;EPSG:4326&quot;):ArgoUtils.makePoint(row3.survey_longitude,row3.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
+      </varTables>
       <outputTables sizeState="INTERMEDIATE" name="m1">
-        <mapperTableEntries name="survey_id" type="id_Integer"/>
-        <mapperTableEntries name="country" type="id_String" nullable="true"/>
-        <mapperTableEntries name="area" type="id_String" nullable="true"/>
-        <mapperTableEntries name="ecoregion" type="id_String" nullable="true"/>
-        <mapperTableEntries name="realm" type="id_String" nullable="true"/>
-        <mapperTableEntries name="location" type="id_String" nullable="true"/>
-        <mapperTableEntries name="site_code" type="id_String" nullable="true"/>
-        <mapperTableEntries name="site_name" type="id_String" nullable="true"/>
-        <mapperTableEntries name="latitude" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="longitude" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="survey_date" type="id_Date" nullable="true"/>
-        <mapperTableEntries name="depth" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="program" type="id_String" nullable="true"/>
-        <mapperTableEntries name="visibility" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="hour" type="id_Date" nullable="true"/>
-        <mapperTableEntries name="survey_latitude" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="survey_longitude" type="id_Double" nullable="true"/>
-        <mapperTableEntries name="method" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="block" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="phylum" type="id_String" nullable="true"/>
-        <mapperTableEntries name="class_" type="id_String" nullable="true"/>
-        <mapperTableEntries name="order" type="id_String" nullable="true"/>
-        <mapperTableEntries name="family" type="id_String" nullable="true"/>
-        <mapperTableEntries name="species_name" type="id_String" nullable="true"/>
-        <mapperTableEntries name="reporting_name" type="id_String" nullable="true"/>
-        <mapperTableEntries name="size_class" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="total" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="biomass" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="geom" type="id_Geometry" nullable="true"/>
+        <mapperTableEntries name="survey_id" expression="row13.survey_id" type="id_Integer"/>
+        <mapperTableEntries name="country" expression="row13.country" type="id_String" nullable="true"/>
+        <mapperTableEntries name="area" expression="row13.area" type="id_String" nullable="true"/>
+        <mapperTableEntries name="ecoregion" expression="row13.ecoregion" type="id_String" nullable="true"/>
+        <mapperTableEntries name="realm" expression="row13.realm" type="id_String" nullable="true"/>
+        <mapperTableEntries name="location" expression="row13.location" type="id_String" nullable="true"/>
+        <mapperTableEntries name="site_code" expression="row13.site_code" type="id_String" nullable="true"/>
+        <mapperTableEntries name="site_name" expression="row13.site_name" type="id_String" nullable="true"/>
+        <mapperTableEntries name="latitude" expression="row13.latitude" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="longitude" expression="row13.longitude" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="survey_date" expression="row13.survey_date" type="id_Date" nullable="true"/>
+        <mapperTableEntries name="depth" expression="row13.depth" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="program" expression="row13.program" type="id_String" nullable="true"/>
+        <mapperTableEntries name="visibility" expression="row13.visibility" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="hour" expression="row13.hour" type="id_Date" nullable="true"/>
+        <mapperTableEntries name="survey_latitude" expression="row13.survey_latitude" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="survey_longitude" expression="row13.survey_longitude" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="method" expression="row13.method" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="block" expression="row13.block" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="phylum" expression="row13.phylum" type="id_String" nullable="true"/>
+        <mapperTableEntries name="class_" expression="row13.class_" type="id_String" nullable="true"/>
+        <mapperTableEntries name="order" expression="row13.order" type="id_String" nullable="true"/>
+        <mapperTableEntries name="family" expression="row13.family" type="id_String" nullable="true"/>
+        <mapperTableEntries name="species_name" expression="row13.species_name" type="id_String" nullable="true"/>
+        <mapperTableEntries name="reporting_name" expression="row13.reporting_name" type="id_String" nullable="true"/>
+        <mapperTableEntries name="size_class" expression="row13.size_class" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="total" expression="row13.total" type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="biomass" expression="row13.biomass" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="geom" expression="Var.geom" type="id_Geometry" nullable="true"/>
       </outputTables>
-      <outputTables sizeState="INTERMEDIATE" name="out2">
-        <mapperTableEntries name="site_code" type="id_String" nullable="true"/>
-        <mapperTableEntries name="site_name" type="id_String" nullable="true"/>
-        <mapperTableEntries name="latitude" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="longitude" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="survey_date" type="id_Date" nullable="true"/>
-        <mapperTableEntries name="depth" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="program" type="id_String" nullable="true"/>
-        <mapperTableEntries name="geom" type="id_Geometry" nullable="true"/>
+      <outputTables sizeState="INTERMEDIATE" name="m1_map">
+        <mapperTableEntries name="site_code" expression="row13.site_code" type="id_String" nullable="true"/>
+        <mapperTableEntries name="site_name" expression="row13.site_name" type="id_String" nullable="true"/>
+        <mapperTableEntries name="latitude" expression="row13.latitude" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="longitude" expression="row13.longitude" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="survey_date" expression="row13.survey_date" type="id_Date" nullable="true"/>
+        <mapperTableEntries name="depth" expression="row13.depth" type="id_Float" nullable="true"/>
+        <mapperTableEntries name="program" expression="row13.program" type="id_String" nullable="true"/>
+        <mapperTableEntries name="geom" expression="Var.geom" type="id_Geometry" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row13" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="survey_id" type="id_Integer"/>
@@ -9735,9 +9737,9 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="m1" show="false"/>
   </connection>
-  <connection connectorName="FLOW" label="out2" lineStyle="0" metaname="out2" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_2" target="tDBOutput_14">
+  <connection connectorName="FLOW" label="m1_map" lineStyle="0" metaname="m1_map" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMap_2" target="tDBOutput_14">
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="out2" show="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="m1_map" show="false"/>
   </connection>
   <subjob>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlConnection_1" show="false"/>
