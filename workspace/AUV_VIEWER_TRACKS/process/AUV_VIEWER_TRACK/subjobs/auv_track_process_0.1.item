@@ -11,7 +11,7 @@
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="harvest-db-aodnstack-lbesnard.dev.aodn.org.au"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
-    <contextParameter comment="" name="foreign_key" prompt="foreign_key?" promptNeeded="false" type="id_Integer" value=""/>
+    <contextParameter comment="" name="foreign_key" prompt="foreign_key?" promptNeeded="false" type="id_Integer" value="null"/>
     <contextParameter comment="" name="campaign_code_context" prompt="campaign_code_context?" promptNeeded="false" type="id_String" value="null"/>
     <contextParameter comment="" name="dive_code_context" prompt="dive_code_context?" promptNeeded="false" type="id_String" value="null"/>
     <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value=""/>
@@ -28,7 +28,7 @@
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_Tq_7EAuXEeO-v4jR06LTxA" type="id_String" value="#{node['talend']['destination_database_server']}"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
-    <contextParameter comment="" name="foreign_key" prompt="foreign_key?" promptNeeded="false" type="id_Integer" value=""/>
+    <contextParameter comment="" name="foreign_key" prompt="foreign_key?" promptNeeded="false" type="id_Integer" value="null"/>
     <contextParameter comment="" name="campaign_code_context" prompt="campaign_code_context?" promptNeeded="false" type="id_String" value="null"/>
     <contextParameter comment="" name="dive_code_context" prompt="dive_code_context?" promptNeeded="false" type="id_String" value="null"/>
     <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_EMU5IED2EeO4PMQpaPeV8A" type="id_String" value=""/>
@@ -698,6 +698,7 @@
   <node componentName="tPostgresqlClose" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="96" posY="768">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlClose_1" show="false"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
   </node>
   <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="256" posY="32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlRow_1" show="false"/>
@@ -734,7 +735,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="32" posY="384">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="96" posY="480">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_2" show="false"/>
     <elementParameter field="CHECK" name="TSTATCATCHER_STATS" value="true"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
@@ -752,7 +753,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select pkid as foreign_key from auv_tracks where dive_code = '&quot; + context.dive_code_context +&quot;';&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select pkid as foreign_key from auv_tracks where dive_code =  (SELECT substring(url, 'DATA_[a-zA-Z][A-Za-z0-9_]*_(r[0-9]*.*).csv') from indexed_file where id =&quot;+ context.file_id +&quot; AND url ~ 'DATA_' )  ;&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime" show="false"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false" show="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" value="&quot;&quot;" show="false"/>
@@ -769,19 +770,19 @@
     <elementParameter field="TEXT" name="LABEL" value="getFkey"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tPostgresqlInput_2">
-      <column comment="" defaultValue="" key="false" length="20" name="foreign_key" nullable="false" pattern="" precision="-1" sourceType="INT4" type="id_Integer" originalLength="20" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="true" length="20" name="foreign_key" nullable="false" pattern="" precision="-1" sourceType="INT4" type="id_Integer" originalLength="20" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="32" posY="480">
+  <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="96" posY="576">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_2" show="false"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#xA;//&#xA;// multiply by 2 the row identifier&#xA;// output_row.id = input_row.id * 2;&#xA;//&#xA;// lowercase the name&#xA;// output_row.name = input_row.name.toLowerCase();&#xA;&#xA;context.foreign_key=(row2.foreign_key);&#xA;"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#xA;//&#xA;// multiply by 2 the row identifier&#xA;// output_row.id = input_row.id * 2;&#xA;//&#xA;// lowercase the name&#xA;// output_row.name = input_row.name.toLowerCase();&#xA;&#xA;context.foreign_key=row2.foreign_key;&#xA;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tJavaRow_2">
       <column comment="" defaultValue="" key="false" length="20" name="foreign_key" nullable="false" pattern="" precision="-1" sourceType="INT4" type="id_Integer" originalLength="20" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tFileInputDelimited" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="416">
+  <node componentName="tFileInputDelimited" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="288" posY="480">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileInputDelimited_2" show="false"/>
     <elementParameter field="CHECK" name="TSTATCATCHER_STATS" value="true"/>
     <elementParameter field="LABEL" name="FILENAMETEXT" value="&quot;When the input source is a stream or a zip file,footer and random shouldn't be bigger than 0.&quot;"/>
@@ -917,9 +918,9 @@
     <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" value="100" show="false"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" label="metadata" name="tFileInputDelimited_2">
-      <column comment="" key="false" length="15" name="campaign_code" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="15" usefulColumn="true"/>
-      <column comment="" key="false" length="50" name="dive_code" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="50" usefulColumn="true"/>
-      <column comment="" key="false" length="40" name="image_filename" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="40" usefulColumn="true"/>
+      <column comment="" key="false" length="15" name="campaign_code" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="15" usefulColumn="true"/>
+      <column comment="" key="false" length="50" name="dive_code" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="50" usefulColumn="true"/>
+      <column comment="" key="false" length="40" name="image_filename" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="40" usefulColumn="true"/>
       <column comment="" key="false" length="15" name="longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="10" type="id_Double" usefulColumn="true"/>
       <column comment="" key="false" length="15" name="latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="10" type="id_Double" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="8" name="image_width" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double" usefulColumn="true"/>
@@ -943,12 +944,12 @@
       <column comment="" key="false" length="11" name="low_left_lat" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="8" type="id_Double" usefulColumn="true"/>
     </metadata>
     <metadata connector="REJECT" label="metadata" name="REJECT">
-      <column comment="" key="false" length="15" name="campaign_code" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="15" usefulColumn="true"/>
-      <column comment="" key="false" length="50" name="dive_code" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="50" usefulColumn="true"/>
-      <column comment="" key="false" length="40" name="image_filename" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="40" usefulColumn="true"/>
-      <column comment="" key="false" length="15" name="longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="10" type="id_Float" usefulColumn="true"/>
+      <column comment="" key="false" length="15" name="campaign_code" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="15" usefulColumn="true"/>
+      <column comment="" key="false" length="50" name="dive_code" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="50" usefulColumn="true"/>
+      <column comment="" key="false" length="40" name="image_filename" nullable="false" pattern="&quot;dd-MM-yyyy&quot;" precision="0" type="id_String" originalLength="40" usefulColumn="true"/>
+      <column comment="" key="false" length="15" name="longitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="10" type="id_Double" usefulColumn="true"/>
       <column comment="" key="false" length="15" name="latitude" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="10" type="id_Double" usefulColumn="true"/>
-      <column comment="" key="false" length="8" name="image_width" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double" usefulColumn="true"/>
+      <column comment="" defaultValue="" key="false" length="8" name="image_width" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double" usefulColumn="true"/>
       <column comment="" key="false" length="9" name="depth_sensor" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double" usefulColumn="true"/>
       <column comment="" key="false" length="8" name="altitude_sensor" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double" usefulColumn="true"/>
       <column comment="" key="false" length="9" name="depth" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="7" type="id_Double" usefulColumn="true"/>
@@ -971,7 +972,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="448" posY="416">
+  <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="448" posY="480">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_2" show="false"/>
     <elementParameter field="CHECK" name="TSTATCATCHER_STATS" value="true"/>
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
@@ -1034,7 +1035,7 @@
         <mapperTableEntries name="chlorophyll_concentration_in_sea_water" expression="row3.chlorophyll_concentration_in_sea_water " type="id_Double" nullable="true"/>
         <mapperTableEntries name="backscattering_ratio" expression="row3.backscattering_ratio " type="id_Double" nullable="true"/>
         <mapperTableEntries name="colored_dissolved_organic_matter" expression="row3.colored_dissolved_organic_matter " type="id_Double" nullable="true"/>
-        <mapperTableEntries name="time" expression="TalendDate.parseDate(&quot;yyyyMMdd'T'HHmmss&quot;,row3.time) " type="id_Date"/>
+        <mapperTableEntries name="time" expression="TalendDate.parseDate(&quot;yyyyMMdd'T'HHmmss'Z'&quot;,row3.time) " type="id_Date"/>
         <mapperTableEntries name="cluster_tag" expression="row3.cluster_tag " type="id_Integer" nullable="true"/>
         <mapperTableEntries name="up_left_lon" expression="row3.up_left_lon " type="id_Double"/>
         <mapperTableEntries name="up_left_lat" expression="row3.up_left_lat " type="id_Double"/>
@@ -1046,9 +1047,9 @@
         <mapperTableEntries name="low_left_lat" expression="row3.low_left_lat " type="id_Double"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row3" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
-        <mapperTableEntries name="campaign_code" type="id_String" nullable="true"/>
-        <mapperTableEntries name="dive_code" type="id_String" nullable="true"/>
-        <mapperTableEntries name="image_filename" type="id_String" nullable="true"/>
+        <mapperTableEntries name="campaign_code" type="id_String"/>
+        <mapperTableEntries name="dive_code" type="id_String"/>
+        <mapperTableEntries name="image_filename" type="id_String"/>
         <mapperTableEntries name="longitude" type="id_Double" nullable="true"/>
         <mapperTableEntries name="latitude" type="id_Double" nullable="true"/>
         <mapperTableEntries name="image_width" type="id_Double" nullable="true"/>
@@ -1073,7 +1074,7 @@
       </inputTables>
     </nodeData>
   </node>
-  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="416">
+  <node componentName="tPostgresqlOutput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="480">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlOutput_2" show="false"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tPostgresqlConnection_1"/>
@@ -1375,7 +1376,7 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tPostgresqlCommit_1"/>
   </node>
-  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-128" posY="384">
+  <node componentName="tPostgresqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="-96" posY="288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostgresqlInput_3" show="false"/>
     <elementParameter field="CHECK" name="TSTATCATCHER_STATS" value="true"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
@@ -1419,7 +1420,7 @@
       <column comment="" key="false" length="100" name="dive_code_context" nullable="false" pattern="" precision="0" sourceType="" type="id_String" originalLength="100" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="-128" posY="480">
+  <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="-96" posY="384">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_3" show="false"/>
     <elementParameter field="MEMO_JAVA" name="CODE" value="// code sample:&#xA;//&#xA;// multiply by 2 the row identifier&#xA;// output_row.id = input_row.id * 2;&#xA;//&#xA;// lowercase the name&#xA;// output_row.name = input_row.name.toLowerCase();&#xA;&#xA;context.url=row4.url;&#xA;context.campaign_code_context=row4.campaign_code_context;&#xA;context.dive_code_context=row4.dive_code_context;&#xA;"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
@@ -1445,8 +1446,11 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row13" show="false"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_1" target="tFileInputDelimited_1">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk3" show="false"/>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tPostgresqlInput_1" target="tFileInputDelimited_1">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk3" show="false"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tPostgresqlInput_1" target="tPostgresqlInput_3">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk4" show="false"/>
   </connection>
   <connection connectorName="FLOW" label="row1" lineStyle="0" metaname="tFileInputDelimited_1" offsetLabelX="0" offsetLabelY="0" source="tFileInputDelimited_1" target="tMap_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
@@ -1595,9 +1599,6 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="track" show="false"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlOutput_1" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlOutput_1" target="tPostgresqlInput_3">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk10" show="false"/>
-  </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostjob_1" offsetLabelX="0" offsetLabelY="0" source="tPostjob_1" target="tPostgresqlClose_1">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk4" show="false"/>
   </connection>
@@ -1619,8 +1620,8 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row2" show="false"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPostgresqlInput_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_2" target="tFileInputDelimited_2">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk5" show="false"/>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tPostgresqlInput_2" offsetLabelX="0" offsetLabelY="0" source="tPostgresqlInput_2" target="tFileInputDelimited_2">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk2" show="false"/>
   </connection>
   <connection connectorName="FLOW" label="row3" lineStyle="0" metaname="tFileInputDelimited_2" offsetLabelX="0" offsetLabelY="0" source="tFileInputDelimited_2" target="tMap_2">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
