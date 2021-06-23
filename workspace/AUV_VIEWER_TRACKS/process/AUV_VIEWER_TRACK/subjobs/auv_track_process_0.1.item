@@ -753,7 +753,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select pkid as foreign_key from auv_tracks where dive_code =  (SELECT substring(url, 'DATA_[a-zA-Z][A-Za-z0-9_]*_(r[0-9]*.*).csv') from indexed_file where id =&quot;+ context.file_id +&quot; AND url ~ 'DATA_' )  ;&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select pkid as foreign_key from auv_tracks where dive_code =  (SELECT substring(url, 'DATA_[a-zA-Z][A-Za-z0-9_]*_(r[0-9]{8}_[0-9]{6}.*).csv') from indexed_file where id =&quot;+ context.file_id +&quot; AND url ~ 'DATA_' )  ;&quot;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime" show="false"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false" show="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" value="&quot;&quot;" show="false"/>
@@ -1394,7 +1394,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select url ,(SELECT substring(url, 'DATA_([a-zA-Z][A-Za-z0-9_]*)_r20.*')) as campaign_code_context ,(SELECT substring(url, 'DATA_[a-zA-Z][A-Za-z0-9_]*_(r[0-9]*.*).csv')) as dive_code_context  from indexed_file where id =&quot;+ context.file_id +&quot; AND url ~ 'DATA_';&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select url ,(SELECT substring(url, 'DATA_([a-zA-Z][A-Za-z0-9_]*)_r[0-9]{8}_[0-9]{6}.*.*')) as campaign_code_context ,(SELECT substring(url, 'DATA_[a-zA-Z][A-Za-z0-9_]*_(r[0-9]{8}_[0-9]{6}.*).csv')) as dive_code_context  from indexed_file where id =&quot;+ context.file_id +&quot; AND url ~ 'DATA_';&quot;&#xA;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime" show="false"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false" show="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" value="&quot;&quot;" show="false"/>
