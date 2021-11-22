@@ -748,7 +748,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value="" show="false"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;data AS &#xA;  (&#xA;  SELECT polygon_id,&#xA;  url,&#xA;  size,&#xA;  min(\&quot;TIME\&quot;) AS time_coverage_start, &#xA;  max(\&quot;TIME\&quot;) AS time_coverage_end,&#xA;  SUBSTRING(url, '[0-9]{8}_Coastal-Wind-(.*)_FV0') as platform_code,&#xA;  SUBSTRING(url, '[0-9]{8}_Coastal-Wind-.*_FV0.*-.*-(.*)-.*\\.nc') as product_id,&#xA;&#xA;  CASE &#xA;  WHEN SUBSTRING(url, '[0-9]{8}_.*_FV0([0-1])') LIKE '0'::text&#xA;       THEN True&#xA;  WHEN SUBSTRING(url, '[0-9]{8}_.*_FV0([0-1])') LIKE '1'::text&#xA;       THEN False&#xA;  END AS is_realtime&#xA;  &#xA;  FROM measurements&#xA;  LEFT JOIN indexed_file ON measurements.polygon_id = indexed_file.id&#xA;  WHERE polygon_id = &quot; + context.fileId + &quot;&#xA;      GROUP BY polygon_id, url, size&#xA;  ),&#xA;&#xA;geo_extent AS (&#xA;  with geo_extent_sub AS (&#xA;  select &#xA;    min(\&quot;LONGITUDE\&quot;) as a_lon,&#xA;    max(\&quot;LONGITUDE\&quot;) as c_lon,&#xA;    min(\&quot;LATITUDE\&quot;) as d_lat,&#xA;    max(\&quot;LATITUDE\&quot;) as b_lat&#xA;    FROM measurements&#xA;    LEFT JOIN indexed_file ON measurements.polygon_id = indexed_file.id&#xA;    WHERE polygon_id =  &quot; + context.fileId + &quot;&#xA;&#xA;    GROUP BY polygon_id, url, size&#xA;  )&#xA;&#xA;  select *,&#xA;&#xA;  (select \&quot;LATITUDE\&quot; FROM geo_extent_sub, measurements LEFT JOIN indexed_file ON measurements.polygon_id = indexed_file.id WHERE \&quot;LONGITUDE\&quot; = geo_extent_sub.a_lon and polygon_id =  &quot; + context.fileId + &quot;) as a_lat,&#xA;  (select \&quot;LATITUDE\&quot; FROM geo_extent_sub, measurements LEFT JOIN indexed_file ON measurements.polygon_id = indexed_file.id WHERE \&quot;LONGITUDE\&quot; = geo_extent_sub.c_lon and polygon_id =  &quot; + context.fileId + &quot;) as c_lat,&#xA;  (select \&quot;LONGITUDE\&quot; FROM geo_extent_sub, measurements LEFT JOIN indexed_file ON measurements.polygon_id = indexed_file.id WHERE \&quot;LATITUDE\&quot; = geo_extent_sub.b_lat and polygon_id =  &quot; + context.fileId + &quot;) as b_lon,&#xA;  (select \&quot;LONGITUDE\&quot; FROM geo_extent_sub, measurements LEFT JOIN indexed_file ON measurements.polygon_id = indexed_file.id WHERE \&quot;LATITUDE\&quot; = geo_extent_sub.d_lat and polygon_id =  &quot; + context.fileId + &quot;) as d_lon&#xA;  from geo_extent_sub&#xA;&#xA;),&#xA;gatts AS (&#xA;select value::float  as percent_coverage&#xA;    from attribute where file_id = &quot; + context.fileId + &quot; and name = 'percent_coverage'&#xA;    )&#xA;&#xA;SELECT DISTINCT data.polygon_id,&#xA;url,&#xA;size,&#xA;platform_code,&#xA;product_id,&#xA;is_realtime,&#xA;time_coverage_start,&#xA;time_coverage_end,&#xA;percent_coverage,&#xA;st_makepolygon(st_geomfromtext(format('LINESTRING(%s %s,%s %s,%s %s,%s %s,%s %s)',geo_extent.a_lon::float, geo_extent.a_lat::float,&#xA;                                                                            geo_extent.b_lon::float, geo_extent.b_lat::float,&#xA;                                                                            geo_extent.c_lon::float,geo_extent.c_lat::float,&#xA;                                                                            geo_extent.d_lon::float,geo_extent.d_lat::float,&#xA;                                                                            geo_extent.a_lon::float, geo_extent.a_lat::float),4326)) as geom&#xA;FROM data,geo_extent,gatts&#xA;ORDER BY polygon_id;&#xA;&quot;&#xA;&#xA;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;&#xA;WITH &#xA;data AS &#xA;  (&#xA;  SELECT polygon_id,&#xA;  url,&#xA;  size,&#xA;  min(\&quot;TIME\&quot;) AS time_coverage_start, &#xA;  max(\&quot;TIME\&quot;) AS time_coverage_end,&#xA;  SUBSTRING(url, '[0-9]{8}_Coastal-Wind-(.*)_FV0') as platform_code,&#xA;  SUBSTRING(url, '[0-9]{8}_Coastal-Wind-.*_FV0.*-.*-(.*)-.*\\.nc') as swath_id,&#xA;  SUBSTRING(url, '[0-9]{8}_Coastal-Wind-.*_FV0.*-(.*)-.*-.*\\.nc') as absolute_orbit_number,&#xA;  SUBSTRING(url, '[0-9]{8}_Coastal-Wind-.*_FV0.*-.*-.*-(.*)\\.nc') as product_id,&#xA;&#xA;  CASE &#xA;  WHEN SUBSTRING(url, '[0-9]{8}_.*_FV0([0-1])') LIKE '0'::text&#xA;       THEN True&#xA;  WHEN SUBSTRING(url, '[0-9]{8}_.*_FV0([0-1])') LIKE '1'::text&#xA;       THEN False&#xA;  END AS is_realtime&#xA;  &#xA;  FROM measurements&#xA;  LEFT JOIN indexed_file ON measurements.polygon_id = indexed_file.id&#xA;  WHERE polygon_id = &quot; + context.fileId + &quot;&#xA;      GROUP BY polygon_id, url, size&#xA;  ),&#xA;&#xA;geo_extent AS (&#xA;  with geo_extent_sub AS (&#xA;  select &#xA;    min(\&quot;LONGITUDE\&quot;) as a_lon,&#xA;    max(\&quot;LONGITUDE\&quot;) as c_lon,&#xA;    min(\&quot;LATITUDE\&quot;) as d_lat,&#xA;    max(\&quot;LATITUDE\&quot;) as b_lat&#xA;    FROM measurements&#xA;    LEFT JOIN indexed_file ON measurements.polygon_id = indexed_file.id&#xA;    WHERE polygon_id =  &quot; + context.fileId + &quot;&#xA;&#xA;    GROUP BY polygon_id, url, size&#xA;  )&#xA;&#xA;  select *,&#xA;&#xA;  (select \&quot;LATITUDE\&quot; FROM geo_extent_sub, measurements LEFT JOIN indexed_file ON measurements.polygon_id = indexed_file.id WHERE \&quot;LONGITUDE\&quot; = geo_extent_sub.a_lon and polygon_id =  &quot; + context.fileId + &quot;) as a_lat,&#xA;  (select \&quot;LATITUDE\&quot; FROM geo_extent_sub, measurements LEFT JOIN indexed_file ON measurements.polygon_id = indexed_file.id WHERE \&quot;LONGITUDE\&quot; = geo_extent_sub.c_lon and polygon_id =  &quot; + context.fileId + &quot;) as c_lat,&#xA;  (select \&quot;LONGITUDE\&quot; FROM geo_extent_sub, measurements LEFT JOIN indexed_file ON measurements.polygon_id = indexed_file.id WHERE \&quot;LATITUDE\&quot; = geo_extent_sub.b_lat and polygon_id =  &quot; + context.fileId + &quot;) as b_lon,&#xA;  (select \&quot;LONGITUDE\&quot; FROM geo_extent_sub, measurements LEFT JOIN indexed_file ON measurements.polygon_id = indexed_file.id WHERE \&quot;LATITUDE\&quot; = geo_extent_sub.d_lat and polygon_id =  &quot; + context.fileId + &quot;) as d_lon&#xA;  from geo_extent_sub&#xA;&#xA;),&#xA;gatts AS (&#xA;select round(cast(value::float as numeric), 2) as percent_coverage&#xA;    from attribute where file_id = &quot; + context.fileId + &quot; and name = 'percent_coverage'&#xA;    )&#xA;&#xA;SELECT DISTINCT data.polygon_id,&#xA;url,&#xA;size,&#xA;platform_code,&#xA;swath_id,&#xA;absolute_orbit_number,&#xA;product_id,&#xA;is_realtime,&#xA;time_coverage_start,&#xA;time_coverage_end,&#xA;percent_coverage,&#xA;st_makepolygon(st_geomfromtext(format('LINESTRING(%s %s,%s %s,%s %s,%s %s,%s %s)',geo_extent.a_lon::float, geo_extent.a_lat::float,&#xA;                                                                            geo_extent.b_lon::float, geo_extent.b_lat::float,&#xA;                                                                            geo_extent.c_lon::float,geo_extent.c_lat::float,&#xA;                                                                            geo_extent.d_lon::float,geo_extent.d_lat::float,&#xA;                                                                            geo_extent.a_lon::float, geo_extent.a_lat::float),4326)) as geom&#xA;FROM data,geo_extent,gatts&#xA;ORDER BY polygon_id;&#xA;&quot;&#xA;&#xA;"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime" show="false"/>
     <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false" show="false"/>
     <elementParameter field="TEXT" name="DATASOURCE_ALIAS" value="&quot;&quot;" show="false"/>
@@ -766,6 +766,10 @@
       <elementValue elementRef="SCHEMA_COLUMN" value="size"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="platform_code"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="swath_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="absolute_orbit_number"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="product_id"/>
       <elementValue elementRef="TRIM" value="false"/>
@@ -786,6 +790,8 @@
       <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="17" name="size" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2147483647" name="platform_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="swath_id" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="absolute_orbit_number" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2147483647" name="product_id" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="1" name="is_realtime" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date" originalLength="-1" usefulColumn="true"/>
@@ -844,6 +850,16 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="swath_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="absolute_orbit_number"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="product_id"/>
       <elementValue elementRef="UPDATE_KEY" value="false"/>
       <elementValue elementRef="DELETE_KEY" value="false"/>
@@ -885,6 +901,8 @@
       <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="17" name="size" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2147483647" name="platform_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="swath_id" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="absolute_orbit_number" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2147483647" name="product_id" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="1" name="is_realtime" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date" originalLength="-1" usefulColumn="true"/>
@@ -897,6 +915,8 @@
       <column comment="" key="false" length="512" name="url" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="17" name="size" nullable="true" pattern="" precision="17" sourceType="FLOAT8" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2147483647" name="platform_code" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="swath_id" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="absolute_orbit_number" nullable="true" pattern="" precision="-1" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2147483647" name="product_id" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="1" name="is_realtime" nullable="true" pattern="" precision="0" sourceType="BOOL" type="id_Boolean" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="35" name="time_coverage_start" nullable="true" pattern="" precision="6" sourceType="TIMESTAMP" type="id_Date" originalLength="-1" usefulColumn="true"/>
@@ -1450,6 +1470,12 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="is_realtime"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="absolute_orbit_number"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="swath_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
