@@ -2,10 +2,11 @@
 # Dockerfile to build image for running Talend Open Studio 7.1.1
 #################################################################
 
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 MAINTAINER AODN
 
 ARG BUILDER_UID=9999
+ARG DEBIAN_FRONTEND=noninteractive
 
 # Add JAVA_HOME and add to path as required by TOS
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
