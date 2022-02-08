@@ -1154,7 +1154,7 @@
       <outputTables sizeState="INTERMEDIATE" name="out">
         <mapperTableEntries name="file_id" expression="context.fileId" type="id_Long" nullable="true"/>
         <mapperTableEntries name="device_id" expression="row2.ref" type="id_String"/>
-        <mapperTableEntries name="timestamp_start" expression="TalendDate.parseDate(&quot;MM/dd/yy HH:mm:ssZ&quot;,row2.s_date + &quot;+0000&quot;) " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="timestamp_start" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row2.s_date,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
         <mapperTableEntries name="timestamp_end" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row2.e_date,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
         <mapperTableEntries name="qc_ssm_lat" expression="row2.ssm_lat " type="id_String" nullable="true"/>
         <mapperTableEntries name="qc_ssm_lon" expression="row2.ssm_lon " type="id_String" nullable="true"/>
