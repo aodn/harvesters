@@ -2,10 +2,10 @@
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TalendMapper="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default" jobType="Standard">
   <context confirmationNeeded="false" name="Default">
     <contextParameter comment="" name="Destination_Database" prompt="Destination_Database?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="harvest?loginTimeout=1000&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
-    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="aatams_sattag_qc"/>
-    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_Password" value="PvDktF0rj0sm7SrDjDaBRd7KGeZ++L/s"/>
+    <contextParameter comment="" name="Destination_Login" prompt="Destination_Login?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="aatams_sattag_qc_dm"/>
+    <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_Password" value="PvDktF0rj0sm7SrDjDaBRVEb7QRInAcn"/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="5432"/>
-    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="aatams_sattag_qc"/>
+    <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="aatams_sattag_qc_dm"/>
     <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_QeAEQFpfEeO6RoiP0Wgizw" type="id_String" value="harvest-db-aodnstack-ecougnon.dev.aodn.org.au"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_brvNgFGXEeOFRtW2h_ugHg" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_brvNgFGXEeOFRtW2h_ugHg" type="id_String" value="null"/>
@@ -286,6 +286,12 @@
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="wet_sd"/>
       <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="tagging_id"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="s_date_tag"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="e_date_tag"/>
+      <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="end_number"/>
       <elementValue elementRef="TRIM" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="lat"/>
@@ -338,6 +344,12 @@
       <elementValue elementRef="DECODE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="wet_sd"/>
       <elementValue elementRef="DECODE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="tagging_id"/>
+      <elementValue elementRef="DECODE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="s_date_tag"/>
+      <elementValue elementRef="DECODE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="e_date_tag"/>
+      <elementValue elementRef="DECODE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="end_number"/>
       <elementValue elementRef="DECODE" value="false"/>
       <elementValue elementRef="SCHEMA_COLUMN" value="lat"/>
@@ -375,6 +387,9 @@
       <column comment="" key="false" length="2" name="wet_max" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_mean" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_sd" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="11" name="tagging_id" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="11" usefulColumn="true"/>
+      <column comment="" key="false" length="20" name="s_date_tag" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="20" usefulColumn="true"/>
+      <column comment="" key="false" length="17" name="e_date_tag" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="17" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="end_number" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="17" name="lat" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="16" name="lon" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
@@ -399,6 +414,9 @@
       <column comment="" key="false" length="2" name="wet_max" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_mean" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_sd" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="11" name="tagging_id" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="11" usefulColumn="true"/>
+      <column comment="" key="false" length="20" name="s_date_tag" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="20" usefulColumn="true"/>
+      <column comment="" key="false" length="17" name="e_date_tag" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="17" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="end_number" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="17" name="lat" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="16" name="lon" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
@@ -502,6 +520,13 @@
       <elementValue elementRef="CASE_SENSITIVE" value="false"/>
       <elementValue elementRef="USE_GLOB" value="false"/>
       <elementValue elementRef="COMMENT" value=""/>
+      <elementValue elementRef="INPUT_COLUMN" value="tagging_id"/>
+      <elementValue elementRef="SEARCH_PATTERN" value="&quot;NA&quot;"/>
+      <elementValue elementRef="REPLACE_STRING" value="null"/>
+      <elementValue elementRef="WHOLE_WORD" value="true"/>
+      <elementValue elementRef="CASE_SENSITIVE" value="false"/>
+      <elementValue elementRef="USE_GLOB" value="false"/>
+      <elementValue elementRef="COMMENT" value=""/>
       <elementValue elementRef="INPUT_COLUMN" value="end_number"/>
       <elementValue elementRef="SEARCH_PATTERN" value="&quot;NA&quot;"/>
       <elementValue elementRef="REPLACE_STRING" value="null"/>
@@ -590,6 +615,9 @@
       <column comment="" key="false" length="2" name="wet_max" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_mean" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_sd" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="11" name="tagging_id" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="11" usefulColumn="true"/>
+      <column comment="" key="false" length="20" name="s_date_tag" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="20" usefulColumn="true"/>
+      <column comment="" key="false" length="17" name="e_date_tag" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="17" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="end_number" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="17" name="lat" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="16" name="lon" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
@@ -638,18 +666,21 @@
       <column comment="" key="false" length="2" name="wet_max" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_mean" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_sd" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="11" name="tagging_id" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="11" usefulColumn="true"/>
+      <column comment="" key="false" length="20" name="s_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Date" originalLength="20" usefulColumn="true"/>
+      <column comment="" key="false" length="17" name="e_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Date" originalLength="17" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="end_number" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="4" name="cid" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="out">
         <mapperTableEntries name="file_id" expression="context.fileId" type="id_Long" nullable="true"/>
         <mapperTableEntries name="device_id" expression="row2.device_id" type="id_String"/>
         <mapperTableEntries name="ptt" expression="row2.ptt " type="id_String" nullable="true"/>
         <mapperTableEntries name="start_date" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row2.s_date,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
-        <mapperTableEntries name="end_date" expression="TalendDate.parseDate(&quot;MM/dd/yy HH:mm:ssZ&quot;,row2.e_date + &quot;+0000&quot;) " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="end_date" expression="TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row2.e_date,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
         <mapperTableEntries name="lat" expression="row2.lat " type="id_String" nullable="true"/>
         <mapperTableEntries name="lon" expression="row2.lon " type="id_String" nullable="true"/>
         <mapperTableEntries name="qc_ssm_lat" expression="row2.ssm_lat " type="id_String" nullable="true"/>
@@ -666,6 +697,9 @@
         <mapperTableEntries name="wet_max" expression="row2.wet_max " type="id_String" nullable="true"/>
         <mapperTableEntries name="wet_mean" expression="row2.wet_mean " type="id_String" nullable="true"/>
         <mapperTableEntries name="wet_sd" expression="row2.wet_sd " type="id_String" nullable="true"/>
+        <mapperTableEntries name="tagging_id" expression="row2.tagging_id" type="id_String" nullable="true"/>
+        <mapperTableEntries name="s_date_tag" expression="row2.s_date_tag.equals(&quot;NA&quot;)? null: TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row2.s_date_tag,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
+        <mapperTableEntries name="e_date_tag" expression="row2.e_date_tag.equals(&quot;NA&quot;)? null: TalendDate.parseDate(&quot;yyyy-MM-dd'T'HH:mm:ssZ&quot;,StringHandling.EREPLACE(row2.e_date_tag,&quot;Z&quot;,&quot;+0000&quot;)) " type="id_Date" nullable="true"/>
         <mapperTableEntries name="end_number" expression="row2.end_number " type="id_String" nullable="true"/>
         <mapperTableEntries name="cid" expression="row2.cid " type="id_String" nullable="true"/>
       </outputTables>
@@ -682,6 +716,9 @@
         <mapperTableEntries name="wet_max" type="id_String" nullable="true"/>
         <mapperTableEntries name="wet_mean" type="id_String" nullable="true"/>
         <mapperTableEntries name="wet_sd" type="id_String" nullable="true"/>
+        <mapperTableEntries name="tagging_id" type="id_String" nullable="true"/>
+        <mapperTableEntries name="s_date_tag" type="id_String" nullable="true"/>
+        <mapperTableEntries name="e_date_tag" type="id_String" nullable="true"/>
         <mapperTableEntries name="end_number" type="id_String" nullable="true"/>
         <mapperTableEntries name="lat" type="id_String" nullable="true"/>
         <mapperTableEntries name="lon" type="id_String" nullable="true"/>
@@ -724,6 +761,9 @@
       <column comment="" key="false" length="2" name="wet_max" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_mean" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_sd" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="11" name="tagging_id" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="11" usefulColumn="true"/>
+      <column comment="" key="false" length="20" name="s_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Date" originalLength="20" usefulColumn="true"/>
+      <column comment="" key="false" length="17" name="e_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Date" originalLength="17" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="end_number" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Integer" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="4" name="cid" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
     </metadata>
@@ -749,6 +789,9 @@
       <column comment="" key="false" length="2" name="wet_max" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_mean" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_sd" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="11" name="tagging_id" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="11" usefulColumn="true"/>
+      <column comment="" key="false" length="20" name="s_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Date" originalLength="20" usefulColumn="true"/>
+      <column comment="" key="false" length="17" name="e_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Date" originalLength="17" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="end_number" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Integer" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="4" name="cid" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
@@ -793,6 +836,9 @@
       <column comment="" key="false" length="2" name="wet_max" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_mean" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_sd" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="11" name="tagging_id" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="11" usefulColumn="true"/>
+      <column comment="" key="false" length="20" name="s_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Date" originalLength="20" usefulColumn="true"/>
+      <column comment="" key="false" length="17" name="e_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Date" originalLength="17" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="end_number" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Integer" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="4" name="cid" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
     </metadata>
@@ -818,6 +864,9 @@
       <column comment="" key="false" length="2" name="wet_max" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_mean" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_sd" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="11" name="tagging_id" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="11" usefulColumn="true"/>
+      <column comment="" key="false" length="20" name="s_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Date" originalLength="20" usefulColumn="true"/>
+      <column comment="" key="false" length="17" name="e_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Date" originalLength="17" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="end_number" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Integer" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="4" name="cid" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
     </metadata>
@@ -843,6 +892,9 @@
       <column comment="" key="false" length="2" name="wet_max" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_mean" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="wet_sd" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Double" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="11" name="tagging_id" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="11" usefulColumn="true"/>
+      <column comment="" key="false" length="20" name="s_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Date" originalLength="20" usefulColumn="true"/>
+      <column comment="" key="false" length="17" name="e_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Date" originalLength="17" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="end_number" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Integer" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="4" name="cid" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
@@ -866,7 +918,7 @@
       <column comment="" defaultValue="" key="false" length="-1" name="file_id" nullable="true" pattern="" precision="-1" sourceType="INT8" type="id_Long" usefulColumn="true"/>
       <column comment="" key="true" length="20" name="device_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="" type="id_Date" originalLength="-1" usefulColumn="true"/>
-      <column comment="" key="false" length="19" name="timestamp_end" nullable="true" pattern="" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="19" name="timestamp_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="lat" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_Double" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="lon" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_Double" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_lat" nullable="true" pattern="" precision="16" sourceType="" type="id_Double" originalLength="16" usefulColumn="true"/>
@@ -878,6 +930,9 @@
       <column comment="" defaultValue="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="" type="id_Geometry" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="count" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Integer" originalLength="-1" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="2" name="haulout_number" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Integer" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="11" name="tagging_id" nullable="true" pattern="" precision="0" sourceType="" type="id_String" originalLength="11" usefulColumn="true"/>
+      <column comment="" key="false" length="20" name="s_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Date" originalLength="20" usefulColumn="true"/>
+      <column comment="" key="false" length="17" name="e_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="" type="id_Date" originalLength="17" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties/>
@@ -898,6 +953,9 @@
         <mapperTableEntries name="geom" expression="ArgoUtils.makePoint(row5.qc_ssm_lon,row5.qc_ssm_lat,&quot;EPSG:4326&quot;) " type="id_Geometry" nullable="true"/>
         <mapperTableEntries name="count" expression="row5.cnt " type="id_Integer" nullable="true"/>
         <mapperTableEntries name="haulout_number" expression="row5.haulout_number " type="id_Integer" nullable="true"/>
+        <mapperTableEntries name="tagging_id" expression="row5.tagging_id" type="id_String" nullable="true"/>
+        <mapperTableEntries name="s_date_tag" expression="row5.s_date_tag" type="id_Date" nullable="true"/>
+        <mapperTableEntries name="e_date_tag" expression="row5.e_date_tag" type="id_Date" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row5" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
         <mapperTableEntries name="file_id" type="id_Long" nullable="true"/>
@@ -921,6 +979,9 @@
         <mapperTableEntries name="wet_max" type="id_Double" nullable="true"/>
         <mapperTableEntries name="wet_mean" type="id_Double" nullable="true"/>
         <mapperTableEntries name="wet_sd" type="id_Double" nullable="true"/>
+        <mapperTableEntries name="tagging_id" type="id_String" nullable="true"/>
+        <mapperTableEntries name="s_date_tag" type="id_Date" nullable="true"/>
+        <mapperTableEntries name="e_date_tag" type="id_Date" nullable="true"/>
         <mapperTableEntries name="end_number" type="id_Integer" nullable="true"/>
         <mapperTableEntries name="cid" type="id_String" nullable="true"/>
       </inputTables>
@@ -1033,6 +1094,21 @@
       <elementValue elementRef="DELETE_KEY" value="false"/>
       <elementValue elementRef="UPDATABLE" value="true"/>
       <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="tagging_id"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="s_date_tag"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="e_date_tag"/>
+      <elementValue elementRef="UPDATE_KEY" value="false"/>
+      <elementValue elementRef="DELETE_KEY" value="false"/>
+      <elementValue elementRef="UPDATABLE" value="true"/>
+      <elementValue elementRef="INSERTABLE" value="true"/>
     </elementParameter>
     <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
     <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
@@ -1043,7 +1119,7 @@
       <column comment="" defaultValue="" key="false" length="-1" name="file_id" nullable="true" pattern="" precision="-1" sourceType="INT8" type="id_Long" usefulColumn="true"/>
       <column comment="" key="true" length="20" name="device_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="TIMESTAMP" type="id_Date" originalLength="-1" usefulColumn="true"/>
-      <column comment="" key="false" length="19" name="timestamp_end" nullable="true" pattern="" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="19" name="timestamp_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="lat" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_Double" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="lon" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_Double" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_lat" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_Double" originalLength="16" usefulColumn="true"/>
@@ -1055,12 +1131,15 @@
       <column comment="" defaultValue="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="GEOMETRY" type="id_Geometry" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="count" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer" originalLength="-1" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="2" name="haulout_number" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="11" name="tagging_id" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="11" usefulColumn="true"/>
+      <column comment="" key="false" length="20" name="s_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" originalLength="20" usefulColumn="true"/>
+      <column comment="" key="false" length="17" name="e_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" originalLength="17" usefulColumn="true"/>
     </metadata>
     <metadata connector="REJECT" label="out2" name="REJECT">
       <column comment="" defaultValue="" key="false" length="-1" name="file_id" nullable="true" pattern="" precision="-1" sourceType="INT8" type="id_Long" usefulColumn="true"/>
       <column comment="" key="true" length="20" name="device_id" nullable="false" pattern="" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="timestamp_start" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="-1" sourceType="TIMESTAMP" type="id_Date" originalLength="-1" usefulColumn="true"/>
-      <column comment="" key="false" length="19" name="timestamp_end" nullable="true" pattern="" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true"/>
+      <column comment="" key="false" length="19" name="timestamp_end" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="lat" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_Double" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="lon" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_Double" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="16" name="qc_ssm_lat" nullable="true" pattern="" precision="16" sourceType="FLOAT8" type="id_Double" originalLength="16" usefulColumn="true"/>
@@ -1072,6 +1151,9 @@
       <column comment="" defaultValue="" key="false" length="0" name="geom" nullable="true" pattern="" precision="0" sourceType="GEOMETRY" type="id_Geometry" usefulColumn="true"/>
       <column comment="" key="false" length="2" name="count" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer" originalLength="-1" usefulColumn="true"/>
       <column comment="" defaultValue="" key="false" length="2" name="haulout_number" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="INT4" type="id_Integer" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="11" name="tagging_id" nullable="true" pattern="" precision="0" sourceType="VARCHAR" type="id_String" originalLength="11" usefulColumn="true"/>
+      <column comment="" key="false" length="20" name="s_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" originalLength="20" usefulColumn="true"/>
+      <column comment="" key="false" length="17" name="e_date_tag" nullable="true" pattern="&quot;dd-MM-yyyy&quot;" precision="0" sourceType="TIMESTAMP" type="id_Date" originalLength="17" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="VARCHAR" type="id_String" originalLength="-1" usefulColumn="true"/>
     </metadata>
@@ -1139,19 +1221,61 @@
       <elementValue elementRef="TRACE_COLUMN" value="wet_mean"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="s_date_tag"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="e_date_tag"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="tagging_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row1" show="false"/>
   </connection>
   <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tReplace_1" offsetLabelX="0" offsetLabelY="0" source="tReplace_1" target="tMap_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="s_date_tag"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="e_date_tag"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="tagging_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row2" show="false"/>
   </connection>
   <connection connectorName="FLOW" label="out" lineStyle="0" metaname="out" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tConvertType_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="s_date_tag"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="e_date_tag"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="tagging_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="out" show="false"/>
   </connection>
   <connection connectorName="FLOW" label="row4" lineStyle="0" metaname="tConvertType_1" offsetLabelX="0" offsetLabelY="0" source="tConvertType_1" target="tFilterRow_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER" show="false">
+      <elementValue elementRef="TRACE_COLUMN" value="s_date_tag"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="e_date_tag"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="tagging_id"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row4" show="false"/>
   </connection>
@@ -1171,6 +1295,15 @@
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
       <elementValue elementRef="TRACE_COLUMN" value="haulout_number"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="s_date_tag"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="e_date_tag"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="tagging_id"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
@@ -1208,7 +1341,7 @@
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="207;226;236"/>
   </subjob>
   <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true" show="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1" show="false"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="230;100;0"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="255;220;180"/>
