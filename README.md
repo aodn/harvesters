@@ -14,6 +14,8 @@ This repository contains Talend harvester projects
  * `talend_run_all` - Queues all talend processes for execution
  * `talend_version JOB_NAME` - Shows the build and commit version for the talend job (has auto complete, so `<TAB><TAB>` will complete the job name)
 
+## Licensing
+This project is licensed under the terms of the GNU GPLv3 license.
 ## bin/update-harvester.sh
 
 Convert a harvester from using index-all harvesting components to manifest harvesting components
