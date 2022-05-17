@@ -1,5 +1,5 @@
--- This pattern generated a merge statement for Oracle database or equivalent of a merge in other dbs
---(c) 2008 Talend Inc.
+-- This pattern generated a merge statement for Vertica database or equivalent of a merge in other dbs
+--(c) 2015 Talend Inc.
 <% 
 	EXTRACT(__MERGE_ON__);
 	EXTRACT(__UPDATE_MAPPING__);
@@ -36,7 +36,7 @@
 			} else {
 				iFlag = true;
 			}
-			insertColumnsStr += (__TARGET_TABLE__ + "." + __INSERT_MAPPING_TRG_COLUMN__[i]);
+			insertColumnsStr += (__INSERT_MAPPING_TRG_COLUMN__[i]);
 			insertValuesStr += (__SOURCE_TABLE__ + "." + __INSERT_MAPPING_SRC_COLUMN__[i]);
 		}
 		if (hasAdditionalInsertColumns) {
@@ -47,7 +47,7 @@
 				} else {
 					iFlag = true;
 				}
-				insertColumnsStr += (__TARGET_TABLE__ + "." + __ADDITIONAL_INSERT_COLUMNS_TRG_COLUMN_NAME__[i]);
+				insertColumnsStr += (__ADDITIONAL_INSERT_COLUMNS_TRG_COLUMN_NAME__[i]);
 				insertValuesStr += (__ADDITIONAL_INSERT_COLUMNS_TRG_COLUMN_VALUE__[i]);
 			}
 		}
