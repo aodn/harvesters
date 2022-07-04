@@ -8,7 +8,7 @@
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_Password" value="bGcnuz0IaEfdrTPscn/Pkg=="/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_String" value="aodn_wave"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_String" value="harvest-db-aodnstack-bpasquer.dev.aodn.org.au"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_String" value="harvest-db-aodnstack-apberger.dev.aodn.org.au"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
     <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value=""/>
@@ -22,7 +22,7 @@
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_Password" value="bGcnuz0IaEfdrTPscn/Pkg=="/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_String" value="aodn_wave"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_String" value="harvest-db-aodnstack-bpasquer.dev.aodn.org.au"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_String" value="harvest-db-aodnstack-apberger.dev.aodn.org.au"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
     <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value="null"/>
@@ -152,7 +152,6 @@
     <elementParameter field="CHECK" name="USE_INLINE_CONTENT" value="true"/>
     <elementParameter field="MEMO" name="INLINE_CONTENT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xA;&lt;databaseChangeLog xmlns=&quot;http://www.liquibase.org/xml/ns/dbchangelog&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd&quot;>&#xA;  &#xA;&lt;changeSet author=&quot;bpasquer&quot; id=&quot;cr_metadata_delayed&quot;>&#xA;  &lt;sql>&#xA;  CREATE TABLE file_metadata&#xA;( &#xA;  file_id integer NOT NULL,&#xA;  site_name character varying(50) NOT NULL,&#xA;  source_id character varying(50),&#xA;  time_coverage_start timestamp with time zone,&#xA;  time_coverage_end timestamp with time zone,&#xA;  geospatial_lat_min double precision,  &#xA;  geospatial_lon_min double precision,&#xA;  geospatial_lat_max double precision,  &#xA;  geospatial_lon_max double precision,&#xA;  data_mode character varying(12),&#xA;  geom geometry CHECK (ST_IsValid(geom)),&#xA;  CONSTRAINT metadata_pkey PRIMARY KEY (file_id),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE)&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;bpasquer&quot; id=&quot;cr_site_metadata&quot;>&#xA;  &lt;sql>&#xA;  CREATE TABLE site_metadata&#xA;( &#xA;  site_name character varying(50) NOT NULL, &#xA;  institution character varying(100),&#xA;  wave_buoy_type character varying(20),&#xA;  platform character varying(30),&#xA;  data_mode character varying(12),&#xA;  water_depth real, &#xA;  instrument character varying(100),&#xA;  time_start timestamp with time zone,&#xA;  time_end timestamp with time zone,&#xA;  latitude_min double precision,  &#xA;  longitude_min double precision,&#xA;  latitude_max double precision,  &#xA;  longitude_max double precision,&#xA;  geom geometry CHECK (ST_IsValid(geom)),&#xA;  CONSTRAINT site_pkey PRIMARY KEY (site_name,data_mode)&#xA;)&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;cr_measurements&quot;>&#xA;   &lt;sql>&#xA;    CREATE TABLE measurements&#xA;(&#xA;  measurement_id bigserial,&#xA;  file_id integer NOT NULL,&#xA;  &quot;TIME&quot; timestamp with time zone,&#xA;  &quot;LATITUDE&quot; real,&#xA;  &quot;LONGITUDE&quot; real,&#xA;  &quot;WSSH&quot; real,&#xA;  &quot;WPFM&quot; real,&#xA;  &quot;WPPE&quot; real,&#xA;  &quot;SSWMD&quot; real,&#xA;  &quot;SSWMD_MAG&quot; real,&#xA;  &quot;WPDI&quot; real,&#xA;  &quot;WMDS&quot; real,&#xA;  &quot;WPDS&quot; real,&#xA;  &quot;TEMP&quot; real,&#xA;  &quot;WAVE_quality_control&quot; character varying(5),&#xA;  &quot;TEMP_quality_control&quot; character varying(5),&#xA;  &quot;WHTH&quot; real,&#xA;  &quot;WMXH&quot; real,&#xA;  &quot;WPMH&quot; real,&#xA;  &quot;WPSM&quot; real,&#xA;  &quot;WPTH&quot; real,&#xA;  &quot;WPTE&quot; real,&#xA;  &quot;THMAX&quot; real,&#xA;  &quot;TP2&quot; real,&#xA;  &quot;WMSH&quot; real,&#xA;  &quot;WWSSH&quot; real,&#xA;  &quot;WWPP&quot; real,&#xA;  &quot;WWPFM&quot; real,&#xA;  &quot;WWMD&quot; real,&#xA;  &quot;WWPD&quot; real,&#xA;  &quot;SWSSH&quot; real,&#xA;  &quot;SWPP&quot; real,&#xA;  &quot;SWPFM&quot; real,&#xA;  &quot;SWMD&quot; real,&#xA;  &quot;SWPD&quot; real,&#xA;  geom geometry,&#xA;  CONSTRAINT measurements_pkey PRIMARY KEY (measurement_id),&#xA;  CONSTRAINT fk_file_id FOREIGN KEY (file_id)&#xA;      REFERENCES indexed_file (id) MATCH SIMPLE&#xA;      ON UPDATE CASCADE ON DELETE CASCADE&#xA;)&#xA;    &lt;/sql>&#xA; &lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;bpasquer&quot; id=&quot;cr_indices_measurments-1&quot;>&#xA;  &lt;sql>&#xA;  CREATE INDEX measurements_file_id_idx ON measurements (file_id ASC NULLS LAST);&#xA;  CREATE INDEX measurements_T_idx ON measurements (file_id,timezone('UTC'::text, &quot;TIME&quot;))&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;aodn_wave_rt_map&quot; runAlways=&quot;true&quot;>&#xA;  &lt;sql>&#xA; DROP VIEW IF EXISTS aodn_wave_nrt_v2_timeseries_map;&#xA;  CREATE VIEW aodn_wave_nrt_v2_timeseries_map AS      &#xA;  SELECT&#xA;  fm.file_id,&#xA;  f.url,&#xA;  f.size,&#xA;  sm.institution,&#xA;  fm.site_name,&#xA;  sm.instrument,&#xA;  sm.wave_buoy_type,&#xA;  sm.platform,  &#xA;  sm.water_depth,&#xA;  sm.time_start,&#xA;  sm.time_end,&#xA;  sm.latitude_min,&#xA;  sm.longitude_min,&#xA;  m.&quot;TIME&quot;,&#xA;  case &#xA;    when sm.instrument like '%Datawell%' then m.&quot;WHTH&quot;&#xA;    when sm.instrument like '%Spotter%' then m.&quot;WSSH&quot;&#xA;    when sm.instrument like '%Triaxys%' then m.&quot;WHTH&quot;&#xA;  end significant_wave_height,&#xA;  case&#xA;    when sm.instrument like '%Datawell%' then m.&quot;WPMH&quot;&#xA;    when sm.instrument like '%Spotter%' then m.&quot;WPFM&quot;&#xA;    when sm.instrument like '%Triaxys%' then m.&quot;WPMH&quot;&#xA;  end wave_mean_period,&#xA;  m.&quot;WPDI&quot; as peak_wave_direction,&#xA;  m.&quot;WPPE&quot; as peak_wave_period,&#xA;  sm.geom&#xA;  FROM file_metadata fm&#xA;  JOIN indexed_file f ON f.id = fm.file_id&#xA;  JOIN site_metadata sm ON sm.site_name = fm.site_name&#xA;  JOIN measurements m on m.file_id = fm.file_id&#xA;  WHERE m.&quot;TIME&quot; > (now() - '3007 days'::interval) AND fm.data_mode = 'realtime'&#xA;  ORDER BY m.&quot;TIME&quot; DESC;&#xA; &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;aodn_wave_dm_v2_map&quot; runAlways=&quot;true&quot;>&#xA;  &lt;sql>&#xA;  DROP VIEW IF EXISTS aodn_wave_dm_v2_timeseries_map;&#xA;  CREATE VIEW aodn_wave_dm_v2_timeseries_map AS      &#xA;  SELECT&#xA;  fm.file_id,&#xA;  f.url,&#xA;  f.size,&#xA;  sm.institution,&#xA;  fm.site_name,&#xA;  sm.instrument,&#xA;  sm.wave_buoy_type,&#xA;  sm.platform,  &#xA;  sm.water_depth,&#xA;  sm.time_start,&#xA;  sm.time_end,&#xA;  sm.latitude_min,&#xA;  sm.longitude_min,&#xA;  sm.geom&#xA;  FROM file_metadata fm&#xA;  JOIN indexed_file f ON f.id = fm.file_id&#xA;  JOIN site_metadata sm ON sm.site_name = fm.site_name&#xA;  WHERE fm.data_mode = 'delayed_mode'&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;bpasquer&quot; id=&quot;aodn_wave_rt_timeseries_data&quot; runOnChange=&quot;true&quot;>&#xA;  &lt;sql>&#xA;  DROP VIEW IF EXISTS aodn_wave_nrt_v2_timeseries_data;&#xA;  CREATE VIEW aodn_wave_nrt_v2_timeseries_data AS &#xA;  SELECT&#xA;  m.file_id,&#xA;  sm.institution,&#xA;  fm.source_id,&#xA;  sm.site_name, &#xA;  &quot;TIME&quot;,&#xA;  &quot;LATITUDE&quot;,&#xA;  &quot;LONGITUDE&quot;,&#xA;  &quot;WSSH&quot;, &#xA;  &quot;WPFM&quot;,&#xA;  &quot;WPPE&quot;,&#xA;  &quot;SSWMD&quot;,&#xA;  &quot;WPDI&quot;,&#xA;  &quot;WMDS&quot;,&#xA;  &quot;WPDS&quot;,&#xA;  &quot;WAVE_quality_control&quot;,&#xA;  &quot;WMXH&quot;,&#xA;  &quot;WPMH&quot;,&#xA;  &quot;WPSM&quot;,&#xA;  &quot;WPTH&quot;,&#xA;  &quot;WPTE&quot;,&#xA;  &quot;WMSH&quot;,&#xA;  &quot;WWSSH&quot;,&#xA;  &quot;WWPP&quot;,&#xA;  &quot;WWPFM&quot;,&#xA;  &quot;WWMD&quot;,&#xA;  &quot;WWPD&quot;,&#xA;  &quot;SWSSH&quot;,&#xA;  &quot;SWPP&quot;,&#xA;  &quot;SWPFM&quot;,&#xA;  &quot;SWMD&quot;,&#xA;  &quot;SWPD&quot;,&#xA;  m.geom&#xA;  FROM measurements m&#xA;  JOIN file_metadata fm ON fm.file_id = m.file_id&#xA;  JOIN site_metadata sm ON sm.site_name = fm.site_name&#xA;  ORDER BY m.file_id,timezone('UTC'::text, m.&quot;TIME&quot;);&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;changeSet author=&quot;talend&quot; id=&quot;aodn_wave_dm_v2_timeseries_data&quot; runOnChange=&quot;true&quot;>&#xA;    &lt;sql>&#xA;   DROP VIEW IF EXISTS aodn_wave_dm_v2_timeseries_data;&#xA;   CREATE VIEW aodn_wave_dm_v2_timeseries_data AS &#xA;  SELECT&#xA;  m.file_id,&#xA;  sm.institution,&#xA;  sm.site_name,&#xA;  m.&quot;TIME&quot; AT TIME ZONE 'UTC' AS &quot;TIME&quot;,&#xA;  m.&quot;LATITUDE&quot;,&#xA;  m.&quot;LONGITUDE&quot;,&#xA;  m.&quot;WSSH&quot;,&#xA;  m.&quot;WPFM&quot;,&#xA;  m.&quot;WPPE&quot;,&#xA;  m.&quot;SSWMD&quot;,&#xA;  m.&quot;SSWMD_MAG&quot;,&#xA;  m.&quot;WPDI&quot;,&#xA;  m.&quot;WMDS&quot;,&#xA;  m.&quot;WPDS&quot;,&#xA;  m.&quot;TEMP&quot;,&#xA;  m.&quot;WAVE_quality_control&quot;,&#xA;  m.&quot;TEMP_quality_control&quot;,&#xA;  m.&quot;WHTH&quot;,&#xA;  m.&quot;WMXH&quot;,&#xA;  m.&quot;WPMH&quot;,&#xA;  m.&quot;WPSM&quot;,&#xA;  m.&quot;WPTH&quot;,&#xA;  m.&quot;WPTE&quot;,&#xA;  m.&quot;THMAX&quot;,&#xA;  m.&quot;TP2&quot;,&#xA;  m.geom&#xA; FROM measurements m&#xA; JOIN file_metadata fm ON fm.file_id = m.file_id&#xA; JOIN site_metadata sm ON sm.site_name = fm.site_name&#xA;ORDER BY m.file_id,timezone('UTC'::text, m.&quot;TIME&quot;);&#xA;  &lt;/sql>&#xA;&lt;/changeSet>&#xA;&#xA;&lt;/databaseChangeLog>"/>
     <elementParameter field="TEXT" name="LABEL" value="liquidBase_createTables"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
   </node>
   <node componentName="iNewOrModifiedFileList" componentVersion="0.1" offsetLabelX="0" offsetLabelY="0" posX="352" posY="704">
@@ -174,8 +173,6 @@
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
     <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&#xA;        &quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#xA;        &quot;  from indexed_file &quot; +&#xA;        &quot;  join index_job &quot; +&#xA;        &quot;    on indexed_file.job_id = index_job.id &quot; +&#xA;        &quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#xA;        &quot;   and index_job.name = ? &quot; +&#xA;        &quot;  left join file_harvest &quot; +&#xA;        &quot;    on file_harvest.file_id = indexed_file.id &quot; +&#xA;        &quot;   and file_harvest.harvest_type = ? &quot; +&#xA;        &quot;   and file_harvest.last_change_type &lt;> 'deleted' &quot; +&#xA;        &quot; where not indexed_file.deleted &quot;&#xA;      " show="false"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="__UNIQUE_NAME__"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
   </node>
   <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="576" posY="704">
@@ -194,13 +191,12 @@
       <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
       <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iNewOrModifiedFileList_1_FILE_ID&quot;)).intValue()"/>
       <elementValue elementRef="PARAM_NAME_COLUMN" value="url"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="context.base + &quot;/&quot; + ((String)globalMap.get(&quot;iNewOrModifiedFileList_1_URL&quot;))"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;iNewOrModifiedFileList_1_URL&quot;))"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PROPAGATE_CHILD_RESULT" value="false"/>
     <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
     <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true" show="false"/>
     <elementParameter field="TEXT" name="LABEL" value="HarvestFile_WaveGeneric"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tRunJob_1"/>
   </node>
@@ -223,8 +219,6 @@
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
     <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&#xA;          &quot; select indexed_file.id, indexed_file.url, indexed_file.modified&quot;&#xA;        + &quot;   from indexed_file &quot;&#xA;        + &quot;   join index_job &quot;&#xA;        + &quot;     on indexed_file.job_id = index_job.id &quot;&#xA;        + &quot;    and indexed_file.last_indexed_run = index_job.last_run_no &quot; &#xA;        + &quot;   join file_harvest on (file_harvest.file_id = indexed_file.id)&quot;&#xA;        + &quot; where indexed_file.deleted&quot;&#xA;        + &quot;   and file_harvest.last_change_type &lt;> 'deleted'&quot;&#xA;        + &quot;   and index_job.name = ?&quot;&#xA;        + &quot;   and file_harvest.harvest_type = ?&quot;&#xA;      " show="false"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="__UNIQUE_NAME__"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
   </node>
   <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="576" posY="416">
@@ -257,8 +251,6 @@
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;" show="false"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
-    <elementParameter field="TEXT" name="LABEL" value="__UNIQUE_NAME__"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tPostgresqlRow_1"/>
     <metadata connector="REJECT" name="REJECT">
@@ -285,8 +277,6 @@
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
     <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&#xA;        &quot;select indexed_file.id, indexed_file.url, indexed_file.modified &quot; +&#xA;        &quot;  from indexed_file &quot; +&#xA;        &quot;  join index_job &quot; +&#xA;        &quot;    on indexed_file.job_id = index_job.id &quot; +&#xA;        &quot;   and indexed_file.last_indexed_run = index_job.last_run_no &quot; +&#xA;        &quot;   and index_job.name = ? &quot; +&#xA;        &quot;  left join file_harvest &quot; +&#xA;        &quot;    on file_harvest.file_id = indexed_file.id &quot; +&#xA;        &quot;   and file_harvest.harvest_type = ? &quot; +&#xA;        &quot;   and file_harvest.last_change_type &lt;> 'deleted' &quot; +&#xA;        &quot; where not indexed_file.deleted &quot;&#xA;      " show="false"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="__UNIQUE_NAME__"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
   </node>
   <node componentName="tRunJob" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="576" posY="832">
@@ -305,13 +295,12 @@
       <elementValue elementRef="PARAM_NAME_COLUMN" value="fileId"/>
       <elementValue elementRef="PARAM_VALUE_COLUMN" value="((Long)globalMap.get(&quot;iNewOrModifiedFileList_2_FILE_ID&quot;)).intValue()"/>
       <elementValue elementRef="PARAM_NAME_COLUMN" value="url"/>
-      <elementValue elementRef="PARAM_VALUE_COLUMN" value="context.base + &quot;/&quot; + ((String)globalMap.get(&quot;iNewOrModifiedFileList_2_URL&quot;))"/>
+      <elementValue elementRef="PARAM_VALUE_COLUMN" value="((String)globalMap.get(&quot;iNewOrModifiedFileList_2_URL&quot;))"/>
     </elementParameter>
     <elementParameter field="CHECK" name="PROPAGATE_CHILD_RESULT" value="false"/>
     <elementParameter field="CHECK" name="PRINT_PARAMETER" value="false"/>
     <elementParameter field="CHECK" name="TRANSMIT_ORIGINAL_CONTEXT" value="true" show="false"/>
     <elementParameter field="TEXT" name="LABEL" value="HarvestFile_WaveGeneric"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tRunJob_2"/>
   </node>
@@ -334,8 +323,6 @@
     <elementParameter field="RADIO" name="USE_CUSTOM_QUERY" value="false"/>
     <elementParameter field="MEMO" name="CUSTOM_QUERY" value="&#xA;          &quot; select indexed_file.id, indexed_file.url, indexed_file.modified&quot;&#xA;        + &quot;   from indexed_file &quot;&#xA;        + &quot;   join index_job &quot;&#xA;        + &quot;     on indexed_file.job_id = index_job.id &quot;&#xA;        + &quot;    and indexed_file.last_indexed_run = index_job.last_run_no &quot; &#xA;        + &quot;   join file_harvest on (file_harvest.file_id = indexed_file.id)&quot;&#xA;        + &quot; where indexed_file.deleted&quot;&#xA;        + &quot;   and file_harvest.last_change_type &lt;> 'deleted'&quot;&#xA;        + &quot;   and index_job.name = ?&quot;&#xA;        + &quot;   and file_harvest.harvest_type = ?&quot;&#xA;      " show="false"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="__UNIQUE_NAME__"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
   </node>
   <node componentName="tPostgresqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="576" posY="544">
@@ -368,8 +355,6 @@
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;" show="false"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
-    <elementParameter field="TEXT" name="LABEL" value="__UNIQUE_NAME__"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tDBRow_1"/>
     <metadata connector="REJECT" name="REJECT">
