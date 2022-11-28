@@ -1,8 +1,8 @@
 "
-WITH std_agg AS ( 
+WITH std_agg AS (
        SELECT string_agg(distinct value, ', ') AS standard_names
-       FROM variable_attribute 
-       WHERE file_id = " + context.fileId + " AND 
+       FROM variable_attribute
+       WHERE file_id = " + context.fileId + " AND
              name='standard_name' AND
              value !~ 'flag$'
      ), long_agg AS (
@@ -42,7 +42,8 @@ UPDATE file_metadata m
     time_deployment_end = getglobalattributeastimestamp(f.id, 'time_deployment_end'),
     geom = st_geomfromtext('POINT(' || longitude::text || ' ' || latitude::text || ')', 4326),
     data_category = coalesce(substring(url, '/(Temperature|(CTD|Biogeochem)_(timeseries|profiles)|Velocity|Wave|CO2|Meteorology|Surface_[^/]+|Sub-surface_[^/]+|Sediment_traps|aggregated_products|aggregated_timeseries|hourly_timeseries|gridded_timeseries)/'),
-                             substring(url, '/(Pulse|FluxPulse)/')),
+                             substring(url, '/(Pulse|FluxPulse)/'),
+                             substring(url, '/CSIRO_gridded_all_variables/')),
     variables = v.variables,
     standard_names = s.standard_names,
     long_names = l.long_names,

@@ -136,7 +136,8 @@
         UPDATE file_metadata m
           SET
             data_category = coalesce(substring(url, '/(Temperature|(CTD|Biogeochem)_(timeseries|profiles)|Velocity|Wave|CO2|Meteorology|Surface_[^/]+|Sub-surface_[^/]+|Sediment_traps|aggregated_products|aggregated_timeseries|hourly_timeseries|gridded_timeseries)/'),
-                                     substring(url, '/(Pulse|FluxPulse)/'))
+	      substring(url, '/(Pulse|FluxPulse)/'),
+	      substring(url, '/CSIRO_gridded_all_variables/'))
         FROM indexed_file f
         WHERE m.file_id = f.id ;
       </sql>
@@ -437,6 +438,34 @@
                 m.geom
                 FROM indexed_file i JOIN file_metadata m ON m.file_id = i.id
                 WHERE m.data_category = 'gridded_timeseries' AND NOT m.deleted
+                ORDER BY m.site_code, m.variables
+           ;
+        </sql>
+    </changeSet>
+
+    <changeSet author="talend" id="dwm_csiro_gridded_hourly_timeseries_map_view" runOnChange="true">
+        <sql>
+            DROP VIEW IF EXISTS dwm_csiro_gridded_hourly_timeseries_map CASCADE;
+            CREATE VIEW dwm_csiro_gridded_hourly_timeseries_map AS
+                SELECT
+                i.url,
+                i.size,
+                m.file_id,
+                m.variables,
+                m.standard_names,
+                m.long_names,
+                m.site_code,
+                m.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+                m.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
+                m.date_created AT TIME ZONE 'UTC' AS date_created,
+                i.first_indexed AT TIME ZONE 'UTC' AS date_published,
+                i.last_indexed AT TIME ZONE 'UTC' AS date_updated,
+                m.latitude,
+                m.longitude,
+                m.geom
+                FROM indexed_file i JOIN file_metadata m ON m.file_id = i.id
+                WHERE i.url LIKE 'IMOS/DWM/DA/CSIRO_gridded_all_variables/%hourly-depth-gridded%'
+                      AND NOT m.deleted
                 ORDER BY m.site_code, m.variables
            ;
         </sql>
