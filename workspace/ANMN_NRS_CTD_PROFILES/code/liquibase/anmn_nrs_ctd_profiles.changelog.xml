@@ -28,7 +28,14 @@
 
        </sql>
     </changeSet>
-   
+
+    <changeSet author="talend" id="deployments_add_mmp_variables">
+      <sql>
+        ALTER TABLE deployments
+          ADD COLUMN site_short_name character varying(50);
+      </sql>
+    </changeSet>
+
 
     <changeSet author="talend" id="cr_measurements-1">
        <sql>
@@ -96,10 +103,23 @@ CREATE INDEX deployments_gist_idx ON deployments USING GIST (geom);
     </changeSet>
 
 
+    <changeSet author="talend" id="measurements_add_mmp_variables">
+      <sql>
+        ALTER TABLE measurements
+          ADD COLUMN "BAT_PERCENT" real,
+          ADD COLUMN "SBE_FLAG" real,
+          ADD COLUMN "BOAT_SHADOW" real,
+          ADD COLUMN "N_BIN" real,
+          ADD COLUMN "PAR" real;
+      </sql>
+    </changeSet>
+
+
     <changeSet author="talend" id="alter_deployments_table-1">
        <sql>
 -- Drop views that depend on columns to be changed
 DROP VIEW IF EXISTS anmn_nrs_ctd_profiles_map;
+DROP VIEW IF EXISTS aims_mmp_ctd_profiles_map;
 DROP VIEW IF EXISTS anmn_nrs_ctd_profiles_data;
 
 ALTER TABLE deployments
@@ -129,8 +149,34 @@ CREATE VIEW anmn_nrs_ctd_profiles_map AS
    	geom
     FROM deployments d
     JOIN indexed_file f ON d.file_id = f.id 
+    WHERE f.url LIKE 'IMOS%'
       </sql>
     </changeSet>
+
+    <changeSet author="talend" id="aims_ctdpro_map-2" runOnChange="true">
+      <sql>
+DROP VIEW IF EXISTS aims_mmp_ctd_profiles_map; 
+CREATE VIEW aims_mmp_ctd_profiles_map AS
+ SELECT d.file_id,
+    	f.url,
+    	f.size,
+    	site_short_name,
+	cruise_id,
+	station,
+	time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+	time_coverage_end  AT TIME ZONE 'UTC' AS time_coverage_end, 
+    	geospatial_lon_max,
+    	geospatial_lat_max,
+    	geospatial_vertical_min, 
+    	geospatial_vertical_max ,
+   	geom
+    FROM deployments d
+    JOIN indexed_file f ON d.file_id = f.id 
+    WHERE f.url LIKE 'AIMS%'
+      </sql>
+    </changeSet>
+
+
 
     <changeSet author="talend" id="anmn_nrs_ctdpro_data-2" runOnChange="true">
       <sql>
@@ -178,6 +224,44 @@ CREATE VIEW anmn_nrs_ctd_profiles_data AS
 	a.geom
 	FROM measurements
 	 JOIN deployments a ON measurements.file_id = a.file_id
+         JOIN indexed_file f ON a.file_id = f.id
+         WHERE f.url LIKE 'IMOS%'
+     ORDER BY measurements.file_id,measurements."TIME",measurements."DEPTH";	
+      </sql>
+    </changeSet>
+
+
+    <changeSet author="talend" id="aims_mmp_ctdpro_data-2" runOnChange="true">
+      <sql>
+DROP VIEW IF EXISTS aims_mmp_ctd_profiles_data; 
+CREATE VIEW aims_mmp_ctd_profiles_data AS
+ SELECT measurements.file_id, 
+ 	a.site_short_name,
+ 	a.cruise_id,
+	a.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+  	a.time_coverage_end  AT TIME ZONE 'UTC' AS time_coverage_end, 
+  	"TIME" AT TIME ZONE 'UTC' AS "TIME",
+  	"DIRECTION",
+	"LATITUDE", 
+	"LONGITUDE",
+	"DEPTH", 
+	"BOT_DEPTH",
+	"BOAT_SHADOW",
+	"PRES_REL",
+        "BAT_PERCENT",
+	"TEMP",
+	"PSAL",   
+	"TURB",
+ 	"N_BIN", 
+	"CPHL",
+	"PAR",
+	"CNDC",
+	"SBE_FLAG",
+	a.geom
+	FROM measurements
+	 JOIN deployments a ON measurements.file_id = a.file_id
+         JOIN indexed_file f ON a.file_id = f.id
+         WHERE f.url LIKE 'AIMS%'
      ORDER BY measurements.file_id,measurements."TIME",measurements."DEPTH";	
       </sql>
     </changeSet>
