@@ -108,7 +108,7 @@ CREATE INDEX deployments_gist_idx ON deployments USING GIST (geom);
         ALTER TABLE measurements
           ADD COLUMN "BAT_PERCENT" real,
           ADD COLUMN "SBE_FLAG" real,
-          ADD COLUMN "BOAT_SHADOW" real,
+          ADD COLUMN "BOAT_SHADOW" character varying(1),
           ADD COLUMN "N_BIN" real,
           ADD COLUMN "PAR" real;
       </sql>
@@ -119,7 +119,6 @@ CREATE INDEX deployments_gist_idx ON deployments USING GIST (geom);
        <sql>
 -- Drop views that depend on columns to be changed
 DROP VIEW IF EXISTS anmn_nrs_ctd_profiles_map;
-DROP VIEW IF EXISTS aims_mmp_ctd_profiles_map;
 DROP VIEW IF EXISTS anmn_nrs_ctd_profiles_data;
 
 ALTER TABLE deployments
@@ -255,6 +254,7 @@ CREATE VIEW aims_mmp_ctd_profiles_data AS
 	"TURB",
  	"N_BIN", 
 	"CPHL",
+        "DOX2",
 	"PAR",
 	"CNDC",
 	"SBE_FLAG",
@@ -269,3 +269,4 @@ CREATE VIEW aims_mmp_ctd_profiles_data AS
 
 
 </databaseChangeLog>
+
