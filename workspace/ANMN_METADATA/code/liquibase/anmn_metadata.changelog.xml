@@ -490,7 +490,7 @@
                 i.last_indexed AT TIME ZONE 'UTC' AS date_updated,
                 m.latitude,
                 m.longitude,
-                CASE WHEN i.url LIKE 'IMOS/DWM/DA/CSIRO_gridded_all_variables/%hourly-depth-gridded%' THEN 'hourly' ELSE 'daily' END AS data_type,
+                substring(i.url, 'FV02_([^_]*)_END') AS product_type,
                 m.geom
                 FROM indexed_file i JOIN file_metadata m ON m.file_id = i.id
                 WHERE i.url LIKE 'IMOS/DWM/DA/CSIRO_gridded_all_variables/%depth-gridded%'
