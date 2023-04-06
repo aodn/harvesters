@@ -471,6 +471,36 @@
         </sql>
     </changeSet>
 
+    <changeSet author="talend" id="dwm_csiro_gridded_timeseries_map_view" runOnChange="true">
+        <sql>
+            DROP VIEW IF EXISTS dwm_csiro_gridded_timeseries_map CASCADE;
+            CREATE VIEW dwm_csiro_gridded_timeseries_map AS
+                SELECT
+                i.url,
+                i.size,
+                m.file_id,
+                m.variables,
+                m.standard_names,
+                m.long_names,
+                m.site_code,
+                m.time_coverage_start AT TIME ZONE 'UTC' AS time_coverage_start,
+                m.time_coverage_end AT TIME ZONE 'UTC' AS time_coverage_end,
+                m.date_created AT TIME ZONE 'UTC' AS date_created,
+                i.first_indexed AT TIME ZONE 'UTC' AS date_published,
+                i.last_indexed AT TIME ZONE 'UTC' AS date_updated,
+                m.latitude,
+                m.longitude,
+                CASE WHEN i.url LIKE 'IMOS/DWM/DA/CSIRO_gridded_all_variables/%hourly-depth-gridded%' THEN 'hourly' ELSE 'daily' END AS data_type,
+                m.geom
+                FROM indexed_file i JOIN file_metadata m ON m.file_id = i.id
+                WHERE i.url LIKE 'IMOS/DWM/DA/CSIRO_gridded_all_variables/%depth-gridded%'
+                      AND NOT m.deleted
+                ORDER BY m.site_code, m.variables
+           ;
+        </sql>
+    </changeSet>
+
+
     <changeSet author="anaberger" id="drop_ABOS_views" runOnChange="true">
         <sql>
             DROP VIEW IF EXISTS abos_all_map CASCADE; 
@@ -481,3 +511,4 @@
     </changeSet>
 
 </databaseChangeLog>
+
