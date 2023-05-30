@@ -194,13 +194,14 @@
       <column comment="" key="false" length="-1" name="geom" nullable="true" pattern="" precision="-1" sourceType="" type="id_Geometry" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="lon_avg" expression="(row1.geospatial_lon_min+row1.geospatial_lon_max)/2 " type="id_Double"/>
         <mapperTableEntries name="lat_avg" expression="(row1.geospatial_lat_min +row1.geospatial_lat_max )/2" type="id_Double"/>
+        <mapperTableEntries name="sitename" expression="StringHandling.DOWNCASE(row1.site_name) " type="id_String"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="metadata">
-        <mapperTableEntries name="site_name" expression="row1.site_name " type="id_String" nullable="true"/>
+        <mapperTableEntries name="site_name" expression="StringHandling.UPCASE(Var.sitename.substring(0,1)) " type="id_String" nullable="true"/>
         <mapperTableEntries name="institution" expression="row1.institution " type="id_String" nullable="true"/>
         <mapperTableEntries name="wave_buoy_type" expression="row1.wave_buoy_type " type="id_String" nullable="true"/>
         <mapperTableEntries name="platform" expression="row1.platform " type="id_String" nullable="true"/>
@@ -210,7 +211,7 @@
       </outputTables>
       <outputTables sizeState="INTERMEDIATE" name="file_metadata">
         <mapperTableEntries name="file_id" expression="context.fileId" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="site_name" expression="row1.site_name " type="id_String" nullable="true"/>
+        <mapperTableEntries name="site_name" expression="StringHandling.UPCASE(Var.sitename.substring(0,1)); " type="id_String" nullable="true"/>
         <mapperTableEntries name="source_id" expression="row1.source_id" type="id_String" nullable="true"/>
         <mapperTableEntries name="geospatial_lat_min" expression="row1.geospatial_lat_min " type="id_Double" nullable="true"/>
         <mapperTableEntries name="geospatial_lat_max" expression="row1.geospatial_lat_max " type="id_Double" nullable="true"/>
@@ -1502,7 +1503,7 @@
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
-    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true" show="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPostjob_1" show="false"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="230;100;0"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="255;220;180"/>
