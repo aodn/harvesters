@@ -198,10 +198,10 @@
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="lon_avg" expression="(row1.geospatial_lon_min+row1.geospatial_lon_max)/2 " type="id_Double"/>
         <mapperTableEntries name="lat_avg" expression="(row1.geospatial_lat_min +row1.geospatial_lat_max )/2" type="id_Double"/>
-        <mapperTableEntries name="sitename" expression="StringHandling.DOWNCASE(row1.site_name) " type="id_String"/>
+        <mapperTableEntries name="sitename" expression="row1.site_name.toLowerCase().substring(0, 1).toUpperCase() + row1.site_name.toLowerCase().substring(1) " type="id_String"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="metadata">
-        <mapperTableEntries name="site_name" expression="StringHandling.UPCASE(Var.sitename.substring(0,1)) " type="id_String" nullable="true"/>
+        <mapperTableEntries name="site_name" expression="Var.sitename" type="id_String" nullable="true"/>
         <mapperTableEntries name="institution" expression="row1.institution " type="id_String" nullable="true"/>
         <mapperTableEntries name="wave_buoy_type" expression="row1.wave_buoy_type " type="id_String" nullable="true"/>
         <mapperTableEntries name="platform" expression="row1.platform " type="id_String" nullable="true"/>
@@ -211,7 +211,7 @@
       </outputTables>
       <outputTables sizeState="INTERMEDIATE" name="file_metadata">
         <mapperTableEntries name="file_id" expression="context.fileId" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="site_name" expression="StringHandling.UPCASE(Var.sitename.substring(0,1)); " type="id_String" nullable="true"/>
+        <mapperTableEntries name="site_name" expression=" Var.sitename" type="id_String" nullable="true"/>
         <mapperTableEntries name="source_id" expression="row1.source_id" type="id_String" nullable="true"/>
         <mapperTableEntries name="geospatial_lat_min" expression="row1.geospatial_lat_min " type="id_Double" nullable="true"/>
         <mapperTableEntries name="geospatial_lat_max" expression="row1.geospatial_lat_max " type="id_Double" nullable="true"/>
