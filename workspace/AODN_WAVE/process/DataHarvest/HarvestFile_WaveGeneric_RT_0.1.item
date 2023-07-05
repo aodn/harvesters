@@ -8,7 +8,7 @@
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_Password" value="bGcnuz0IaEfdrTPscn/Pkg=="/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_String" value="aodn_wave"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_String" value="harvest-db-aodnstack-apberger.dev.aodn.org.au"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_String" value="harvest-db-aodnstack-bpasquer.dev.aodn.org.au"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
     <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value=""/>
@@ -22,7 +22,7 @@
     <contextParameter comment="" name="Destination_Password" prompt="Destination_Password?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_Password" value="bGcnuz0IaEfdrTPscn/Pkg=="/>
     <contextParameter comment="" name="Destination_Port" prompt="Destination_Port?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_String" value="5432"/>
     <contextParameter comment="" name="Destination_Schema" prompt="Destination_Schema?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_String" value="aodn_wave"/>
-    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_String" value="harvest-db-aodnstack-apberger.dev.aodn.org.au"/>
+    <contextParameter comment="" name="Destination_Server" prompt="Destination_Server?" promptNeeded="false" repositoryContextId="_KWmF0NZNEeyQhdenPzCbQA" type="id_String" value="harvest-db-aodnstack-bpasquer.dev.aodn.org.au"/>
     <contextParameter comment="" name="logDir" prompt="logDir?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="/tmp"/>
     <contextParameter comment="" name="paramFile" prompt="paramFile?" promptNeeded="false" repositoryContextId="_1TC3MFL9EeOUYeJDXGjB-Q" type="id_String" value="null"/>
     <contextParameter comment="" name="base" prompt="base?" promptNeeded="false" repositoryContextId="_slU0gHgdEeOd_Yy1aYEh8A" type="id_String" value="null"/>
@@ -136,6 +136,7 @@
     <routinesParameter id="_cRn34BQsEeKRFb0vPU_LNg" name="DAPUtils"/>
     <routinesParameter id="_IMfY4Dp8EeKYTu4DLH4cKg" name="NetCDFUtils"/>
     <routinesParameter id="_0De7gGQMEeqRW66ciSV5LA" name="TalendStringUtil"/>
+    <routinesParameter id="_v9sTwBoiEe69wfJDfWSufA" name="Capitalize"/>
   </parameters>
   <node componentName="iNetCDFGlobalAttributes" componentVersion="0.1" offsetLabelX="-9" offsetLabelY="0" posX="544" posY="288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="iNetCDFGlobalAttributes_1" show="false"/>
@@ -198,10 +199,10 @@
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="lon_avg" expression="(row1.geospatial_lon_min+row1.geospatial_lon_max)/2 " type="id_Double"/>
         <mapperTableEntries name="lat_avg" expression="(row1.geospatial_lat_min +row1.geospatial_lat_max )/2" type="id_Double"/>
-        <mapperTableEntries name="sitename" expression="row1.site_name.substring(0, 1).toUpperCase() + row1.site_name.toLowerCase().substring(1) " type="id_String"/>
+        <mapperTableEntries name="sitename" expression="StringHandling.EREPLACE(row1.site_name,&quot;-&quot;,&quot; &quot;) " type="id_String"/>
       </varTables>
       <outputTables sizeState="INTERMEDIATE" name="metadata">
-        <mapperTableEntries name="site_name" expression="Var.sitename" type="id_String" nullable="true"/>
+        <mapperTableEntries name="site_name" expression="Capitalize.convertToTitleCase(Var.sitename)" type="id_String" nullable="true"/>
         <mapperTableEntries name="institution" expression="row1.institution " type="id_String" nullable="true"/>
         <mapperTableEntries name="wave_buoy_type" expression="row1.wave_buoy_type " type="id_String" nullable="true"/>
         <mapperTableEntries name="platform" expression="row1.platform " type="id_String" nullable="true"/>
@@ -211,7 +212,7 @@
       </outputTables>
       <outputTables sizeState="INTERMEDIATE" name="file_metadata">
         <mapperTableEntries name="file_id" expression="context.fileId" type="id_Integer" nullable="true"/>
-        <mapperTableEntries name="site_name" expression=" Var.sitename" type="id_String" nullable="true"/>
+        <mapperTableEntries name="site_name" expression="Capitalize.convertToTitleCase(Var.sitename)" type="id_String" nullable="true"/>
         <mapperTableEntries name="source_id" expression="row1.source_id" type="id_String" nullable="true"/>
         <mapperTableEntries name="geospatial_lat_min" expression="row1.geospatial_lat_min " type="id_Double" nullable="true"/>
         <mapperTableEntries name="geospatial_lat_max" expression="row1.geospatial_lat_max " type="id_Double" nullable="true"/>
