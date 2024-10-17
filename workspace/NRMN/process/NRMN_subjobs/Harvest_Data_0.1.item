@@ -6857,7 +6857,7 @@
       <column comment="" key="false" length="-1" name="survey_id" nullable="false" pattern="" precision="-1" sourceType="" type="id_Integer" originalLength="-1" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
-      <uiProperties/>
+      <uiProperties shellMaximized="true"/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="geom" expression="row12.survey_longitude==null?ArgoUtils.makePoint((double)row12.longitude,(double)row12.latitude,&quot;EPSG:4326&quot;):ArgoUtils.makePoint(row12.survey_longitude,row12.survey_latitude,&quot;EPSG:4326&quot;) " type="id_Geometry"/>
         <mapperTableEntries name="latest_surveydate_for_site" expression="row12.latest_surveydate_for_site.equals(&quot;t&quot;)?true:row12.latest_surveydate_for_site.equals(&quot;f&quot;)?false:null " type="id_Boolean"/>
@@ -10377,7 +10377,7 @@
       <column comment="" key="false" length="-1" name="longitude" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="survey_latitude" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="survey_longitude" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" originalLength="-1" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="has_pqs_catalogued_in_db" nullable="true" pattern="" precision="-1" sourceType="" type="id_Boolean" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="has_pqs_catalogued_in_db" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="10" name="direction" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="10" usefulColumn="true"/>
     </metadata>
     <metadata connector="REJECT" name="REJECT">
@@ -10390,7 +10390,7 @@
       <column comment="" key="false" length="-1" name="longitude" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="survey_latitude" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="-1" name="survey_longitude" nullable="true" pattern="" precision="-1" sourceType="" type="id_Float" originalLength="-1" usefulColumn="true"/>
-      <column comment="" key="false" length="-1" name="has_pqs_catalogued_in_db" nullable="true" pattern="" precision="-1" sourceType="" type="id_Boolean" originalLength="-1" usefulColumn="true"/>
+      <column comment="" key="false" length="-1" name="has_pqs_catalogued_in_db" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column comment="" key="false" length="10" name="direction" nullable="true" pattern="" precision="-1" sourceType="" type="id_String" originalLength="10" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String" originalLength="-1" usefulColumn="true"/>
@@ -10425,7 +10425,9 @@
     </metadata>
     <nodeData xsi:type="TalendMapper:MapperData">
       <uiProperties shellMaximized="true"/>
-      <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
+      <varTables sizeState="INTERMEDIATE" name="Var">
+        <mapperTableEntries name="has_pqs_catalogued_in_db" expression="row26.has_pqs_catalogued_in_db.equals(&quot;t&quot;)?true:row26.has_pqs_catalogued_in_db.equals(&quot;f&quot;)?false:null " type="id_Boolean"/>
+      </varTables>
       <outputTables sizeState="INTERMEDIATE" name="out2">
         <mapperTableEntries name="survey_id" expression="row26.survey_id " type="id_Integer" nullable="true"/>
         <mapperTableEntries name="site_code" expression="row26.site_code " type="id_String" nullable="true"/>
@@ -10436,7 +10438,7 @@
         <mapperTableEntries name="longitude" expression="row26.longitude " type="id_Float" nullable="true"/>
         <mapperTableEntries name="survey_latitude" expression="row26.survey_latitude " type="id_Float" nullable="true"/>
         <mapperTableEntries name="survey_longitude" expression="row26.survey_longitude " type="id_Float" nullable="true"/>
-        <mapperTableEntries name="has_pqs_catalogued_in_db" expression="row26.has_pqs_catalogued_in_db " type="id_Boolean" nullable="true"/>
+        <mapperTableEntries name="has_pqs_catalogued_in_db" expression="Var.has_pqs_catalogued_in_db " type="id_Boolean" nullable="true"/>
         <mapperTableEntries name="direction" expression="row26.direction " type="id_String" nullable="true"/>
       </outputTables>
       <inputTables sizeState="INTERMEDIATE" name="row26" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
@@ -10449,7 +10451,7 @@
         <mapperTableEntries name="longitude" type="id_Float" nullable="true"/>
         <mapperTableEntries name="survey_latitude" type="id_Float" nullable="true"/>
         <mapperTableEntries name="survey_longitude" type="id_Float" nullable="true"/>
-        <mapperTableEntries name="has_pqs_catalogued_in_db" type="id_Boolean" nullable="true"/>
+        <mapperTableEntries name="has_pqs_catalogued_in_db" type="id_String" nullable="true"/>
         <mapperTableEntries name="direction" type="id_String" nullable="true"/>
       </inputTables>
     </nodeData>
